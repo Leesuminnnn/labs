@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "member">
+	<select id="detail" resultType="memberVo" parameterType="int">
+		select * from member where midx=#{midx}
+	</select>
+	
+	<select id="login" parameterType="memberVo" resultType="memberVo">
+        select *
+        from member
+        where m_id = #{m_id} and m_pw = #{m_pw} and m_delyn = 'N'
+    </select>
+    
+    <select id="mlist" resultType="memberVo">
+    <!-- 관리자 제외하고 회원 정보 불러오기 -->
+    	SELECT * FROM member WHERE m_status != '2' order by midx DESC
+    
+    </select>
+    
+    <update id="change">
+    	UPDATE member SET m_status = '1' WHERE m_id = #{m_id}
+    </update>
+	
+
+</mapper>

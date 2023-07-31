@@ -1,0 +1,84 @@
+@charset "UTF-8";
+*,
+*::before,
+*::after {
+  /* 테두리를 기준으로 크기를 정합니다. */
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+
+/* 기본 셋업 */
+header,section,article,aside,footer,main,a,button,input,textarea,img,nav,ul,ol,li,p,h1,h2,h3,h4,h5,h6,div,span{
+	margin   : 0;
+	padding  : 0;
+	/* 폰트 크기 상속 */
+	font-size: inherit;
+}
+ul,ol,li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+body {
+	font-family: 'NanumSquare', sans-serif;
+}
+.normal{
+	font-weight:400
+}
+.bold{
+	font-weight:700
+}
+.bolder{
+	font-weight:800
+}
+.light{
+	font-weight:300
+}
+
+.flex{
+	display: flex;
+	align-items: center; /* 수직 정렬을 위해 align-items 속성을 사용합니다. */
+}
+.flex-center{
+	justify-content: center;
+}
+.flex-between{
+	justify-content: space-between;
+}
+.flex-around{
+	justify-content: space-around;
+}
+.flex-start{
+	justify-content: flex-start;
+}
+.flex-end{
+	justify-content: flex-end;
+}
+.flex-col{
+	flex-direction: column;
+}
+.flex-row{
+	display: inline-block;
+}
+.bg-1{
+	background-color: black;
+	color: #ffffff;
+}
+
+.center{
+	text-align: center;
+	
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "board">
+
+	
+	
+	<select id="boardlist" resultType="map" parameterType="map">
+		SELECT 
+		bidx, b_title, b_content, b_file, b_filename, DATE_FORMAT(b_regdate, '%Y-%m-%d') as b_regdate, b_writer, b_delyn, midx 
+		FROM csworktools.board order by bidx DESC
+	</select>
+	
+	<select id="View" resultType="boardVo" parameterType="boardVo">
+		select 
+		b_title, b_content, b_file, b_filename, b_regdate, b_writer, midx, b_delyn
+		 from csworktools.board where bidx = #{bidx} and b_delyn = 'N'
+	</select>
+
+</mapper>
