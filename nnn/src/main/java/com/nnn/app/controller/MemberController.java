@@ -94,7 +94,7 @@ public class MemberController {
 			mlist = memberService.Memberlist2(vo);
 			model.addAttribute("mlist", mlist);
 			System.out.println("mlist 값 : "+mlist);
-	    	return "redirect:Admin.do";
+	    	return "redirect:/m/Admin.do";
 	    }
 	    
 	    // 로그인이 완료되면 이전 페이지로 이동하기	-- 정상 작동 되지 않음 해결해야함!!
@@ -429,7 +429,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "Admin.do")
-	public ModelAndView admin(MemberVo vo, HttpSession session, ModelAndView mav) {
+	public ModelAndView admin(/*MemberVo*/ CustomerVo vo, HttpSession session, ModelAndView mav) {
 		
 		System.out.println("관리자 페이지");
 		session.getAttribute("loginMember");
@@ -443,9 +443,12 @@ public class MemberController {
     	session.getAttribute("m_in");
     	session.getAttribute("m_de");
 		
-		List<MemberVo> mlist = new ArrayList<MemberVo>();
+//		List<MemberVo> mlist = new ArrayList<MemberVo>();
+//		mlist = memberService.Memberlist(vo);Memberlist2
+		// 시연용
+		List<CustomerVo> mlist = new ArrayList<CustomerVo>();
+		mlist = memberService.Memberlist2(vo);
 		
-		mlist = memberService.Memberlist(vo);
 		mav.addObject("mlist", mlist);
 		System.out.println("mlist 값 : "+mlist);
 		mav.setViewName("m/Admin");

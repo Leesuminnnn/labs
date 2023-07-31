@@ -658,4 +658,11 @@ public class TestController {
 		mav.setViewName("t/random");
 		return mav;
 	}
+	
+	@RequestMapping(value="TestCalendar.do")
+	public ModelAndView calendar(ModelAndView mav) {
+		
+		mav.setViewName("t/TestCalendar");
+		return mav;
+	}
 }

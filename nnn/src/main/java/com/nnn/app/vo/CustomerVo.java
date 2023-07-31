@@ -15,6 +15,8 @@ m_name VARCHAR(100),
 m_pw VARCHAR(100),
 m_email VARCHAR(100),
 m_no VARCHAR(100),
+m_in VARCHAR(100),
+m_de VARCHAR(100),
 m_status VARCHAR(20) DEFAULT "1"
 );
 */
@@ -29,6 +31,8 @@ m_status VARCHAR(20) DEFAULT "1"
 	private String m_status;
 	private String m_point;
 	private String m_no;
+	private String m_in;
+	private String m_de;
 	
 
 

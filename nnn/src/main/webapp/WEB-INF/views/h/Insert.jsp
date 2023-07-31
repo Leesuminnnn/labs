@@ -282,7 +282,7 @@
 						<img class="modal2_img" src="${pageContext.request.contextPath}/resources/img/white.png" style="width: 680px; height: 680px;">
 						<!-- <img class="modal2_img" src="" style="width: 680px; height: 680px;"> -->
 						<div class="text text3" id="result"></div>
-						<div class="modal_insert" id="" onclick="closePopupAndRedirect2(); closePopup();">
+						<div class="modal_insert" id="" onclick="closePopupAndRedirect2()">
 						확인
 						</div>
 					</div>
@@ -345,7 +345,7 @@ const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const modal2 = document.querySelector('.modal2');
 const btnOpenPopup = document.querySelector('#end');
-const modal2Open = document.querySelector('#modal_insert')
+//const modal2Open = document.querySelector('#modal_insert');
 var result = document.querySelector('#result')
 var modal2img = document.querySelector('.modal2_img');
 
@@ -396,7 +396,7 @@ btnOpenPopup.addEventListener('click', () => {
 		body.style.overflow = 'hidden';
 	}
 });
-
+/* 
 modal2Open.addEventListener('click', () => {
 	modal2.classList.toggle('show');
 
@@ -404,12 +404,147 @@ modal2Open.addEventListener('click', () => {
 		body.style.overflow = 'hidden';
 	}
 });
+ */
 function end(){
+	modal2.classList.toggle('show');
 	
+	if (modal2.classList.contains('show')) {
+		body.style.overflow = 'hidden';
+	}
 	if (textareaIsEmpty()) {
 		// textarea가 비어있는 경우
-			const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
-			if (confirmed) {
+		const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
+		if (confirmed) {
+
+			$(document).ready(function(){
+				var str = "";
+				var listItem = [];
+				listItem["당첨"] = 50;
+				listItem["꽝"] = 50;
+				
+				// 꽝
+				var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
+				// 당첨
+				var src2 = "${pageContext.request.contextPath}/resources/img/prize.png";
+				
+				var pickItem = getRandWeight(listItem);
+				
+				if(pickItem == "꽝"){
+					str = "아쉽지만.. "
+					modal2img.src = src1;
+				}else{
+					str = "축하합니다! "
+					modal2img.src = src2;
+				}
+				console.log(str + pickItem +"입니다");
+				
+				
+				result.textContent = str + pickItem +"입니다";
+//				alert(str + pickItem +" 입니다");
+				
+			});
+//			closePopupAndRedirect();
+		}else{
+			closePopup2();
+			closePopup();
+		}
+	} else {
+		// textarea에 글이 있는 경우
+		modal2.classList.toggle('show');
+		
+		if (modal2.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+		$(document).ready(function(){
+			var str = "";
+			var listItem = [];
+			listItem["당첨"] = 50;
+			listItem["꽝"] = 50;
+			
+			// 꽝
+			var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
+			// 당첨
+			var src2 = "${pageContext.request.contextPath}/resources/img/prize.png";
+			
+			var pickItem = getRandWeight(listItem);
+			
+			if(pickItem == "꽝"){
+				str = "아쉽지만.. "
+				modal2img.src = src1;
+			}else{
+				str = "축하합니다! "
+				modal2img.src = src2;
+			}
+			console.log(str + pickItem +"입니다");
+			
+			
+			result.textContent = str + pickItem +"입니다";
+//			alert(str + pickItem +" 입니다");
+			
+		});
+	}
+}
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+modal.addEventListener('click', (event) => {
+	
+	
+	if (event.target === modal) {
+		// 모달 바깥 영역을 클릭했을 때
+		const confirmed = window.confirm('등록하시겠습니까?');
+		if (confirmed){
+			// 예
+			if (textareaIsEmpty()) {
+				// textarea가 비어있는 경우
+				const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
+				if (confirmed) {
+					// 예
+					$(document).ready(function(){
+					var str = "";
+					var listItem = [];
+					listItem["당첨"] = 50;
+					listItem["꽝"] = 50;
+					
+					// 꽝
+					var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
+					// 당첨
+					var src2 = "${pageContext.request.contextPath}/resources/img/prize.png";
+					
+					var pickItem = getRandWeight(listItem);
+					
+					if(pickItem == "꽝"){
+						str = "아쉽지만.. "
+						modal2img.src = src1;
+					}else{
+						str = "축하합니다! "
+						modal2img.src = src2;
+					}
+					console.log(str + pickItem +"입니다");
+					
+					
+					result.textContent = str + pickItem +"입니다";
+	//				alert(str + pickItem +" 입니다");
+					});
+//					closePopupAndRedirect();
+				}else{
+					// 아니오
+					closePopup();
+				}
+			}else{
+				// textarea에 글이 있는 경우
+				modal2.classList.toggle('show');
+				
+				if (modal2.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
 				$(document).ready(function(){
 					var str = "";
 					var listItem = [];
@@ -439,62 +574,10 @@ function end(){
 				});
 //				closePopupAndRedirect();
 			}
-		} else {
-			// 코멘트 창에 아무말도 입력하지 않았을때
-			$(document).ready(function(){
-				var str = "";
-				var listItem = [];
-				listItem["당첨"] = 50;
-				listItem["꽝"] = 50;
-				
-				// 꽝
-				var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
-				// 당첨
-				var src2 = "${pageContext.request.contextPath}/resources/img/prize.png";
-				
-				var pickItem = getRandWeight(listItem);
-				
-				if(pickItem == "꽝"){
-					str = "아쉽지만.. "
-					modal2img.src = src1;
-				}else{
-					str = "축하합니다! "
-					modal2img.src = src2;
-				}
-				console.log(str + pickItem +"입니다");
-				
-				
-				result.textContent = str + pickItem +"입니다";
-//				alert(str + pickItem +" 입니다");
-				
-			});
-//			closePopupAndRedirect();
+		}else{
+			// 아니오
+			closePopup();
 		}
-}
-
-modal.addEventListener('click', (event) => {
-	
-	
-	if (event.target === modal) {
-		// 모달 바깥 영역을 클릭했을 때
-		const confirmed = window.confirm('등록하시겠습니까?');
-		end();
-		/* 
-		if (textareaIsEmpty()) {
-		// textarea가 비어있는 경우
-			const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
-			if (confirmed) {
-				// 모달 바깥 영역 클릭했을 때 모달2 띄움
-				end();
-//				closePopupAndRedirect();
-				
-			}
-		} else {
-			// 모달 바깥 영역 클릭했을 때 + 코멘트 창 비어있을때 모달2 띄움
-			end();
-//			closePopupAndRedirect();
-		}
-		 */
 	}
 });
 
@@ -533,10 +616,28 @@ function closePopupAndRedirect() {
 	
 }
 
-//모달2 닫고 전송
-function closePopupAndRedirect2() {
+
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+//모달2 닫기
+function closePopup2(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+
+function closePopupAndRedirect2(){
 	modal2.classList.toggle('show');
 	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
 		body.style.overflow = 'auto';
 	}
 	let h_name = $("#h_name").val();
@@ -550,22 +651,6 @@ function closePopupAndRedirect2() {
 	console.log(h_number);
 	console.log(h_comm);
 	$("#frm").attr("action","${pageContext.request.contextPath}/h/end.do/${detail.midx}").submit();
-	//window.location.href = '${pageContext.request.contextPath}/h/end.do/${sessionScope.midx}';
-	
-}
-
-function closePopup(){
-	modal.classList.toggle('show');
-	if (!modal.classList.contains('show')) {
-		body.style.overflow = 'auto';
-	}
-}
-//모달2 닫기
-function closePopup2(){
-	modal2.classList.toggle('show');
-	if (!modal2.classList.contains('show')) {
-		body.style.overflow = 'auto';
-	}
 }
 
 function textareaIsEmpty() {
