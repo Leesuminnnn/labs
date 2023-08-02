@@ -33,7 +33,7 @@ public class MemberDao {
 	public MemberVo detail(int midx) {
 		return sqlSession1.selectOne(MAPPER+".detail", midx);
 	}
-	
+	// 회원정보 수정
 	public void detailAction(MemberVo memberVo) {
 		sqlSession1.update(MAPPER+".detailAction", memberVo);
 	}
@@ -95,7 +95,10 @@ public class MemberDao {
 		return sqlSession1.selectOne(MAPPER+".detail4", midx);
 	
 	}
-
+	// 회원정보 수정
+	public void detailAction2(CustomerVo vo) {
+		sqlSession1.update(MAPPER+".detailAction2", vo);
+	}
 	
 	
 

@@ -3,9 +3,78 @@
 	width: 200px;	
 }
 
+.text3{
+	margin-top: 36px;
+	margin-bottom: 56pt;
+	font-size: 15pt;
+}
+.text4{
+	margin-bottom: 48px;
+}
 
 
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	bottom: 0;
+	
+	width: 100vw;
+	height: 100vh;
 
+	display: none;
 
+	background-color: rgba(51, 51, 51, 0.7);
+	/* 애니메이션 효과 */
+	/* transform: translateY(100%); */
+	/* transition: transform 1s ease-in-out; */
+}
 
+.modal.show {
+	display: block;
+	transform: translateY(0);
+	transition: transform 1s ease-in-out;
+	z-index: 3;
+}
 
+.modal_body {
+	display: flex;
+    justify-content: center;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+
+	width: 680px;
+	height: 60vh;
+
+	/* padding: 35px; */
+
+	text-align: center;
+
+	background-color: rgb(255, 255, 255);
+	border-radius: 20px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	/* 애니메이션 효과 */
+	transform: translateY(0);
+	transform: translate(-50%, -50%); 
+}
+
+.del-icon{
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	margin-top: 0;
+}
+
+.comment{
+	background-color: #efefef;
+	width: 91%;
+	height: 75%;
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 10px;
+	position: absolute;
+	top: 100px;
+	left: 5%;
+}

@@ -28,7 +28,7 @@
 					<span class="light text user-info">로그인을 해주세요.</span>
 				</c:when>
 				<c:otherwise>
-					<span class="bold text user-info">${detail.m_name}</span> 님 안녕하세요. [${detail.m_no}]
+					<span class="bold text user-info">${m_name}</span> 님 안녕하세요. [${m_no}]
 				</c:otherwise>
 			</c:choose>
 		</div>

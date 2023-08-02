@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "point">
+
+	
+	<insert id="pointdetail" parameterType="pointdetail">
+		insert into csworktools.point_details (midx, userId, details, p_status, hidx) 
+		select #{midx}, #{h_userId}, 2000, "적립", hidx FROM csworktools.help ORDER BY hidx DESC LIMIT 1
+	</insert>
+	
+	<select id="pointlist" resultType="map" parameterType="map">
+	<!-- select id="pointlist" resultType="map" parameterType="map"> -->
+		<!-- 
+		SELECT 
+		DATE_FORMAT(p.p_regdate, '%Y.%m.%d %H:%i') AS p_regdate, p.userId, p.details, p.p_status,
+		DATE_FORMAT(h.h_endTime, '%Y.%m.%d %H:%i') AS h_endTime, h.h_name, h.h_no, h.h_number, p.idx , p.midx
+		FROM csworktools.member m 
+		JOIN csworktools.point_details p ON m.midx = p.midx
+		JOIN csworktools.help h ON p.hidx = h.hidx 
+		WHERE m.midx = #{midx}
+		 -->
+		 
+		SELECT 
+		DATE_FORMAT(p.p_regdate, '%Y.%m.%d %H:%i') AS p_regdate, p.userId, p.details, p.p_status,
+		DATE_FORMAT(h.h_endTime, '%Y.%m.%d %H:%i') AS h_endTime, h.h_name, h.h_no, h.h_number, p.idx , p.midx
+		FROM csworktools.customer m 
+		JOIN csworktools.point_details p ON m.midx = p.midx
+		JOIN csworktools.help h ON p.hidx = h.hidx 
+		WHERE m.midx = #{midx}
+		
+		<choose>
+			<when test="duration == 1">
+			
+			and p.p_regdate BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() 
+			 
+			</when>
+			<when test="duration == 3">
+			
+			and p.p_regdate BETWEEN DATE_SUB(NOW(), INTERVAL 3 MONTH) AND NOW()
+			
+			</when>
+			<when test="duration == 6">
+			
+			and p.p_regdate BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+			
+			</when>
+			<otherwise>
+			
+			and DATE(p.p_regdate) BETWEEN #{startDate} AND #{endDate} 
+			
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="select == 'selectOption1'">
+			order by p.idx DESC
+			</when>
+			<when test="select == 'selectOption2'">
+				and p.p_status = '적립' order by p.idx DESC
+			</when>
+			<when test="select == 'selectOption3'">
+				and p.p_status = '사용' order by p.idx DESC
+			</when>
+		</choose>
+		
+		
+		
+	</select>
+	
+	<select id="pointresult" parameterType="String" resultType="int">
+		<!-- 
+		SELECT count(*),
+		DATE_FORMAT(p.p_regdate, '%Y.%m.%d %H:%i') AS p_regdate, p.userId, p.details, p.p_status, 
+		DATE_FORMAT(h.h_endTime, '%Y.%m.%d %H:%i') AS h_endTime, h.h_name, h.h_no, h.h_number, p.idx 
+		FROM csworktools.point_details p 
+		JOIN csworktools.member m on p.midx = m.midx 
+		JOIN csworktools.help h ON p.midx = h.midx 
+		where m.midx = #{midx} 
+		 -->
+		 
+		SELECT count(*),
+		DATE_FORMAT(p.p_regdate, '%Y.%m.%d %H:%i') AS p_regdate, p.userId, p.details, p.p_status, 
+		DATE_FORMAT(h.h_endTime, '%Y.%m.%d %H:%i') AS h_endTime, h.h_name, h.h_no, h.h_number, p.idx 
+		FROM csworktools.point_details p 
+		JOIN csworktools.customer m on p.midx = m.midx 
+		JOIN csworktools.help h ON p.midx = h.midx 
+		where m.midx = #{midx} 
+		
+		<choose>
+			<when test="duration == 1">
+			
+			and p.p_regdate BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW() 
+			 
+			</when>
+			<when test="duration == 3">
+			
+			and p.p_regdate BETWEEN DATE_SUB(NOW(), INTERVAL 3 MONTH) AND NOW()
+			
+			</when>
+			<when test="duration == 6">
+			
+			and p.p_regdate BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+			
+			</when>
+			<otherwise>
+			
+			and DATE(p.p_regdate) BETWEEN #{startDate} AND #{endDate} 
+			
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="select == 'selectOption1'">
+			order by p.idx DESC
+			</when>
+			<when test="select == 'selectOption2'">
+				and p.p_status = '적립' order by p.idx DESC
+			</when>
+			<when test="select == 'selectOption3'">
+				and p.p_status = '사용' order by p.idx DESC
+			</when>
+		</choose>
+	</select>
+	
+
+</mapper>

@@ -406,15 +406,16 @@ modal2Open.addEventListener('click', () => {
 });
  */
 function end(){
-	modal2.classList.toggle('show');
 	
-	if (modal2.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
 	if (textareaIsEmpty()) {
 		// textarea가 비어있는 경우
 		const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
 		if (confirmed) {
+			modal2.classList.toggle('show');
+			
+			if (modal2.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
 
 			$(document).ready(function(){
 				var str = "";
@@ -507,6 +508,12 @@ modal.addEventListener('click', (event) => {
 				const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
 				if (confirmed) {
 					// 예
+					modal2.classList.toggle('show');
+				
+					if (modal2.classList.contains('show')) {
+						body.style.overflow = 'hidden';
+					}
+					
 					$(document).ready(function(){
 					var str = "";
 					var listItem = [];

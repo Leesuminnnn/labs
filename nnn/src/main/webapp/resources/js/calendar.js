@@ -75,3 +75,21 @@ const goToday = () => {
   date = new Date();
   renderCalender();
 };
+
+// 일자 클릭 시 예약
+let thisday = document.querySelector(".date");
+
+thisday.addEventListener('click', () => {
+	
+	console.log("클릭");
+});
+
+
+
+
+
+
+
+
+
+

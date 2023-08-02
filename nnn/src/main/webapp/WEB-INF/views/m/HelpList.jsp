@@ -59,7 +59,7 @@
 			<li><a href="#" onclick="menucontrol3()">엠블런스관리</a>
 				<ul class="sub-menu" id="menu3">
 					<li><a href="#">예약관리</a></li>
-					<li><a href="#">캘린더관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/a/Calendar.do">캘린더관리</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -93,21 +93,48 @@
 						<fmt:formatDate value="${l.h_endTime }" pattern="yyyy-MM-dd HH:mm"/>
 					</div>
 					<div>
-						<c:set var="elapsedTime" value="${(l.h_endTime.time - l.h_startTime.time)}" />
-						<fmt:formatNumber value="${elapsedTime/1000/60}" pattern="#"/>분
+					<c:choose>
+						<c:when test="${l.h_endTime == null}">
+						수발 진행중
+						</c:when>
+						<c:otherwise>
+							<c:set var="elapsedTime" value="${(l.h_endTime.time - l.h_startTime.time)}" />
+							<fmt:formatNumber value="${elapsedTime/1000/60}" pattern="#"/>분
+						</c:otherwise>
+					</c:choose>
+						
 					</div>
-					<div>
+					<div class="com" data-com="${l.h_comm }" onclick="t(this);" style="cursor: pointer;">
 						${l.h_comm }
 					</div>
 				</div>
 				
 			</c:forEach>
+			<div class="modal normal">
+					<div class="modal_body">
+						<div>
+							<img class="del-icon" src="${pageContext.request.contextPath}/resources/icon/del.png" onclick="closePopup()">
+							<div class="text3 normal">코멘트 보기</div>
+							<div class="comment light" id="comment">
+								<div id="result">
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 		</div>
-	</section>	
+		
+	</section>
+	
 </form>
 </body>
 <script>
 
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+//const btnOpenPopup = document.querySelector('.com');
+var result = document.getElementById('result');
 var sub1 = document.getElementById('menu1');
 var sub2 = document.getElementById('menu2');
 var sub3 = document.getElementById('menu3');
@@ -138,5 +165,36 @@ function menucontrol3(){
 		sub3.classList.add('open');
 	}
 }
+
+function t(element){
+	var comm = element.getAttribute("data-com");
+	console.log(comm);
+	modal.classList.toggle('show');
+
+	if (modal.classList.contains('show')) {
+		body.style.overflow = 'hidden';
+	}
+	result.textContent = comm;
+}
+/* 
+btnOpenPopup.addEventListener('click', () => {
+	
+	
+	
+	modal.classList.toggle('show');
+
+	if (modal.classList.contains('show')) {
+		body.style.overflow = 'hidden';
+	}
+	result = this.comm;
+});
+ */
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+
 </script>
 </html>

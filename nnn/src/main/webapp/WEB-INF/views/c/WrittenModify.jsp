@@ -14,8 +14,105 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css">
 <title>입원 서약서 서명</title>
-<style>
 
+<style>
+  @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    .checkbox-wrapper-13 input[type=checkbox] {
+      --active: #275EFE;
+      --active-inner: #fff;
+      --focus: 2px rgba(39, 94, 254, .3);
+      --border: #BBC1E1;
+      --border-hover: #275EFE;
+      --background: #fff;
+      --disabled: #F6F8FF;
+      --disabled-inner: #E1E6F9;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      height: 21px;
+      outline: none;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      margin: 0;
+      cursor: pointer;
+      border: 1px solid var(--bc, var(--border));
+      background: var(--b, var(--background));
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:after {
+      content: "";
+      display: block;
+      left: 0;
+      top: 0;
+      position: absolute;
+      transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:checked {
+      --b: var(--active);
+      --bc: var(--active);
+      --d-o: .3s;
+      --d-t: .6s;
+      --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:disabled {
+      --b: var(--disabled);
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:disabled:checked {
+      --b: var(--disabled-inner);
+      --bc: var(--border);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:disabled + label {
+      cursor: not-allowed;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:hover:not(:checked):not(:disabled) {
+      --bc: var(--border-hover);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:focus {
+      box-shadow: 0 0 0 var(--focus);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch) {
+      width: 21px;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):after {
+      opacity: var(--o, 0);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):checked {
+      --o: 1;
+    }
+    .checkbox-wrapper-13 input[type=checkbox] + label {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch) {
+      border-radius: 7px;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):after {
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--active-inner);
+      border-top: 0;
+      border-left: 0;
+      left: 7px;
+      top: 4px;
+      transform: rotate(var(--r, 20deg));
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):checked {
+      --r: 43deg;
+    }
+  }
+
+  .checkbox-wrapper-13 * {
+    box-sizing: inherit;
+  }
+  .checkbox-wrapper-13 *:before,
+  .checkbox-wrapper-13 *:after {
+    box-sizing: inherit;
+  }
 </style>
 </head>
 <body style="min-width: 1280px;">
@@ -191,8 +288,18 @@
 		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" /></td>
 		<td colspan="2" style="text-align: right;">
+		<%-- 
 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11" style="cursor: pointer;"> 비용안내</label></div></td>
+		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11" style="cursor: pointer;"> 비용안내</label></div>
+		 --%>
+		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		  <label for="cs_data_11" class="normal"><input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>>
+		  비용안내</label>
+		</div>
+		
+		
+		
+		</td>
 	</tr>
 </table>
 </div>
@@ -224,36 +331,84 @@
 		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;" value="${decryptedCs_data_15 }" /></td>
 		<td colspan="2" style="text-align: right; border-right: inherit;">
+		<%-- 
 		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div></td>
+		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div>
+		 --%>
+		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		  <label for="cs_data_16"><input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>>
+		  비용안내</label>
+		</div>
+		</td>
 	</tr>
 </table>
 </div>
 
 <div style="text-align: center; margin-bottom: 27px;">
 <div style="margin-bottom: 27px;">
-<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
+<table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
 border: 1px solid #c7c7c7;" >
 	<tr style="background-color: #fafafa;">
 		<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 21px;">환자가 아닌 보호자의 동의사유</div></td>
 	</tr>
 	<tr style="background-color: #ffffff;">
 		<td style="height: 56px; text-align: left; width:585px; border-bottom: none; border-right: none;">
+		<%-- 
 		<input name="cs_data_17" id="cs_data_17" style="margin-left: 21px;" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>/>
-		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label></td>
+		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
+		 --%>
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_17"><input style="margin-left: 21px;" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
+		  환자의 신체적 정신적 장애로 의사결정 불가</label>
+		</div>
+		</td>
 		<td style="text-align: center; border-left: none; border-right: none; border-bottom: none;">
-		<input name="cs_data_18" id="cs_data_18" value="환자위임" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>/><label for="cs_data_18" style="cursor: pointer;"> 환자위임</label></td>
+		<%-- 
+		<input name="cs_data_18" id="cs_data_18" value="환자위임" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>/>
+		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
+		 --%>
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_18"><input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
+		  환자위임</label>
+		</div>
+		</td>
 		<td style="text-align: right; border-left: none; border-bottom: none;">
-		<div style="margin-right: 21px;"><label for="cs_data_19" style="cursor: pointer;">
-		<input name="cs_data_19" id="cs_data_19" value="응급 상황" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/> 응급 상황</label></div></td>
+		<%-- 
+		<div style="margin-right: 21px;">
+		<label for="cs_data_19" style="cursor: pointer;">
+		<input name="cs_data_19" id="cs_data_19" value="응급 상황" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/> 응급 상황</label>
+		</div>
+		 --%>
+		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		  <label for="cs_data_19"><input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
+		  응급 상황</label>
+		</div>
+		</td>
 	</tr>
 	
 	<tr style="background-color: #ffffff;">
 		<td style="height: 56px; text-align: left; border-top: none; border-right: none;">
-		<label for="cs_data_20" style="cursor: pointer;"><input style="margin-left:21px;" id="cs_data_20" name="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>/> 
-		내용 설명 시 환자의 심신에 중대한 영향 우려</label></td>
+		<%-- 
+		<label for="cs_data_20" style="cursor: pointer;">
+		<input style="margin-left:21px;" id="cs_data_20" name="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>/> 
+		내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		 --%>
+		<div class="checkbox-wrapper-13" style="margin-left:21px;">
+		  <label for="cs_data_20"><input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
+		  내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		</div>
+		</td>
 		<td style=" border-left: none; border-right: none; border-top: none;">
-		<div style=""><label for="cs_data_21" style="cursor: pointer;"><input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_21 eq '미성년자' }">checked</c:if>/> 미성년자</label></div></td>
+		<%-- 
+		<div style=""><label for="cs_data_21" style="cursor: pointer;">
+		<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_21 eq '미성년자' }">checked</c:if>/> 미성년자</label>
+		</div>
+		 --%>
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_21"><input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
+		  미성년자</label>
+		</div>
+		</td>
 		<td style="text-align: center; border-left: none; border-top: none;">
 		</td>
 	</tr>
@@ -265,8 +420,15 @@ border: 1px solid #c7c7c7;" >
  margin-right: auto; border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 		<td colspan="3" style="text-align: left;">
-		<label for="cs_data_22" style="cursor: pointer;"><input style="font-size:14pt; margin-left: 21px; cursor: pointer;"  name="cs_data_22" id="cs_data_22" value="상급병실" type="checkbox" onchange="toggleCheckbox()" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>/> 
+		<%-- 
+		<label for="cs_data_22" style="cursor: pointer;">
+		<input style="font-size:14pt; margin-left: 21px; cursor: pointer;"  name="cs_data_22" id="cs_data_22" value="상급병실" type="checkbox" onchange="toggleCheckbox()" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>/> 
 		상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+		 --%>
+		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
+		  <label for="cs_data_22"><input style="font-size:14pt; margin-left: 21px;" id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
+		  상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+		</div>
 		</td>
 	</tr>
 	<tr style="height: 56px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
@@ -274,10 +436,41 @@ border: 1px solid #c7c7c7;" >
 		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
 		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
 		<td style="text-align: right; color:#222222;" class="light">
-		<div style="margin-right: 21px;">
-		<label for="cs_data_24" style="cursor: pointer;"><input name="cs_data_24" id="cs_data_24" value="특실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if><c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /> 특실</label>&emsp;&emsp;
-		<label for="cs_data_25" style="cursor: pointer;"><input name="cs_data_25" id="cs_data_25" value="1인실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 1인실</label>&emsp;&emsp;
-		<label for="cs_data_26" style="cursor: pointer;"><input name="cs_data_26" id="cs_data_26" value="2인실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 2인실</label></div></td>
+		<div style="margin-right: 21px; display: flex; justify-content: right;">
+		<%-- 
+		<label for="cs_data_24" style="cursor: pointer;">
+		<input name="cs_data_24" id="cs_data_24" value="특실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
+		<c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /> 특실</label>&emsp;&emsp;
+		 --%>
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_24"><input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
+		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+		  특실</label>&emsp;&emsp;
+		</div>
+		<%-- 
+		<label for="cs_data_25" style="cursor: pointer;">
+		<input name="cs_data_25" id="cs_data_25" value="1인실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
+		<c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 1인실</label>&emsp;&emsp;
+		 --%>
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_25"><input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled"<c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
+		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+		  1인실</label>&emsp;&emsp;
+		</div>
+		<%-- 
+		<label for="cs_data_26" style="cursor: pointer;">
+		<input name="cs_data_26" id="cs_data_26" value="2인실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
+		<c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 2인실</label>
+		 --%>
+		
+		
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_26"><input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
+		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+		  2인실</label>
+		</div>
+		</div>
+		</td>
 	</tr>
 	<tr style="height: 56px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
 		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
@@ -335,8 +528,7 @@ border: 1px solid #c7c7c7;" >
 <div class="modal2 normal">
 	<div class="modal_body2">
 		<div style="position: relative;">
-			<div><img style="position: absolute; right: -14px; top: 33px;" 
-			src="${pageContext.request.contextPath}/resources/icon/del.png" onclick="cancle2();"></div>
+			<div><img style="position: absolute; right: -14px; top: 33px;" src="${pageContext.request.contextPath}/resources/icon/del.png" onclick="cancle2();"></div>
 			<div class="text">아래 공간에 서명을 하신 후 확인을 누르세요</div>
 			<input type="hidden" name="image-data" id="image-data">
 			<canvas class="canvas2" id="canvas2" width="785px" height="735px">

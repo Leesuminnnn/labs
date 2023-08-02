@@ -61,6 +61,7 @@ public class HelpController {
 	public ModelAndView main(/* @CookieValue(value="name", required=false) Cookie cookie, */
 			ModelAndView mav, HttpSession session, CustomerVo vo, HttpServletRequest request) throws Exception {
 		System.out.println("-----------------1");
+		
 		// -- 여기서 수정 후 HomeController에서 수정하기
 		//저장되어 있는 세션 꺼내오기
 		session.getAttribute("email");
@@ -87,7 +88,7 @@ public class HelpController {
 		
 		// 시연용
 		
-		mav.addObject("detail", session.getAttribute("loginMember"));
+		mav.addObject("detail", memberService.detail4((Integer)session.getAttribute("midx")));
 		
 		
 //		mav.addObject("detail", memberService.detail2((String)session.getAttribute("name")));
@@ -107,9 +108,9 @@ public class HelpController {
 		mav.addObject("h_userName", session.getAttribute("name"));
 		mav.addObject("m_name",session.getAttribute("name"));
 		mav.addObject("userId", session.getAttribute("userId"));
-//		mav.addObject("m_no", vo.getM_no());
-//		mav.addObject("m_in", vo.getM_in());
-//		mav.addObject("m_de", vo.getM_de());
+		mav.addObject("m_no", session.getAttribute("m_no"));
+		mav.addObject("m_in", session.getAttribute("m_in"));
+		mav.addObject("m_de", session.getAttribute("m_de"));
 		mav.addObject("end", endDate);
 		mav.addObject("start", startDate);
 		System.out.println("#####################################");

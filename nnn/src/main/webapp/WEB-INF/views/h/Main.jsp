@@ -62,9 +62,9 @@
 				<div class="light content-text1">안녕하세요.</div>
 				<div class="normal content-text2">
 				<b class="bold content-text3">
-				${detail.m_name}
+				${m_name}
 				<c:set var="midx" value="${detail.midx }"/>
-				</b>님[${detail.m_no }]</div>
+				</b>님[${m_no }]</div>
 			</div>
 		</div>
 		<div class="second-content" onclick="location.href='${pageContext.request.contextPath}/m/Point.do/${detail.midx}/1/${start}/${end}/selectOption1'">
@@ -159,7 +159,7 @@
 						</div>	
 					</div>
 					 --%>
-					<div class="b shadow1" onclick="location.href='#'">
+					<div class="b shadow1" onclick="location.href='${pageContext.request.contextPath}/a/Calendar.do'">
 						<div class="content">
 							<div>
 								<img alt="앰블런스" src="${pageContext.request.contextPath}/resources/icon/ambul_icon.png"><br>

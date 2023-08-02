@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +71,24 @@ public class MemberService {
 
 	}
 
+	public String getAccessTokenFromCookie(HttpServletRequest request) {
+	    String access_Token = null;
+
+	    // Retrieve the access token from the cookie
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("access_token")) {
+	                access_Token = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+
+	    return access_Token;
+	}
+	
+	
 	// 카카오 로그인 서비스
 	public String getAccessToken(String authorize_code) {
 		String access_Token = "";
@@ -77,6 +98,8 @@ public class MemberService {
 //		String now_addres = javax.servlet.http.HttpUtils.getRequestURL(request).toString();
 		System.out.println("########################");
 //		System.out.println("now_addres : "+now_addres);
+		
+		
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -91,9 +114,9 @@ public class MemberService {
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=ecfda70a16078a6b5a64478901f3dfb3");
 			
-//			sb.append("&redirect_uri=http://localhost:8090/app/m/kakao/callback");			//로컬사이트
+			sb.append("&redirect_uri=http://localhost:8090/app/m/kakao/callback");			//로컬사이트
 //			sb.append("&redirect_uri=http://csworktools.cafe24.com/m/kakao/callback");		//cswork
-			sb.append("&redirect_uri=https://hwtools.kr/m/kakao/callback");					//hwtools(https)
+//			sb.append("&redirect_uri=https://hwtools.kr/m/kakao/callback");					//hwtools(https)
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -135,6 +158,7 @@ public class MemberService {
 
 	public HashMap<String, Object> getUserInfo(String access_Token) {
 
+		
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -243,7 +267,10 @@ public class MemberService {
 	public CustomerVo detail4(Integer midx) {
 		return memberDao.detail4(midx);
 	}
-	
+	// 회원정보 수정
+	public void detailAction2(CustomerVo vo) {
+		memberDao.detailAction2(vo);
+	}
 
 	
 }

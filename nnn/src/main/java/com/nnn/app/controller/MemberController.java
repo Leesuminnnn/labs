@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -84,8 +85,8 @@ public class MemberController {
 	    	session.setAttribute("userId", loginMember.getM_id());
 	    	session.setAttribute("m_no", loginMember.getM_no());
 	    	session.setAttribute("m_point", loginMember.getM_point());
-//	    	session.setAttribute("m_in", loginMember.getM_in());
-//	    	session.setAttribute("m_de", loginMember.getM_de());
+	    	session.setAttribute("m_in", loginMember.getM_in());
+	    	session.setAttribute("m_de", loginMember.getM_de());
 	    	System.out.println("loginMember : " + loginMember);
 //	    	List<MemberVo> mlist = new ArrayList<MemberVo>();
 	    	// 시연용
@@ -108,8 +109,8 @@ public class MemberController {
     	session.setAttribute("userId", loginMember.getM_id());
     	session.setAttribute("m_no", loginMember.getM_no());
     	session.setAttribute("m_point", loginMember.getM_point());
-//		session.setAttribute("m_in", loginMember.getM_in());
-//		session.setAttribute("m_de", loginMember.getM_de());
+		session.setAttribute("m_in", loginMember.getM_in());
+		session.setAttribute("m_de", loginMember.getM_de());
     	
     	
     	
@@ -182,18 +183,27 @@ public class MemberController {
 	}
 	// 회원 정보 업데이트
 	@RequestMapping(value = "DetailAction.do/{midx}")
-	public String detailAction(HttpSession session,@PathVariable("midx") Integer midx, Model model, MemberVo memverVo, HttpServletRequest request) throws Exception {
+	public String detailAction(HttpSession session,@PathVariable("midx") Integer midx, Model model, CustomerVo vo, HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		
 		session.getAttribute("loginMember");
-		
-		
-		memberService.detailAction(memverVo);
-		
+
+//		memberService.detailAction(memverVo);
+		// 시연용
+		memberService.detailAction2(vo);
 		String h_name = (String)session.getAttribute("h_name");
     	String h_no = (String)session.getAttribute("h_no");
     	String h_number = (String)session.getAttribute("h_number");
     	System.out.println("#################################");
+    	session.getAttribute("loginMember");
+    	session.setAttribute("m_in", vo.getM_in());
+    	session.setAttribute("m_de", vo.getM_de());
+    	session.setAttribute("m_no", vo.getM_no());
+    	session.setAttribute("name", vo.getM_name());
+		System.out.println(vo.getM_in());
+		System.out.println(vo.getM_de());
+		System.out.println(vo.getM_no());
+		System.out.println(vo.getM_name());
     	System.out.println("h_name : "+h_name);
     	System.out.println("h_no : "+h_no);
     	System.out.println("h_number : "+h_number);
@@ -501,6 +511,13 @@ public class MemberController {
 		System.out.println("login Controller : " + userInfo);
 		System.out.println("controller access_Token : " + access_Token);
 		
+		// Set the access token in a cookie
+	    Cookie accessTokenCookie = new Cookie("access_token", access_Token);
+	    accessTokenCookie.setMaxAge(60 * 60 * 24 * 7); // Set the cookie to expire in 1 week (adjust as needed)
+	    accessTokenCookie.setPath("/"); // Set the cookie to be accessible from all paths
+	    response.addCookie(accessTokenCookie);
+		
+		
 		//	    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.get("email")!= null) {
         	 // 이메일로 해당 회원 정보를 가져옵니다.
@@ -552,6 +569,9 @@ public class MemberController {
         	session.setAttribute("midx", customerVo.getMidx());
         	session.setAttribute("userId", customerVo.getM_id());
         	session.setAttribute("m_point", customerVo.getM_point());
+        	session.setAttribute("m_in", customerVo.getM_in());
+        	session.setAttribute("m_de", customerVo.getM_de());
+        	session.setAttribute("m_no", customerVo.getM_no());
         	
         	session.setAttribute("access_Token", access_Token);
         	
@@ -575,6 +595,9 @@ public class MemberController {
     		System.out.println("m_status : "+customerVo.getM_status());
     		System.out.println("midx : "+customerVo.getMidx());
     		System.out.println("userId : "+customerVo.getM_id());
+    		System.out.println("m_in : "+customerVo.getM_in());
+    		System.out.println("m_de : "+customerVo.getM_de());
+    		System.out.println("m_no : "+customerVo.getM_no());
     		
         	/*
         		Logininterceptor에서 저장한 세션을 불러오고 

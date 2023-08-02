@@ -14,8 +14,105 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css?after">
 <title>입원 서약서</title>
-<style>
 
+<style>
+  @supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    .checkbox-wrapper-13 input[type=checkbox] {
+      --active: #275EFE;
+      --active-inner: #fff;
+      --focus: 2px rgba(39, 94, 254, .3);
+      --border: #BBC1E1;
+      --border-hover: #275EFE;
+      --background: #fff;
+      --disabled: #F6F8FF;
+      --disabled-inner: #E1E6F9;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      height: 21px;
+      outline: none;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      margin: 0;
+      cursor: pointer;
+      border: 1px solid var(--bc, var(--border));
+      background: var(--b, var(--background));
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:after {
+      content: "";
+      display: block;
+      left: 0;
+      top: 0;
+      position: absolute;
+      transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:checked {
+      --b: var(--active);
+      --bc: var(--active);
+      --d-o: .3s;
+      --d-t: .6s;
+      --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:disabled {
+      --b: var(--disabled);
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:disabled:checked {
+      --b: var(--disabled-inner);
+      --bc: var(--border);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:disabled + label {
+      cursor: not-allowed;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:hover:not(:checked):not(:disabled) {
+      --bc: var(--border-hover);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:focus {
+      box-shadow: 0 0 0 var(--focus);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch) {
+      width: 21px;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):after {
+      opacity: var(--o, 0);
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):checked {
+      --o: 1;
+    }
+    .checkbox-wrapper-13 input[type=checkbox] + label {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch) {
+      border-radius: 7px;
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):after {
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--active-inner);
+      border-top: 0;
+      border-left: 0;
+      left: 7px;
+      top: 4px;
+      transform: rotate(var(--r, 20deg));
+    }
+    .checkbox-wrapper-13 input[type=checkbox]:not(.switch):checked {
+      --r: 43deg;
+    }
+  }
+
+  .checkbox-wrapper-13 * {
+    box-sizing: inherit;
+  }
+  .checkbox-wrapper-13 *:before,
+  .checkbox-wrapper-13 *:after {
+    box-sizing: inherit;
+  }
 </style>
 </head>
 <body style="min-width: 1280px;">
@@ -167,7 +264,7 @@
 	<tr style="height: 56px;">
 		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border: 1px solid #c7c7c7;">
 		주<br>보<br>호<br>자</td>
-		<td class="normal" style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성명</td> 
+		<td class="normal" style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
 		<td style="width:350px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
 		<input class="light" name="cs_data_07" style="margin-left: 33px; width:250px;" value="${param4 }" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;" class="normal">(관계 :
@@ -178,17 +275,30 @@
 		</td>
 	</tr>
 	<tr style="height: 56px;">
-		<td style="border: 1px solid #dadada;" class="normal">주소</td>
+		<td style="border: 1px solid #dadada;" class="normal">주 소</td>
 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border: 1px solid #dadada; border-right: inherit;">
 		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text"/></td>
 	</tr>
 	<tr style="height: 56px;">
-		<td style="border: 1px solid #dadada; border-left: inherit; border-bottom: inherit;" class="normal">휴대폰번호</td>
+		<td style="border: 1px solid #dadada; border-left: inherit; border-bottom: inherit;" class="normal">휴대폰 번호</td>
 		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${param5}"/></td>
 		<td colspan="2" style="text-align: right;">
+		<!-- 
 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;"/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11"style="cursor: pointer;"> 비용안내</label></div></td>
+		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11"style="cursor: pointer;"> 비용안내</label></div>
+		 -->
+		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		  <label for="cs_data_11"><input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
+		  비용안내</label>
+		</div>
+		</td>
+		
+		
+		
+		
+		
+		
 	</tr>
 </table>
 </div>
@@ -198,7 +308,7 @@
  border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px;">
 		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center; border: 1px solid #c7c7c7;">부<br>보<br>호<br>자</td>
-		<td style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성명</td> 
+		<td style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
 		<td style="width: 350px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;">(관계 :
@@ -219,8 +329,16 @@
 		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;"/></td>
 		<td colspan="2" style="text-align: right;">
+		<!-- 
 		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox"style="cursor: pointer;"/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div></td>
+		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div>
+		 -->
+		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		  <label for="cs_data_16"><input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
+		  비용안내</label>
+		</div>
+		
+		</td>
 	</tr>
 </table>
 </div>
@@ -233,22 +351,60 @@ border: 1px solid #c7c7c7;" >
 	</tr>
 	<tr style="border-bottom: none; background-color: #ffffff;">
 		<td style="border-right: none; border-bottom: none; height: 56px; text-align: left; width:585px;">
+		<!-- 
 		<input style="margin-left: 21px; cursor: pointer;" name="cs_data_17" id="cs_data_17" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox"/>
-		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label></td>
+		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
+		 -->
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_17"><input style="margin-left: 21px;" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
+		  환자의 신체적 정신적 장애로 의사결정 불가</label>
+		</div>
+		</td>
 		<td style="text-align: center; border-bottom: none; border-left:none; border-right: none;">
-		<input name="cs_data_18" value="환자위임" id="cs_data_18" type="checkbox" style="cursor: pointer;"/><label for="cs_data_18" style="cursor: pointer;"> 환자위임</label></td>
+		<!-- 
+		<input name="cs_data_18" value="환자위임" id="cs_data_18" type="checkbox" style="cursor: pointer;"/>
+		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
+		 -->
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_18"><input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
+		  환자위임</label>
+		</div>
+		
+		</td>
 		<td style="text-align: center; border-bottom: none; border-left: none; text-align: right;">
+		<!-- 
 		<div style="margin-right: 21px;"><label for="cs_data_19" style="cursor: pointer;">
 		<input name="cs_data_19" id="cs_data_19"value="응급 상황" type="checkbox" style="cursor: pointer;"/>
-		 응급 상황</label></div></td>
+		 응급 상황</label></div>
+		  -->
+		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		  <label for="cs_data_19"><input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황">
+		  응급 상황</label>
+		</div>
+		 </td>
 	</tr>
 	
 	<tr style="background-color: #ffffff; border-top:none;">
 		<td style="border-right: none; border-top:none; height: 56px; text-align: left;">
+		<!-- 
 		<label for="cs_data_20" style="cursor: pointer;"><input style="margin-left:21px; cursor: pointer;" name="cs_data_20" id="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox"/>
-		 내용 설명 시 환자의 심신에 중대한 영향 우려</label></td>
+		 내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		  -->
+		<div class="checkbox-wrapper-13" style="margin-left:21px;">
+		  <label for="cs_data_20"><input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려">
+		  내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		</div>
+		 </td>
 		<td style="border-right: none; border-top:none; border-left: none;">
-		<div style=""><label for="cs_data_21" style="cursor: pointer;"><input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;"/> 미성년자</label></div></td>
+		 <!-- 
+		<div style=""><label for="cs_data_21" style="cursor: pointer;">
+		<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;"/> 미성년자</label></div>
+		 -->
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_21"><input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
+		  미성년자</label>
+		</div>
+		</td>
 		<td style="border-left: none; border-top:none; text-align: center;">
 		</td>
 	</tr>
@@ -260,8 +416,16 @@ border: 1px solid #c7c7c7;" >
  margin-right: auto; border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px; background-color: #fafafa;" class="normal">
 		<td colspan="3" style="text-align: left; border-bottom: 1px solid #c7c7c7;">
-		<label for="cs_data_22" style="cursor: pointer;"><input style="font-size:14pt; margin-left: 21px; cursor: pointer;" name="cs_data_22" id="cs_data_22" value="상급병실" type="checkbox" onchange="toggleCheckbox()"/>
+		<!-- 
+		<label for="cs_data_22" style="cursor: pointer;">
+		<input style="font-size:14pt; margin-left: 21px; cursor: pointer;" name="cs_data_22" id="cs_data_22" value="상급병실" type="checkbox" onchange="toggleCheckbox()"/>
 		 상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+		  -->
+		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
+		  <label for="cs_data_22"><input style="font-size:14pt; margin-left: 21px;" id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실">
+		  상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+		</div>
+		 
 		</td>
 	</tr>
 	<tr style="height: 56px; border-bottom: 1px solid #dadada; background-color: #ffffff;">
@@ -269,10 +433,35 @@ border: 1px solid #c7c7c7;" >
 		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
 		<input name="cs_data_23" style="width:190px; text-align: right;" type="text" disabled="disabled"/> 호</td>
 		<td style="text-align: right; color:#222222;" class="light">
-		<div style="margin-right: 21px;">
-		<label for="cs_data_24" style="cursor: pointer;"><input style="cursor: pointer;" name="cs_data_24" id="cs_data_24" value="특실" type="checkbox" disabled="disabled"/> 특실</label>&emsp;&emsp;
-		<label for="cs_data_25" style="cursor: pointer;"><input style="cursor: pointer;" name="cs_data_25" id="cs_data_25" value="1인실" type="checkbox" disabled="disabled"/> 1인실</label>&emsp;&emsp;
-		<label for="cs_data_26" style="cursor: pointer;"><input style="cursor: pointer;" name="cs_data_26" id="cs_data_26" value="2인실" type="checkbox" disabled="disabled"/> 2인실</label></div></td>
+		
+		<div style="margin-right: 21px; display: flex; justify-content: right;">
+		<!-- 
+		<label for="cs_data_24" style="cursor: pointer;">
+		<input style="cursor: pointer;" name="cs_data_24" id="cs_data_24" value="특실" type="checkbox" disabled="disabled"/> 특실</label>&emsp;&emsp;
+		 -->
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_24"><input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled">
+		  특실</label>&emsp;&emsp;
+		</div>
+		<!-- 
+		<label for="cs_data_25" style="cursor: pointer;">
+		<input style="cursor: pointer;" name="cs_data_25" id="cs_data_25" value="1인실" type="checkbox" disabled="disabled"/> 1인실</label>&emsp;&emsp;
+		 -->
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_25"><input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled">
+		  1인실</label>&emsp;&emsp;
+		</div>
+		<!-- 
+		<label for="cs_data_26" style="cursor: pointer;">
+		<input style="cursor: pointer;" name="cs_data_26" id="cs_data_26" value="2인실" type="checkbox" disabled="disabled"/> 2인실</label>
+		 -->
+		<div class="checkbox-wrapper-13" style="">
+		  <label for="cs_data_26"><input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled">
+		  2인실</label>
+		</div>
+		</div>
+		
+		</td>
 	</tr>
 	<tr style="height: 56px;  border-bottom: 1px solid #dadada; background-color: #ffffff; color:#222222;">
 		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"

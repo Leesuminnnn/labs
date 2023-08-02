@@ -61,7 +61,7 @@
 			<li><a href="#" onclick="menucontrol3()">엠블런스관리</a>
 				<ul class="sub-menu" id="menu3">
 					<li><a href="#">예약관리</a></li>
-					<li><a href="#">캘린더관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/a/Calendar.do">캘린더관리</a></li>
 				</ul>
 			</li>
 		</ul>
