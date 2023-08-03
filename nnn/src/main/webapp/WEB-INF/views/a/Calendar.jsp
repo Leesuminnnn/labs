@@ -16,6 +16,7 @@
 </style>
 </head>
 <body>
+<div class="container">
 <div class="calendar">
     <div class="header">
       <div class="year-month"></div>
@@ -38,6 +39,25 @@
       <div class="dates"></div>
     </div>
   </div>
+</div>
+<div class="flex flex-end plan" id="plan" style="width: 600px; cursor: pointer;">예약하기</div>
+<div class="modal normal">
+	<div class="modal_body">
+		<div>
+			<img class="del-icon" src="${pageContext.request.contextPath}/resources/icon/del.png" onclick="closePopup()">
+			<div class="text3 normal">엠블런스 예약 하기</div>
+			<div class="comment light" id="comment">
+				<div id="result">
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
 <script src="${pageContext.request.contextPath}/resources/js/calendar.js"></script>
+<script>
+
+
+</script>
 </body>
 </html>

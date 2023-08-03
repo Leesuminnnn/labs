@@ -104,25 +104,25 @@
 					</c:choose>
 						
 					</div>
-					<div class="com" data-com="${l.h_comm }" onclick="t(this);" style="cursor: pointer;">
+					<div class="com" data-com="${l.h_comm }" onclick="t(this);" style="cursor: pointer;overflow:hidden; white-space:nowrap; text-overflow:ellipsis;" >
 						${l.h_comm }
 					</div>
 				</div>
 				
 			</c:forEach>
 			<div class="modal normal">
-					<div class="modal_body">
-						<div>
-							<img class="del-icon" src="${pageContext.request.contextPath}/resources/icon/del.png" onclick="closePopup()">
-							<div class="text3 normal">코멘트 보기</div>
-							<div class="comment light" id="comment">
-								<div id="result">
-								</div>
+				<div class="modal_body">
+					<div>
+						<img class="del-icon" style="cursor:pointer;" src="${pageContext.request.contextPath}/resources/icon/del.png" onclick="closePopup()">
+						<div class="text3 normal">코멘트 보기</div>
+						<div class="comment light" id="comment">
+							<div id="result">
 							</div>
-							
 						</div>
+						
 					</div>
 				</div>
+			</div>
 		</div>
 		
 	</section>
