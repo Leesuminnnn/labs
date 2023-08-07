@@ -12,7 +12,7 @@
 		</label>
 	</div>
 	<div>
-		<span class="bold header-text">CW</span>
+		<span class="bold header-text">HWT</span>
 	</div>
 </header>
 <!-- 본문영역 -->
@@ -21,7 +21,7 @@
 <div class="sidebar_content">
 	<div class="info">
 		<img class="info-icon" id="info-icon" onclick="check()" src="${pageContext.request.contextPath}/resources/icon/slidemenu_del.png">
-		<div class="bold" style="font-size: 40pt; text-align: center;">CW</div>
+		<div class="bold" style="font-size: 40pt; text-align: center;">HWT</div>
 		<div class="text1 normal">
 			<c:choose>
 				<c:when test="${detail.midx == null }">

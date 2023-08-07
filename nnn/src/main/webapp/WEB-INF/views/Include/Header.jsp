@@ -4,12 +4,12 @@
 <div class="header">
 	<img id="menu-btn" src="${pageContext.request.contextPath}/resources/icon/menu.png">
 	<div>
-		<span class="bold">CW</span>
+		<span class="bold">HWT</span>
 	</div>
 	<div id="menu">
 		<div class="menu-body light">
 			<div class="info">
-				<div class="bold">CW</div>
+				<div class="bold">HWT</div>
 				<div class="text1 normal"><span class="bold text user-info">${detail.m_name}</span> 님 안녕하세요. [${detail.m_no}]</div>
 			</div>
 			<div class="line">

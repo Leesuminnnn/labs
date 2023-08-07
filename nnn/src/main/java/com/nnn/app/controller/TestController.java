@@ -36,6 +36,8 @@ import com.nnn.app.vo.Pointdetail;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.WrittenVo;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
 @RequestMapping(value = "t/*")
 public class TestController {
@@ -665,4 +667,19 @@ public class TestController {
 		mav.setViewName("t/TestCalendar");
 		return mav;
 	}
+	
+	@RequestMapping(value="fullcalendar")
+	public ModelAndView fullcalendar(ModelAndView mav) {
+		
+		mav.setViewName("t/fullcalendar");
+		return mav;
+	}
+	
+	@RequestMapping(value="TestCalendar2")
+	public ModelAndView TestCalendar2(ModelAndView mav) {
+		
+		mav.setViewName("t/TestCalendar2");
+		return mav;
+	}
+	
 }

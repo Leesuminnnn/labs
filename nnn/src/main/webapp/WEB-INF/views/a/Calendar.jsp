@@ -55,9 +55,5 @@
 	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/calendar.js"></script>
-<script>
-
-
-</script>
 </body>
 </html>

@@ -122,13 +122,38 @@ public class MemberController {
     	System.out.println("m_status : "+loginMember.getM_status());
     	System.out.println("midx : "+loginMember.getMidx());
     	System.out.println("userId : "+loginMember.getM_id());
-	    
-	    if (referer != null && !referer.contains("m/Login")) { // 이전 페이지가 null이 아니고 로그인 페이지가 아닌 경우
-	        return "redirect:" + referer; // 이전 페이지로 이동
-	    } else {
-	        return "redirect:/h/Main.do"; // 메인 페이지로 이동
-	    }
+    	/*
+		Logininterceptor에서 저장한 세션을 불러오고 
+	
+		 */
+		String h_name = (String)session.getAttribute("h_name");
+		String h_no = (String)session.getAttribute("h_no");
+		String h_number = (String)session.getAttribute("h_number");
+		System.out.println("#################################");
+		System.out.println("h_name : "+h_name);
+		System.out.println("h_no : "+h_no);
+		System.out.println("h_number : "+h_number);
+		if(h_name != null && h_no != null && h_number != null) {
+			try {
+	        	System.out.println("#################################");
+	        	return "redirect:/h/Insert.do?h_name="+h_name+"&h_no="+h_no+"&h_number="+h_number;			        	
+			} catch (Exception e) {
+				
+			}
+			
+	
+		}
+		return "redirect:/h/Main.do";	
+	    	
 	}
+	
+	
+//	    if (referer != null && !referer.contains("m/Login")) { // 이전 페이지가 null이 아니고 로그인 페이지가 아닌 경우
+//	        return "redirect:" + referer; // 이전 페이지로 이동
+//	    } else {
+//	        return "redirect:/h/Main.do"; // 메인 페이지로 이동
+//	    }
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "Info", method = RequestMethod.POST)
