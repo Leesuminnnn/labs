@@ -668,13 +668,6 @@ public class TestController {
 		return mav;
 	}
 	
-	@RequestMapping(value="fullcalendar")
-	public ModelAndView fullcalendar(ModelAndView mav) {
-		
-		mav.setViewName("t/fullcalendar");
-		return mav;
-	}
-	
 	@RequestMapping(value="TestCalendar2")
 	public ModelAndView TestCalendar2(ModelAndView mav) {
 		

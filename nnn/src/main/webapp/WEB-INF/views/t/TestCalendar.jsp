@@ -20,9 +20,9 @@
     <div class="header">
       <div class="year-month"></div>
       <div class="nav">
-        <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-        <button class="nav-btn go-today" onclick="goToday()">Today</button>
-        <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+        <button class="nav-btn go-prev" id="go-prev-btn" onclick="prevMonth()">&lt;</button>
+		<button class="nav-btn go-today" id="go-today-btn" onclick="goToday()">Today</button>
+		<button class="nav-btn go-next" id="go-next-btn" onclick="nextMonth()">&gt;</button>
       </div>
     </div>
     <div class="main">
