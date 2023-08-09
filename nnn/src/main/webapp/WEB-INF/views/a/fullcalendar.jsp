@@ -4,6 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.nnn.app.vo.CalendarVo" %>
+<%List<CalendarVo> calendarList = (List<CalendarVo>) request.getAttribute("calendarList");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,82 +15,13 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<!-- 
-<link href='assets/css/fullcalendar.css' rel='stylesheet' />
-<link href='assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
- -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/fullcalendar.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/fullcalendar.print.css"media='print'>
+<!-- fullcalendar css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!-- fullcalendar 언어 설정관련 script -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
-<script src='${pageContext.request.contextPath}/resources/js/jquery-1.10.2.js' type="text/javascript"></script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.8/index.global.min.js'></script>
-<script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-		initialView: 'dayGridMonth',
-		initialDate: '2023-08-08', // 초기 로딩 날짜.
-		navLinks: true, // can click day/week names to navigate views
-		selectable: true,
-		selectMirror: true,
-		headerToolbar: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'dayGridMonth,timeGridWeek,timeGridDay'
-		}, 
-		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
-	      select: function(arg) {
-	    	  console.log(arg);
-
-	        var title = prompt('입력할 일정:');
-	    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
-	        if (title) {
-	          calendar.addEvent({
-	            title: title,
-	            start: arg.start,
-	            end: arg.end,
-	            allDay: arg.allDay,
-	            backgroundColor:"yellow",
-	            textColor:"blue"
-	          })
-	        }
-	        calendar.unselect()
-	      },
-	      eventClick: function(arg) {
-	    	  // 있는 일정 클릭시,
-	    	  console.log("#등록된 일정 클릭#");
-	    	  console.log(arg.event);
-	    	  
-	        if (confirm('Are you sure you want to delete this event?')) {
-	          arg.event.remove()
-	        }
-	      },
-	      editable: true,
-	      dayMaxEvents: true, // allow "more" link when too many events
-	      events: 
-	      //================ ajax데이터 불러올 부분 =====================//
-	    	  function(info, successCallback, failureCallback){
-	    	  // ajax 처리로 데이터를 로딩 시킨다.
-	    	  $.ajax({
-	    		 type:"get",
-	    		 url:"${pageContext.request.contextPath}/a/fullcalendar?method=data",
-	    		dataType:"json"  
-	    		
-	    	  });
-	    	  
-	      }
-    });
-    calendar.render();
-    calendar.on('dateClick', function(info) {
-  	  console.log('clicked on ' + info.dateStr);
-  	});
-
-  });
-  
- 
- 
-</script>
 <style>
 
 	body {
@@ -149,5 +83,110 @@
 </head>
 <body>
 <div id='calendar'></div>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView: 'dayGridMonth',// 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+	//	initialDate: '2023-08-08', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
+		locale : 'ko',	// 한국어 설정
+		navLinks: true, // can click day/week names to navigate views
+		selectable : true, // 달력 일자 드래그 설정가능
+		selectMirror: true,
+		nowIndicator: true, // 현재 시간 마크
+		headerToolbar: {
+			start : 'prev next today',
+			center : 'title',
+			end : 'dayGridMonth,dayGridWeek,dayGridDay'
+		}, 
+		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
+	      select: function(arg) {
+	    	  console.log(arg);
+
+	        var title = prompt('일정을 입력하세요.');
+	    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+	        if (title) {
+	          calendar.addEvent({
+	            title: title,
+	            start: arg.start,
+	            end: arg.end,
+	            allDay: arg.allDay,
+	            backgroundColor:"yellow",
+	            textColor:"blue"
+	          })
+	          $.ajax({
+	        	 type: "post",
+	        	 url: "${pageContext.request.contextPath}/a/input",
+	        	 data: {
+	        		 'event_date_give' : dateFormat(arg.start), // date 형식
+	        		 'event_title_give' : title
+	        	 },
+	        	 success : function (response) {
+	        		 alert('일정이 추가 되었습니다.');
+	        	 }
+	          })
+	        }
+	        calendar.unselect()
+	      },
+	      eventClick: function(arg) {
+	    	  // 있는 일정 클릭시,
+	    	  console.log("#등록된 일정 클릭#");
+	    	  console.log(arg.event.title);
+	    	  
+	        if (confirm(arg.event.title + ' - 삭제 하시겠어요?')) {
+	        	$.ajax({
+	        		type : "post",
+	        		url : "${pageContext.request.contextPath}/a/delete",
+	        		data: {
+	        			'event_date_give' : dateFormat(arg.event.start),	// date 형식
+	        			'event_title_give' : arg.event.title
+	        		},
+	        		success : function (response){
+	        			window.location.reload()
+	        		}
+	        	})
+	          arg.event.remove()
+	        }
+	      },
+	      editable: true,
+	      dayMaxEvents: true, // allow "more" link when too many events
+	      events: [
+	      
+      		
+      		<%if (calendarList != null) {%>
+      		<%for (CalendarVo vo : calendarList) {%>
+            {
+            	title : '<%=vo.getTitle()%>',
+                start : '<%=vo.getStart()%>',
+                end : '<%=vo.getEnd()%>',
+                color : '#' + Math.round(Math.random() * 0xffffff).toString(16)
+             }
+				<%}
+			}%>
+				]
+				
+	   	 //================ ajax데이터 불러올 부분 =====================//
+	    	  /* function(info, successCallback, failureCallback){
+	    	  // ajax 처리로 데이터를 로딩 시킨다.
+	    	  $.ajax({
+	    		 type:"get",
+	    		 url:"${pageContext.request.contextPath}/a/fullcalendar?method=data",
+	    		dataType:"json"  
+	    		
+	    	  }); 
+	    	  
+	      }*/
+    });
+    calendar.render();
+    calendar.on('dateClick', function(info) {
+  	  console.log('clicked on ' + info.dateStr);
+  	});
+
+  });
+  
+ 
+ 
+</script>
 </body>
 </html>

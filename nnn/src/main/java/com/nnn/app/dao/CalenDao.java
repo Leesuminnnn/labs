@@ -22,7 +22,7 @@ public class CalenDao {
 	public static final String MAPPER = "calen";
 		
 	
-	public List<CalendarVo> calenList(CalendarVo calendarVo){
-		return sqlSession1.selectList(MAPPER+".calenList", calendarVo);
+	public List<CalendarVo> calenList(){
+		return sqlSession1.selectList(MAPPER+".calenList");
 	}
 }

@@ -37,7 +37,7 @@ import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Controller
-@RequestMapping(value = "a/*")
+@RequestMapping(value = "v/*")
 public class AmbController {
 	private MemberService memberService;
 	

@@ -19,8 +19,8 @@ public class CalenService {
 		this.calenDao = calenDao;
 	}
 	
-	public List<CalendarVo> calenList(CalendarVo calendarVo){
-		return calenDao.calenList(calendarVo);
+	public List<CalendarVo> calenList(){
+		return calenDao.calenList();
 	}
 	
 }
