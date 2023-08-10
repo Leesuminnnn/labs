@@ -14,7 +14,7 @@
 
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- fullcalendar css -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
@@ -87,6 +87,7 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
 		initialView: 'dayGridMonth',// 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
 	//	initialDate: '2023-08-08', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
@@ -101,35 +102,48 @@
 			end : 'dayGridMonth,dayGridWeek,dayGridDay'
 		}, 
 		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
-	      select: function(arg) {
-	    	  console.log(arg);
+		select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
+ 
+		    var title = prompt('일정을 입력해주세요.');
+		    if (title) {
+		        calendar.addEvent({
+		            title: title,
+		            start: arg.start,
+		            end: arg.end,
+		            allDay: arg.allDay,
+		        })
+		    }
+		
+		    var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+		        var obj = new Object();     // Json 을 담기 위해 Object 선언
+		
+		        obj.title = title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
+		        obj.start = arg.start; // 시작
+		        obj.end = arg.end; // 끝
+		        events.push(obj);
+		
+		    var jsondata = JSON.stringify(events);
+		    console.log(jsondata);
+		
+		    $(function saveData(jsondata) {
+		        $.ajax({
+		            url: "${pageContext.request.contextPath}/a/input",
+		            method: "POST",
+		            dataType: "json",
+		            data: JSON.stringify(events),
+		            contentType: 'application/json',
+		        })
+		            .done(function (result) {
+		                // alert(result);
+		            })
+		            .fail(function (request, status, error) {
+		                 // alert("에러 발생" + error);
+		            });
+		        calendar.unselect()
+		    });
+		},
 
-	        var title = prompt('일정을 입력하세요.');
-	    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
-	        if (title) {
-	          calendar.addEvent({
-	            title: title,
-	            start: arg.start,
-	            end: arg.end,
-	            allDay: arg.allDay,
-	            backgroundColor:"yellow",
-	            textColor:"blue"
-	          })
-	          $.ajax({
-	        	 type: "post",
-	        	 url: "${pageContext.request.contextPath}/a/input",
-	        	 data: {
-	        		 'event_date_give' : dateFormat(arg.start), // date 형식
-	        		 'event_title_give' : title
-	        	 },
-	        	 success : function (response) {
-	        		 alert('일정이 추가 되었습니다.');
-	        	 }
-	          })
-	        }
-	        calendar.unselect()
-	      },
-	      eventClick: function(arg) {
+		eventClick: function(arg) {
 	    	  // 있는 일정 클릭시,
 	    	  console.log("#등록된 일정 클릭#");
 	    	  console.log(arg.event.title);
@@ -145,8 +159,8 @@
 	        		success : function (response){
 	        			window.location.reload()
 	        		}
-	        	})
-	          arg.event.remove()
+	        	});
+	          arg.event.remove();
 	        }
 	      },
 	      editable: true,
@@ -179,12 +193,11 @@
 	      }*/
     });
     calendar.render();
+    
     calendar.on('dateClick', function(info) {
   	  console.log('clicked on ' + info.dateStr);
   	});
-
-  });
-  
+});
  
  
 </script>
