@@ -2,6 +2,7 @@ package com.nnn.app.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -24,5 +25,10 @@ public class CalenDao {
 	
 	public List<CalendarVo> calenList(){
 		return sqlSession1.selectList(MAPPER+".calenList");
+	}
+
+
+	public int caleninput(Map<String, Object> map) {
+		return sqlSession1.insert(MAPPER+".input", map);
 	}
 }

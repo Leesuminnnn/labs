@@ -17,6 +17,9 @@
 		BORDERCOLOR 
 		FROM calendar
 	</select>
-	
+	<insert id="input" parameterType="calen">
+		insert into calendar (title, start1, end1, allDay, textColor, backgroundColor, borderColor) 
+		values(#{title}, #{start1}, #{end1}, 1, 'yellow', 'navy', 'navy')
+	</insert>
 	
 </mapper>

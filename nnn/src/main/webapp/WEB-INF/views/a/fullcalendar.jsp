@@ -14,9 +14,19 @@
 
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <!-- fullcalendar css -->
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+
+<%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/fullcalendar.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/fullcalendar.print.css">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-ui.custom.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/fullcalendar.js"></script>
+ --%>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <!-- fullcalendar 언어 설정관련 script -->
@@ -78,7 +88,8 @@
 		  border-radius: 6px;
         box-shadow: 0 1px 2px #C3C3C3;
 		}
-
+.fc-day-sat a { color:#0000FF; }     /* 토요일 */
+.fc-day-sun a { color:#FF0000; }    /* 일요일 */
 </style>
 </head>
 <body>
@@ -175,7 +186,7 @@
                 start : '<%=vo.getStart()%>',
                 end : '<%=vo.getEnd()%>',
                 color : '#' + Math.round(Math.random() * 0xffffff).toString(16)
-             }
+             },
 				<%}
 			}%>
 				]

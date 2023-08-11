@@ -1,7 +1,9 @@
 package com.nnn.app.controller;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class CalendarController {
 //		return "a/fullcalendar";
 //	}
 	
-	@RequestMapping(value = "fullcalendar")
+	@RequestMapping(value = "Calendar.do")
 	public ModelAndView list(ModelAndView mv, HttpServletRequest request) {
 		List<CalendarVo> calendar = null;
 		try {
@@ -77,12 +79,12 @@ public class CalendarController {
 			String endDateString = (String) list.get("end");
 
 			System.out.println("**============================");
-			System.out.println(list.get("start"));
-			System.out.println(list.get("end"));
-			System.out.println("**============================");
-			System.out.println("============================**");
 			System.out.println(startDateString);
 			System.out.println(endDateString);
+			System.out.println("**============================");
+			System.out.println("============================**");
+			System.out.println( );
+			System.out.println( );
 			System.out.println("============================**");
 			LocalDateTime startDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
 			LocalDateTime endDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
@@ -91,6 +93,30 @@ public class CalendarController {
 			System.out.println(startDate);
 			System.out.println(endDate);
 			System.out.println("============================");
+			
+			ZoneOffset koreaOffset = ZoneOffset.of("+09:00");	//  한국 시간대의 오프셋
+			startDate = startDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime(); // 날짜와 시간에 9시간을 더함
+			endDate = endDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime();		// 날짜와 시간에 9시간을 더함
+
+			System.out.println("============================");
+			System.out.println(startDate);
+			System.out.println(endDate);
+			System.out.println("============================");
+			
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("title", eventName);
+			map.put("start1", startDate);
+			map.put("end1", endDate);
+			int result = calenService.caleninput(map);
+			
+			if (result == 1) {
+				// 성공
+				System.out.println("성공");
+			}else {
+				// 실패
+				System.out.println("실패");
+			}
 			
 			
 		}

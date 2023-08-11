@@ -252,7 +252,7 @@ public class HelpController {
 	@RequestMapping(value = "Insertajax/{midx}", method = RequestMethod.POST)
 	public String addHelp(HelpVo helpVo, HttpSession session, Model model, @PathVariable("midx") Integer midx,
 			@RequestParam("h_userId")String h_userId, @RequestParam("h_userName")String h_userName,HttpServletRequest request, 
-			@RequestParam("h_name")String h_name, @RequestParam("h_no")String h_no, @RequestParam("h_number")String h_number) {
+			@RequestParam("h_name")String h_name, @RequestParam("h_no")String h_no, @RequestParam("h_number")String h_number) throws Exception {
 		System.out.println("--------------insertajax접속");
 		// 요청매핑이 있는 메소드의 매개변수에 Vo나 자바클래스가 있는 경우 전달된 값을 그 객체에 매핑시켜줌
 		// 이러한 객체를 커맨드 객체라고 함.
@@ -459,7 +459,7 @@ public class HelpController {
 			@PathVariable("midx") Integer midx/*,@ModelAttribute("h_name")String h_name, 
 			@ModelAttribute("h_no")String h_no, @ModelAttribute("h_number")String h_number,
 			@ModelAttribute("h_userId")String h_userId, @ModelAttribute("h_userName")String h_userName,
-			@ModelAttribute("h_comm")String h_comm*/) {
+			@ModelAttribute("h_comm")String h_comm*/) throws Exception {
 		// 요청매핑이 있는 메소드의 매개변수에 Vo나 자바클래스가 있는 경우 전달된 값을 그 객체에 매핑시켜줌
 		// 이러한 객체를 커맨드 객체라고 함.
 		//저장되어 있는 세션 꺼내오기

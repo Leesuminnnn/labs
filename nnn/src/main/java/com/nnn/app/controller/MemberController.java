@@ -482,7 +482,12 @@ public class MemberController {
 //		mlist = memberService.Memberlist(vo);Memberlist2
 		// 시연용
 		List<CustomerVo> mlist = new ArrayList<CustomerVo>();
-		mlist = memberService.Memberlist2(vo);
+		try {
+			mlist = memberService.Memberlist2(vo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		mav.addObject("mlist", mlist);
 		System.out.println("mlist 값 : "+mlist);
