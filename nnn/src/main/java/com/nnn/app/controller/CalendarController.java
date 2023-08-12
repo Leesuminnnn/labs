@@ -63,7 +63,7 @@ public class CalendarController {
 	
 	
 	@RequestMapping(value = "input")
-	public String input(@RequestBody List<Map<String, Object>> param) throws Exception {
+	public String input(@RequestBody List<Map<String, Object>> param, HttpServletRequest request) throws Exception {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
 		
 		for (Map<String, Object> list : param) {
@@ -108,21 +108,33 @@ public class CalendarController {
 			map.put("title", eventName);
 			map.put("start1", startDate);
 			map.put("end1", endDate);
-			int result = calenService.caleninput(map);
-			
-			if (result == 1) {
-				// 성공
-				System.out.println("성공");
+			int select = calenService.calenselect(map);
+			System.out.println(select);
+			if(select != 1) {
+				System.out.println("DB에 중복없음");
+				int result = calenService.caleninput(map);
+				
+				if (result == 1) {
+					// 성공
+					System.out.println("성공");
+				}else {
+					// 실패
+					System.out.println("실패");
+				}
+				request.setAttribute("msg", "등록이 완료되었습니다.");
+	    		request.setAttribute("url", "a/input");
 			}else {
-				// 실패
-				System.out.println("실패");
+				System.out.println("중복");
+				request.setAttribute("msg", "이미 등록이 된 날짜입니다.");
+	    		request.setAttribute("url", "a/input");
 			}
+			
 			
 			
 		}
 		
 		
-		return "/a/input";
+		return "alert4";
 		
 	}
 	

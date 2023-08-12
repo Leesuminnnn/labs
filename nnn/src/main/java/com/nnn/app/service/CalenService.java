@@ -32,5 +32,13 @@ public class CalenService {
 		return result;
 		
 	}
+
+	public int calenselect(Map<String, Object> map) {
+		int result = 0;
+		
+		result = calenDao.calenselect(map);
+		
+		return result;
+	}
 	
 }

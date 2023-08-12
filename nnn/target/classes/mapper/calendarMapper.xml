@@ -22,4 +22,8 @@
 		values(#{title}, #{start1}, #{end1}, 1, 'yellow', 'navy', 'navy')
 	</insert>
 	
+	<select id="calenselect" resultMap="calMap">
+	select count(*) from calendar where start1 = #{start1}
+	
+	</select>
 </mapper>

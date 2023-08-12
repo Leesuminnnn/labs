@@ -116,14 +116,14 @@
 		select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
  
 		    var title = prompt('일정을 입력해주세요.');
-		    if (title) {
+		    if (title !== null) {
 		        calendar.addEvent({
 		            title: title,
 		            start: arg.start,
 		            end: arg.end,
 		            allDay: arg.allDay,
-		        })
-		    }
+		        });
+		    
 		
 		    var events = new Array(); // Json 데이터를 받기 위한 배열 선언
 		        var obj = new Object();     // Json 을 담기 위해 Object 선언
@@ -151,7 +151,8 @@
 		                 // alert("에러 발생" + error);
 		            });
 		        calendar.unselect()
-		    });
+		    	});
+		    }
 		},
 
 		eventClick: function(arg) {

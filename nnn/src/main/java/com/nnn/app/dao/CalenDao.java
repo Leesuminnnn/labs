@@ -31,4 +31,9 @@ public class CalenDao {
 	public int caleninput(Map<String, Object> map) {
 		return sqlSession1.insert(MAPPER+".input", map);
 	}
+
+
+	public int calenselect(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".calenselect", map);
+	}
 }
