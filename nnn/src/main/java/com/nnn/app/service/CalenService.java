@@ -37,7 +37,7 @@ public class CalenService {
 		int result = 0;
 		
 		result = calenDao.calenselect(map);
-		
+		System.out.println("service  ! : "+result);
 		return result;
 	}
 	

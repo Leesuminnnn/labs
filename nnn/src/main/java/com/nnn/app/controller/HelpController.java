@@ -349,7 +349,7 @@ public class HelpController {
 			// 시연용으로 침상 유효성 삭제
 //		    if(selectresult == 0) {
 		    	
-		    	if(selectresult2 == 0){
+//		    	if(selectresult2 == 0){
 		    		int result = helpService.addHelp(map);
 			    	if (result == 1) {
 			    		request.setAttribute("msg", "수발 등록이 완료되었습니다.");
@@ -359,11 +359,12 @@ public class HelpController {
 			    		request.setAttribute("url", "h/Insert.do/"+midx);
 					}
 					return "alert";
-		    	}else {
-		    		request.setAttribute("msg", "이미 식사수발 기록이 있습니다.");
-		    		request.setAttribute("url", "h/Main.do");
-		    		return "alert";
-		    	}
+				// 내부 시연용으로 회원 유효성 삭제 
+//		    	}else {
+//		    		request.setAttribute("msg", "이미 식사수발 기록이 있습니다.");
+//		    		request.setAttribute("url", "h/Main.do");
+//		    		return "alert";
+//		    	}
 		    	
 		    	// 시연용으로 침상 유효성 삭제
 //		    }else {
@@ -384,7 +385,7 @@ public class HelpController {
 			
 			// 시연용으로 침상 유효성 삭제
 //			if(selectresult == 0) {
-				if(selectresult2 == 0){
+//				if(selectresult2 == 0){
 		    		int result = helpService.addHelp(map);
 			    	if (result == 1) {
 			    		request.setAttribute("msg", "수발 등록이 완료되었습니다.");
@@ -394,11 +395,11 @@ public class HelpController {
 			    		request.setAttribute("url", "h/Insert.do/"+midx);
 					}
 					return "alert";
-		    	}else {
-		    		request.setAttribute("msg", "이미 식사수발 기록이 있습니다.");
-		    		request.setAttribute("url", "h/Main.do");
-		    		return "alert";
-		    	}
+//		    	}else {
+//		    		request.setAttribute("msg", "이미 식사수발 기록이 있습니다.");
+//		    		request.setAttribute("url", "h/Main.do");
+//		    		return "alert";
+//		    	}
 				// 시연용으로 침상 유효성 삭제
 //		    }else {
 //		    	request.setAttribute("msg", "이미 수발중이거나 완료한 침상입니다.");
@@ -417,7 +418,7 @@ public class HelpController {
 			System.out.println("selectresult2 : "+selectresult2);
 			// 시연용으로 침상 유효성 삭제
 //			if(selectresult == 0) {
-				if(selectresult2 == 0){
+//				if(selectresult2 == 0){
 		    		int result = helpService.addHelp(map);
 			    	if (result == 1) {
 			    		request.setAttribute("msg", "수발 등록이 완료되었습니다.");
@@ -427,11 +428,11 @@ public class HelpController {
 			    		request.setAttribute("url", "h/Insert.do/"+midx);
 					}
 					return "alert";
-		    	}else {
-		    		request.setAttribute("msg", "이미 식사수발 기록이 있습니다.");
-		    		request.setAttribute("url", "h/Main.do");
-		    		return "alert";
-		    	}
+//		    	}else {
+//		    		request.setAttribute("msg", "이미 식사수발 기록이 있습니다.");
+//		    		request.setAttribute("url", "h/Main.do");
+//		    		return "alert";
+//		    	}
 				// 시연용으로 침상 유효성 삭제
 //		    }else {
 //		    	request.setAttribute("msg", "이미 수발중이거나 완료한 침상입니다.");

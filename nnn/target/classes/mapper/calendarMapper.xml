@@ -15,15 +15,15 @@
 		TEXTCOLOR,
 		BACKGROUNDCOLOR,
 		BORDERCOLOR 
-		FROM calendar
+		FROM csworktools.calendar
 	</select>
-	<insert id="input" parameterType="calen">
-		insert into calendar (title, start1, end1, allDay, textColor, backgroundColor, borderColor) 
-		values(#{title}, #{start1}, #{end1}, 1, 'yellow', 'navy', 'navy')
+	<insert id="input" parameterType="calen" >
+		insert into csworktools.calendar (title, start1, end1, allDay, textColor, backgroundColor, borderColor) 
+		values(#{title}, DATE_FORMAT(#{start1}, '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(#{end1}, '%Y-%m-%d %H:%i:%s'), 1, 'yellow', 'navy', 'navy')
 	</insert>
 	
 	<select id="calenselect" resultMap="calMap">
-	select count(*) from calendar where start1 = #{start1}
+	select count(*) from csworktools.calendar where DATE_FORMAT(start1, '%Y-%m-%d') = DATE_FORMAT(#{start1}, '%Y-%m-%d')
 	
 	</select>
 </mapper>

@@ -145,7 +145,7 @@
 		            contentType: 'application/json',
 		        })
 		            .done(function (result) {
-		                // alert(result);
+		             //   alert(result);
 		            })
 		            .fail(function (request, status, error) {
 		                 // alert("에러 발생" + error);

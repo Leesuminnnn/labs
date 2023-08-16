@@ -114,9 +114,10 @@ public class MemberService {
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=ecfda70a16078a6b5a64478901f3dfb3");
 			
-			sb.append("&redirect_uri=http://localhost:8090/app/m/kakao/callback");			//로컬사이트
+//			sb.append("&redirect_uri=http://localhost:8090/app/m/kakao/callback");			//로컬사이트
 //			sb.append("&redirect_uri=http://csworktools.cafe24.com/m/kakao/callback");		//cswork
-//			sb.append("&redirect_uri=https://hwtools.kr/m/kakao/callback");					//hwtools(https)
+			sb.append("&redirect_uri=https://hwtools.kr/m/kakao/callback");					//hwtools(https)
+//			sb.append("&redirect_uri=http://hwtools.kr/m/kakao/callback");					//hwtools(http)
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
