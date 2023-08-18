@@ -1,9 +1,14 @@
 package com.nnn.app.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -76,16 +81,55 @@ public class CalendarController {
 //				
 //			}
 			
-			String liststart = (String)list.get("start");
-			String listend = (String)list.get("end");
+//			String liststart = (String)list.get("start");
+//			String listend = (String)list.get("end");
+//			LocalDate startdate = (LocalDate)list.get("start");
+//			LocalDate enddate = (LocalDate)list.get("end");
 			System.out.println("@@");
-			System.out.println(liststart);
-			System.out.println(listend);
+//			System.out.println(startdate);
+//			System.out.println(enddate);
 			
 			String eventName = (String) list.get("title"); // 이름 받아오기
 			String startDateString = (String) list.get("start");
 			String endDateString = (String) list.get("end");
-
+//			String input = "2012-03-04T00:00:00.0".replace( "T" , " " ) ; 
+//
+//			
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+//			SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			Date d = sdf.parse(time);
+//			String formattedTime = output.format(d);
+//			
+//			LocalDateTime ldt = LocalDateTime.parse( input ) ;
+//			System.out.println(ldt);
+			
+			String input = "2023-08-09T15:00:00.000Z";
+	        
+	        // 입력 문자열의 형식 지정
+	        DateTimeFormatter inputFormatter = DateTimeFormatter.ISO_INSTANT;
+	        
+	        // 문자열을 Instant로 변환
+	        Instant instant = Instant.parse(input);
+	        Instant instant2 = Instant.parse(startDateString);
+	        Instant instant3 = Instant.parse(endDateString);
+	        		
+	        // Instant를 LocalDateTime으로 변환 (기본 시간대는 UTC)
+	        // 9시간을 더하여 계산
+	        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of("UTC"));
+	        LocalDateTime localDateTimestart = LocalDateTime.ofInstant(instant2, ZoneId.of("UTC")).plus(9, ChronoUnit.HOURS);
+	        LocalDateTime localDateTimeend = LocalDateTime.ofInstant(instant3, ZoneId.of("UTC")).plus(9, ChronoUnit.HOURS);
+	        
+	        // 출력 형식 지정
+	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        
+	        // LocalDateTime을 문자열로 변환하여 출력
+	        String formattedDate = localDateTime.format(outputFormatter);
+	        String formattedDateStart = localDateTimestart.format(outputFormatter);
+	        String formattedDateEnd = localDateTimeend.format(outputFormatter);
+	        System.out.println(formattedDate);
+	        System.out.println(formattedDateStart);
+	        System.out.println(formattedDateEnd);
+	        
 			System.out.println("**============================");
 			System.out.println(startDateString);
 			System.out.println(endDateString);
@@ -104,6 +148,7 @@ public class CalendarController {
 			System.out.println(startDate);
 			System.out.println(endDate);
 			System.out.println("============================");
+			
 //			System.out.println(startDateWithTime);
 //			System.out.println(endDateWithTime);
 			System.out.println("============================");
@@ -114,9 +159,21 @@ public class CalendarController {
 //			LocalDateTime localDateTime = LocalDateTime.parse(inputDateTimeString, formatter);
 //			System.out.println(localDateTime);
 			
+//			startDate = startDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime(); // 날짜와 시간에 9시간을 더함
+//			endDate = endDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime();		// 날짜와 시간에 9시간을 더함
+			
 			ZoneOffset koreaOffset = ZoneOffset.of("+09:00");	//  한국 시간대의 오프셋
-			startDate = startDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime(); // 날짜와 시간에 9시간을 더함
-			endDate = endDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime();		// 날짜와 시간에 9시간을 더함
+			ZonedDateTime zonedDateTimeStart = startDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
+			ZonedDateTime zonedDateTimeEnd = endDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
+
+			// Convert ZonedDateTime to UTC
+			ZonedDateTime utcStart = zonedDateTimeStart.withZoneSameInstant(ZoneOffset.UTC);
+			ZonedDateTime utcEnd = zonedDateTimeEnd.withZoneSameInstant(ZoneOffset.UTC);
+
+			
+			
+			
+			
 //			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 //			String startfor = startDate.format(outputFormatter);
 //			String endfor = endDate.format(outputFormatter);
@@ -130,8 +187,9 @@ public class CalendarController {
 			System.out.println(startDate);
 			System.out.println(endDate);
 			System.out.println("============================");
-//			System.out.println(startfor);
-//			System.out.println(endfor);
+			
+			System.out.println(utcStart);
+			System.out.println(utcEnd);
 			System.out.println("============================");
 //			System.out.println(startLocal);
 //			System.out.println(endLocal);
@@ -139,14 +197,14 @@ public class CalendarController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("title", eventName);
-			map.put("start1", startDate);
-			map.put("end1", endDate);
-//			int select = calenService.calenselect(map);
+			map.put("start1", formattedDateStart);
+			map.put("end1", formattedDateEnd);
+			int select = calenService.calenselect(map);
 			
-//			System.out.println(select);
+			System.out.println(select);
 			
-//			if(select != 1) {
-//				System.out.println("DB에 중복없음");
+			if(select != 1) {
+				System.out.println("DB에 중복없음");
 				int result = calenService.caleninput(map);
 				System.out.println(result);
 				if (result == 1) {
@@ -160,12 +218,12 @@ public class CalendarController {
 					System.out.println("실패");
 				}
 				
-//			}else {
-//				System.out.println("중복");
+			}else {
+				System.out.println("중복");
 //				request.setAttribute("msg", "이미 등록이 된 날짜입니다.");
 //	    		request.setAttribute("url", "a/input");
 //	    		return "alert4";
-//			}
+			}
 			
 			
 			
