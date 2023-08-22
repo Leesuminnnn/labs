@@ -221,11 +221,19 @@
 								
 								Hour = (dateend.getTime() - datestart.getTime()) / 3600000; // 시
 								H = 0;
-								if (Min != 0 && Min > 120 && Min < 180) {
+								if(Min != 0 && Min >= 300){
+									H = 5;
+									Min = Min - 300;
+								}else if (Min != 0 && Min >= 240) {
+									H = 4;
+									Min = Min - 240;
+								}else if(Min != 0 && Min >= 180){
+									H = 3;
+									Min = Min - 180;
+								}else if(Min != 0 && Min >= 120){
 									H = 2;
 									Min = Min - 120;
-									
-								}else if(Min != 0 && Min > 60){
+								}else if(Min != 0 && Min >= 60){
 									H += 1;
 									Min = Min - 60;
 								}
@@ -316,7 +324,7 @@
 		</div>
 	</section>
 	<script type="text/javascript">
-	/*	
+		/*
 		var didScroll;
 		var lastScrollTop = 0;
 		var delta = 5;

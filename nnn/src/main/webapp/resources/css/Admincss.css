@@ -38,12 +38,12 @@ header ul > li {
 }
 
 .left-nav {
-	width:150px;
+	width:250px;
 	position: fixed;
 }
 
 section{
-	padding-left: 150px;
+	padding-left: 250px;
 }
 .table{
 	width: 100%;	

@@ -1,21 +1,19 @@
 package com.nnn.app.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.CalenService;
+import com.nnn.app.service.MemberService;
 import com.nnn.app.vo.CalendarVo;
 
 @Controller
@@ -33,6 +32,7 @@ public class CalendarController {
 	
 	@Autowired(required = false)
 	private CalenService calenService;
+	private MemberService memberService;
 
 	
 //	@GetMapping(params="method=list")
@@ -42,7 +42,7 @@ public class CalendarController {
 //	}
 	
 	@RequestMapping(value = "Calendar.do")
-	public ModelAndView list(ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView list(ModelAndView mv, HttpServletRequest request, HttpSession session) {
 		List<CalendarVo> calendar = null;
 		try {
 			calendar = calenService.calenList();
@@ -51,6 +51,20 @@ public class CalendarController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(session.getAttribute("name"));
+//		mv.addObject("detail", memberService.detail2((String)session.getAttribute("name")));
+		// 시연용
+		session.getAttribute("loginMember");
+		session.getAttribute("email");
+    	session.getAttribute("name");
+    	session.getAttribute("m_status");
+    	session.getAttribute("midx");
+    	session.getAttribute("userId");
+    	session.getAttribute("m_no");
+    	session.getAttribute("m_point");
+    	session.getAttribute("m_in");
+    	session.getAttribute("m_de");
+		
 		mv.setViewName("a/fullcalendar");
 		return mv;
 	}
@@ -162,13 +176,13 @@ public class CalendarController {
 //			startDate = startDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime(); // 날짜와 시간에 9시간을 더함
 //			endDate = endDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime();		// 날짜와 시간에 9시간을 더함
 			
-			ZoneOffset koreaOffset = ZoneOffset.of("+09:00");	//  한국 시간대의 오프셋
-			ZonedDateTime zonedDateTimeStart = startDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
-			ZonedDateTime zonedDateTimeEnd = endDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
+//			ZoneOffset koreaOffset = ZoneOffset.of("+09:00");	//  한국 시간대의 오프셋
+//			ZonedDateTime zonedDateTimeStart = startDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
+//			ZonedDateTime zonedDateTimeEnd = endDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
 
 			// Convert ZonedDateTime to UTC
-			ZonedDateTime utcStart = zonedDateTimeStart.withZoneSameInstant(ZoneOffset.UTC);
-			ZonedDateTime utcEnd = zonedDateTimeEnd.withZoneSameInstant(ZoneOffset.UTC);
+//			ZonedDateTime utcStart = zonedDateTimeStart.withZoneSameInstant(ZoneOffset.UTC);
+//			ZonedDateTime utcEnd = zonedDateTimeEnd.withZoneSameInstant(ZoneOffset.UTC);
 
 			
 			
@@ -184,21 +198,21 @@ public class CalendarController {
 			
 			System.out.println("============================");
 			System.out.println("여기");
-			System.out.println(startDate);
-			System.out.println(endDate);
-			System.out.println("============================");
+			System.out.println(formattedDateStart);
+			System.out.println(formattedDateEnd);
+//			System.out.println("============================");
 			
-			System.out.println(utcStart);
-			System.out.println(utcEnd);
-			System.out.println("============================");
+//			System.out.println(utcStart);
+//			System.out.println(utcEnd);
+//			System.out.println("============================");
 //			System.out.println(startLocal);
 //			System.out.println(endLocal);
 			System.out.println("============================");
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("title", eventName);
-			map.put("start1", formattedDateStart);
-			map.put("end1", formattedDateEnd);
+			map.put("start", formattedDateStart);
+			map.put("end", formattedDateEnd);
 			int select = calenService.calenselect(map);
 			
 			System.out.println(select);
@@ -207,12 +221,12 @@ public class CalendarController {
 				System.out.println("DB에 중복없음");
 				int result = calenService.caleninput(map);
 				System.out.println(result);
-				if (result == 1) {
+				if (result >= 1) {
 					// 성공
 					System.out.println("성공");
-//					request.setAttribute("msg", "등록이 완료되었습니다.");
-//		    		request.setAttribute("url", "a/input");
-//		    		return "alert4";
+					request.setAttribute("msg", "등록이 완료되었습니다.");
+		    		request.setAttribute("url", "a/Calendar.do");
+		    		return "alert4";
 				}else {
 					// 실패
 					System.out.println("실패");
@@ -220,9 +234,9 @@ public class CalendarController {
 				
 			}else {
 				System.out.println("중복");
-//				request.setAttribute("msg", "이미 등록이 된 날짜입니다.");
-//	    		request.setAttribute("url", "a/input");
-//	    		return "alert4";
+				request.setAttribute("msg", "이미 등록이 된 날짜입니다.");
+	    		request.setAttribute("url", "a/Calendar.do");
+	    		return "alert4";
 			}
 			
 			
@@ -234,12 +248,12 @@ public class CalendarController {
 		
 	}
 	
-//	
-//	@ResponseBody
-//	@GetMapping(params = "method=data", produces = "application/json")
-//	public String data(Model d, CalendarVo calendarVo) {
-//		d.addAttribute("list", calenService.calenList());
-//		return "pageJsonReport";
-//	}
+	@RequestMapping(value = "delete")
+	public String delete(@RequestBody List<Map<String, Object>> param, HttpServletRequest request) throws Exception {
+		
+		
+		return "a/delete";
+	}
+	
 
 }

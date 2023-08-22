@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FullCalendar by Creative Tim </title>
+    <title>엠블런스</title>
 
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -18,7 +18,8 @@
 <!-- fullcalendar css -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Admincss.css">
 
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/fullcalendar.css">
@@ -34,14 +35,13 @@
 
 <style>
 
-	body {
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: "Helvetica Nueue",Arial,Verdana,sans-serif;
+	
+	.container{
+		padding-top: 40px;
 		background-color: #DDDDDD;
-		}
-
+		/* height: 843px; */
+		height: calc(100vh - 80px);
+	}
 	#wrap {
 		width: 1100px;
 		margin: 0 auto;
@@ -92,8 +92,56 @@
 .fc-day-sun a { color:#FF0000; }    /* 일요일 */
 </style>
 </head>
-<body>
-<div id='calendar'></div>
+<body class="normal">
+<div class="page">
+		<header class="flex flex-around">
+			<h1>HWT</h1>
+			<nav class="flex" style="">
+				<ul class="flex flex-between">
+					<li class="flex"><a href="#">회원관리</a></li>
+					<li class="flex"><a href="#">플랫폼관리</a></li>
+					<li class="flex"><a href="#">엠블런스관리</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+	<nav class="left-nav">
+		<ul class="main-menu main1">
+			<li><a href="#" onclick="menucontrol1()">회원관리</a>
+				<ul class="sub-menu" id="menu1">	
+					<li><a href="${pageContext.request.contextPath}/m/Admin.do">회원가입승인</a></li>
+					<li><a href="#">포인트</a></li>
+					<li><a href="${pageContext.request.contextPath}/m/HelpList.do">식사수발</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="main-menu main2">
+			<li><a href="#" onclick="menucontrol2()">플랫폼관리</a>
+				<ul class="sub-menu" id="menu2">
+					<li><a href="#">공지사항관리</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="main-menu main3">
+			<li><a href="#" onclick="menucontrol3()">엠블런스관리</a>
+				<ul class="sub-menu open" id="menu3">
+					<li><a href="#">예약관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/a/Calendar.do">캘린더관리</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<section >
+		<div class="container">
+			<div id='calendar'></div>
+		</div>
+	</section>
+
+
+
+
+
+
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -111,7 +159,8 @@
 			start : 'prev next today',
 			center : 'title',
 			end : 'dayGridMonth,dayGridWeek,dayGridDay'
-		}, 
+		},
+		
 		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 		select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
  
@@ -145,10 +194,12 @@
 		            contentType: 'application/json',
 		        })
 		            .done(function (result) {
-		             //   alert(result);
+						alert(result);
+						console.log(result);
 		            })
 		            .fail(function (request, status, error) {
-		                 // alert("에러 발생" + error);
+					//	alert("에러 발생" + error);
+						console.log(error);
 		            });
 		        calendar.unselect()
 		    	});
@@ -177,32 +228,28 @@
 	      },
 	      editable: true,
 	      dayMaxEvents: true, // allow "more" link when too many events
-	      events: [
 	      
+	      events: [
+	    	//================ ajax데이터 불러올 부분 =====================//
       		
       		<%if (calendarList != null) {%>
       		<%for (CalendarVo vo : calendarList) {%>
-            {
-            	title : '<%=vo.getTitle()%>',
-                start : '<%=vo.getStart()%>',
-                end : '<%=vo.getEnd()%>',
-                color : '#' + Math.round(Math.random() * 0xffffff).toString(16)
-             },
+				{
+					title : '<%=vo.getTitle()%>',
+					start : '<%=vo.getStart()%>',
+					end : '<%=vo.getEnd()%>',
+					/* color : '#' + Math.round(Math.random() * 0xffffff).toString(16), */
+					allDay : true,		// 시간을 표시하지 않음
+					writer : '<%=vo.getWriter()%>',
+				},
 				<%}
 			}%>
-				]
-				
-	   	 //================ ajax데이터 불러올 부분 =====================//
-	    	  /* function(info, successCallback, failureCallback){
-	    	  // ajax 처리로 데이터를 로딩 시킨다.
-	    	  $.ajax({
-	    		 type:"get",
-	    		 url:"${pageContext.request.contextPath}/a/fullcalendar?method=data",
-	    		dataType:"json"  
-	    		
-	    	  }); 
-	    	  
-	      }*/
+		],
+		eventContent: function(arg) {
+			return {
+				html: arg.event.title + '<br>By ' + arg.event.extendedProps.writer,
+			};
+		},
     });
     calendar.render();
     
@@ -211,7 +258,38 @@
   	});
 });
  
- 
+
+  var sub1 = document.getElementById('menu1');
+  var sub2 = document.getElementById('menu2');
+  var sub3 = document.getElementById('menu3');
+  var main1 = document.getElementById('main1');
+  var main2 = document.getElementById('main2');
+  var main3 = document.getElementById('main3');
+
+  function menucontrol1(){
+  	if(sub1.classList.contains('open')){
+  		sub1.classList.remove('open');
+  	}else{
+  		sub1.classList.add('open');
+  	}
+  }
+
+  function menucontrol2(){
+  	if(sub2.classList.contains('open')){
+  		sub2.classList.remove('open');
+  	}else{
+  		sub2.classList.add('open');
+  	}
+  }
+
+  function menucontrol3(){
+  	if(sub3.classList.contains('open')){
+  		sub3.classList.remove('open');
+  	}else{
+  		sub3.classList.add('open');
+  	}
+  }
+
 </script>
 </body>
 </html>

@@ -10,7 +10,6 @@
 <title></title>
 </head>
 <body>
-	<input type="hidden" name="midx" value="${sessionScope.midx }">
 	<script>
 		var msg = "<c:out value='${msg}'/>";
 		var url = "<c:out value='${url}'/>";

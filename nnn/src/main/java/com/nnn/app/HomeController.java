@@ -6,19 +6,17 @@ package com.nnn.app;
 import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.HelpService;
 import com.nnn.app.service.MemberService;
-import com.nnn.app.vo.MemberVo;
+import com.nnn.app.vo.CustomerVo;
 
 /**
  * Handles requests for the application home page.
@@ -70,7 +68,7 @@ public class HomeController {
 		return "alert2";
 	}
 	@RequestMapping(value="/")
-	public ModelAndView main2(ModelAndView mav, HttpSession session, MemberVo vo, HttpServletRequest request) throws Exception {
+	public ModelAndView main2(ModelAndView mav, HttpSession session, CustomerVo vo, HttpServletRequest request) throws Exception {
 		System.out.println("-----------------1");
 		//저장되어 있는 세션 꺼내오기
 		session.getAttribute("email");
@@ -81,7 +79,8 @@ public class HomeController {
 		session.getAttribute("midx");
 		System.out.println("--------------Main접속");
 //		mav.addObject("detail", memberService.detail2((String)session.getAttribute("name")));
-		mav.addObject("detail", memberService.detail((Integer)session.getAttribute("midx")));
+		// 시연용
+		mav.addObject("detail", memberService.detail3((String)session.getAttribute("name")));
 		System.out.println("##########################################################");
 		System.out.println("midx : "+session.getAttribute("midx"));
 		System.out.println("##########################################################");

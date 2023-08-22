@@ -28,6 +28,9 @@ public class CalenService {
 		int result = 0; // 글쓰기 실패
 		
 		result = calenDao.caleninput(map);
+		System.out.println("---------------------");
+		System.out.println("service  ! : "+result);
+		System.out.println("---------------------");
 		
 		return result;
 		
@@ -37,7 +40,9 @@ public class CalenService {
 		int result = 0;
 		
 		result = calenDao.calenselect(map);
+		System.out.println("---------------------");
 		System.out.println("service  ! : "+result);
+		System.out.println("---------------------");
 		return result;
 	}
 	

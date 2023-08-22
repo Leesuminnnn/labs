@@ -7,10 +7,10 @@
 		<result property="start" column="start1"/>
 		<result property="end" column="end1"/>
 	</resultMap>
-	<select id="calenList" resultMap="calMap">
-		SELECT id, title,
-		DATE_FORMAT(start1, '%Y-%m-%d %H:%i:%s') start1,
-		DATE_FORMAT(end1, '%Y-%m-%d %H:%i:%s') end1,
+	<select id="calenList" resultType="calen">
+		SELECT id, title, writer,
+		DATE_FORMAT(start, '%Y-%m-%d %H:%i:%s') start,
+		DATE_FORMAT(end, '%Y-%m-%d %H:%i:%s') end,
 		ALLDAY,
 		TEXTCOLOR,
 		BACKGROUNDCOLOR,
@@ -18,12 +18,12 @@
 		FROM csworktools.calendar
 	</select>
 	<insert id="input" parameterType="calen" >
-		insert into csworktools.calendar (title, start1, end1, allDay, textColor, backgroundColor, borderColor) 
-		values(#{title}, DATE_FORMAT(#{start1}, '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(#{end1}, '%Y-%m-%d %H:%i:%s'), 1, 'yellow', 'navy', 'navy')
+		insert into csworktools.calendar (title, start, end, allDay, textColor, backgroundColor, borderColor) 
+		values(#{title}, #{start}, #{end}, 1, 'yellow', 'navy', 'navy')
 	</insert>
 	
-	<select id="calenselect" resultMap="calMap">
-	select count(*) from csworktools.calendar where start1 = (STR_TO_DATE(#{start1}, '%Y-%m-%d %H:%i:%s'))
+	<select id="calenselect" resultType="int">
+	select count(*) from csworktools.calendar where start = #{start}
 	<!--  DATE_FORMAT(#{start1}, '%Y-%m-%d %H:%i:%s') -->
 	
 	</select>

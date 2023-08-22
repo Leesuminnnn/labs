@@ -40,10 +40,11 @@
 			</nav>
 		</header>
 	</div>
+	
 	<nav class="left-nav">
 		<ul class="main-menu main1">
 			<li><a href="#" onclick="menucontrol1()">회원관리</a>
-				<ul class="sub-menu" id="menu1">	
+				<ul class="sub-menu open" id="menu1">	
 					<li><a href="#">회원가입승인</a></li>
 					<li><a href="#">포인트</a></li>
 					<li><a href="${pageContext.request.contextPath}/m/HelpList.do">식사수발</a></li>
