@@ -54,7 +54,6 @@
 			<exclude-mapping path="/c/Written.do/*"/>
 			<exclude-mapping path="/saveImage"/>
 			<exclude-mapping path="/saveImage*"/>
-			<exclude-mapping path="/a/*"/>
 			<exclude-mapping path="/t/*"/>
 			
 			<exclude-mapping path="/resources/**"/>

@@ -18,8 +18,16 @@
 		FROM csworktools.calendar
 	</select>
 	<insert id="input" parameterType="calen" >
-		insert into csworktools.calendar (title, start, end, allDay, textColor, backgroundColor, borderColor) 
-		values(#{title}, #{start}, #{end}, 1, 'yellow', 'navy', 'navy')
+	<![CDATA[
+		INSERT INTO csworktools.calendar (title, start, end, allDay, textColor, backgroundColor, borderColor)
+		SELECT #{title}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy'
+		FROM DUAL
+		WHERE NOT EXISTS (
+		    SELECT *
+		    FROM csworktools.calendar
+		    WHERE #{start} <= end AND #{end} >= start
+		)
+		]]>
 	</insert>
 	
 	<select id="calenselect" resultType="int">

@@ -141,7 +141,6 @@
 
 
 
-
 <script>
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -158,13 +157,12 @@
 		headerToolbar: {
 			start : 'prev next today',
 			center : 'title',
-			end : 'dayGridMonth,dayGridWeek,dayGridDay'
+			end : 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
 		},
 		
 		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 		select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
- 
-		    var title = prompt('일정을 입력해주세요.');
+			var title = prompt('일정을 입력해주세요.');
 		    if (title !== null) {
 		        calendar.addEvent({
 		            title: title,
@@ -180,8 +178,12 @@
 		        obj.title = title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
 		        obj.start = arg.start; // 시작
 		        obj.end = arg.end; // 끝
+		        
+		        obj.allDay = arg.allDay;
+		        console.log(obj.allDay);
+		        
 		        events.push(obj);
-		
+		        
 		    var jsondata = JSON.stringify(events);
 		    console.log(jsondata);
 		
@@ -210,15 +212,30 @@
 	    	  // 있는 일정 클릭시,
 	    	  console.log("#등록된 일정 클릭#");
 	    	  console.log(arg.event.title);
-	    	  
+	    	  console.log(arg.event.id);
+	    	  var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+		        var obj = new Object();     // Json 을 담기 위해 Object 선언
+		
+		        obj.title = title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
+		        obj.start = arg.start; // 시작
+		        obj.end = arg.end; // 끝
+		        obj.id = arg.id
+		        obj.allDay = arg.allDay;
+		        console.log(obj.allDay);
+		        
+		        events.push(obj);
+		        
+		    var jsondata = JSON.stringify(events);
+		    console.log(jsondata);
 	        if (confirm(arg.event.title + ' - 삭제 하시겠어요?')) {
+	        	
 	        	$.ajax({
 	        		type : "post",
 	        		url : "${pageContext.request.contextPath}/a/delete",
-	        		data: {
-	        			'event_date_give' : dateFormat(arg.event.start),	// date 형식
-	        			'event_title_give' : arg.event.title
-	        		},
+	        		method: "POST",
+	        		data: JSON.stringify(events),
+	        		
+	        		contentType: 'application/json',
 	        		success : function (response){
 	        			window.location.reload()
 	        		}
@@ -238,13 +255,13 @@
 					title : '<%=vo.getTitle()%>',
 					start : '<%=vo.getStart()%>',
 					end : '<%=vo.getEnd()%>',
-					/* color : '#' + Math.round(Math.random() * 0xffffff).toString(16), */
-					allDay : true,		// 시간을 표시하지 않음
 					writer : '<%=vo.getWriter()%>',
+					id : '<%=vo.getId()%>',
 				},
 				<%}
 			}%>
 		],
+		// 작성자 표시
 		eventContent: function(arg) {
 			return {
 				html: arg.event.title + '<br>By ' + arg.event.extendedProps.writer,
@@ -289,7 +306,6 @@
   		sub3.classList.add('open');
   	}
   }
-
 </script>
 </body>
 </html>

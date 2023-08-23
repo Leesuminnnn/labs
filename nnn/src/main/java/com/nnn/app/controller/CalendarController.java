@@ -88,35 +88,14 @@ public class CalendarController {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
 		
 		for (Map<String, Object> list : param) {
-//			for (Map.Entry<String, Object> entry : list.entrySet()) {
-//				
-//				String key = entry.getKey();
-//				Object value = entry.getValue();
-//				
-//			}
-			
-//			String liststart = (String)list.get("start");
-//			String listend = (String)list.get("end");
-//			LocalDate startdate = (LocalDate)list.get("start");
-//			LocalDate enddate = (LocalDate)list.get("end");
-			System.out.println("@@");
-//			System.out.println(startdate);
-//			System.out.println(enddate);
 			
 			String eventName = (String) list.get("title"); // 이름 받아오기
 			String startDateString = (String) list.get("start");
 			String endDateString = (String) list.get("end");
-//			String input = "2012-03-04T00:00:00.0".replace( "T" , " " ) ; 
-//
-//			
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-//			SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//			Date d = sdf.parse(time);
-//			String formattedTime = output.format(d);
-//			
-//			LocalDateTime ldt = LocalDateTime.parse( input ) ;
-//			System.out.println(ldt);
+//			String allday = (String) list.get("allDay");
+			boolean allday = (boolean) list.get("allDay");
 			
+			System.out.println(allday);
 			String input = "2023-08-09T15:00:00.000Z";
 	        
 	        // 입력 문자열의 형식 지정
@@ -154,69 +133,28 @@ public class CalendarController {
 			System.out.println("============================**");
 			LocalDateTime startDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
 			LocalDateTime endDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
-			// 시, 분, 초를 0으로 만드는?
-//			LocalDateTime startDateWithTime = startDate.withHour(0).withMinute(0).withSecond(0);
-//			LocalDateTime endDateWithTime = endDate.withHour(0).withMinute(0).withSecond(0);
 			System.out.println("============================");
 			System.out.println(eventName);
 			System.out.println(startDate);
 			System.out.println(endDate);
-			System.out.println("============================");
-			
-//			System.out.println(startDateWithTime);
-//			System.out.println(endDateWithTime);
-			System.out.println("============================");
-			
-			
-//			String inputDateTimeString = "2023-08-07 00:00"; // Input date-time string
-//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Adjust the pattern
-//			LocalDateTime localDateTime = LocalDateTime.parse(inputDateTimeString, formatter);
-//			System.out.println(localDateTime);
-			
-//			startDate = startDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime(); // 날짜와 시간에 9시간을 더함
-//			endDate = endDate.plusHours(9).atOffset(koreaOffset).toLocalDateTime();		// 날짜와 시간에 9시간을 더함
-			
-//			ZoneOffset koreaOffset = ZoneOffset.of("+09:00");	//  한국 시간대의 오프셋
-//			ZonedDateTime zonedDateTimeStart = startDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
-//			ZonedDateTime zonedDateTimeEnd = endDate.plusHours(9).atOffset(koreaOffset).toZonedDateTime();
 
-			// Convert ZonedDateTime to UTC
-//			ZonedDateTime utcStart = zonedDateTimeStart.withZoneSameInstant(ZoneOffset.UTC);
-//			ZonedDateTime utcEnd = zonedDateTimeEnd.withZoneSameInstant(ZoneOffset.UTC);
-
-			
-			
-			
-			
-//			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//			String startfor = startDate.format(outputFormatter);
-//			String endfor = endDate.format(outputFormatter);
-			
-//			LocalDate startLocal = LocalDate.parse(startfor,DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-//			LocalDate endLocal = LocalDate.parse(endfor,DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-			
-			
 			System.out.println("============================");
+
 			System.out.println("여기");
 			System.out.println(formattedDateStart);
 			System.out.println(formattedDateEnd);
-//			System.out.println("============================");
-			
-//			System.out.println(utcStart);
-//			System.out.println(utcEnd);
-//			System.out.println("============================");
-//			System.out.println(startLocal);
-//			System.out.println(endLocal);
+
 			System.out.println("============================");
+			
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("title", eventName);
 			map.put("start", formattedDateStart);
 			map.put("end", formattedDateEnd);
+			map.put("allday", allday);
 			int select = calenService.calenselect(map);
 			
 			System.out.println(select);
-			
 			if(select != 1) {
 				System.out.println("DB에 중복없음");
 				int result = calenService.caleninput(map);
@@ -241,16 +179,25 @@ public class CalendarController {
 			
 			
 			
+			
+			
 		}
+		request.setAttribute("msg", "등록이 완료되었습니다.");
+		request.setAttribute("url", "a/Calendar.do");
 		
-		
-		return "a/input";
+		return "alert4";
 		
 	}
 	
 	@RequestMapping(value = "delete")
 	public String delete(@RequestBody List<Map<String, Object>> param, HttpServletRequest request) throws Exception {
-		
+		for (Map<String, Object> list : param) {
+			String eventName = (String) list.get("title"); // 이름 받아오기
+			int id = (int) list.get("id");
+			
+			System.out.println(eventName);
+			System.out.println(id);
+		}
 		
 		return "a/delete";
 	}

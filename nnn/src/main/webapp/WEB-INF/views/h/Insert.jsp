@@ -420,8 +420,8 @@ function end(){
 			$(document).ready(function(){
 				var str = "";
 				var listItem = [];
-				listItem["당첨"] = 50;
-				listItem["꽝"] = 50;
+				listItem["당첨"] = 30;
+				listItem["꽝"] = 70;
 				
 				// 꽝
 				var src1 = "${pageContext.request.contextPath}/resources/img/25.png";

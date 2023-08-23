@@ -67,6 +67,17 @@ public class HomeController {
 		session.getAttribute("midx");
 		return "alert2";
 	}
+	@RequestMapping(value = "/alert4.do", method = RequestMethod.GET)
+	public String alert4(HttpSession session) {
+		session.getAttribute("loginMember");
+		session.getAttribute("email");
+    	session.getAttribute("name");
+    	session.getAttribute("userId");
+    	session.getAttribute("access_Token");
+		session.getAttribute("m_status");
+		session.getAttribute("midx");
+		return "alert4";
+	}
 	@RequestMapping(value="/")
 	public ModelAndView main2(ModelAndView mav, HttpSession session, CustomerVo vo, HttpServletRequest request) throws Exception {
 		System.out.println("-----------------1");
