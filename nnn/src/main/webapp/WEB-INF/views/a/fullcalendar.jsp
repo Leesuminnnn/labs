@@ -159,7 +159,13 @@
 			center : 'title',
 			end : 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
 		},
-		
+		columnFormat: {
+            month: 'ddd',    // Mon
+            week: 'ddd d', // Mon 7
+            day: 'dddd M/d',  // Monday 9/7
+            agendaDay: 'dddd d'
+        },
+		axisFormat: 'h:mm',
 		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 		select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
 			var title = prompt('일정을 입력해주세요.');

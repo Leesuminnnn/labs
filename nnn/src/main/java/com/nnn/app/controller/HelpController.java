@@ -491,7 +491,7 @@ public class HelpController {
 		String h_no = (String)httpServletRequest.getParameter("h_no");
 		String h_number = (String)httpServletRequest.getParameter("h_number");
 		String h_comm = (String)httpServletRequest.getParameter("h_comm");
-		
+		String mainpickItem = (String)httpServletRequest.getParameter("mainpickItem");
 
 		// 수발 시작한 시간 별로 나누기 (아침, 점심, 저녁)
 		
@@ -551,7 +551,7 @@ public class HelpController {
 //		map.put("midx",memberService.detail2((String)session.getAttribute("name")).getMidx());
 		map.put("midx",memberService.detail3((String)session.getAttribute("name")).getMidx());
 		map.put("checkTime",checkTime);
-		
+		map.put("mainpickItem", mainpickItem);
 //		model.addAttribute("midx", midx);
 		
 //		model.addAttribute("detail", memberService.detail2((String)session.getAttribute("name")));
@@ -574,6 +574,7 @@ public class HelpController {
 		System.out.println("h_number : "+h_number);
 		System.out.println("h_userId : "+h_userId);
 		System.out.println("h_userName : "+h_userName);
+		System.out.println("mainpickItem : "+mainpickItem);
 		System.out.println("#########################");
 		
 		int result1 = helpService.selectend(map);

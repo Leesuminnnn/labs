@@ -79,6 +79,7 @@
 				<div>끝난시간</div>
 				<div>소요시간</div>
 				<div>코멘트</div>
+				<div>당첨내역</div>
 			</div>
 			<c:forEach items="${list }" var="l">
 				<div class="flex flex-center help center">
@@ -106,6 +107,9 @@
 					</div>
 					<div class="com" data-com="${l.h_comm }" onclick="t(this);" style="cursor: pointer;overflow:hidden; white-space:nowrap; text-overflow:ellipsis;" >
 						${l.h_comm }
+					</div>
+					<div>
+						${l.mainpickItem }
 					</div>
 				</div>
 				

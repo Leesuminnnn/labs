@@ -41,6 +41,7 @@ h_dayTime VARCHAR(10) NULL
 	private String h_imgName;
 	private String h_comm;
 	private String h_dayTime;
+	private String mainpickItem;
 	public Object getCount() {
 		// TODO Auto-generated method stub
 		return null;

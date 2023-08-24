@@ -70,7 +70,7 @@
 	</select>
 	
 	<select id="listAll" resultType="helpVo">
-		select hidx, DATE_FORMAT(h_startTime, '%Y-%m-%d %H:%i:%s') as h_startTime, DATE_FORMAT(h_regdate, '%Y-%m-%d %H:%i:%s') as h_regdate, 
+		select hidx, DATE_FORMAT(h_startTime, '%Y-%m-%d %H:%i:%s') as h_startTime, DATE_FORMAT(h_regdate, '%Y-%m-%d %H:%i:%s') as h_regdate, mainpickItem,
 		DATE_FORMAT(h_endTime, '%Y-%m-%d %H:%i:%s') as h_endTime, h_delyn, h_userId, h_userName, h_name, h_no, h_number, h_img, h_imgName, h_comm, midx
 		from csworktools.help order by h_regdate desc 
 	</select>
@@ -204,7 +204,7 @@
 	</select>
 	
 	<update id="endHelp" parameterType="map">
-		update csworktools.help set h_endTime = now(), 
+		update csworktools.help set h_endTime = now(), mainpickItem = #{mainpickItem},
 		<choose>
 			<when test = "h_comm == ''">
 			h_comm = '특이사항없음'
@@ -215,7 +215,7 @@
 		</choose>
 		where h_name = #{h_name} and h_no =#{h_no} and h_number = #{h_number} 
 		and h_userId = #{h_userId} and h_userName = #{h_userName} 
-		and DATE_FORMAT(h_regdate, '%Y-%m-%d') = #{date} 
+		and DATE_FORMAT(h_regdate, '%Y-%m-%d') = #{date}
 		<choose>
 			<when test = "h_dayTime == B">
 			h_dayTime = 'B'

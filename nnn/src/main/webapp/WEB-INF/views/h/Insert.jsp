@@ -282,6 +282,7 @@
 						<img class="modal2_img" src="${pageContext.request.contextPath}/resources/img/white.png" style="width: 680px; height: 680px;">
 						<!-- <img class="modal2_img" src="" style="width: 680px; height: 680px;"> -->
 						<div class="text text3" id="result"></div>
+						<input type="hidden" value="" name="mainpickItem" id="mainpickItem">
 						<div class="modal_insert" id="" onclick="closePopupAndRedirect2()">
 						확인
 						</div>
@@ -348,7 +349,7 @@ const btnOpenPopup = document.querySelector('#end');
 //const modal2Open = document.querySelector('#modal_insert');
 var result = document.querySelector('#result')
 var modal2img = document.querySelector('.modal2_img');
-
+var MainpickItem = $("#mainpickItem").val();
 function getRandRange(min,max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -438,8 +439,9 @@ function end(){
 					modal2img.src = src2;
 				}
 				console.log(str + pickItem +"입니다");
-				
-				
+				$("#mainpickItem").val(pickItem);
+				console.log(MainpickItem);
+				console.log("#mainpickItem.val() = "+$("#mainpickItem").val());
 				result.textContent = str + pickItem +"입니다";
 //				alert(str + pickItem +" 입니다");
 				
@@ -459,8 +461,8 @@ function end(){
 		$(document).ready(function(){
 			var str = "";
 			var listItem = [];
-			listItem["당첨"] = 50;
-			listItem["꽝"] = 50;
+			listItem["당첨"] = 30;
+			listItem["꽝"] = 70;
 			
 			// 꽝
 			var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -477,8 +479,9 @@ function end(){
 				modal2img.src = src2;
 			}
 			console.log(str + pickItem +"입니다");
-			
-			
+			MainpickItem = pickItem;
+			console.log(MainpickItem);
+			console.log($("#mainpickItem").val());
 			result.textContent = str + pickItem +"입니다";
 //			alert(str + pickItem +" 입니다");
 			
@@ -517,8 +520,8 @@ modal.addEventListener('click', (event) => {
 					$(document).ready(function(){
 					var str = "";
 					var listItem = [];
-					listItem["당첨"] = 50;
-					listItem["꽝"] = 50;
+					listItem["당첨"] = 30;
+					listItem["꽝"] = 70;
 					
 					// 꽝
 					var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -536,7 +539,8 @@ modal.addEventListener('click', (event) => {
 					}
 					console.log(str + pickItem +"입니다");
 					
-					
+					MainpickItem = pickItem;
+					console.log(MainpickItem);
 					result.textContent = str + pickItem +"입니다";
 	//				alert(str + pickItem +" 입니다");
 					});
@@ -555,8 +559,8 @@ modal.addEventListener('click', (event) => {
 				$(document).ready(function(){
 					var str = "";
 					var listItem = [];
-					listItem["당첨"] = 50;
-					listItem["꽝"] = 50;
+					listItem["당첨"] = 30;
+					listItem["꽝"] = 70;
 					
 					// 꽝
 					var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -578,6 +582,7 @@ modal.addEventListener('click', (event) => {
 					result.textContent = str + pickItem +"입니다";
 //					alert(str + pickItem +" 입니다");
 					
+					console.log(MainpickItem);
 				});
 //				closePopupAndRedirect();
 			}
@@ -613,7 +618,6 @@ function closePopupAndRedirect() {
 	let h_number = $("#h_number").val();
 	let midx = "${sessionScope.midx}"
 	let h_comm = $("#h_comm").val();
-	
 	console.log(h_name);
 	console.log(h_no);
 	console.log(h_number);
@@ -652,11 +656,13 @@ function closePopupAndRedirect2(){
 	let h_number = $("#h_number").val();
 	let midx = "${sessionScope.midx}"
 	let h_comm = $("#h_comm").val();
+	let MainpickItem = $("#mainpickItem").val();
 	
 	console.log(h_name);
 	console.log(h_no);
 	console.log(h_number);
 	console.log(h_comm);
+	console.log(MainpickItem);
 	$("#frm").attr("action","${pageContext.request.contextPath}/h/end.do/${detail.midx}").submit();
 }
 
