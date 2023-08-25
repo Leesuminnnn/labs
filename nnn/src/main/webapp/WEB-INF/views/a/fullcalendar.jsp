@@ -142,6 +142,10 @@
 
 
 <script>
+let user = "${name}"
+if(user != null){
+//	alert(user);
+}
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -159,13 +163,6 @@
 			center : 'title',
 			end : 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
 		},
-		columnFormat: {
-            month: 'ddd',    // Mon
-            week: 'ddd d', // Mon 7
-            day: 'dddd M/d',  // Monday 9/7
-            agendaDay: 'dddd d'
-        },
-		axisFormat: 'h:mm',
 		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 		select: function (arg) { // 캘린더에서 이벤트를 생성할 수 있다.
 			var title = prompt('일정을 입력해주세요.');
@@ -175,6 +172,7 @@
 		            start: arg.start,
 		            end: arg.end,
 		            allDay: arg.allDay,
+		            writer : user,
 		        });
 		    
 		
@@ -184,7 +182,7 @@
 		        obj.title = title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
 		        obj.start = arg.start; // 시작
 		        obj.end = arg.end; // 끝
-		        
+		        obj.writer = user;	// 작성자
 		        obj.allDay = arg.allDay;
 		        console.log(obj.allDay);
 		        
@@ -219,39 +217,46 @@
 	    	  console.log("#등록된 일정 클릭#");
 	    	  console.log(arg.event.title);
 	    	  console.log(arg.event.id);
+	    	  console.log(arg.event.extendedProps.writer);
 	    	  var events = new Array(); // Json 데이터를 받기 위한 배열 선언
 		        var obj = new Object();     // Json 을 담기 위해 Object 선언
 		
-		        obj.title = title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
-		        obj.start = arg.start; // 시작
-		        obj.end = arg.end; // 끝
-		        obj.id = arg.id
-		        obj.allDay = arg.allDay;
+		        obj.title = arg.event.title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
+		        obj.start = arg.event.start; // 시작
+		        obj.end = arg.event.end; // 끝
+		        obj.id = arg.event.id
+		        obj.allDay = arg.event.allDay;
+		        obj.writer = arg.event.extendedProps.writer;
+		        obj.user = user
 		        console.log(obj.allDay);
 		        
 		        events.push(obj);
 		        
 		    var jsondata = JSON.stringify(events);
 		    console.log(jsondata);
-	        if (confirm(arg.event.title + ' - 삭제 하시겠어요?')) {
-	        	
-	        	$.ajax({
-	        		type : "post",
-	        		url : "${pageContext.request.contextPath}/a/delete",
-	        		method: "POST",
-	        		data: JSON.stringify(events),
-	        		
-	        		contentType: 'application/json',
-	        		success : function (response){
-	        			window.location.reload()
-	        		}
-	        	});
-	          arg.event.remove();
-	        }
+		    if(user == arg.event.extendedProps.writer){
+		    	if (confirm(arg.event.title + ' - 삭제 하시겠어요?')) {
+		        	
+		        	$.ajax({
+		        		type : "post",
+		        		url : "${pageContext.request.contextPath}/a/delete",
+		        		method: "POST",
+		        		data: JSON.stringify(events),
+		        		
+		        		contentType: 'application/json',
+		        		success : function (response){
+		        			window.location.reload()
+		        		}
+		        	});
+		          arg.event.remove();
+		        }
+		    }else{
+		    	alert("작성한 본인만 삭제할 수 있습니다.");
+		    }
+	        
 	      },
 	      editable: true,
 	      dayMaxEvents: true, // allow "more" link when too many events
-	      
 	      events: [
 	    	//================ ajax데이터 불러올 부분 =====================//
       		
@@ -263,6 +268,7 @@
 					end : '<%=vo.getEnd()%>',
 					writer : '<%=vo.getWriter()%>',
 					id : '<%=vo.getId()%>',
+					allday : '<%=vo.isAllday()%>',
 				},
 				<%}
 			}%>

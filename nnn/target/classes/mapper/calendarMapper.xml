@@ -19,14 +19,19 @@
 	</select>
 	<insert id="input" parameterType="calen" >
 	<![CDATA[
-		INSERT INTO csworktools.calendar (title, start, end, allDay, textColor, backgroundColor, borderColor)
-		SELECT #{title}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy'
+		INSERT INTO csworktools.calendar (title, start, end, allDay, textColor, backgroundColor, borderColor, writer)
+		SELECT #{title}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy', #{writer}
 		FROM DUAL
 		WHERE NOT EXISTS (
-		    SELECT *
-		    FROM csworktools.calendar
-		    WHERE #{start} <= end AND #{end} >= start
-		)
+		    SELECT
+			* 
+		FROM
+			csworktools.calendar
+		WHERE
+			#{start} < end
+			AND
+			#{end} > start
+		);
 		]]>
 	</insert>
 	
@@ -35,4 +40,11 @@
 	<!--  DATE_FORMAT(#{start1}, '%Y-%m-%d %H:%i:%s') -->
 	
 	</select>
+	
+	<delete id="calendelete">
+	
+	DELETE FROM	csworktools.calendar WHERE id = #{id};
+	
+	</delete>
+	
 </mapper>

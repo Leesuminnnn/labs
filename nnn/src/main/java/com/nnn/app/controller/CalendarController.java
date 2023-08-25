@@ -92,6 +92,7 @@ public class CalendarController {
 			String eventName = (String) list.get("title"); // 이름 받아오기
 			String startDateString = (String) list.get("start");
 			String endDateString = (String) list.get("end");
+			String writer = (String)list.get("writer");
 //			String allday = (String) list.get("allDay");
 			boolean allday = (boolean) list.get("allDay");
 			
@@ -143,7 +144,7 @@ public class CalendarController {
 			System.out.println("여기");
 			System.out.println(formattedDateStart);
 			System.out.println(formattedDateEnd);
-
+			System.out.println(writer);
 			System.out.println("============================");
 			
 			
@@ -152,6 +153,7 @@ public class CalendarController {
 			map.put("start", formattedDateStart);
 			map.put("end", formattedDateEnd);
 			map.put("allday", allday);
+			map.put("writer", writer);
 			int select = calenService.calenselect(map);
 			
 			System.out.println(select);
@@ -193,10 +195,38 @@ public class CalendarController {
 	public String delete(@RequestBody List<Map<String, Object>> param, HttpServletRequest request) throws Exception {
 		for (Map<String, Object> list : param) {
 			String eventName = (String) list.get("title"); // 이름 받아오기
-			int id = (int) list.get("id");
-			
 			System.out.println(eventName);
-			System.out.println(id);
+			String id = (String) list.get("id");
+			String writer = (String) list.get("writer");	// DB에 담겨있는 작성자
+			System.out.println("writer : "+writer);
+			String user = (String) list.get("user");		// 현재 로그인한 사용자
+			System.out.println("user : "+user);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("title", eventName);
+			try{
+	            int number = Integer.parseInt(id);
+	            System.out.println(number);
+	            map.put("id", number);
+	        }
+	        catch (NumberFormatException ex){
+	            ex.printStackTrace();
+	        }
+			
+			if(writer.equals(user)) {
+				int delete = calenService.calendelete(map);
+				if(delete != 1) {
+					System.out.println("삭제 실패");
+				}else {
+					System.out.println("삭제 성공");
+					
+				}
+			}else {
+				System.out.println("일정 작성자와 현재 로그인한 작성자가 다름");
+				
+			}
+			
+			
+			
 		}
 		
 		return "a/delete";

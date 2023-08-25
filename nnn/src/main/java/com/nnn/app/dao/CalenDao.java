@@ -49,4 +49,13 @@ public class CalenDao {
 		System.out.println("---------------------");
 		return sqlSession.selectOne(MAPPER+".calenselect", map);
 	}
+	
+	public int calendelete(Map<String, Object> map) {
+		System.out.println("---------------------dao");
+		System.out.println(map);
+		System.out.println("---------------------");
+		
+		return sqlSession.delete(MAPPER+".calendelete", map);
+		
+	}
 }

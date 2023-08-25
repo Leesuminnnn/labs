@@ -46,4 +46,15 @@ public class CalenService {
 		return result;
 	}
 	
+	public int calendelete(Map<String, Object> map) {
+		int result = 0;
+		
+		result = calenDao.calendelete(map);
+		System.out.println("---------------------");
+		System.out.println("service ! : "+result);
+		System.out.println("---------------------");
+		
+		return result;
+		
+	}
 }
