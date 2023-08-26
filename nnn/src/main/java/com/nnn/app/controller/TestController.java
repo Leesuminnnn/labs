@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nnn.app.service.CalenService;
 import com.nnn.app.service.HelpService;
 import com.nnn.app.service.ImageService;
 import com.nnn.app.service.MemberService;
@@ -29,14 +30,13 @@ import com.nnn.app.service.PointService;
 import com.nnn.app.service.PointplusService;
 import com.nnn.app.service.TestService;
 import com.nnn.app.vo.AjaxResponse;
+import com.nnn.app.vo.CalendarVo;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.HelpVo;
 import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.WrittenVo;
-
-import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping(value = "t/*")
@@ -48,17 +48,19 @@ public class TestController {
 	private ImageService imageService;
 	private HelpService helpService;
 	private PointService pointService;
+	private CalenService calenService;
 	
 	@Autowired
 	public TestController(MemberService memberService, PointplusService pointplusService, TestService testService, AES256Util aes, ImageService imageService,
-			HelpService helpService, PointService pointService) {
+			HelpService helpService, PointService pointService, CalenService calenService) {
 		this.memberService = memberService;
 		this.pointplusService = pointplusService;
 		this.testService = testService;
 		this.aes = aes;
 		this.imageService = imageService;
 		this.helpService = helpService;
-		this.pointService = pointService; 
+		this.pointService = pointService;
+		this.calenService = calenService;
 	}
 
 	@RequestMapping(value = "test.do")
@@ -668,11 +670,33 @@ public class TestController {
 		return mav;
 	}
 	
-	@RequestMapping(value="TestCalendar2")
-	public ModelAndView TestCalendar2(ModelAndView mav) {
+	
+	@RequestMapping(value = "TestCalendar2.do")
+	public ModelAndView list(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+		List<CalendarVo> calendar = null;
+		try {
+			calendar = calenService.calenList();
+			request.setAttribute("calendarList", calendar);
+			System.out.println("calendar : "+ calendar);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(session.getAttribute("name"));
+//		mv.addObject("detail", memberService.detail2((String)session.getAttribute("name")));
+		// 시연용
+		session.getAttribute("loginMember");
+		session.getAttribute("email");
+    	session.getAttribute("name");
+    	session.getAttribute("m_status");
+    	session.getAttribute("midx");
+    	session.getAttribute("userId");
+    	session.getAttribute("m_no");
+    	session.getAttribute("m_point");
+    	session.getAttribute("m_in");
+    	session.getAttribute("m_de");
 		
-		mav.setViewName("t/TestCalendar2");
-		return mav;
+		mv.setViewName("t/TestCalendar2");
+		return mv;
 	}
 	
 }
