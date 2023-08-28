@@ -14,8 +14,8 @@ String calendarListJson = objectMapper.writeValueAsString(calendarList);
 %>
 <%
 request.setCharacterEncoding("utf-8");
-String sessionId = (String)(session.getAttribute("id"));
-String sessionNm = (String)(session.getAttribute("nm"));
+String sessionId = (String)(session.getAttribute("userId"));
+String sessionNm = (String)(session.getAttribute("name"));
 
 System.out.println("jsp :: "+sessionId);
 
@@ -24,7 +24,7 @@ System.out.println("jsp :: "+sessionId);
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>CEO 보고일정</title>
+<title>앰뷸런스 예약</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
@@ -141,20 +141,76 @@ System.out.println("jsp :: "+sessionId);
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">일정 등록</h4>
+          <h4 class="modal-title">앰뷸런스 운행 예약 요청서</h4>
           <button type="button" class="close" onclick="initModal('insertModal', g_arg)">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          <div class="form-group empl_nm">
-			<label for="empl_nm">보고자:</label>
-			<input type="text" class="form-control" placeholder="" id="empl_nm" readonly="readonly">
+     	  <div class="form-group">
+			<label for="">운행구분:</label><br>
+			<label>
+			<input type="radio" class="form-control" name="운행구분" value="입원" style="height: 100%;">입원</label> 
+			<label>
+			<input type="radio" class="form-control" name="운행구분" value="외진"style="height: 100%;">외진</label> 
+			<label>
+			<input type="radio" class="form-control" name="운행구분" value="전원(응급)"style="height: 100%;">전원(응급)</label> 
+			<label>
+			<input type="radio" class="form-control" name="운행구분" value="혈액원"style="height: 100%;">혈액원</label> 
+			<label>
+			<input type="radio" class="form-control" name="운행구분" value="other"style="height: 100%;">other<br></label> 
+			<input type="text" class="form-control">
+		  </div>
+		  <div class="form-group">
+			<label for="">기관선택:</label><br>
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="전북대학교병원" style="height: 100%;">전북대학교병원</label> 
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="예수병원"style="height: 100%;">예수병원</label> 
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="대자인병원"style="height: 100%;">대자인병원</label> 
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="전주병원"style="height: 100%;">전주병원</label> 
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="호성전주병원"style="height: 100%;">호성전주병원</label> 
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="혈액원"style="height: 100%;">혈액원</label> <br>
+			<label>
+			<input type="radio" class="form-control" name="기관선택" value="other"style="height: 100%;">other</label> <br>
+			<input type="text" class="form-control">
+		  </div>
+		  <div class="form-group">
+			<label for="">준비사항:</label><br>
+			<label>
+			<input type="checkbox" class="form-control" name="준비사항" value="산소" style="height: 100%;">산소</label> 
+			<label>
+			<input type="checkbox" class="form-control" name="준비사항" value="석션"style="height: 100%;">석션</label> 
+			<label>
+			<input type="checkbox" class="form-control" name="준비사항" value="환의"style="height: 100%;">환의</label> 
+			<label>
+			<input type="checkbox" class="form-control" name="준비사항" value="기타"style="height: 100%;">기타</label> 
+		  </div>
+		  <div class="form-group">
+			<label for="">환자 정보를 입력해 주세요</label><br>
+			<label>환자 이름
+			<input type="text" class="form-control" name="환자정보" value="" style="height: 100%;"></label> 
+			<label>병실
+			<input type="text" class="form-control" name="환자정보" value="" style="height: 100%;"></label> 
+			<label>연락처
+			<input type="text" class="form-control" name="환자정보" value="" placeholder="예) 010-1234-5678" style="height: 100%;"></label> 
+		  </div>
+          <div class="form-group writer">
+			<label for="writer">보고자:</label>
+			<input type="text" class="form-control" placeholder="" id="writer" readonly="readonly">
 		  </div>
 		  <br>
           <div class="form-group">
-			<label for="title">일정내용:</label>
-			<input type="text" class="form-control" placeholder="" id="title">
+			<label for="title">일정제목:</label>
+			<input type="text" class="form-control" value="엠뷸런스예약" id="title">
+		  </div>
+		  <div class="form-group">
+			<label for="content">주의사항 및 특이사항:</label>
+			<textarea class="form-control" id="content"></textarea>
 		  </div>
 		  <div class="form-group">
 			<label for="start">시작시간:</label>
@@ -255,35 +311,38 @@ var calendarData = <%= calendarListJson %>;
   
   //이벤트 가져오기
   //DB	
-  $.ajax({
-	  url: "${pageContext.request.contextPath}/t/TestCalendar2.do",
-	  type: "POST",
-	  data: calendarData,
-	  dataType: "JSON",
-	  traditional: true,
-	  async: false, //동기
-	  success : function(data, status, xhr){
+//  $.ajax({
+//	  url: "${pageContext.request.contextPath}/t/TestCalendar2.do",
+//	  type: "GET",
+//	  data: calendarData,
+//	  dataType: "JSON",
+//	  traditional: true,
+//	  async: false, //동기
+//	  success : function(/* data, status, xhr */response){
 		  //alert(xhr.status);
 //		  $.each(data, function(key, value){
 //			    sch = value; //스케줄 저장
 //			    
 //		  });
-		try {
-            var parsedData = JSON.parse(data);
-            console.log(parsedData); // Inspect the parsed data
-        } catch (error) {
-            console.error("Error parsing JSON:", error);
-        }
-	  },
-	  error : function(xhr, status, error){
+//			console.log(data); // This is the parsed JSON data from the server
+//		    sch = data; // Store the parsed data in the sch variable
+//		    $("#calendar").html(response);
+//		try {
+//            var parsedData = JSON.parse(calendarData);
+//            console.log(parsedData); // Inspect the parsed data
+//        } catch (error) {
+//            console.error("Error parsing JSON:", error);
+//        }
+//	  },
+//	  error : function(xhr, status, error){
 		    //alert(xhr.responseText);
 		 // alert('데이터 로딩 실패<br>새로고침 해주세요');
-		  console.error("AJAX Error:", error);
-	        console.log("Error Status:", xhr.status);
-	        console.log("Error Response:", xhr.responseText);
-	        alert('Failed to load data. Please refresh the page.');
-	  }
-	});
+//		  console.error("AJAX Error:", error);
+//	        console.log("Error Status:", xhr.status);
+//	        console.log("Error Response:", xhr.responseText);
+//	        alert('Failed to load data. Please refresh the page.');
+//	  }
+//	});
 	//
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -294,7 +353,7 @@ var calendarData = <%= calendarListJson %>;
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
       },
       locale: 'ko',
 	  slotMinTime: '09:00',
@@ -325,7 +384,23 @@ var calendarData = <%= calendarListJson %>;
 	  },	
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: sch
+      events: [
+			//================ ajax데이터 불러올 부분 =====================//
+		  
+		  <%if (calendarList != null) {%>
+		  <%for (CalendarVo vo : calendarList) {%>
+			{
+				title : '<%=vo.getTitle()%>',
+				content : '<%=vo.getContent()%>',
+				start : '<%=vo.getStart()%>',
+				end : '<%=vo.getEnd()%>',
+				writer : '<%=vo.getWriter()%>',
+				id : '<%=vo.getId()%>',
+				allday : '<%=vo.isAllday()%>',
+			},
+			<%}
+		}%>
+	],
     });
 
     calendar.render();
@@ -353,6 +428,7 @@ var calendarData = <%= calendarListJson %>;
   //모달초기화
   function initModal(modal, arg){
 	$('.'+modal+' #title').val('');
+	$('.'+modal+' #content').val('');
 	$('.'+modal+' #start').val('09:00');
 	$('.'+modal+' #end').val('09:30');
 	$('.'+modal+' #allDay').val('0');
@@ -372,9 +448,10 @@ var calendarData = <%= calendarListJson %>;
 	//값이 있는경우 세팅
 	if(g_arg.event != undefined){
 		$('.insertModal .deleteBtn').css('display', 'inline');
-		$('.insertModal .empl_nm').css('display', 'inline');
-		$('.insertModal #empl_nm').val(g_arg.event.extendedProps.empl_nm);
+		$('.insertModal .writer').css('display', 'inline');
+		$('.insertModal #writer').val(g_arg.event.extendedProps.empl_nm);
 		$('.insertModal #title').val(g_arg.event.title);
+		$('.insertModal #content').val(g_arg.event.content);
 		$('.insertModal #start').val(stringFormat(g_arg.event.start.getHours())+':'+stringFormat(g_arg.event.start.getMinutes()));
 		$('.insertModal #end').val(stringFormat(g_arg.event.end.getHours())+':'+stringFormat(g_arg.event.end.getMinutes()));
 		$('.insertModal input[name="allDay"]').val([g_arg.event.allDay]);
@@ -423,7 +500,7 @@ var calendarData = <%= calendarListJson %>;
 			$('.insertModal #end').val(g_arg.endStr.substr(11, 5));
 		}
 		//등록자 숨김(readonly)
-		$('.insertModal .empl_nm').css('display', 'none');
+		$('.insertModal .writer').css('display', 'none');
 		//등록버튼 외 숨김
 		$('.insertModal .insertBtn').css('display', 'inline');
 		$('.insertModal .deleteBtn').css('display', 'none');
@@ -503,6 +580,10 @@ var calendarData = <%= calendarListJson %>;
 			alert('제목은 100자를 넘을 수 없습니다 현재 ' + $('.'+modal+' #title').val().length + '자');
 			return;
 		}	
+		if($('.'+modal+' #content').val() == ''){
+			alert('내용을 입력해주세요');
+			return;
+		}
 		//이벤트가 있어야 승인 가능, 이벤트 수정 후 승인할 수도 있으므로 수정 로직을 거친다
 		//수정
 		if(arg.event != undefined){
@@ -551,6 +632,7 @@ var calendarData = <%= calendarListJson %>;
 				data = { 
 						id : arg.event.id,
 				  		title : $('.'+modal+' #title').val(),
+				  		content : $('.'+modal+' #content').val(),
 				  		startdt : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
 				  		enddt : m_end_dt+'T'+$('.'+modal+' #end').val(),
 				  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
@@ -583,6 +665,7 @@ var calendarData = <%= calendarListJson %>;
 				data = {
 						id : arg.event.id,
 				  		title : $('.'+modal+' #title').val(),
+				  		content : $('.'+modal+' #content').val(),
 				  		startdt : arg.event.startStr.substr(0, 10)+'T00:00',
 				  		enddt : m_end_dt+'T00:00',
 				  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
@@ -647,7 +730,10 @@ var calendarData = <%= calendarListJson %>;
 		alert('제목은 100자를 넘을 수 없습니다 현재 ' + $('.'+modal+' #title').val().length + '자');
 		return;
 	}
-		
+	if($('.'+modal+' #content').val() == ''){
+		alert('내용을 입력해주세요');
+		return;
+	}	
 	//수정 (승인 함수의 수정로직과 동일)
 	if(arg.event != undefined){
 		if($('.insertModal input[name="allDay"]:checked').val()!='true'){
@@ -689,14 +775,11 @@ var calendarData = <%= calendarListJson %>;
 			m_date = m_end.getDate();
 			m_end_dt = m_end.getFullYear() + '-' + stringFormat(m_month) + '-' + stringFormat(m_date);
 			data = { 
-					id : arg.event.id,
 			  		title : $('.'+modal+' #title').val(),
-			  		startdt : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
-			  		enddt : m_end_dt+'T'+$('.'+modal+' #end').val(),
-			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
-			  		allowyn : '0',
-			  		comments : '',
-			  		regid : '<%=sessionId%>'
+			  		start : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
+			  		end : m_end_dt+'T'+$('.'+modal+' #end').val(),
+			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),		
+			  		writer: '<%=sessionNm%>'
 			  	}
 		}else{
 			if(!be_allday){
@@ -715,14 +798,11 @@ var calendarData = <%= calendarListJson %>;
 			m_end_dt = m_end.getFullYear() + '-' + stringFormat(m_month) + '-' + stringFormat(m_date);
 			
 			data = {
-					id : arg.event.id,
 			  		title : $('.'+modal+' #title').val(),
-			  		startdt : arg.event.startStr.substr(0, 10)+'T00:00',
-			  		enddt : m_end_dt+'T00:00',
-			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
-			  		allowyn : '0',
-			  		comments : '',
-			  		regid : '<%=sessionId%>'
+			  		start : arg.event.startStr.substr(0, 10)+'T00:00',
+			  		end : m_end_dt+'T00:00',
+			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),
+			  		writer: '<%=sessionNm%>'
 			  	}
 		}
 		if(data.startdt >= data.enddt){
@@ -810,13 +890,11 @@ var calendarData = <%= calendarListJson %>;
 			
 			data = { 
 			  		title : $('.'+modal+' #title').val(),
-			  		startdt : arg.startStr+'T'+$('.'+modal+' #start').val(),
-			  		enddt : arg.endStr+'T'+$('.'+modal+' #end').val(),
+			  		content : $('.'+modal+' #content').val(),
+			  		start : arg.startStr+'T'+$('.'+modal+' #start').val(),
+			  		end : arg.endStr+'T'+$('.'+modal+' #end').val(),
 			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
-			  		allowyn : '0',
-			  		comments : '',
-			  		empl_nm: '<%=sessionNm%>',
-			  		regid : '<%=sessionId%>'
+			  		writer: '<%=sessionNm%>'
 			  	}
 			//종일이벤트면
 		}else{
@@ -833,13 +911,11 @@ var calendarData = <%= calendarListJson %>;
 			
 			data = {
 			  		title : $('.'+modal+' #title').val(),
-			  		startdt : arg.startStr+'T00:00',
-			  		enddt : arg.endStr+'T00:00',
+			  		content : $('.'+modal+' #content').val(),
+			  		start : arg.startStr+'T00:00',
+			  		end : arg.endStr+'T00:00',
 			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
-			  		allowyn : '0',
-			  		comments : '',
-			  		empl_nm: '<%=sessionNm%>',
-			  		regid : '<%=sessionId%>'
+			  		writer: '<%=sessionNm%>'
 			  	}
 		}
 		
@@ -847,13 +923,20 @@ var calendarData = <%= calendarListJson %>;
 			alert('종료시간을 시작시간보다 크게 선택해주세요');
 			return;
 		}
+		// ajax로 보내는 데이터 출력
+		console.log("Sending JSON data:", JSON.stringify(data));
 		//DB 삽입	
 		$.ajax({
-		  url: "./insertSch.jsp",
+		  url: "${pageContext.request.contextPath}/a/input",
+		  contentType : "application/json",
 		  type: "POST",
 		  data: JSON.stringify(data),
 		  dataType: "JSON",
 		  traditional: true,
+		  headers: {
+			    "Content-Type": "application/json",
+			    "Accept": "application/json" // Make sure to add this line
+			  },
 		  success : function(data, status, xhr){
 			  var id;
 			  $.each(data, function(key, value){
@@ -864,26 +947,28 @@ var calendarData = <%= calendarListJson %>;
 					  calendar.addEvent({
 					    id: id,
 						title: $('.'+modal+' #title').val(),
+				  		content : $('.'+modal+' #content').val(),
 						start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 						end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 						backgroundColor: ceoColor,
 						borderColor: ceoColor,
 						textColor: textBlack,
-						regid: '<%=sessionId%>',
-						empl_nm: '<%=sessionNm%>',
+						
+						writer: '<%=sessionNm%>',
 						allDay: true
 					  });
 				  }else{
 					  calendar.addEvent({
 							id: id,
 							title: $('.'+modal+' #title').val(),
+					  		content : $('.'+modal+' #content').val(),
 							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 							backgroundColor: regColor,
 							borderColor: regColor,
 							textColor: textWhite,
-							regid: '<%=sessionId%>',
-							empl_nm: '<%=sessionNm%>',
+							
+							writer: '<%=sessionNm%>',
 							allDay: true
 						});  
 				  }
@@ -893,23 +978,25 @@ var calendarData = <%= calendarListJson %>;
 					  calendar.addEvent({
 							id: id,
 							title: $('.'+modal+' #title').val(),
+					  		content : $('.'+modal+' #content').val(),
 							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 							backgroundColor: ceoColor,
 							borderColor: ceoColor,
-							regid: '<%=sessionId%>',
-							empl_nm: '<%=sessionNm%>',
+							
+							writer: '<%=sessionNm%>',
 							textColor: textBlack
 						});
 				  }else{
 					  calendar.addEvent({
 							id: id,
 							title: $('.'+modal+' #title').val(),
+					  		content : $('.'+modal+' #content').val(),
 							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 							backgroundColor: regColor,
-							regid: '<%=sessionId%>',
-							empl_nm: '<%=sessionNm%>',
+							
+							writer: '<%=sessionNm%>',
 							borderColor: regColor
 						});
 				  }
@@ -917,17 +1004,20 @@ var calendarData = <%= calendarListJson %>;
 			  }
 			  calendar.unselect();
 			  initModal(modal, arg);
+			  location.reload();
 		  },
 		  error : function(xhr, status, error){
-			    //alert(xhr.responseText);
-			  alert('일정 등록 실패<br>새로고침 후 재시도 해주세요');
+			//    alert(xhr.responseText);
+			    console.log(xhr.responseText);
+			//  alert('일정 등록 실패<br>새로고침 후 재시도 해주세요');
+			    location.reload();
 		  }
 		});
 		//
 	}
   }
 
-
+<%-- 
 $(function() {
 	//ceo만 1분에 한번 업데이트
 	if('<%=sessionId%>' == ceo){ 
@@ -1000,6 +1090,7 @@ $(function() {
 		 }, 60000 ); //1min
 	}
 });
+ --%>
 </script>
 
 </html>

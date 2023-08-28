@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -672,7 +676,7 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "TestCalendar2.do")
-	public ModelAndView list(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+	public ModelAndView claendar(ModelAndView mv, HttpServletRequest request, HttpSession session) {
 		List<CalendarVo> calendar = null;
 		try {
 			calendar = calenService.calenList();
@@ -697,6 +701,19 @@ public class TestController {
 		
 		mv.setViewName("t/TestCalendar2");
 		return mv;
+	}
+	
+	@GetMapping(value = "getCalendarData", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<CalendarVo>> getCalendarData() {
+		List<CalendarVo> calendarList;
+		try {
+			calendarList = calenService.calenList();
+			return ResponseEntity.ok(calendarList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 	
 }
