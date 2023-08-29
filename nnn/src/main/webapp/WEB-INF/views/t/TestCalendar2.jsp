@@ -149,55 +149,62 @@ System.out.println("jsp :: "+sessionId);
         <div class="modal-body">
      	  <div class="form-group">
 			<label for="">운행구분:</label><br>
-			<label>
-			<input type="radio" class="form-control" name="운행구분" value="입원" style="height: 100%;">입원</label> 
-			<label>
-			<input type="radio" class="form-control" name="운행구분" value="외진"style="height: 100%;">외진</label> 
-			<label>
-			<input type="radio" class="form-control" name="운행구분" value="전원(응급)"style="height: 100%;">전원(응급)</label> 
-			<label>
-			<input type="radio" class="form-control" name="운행구분" value="혈액원"style="height: 100%;">혈액원</label> 
-			<label>
-			<input type="radio" class="form-control" name="운행구분" value="other"style="height: 100%;">other<br></label> 
-			<input type="text" class="form-control">
+			<div class="form-inline">
+				<label class="mr-2">
+				<input type="radio" onclick="run(event)" class="form-control" name="run" value="입원" style="height: 100%;">입원</label> 
+				<label class="mr-2">
+				<input type="radio" onclick="run(event)" class="form-control" name="run" value="외진"style="height: 100%;">외진</label> 
+				<label class="mr-2">
+				<input type="radio" onclick="run(event)" class="form-control" name="run" value="전원(응급)"style="height: 100%;">전원(응급)</label> 
+				<label class="mr-2">
+				<input type="radio" onclick="run(event)" class="form-control" name="run" value="혈액원"style="height: 100%;">혈액원</label> 
+				<label class="mr-2">
+				<input type="radio" onclick="run(event)" class="form-control" name="run" checked value="other"style="height: 100%;">Other&nbsp;
+				<input type="text" class="form-control"></label> 
+			</div>
 		  </div>
 		  <div class="form-group">
 			<label for="">기관선택:</label><br>
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="전북대학교병원" style="height: 100%;">전북대학교병원</label> 
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="예수병원"style="height: 100%;">예수병원</label> 
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="대자인병원"style="height: 100%;">대자인병원</label> 
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="전주병원"style="height: 100%;">전주병원</label> 
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="호성전주병원"style="height: 100%;">호성전주병원</label> 
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="혈액원"style="height: 100%;">혈액원</label> <br>
-			<label>
-			<input type="radio" class="form-control" name="기관선택" value="other"style="height: 100%;">other</label> <br>
-			<input type="text" class="form-control">
+			<div class="form-inline">
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="전북대학교병원" style="height: 100%;">전북대학교병원</label> 
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="예수병원"style="height: 100%;">예수병원</label> 
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="대자인병원"style="height: 100%;">대자인병원</label> 
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="전주병원"style="height: 100%;">전주병원</label> 
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="호성전주병원"style="height: 100%;">호성전주병원</label> 
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="혈액원"style="height: 100%;">혈액원</label> <br>
+			<label class="mr-2">
+			<input type="radio" onclick="agency(event)" class="form-control" name="agency" checked value="other"style="height: 100%;">Other&nbsp;<input type="text" class="form-control"></label> <br>
+			</div>
 		  </div>
 		  <div class="form-group">
 			<label for="">준비사항:</label><br>
-			<label>
-			<input type="checkbox" class="form-control" name="준비사항" value="산소" style="height: 100%;">산소</label> 
-			<label>
-			<input type="checkbox" class="form-control" name="준비사항" value="석션"style="height: 100%;">석션</label> 
-			<label>
-			<input type="checkbox" class="form-control" name="준비사항" value="환의"style="height: 100%;">환의</label> 
-			<label>
-			<input type="checkbox" class="form-control" name="준비사항" value="기타"style="height: 100%;">기타</label> 
+			<div class="form-inline">
+			<label class="mr-2">
+			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="산소" style="height: 100%;">산소</label> 
+			<label class="mr-2">
+			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="석션"style="height: 100%;">석션</label> 
+			<label class="mr-2">
+			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="환의"style="height: 100%;">환의</label> 
+			<label class="mr-2">
+			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="기타"style="height: 100%;">기타</label> 
+		  	</div>
 		  </div>
 		  <div class="form-group">
 			<label for="">환자 정보를 입력해 주세요</label><br>
+			<div>
 			<label>환자 이름
-			<input type="text" class="form-control" name="환자정보" value="" style="height: 100%;"></label> 
+			<input type="text" class="form-control" name="patientName" id="patientName" value="김환자" style="height: 100%;"></label> 
 			<label>병실
-			<input type="text" class="form-control" name="환자정보" value="" style="height: 100%;"></label> 
+			<input type="text" class="form-control" name="patientRoom" id="patientRoom" value="101호" style="height: 100%;"></label> 
 			<label>연락처
-			<input type="text" class="form-control" name="환자정보" value="" placeholder="예) 010-1234-5678" style="height: 100%;"></label> 
+			<input type="text" class="form-control" name="patientNumber" id="patientNumber" value="010-5678-1234" placeholder="예) 010-1234-5678" style="height: 100%;"></label>
+			</div> 
 		  </div>
           <div class="form-group writer">
 			<label for="writer">보고자:</label>
@@ -210,7 +217,7 @@ System.out.println("jsp :: "+sessionId);
 		  </div>
 		  <div class="form-group">
 			<label for="content">주의사항 및 특이사항:</label>
-			<textarea class="form-control" id="content"></textarea>
+			<textarea class="form-control" id="content">낙상주의</textarea>
 		  </div>
 		  <div class="form-group">
 			<label for="start">시작시간:</label>
@@ -263,6 +270,63 @@ System.out.println("jsp :: "+sessionId);
 			</select>
 		  </div>
 		  <div class="form-group">
+		  	<label for="">요청(예약)자 이름 및 부서</label>
+		  	<input type="text" class="form-control" value="엠뷸런스예약" id="title">
+		  </div>
+		  <div class="form-group">
+		  	<div><label for="">요청 부서 선택</label></div>
+		  	<div class="row-sm-12 form-check">
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="2병동" name="a">2병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="3병동" name="a">3병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="4병동" name="a">4병동 
+				</label>
+				
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="5병동" name="a">5병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="6병동" name="a">6병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="7병동" name="a">7병동 
+				</label>
+				
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="8병동" name="a">8병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="9병동" name="a">9병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="10병동" name="a">10병동 
+				</label>
+				
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="11병동" name="a">11병동 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="외래" name="a">외래 
+				</label>
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="원무부" name="a">원무부 
+				</label>
+				
+				<label class="form-check-label col-sm-3">
+					<input type="radio" class="form-check-input" value="임상병리실" name="a">임상병리실 
+				</label>
+				<label class="form-check-label col-sm-7">
+					<input type="radio" class="form-check-input" value="Other" name="a">Other 
+					<input type="text" class="form-control">
+				</label>
+			</div>
+			<br>
+		  </div>
+		  <div class="form-group">
 			  <label for="allDay">종일여부:</label>
 			  <div class="form-check">
 				<label class="form-check-label">
@@ -279,9 +343,10 @@ System.out.println("jsp :: "+sessionId);
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
+        <!-- 
 		  <button type="button" class="btn btn-success approvalBtn" onclick="approvalSch('insertModal',g_arg)">승인</button>
 		  <button type="button" class="btn btn-danger rejectBtn" onclick="rejectSch('insertModal', g_arg)">반려</button>
-		  
+		   -->
 		  <button type="button" class="btn btn-dark  float-right deleteBtn" onclick="deleteSch('insertModal', g_arg)">삭제</button>
 		  <button type="button" class="btn btn-warning float-right insertBtn" onclick="insertSch('insertModal', g_arg)">등록</button>
         </div>
@@ -397,6 +462,14 @@ var calendarData = <%= calendarListJson %>;
 				writer : '<%=vo.getWriter()%>',
 				id : '<%=vo.getId()%>',
 				allday : '<%=vo.isAllday()%>',
+				agency : '<%=vo.getAgency()%>',
+				run : '<%=vo.getRun()%>',
+				prepare : '<%=vo.getPrepare()%>',
+				patientName : '<%=vo.getPatientName()%>',
+				patientRoom : '<%=vo.getPatientRoom()%>',
+				patientNumber : '<%=vo.getPatientNumber()%>',
+				regdate : '<%=vo.getRegdate()%>'
+				
 			},
 			<%}
 		}%>
@@ -426,16 +499,56 @@ var calendarData = <%= calendarListJson %>;
 	  $('#end').val(end);
   }
   //모달초기화
-  function initModal(modal, arg){
-	$('.'+modal+' #title').val('');
+function initModal(modal, arg){
+  	var run = $('.modal .' + modal + ' input[name="run"]:checked').val();
+  	
+  	var runCheckbox = $('.modal .' + modal + ' input[name="run"]:checked');
+  	var runValue = runCheckbox.val();
+  	
+	var agency = $('.modal .' + modal + ' input[name="agency"]:checked').val();
+	var prepare = $('.modal .' + modal + ' input[name="prepare"]:checked').val();
+	$('.'+modal+' #title').val('앰뷸런스예약');
 	$('.'+modal+' #content').val('');
+	$('.'+modal+' input[name="' + run + '"]:checked').val(''),
+	
+	runCheckbox.prop('checked', false);
+	
+  	$('.'+modal+' input[name="' + agency + '"]:checked').val(''),
+  	$('.'+modal+' input[name="' + prepare + '"]:checked').val(''),
+	$('.'+modal+' #patientName').val('');
+	$('.'+modal+' #patientRoom').val('');
+	$('.'+modal+' #patientNumber').val('');
 	$('.'+modal+' #start').val('09:00');
 	$('.'+modal+' #end').val('09:30');
 	$('.'+modal+' #allDay').val('0');
 	$('.'+modal+' input[name="allDay"]').val(['false']);
 	$('.'+modal).modal('hide');
 	g_arg = null;
+	
   }
+var run;
+var agency;
+var prepare = preparecheck(event);
+  // radio value 가져오기
+  function run(event){
+	  var run = event.target.value
+	  console.log(event.target.value);
+  }
+  //
+  function agency(event){
+	  var agency = event.target.value
+	  console.log(event.target.value);
+  }
+  
+  function preparecheck(event){
+	  let chk_Val = [];
+	  $("input:checkbox[name=prepare]:checked").each(function(){
+		 chk_Val.push($(this).val());
+	  });
+	  console.log(chk_Val);
+	  return chk_Val;
+  }
+  console.log("ㅇㅇㅇ"+prepare);
   //일정등록창 모달
   function insertModalOpen(arg){
 	
@@ -449,9 +562,15 @@ var calendarData = <%= calendarListJson %>;
 	if(g_arg.event != undefined){
 		$('.insertModal .deleteBtn').css('display', 'inline');
 		$('.insertModal .writer').css('display', 'inline');
-		$('.insertModal #writer').val(g_arg.event.extendedProps.empl_nm);
+		$('.insertModal #writer').val(g_arg.event.extendedProps.writer);
 		$('.insertModal #title').val(g_arg.event.title);
-		$('.insertModal #content').val(g_arg.event.content);
+		$('.insertModal #content').val(g_arg.event.extendedProps.content);
+		$('.insertModal input[name="run"]').val([g_arg.event.extendedProps.run]);
+		$('.insertModal input[name="agency"]').val([g_arg.event.extendedProps.agency]);
+		$('.insertModal input[name="prepare"]').val([g_arg.event.extendedProps.prepare]);
+		$('.insertModal #patientName').val(g_arg.event.extendedProps.patientName);
+		$('.insertModal #patientRoom').val(g_arg.event.extendedProps.patientRoom);
+		$('.insertModal #patientNumber').val(g_arg.event.extendedProps.patientNumber);
 		$('.insertModal #start').val(stringFormat(g_arg.event.start.getHours())+':'+stringFormat(g_arg.event.start.getMinutes()));
 		$('.insertModal #end').val(stringFormat(g_arg.event.end.getHours())+':'+stringFormat(g_arg.event.end.getMinutes()));
 		$('.insertModal input[name="allDay"]').val([g_arg.event.allDay]);
@@ -509,6 +628,7 @@ var calendarData = <%= calendarListJson %>;
 	}
 	//모달창 show
 	$('.insertModal').modal({backdrop: 'static'});
+	console.log("모달창 오픈");
 	console.log(arg);
 	$('.insertModal #title').focus();
   }
@@ -629,12 +749,19 @@ var calendarData = <%= calendarListJson %>;
 				//종료일자 문자열 생성 ex)2021.09.30 위 말일 로직이 없으면 2021.10.30으로 잡히는 걸 방지
 				m_end_dt = m_end.getFullYear() + '-' + stringFormat(m_month) + '-' + stringFormat(m_date);
 				//start, end 포맷은 2021-09-30T09:00, 2021-09-30T09:30
+				
 				data = { 
 						id : arg.event.id,
-				  		title : $('.'+modal+' #title').val(),
+						title : $('.'+modal+' #title').val(),
 				  		content : $('.'+modal+' #content').val(),
-				  		startdt : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
-				  		enddt : m_end_dt+'T'+$('.'+modal+' #end').val(),
+				  		run : $('.'+modal+' input[name="run"]:checked').val(),
+				  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+				  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+				  		patientName : $('.'+modal+' #patientName').val(),
+				  		patientRoom : $('.'+modal+' #patientRoom').val(),
+				  		patientNumber : $('.'+modal+' #patientNumber').val(),
+				  		start : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
+				  		end : m_end_dt+'T'+$('.'+modal+' #end').val(),
 				  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
 				  		allowyn : '1',
 				  		comments : '',
@@ -664,10 +791,16 @@ var calendarData = <%= calendarListJson %>;
 				
 				data = {
 						id : arg.event.id,
-				  		title : $('.'+modal+' #title').val(),
+						title : $('.'+modal+' #title').val(),
 				  		content : $('.'+modal+' #content').val(),
-				  		startdt : arg.event.startStr.substr(0, 10)+'T00:00',
-				  		enddt : m_end_dt+'T00:00',
+				  		run : $('.'+modal+' input[name="run"]:checked').val(),
+				  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+				  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+				  		patientName : $('.'+modal+' #patientName').val(),
+				  		patientRoom : $('.'+modal+' #patientRoom').val(),
+				  		patientNumber : $('.'+modal+' #patientNumber').val(),
+				  		start : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
+				  		end : m_end_dt+'T'+$('.'+modal+' #end').val(),
 				  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
 				  		allowyn : '1',
 				  		comments : '',
@@ -736,6 +869,7 @@ var calendarData = <%= calendarListJson %>;
 	}	
 	//수정 (승인 함수의 수정로직과 동일)
 	if(arg.event != undefined){
+		console.log("수정");
 		if($('.insertModal input[name="allDay"]:checked').val()!='true'){
 			  if(arg.event.startStr.substring(0, 10) == arg.event.endStr.substring(0, 10)){
 				  if($('.insertModal #end').val() <= $('.insertModal #start').val()){
@@ -774,12 +908,23 @@ var calendarData = <%= calendarListJson %>;
 			
 			m_date = m_end.getDate();
 			m_end_dt = m_end.getFullYear() + '-' + stringFormat(m_month) + '-' + stringFormat(m_date);
+			
 			data = { 
-			  		title : $('.'+modal+' #title').val(),
+					id : arg.event.id,
+					title : $('.'+modal+' #title').val(),
+			  		content : $('.'+modal+' #content').val(),
+			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+			  		patientName : $('.'+modal+' #patientName').val(),
+			  		patientRoom : $('.'+modal+' #patientRoom').val(),
+			  		patientNumber : $('.'+modal+' #patientNumber').val(),
 			  		start : arg.event.startStr.substr(0, 10)+'T'+$('.'+modal+' #start').val(),
 			  		end : m_end_dt+'T'+$('.'+modal+' #end').val(),
-			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),		
-			  		writer: '<%=sessionNm%>'
+			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
+			  		allowyn : '1',
+			  		comments : '',
+			  		regid : '<%=sessionId%>'
 			  	}
 		}else{
 			if(!be_allday){
@@ -797,8 +942,16 @@ var calendarData = <%= calendarListJson %>;
 			m_date = m_end.getDate();
 			m_end_dt = m_end.getFullYear() + '-' + stringFormat(m_month) + '-' + stringFormat(m_date);
 			
+			
 			data = {
-			  		title : $('.'+modal+' #title').val(),
+					title : $('.'+modal+' #title').val(),
+			  		content : $('.'+modal+' #content').val(),
+			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+			  		patientName : $('.'+modal+' #patientName').val(),
+			  		patientRoom : $('.'+modal+' #patientRoom').val(),
+			  		patientNumber : $('.'+modal+' #patientNumber').val(),
 			  		start : arg.event.startStr.substr(0, 10)+'T00:00',
 			  		end : m_end_dt+'T00:00',
 			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),
@@ -887,10 +1040,17 @@ var calendarData = <%= calendarListJson %>;
 				//일자만 추출
 				arg.startStr = arg.startStr.substr(0, 10);
 			}
+			 
 			
 			data = { 
 			  		title : $('.'+modal+' #title').val(),
 			  		content : $('.'+modal+' #content').val(),
+			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+			  		patientName : $('.'+modal+' #patientName').val(),
+			  		patientRoom : $('.'+modal+' #patientRoom').val(),
+			  		patientNumber : $('.'+modal+' #patientNumber').val(),
 			  		start : arg.startStr+'T'+$('.'+modal+' #start').val(),
 			  		end : arg.endStr+'T'+$('.'+modal+' #end').val(),
 			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
@@ -909,9 +1069,16 @@ var calendarData = <%= calendarListJson %>;
 				arg.endStr = m_end.getFullYear()+'-'+ stringFormat(m_end.getMonth()+1)+'-'+ stringFormat(m_end.getDate());
 			}
 			
+			 
 			data = {
-			  		title : $('.'+modal+' #title').val(),
+					title : $('.'+modal+' #title').val(),
 			  		content : $('.'+modal+' #content').val(),
+			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+			  		patientName : $('.'+modal+' #patientName').val(),
+			  		patientRoom : $('.'+modal+' #patientRoom').val(),
+			  		patientNumber : $('.'+modal+' #patientNumber').val(),
 			  		start : arg.startStr+'T00:00',
 			  		end : arg.endStr+'T00:00',
 			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
@@ -946,8 +1113,14 @@ var calendarData = <%= calendarListJson %>;
 				  if('<%=sessionId%>' == ceo){
 					  calendar.addEvent({
 					    id: id,
-						title: $('.'+modal+' #title').val(),
+					    title : $('.'+modal+' #title').val(),
 				  		content : $('.'+modal+' #content').val(),
+				  		run : $('.'+modal+' input[name="run"]:checked').val(),
+				  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+				  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+				  		patientName : $('.'+modal+' #patientName').val(),
+				  		patientRoom : $('.'+modal+' #patientRoom').val(),
+				  		patientNumber : $('.'+modal+' #patientNumber').val(),
 						start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 						end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 						backgroundColor: ceoColor,
@@ -960,8 +1133,14 @@ var calendarData = <%= calendarListJson %>;
 				  }else{
 					  calendar.addEvent({
 							id: id,
-							title: $('.'+modal+' #title').val(),
+							title : $('.'+modal+' #title').val(),
 					  		content : $('.'+modal+' #content').val(),
+					  		run : $('.'+modal+' input[name="run"]:checked').val(),
+					  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+					  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+					  		patientName : $('.'+modal+' #patientName').val(),
+					  		patientRoom : $('.'+modal+' #patientRoom').val(),
+					  		patientNumber : $('.'+modal+' #patientNumber').val(),
 							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 							backgroundColor: regColor,
@@ -977,8 +1156,14 @@ var calendarData = <%= calendarListJson %>;
 				  if('<%=sessionId%>' == ceo){
 					  calendar.addEvent({
 							id: id,
-							title: $('.'+modal+' #title').val(),
+							title : $('.'+modal+' #title').val(),
 					  		content : $('.'+modal+' #content').val(),
+					  		run : $('.'+modal+' input[name="run"]:checked').val(),
+					  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+					  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+					  		patientName : $('.'+modal+' #patientName').val(),
+					  		patientRoom : $('.'+modal+' #patientRoom').val(),
+					  		patientNumber : $('.'+modal+' #patientNumber').val(),
 							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 							backgroundColor: ceoColor,
@@ -990,8 +1175,14 @@ var calendarData = <%= calendarListJson %>;
 				  }else{
 					  calendar.addEvent({
 							id: id,
-							title: $('.'+modal+' #title').val(),
+							title : $('.'+modal+' #title').val(),
 					  		content : $('.'+modal+' #content').val(),
+					  		run : $('.'+modal+' input[name="run"]:checked').val(),
+					  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+					  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+					  		patientName : $('.'+modal+' #patientName').val(),
+					  		patientRoom : $('.'+modal+' #patientRoom').val(),
+					  		patientNumber : $('.'+modal+' #patientNumber').val(),
 							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
 							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
 							backgroundColor: regColor,
@@ -1005,12 +1196,14 @@ var calendarData = <%= calendarListJson %>;
 			  calendar.unselect();
 			  initModal(modal, arg);
 			  location.reload();
+			  console.log(prepare);
 		  },
 		  error : function(xhr, status, error){
 			//    alert(xhr.responseText);
 			    console.log(xhr.responseText);
 			//  alert('일정 등록 실패<br>새로고침 후 재시도 해주세요');
 			    location.reload();
+//			    console.log(prepare);
 		  }
 		});
 		//

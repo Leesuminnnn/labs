@@ -83,6 +83,13 @@ public class CalendarController {
 		System.out.println(CalendarVo.getEnd());
 		System.out.println(CalendarVo.getWriter());
 		System.out.println(CalendarVo.getContent());
+		System.out.println(CalendarVo.getRun());
+		System.out.println(CalendarVo.getAgency());
+		System.out.println(CalendarVo.getPrepare());
+		System.out.println(CalendarVo.getPatientName());
+		System.out.println(CalendarVo.getPatientRoom());
+		System.out.println(CalendarVo.getPatientNumber());
+		
 		
 		String eventName = (String) CalendarVo.getTitle();
 		String startDateString = (String) CalendarVo.getStart();
@@ -90,6 +97,17 @@ public class CalendarController {
 		String writer = (String) CalendarVo.getWriter();
 		boolean allday = (boolean) CalendarVo.isAllday();
 		String content = (String) CalendarVo.getContent();
+		String run = (String) CalendarVo.getRun();
+		String agency = (String) CalendarVo.getAgency();
+		String prepare = (String)CalendarVo.getPrepare();
+//		String prepare = (String) CalendarVo.getPrepare();
+		String patientName = (String) CalendarVo.getPatientName();
+		String patientRoom = (String) CalendarVo.getPatientRoom();
+		String patientNumber = (String) CalendarVo.getPatientNumber();
+				
+				
+		
+		
 		System.out.println(allday);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -99,6 +117,13 @@ public class CalendarController {
 		map.put("allday", allday);
 		map.put("writer", writer);
 		map.put("content", content);
+		map.put("run", run);
+		map.put("agency", agency);
+		map.put("prepare", prepare);
+		map.put("patientName", patientName);
+		map.put("patientRoom", patientRoom);
+		map.put("patientNumber", patientNumber);
+		
 		
 		int select = calenService.calenselect(map);
 		System.out.println(select);

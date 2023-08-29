@@ -8,7 +8,7 @@
 		<result property="end" column="end1"/>
 	</resultMap>
 	<select id="calenList" resultType="calen">
-		SELECT id, title, writer, content, 
+		SELECT id, title, writer, content, run, agency, prepare, patientName, patientRoom, patientNumber,
 		DATE_FORMAT(start, '%Y-%m-%d %H:%i:%s') start,
 		DATE_FORMAT(end, '%Y-%m-%d %H:%i:%s') end,
 		ALLDAY,
@@ -20,8 +20,8 @@
 	</select>
 	<insert id="input" parameterType="calen" >
 	<![CDATA[
-		INSERT INTO csworktools.calendar (title, content, start, end, allDay, textColor, backgroundColor, borderColor, writer, regdate)
-		SELECT #{title}, #{content}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy', #{writer}, now()
+		INSERT INTO csworktools.calendar (title, content, start, end, allDay, textColor, backgroundColor, borderColor, writer, regdate, run, agency, prepare, patientName, patientRoom, patientNumber)
+		SELECT #{title}, #{content}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy', #{writer}, now(), #{run}, #{agency}, #{prepare}, #{patientName}, #{patientRoom}, #{patientNumber}
 		FROM DUAL
 		WHERE NOT EXISTS (
 		    SELECT
