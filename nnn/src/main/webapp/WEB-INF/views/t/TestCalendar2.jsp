@@ -151,35 +151,36 @@ System.out.println("jsp :: "+sessionId);
 			<label for="">운행구분:</label><br>
 			<div class="form-inline">
 				<label class="mr-2">
-				<input type="radio" onclick="run(event)" class="form-control" name="run" value="입원" style="height: 100%;">입원</label> 
+				<input type="radio" onclick="runselect(event)" class="form-control" name="run" value="입원" style="height: 100%;">입원</label> 
 				<label class="mr-2">
-				<input type="radio" onclick="run(event)" class="form-control" name="run" value="외진"style="height: 100%;">외진</label> 
+				<input type="radio" onclick="runselect(event)" class="form-control" name="run" value="외진"style="height: 100%;">외진</label> 
 				<label class="mr-2">
-				<input type="radio" onclick="run(event)" class="form-control" name="run" value="전원(응급)"style="height: 100%;">전원(응급)</label> 
+				<input type="radio" onclick="runselect(event)" class="form-control" name="run" value="전원(응급)"style="height: 100%;">전원(응급)</label> 
 				<label class="mr-2">
-				<input type="radio" onclick="run(event)" class="form-control" name="run" value="혈액원"style="height: 100%;">혈액원</label> 
+				<input type="radio" onclick="runselect(event)" class="form-control" name="run" value="혈액원"style="height: 100%;">혈액원</label> 
 				<label class="mr-2">
-				<input type="radio" onclick="run(event)" class="form-control" name="run" checked value="other"style="height: 100%;">Other&nbsp;
-				<input type="text" class="form-control"></label> 
+				<input type="radio" onclick="runselect(event)" class="form-control" id="other" name="run" value="Other"style="height: 100%;">Other&nbsp;
+				<input type="text" class="form-control" name="RunotherInput" id="RunotherInput"  value=""></label> 
 			</div>
 		  </div>
 		  <div class="form-group">
 			<label for="">기관선택:</label><br>
 			<div class="form-inline">
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="전북대학교병원" style="height: 100%;">전북대학교병원</label> 
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="전북대학교병원" style="height: 100%;">전북대학교병원</label> 
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="예수병원"style="height: 100%;">예수병원</label> 
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="예수병원"style="height: 100%;">예수병원</label> 
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="대자인병원"style="height: 100%;">대자인병원</label> 
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="대자인병원"style="height: 100%;">대자인병원</label> 
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="전주병원"style="height: 100%;">전주병원</label> 
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="전주병원"style="height: 100%;">전주병원</label> 
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="호성전주병원"style="height: 100%;">호성전주병원</label> 
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="호성전주병원"style="height: 100%;">호성전주병원</label> 
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" value="혈액원"style="height: 100%;">혈액원</label> <br>
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="혈액원"style="height: 100%;">혈액원</label> <br>
 			<label class="mr-2">
-			<input type="radio" onclick="agency(event)" class="form-control" name="agency" checked value="other"style="height: 100%;">Other&nbsp;<input type="text" class="form-control"></label> <br>
+			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="other"style="height: 100%;">Other&nbsp;
+			<input type="text" class="form-control" name="agency"></label> <br>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -192,7 +193,9 @@ System.out.println("jsp :: "+sessionId);
 			<label class="mr-2">
 			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="환의"style="height: 100%;">환의</label> 
 			<label class="mr-2">
-			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="기타"style="height: 100%;">기타</label> 
+			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="기타"style="height: 100%;">기타
+			<input type="text" class="form-control" name="prepare">
+			</label> 
 		  	</div>
 		  </div>
 		  <div class="form-group">
@@ -528,16 +531,37 @@ function initModal(modal, arg){
 	g_arg = null;
 	
   }
-var run;
-var agency;
+var run = "";
+var agency = "";
 var prepare = preparecheck(event);
   // radio value 가져오기
-  function run(event){
-	  var run = event.target.value
-	  console.log(event.target.value);
+  function runselect(event){
+	  var selectedValue = event.target.value;
+	  var otherselect = document.getElementById('other');
+	  var RunotherInput = document.getElementById('RunotherInput');
+//	  console.log(selectedValue);
+	  run = selectedValue;
+	  console.log(run);		// other
+	  console.log(RunotherInput.value);
+	  
+	  if (selectedValue === 'Other') {
+//		RunotherInput.disabled = false;
+		
+		var inputValue = RunotherInput.value;
+		console.log(inputValue);
+		// run = inputValue; // run 변수 업데이트 (이 부분은 선택적으로 사용할 수 있습니다.)
+        otherselect.value = inputValue;
+        console.log(otherselect.value);
+	} else {
+//	        RunotherInput.disabled = true;
+	    }
+	  
+	  
+	  
+	  
   }
   //
-  function agency(event){
+  function agencyselect(event){
 	  var agency = event.target.value
 	  console.log(event.target.value);
   }
@@ -923,7 +947,7 @@ var prepare = preparecheck(event);
 					id : arg.event.id,
 					title : $('.'+modal+' #title').val(),
 			  		content : $('.'+modal+' #content').val(),
-			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		run : run,
 			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
 			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
 			  		patientName : $('.'+modal+' #patientName').val(),
