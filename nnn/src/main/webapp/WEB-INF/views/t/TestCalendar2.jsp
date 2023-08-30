@@ -220,8 +220,9 @@ System.out.println("jsp :: "+sessionId);
 			<textarea class="form-control" id="content">낙상주의</textarea>
 		  </div>
 		  <div class="form-group">
-			<label for="start">시작시간:</label>
+			<label for="start">출발시간:</label>
 			<select class="form-control" id="start" onchange="startChange()">
+				<option value="" selected>출발시간을 선택해 주세요.</option>
 				<option value="09:00">09:00</option>
 				<option value="09:30">09:30</option>
 				<option value="10:00">10:00</option>
@@ -247,6 +248,7 @@ System.out.println("jsp :: "+sessionId);
 		   <div class="form-group">
 			<label for="end">종료시간:</label>
 			<select class="form-control" id="end">
+				<option value="" selected>종료시간을 선택해 주세요.</option>
 				<option value="09:30">09:30</option>
 				<option value="10:00">10:00</option>
 				<option value="10:30">10:30</option>
@@ -455,7 +457,7 @@ var calendarData = <%= calendarListJson %>;
 		  <%if (calendarList != null) {%>
 		  <%for (CalendarVo vo : calendarList) {%>
 			{
-				title : '<%=vo.getTitle()%>',
+				title : '<%=vo.getRun()%> <%=vo.getAgency()%>',
 				content : '<%=vo.getContent()%>',
 				start : '<%=vo.getStart()%>',
 				end : '<%=vo.getEnd()%>',
@@ -518,8 +520,8 @@ function initModal(modal, arg){
 	$('.'+modal+' #patientName').val('');
 	$('.'+modal+' #patientRoom').val('');
 	$('.'+modal+' #patientNumber').val('');
-	$('.'+modal+' #start').val('09:00');
-	$('.'+modal+' #end').val('09:30');
+	$('.'+modal+' #start').val('');
+	$('.'+modal+' #end').val('');
 	$('.'+modal+' #allDay').val('0');
 	$('.'+modal+' input[name="allDay"]').val(['false']);
 	$('.'+modal).modal('hide');
@@ -866,7 +868,15 @@ var prepare = preparecheck(event);
 	if($('.'+modal+' #content').val() == ''){
 		alert('내용을 입력해주세요');
 		return;
-	}	
+	}
+	if($('.'+modal+' #start').val() == ''){
+		alert('출발시간을 선택해주세요');
+		return;
+	}
+	if($('.'+modal+' #end').val() == ''){
+		alert('출발시간을 선택해주세요');
+		return;
+	}
 	//수정 (승인 함수의 수정로직과 동일)
 	if(arg.event != undefined){
 		console.log("수정");
@@ -887,11 +897,11 @@ var prepare = preparecheck(event);
 		var m_date;
 		var m_end_dt;
 		if($('.insertModal input[name="allDay"]:checked').val()!='true'){
-			if($('.'+modal+' #start').val() == null){
-				alert('시작시간을 입력해주세요');
+			if($('.'+modal+' #start').val() == null || $('.'+modal+' #start').val() == ''){
+				alert('출발시간을 입력해주세요');
 				return;
 			}
-			if($('.'+modal+' #end').val() == null){
+			if($('.'+modal+' #end').val() == null || $('.'+modal+' #end').val() == ''){
 				alert('종료시간을 입력해주세요');
 				return;
 			}
