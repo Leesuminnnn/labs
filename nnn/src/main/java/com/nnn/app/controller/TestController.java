@@ -715,5 +715,11 @@ public class TestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
+	@RequestMapping(value="Testurl")
+	public ModelAndView testurl(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl");
+		return mv;
+	}
 	
 }

@@ -160,7 +160,8 @@ System.out.println("jsp :: "+sessionId);
 				<input type="radio" onclick="runselect(event)" class="form-control" name="run" value="혈액원"style="height: 100%;">혈액원</label> 
 				<label class="mr-2">
 				<input type="radio" onclick="runselect(event)" class="form-control" id="other" name="run" value="Other"style="height: 100%;">Other&nbsp;
-				<input type="text" class="form-control" name="RunotherInput" id="RunotherInput"  value=""></label> 
+				<input type="text" class="form-control" name="RunotherInput" id="RunotherInput"  value=""></label>
+				<input type="text" class="form-control" name="Runhidden" id="Runhidden" value=""> 
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -180,7 +181,7 @@ System.out.println("jsp :: "+sessionId);
 			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="혈액원"style="height: 100%;">혈액원</label> <br>
 			<label class="mr-2">
 			<input type="radio" onclick="agencyselect(event)" class="form-control" name="agency" value="other"style="height: 100%;">Other&nbsp;
-			<input type="text" class="form-control" name="agency"></label> <br>
+			<input type="text" class="form-control" name="agencyInput"></label> <br>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -194,7 +195,7 @@ System.out.println("jsp :: "+sessionId);
 			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="환의"style="height: 100%;">환의</label> 
 			<label class="mr-2">
 			<input type="checkbox" onclick="preparecheck(event)" class="form-control" name="prepare" value="기타"style="height: 100%;">기타
-			<input type="text" class="form-control" name="prepare">
+			<input type="text" class="form-control" name="prepareInput">
 			</label> 
 		  	</div>
 		  </div>
@@ -508,18 +509,29 @@ function initModal(modal, arg){
   	var run = $('.modal .' + modal + ' input[name="run"]:checked').val();
   	
   	var runCheckbox = $('.modal .' + modal + ' input[name="run"]:checked');
+  	var agencyCheckbox = $('.modal .' + modal + ' input[name="agency"]:checked');
+  	var prepareCheckbox = $('.modal .' + modal + ' input[name="prepare"]:checked');
+
+  	
   	var runValue = runCheckbox.val();
+  	var agencyValue = agencyCheckbox.val();
+  	var prepareValue = prepareCheckbox.val();
+  	console.log(runValue);
+  	console.log(agencyValue);
+  	console.log(prepareValue);
   	
 	var agency = $('.modal .' + modal + ' input[name="agency"]:checked').val();
 	var prepare = $('.modal .' + modal + ' input[name="prepare"]:checked').val();
-	$('.'+modal+' #title').val('앰뷸런스예약');
+	$('.'+modal+' #title').val('');
 	$('.'+modal+' #content').val('');
-	$('.'+modal+' input[name="' + run + '"]:checked').val(''),
+//	$('.'+modal+' input[name="' + run + '"]:checked').val(''),
 	
 	runCheckbox.prop('checked', false);
+	agencyCheckbox.prop('checked', false);
+	prepareCheckbox.prop('checked', false);
 	
-  	$('.'+modal+' input[name="' + agency + '"]:checked').val(''),
-  	$('.'+modal+' input[name="' + prepare + '"]:checked').val(''),
+//	$('.'+modal+' input[name="' + agency + '"]:checked').val(''),
+//	$('.'+modal+' input[name="' + prepare + '"]:checked').val(''),
 	$('.'+modal+' #patientName').val('');
 	$('.'+modal+' #patientRoom').val('');
 	$('.'+modal+' #patientNumber').val('');
@@ -534,6 +546,8 @@ function initModal(modal, arg){
 var run = "";
 var agency = "";
 var prepare = preparecheck(event);
+var runhidden = $("#Runhidden").val();
+
   // radio value 가져오기
   function runselect(event){
 	  var selectedValue = event.target.value;
@@ -541,9 +555,10 @@ var prepare = preparecheck(event);
 	  var RunotherInput = document.getElementById('RunotherInput');
 //	  console.log(selectedValue);
 	  run = selectedValue;
+	  runhidden = run;
 	  console.log(run);		// other
 	  console.log(RunotherInput.value);
-	  
+	  console.log(runhidden);
 	  if (selectedValue === 'Other') {
 //		RunotherInput.disabled = false;
 		
@@ -552,6 +567,9 @@ var prepare = preparecheck(event);
 		// run = inputValue; // run 변수 업데이트 (이 부분은 선택적으로 사용할 수 있습니다.)
         otherselect.value = inputValue;
         console.log(otherselect.value);
+        $("#RunotherInput").on("propertychange change keyup paste input", function(){
+        	console.log("   "+otherselect.value);
+        });
 	} else {
 //	        RunotherInput.disabled = true;
 	    }
