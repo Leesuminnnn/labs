@@ -676,7 +676,7 @@ public class TestController {
 	
 	
 	@RequestMapping(value = "TestCalendar2.do")
-	public ModelAndView claendar(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+	public ModelAndView claendar(ModelAndView mv, HttpServletRequest request, HttpSession session) throws Exception {
 		List<CalendarVo> calendar = null;
 		try {
 			calendar = calenService.calenList();
@@ -722,4 +722,10 @@ public class TestController {
 		return mv;
 	}
 	
+	@RequestMapping(value="Testsum")
+	public ModelAndView testsum(ModelAndView mv) {
+		
+		mv.setViewName("t/Testsum");
+		return mv;
+	}
 }

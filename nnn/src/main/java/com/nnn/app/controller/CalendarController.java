@@ -1,5 +1,6 @@
 package com.nnn.app.controller;
 
+import java.io.PrintWriter;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.CalenService;
@@ -43,7 +46,7 @@ public class CalendarController {
 //	}
 	
 	@RequestMapping(value = "Calendar.do")
-	public ModelAndView list(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+	public ModelAndView list(ModelAndView mv, HttpServletRequest request, HttpSession session) throws Exception{
 		List<CalendarVo> calendar = null;
 		try {
 			calendar = calenService.calenList();
@@ -73,9 +76,9 @@ public class CalendarController {
 
 	
 	@RequestMapping(value = "input", method = RequestMethod.POST)
-	public String input(@RequestBody CalendarVo CalendarVo/*List<Map<String, Object>> calendarData*/, HttpServletRequest request) throws Exception {
+	public String input(@RequestBody CalendarVo CalendarVo/*List<Map<String, Object>> calendarData*/, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
+//		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
 		System.out.println("input ajax");
 		System.out.println("Received Request Body: " + CalendarVo);
 		System.out.println(CalendarVo.getTitle());
@@ -89,8 +92,10 @@ public class CalendarController {
 		System.out.println(CalendarVo.getPatientName());
 		System.out.println(CalendarVo.getPatientRoom());
 		System.out.println(CalendarVo.getPatientNumber());
+		System.out.println(CalendarVo.toString());
 		
-		
+//		String[] testprepare = request.getParameterValues("prepare");
+//		System.out.println("testprepare =    "+testprepare);
 		String eventName = (String) CalendarVo.getTitle();
 		String startDateString = (String) CalendarVo.getStart();
 		String endDateString = (String) CalendarVo.getEnd();
@@ -99,8 +104,8 @@ public class CalendarController {
 		String content = (String) CalendarVo.getContent();
 		String run = (String) CalendarVo.getRun();
 		String agency = (String) CalendarVo.getAgency();
-		String prepare = (String)CalendarVo.getPrepare();
-//		String prepare = (String) CalendarVo.getPrepare();
+//		List<String> prepare = CalendarVo.getPrepare();
+		String prepare = (String) CalendarVo.getPrepare();
 		String patientName = (String) CalendarVo.getPatientName();
 		String patientRoom = (String) CalendarVo.getPatientRoom();
 		String patientNumber = (String) CalendarVo.getPatientNumber();
@@ -134,9 +139,13 @@ public class CalendarController {
 			if (result >= 1) {
 				// 성공
 				System.out.println("성공");
-				request.setAttribute("msg", "등록이 완료되었습니다.");
-	    		request.setAttribute("url", "a/Calendar.do");
-	    		return "alert";
+	//			response.setContentType("text/html; charset=UTF-8");
+	  //          PrintWriter out = response.getWriter();
+	 //           out.println("<script>alert('등록완료'); location.href = 'a/Calendar.do';</script>");
+	//            out.flush(); 
+//				request.setAttribute("msg", "등록이 완료되었습니다.");
+//	    		request.setAttribute("url", "a/Calendar.do");
+//	    		return "alertAndGo";
 			}else {
 				// 실패
 				System.out.println("실패");
@@ -144,91 +153,14 @@ public class CalendarController {
 			
 		}else {
 			System.out.println("중복");
-			request.setAttribute("msg", "이미 등록이 된 날짜입니다.");
-    		request.setAttribute("url", "a/Calendar.do");
-    		return "alert";
+//			response.setContentType("text/html; charset=UTF-8");
+  //          PrintWriter out = response.getWriter();
+ //           out.println("<script>alert('중복'); history.go(-1);</script>");
+//            out.flush(); 
 		}
 		
 		
-		
-		
-		
-	
-//		for (Map<String, Object> list : calendarData) {
-//			
-//			String eventName = (String) list.get("title"); // 이름 받아오기
-//			String startDateString = (String) list.get("start");
-//			String endDateString = (String) list.get("end");
-//			String writer = (String)list.get("writer");
-////			String allday = (String) list.get("allDay");
-//			boolean allday = (boolean) list.get("allDay");
-//			
-//			System.out.println(allday);
-//			String input = "2023-08-09T15:00:00.000Z";
-//	        
-//	        // 입력 문자열의 형식 지정
-//	        DateTimeFormatter inputFormatter = DateTimeFormatter.ISO_INSTANT;
-//	        
-//	        // 문자열을 Instant로 변환
-//	        Instant instant = Instant.parse(input);
-//	        Instant instant2 = Instant.parse(startDateString);
-//	        Instant instant3 = Instant.parse(endDateString);
-//	        		
-//	        // Instant를 LocalDateTime으로 변환 (기본 시간대는 UTC)
-//	        // 9시간을 더하여 계산
-//	        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of("UTC"));
-//	        LocalDateTime localDateTimestart = LocalDateTime.ofInstant(instant2, ZoneId.of("UTC")).plus(9, ChronoUnit.HOURS);
-//	        LocalDateTime localDateTimeend = LocalDateTime.ofInstant(instant3, ZoneId.of("UTC")).plus(9, ChronoUnit.HOURS);
-//	        
-//	        // 출력 형식 지정
-//	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//	        
-//	        // LocalDateTime을 문자열로 변환하여 출력
-//	        String formattedDate = localDateTime.format(outputFormatter);
-//	        String formattedDateStart = localDateTimestart.format(outputFormatter);
-//	        String formattedDateEnd = localDateTimeend.format(outputFormatter);
-//	        System.out.println(formattedDate);
-//	        System.out.println(formattedDateStart);
-//	        System.out.println(formattedDateEnd);
-//	        
-//			System.out.println("**============================");
-//			System.out.println(startDateString);
-//			System.out.println(endDateString);
-//			System.out.println("**============================");
-//			System.out.println("============================**");
-//			System.out.println( );
-//			System.out.println( );
-//			System.out.println("============================**");
-//			LocalDateTime startDate = LocalDateTime.parse(startDateString, dateTimeFormatter);
-//			LocalDateTime endDate = LocalDateTime.parse(endDateString, dateTimeFormatter);
-//			System.out.println("============================");
-//			System.out.println(eventName);
-//			System.out.println(startDate);
-//			System.out.println(endDate);
-//
-//			System.out.println("============================");
-//
-//			System.out.println("여기");
-//			System.out.println(formattedDateStart);
-//			System.out.println(formattedDateEnd);
-//			System.out.println(writer);
-//			System.out.println("============================");
-//			
-//			
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("title", eventName);
-//			map.put("start", formattedDateStart);
-//			map.put("end", formattedDateEnd);
-//			map.put("allday", allday);
-//			map.put("writer", writer);
-//			int select = calenService.calenselect(map);
-//			
-//			
-		System.out.println("여기");
-		request.setAttribute("msg", "등록이 완료되었습니다.");
-		request.setAttribute("url", "a/Calendar.do");
-		
-		return "alert";
+		return "a/input";
 		
 	}
 	

@@ -1031,6 +1031,7 @@ var prepare = preparecheck(event);
 		//DB 삽입	
 		$.ajax({
 		  url: "${pageContext.request.contextPath}/a/input",
+		  method: 'POST',
 		  contentType : "application/json",
 		  type: "POST",
 		  data: JSON.stringify(data),
@@ -1044,102 +1045,55 @@ var prepare = preparecheck(event);
 			  var id;
 			  $.each(data, function(key, value){
 				  id = value;
+				  console.log(id);
 			  });
 			  if($('.insertModal input[name="allDay"]:checked').val()=='true'){
-				  if('<%=sessionId%>' == ceo){
-					  calendar.addEvent({
-					    id: id,
-					    title : $('.'+modal+' #title').val(),
-				  		content : $('.'+modal+' #content').val(),
-				  		run : $('.'+modal+' input[name="run"]:checked').val(),
-				  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
-				  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
-				  		patientName : $('.'+modal+' #patientName').val(),
-				  		patientRoom : $('.'+modal+' #patientRoom').val(),
-				  		patientNumber : $('.'+modal+' #patientNumber').val(),
-						start: arg.startStr+'T'+$('.'+modal+' #start').val(),
-						end: arg.endStr+'T'+$('.'+modal+' #end').val(),
-						backgroundColor: ceoColor,
-						borderColor: ceoColor,
-						textColor: textBlack,
-						
-						writer: '<%=sessionNm%>',
-						allDay: true
-					  });
-				  }else{
-					  calendar.addEvent({
-							id: id,
-							title : $('.'+modal+' #title').val(),
-					  		content : $('.'+modal+' #content').val(),
-					  		run : $('.'+modal+' input[name="run"]:checked').val(),
-					  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
-					  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
-					  		patientName : $('.'+modal+' #patientName').val(),
-					  		patientRoom : $('.'+modal+' #patientRoom').val(),
-					  		patientNumber : $('.'+modal+' #patientNumber').val(),
-							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
-							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
-							backgroundColor: regColor,
-							borderColor: regColor,
-							textColor: textWhite,
-							
-							writer: '<%=sessionNm%>',
-							allDay: true
-						});  
-				  }
-					
+				  calendar.addEvent({
+				    id: id,
+				    title : $('.'+modal+' #title').val(),
+			  		content : $('.'+modal+' #content').val(),
+			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+			  		patientName : $('.'+modal+' #patientName').val(),
+			  		patientRoom : $('.'+modal+' #patientRoom').val(),
+			  		patientNumber : $('.'+modal+' #patientNumber').val(),
+					start: arg.startStr+'T'+$('.'+modal+' #start').val(),
+					end: arg.endStr+'T'+$('.'+modal+' #end').val(),
+					backgroundColor: ceoColor,
+					borderColor: ceoColor,
+					textColor: textBlack,
+					writer: '<%=sessionNm%>',
+					allDay: true
+				  });
 			  }else{
-				  if('<%=sessionId%>' == ceo){
-					  calendar.addEvent({
-							id: id,
-							title : $('.'+modal+' #title').val(),
-					  		content : $('.'+modal+' #content').val(),
-					  		run : $('.'+modal+' input[name="run"]:checked').val(),
-					  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
-					  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
-					  		patientName : $('.'+modal+' #patientName').val(),
-					  		patientRoom : $('.'+modal+' #patientRoom').val(),
-					  		patientNumber : $('.'+modal+' #patientNumber').val(),
-							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
-							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
-							backgroundColor: ceoColor,
-							borderColor: ceoColor,
-							
-							writer: '<%=sessionNm%>',
-							textColor: textBlack
-						});
-				  }else{
-					  calendar.addEvent({
-							id: id,
-							title : $('.'+modal+' #title').val(),
-					  		content : $('.'+modal+' #content').val(),
-					  		run : $('.'+modal+' input[name="run"]:checked').val(),
-					  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
-					  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
-					  		patientName : $('.'+modal+' #patientName').val(),
-					  		patientRoom : $('.'+modal+' #patientRoom').val(),
-					  		patientNumber : $('.'+modal+' #patientNumber').val(),
-							start: arg.startStr+'T'+$('.'+modal+' #start').val(),
-							end: arg.endStr+'T'+$('.'+modal+' #end').val(),
-							backgroundColor: regColor,
-							
-							writer: '<%=sessionNm%>',
-							borderColor: regColor
-						});
-				  }
-					
+				  calendar.addEvent({
+					id: id,
+					title : $('.'+modal+' #title').val(),
+			  		content : $('.'+modal+' #content').val(),
+			  		run : $('.'+modal+' input[name="run"]:checked').val(),
+			  		agency : $('.'+modal+' input[name="agency"]:checked').val(),
+			  		prepare : $('.'+modal+' input[name="prepare"]:checked').val(),
+			  		patientName : $('.'+modal+' #patientName').val(),
+			  		patientRoom : $('.'+modal+' #patientRoom').val(),
+			  		patientNumber : $('.'+modal+' #patientNumber').val(),
+					start: arg.startStr+'T'+$('.'+modal+' #start').val(),
+					end: arg.endStr+'T'+$('.'+modal+' #end').val(),
+					backgroundColor: ceoColor,
+					borderColor: ceoColor,
+					writer: '<%=sessionNm%>',
+					textColor: textBlack
+				});
 			  }
 			  calendar.unselect();
 			  initModal(modal, arg);
-			  location.reload();
-			  console.log(prepare);
+		//	  location.reload();
 		  },
 		  error : function(xhr, status, error){
 			//    alert(xhr.responseText);
 			    console.log(xhr.responseText);
 			//  alert('일정 등록 실패<br>새로고침 후 재시도 해주세요');
-			    location.reload();
-//			    console.log(prepare);
+		//	    location.reload();
 		  }
 		});
 		//

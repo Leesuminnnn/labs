@@ -14,6 +14,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+img{
+	margin: 0 auto;
+}
+</style>
 </head>
 <body>
 	<div class="container-fluid">
@@ -25,17 +30,18 @@
 						<li class="nav-item">
 							<a class="nav-link active" href="#" data-menu="googleSheetWeb">병실현황뷰</a>
 						</li>
-						<!-- 
+						
 						<li class="nav-item">
-							<a class="nav-link" href="#" data-menu="googleSheet">구글시트 셀범위 link</a>
+							<a class="nav-link" href="#" data-menu="googleSheet">aa</a>
+						</li>
+						
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-menu="img">이미지링크</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#" data-menu="googleSheet3">시트 세번째 링크</a>
+							<a class="nav-link" href="#" data-menu="imgs">이미지 여러개 링크</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" data-menu="googleex">임시</a>
-						</li>
-						 -->
+						
 					</ul>
 				</div>
 			</nav>
@@ -59,11 +65,11 @@
 	        if (menuId === 'googleSheetWeb') {
 	          showGoogleSheetWebView();
 	        }else if(menuId === 'googleSheet'){
-	        	shewGoogleSheet('B7:V16');
-	        }else if(menuId === 'googleSheet3'){
-	        	shewGoogleSheet3();
-	        }else if(menuId === 'googleex'){
-	        	showGoogleSheetDataView();
+	        	showGoogleSheet();
+	        }else if(menuId === 'img'){
+	        	showGoogleSheet3();
+	        }else if(menuId === 'imgs'){
+	        	showGoogleSheet4();
 	        }
 	      });
 	    });
@@ -100,6 +106,7 @@
 			  mainContent.innerHTML = ''; // 기존 내용을 지우고
 			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 			}
+		/* 
 		function shewGoogleSheet(range){
 			const iframe = document.createElement('iframe');
 			  iframe.src = 'https://docs.google.com/spreadsheets/d/1MECrScp7CxVALaZKH9R9KpA_eEFTweLr-sqpMQGQQEA/edit#gid=989350309&range=${range}/1/public/full?alt=json'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
@@ -111,9 +118,21 @@
 			  mainContent.innerHTML = ''; // 기존 내용을 지우고
 			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
-		function shewGoogleSheet3(){
+		 */
+		 function showGoogleSheet(){
+				const iframe = document.createElement('iframe');
+				  iframe.src = 'https://docs.google.com/gview?url=https://drive.google.com/file/d/1mR7ByU9iXg3w0XjXRrSrChfQUoa5QI9y/view?usp=drive_link&embedded=true'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+				  iframe.width = '100%';
+				  iframe.height = '100%';
+				  iframe.frameborder = '0';
+				  iframe.allowfullscreen = true;
+				
+				  mainContent.innerHTML = ''; // 기존 내용을 지우고
+				  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+			}
+		function showGoogleSheet3(){
 			const iframe = document.createElement('iframe');
-			  iframe.src = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQkYgWmgGTeXRZswQlGoJN_SpYhCTMaVQ__b6sSTe_q8IcGL6LhYzdR0RFV9_Y1hMZi23lkGGmnJ2Kh/pubhtml?widget=true&amp;headers=false&amp;single=true'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			  iframe.src = '<%=request.getContextPath() %>/resources/img/test/1.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
 			  iframe.width = '100%';
 			  iframe.height = '100%';
 			  iframe.frameborder = '0';
@@ -122,7 +141,42 @@
 			  mainContent.innerHTML = ''; // 기존 내용을 지우고
 			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
-		
+		function showGoogleSheet4(){
+			const iframe = document.createElement('iframe');
+			  iframe.src = '<%=request.getContextPath() %>/resources/img/test/2.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			  iframe.width = '100%';
+			  iframe.height = '100%';
+			  iframe.frameborder = '0';
+			  iframe.allowfullscreen = true;
+
+			  const iframe2 = document.createElement('iframe');
+			  iframe2.src = '<%=request.getContextPath() %>/resources/img/test/3.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			  iframe2.width = '100%';
+			  iframe2.height = '100%';
+			  iframe2.frameborder = '0';
+			  iframe2.allowfullscreen = true;
+
+			  const iframe3 = document.createElement('iframe');
+			  iframe3.src = '<%=request.getContextPath() %>/resources/img/test/3.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			  iframe3.width = '100%';
+			  iframe3.height = '100%';
+			  iframe3.frameborder = '0';
+			  iframe3.allowfullscreen = true;
+			  
+			  const iframe4 = document.createElement('iframe');
+			  iframe4.src = '<%=request.getContextPath() %>/resources/img/test/3.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			  iframe4.width = '100%';
+			  iframe4.height = '100%';
+			  iframe4.frameborder = '0';
+			  iframe4.allowfullscreen = true;
+			  
+			  
+			  mainContent.innerHTML = ''; // 기존 내용을 지우고
+			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+			  mainContent.appendChild(iframe2); // 웹 뷰를 추가합니다.
+			  mainContent.appendChild(iframe3); // 웹 뷰를 추가합니다.
+			  mainContent.appendChild(iframe4); // 웹 뷰를 추가합니다.
+		}
 		/* 
 		async function fetchGoogleSheetData() {
 			  try {
