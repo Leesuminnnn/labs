@@ -2,8 +2,11 @@ package com.nnn.app.vo;
 
 import java.sql.Date;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class WrittenVo {
 /*
 CREATE TABLE `cs_data` (

@@ -5,8 +5,11 @@ import java.util.Date;
 import javax.persistence.Lob;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ImageEntity {
 
 	private int idx;

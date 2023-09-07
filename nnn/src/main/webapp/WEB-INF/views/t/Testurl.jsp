@@ -32,7 +32,7 @@ img{
 
 /* VARIABLES CSS */
 :root {
-    --nav--width: 160px;
+    --nav--width: 250px;
 
     /* Colores */
     --first-color: #035397;
@@ -53,7 +53,19 @@ img{
 *, ::before, ::after {
     box-sizing: border-box;
 }
+.nav::-webkit-scrollbar {
+    display: none;
+}
+/* 
+.nav::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #0a4b73; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
 
+.nav::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+} */
 body {
     position: relative;
     margin: 0;
@@ -89,6 +101,7 @@ a {
     padding: 1.5rem 1.5rem 2rem;
     transition: .5s;
     z-index: var(--z-fixed);
+    
 }
 
 /* NAV */
@@ -97,7 +110,10 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+   /* overflow: hidden; */
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+	scrollbar-width: none; /* for Firefox */
 }
 
 .nav__brand {
@@ -141,6 +157,9 @@ a {
 }
 
 .nav_name {
+    font-size: var(--normal-font-size);
+}
+.nav_subname {
     font-size: var(--small-font-size);
 }
 
@@ -197,38 +216,93 @@ a {
 </head>
 <body id="body-pd">
 
-    <div class="l-navbar expander" id="navbar">
-        <nav class="nav">
-            <div>
-                <div class="nav__brand">
-                    <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="#" class="nav__logo">TestUrl</a>
-                </div>
-                <div class="nav__list">
-                    <a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="googleSheetWeb">
-                        <!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-                        <span class="nav_name">병실현황 Total VIEW</span>
-                    </a>
+	<div class="l-navbar expander" id="navbar">
+		<nav class="nav">
+			<div>
+				<div class="nav__brand">
+					<ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+					<a href="#" class="nav__logo">Core Hospital</a>
+				</div>
+				<div class="nav__list">
+					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="googleSheetWeb">
+					<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_name">병실현황 Total VIEW</span>
+					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="googleSheetSubMenu1">
-                        <!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
-                        <span class="nav_name">&nbsp;&nbsp;재원현황 목표</span>
-                    </a>
-                    <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="googleSheetSubMenu2">
-                        <!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
-                        <span class="nav_name">&nbsp;&nbsp;최근7일간 입원 환자 수</span>
-                    </a>
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;재원현황 목표</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="googleSheetSubMenu2">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;최근7일간 입원 환자 수</span>
+					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="googleSheetSubMenu3">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;병동&의료진별 재원현황</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="googleSheetSubMenu4">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;보험유형&재원일수기준 재원현황</span>
+					</a>
+					<a href="#" class="nav__link" data-menu="googleSheetSubMenu5">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;연령 및 남여성비 현황</span>
+					</a>
+					<!-- 구분 st -->
+					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
+					<!-- 구분 ed -->
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsMain1">
+						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_name">병상가동률</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsSub1-1">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;입원환자 연인원수</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsSub1-2">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;월별 병상가동률(%)</span>
+					</a>
+                    <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsSub1-3">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;월평균 재원환자수</span>
+					</a>
+					 <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsSub1-4">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;일일 평균 재원환자수</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" style="margin-bottom: 0;" data-menu="harsMain2">
+						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_name">환자분류군</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsSub2-1">
+						<!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
+						<span class="nav_subname">&nbsp;&nbsp;환자분류군별 분포 전월 비교 및 병동별 분포</span>
+					</a>
+					
+					
+					
+					
+					<!-- 구분 st -->
+                    <div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
+                    <!-- 구분 ed -->
+                    
+                    <a href="#" class="nav__link"  style="margin-top:16px;" data-menu="googleSheetimg4">
                         <!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
-                        <span class="nav_name">&nbsp;&nbsp;병동&의료진별 재원현황</span>
+                        <span class="nav_name">이미지 예3 (최종)</span>
                     </a>
-                    <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="googleSheetSubMenu4">
+                    <a href="#" class="nav__link" data-menu="googleSheetiweb2">
                         <!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
-                        <span class="nav_name">&nbsp;&nbsp;보험유형&재원일수기준 재원현황</span>
+                        <span class="nav_name">웹게시 예</span>
                     </a>
-                    <a href="#" class="nav__link" data-menu="googleSheetSubMenu5">
+                    <a href="#" class="nav__link" data-menu="googleSheetweb3">
                         <!-- <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon> -->
-                        <span class="nav_name">&nbsp;&nbsp;연령 및 남여성비 현황</span>
+                        <span class="nav_name">병실별 입원현황(C-type)</span>
                     </a>
+                    
+                     
+                    
+                    
                     <!-- 
                     <div href="#" class="nav__link collapse">
                         <ion-icon name="folder-outline" class="nav__icon"></ion-icon>
@@ -303,6 +377,14 @@ a {
 	        	showGoogleSheetSubMenu4();
 	        }else if(menuId === 'googleSheetSubMenu5'){
 	        	showGoogleSheetSubMenu5();
+	        }else if(menuId === 'googleSheetimg4'){
+	        	showGoogleSheetimg4();
+	        }else if(menuId === 'googleSheetiweb2'){
+	        	googleSheetiweb2();
+	        }else if(menuId === 'harsMain1'){
+	        	harsMain1();
+	        }else if(menuId === 'googleSheetweb3'){
+	        	googleSheetweb3();
 	        }
 	      });
 	    });
@@ -328,6 +410,22 @@ a {
 			}
 		}
 		
+		function googleSheetiweb2() {
+			const iframe = document.createElement('iframe');
+			iframe.src = 'https://docs.google.com/presentation/d/e/2PACX-1vQEWIf82Ut4WgB7UgcOqdtnboQccUr9pFJTEs1i7LLc3pgVbvpEEPAvYh6NGkzYgBgXWwiXnmmzRsuL/embed?start=false&loop=false&delayms=3000'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+	//		iframe.width = '100%';
+	//		iframe.height = '100%';
+			iframe.frameborder = '0';
+			iframe.style.width = '100%';
+			iframe.style.height = '100%';
+			iframe.allowfullscreen="true" ;
+			iframe.mozallowfullscreen="true";
+			iframe.webkitallowfullscreen="true";
+			iframe.allowfullscreen = true;
+			  
+			mainContent.innerHTML = ''; // 기존 내용을 지우고
+			mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+		}
 		function showGoogleSheetWebView() {
 			const iframe = document.createElement('iframe');
 			iframe.src = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR6JOk436AoXyveEv4VWOQ5CrbgL3orbrEysB9rQnY5BGLMpmii72CuJVKUTst_TZrRnFmMJyhzqCrM/pubhtml'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
@@ -335,7 +433,6 @@ a {
 			iframe.height = '100%';
 			iframe.frameborder = '0';
 			iframe.allowfullscreen = true;
-			  
 			mainContent.innerHTML = ''; // 기존 내용을 지우고
 			mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
@@ -412,9 +509,36 @@ a {
 			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
 		 */
+		 // 이미지 예 최종
+		 function showGoogleSheetimg4(){
+				const iframe = document.createElement('img');
+				  iframe.src = '<%=request.getContextPath() %>/resources/img/test/111.png'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+				  iframe.style.width = '1440px';
+				  iframe.style.height = '1200px';
+				 
+				  iframe.allowfullscreen = true;
+				
+				  mainContent.innerHTML = ''; // 기존 내용을 지우고
+				  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+			}
+		 // 병상가동율
+		 function harsMain1(){
+				const iframe = document.createElement('img');
+				  iframe.src = '<%=request.getContextPath() %>/resources/img/HARS_img/0003.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+				  iframe.style.width = '1440px';
+				  iframe.style.height = '1200px';
+				 
+				  iframe.allowfullscreen = true;
+				
+				  mainContent.innerHTML = ''; // 기존 내용을 지우고
+				  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+			}
+		 
+		 
+		 
 		 function showGoogleSheet(){
 				const iframe = document.createElement('iframe');
-				  iframe.src = 'https://docs.google.com/gview?url=https://drive.google.com/file/d/1mR7ByU9iXg3w0XjXRrSrChfQUoa5QI9y/view?usp=drive_link&embedded=true'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+				  iframe.src = '<%=request.getContextPath() %>/resources/img/test/qwe.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
 				  iframe.width = '100%';
 				  iframe.height = '100%';
 				  iframe.frameborder = '0';
@@ -433,6 +557,17 @@ a {
 
 			  mainContent.innerHTML = ''; // 기존 내용을 지우고
 			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+		}
+		// C-type
+		function googleSheetweb3() {
+			const iframe = document.createElement('iframe');
+			iframe.src = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTqqSx5-gvpK53MLlPBnjD9_e-MunXutjun2Bjyqn2ReJKl-9MVl1mecdV2-iMlYqQJEh6TLXi3p6nV/pubhtml?gid=1700249851&single=true'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			iframe.width = '100%';
+			iframe.height = '100%';
+			iframe.frameborder = '0';
+			iframe.allowfullscreen = true;
+			mainContent.innerHTML = ''; // 기존 내용을 지우고
+			mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
 		function showGoogleSheet4(){
 			const iframe = document.createElement('iframe');
