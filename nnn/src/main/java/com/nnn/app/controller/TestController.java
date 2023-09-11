@@ -721,7 +721,18 @@ public class TestController {
 		mv.setViewName("t/Testurl");
 		return mv;
 	}
-	
+	@RequestMapping(value="CoreHospital")
+	public ModelAndView testurl3(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl");
+		return mv;
+	}
+	@RequestMapping(value="CoreHospitalAuto")
+	public ModelAndView testurl2(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl2");
+		return mv;
+	}
 	@RequestMapping(value="Testsum")
 	public ModelAndView testsum(ModelAndView mv) {
 		

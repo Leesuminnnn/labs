@@ -1949,7 +1949,7 @@ a {
 		
 		
 		activateMenu(currentMenuIndex);
-		/* 
+		
 		// 방향키 입력을 모방하는 함수
 		function simulateArrowKey() {
 		  const event = new Event('keydown'); // 새 키 이벤트 생성
@@ -1995,7 +1995,7 @@ a {
 		// 페이지 로드 시 초기화
 		window.addEventListener('load', refreshPageIfInactive);
 		
-		 */
+		
 		/* 
 		function scrollToSelectedMenu() {
 			  // 선택된 메뉴 항목 가져오기
