@@ -310,7 +310,7 @@ a {
 					<!-- 구분 ed -->
 					<a href="#" class="nav__link2" style="margin-bottom: 0; grid-template-columns: auto; justify-content: space-evenly;" data-menu="harsMain2">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-						<span class="nav__name2 nav_name">HARS</span>
+						<span class="nav__name2 nav_name" style="font-weight: 600;">HARS</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsMain1">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
