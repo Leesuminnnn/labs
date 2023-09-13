@@ -721,16 +721,35 @@ public class TestController {
 		mv.setViewName("t/Testurl");
 		return mv;
 	}
-	@RequestMapping(value="CoreHospital")
+	@RequestMapping(value="CoreHospital")		// 사이드바 메뉴 자동 재생 X
 	public ModelAndView testurl3(ModelAndView mv) {
 		
 		mv.setViewName("t/Testurl");
 		return mv;
 	}
-	@RequestMapping(value="CoreHospitalAuto")
+	
+	@RequestMapping(value="CoreHospitalAuto")		// 사이드바 메뉴 자동 재생 O
 	public ModelAndView testurl2(ModelAndView mv) {
 		
 		mv.setViewName("t/Testurl2");
+		return mv;
+	}
+	@RequestMapping(value="CoreHospitalAuto2")		// 사이드바 메뉴 자동 재생 O (사이드바 너비, 폰트 사이즈 up)
+	public ModelAndView testurl2_2(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl4");
+		return mv;
+	}
+	@RequestMapping(value="CoreHospital2")			// 사이드바 메뉴 자동 재생 X (사이드바 너비, 폰트 사이즈 up)
+	public ModelAndView testurltest(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl3");
+		return mv;
+	}
+	@RequestMapping(value="Testurl4")			// 사이드바 메뉴 자동 재생 X (너비 커스텀)
+	public ModelAndView testurltest2(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl5");
 		return mv;
 	}
 	@RequestMapping(value="Testsum")
@@ -739,4 +758,5 @@ public class TestController {
 		mv.setViewName("t/Testsum");
 		return mv;
 	}
+	
 }
