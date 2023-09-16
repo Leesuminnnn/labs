@@ -34,7 +34,7 @@
 
 /* VARIABLES CSS */
 :root {
-    --nav--width: 160px;
+    --nav--width: 200px;
 
     /* Colores */
     --first-color: #035397;
@@ -44,8 +44,8 @@
 
     /* Fuente y tipografia */
     --body-font: 'Poppins', sans-serif;
-    --normal-font-size: 1rem;
-    --small-font-size: .875rem;
+    --normal-font-size: 1.4rem;
+    --small-font-size: 1rem;
 
     /* z index */
     --z-fixed: 100;
@@ -140,7 +140,7 @@ a {
 .nav__logo {
     color: var(--white-color);
     font-weight: 600;
-    font-size: 2rem;		/* 폰트사이즈 키움 */
+    font-size: 2.3rem;		/* 폰트사이즈 키움 */
 }
 
 .nav__link {
@@ -177,21 +177,21 @@ a {
 }
 
 .nav__icon {
-    font-size: 1.25rem;
+	font-size: 1.25rem;
 }
 
 .nav_name {
-    font-size: var(--normal-font-size);
+	font-size: var(--normal-font-size);
 	font-weight: 600;
 }
 .nav__name2{
-	font-size: 1.4rem;	
+	font-size: 1.4rem;
 	font-weight: 600;
 }
 .nav_subname {
     font-size: var(--small-font-size);
     color: #A7ABB1;
-	font-weight: 600;
+    font-weight: 600;
 }
 
 /* Expander menu */
@@ -247,22 +247,17 @@ a {
 </style>
 </head>
 <body id="body-pd" class="">
-	<div style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px; padding-left: 33px;
+	<div style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px;
     transition: .5s; z-index: 101; position: fixed; width: calc(var(--nav--width) + 9.25rem); top: 0; left: 0; height: 80px;">
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
 				<div class="nav__brand" style="">
+					<ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
 					<a href="#" class="nav__logo" onclick="window.location.reload()">Core Hospital</a>
-					<div style="/* position: fixed; top: 80px; left: calc(var(--nav--width) + 9.25rem - 48px); */ color: #fff; z-index: 102; cursor: pointer;" id="toggleButton" >
-						<img style="width:25px;" id="playPauseIcon" src="${pageContext.request.contextPath}/resources/icon/stop.png">
-					</div>
-					
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- 버튼 클릭으로 자동 재생 일시정지 및 재개 -->
-	
 	<div class="l-navbar expander" id="navbar">
 		<nav class="nav" style="">
 			<div style="width: 100%;">
@@ -318,7 +313,7 @@ a {
 					<!-- 구분 ed -->
 					<a href="#" class="nav__link2" style="margin-bottom: 0; grid-template-columns: auto; justify-content: space-evenly;" data-menu="harsMain2">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-						<span class="nav__name2 nav_name">HARS</span>
+						<span class="nav__name2 nav_name" style="font-weight: 600;">HARS</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsMain1">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
@@ -722,13 +717,6 @@ a {
 	const menuLinks = document.querySelectorAll('.nav__link'); // 메뉴 링크 요소들
 	let currentMenuIndex = 0; // 현재 메뉴 인덱스
 	
-	let isScriptActive = true; // 스크립트의 활성화 상태를 나타내는 변수
-	let lastMenuVisited = false; // 사용자가 마지막 메뉴를 방문했는지 여부를 나타내는 변수
-	let inactiveTime = 0; // 페이지 비활성 시간을 나타내는 변수
-	let timer = null; // 타이머 변수
-	let lastMenuVisitTime = 0;
-	
-	
 	
 	/* 키보드로 메뉴 이동 */
 	
@@ -738,12 +726,10 @@ a {
 			// 위쪽 방향키를 누르면 이전 메뉴로 이동
 			event.preventDefault();
 			goToPreviousMenu();
-//			navigateMenu('prev');
 		}else if (event.key === 'ArrowDown') {
 			// 아래쪽 방향키를 누르면 다음 메뉴로 이동
 			event.preventDefault();
 			goToNextMenu();
-//			navigateMenu('next');
 		}
 	});
 	
@@ -751,22 +737,239 @@ a {
 	function goToPreviousMenu(){
 		if (currentMenuIndex > 0) {
 			currentMenuIndex--;
-			activateMenu(currentMenuIndex);
-//			scrollToSelectedMenu();
+		} else {
+			currentMenuIndex = menuLinks.length -1;
 		}
+		activateMenu(currentMenuIndex);
 	}
 	
 	/* 다음 메뉴로 이동하는 함수 */
 	function goToNextMenu(){
 		if (currentMenuIndex < menuLinks.length - 1) {
 			currentMenuIndex++;
-			activateMenu(currentMenuIndex);
-//			scrollToSelectedMenu();
+		} else {
+			currentMenuIndex = 0;			
 		}
+		activateMenu(currentMenuIndex);
+		
 	}
-	
+	const menuScripts = [
+	    { id: 'googleSheetWeb', script: showGoogleSheetWebView },
+	    { id: 'googleSheetSubMenu1', script: showGoogleSheetSubMenu1 },
+	    { id: 'googleSheetSubMenu2', script: showGoogleSheetSubMenu2 },
+	    { id: 'googleSheetSubMenu3', script: showGoogleSheetSubMenu3 },
+	    { id: 'googleSheetSubMenu4', script: showGoogleSheetSubMenu4 },
+	    { id: 'googleSheetSubMenu5', script: showGoogleSheetSubMenu5 },
+	    { id: 'googleSheetimg4', script: showGoogleSheetimg4 },
+	    { id: 'googleSheetweb2', script: googleSheetweb2 },
+	    { id: 'googleSheetweb3', script: googleSheetweb3 },
+	    { id: 'googleSheetweb4', script: googleSheetweb4 },
+	    { id: 'googleSheetweb5', script: googleSheetweb5 },
+	    { id: 'harsMain1', script: harsMain1 },
+	    { id: 'harsSub2_1', script: harsSub2_1 },
+	    { id: 'harsSub2_2', script: harsSub2_2 },
+	    { id: 'harsSub3_1', script: harsSub3_1 },
+	    { id: 'harsSub3_2', script: harsSub3_2 },
+	    { id: 'harsSub4_1', script: harsSub4_1 },
+	    { id: 'harsSub4_2', script: harsSub4_2 },
+	    { id: 'harsSub5_1', script: harsSub5_1 },
+	    { id: 'harsSub5_2', script: harsSub5_2 },
+	    { id: 'harsSub5_3', script: harsSub5_3 },
+	    { id: 'harsSub5_4', script: harsSub5_4 },
+	    { id: 'harsSub6_1', script: harsSub6_1 },
+	    { id: 'harsSub6_2', script: harsSub6_2 },
+	    { id: 'harsSub6_3', script: harsSub6_3 },
+	    { id: 'harsSub6_4', script: harsSub6_4 },
+	    { id: 'harsSub6_5', script: harsSub6_5 },
+	    { id: 'harsSub6_6', script: harsSub6_6 },
+	    { id: 'harsSub7_1', script: harsSub7_1 },
+	    { id: 'harsSub7_2', script: harsSub7_2 },
+	    { id: 'harsSub7_3', script: harsSub7_3 },
+	    { id: 'harsSub8_1', script: harsSub8_1 },
+	    { id: 'harsSub8_2', script: harsSub8_2 },
+	    { id: 'harsSub8_3', script: harsSub8_3 },
+	    { id: 'harsSub9_1', script: harsSub9_1 },
+	    { id: 'harsSub9_2', script: harsSub9_2 },
+	    { id: 'harsSub9_3', script: harsSub9_3 },
+	    { id: 'harsSub10_1', script: harsSub10_1 },
+	    { id: 'harsSub10_2', script: harsSub10_2 },
+	    { id: 'harsSub10_3', script: harsSub10_3 },
+	    { id: 'harsSub10_4', script: harsSub10_4 },
+	    { id: 'harsSub11_1', script: harsSub11_1 },
+	    { id: 'harsSub11_2', script: harsSub11_2 },
+	    { id: 'harsSub12_1', script: harsSub12_1 },
+	    { id: 'harsSub12_2', script: harsSub12_2 },
+	    { id: 'harsSub12_3', script: harsSub12_3 },
+	    { id: 'harsSub12_4', script: harsSub12_4 },
+	    { id: 'harsSub12_5', script: harsSub12_5 },
+	    { id: 'harsSub13_1', script: harsSub13_1 },
+	    { id: 'harsSub14_1', script: harsSub14_1 },
+	    { id: 'harsSub15_1', script: harsSub15_1 },
+	    { id: 'harsSub15_2', script: harsSub15_2 },
+	    { id: 'harsSub16_1', script: harsSub16_1 },
+	    { id: 'harsSub17_1', script: harsSub17_1 },
+	    { id: 'harsSub18_1', script: harsSub18_1 },
+	    { id: 'harsSub18_2', script: harsSub18_2},
+	    // 여기에 다른 메뉴와 스크립트 정보를 추가하세요
+	];
 	/* 메뉴 활성화 및 해당 스크립트 실행 함수 */
-	
+	function activateMenu(menuIndex) {
+		menuLinks.forEach(link => link.classList.remove('active'));
+		menuLinks[menuIndex].classList.add('active');
+		menuLinks[menuIndex].focus(); // 선택된 메뉴 항목에 포커스 설정
+		const menuId = menuLinks[menuIndex].getAttribute('data-menu');
+		const menuScript = menuScripts.find(item => item.id === menuId);
+		console.log("console.log(menuScript);" + menuScript);
+		if (menuScript) {
+	        menuScript.script();
+	        onMenuNavigation();
+	        
+	     /* // 추가 작업 함수가 정의되어 있으면 실행
+	        if (menuScript.additionalAction) {
+	        	console.log("Additional action exists:", menuScript.additionalAction);
+	            menuScript.additionalAction();
+	        }else {
+	            console.log("No additional action defined.");
+	        } */
+	    }
+		/* 
+	function activateMenu(menuIndex) {
+		menuLinks.forEach(link => link.classList.remove('active'));
+		menuLinks[menuIndex].classList.add('active');
+		menuLinks[menuIndex].focus(); // 선택된 메뉴 항목에 포커스 설정
+		const menuId = menuLinks[menuIndex].getAttribute('data-menu');
+		 */
+		
+		/* 해당 메뉴에 따른 스크립트 실행 */
+		/* 
+		if (menuId === 'googleSheetWeb') {				// 병실 현황 Total VIEW
+			showGoogleSheetWebView();
+		}else if(menuId === 'googleSheetSubMenu1'){		// 재원 현황 목표
+			showGoogleSheetSubMenu1();
+		}else if(menuId === 'googleSheetSubMenu2'){		// 최근 7일간 입원 환자 수 
+			showGoogleSheetSubMenu2();
+		}else if(menuId === 'googleSheetSubMenu3'){		// 병동 & 의료진 별 재원현황
+			showGoogleSheetSubMenu3();
+		}else if(menuId === 'googleSheetSubMenu4'){		// 보험유형 & 재원일수기준 재원현황
+			showGoogleSheetSubMenu4();
+		}else if(menuId === 'googleSheetSubMenu5'){		// 연령 및 남여성비 현황
+			showGoogleSheetSubMenu5();
+		}else if(menuId === 'googleSheetimg4'){
+			showGoogleSheetimg4();
+		}else if(menuId === 'googleSheetweb2'){
+			googleSheetweb2();
+		}else if(menuId === 'googleSheetweb3'){
+			googleSheetweb3();
+		}else if(menuId === 'googleSheetweb4'){
+			googleSheetweb4();
+		}else if(menuId === 'googleSheetweb5'){
+			googleSheetweb5();
+		}else if(menuId === 'harsMain1'){
+			harsMain1();
+		}else if(menuId === 'harsSub2_1'){
+			harsSub2_1();
+		}else if(menuId === 'harsSub2_2'){
+			harsSub2_2();
+		}else if(menuId === 'harsSub3_1'){
+			harsSub3_1();
+		}else if(menuId === 'harsSub3_2'){
+			harsSub3_2();
+		}else if(menuId === 'harsSub4_1'){
+			harsSub4_1();
+		}else if(menuId === 'harsSub4_2'){
+			harsSub4_2();
+		}else if(menuId === 'harsSub5_1'){
+			harsSub5_1();
+		}else if(menuId === 'harsSub5_2'){
+			harsSub5_2();
+		}else if(menuId === 'harsSub5_3'){
+			harsSub5_3();
+		}else if(menuId === 'harsSub5_4'){
+			harsSub5_4();
+		}else if(menuId === 'harsSub6_1'){
+			harsSub6_1();
+		}else if(menuId === 'harsSub6_2'){
+			harsSub6_2();
+		}else if(menuId === 'harsSub6_3'){
+			harsSub6_3();
+		}else if(menuId === 'harsSub6_4'){
+			harsSub6_4();
+		}else if(menuId === 'harsSub6_5'){
+			harsSub6_5();
+		}else if(menuId === 'harsSub6_6'){
+			harsSub6_6();
+		}else if(menuId === 'harsSub7_1'){
+			harsSub7_1();
+		}else if(menuId === 'harsSub7_2'){
+			harsSub7_2();
+		}else if(menuId === 'harsSub7_3'){
+			harsSub7_3();
+		}else if(menuId === 'harsSub8_1'){
+			harsSub8_1();
+		}else if(menuId === 'harsSub8_2'){
+			harsSub8_2();
+		}else if(menuId === 'harsSub8_3'){
+			harsSub8_3();
+		}else if(menuId === 'harsSub9_1'){
+			harsSub9_1();
+		}else if(menuId === 'harsSub9_2'){
+			harsSub9_2();
+		}else if(menuId === 'harsSub9_3'){
+			harsSub9_3();
+		}else if(menuId === 'harsSub10_1'){
+			harsSub10_1();
+		}else if(menuId === 'harsSub10_2'){
+			harsSub10_2();
+		}else if(menuId === 'harsSub10_3'){
+			harsSub10_3();
+		}else if(menuId === 'harsSub10_4'){
+			harsSub10_4();
+		}else if(menuId === 'harsSub11_1'){
+			harsSub11_1();
+		}else if(menuId === 'harsSub11_2'){
+			harsSub11_2();
+		}else if(menuId === 'harsSub12_1'){
+			harsSub12_1();
+		}else if(menuId === 'harsSub12_2'){
+			harsSub12_2();
+		}else if(menuId === 'harsSub12_3'){
+			harsSub12_3();
+		}else if(menuId === 'harsSub12_4'){
+			harsSub12_4();
+		}else if(menuId === 'harsSub12_5'){
+			harsSub12_5();
+		}else if(menuId === 'harsSub13_1'){
+			harsSub13_1();
+		}else if(menuId === 'harsSub14_1'){
+			harsSub14_1();
+		}else if(menuId === 'harsSub15_1'){
+			harsSub15_1();
+		}else if(menuId === 'harsSub15_2'){
+			harsSub15_2();
+		}else if(menuId === 'harsSub16_1'){
+			harsSub16_1();
+		}else if(menuId === 'harsSub17_1'){
+			harsSub17_1();
+		}else if(menuId === 'harsSub18_1'){
+			harsSub18_1();
+		}else if(menuId === 'harsSub18_2'){
+			harsSub18_2();
+		}else if(menuId === 'showGoogleSheetaa1'){
+			showGoogleSheetaa1();
+		} */
+	}
+	/* 방향키로 메뉴 항목 간 포커스 이동 함수 */
+	/* 
+	function navigateMenu(direction) {
+	  if (direction === 'prev' && currentMenuIndex > 0) {
+	    // 이전 메뉴 항목으로 이동
+	    currentMenuIndex--;
+	  } else if (direction === 'next' && currentMenuIndex < menuLinks.length - 1) {
+	    // 다음 메뉴 항목으로 이동
+	    currentMenuIndex++;
+	  }
+	}
+	 */
 	/* COLLAPSE MENU */
 	const linkCollapse = document.getElementsByClassName('collapse__link')
 	var i
@@ -780,8 +983,8 @@ a {
 	        rotate.classList.toggle('rotate')
 	    });
 	}
-	
 		const mainContent = document.getElementById('main-content');
+//		const menuLinks = document.querySelectorAll('[data-menu]');
 		
 		// 키보드로 이동하기 위해 클릭 리스너 재설정
 		menuLinks.forEach(link => {
@@ -792,6 +995,151 @@ a {
 				
 			});
 		});
+		// 메뉴 클릭 이벤트 처리
+		
+		/* menuLinks.forEach(link => {
+	      link.addEventListener('click', function (event) {
+	        event.preventDefault();
+	        const menuId = this.getAttribute('data-menu');
+	        if (menuId === 'googleSheetWeb') {				// 병실 현황 Total VIEW
+				showGoogleSheetWebView();
+	        }else if(menuId === 'googleSheetSubMenu1'){		// 재원 현황 목표
+	        	showGoogleSheetSubMenu1();
+	        }else if(menuId === 'googleSheetSubMenu2'){		// 최근 7일간 입원 환자 수 
+	        	showGoogleSheetSubMenu2();
+	        }else if(menuId === 'googleSheetSubMenu3'){		// 병동 & 의료진 별 재원현황
+	        	showGoogleSheetSubMenu3();
+	        }else if(menuId === 'googleSheetSubMenu4'){		// 보험유형 & 재원일수기준 재원현황
+	        	showGoogleSheetSubMenu4();
+	        }else if(menuId === 'googleSheetSubMenu5'){		// 연령 및 남여성비 현황
+	        	showGoogleSheetSubMenu5();
+	        }else if(menuId === 'googleSheetimg4'){
+	        	showGoogleSheetimg4();
+	        }else if(menuId === 'googleSheetweb2'){
+	        	googleSheetweb2();
+	        }else if(menuId === 'googleSheetweb3'){
+	        	googleSheetweb3();
+	        }else if(menuId === 'googleSheetweb4'){
+	        	googleSheetweb4();
+	        }else if(menuId === 'googleSheetweb5'){
+	        	googleSheetweb5();
+	        }else if(menuId === 'harsMain1'){
+	        	harsMain1();
+	        }else if(menuId === 'harsSub2_1'){
+	        	harsSub2_1();
+	        }else if(menuId === 'harsSub2_2'){
+	        	harsSub2_2();
+	        }else if(menuId === 'harsSub3_1'){
+	        	harsSub3_1();
+	        }else if(menuId === 'harsSub3_2'){
+	        	harsSub3_2();
+	        }else if(menuId === 'harsSub4_1'){
+	        	harsSub4_1();
+	        }else if(menuId === 'harsSub4_2'){
+	        	harsSub4_2();
+	        }else if(menuId === 'harsSub5_1'){
+	        	harsSub5_1();
+	        }else if(menuId === 'harsSub5_2'){
+	        	harsSub5_2();
+	        }else if(menuId === 'harsSub5_3'){
+	        	harsSub5_3();
+	        }else if(menuId === 'harsSub5_4'){
+	        	harsSub5_4();
+	        }else if(menuId === 'harsSub6_1'){
+	        	harsSub6_1();
+	        }else if(menuId === 'harsSub6_2'){
+	        	harsSub6_2();
+	        }else if(menuId === 'harsSub6_3'){
+	        	harsSub6_3();
+	        }else if(menuId === 'harsSub6_4'){
+	        	harsSub6_4();
+	        }else if(menuId === 'harsSub6_5'){
+	        	harsSub6_5();
+	        }else if(menuId === 'harsSub6_6'){
+	        	harsSub6_6();
+	        }else if(menuId === 'harsSub7_1'){
+	        	harsSub7_1();
+	        }else if(menuId === 'harsSub7_2'){
+	        	harsSub7_2();
+	        }else if(menuId === 'harsSub7_3'){
+	        	harsSub7_3();
+	        }else if(menuId === 'harsSub8_1'){
+	        	harsSub8_1();
+	        }else if(menuId === 'harsSub8_2'){
+	        	harsSub8_2();
+	        }else if(menuId === 'harsSub8_3'){
+	        	harsSub8_3();
+	        }else if(menuId === 'harsSub9_1'){
+	        	harsSub9_1();
+	        }else if(menuId === 'harsSub9_2'){
+	        	harsSub9_2();
+	        }else if(menuId === 'harsSub9_3'){
+	        	harsSub9_3();
+	        }else if(menuId === 'harsSub10_1'){
+	        	harsSub10_1();
+	        }else if(menuId === 'harsSub10_2'){
+	        	harsSub10_2();
+	        }else if(menuId === 'harsSub10_3'){
+	        	harsSub10_3();
+	        }else if(menuId === 'harsSub10_4'){
+	        	harsSub10_4();
+	        }else if(menuId === 'harsSub11_1'){
+	        	harsSub11_1();
+	        }else if(menuId === 'harsSub11_2'){
+	        	harsSub11_2();
+	        }else if(menuId === 'harsSub12_1'){
+	        	harsSub12_1();
+	        }else if(menuId === 'harsSub12_2'){
+	        	harsSub12_2();
+	        }else if(menuId === 'harsSub12_3'){
+	        	harsSub12_3();
+	        }else if(menuId === 'harsSub12_4'){
+	        	harsSub12_4();
+	        }else if(menuId === 'harsSub12_5'){
+	        	harsSub12_5();
+	        }else if(menuId === 'harsSub13_1'){
+	        	harsSub13_1();
+	        }else if(menuId === 'harsSub14_1'){
+	        	harsSub14_1();
+	        }else if(menuId === 'harsSub15_1'){
+	        	harsSub15_1();
+	        }else if(menuId === 'harsSub15_2'){
+	        	harsSub15_2();
+	        }else if(menuId === 'harsSub16_1'){
+	        	harsSub16_1();
+	        }else if(menuId === 'harsSub17_1'){
+	        	harsSub17_1();
+	        }else if(menuId === 'harsSub18_1'){
+	        	harsSub18_1();
+	        }else if(menuId === 'harsSub18_2'){
+	        	harsSub18_2();
+	        }else if(menuId === 'showGoogleSheetaa1'){
+	        	showGoogleSheetaa1();
+	        }
+	      });
+	    }); */
+		
+		// 메뉴에 해당하는 컨텐츠를 보여주는 함수
+		function showMenuContent(menuId) {
+			// 메뉴에 따른 컨텐츠 내용을 여기에서 설정
+			const content = getMenuContent(menuId);
+			mainContent.innerHTML = content;
+		}
+		
+		// 메뉴 ID에 따른 컨텐츠 내용을 반환하는 함수
+		function getMenuContent(menuId) {
+			switch (menuId) {
+			case 'menu1':
+				return '<h2>메뉴 1의 내용</h2><p>메뉴 1에 대한 내용을 여기에 작성합니다.</p>';
+			case 'menu2':
+				return '<h2>메뉴 2의 내용</h2><p>메뉴 2에 대한 내용을 여기에 작성합니다.</p>';
+			case 'menu3':
+				return '<h2>메뉴 3의 내용</h2><p>메뉴 3에 대한 내용을 여기에 작성합니다.</p>';
+			default:
+				return '<p>선택된 메뉴의 내용이 없습니다.</p>';
+			}
+		}
+		
 		function googleSheetweb2() {
 			const iframe = document.createElement('iframe');
 			iframe.src = 'https://docs.google.com/presentation/d/e/2PACX-1vQEWIf82Ut4WgB7UgcOqdtnboQccUr9pFJTEs1i7LLc3pgVbvpEEPAvYh6NGkzYgBgXWwiXnmmzRsuL/embed?start=false&loop=false&delayms=3000'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
@@ -879,6 +1227,20 @@ a {
 			mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
 		
+		
+		/* 
+		function shewGoogleSheet(range){
+			const iframe = document.createElement('iframe');
+			  iframe.src = 'https://docs.google.com/spreadsheets/d/1MECrScp7CxVALaZKH9R9KpA_eEFTweLr-sqpMQGQQEA/edit#gid=989350309&range=${range}/1/public/full?alt=json'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			  iframe.width = '100%';
+			  iframe.height = '100%';
+			  iframe.frameborder = '0';
+			  iframe.allowfullscreen = true;
+			
+			  mainContent.innerHTML = ''; // 기존 내용을 지우고
+			  mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
+		}
+		 */
 		 // 이미지 예 최종
 		function showGoogleSheetimg4(){
 			const iframe = document.createElement('img');
@@ -1590,406 +1952,262 @@ a {
 			  mainContent.appendChild(iframe3); // 웹 뷰를 추가합니다.
 			  mainContent.appendChild(iframe4); // 웹 뷰를 추가합니다.
 		}
-		
-		
-		
-		
-		const menuScripts = [
-		    { id: 'googleSheetWeb', script: showGoogleSheetWebView },
-		    { id: 'googleSheetSubMenu1', script: showGoogleSheetSubMenu1 },
-		    { id: 'googleSheetSubMenu2', script: showGoogleSheetSubMenu2 },
-		    { id: 'googleSheetSubMenu3', script: showGoogleSheetSubMenu3 },
-		    { id: 'googleSheetSubMenu4', script: showGoogleSheetSubMenu4 },
-		    { id: 'googleSheetSubMenu5', script: showGoogleSheetSubMenu5 },
-		    { id: 'googleSheetimg4', script: showGoogleSheetimg4 },
-		    { id: 'googleSheetweb2', script: googleSheetweb2 },
-		    { id: 'googleSheetweb3', script: googleSheetweb3 },
-		    { id: 'googleSheetweb4', script: googleSheetweb4 },
-		    { id: 'googleSheetweb5', script: googleSheetweb5 },
-		    { id: 'harsMain1', script: harsMain1 },
-		    { id: 'harsSub2_1', script: harsSub2_1 },
-		    { id: 'harsSub2_2', script: harsSub2_2 },
-		    { id: 'harsSub3_1', script: harsSub3_1 },
-		    { id: 'harsSub3_2', script: harsSub3_2 },
-		    { id: 'harsSub4_1', script: harsSub4_1 },
-		    { id: 'harsSub4_2', script: harsSub4_2 },
-		    { id: 'harsSub5_1', script: harsSub5_1 },
-		    { id: 'harsSub5_2', script: harsSub5_2 },
-		    { id: 'harsSub5_3', script: harsSub5_3 },
-		    { id: 'harsSub5_4', script: harsSub5_4 },
-		    { id: 'harsSub6_1', script: harsSub6_1 },
-		    { id: 'harsSub6_2', script: harsSub6_2 },
-		    { id: 'harsSub6_3', script: harsSub6_3 },
-		    { id: 'harsSub6_4', script: harsSub6_4 },
-		    { id: 'harsSub6_5', script: harsSub6_5 },
-		    { id: 'harsSub6_6', script: harsSub6_6 },
-		    { id: 'harsSub7_1', script: harsSub7_1 },
-		    { id: 'harsSub7_2', script: harsSub7_2 },
-		    { id: 'harsSub7_3', script: harsSub7_3 },
-		    { id: 'harsSub8_1', script: harsSub8_1 },
-		    { id: 'harsSub8_2', script: harsSub8_2 },
-		    { id: 'harsSub8_3', script: harsSub8_3 },
-		    { id: 'harsSub9_1', script: harsSub9_1 },
-		    { id: 'harsSub9_2', script: harsSub9_2 },
-		    { id: 'harsSub9_3', script: harsSub9_3 },
-		    { id: 'harsSub10_1', script: harsSub10_1 },
-		    { id: 'harsSub10_2', script: harsSub10_2 },
-		    { id: 'harsSub10_3', script: harsSub10_3 },
-		    { id: 'harsSub10_4', script: harsSub10_4 },
-		    { id: 'harsSub11_1', script: harsSub11_1 },
-		    { id: 'harsSub11_2', script: harsSub11_2 },
-		    { id: 'harsSub12_1', script: harsSub12_1 },
-		    { id: 'harsSub12_2', script: harsSub12_2 },
-		    { id: 'harsSub12_3', script: harsSub12_3 },
-		    { id: 'harsSub12_4', script: harsSub12_4 },
-		    { id: 'harsSub12_5', script: harsSub12_5 },
-		    { id: 'harsSub13_1', script: harsSub13_1 },
-		    { id: 'harsSub14_1', script: harsSub14_1 },
-		    { id: 'harsSub15_1', script: harsSub15_1 },
-		    { id: 'harsSub15_2', script: harsSub15_2 },
-		    { id: 'harsSub16_1', script: harsSub16_1 },
-		    { id: 'harsSub17_1', script: harsSub17_1 },
-		    { id: 'harsSub18_1', script: harsSub18_1 },
-		    { id: 'harsSub18_2', script: harsSub18_2, additionalAction: onLastMenuVisited },
-		    // 여기에 다른 메뉴와 스크립트 정보를 추가하세요
-		];
-	function activateMenu(menuIndex) {
-		menuLinks.forEach(link => link.classList.remove('active'));
-		menuLinks[menuIndex].classList.add('active');
-		menuLinks[menuIndex].focus(); // 선택된 메뉴 항목에 포커스 설정
-		const menuId = menuLinks[menuIndex].getAttribute('data-menu');
-		const menuScript = menuScripts.find(item => item.id === menuId);
-		console.log("console.log(menuScript);" + menuScript);
-		if (menuScript) {
-	        menuScript.script();
-	        onMenuNavigation();
-	        
-	     // 추가 작업 함수가 정의되어 있으면 실행
-	        if (menuScript.additionalAction) {
-	        	console.log("Additional action exists:", menuScript.additionalAction);
-	            menuScript.additionalAction();
-	        }else {
-	            console.log("No additional action defined.");
-	        }
-	    }
-		
-		/* 해당 메뉴에 따른 스크립트 실행 */
 		/* 
-		if (menuId === 'googleSheetWeb') {				// 병실 현황 Total VIEW
-			showGoogleSheetWebView();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetSubMenu1'){		// 재원 현황 목표
-			showGoogleSheetSubMenu1();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetSubMenu2'){		// 최근 7일간 입원 환자 수 
-			showGoogleSheetSubMenu2();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetSubMenu3'){		// 병동 & 의료진 별 재원현황
-			showGoogleSheetSubMenu3();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetSubMenu4'){		// 보험유형 & 재원일수기준 재원현황
-			showGoogleSheetSubMenu4();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetSubMenu5'){		// 연령 및 남여성비 현황
-			showGoogleSheetSubMenu5();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetimg4'){
-			showGoogleSheetimg4();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetweb2'){
-			googleSheetweb2();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetweb3'){
-			googleSheetweb3();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetweb4'){
-			googleSheetweb4();
-			onMenuNavigation();
-		}else if(menuId === 'googleSheetweb5'){
-			googleSheetweb5();
-			onMenuNavigation();
-		}else if(menuId === 'harsMain1'){
-			harsMain1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub2_1'){
-			harsSub2_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub2_2'){
-			harsSub2_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub3_1'){
-			harsSub3_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub3_2'){
-			harsSub3_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub4_1'){
-			harsSub4_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub4_2'){
-			harsSub4_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub5_1'){
-			harsSub5_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub5_2'){
-			harsSub5_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub5_3'){
-			harsSub5_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub5_4'){
-			harsSub5_4();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub6_1'){
-			harsSub6_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub6_2'){
-			harsSub6_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub6_3'){
-			harsSub6_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub6_4'){
-			harsSub6_4();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub6_5'){
-			harsSub6_5();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub6_6'){
-			harsSub6_6();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub7_1'){
-			harsSub7_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub7_2'){
-			harsSub7_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub7_3'){
-			harsSub7_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub8_1'){
-			harsSub8_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub8_2'){
-			harsSub8_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub8_3'){
-			harsSub8_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub9_1'){
-			harsSub9_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub9_2'){
-			harsSub9_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub9_3'){
-			harsSub9_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub10_1'){
-			harsSub10_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub10_2'){
-			harsSub10_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub10_3'){
-			harsSub10_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub10_4'){
-			harsSub10_4();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub11_1'){
-			harsSub11_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub11_2'){
-			harsSub11_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub12_1'){
-			harsSub12_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub12_2'){
-			harsSub12_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub12_3'){
-			harsSub12_3();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub12_4'){
-			harsSub12_4();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub12_5'){
-			harsSub12_5();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub13_1'){
-			harsSub13_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub14_1'){
-			harsSub14_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub15_1'){
-			harsSub15_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub15_2'){
-			harsSub15_2();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub16_1'){
-			harsSub16_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub17_1'){
-			harsSub17_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub18_1'){
-			harsSub18_1();
-			onMenuNavigation();
-		}else if(menuId === 'harsSub18_2'){
-			harsSub18_2();
-			onLastMenuVisited();
-		}else if(menuId === 'showGoogleSheetaa1'){
-			showGoogleSheetaa1();
-			console.log("asdad");
-			onLastMenuVisited();
-		} */
-	}
-		
-		
-		// 방향키 입력을 모방하는 함수
-		function simulateArrowKey() {
-			if (!isScriptActive) return; // 스크립트가 비활성화되어 있다면 실행하지 않음
-			
-			const event = new Event('keydown'); // 새 키 이벤트 생성
-
-			// 아래쪽 화살키 입력 모방 (포커스를 다음 메뉴 항목으로 이동)
-			event.key = 'ArrowDown';
-			document.dispatchEvent(event);
-			
-
-		  	// 10초 후에 다시 호출 (10000ms = 10초)
-			setTimeout(simulateArrowKey, 5000);
-		  	
-			// 스크립트가 실행될 때마다 비활성 시간 초기화
-			resetInactiveTime();
-		}
-
-		// 사용자가 마지막 메뉴로 이동했을 때 호출하는 함수
-		function onLastMenuVisited() {
-			console.log("onLastMenuVisited : "+onLastMenuVisited);
-		    lastMenuVisited = true;
-		    // 사용자가 마지막 메뉴를 방문한 시간을 기록
-		    lastMenuVisitTime = new Date().getTime();
-
-		    // 일정 주기로 확인하여 페이지를 새로 고침
-		    const timer = setInterval(function () {
-		        if (lastMenuVisited) {
-		            const currentTime = new Date().getTime();
-		            console.log(currentTime);
-		            const elapsedTime = currentTime - lastMenuVisitTime;
-					console.log(elapsedTime);
-		            if (elapsedTime >= 7000) { // 5초 이상 아무 동작이 없으면 새로 고침
-		                clearInterval(timer);
-		                location.reload(); // 페이지 새로 고침
-		            }
+		async function fetchGoogleSheetData() {
+			  try {
+				  const response = await fetch(
+						  'https://script.google.com/macros/s/AKfycbx4rbvC14NkU_IPveSqyLueH3t766VdS8U1H23GdSjC-h6ZPX90gtyHYRwsOcNXl-z0/exec'); // 배포한 스크립트의 URL 입력
+				    
+			    if (response.ok) {
+			      const data = await response.json();
+			      return data;
+			    } else {
+			      throw new Error('Fetch failed with status: ' + response.status);
+			    }
+			  } catch (error) {
+			    console.error('Fetch error:', error);
+			    return null;
+			  }
+			} */
+		/* 	
+		async function fetchGoogleSheetData() {
+			  const response = await fetch('https://script.google.com/macros/s/AKfycbyVqbEkdYL2BmC6QZy0jBcw02A1_AjdHlWQ4r_YEPA_1Pk7kWro5YrX8PS9KVtE5qCsaQ/exec');
+			  const data = await response.json();
+			  return data;
+			} */
+		function fetchGoogleSheetData() {
+			  var sheetId = "1kT6_er2dzrxNNTCnttU1TW5vOGs3nRG51dSXDtdSnL8"; // 수정된 스프레드시트 ID 입력
+			  var sheetName = "재원환자통계VIEW"; // 시트의 이름 입력
+			  var range = "B7:V16"; // 읽어올 데이터의 범위 입력
+			  var sheet = SpreadsheetApp.openById(sheetId).getSheetByName(sheetName);
+			  var dataRange = sheet.getRange(range); // 범위 내의 셀 객체 가져오기
+			  var data = dataRange.getValues(); // 셀 내용을 실제 값으로 가져오기
+			  return data;
+			}
+		function createDataTableView(data) {
+		      let tableHtml = '<table border=1 style="width:100%; height:100%;">';
+		      for (const row of data) {
+		        tableHtml += '<tr>';
+		        for (const cell of row) {
+		          tableHtml += `<td>${cell}</td>`;
 		        }
-		    }, 1000); // 1초마다 확인
-		}
-		// 초기에 함수 호출
-		setTimeout(simulateArrowKey, 5000);
+		        tableHtml += '</tr>';
+		      }
+		      tableHtml += '</table>';
+		      return tableHtml;
+		    }
+		async function showGoogleSheetDataView() {
+		      // 구글 스크립트를 사용하여 데이터를 가져와서 표시
+		      // 구글 스크립트를 활용하여 원하는 데이터만 가져올 수 있습니다.
+		      const data = await fetchGoogleSheetData();
+		      const content = createDataTableView(data);
+		      mainContent.innerHTML = content;
+		    }
+		
+		
+		activateMenu(currentMenuIndex);
 		
 		// 사용자가 메뉴 이동 조작을 할 때 호출하는 함수 (예: 화살표 아래키를 누를 때)
 		function onMenuNavigation() {
 		    lastMenuVisited = false;
 		    
 		}
-
-		// 예시: 사용자가 마지막 메뉴로 이동했을 때 onLastMenuVisited 함수 호출
-//		onLastMenuVisited();
-
-		// 예시: 사용자가 메뉴 이동 조작을 할 때 onMenuNavigation 함수 호출
-//		onMenuNavigation();
-		
-		// 스크립트 일시정지 및 재개를 토글하는 함수
-		function toggleScript() {
-			isScriptActive = !isScriptActive;
-			const playPauseIcon = document.getElementById('playPauseIcon');
+		/* 
+		$(document).ready(function(){
+			$("#").focus()
 			
-			if (isScriptActive) {
-				playPauseIcon.src = '${pageContext.request.contextPath}/resources/icon/stop.png'; // 재생 중 이미지로 변경
-				// 스크립트가 다시 활성화된 경우, 다음 실행 예약
-				if (!lastMenuVisited) {
-		            simulateArrowKey();
-		        }
-			} else {
-				playPauseIcon.src = '${pageContext.request.contextPath}/resources/icon/play.png'; // 일시정지 이미지로 변경
-				// 스크립트가 일시정지된 경우에는 타이머를 중지
-		        if (timer) {
-		            clearInterval(timer);
-		        }
-			}
-			if (!isScriptActive && !lastMenuVisited) {
-		        // 스크립트가 일시정지되었고 마지막 메뉴를 방문하지 않았을 때만 타이머 시작
-		        startRefreshTimer();
-		    }
-			// 버튼 클릭 시 비활성 시간을 초기화
-			resetInactiveTime();
-		    
-
-		}
-		// 버튼 클릭 시 스크립트 일시정지/재개 토글
-		const toggleButton = document.getElementById('toggleButton'); // HTML에서 해당 버튼을 찾아야 함
-		toggleButton.addEventListener('click', toggleScript);
-		
-		// 타이머 시작 함수 
-		function startRefreshTimer() {
-			if (!isScriptActive && lastMenuVisited) { // 스크립트가 활성화되고 마지막 메뉴를 방문하지 않은 경우에만 타이머 시작
-				console.log("타이머 시작")
-			    timer = setInterval(function () {
-			        const currentTime = new Date().getTime();
-			        const elapsedTime = currentTime - lastMenuVisitTime;
-					console.log("elapsedTime : " + elapsedTime);
-			        /* if (elapsedTime >= 5000) { // 5초 이상 아무 동작이 없으면 새로 고침
-			            clearInterval(timer);
-			            location.reload(); // 페이지 새로 고침
-			        } */
-			    }, 1000); // 1초마다 확인
-			}
-		}
-		
-		
-		// 페이지를 새로 고치는 함수
-		function refreshPage() {
-			location.reload(); // 페이지 새로고침
-		}
-		
-		// 페이지의 비활성 시간을 체크하고 페이지 새로 고치기
-		function checkInactiveTime() {
-			
-			resetInactiveTime();	// 추가하면 일시정지 시 1초마다 시간 초기화 (초기화가 되지만 재생상태이면 다음 메뉴로 넘어감)
-			
-			inactiveTime += 1000; // 1초마다 증가 (1000 밀리초)
-			console.log("inactiveTime : "+inactiveTime);
-			// 5초(5000 밀리초) 동안 스크립트가 실행되지 않으면 페이지 새로고침
-			
-			if (inactiveTime >= 5500) {
-				console.log("6초지남");
-				refreshPage();
-			}
-			
-		}
-		
-		// 페이지 로드 시 초기화 및 비활성 시간 체크 타이머 설정
-		window.addEventListener('load', function () {
-			resetInactiveTime(); // 초기화
-			setInterval(checkInactiveTime, 1000); // 1초마다 비활성 시간 체크
 		});
+		 */
 		
-		// 스크립트가 실행될 때마다 비활성 시간 초기화
-		function resetInactiveTime() {
-			if (!lastMenuVisited) {
-		        // 마지막 메뉴를 방문하지 않은 경우에만 초기화
-		        inactiveTime = 0;
-		        console.log("inactiveTime : " + inactiveTime);
-		    }
+		/* 
+		// 방향키 입력을 모방하는 함수
+		function simulateArrowKey() {
+		  const event = new Event('keydown'); // 새 키 이벤트 생성
+
+		  // 아래쪽 화살키 입력 모방 (포커스를 다음 메뉴 항목으로 이동)
+		  event.key = 'ArrowDown';
+		  document.dispatchEvent(event);
+
+		  // 10초 후에 다시 호출 (10000ms = 10초)
+		  setTimeout(simulateArrowKey, 5000);
 		}
+
+		// 초기에 함수 호출
+		setTimeout(simulateArrowKey, 5000);
 		
-		activateMenu(currentMenuIndex);
+		
+		// 일정 시간(5분)이 경과하면 페이지 새로고침하는 함수
+		function refreshPageIfInactive() {
+		  // 스크립트가 실행되지 않는 동안 시간을 측정하기 위한 변수
+		  let inactiveTime = 0;
+
+		  // 페이지가 활성화되었을 때마다 inactiveTime 초기화
+		  document.addEventListener('mousemove', resetInactiveTime);
+		  document.addEventListener('keydown', resetInactiveTime);
+
+		  // 스크립트가 실행되지 않으면 inactiveTime을 증가
+		  const timer = setInterval(function () {
+		    inactiveTime += 1000; // 1초마다 증가 (1000 밀리초)
+
+		    // 5분(300,000 밀리초) 동안 스크립트가 실행되지 않으면 페이지 새로고침
+		    if (inactiveTime >= 275000) {		// 275000 -> 54개의 메뉴바 5초마다 넘겨질 시 페이지 리로드 될 시간
+		      clearInterval(timer); // 타이머 중지
+		      location.reload(); // 페이지 새로고침
+		    }
+		  }, 1000); // 1초마다 실행
+		}
+
+		// 페이지가 활성화되면 inactiveTime을 초기화
+		function resetInactiveTime() {
+		  inactiveTime = 0;
+		}
+
+		// 페이지 로드 시 초기화
+		window.addEventListener('load', refreshPageIfInactive);
+		
+		 */
+		/* 
+		function scrollToSelectedMenu() {
+			  // 선택된 메뉴 항목 가져오기
+			  const selectedMenu = document.querySelector('.nav__link.active');
+				console.log("스크롤");
+			  if (selectedMenu) {
+			    // 선택된 메뉴 항목의 위치 계산
+			    const selectedMenuTop = selectedMenu.getBoundingClientRect().top + window.scrollY;
+				console.log(selectedMenuTop);
+			    // 스크롤 위치 조정
+			    window.scrollTo({
+			      top: selectedMenuTop,
+			      behavior: 'smooth', // 부드러운 스크롤 효과를 적용하려면 'smooth' 사용
+			    });
+			  }
+			} 
+ */
+		// 초기 화면 로딩 시 첫 번째 메뉴를 보여줌
+//		showGoogleSheetDataView();
+		
+		// 기존 여기 실행	
+//		showGoogleSheetWebView();
+		
+//		showGoogleSheetaa1();
+/* 
+		setInterval(function() {
+			showGoogleSheetWebView();
+			showGoogleSheetSubMenu1();
+			showGoogleSheetSubMenu2();
+			showGoogleSheetSubMenu3();
+			showGoogleSheetSubMenu4();
+			showGoogleSheetSubMenu5();
+		}, 3000);
+		 */
+		/* 
+		function executeFunctions() {
+			showGoogleSheetWebView();
+			setTimeout(showGoogleSheetSubMenu1, 1000);
+			setTimeout(showGoogleSheetSubMenu2, 1000);
+			setTimeout(showGoogleSheetSubMenu3, 1000);
+			setTimeout(showGoogleSheetSubMenu4, 1000);
+			setTimeout(showGoogleSheetSubMenu5, 1000);
+			setTimeout(harsMain1, 1000);
+			setTimeout(harsSub2_1, 1000);
+			setTimeout(harsSub2_2, 1000);
+			setTimeout(harsSub3_1, 1000);
+			setTimeout(harsSub3_2, 1000);
+			setTimeout(harsSub4_1, 1000);
+			setTimeout(harsSub4_2, 1000);
+			setTimeout(harsSub5_1, 1000);
+			setTimeout(harsSub5_2, 1000);
+			setTimeout(harsSub5_3, 1000);
+			setTimeout(harsSub5_4, 1000);
+			setTimeout(harsSub6_1, 1000);
+			setTimeout(harsSub6_2, 1000);
+			setTimeout(harsSub6_3, 1000);
+			setTimeout(harsSub6_4, 1000);
+			setTimeout(harsSub6_5, 1000);
+			setTimeout(harsSub6_6, 1000);
+			setTimeout(harsSub7_1, 1000);
+			setTimeout(harsSub7_2, 1000);
+			setTimeout(harsSub7_3, 1000);
+			setTimeout(harsSub8_1, 1000);
+			setTimeout(harsSub8_2, 1000);
+			setTimeout(harsSub8_3, 1000);
+			setTimeout(harsSub9_1, 1000);
+			setTimeout(harsSub9_2, 1000);
+			setTimeout(harsSub9_3, 1000);
+			setTimeout(harsSub10_1, 1000);
+			setTimeout(harsSub10_2, 1000);
+			setTimeout(harsSub10_3, 1000);
+			setTimeout(harsSub10_4, 1000);
+			setTimeout(harsSub11_1, 1000);
+			setTimeout(harsSub11_2, 1000);
+			setTimeout(harsSub12_1, 1000);
+			setTimeout(harsSub12_2, 1000);
+			setTimeout(harsSub12_3, 1000);
+			setTimeout(harsSub12_4, 1000);
+			setTimeout(harsSub12_5, 1000);
+			setTimeout(harsSub13_1, 1000);
+			setTimeout(harsSub14_1, 1000);
+			setTimeout(harsSub15_1, 1000);
+			setTimeout(harsSub15_2, 1000);
+			setTimeout(harsSub16_1, 1000);
+			setTimeout(harsSub17_1, 1000);
+			setTimeout(harsSub18_1, 1000);
+			setTimeout(harsSub18_2, 1000);
+			
+		    // 나머지 함수들도 동일하게 설정
+		}
+
+		setInterval(executeFunctions, 20000); */
+		/*
+		setInterval(function() {
+			harsMain1();
+			harsSub2_1();
+			harsSub2_2();
+			harsSub3_2();
+			harsSub4_1();
+			harsSub4_2();
+			harsSub5_1();
+			harsSub5_2();
+			harsSub5_3();
+			harsSub5_4();
+			harsSub6_1();
+			harsSub6_2();
+			harsSub6_3();
+			harsSub6_4();
+			harsSub6_5();
+			harsSub6_6();
+			harsSub7_1();
+			harsSub7_2();
+			harsSub7_3();
+			harsSub8_1();
+			harsSub8_2();
+			harsSub8_3();
+			harsSub9_1();
+			harsSub9_2();
+			harsSub9_3();
+			harsSub10_1();
+			harsSub10_2();
+			harsSub10_3();
+			harsSub10_4();
+			harsSub11_1();
+			harsSub11_2();
+			harsSub12_1();
+			harsSub12_2();
+			harsSub12_3();
+			harsSub12_4();
+			harsSub12_5();
+			harsSub13_1();
+			harsSub14_1();
+			harsSub15_1();
+			harsSub15_2();
+			harsSub16_1();
+			harsSub17_1();
+			harsSub18_1();
+			harsSub18_2();
+			
+		}, 1000); */
+		
+		
 		
 		
 			

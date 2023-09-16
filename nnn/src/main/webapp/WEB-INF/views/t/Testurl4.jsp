@@ -34,7 +34,7 @@
 
 /* VARIABLES CSS */
 :root {
-    --nav--width: 160px;
+    --nav--width: 200px;
 
     /* Colores */
     --first-color: #035397;
@@ -44,8 +44,8 @@
 
     /* Fuente y tipografia */
     --body-font: 'Poppins', sans-serif;
-    --normal-font-size: 1rem;
-    --small-font-size: .875rem;
+    --normal-font-size: 1.4rem;
+    --small-font-size: 1rem;
 
     /* z index */
     --z-fixed: 100;

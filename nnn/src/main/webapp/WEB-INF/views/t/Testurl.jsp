@@ -34,7 +34,7 @@
 
 /* VARIABLES CSS */
 :root {
-    --nav--width: 145px;
+    --nav--width: 160px;
 
     /* Colores */
     --first-color: #035397;
@@ -140,7 +140,7 @@ a {
 .nav__logo {
     color: var(--white-color);
     font-weight: 600;
-    font-size: 1.8rem;		/* 폰트사이즈 키움 */
+    font-size: 2rem;		/* 폰트사이즈 키움 */
 }
 
 .nav__link {
@@ -177,18 +177,21 @@ a {
 }
 
 .nav__icon {
-    font-size: 1.25rem;
+	font-size: 1.25rem;
 }
 
 .nav_name {
-    font-size: var(--normal-font-size);
+	font-size: var(--normal-font-size);
+	font-weight: 600;
 }
 .nav__name2{
-	font-size: 1.4rem;	
+	font-size: 1.4rem;
+	font-weight: 600;
 }
 .nav_subname {
     font-size: var(--small-font-size);
     color: #A7ABB1;
+    font-weight: 600;
 }
 
 /* Expander menu */
@@ -310,7 +313,7 @@ a {
 					<!-- 구분 ed -->
 					<a href="#" class="nav__link2" style="margin-bottom: 0; grid-template-columns: auto; justify-content: space-evenly;" data-menu="harsMain2">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-						<span class="nav__name2 nav_name">HARS</span>
+						<span class="nav__name2 nav_name" style="font-weight: 600;">HARS</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="harsMain1">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
@@ -723,12 +726,10 @@ a {
 			// 위쪽 방향키를 누르면 이전 메뉴로 이동
 			event.preventDefault();
 			goToPreviousMenu();
-//			navigateMenu('prev');
 		}else if (event.key === 'ArrowDown') {
 			// 아래쪽 방향키를 누르면 다음 메뉴로 이동
 			event.preventDefault();
 			goToNextMenu();
-//			navigateMenu('next');
 		}
 	});
 	
@@ -736,29 +737,111 @@ a {
 	function goToPreviousMenu(){
 		if (currentMenuIndex > 0) {
 			currentMenuIndex--;
-			activateMenu(currentMenuIndex);
-//			scrollToSelectedMenu();
+		} else {
+			currentMenuIndex = menuLinks.length -1;
 		}
+		activateMenu(currentMenuIndex);
 	}
 	
 	/* 다음 메뉴로 이동하는 함수 */
 	function goToNextMenu(){
 		if (currentMenuIndex < menuLinks.length - 1) {
 			currentMenuIndex++;
-			activateMenu(currentMenuIndex);
-//			scrollToSelectedMenu();
+		} else {
+			currentMenuIndex = 0;			
 		}
+		activateMenu(currentMenuIndex);
+		
 	}
-	
+	const menuScripts = [
+	    { id: 'googleSheetWeb', script: showGoogleSheetWebView },
+	    { id: 'googleSheetSubMenu1', script: showGoogleSheetSubMenu1 },
+	    { id: 'googleSheetSubMenu2', script: showGoogleSheetSubMenu2 },
+	    { id: 'googleSheetSubMenu3', script: showGoogleSheetSubMenu3 },
+	    { id: 'googleSheetSubMenu4', script: showGoogleSheetSubMenu4 },
+	    { id: 'googleSheetSubMenu5', script: showGoogleSheetSubMenu5 },
+	    { id: 'googleSheetimg4', script: showGoogleSheetimg4 },
+	    { id: 'googleSheetweb2', script: googleSheetweb2 },
+	    { id: 'googleSheetweb3', script: googleSheetweb3 },
+	    { id: 'googleSheetweb4', script: googleSheetweb4 },
+	    { id: 'googleSheetweb5', script: googleSheetweb5 },
+	    { id: 'harsMain1', script: harsMain1 },
+	    { id: 'harsSub2_1', script: harsSub2_1 },
+	    { id: 'harsSub2_2', script: harsSub2_2 },
+	    { id: 'harsSub3_1', script: harsSub3_1 },
+	    { id: 'harsSub3_2', script: harsSub3_2 },
+	    { id: 'harsSub4_1', script: harsSub4_1 },
+	    { id: 'harsSub4_2', script: harsSub4_2 },
+	    { id: 'harsSub5_1', script: harsSub5_1 },
+	    { id: 'harsSub5_2', script: harsSub5_2 },
+	    { id: 'harsSub5_3', script: harsSub5_3 },
+	    { id: 'harsSub5_4', script: harsSub5_4 },
+	    { id: 'harsSub6_1', script: harsSub6_1 },
+	    { id: 'harsSub6_2', script: harsSub6_2 },
+	    { id: 'harsSub6_3', script: harsSub6_3 },
+	    { id: 'harsSub6_4', script: harsSub6_4 },
+	    { id: 'harsSub6_5', script: harsSub6_5 },
+	    { id: 'harsSub6_6', script: harsSub6_6 },
+	    { id: 'harsSub7_1', script: harsSub7_1 },
+	    { id: 'harsSub7_2', script: harsSub7_2 },
+	    { id: 'harsSub7_3', script: harsSub7_3 },
+	    { id: 'harsSub8_1', script: harsSub8_1 },
+	    { id: 'harsSub8_2', script: harsSub8_2 },
+	    { id: 'harsSub8_3', script: harsSub8_3 },
+	    { id: 'harsSub9_1', script: harsSub9_1 },
+	    { id: 'harsSub9_2', script: harsSub9_2 },
+	    { id: 'harsSub9_3', script: harsSub9_3 },
+	    { id: 'harsSub10_1', script: harsSub10_1 },
+	    { id: 'harsSub10_2', script: harsSub10_2 },
+	    { id: 'harsSub10_3', script: harsSub10_3 },
+	    { id: 'harsSub10_4', script: harsSub10_4 },
+	    { id: 'harsSub11_1', script: harsSub11_1 },
+	    { id: 'harsSub11_2', script: harsSub11_2 },
+	    { id: 'harsSub12_1', script: harsSub12_1 },
+	    { id: 'harsSub12_2', script: harsSub12_2 },
+	    { id: 'harsSub12_3', script: harsSub12_3 },
+	    { id: 'harsSub12_4', script: harsSub12_4 },
+	    { id: 'harsSub12_5', script: harsSub12_5 },
+	    { id: 'harsSub13_1', script: harsSub13_1 },
+	    { id: 'harsSub14_1', script: harsSub14_1 },
+	    { id: 'harsSub15_1', script: harsSub15_1 },
+	    { id: 'harsSub15_2', script: harsSub15_2 },
+	    { id: 'harsSub16_1', script: harsSub16_1 },
+	    { id: 'harsSub17_1', script: harsSub17_1 },
+	    { id: 'harsSub18_1', script: harsSub18_1 },
+	    { id: 'harsSub18_2', script: harsSub18_2},
+	    // 여기에 다른 메뉴와 스크립트 정보를 추가하세요
+	];
 	/* 메뉴 활성화 및 해당 스크립트 실행 함수 */
 	function activateMenu(menuIndex) {
 		menuLinks.forEach(link => link.classList.remove('active'));
 		menuLinks[menuIndex].classList.add('active');
 		menuLinks[menuIndex].focus(); // 선택된 메뉴 항목에 포커스 설정
 		const menuId = menuLinks[menuIndex].getAttribute('data-menu');
-		
+		const menuScript = menuScripts.find(item => item.id === menuId);
+		console.log("console.log(menuScript);" + menuScript);
+		if (menuScript) {
+	        menuScript.script();
+	        onMenuNavigation();
+	        
+	     /* // 추가 작업 함수가 정의되어 있으면 실행
+	        if (menuScript.additionalAction) {
+	        	console.log("Additional action exists:", menuScript.additionalAction);
+	            menuScript.additionalAction();
+	        }else {
+	            console.log("No additional action defined.");
+	        } */
+	    }
+		/* 
+	function activateMenu(menuIndex) {
+		menuLinks.forEach(link => link.classList.remove('active'));
+		menuLinks[menuIndex].classList.add('active');
+		menuLinks[menuIndex].focus(); // 선택된 메뉴 항목에 포커스 설정
+		const menuId = menuLinks[menuIndex].getAttribute('data-menu');
+		 */
 		
 		/* 해당 메뉴에 따른 스크립트 실행 */
+		/* 
 		if (menuId === 'googleSheetWeb') {				// 병실 현황 Total VIEW
 			showGoogleSheetWebView();
 		}else if(menuId === 'googleSheetSubMenu1'){		// 재원 현황 목표
@@ -873,7 +956,7 @@ a {
 			harsSub18_2();
 		}else if(menuId === 'showGoogleSheetaa1'){
 			showGoogleSheetaa1();
-		}
+		} */
 	}
 	/* 방향키로 메뉴 항목 간 포커스 이동 함수 */
 	/* 
@@ -900,32 +983,6 @@ a {
 	        rotate.classList.toggle('rotate')
 	    });
 	}
-	/* 
-	window.addEventListener("load", function(){
-		document.body.addEventListener("keydown", function(){
-			var x;
-			datamenu = document.querySelector("data-menu").ClassName;
-			console.log(datamenu);
-			switch(event.keyCode){
-			case 37:
-				x="좌측 버튼";
-				break;
-			case 38:
-				x="상단 버튼";
-				break;
-			case 39:
-				x="우측 버튼";
-				break;
-			case 40:
-				x="하단 버튼";
-				break;
-				
-			}
-			console.log("입력하신 버튼은 :", x);
-		});
-	}); */
-	</script>
-	<script>
 		const mainContent = document.getElementById('main-content');
 //		const menuLinks = document.querySelectorAll('[data-menu]');
 		
@@ -1949,6 +2006,19 @@ a {
 		
 		
 		activateMenu(currentMenuIndex);
+		
+		// 사용자가 메뉴 이동 조작을 할 때 호출하는 함수 (예: 화살표 아래키를 누를 때)
+		function onMenuNavigation() {
+		    lastMenuVisited = false;
+		    
+		}
+		/* 
+		$(document).ready(function(){
+			$("#").focus()
+			
+		});
+		 */
+		
 		/* 
 		// 방향키 입력을 모방하는 함수
 		function simulateArrowKey() {
