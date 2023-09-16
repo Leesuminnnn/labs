@@ -740,6 +740,18 @@ public class TestController {
 		mv.setViewName("t/Testurl4");
 		return mv;
 	}
+	@RequestMapping(value="CoreHospitalAuto3")		// 사이드바 메뉴 자동 재생 O (사이드바 너비, 폰트 사이즈 up) 시간초 dwon 2초
+	public ModelAndView testurl2_3(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl6");
+		return mv;
+	}
+	@RequestMapping(value="CoreHospitalAuto4")		// 사이드바 메뉴 자동 재생 O (사이드바 너비, 폰트 사이즈 up) 시간초 dwon 3초
+	public ModelAndView testurl2_4(ModelAndView mv) {
+		
+		mv.setViewName("t/Testurl7");
+		return mv;
+	}
 	@RequestMapping(value="CoreHospital2")			// 사이드바 메뉴 자동 재생 X (사이드바 너비, 폰트 사이즈 up)
 	public ModelAndView testurltest(ModelAndView mv) {
 		

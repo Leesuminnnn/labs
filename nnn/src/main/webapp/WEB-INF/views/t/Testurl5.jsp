@@ -50,7 +50,12 @@
     /* z index */
     --z-fixed: 100;
 }
-
+*{		/* 마우스 드래그 시 블럭 씌워지는 css 제거 */
+	-webkit-user-select: none; /* Chrome, Safari, Opera */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE 10+ */
+	user-select: none; /* 표준 문법 */
+}
 /* BASE */
 *, ::before, ::after {
     box-sizing: border-box;
@@ -247,22 +252,28 @@ a {
 
 /* 사이드바 너비 커스텀 css */
 #sidebar {
+	float: left;
 	transition: width 0.3s; /* 너비 변경에 대한 전환 효과 */
+	width : calc(var(--nav--width) + 9.25rem);
+	height : 100%;
 }
 
 #sidebar-handle {
 	width: 10px;
-    height: 100%;
+    height: 100vh;
     background-color: #ccc;
     cursor: col-resize; /* 드래그 커서 스타일 설정 */
-    float: lef
+    position: absolute; /* 절대 위치로 설정 */
+    top: 0; /* 맨 위에 위치 */
+    left: calc(var(--nav--width) + 9.25rem - 10px);
+    z-index: 101;
 }
 
 </style>
 </head>
 <body id="body-pd" class="">
-<div>
-	<div style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px;
+<div id="sidebar">
+	<div id="side-content" style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px;
     transition: .5s; z-index: 101; position: fixed; width: calc(var(--nav--width) + 9.25rem); top: 0; left: 0; height: 80px;">
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
@@ -660,7 +671,7 @@ a {
             </div>
         </nav>
     </div>
-	<div class="nav__link2" style="margin: 0; position: fixed; bottom: 0; width: calc(var(--nav--width) + 9.25rem); background-color: #08254c; z-index: 100;
+	<div id="nav-logo" class="nav__link2" style="margin: 0; position: fixed; bottom: 0; width: calc(var(--nav--width) + 9.25rem); background-color: #08254c; z-index: 100;
 	display: flex; justify-content: space-evenly; left: 0; align-items: center; border-radius: 0;">
 		<div style="display: flex; justify-content: center;">
 			<img style="width: 90%;" src="<%=request.getContextPath() %>/resources/img/core_logo.png">
@@ -1330,29 +1341,61 @@ a {
 		}
 		// 양방진료 - 의료진별 매출(월별)
 		function harsSub3_1(){
-			const iframe = document.createElement('img');
-			iframe.src = '<%=request.getContextPath() %>/resources/img/HARS_img/0006.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			const iframe = document.createElement('div');
+			iframe.style.backgroundImage = `url('<%=request.getContextPath() %>/resources/img/HARS_img/0006.jpg')`; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			iframe.style.backgroundSize = 'contain'; // 배경 이미지 크기 조절 (원하는대로 조절 가능)
+			iframe.style.backgroundRepeat = 'no-repeat'; // 배경 이미지 반복 방지
+			iframe.style.backgroundPosition = 'center'; // 배경 이미지 중앙 정렬
 			const div = document.createElement('div');
+			const div2 = document.createElement('div');
+			// div2 -> 블러처리
+			div2.style.width = '87%';
+			div2.style.height = '38%';
+			div2.style.backdropFilter = 'blur(5px)';
+			div2.style.position = 'absolute';
+			div2.style.top = '39%';
+			div2.style.left = '55%';
+			div2.style.transform = "translate(-50%, -50%)";
 			iframe.style.height = 'calc(100vh - 50px)';
+			iframe.style.width = '65vw';
 			iframe.allowfullscreen = true;
+			iframe.style.position = 'relative';
 			div.style.display = "flex"
 			div.style.justifyContent = "center";
 			mainContent.innerHTML = ''; // 기존 내용을 지우고
 			mainContent.appendChild(div);
-			div.appendChild(iframe); // 웹 뷰를 추가합니다.
+			div.appendChild(iframe);
+			iframe.appendChild(div2); // 웹 뷰를 추가합니다.
 		}
 		// 양방진료 - 병동별 매출(월별)
 		function harsSub3_2(){
-			const iframe = document.createElement('img');
-			iframe.src = '<%=request.getContextPath() %>/resources/img/HARS_img/0007.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+		//	const iframe = document.createElement('img');
+		const iframe = document.createElement('div');
+		
+		iframe.style.backgroundImage = `url('<%=request.getContextPath() %>/resources/img/HARS_img/0007.jpg')`;
+		iframe.style.backgroundSize = 'contain'; // 배경 이미지 크기 조절 (원하는대로 조절 가능)
+		iframe.style.backgroundRepeat = 'no-repeat'; // 배경 이미지 반복 방지
+		iframe.style.backgroundPosition = 'center'; // 배경 이미지 중앙 정렬
 			const div = document.createElement('div');
+			const div2 = document.createElement('div');
+			// div2 -> 블러처리
+			div2.style.width = '87%';
+			div2.style.height = '25%';
+			div2.style.backdropFilter = 'blur(5px)';
+			div2.style.position = 'absolute';
+			div2.style.top = '32%';
+			div2.style.left = '53%';
+			div2.style.transform = "translate(-50%, -50%)";
 			iframe.style.height = 'calc(100vh - 50px)';
+			iframe.style.width = '65vw';
 			iframe.allowfullscreen = true;
+			iframe.style.position = 'relative';
 			div.style.display = "flex"
 			div.style.justifyContent = "center";
 			mainContent.innerHTML = ''; // 기존 내용을 지우고
 			mainContent.appendChild(div);
-			div.appendChild(iframe); // 웹 뷰를 추가합니다.
+			div.appendChild(iframe);
+			iframe.appendChild(div2); // 웹 뷰를 추가합니다.
 		}
 		// 일당진료비 - 병동별 일당진료비(월별)
 		function harsSub4_1(){
@@ -2024,11 +2067,86 @@ a {
 		
 		activateMenu(currentMenuIndex);
 		
+		
 		// 사용자가 메뉴 이동 조작을 할 때 호출하는 함수 (예: 화살표 아래키를 누를 때)
 		function onMenuNavigation() {
 		    lastMenuVisited = false;
 		    
 		}
+		
+		
+		
+		// 너비 커스텀
+		
+		const sidebar = document.getElementById('sidebar');
+		const sidebarHandle = document.getElementById('sidebar-handle');
+		const content = document.getElementById('side-content'); // 내용 영역 요소 추가
+		const content2 = document.getElementById('navbar'); // 내용 영역 요소 추가
+		const content3 = document.getElementById('nav-logo'); // 내용 영역 요소 추가
+		let isResizing = false;
+		let initialX;
+		let sidebarWidth;
+		let contentWidth;
+		let content2Width;
+		let content3Width;
+
+		// 초기 너비 값을 각각의 변수에 저장
+		sidebarWidth = sidebar.offsetWidth;
+		contentWidth = content.offsetWidth;
+		content2Width = content2.offsetWidth;
+		content3Width = content3.offsetWidth;
+		
+		
+		sidebarHandle.addEventListener('mousedown', (e) => {
+		    isResizing = true;
+		    initialX = e.clientX;
+		    /* 
+		    sidebarWidth = sidebar.offsetWidth;
+		    contentWidth = content.offsetWidth;
+		    content2Width = content.offsetWidth;
+		    content3Width = content.offsetWidth;
+		    sidebarWidth = sidebar.offsetWidth;
+ */
+		    document.addEventListener('mousemove', resizeSidebar);
+		    document.addEventListener('mouseup', stopResizing);
+		});
+
+		function resizeSidebar(e) {
+		    if (!isResizing) return;
+
+		    const newX = e.clientX;
+		    const deltaX = newX - initialX;
+		    const newWidth = sidebarWidth + deltaX;
+		    
+
+		    // Limit minimum and maximum width if desired
+		    // const minWidth = 200;
+		    // const maxWidth = 400;
+
+		    // if (newWidth >= minWidth && newWidth <= maxWidth) {
+		    sidebar.style.width = newWidth + 'px';
+		    
+		    // Update the handle's position based on the sidebar's width
+		    const handleLeft = newWidth + sidebar.offsetLeft - sidebarHandle.offsetWidth;
+		    sidebarHandle.style.left = handleLeft + 'px';
+			    
+			 // Calculate the new content widths
+		    const newContentWidth = contentWidth - deltaX; // 내용 영역 너비 변경
+		    const newContent2Width = content2Width - deltaX; // 내용 영역 너비 변경
+		    const newContent3Width = content3Width - deltaX; // 내용 영역 너비 변경
+		    
+			// Update content widths
+		    content.style.width = newContentWidth + 'px';
+		    content2.style.width = newContent2Width + 'px';
+		    content3.style.width = newContent3Width + 'px';
+		    // }
+		}
+
+		function stopResizing() {
+		    isResizing = false;
+		    document.removeEventListener('mousemove', resizeSidebar);
+		}
+		
 		/* 
 		$(document).ready(function(){
 			$("#").focus()
