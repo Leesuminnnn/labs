@@ -1863,7 +1863,7 @@ a {
 			
 
 		  	// 10초 후에 다시 호출 (10000ms = 10초)
-			setTimeout(simulateArrowKey, 5000);
+			setTimeout(simulateArrowKey, 2000);
 		  	
 			// 스크립트가 실행될 때마다 비활성 시간 초기화
 			resetInactiveTime();
