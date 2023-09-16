@@ -951,29 +951,61 @@ a {
 		}
 		// 양방진료 - 의료진별 매출(월별)
 		function harsSub3_1(){
-			const iframe = document.createElement('img');
-			iframe.src = '<%=request.getContextPath() %>/resources/img/HARS_img/0006.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			const iframe = document.createElement('div');
+			iframe.style.backgroundImage = `url('<%=request.getContextPath() %>/resources/img/HARS_img/0006.jpg')`; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+			iframe.style.backgroundSize = 'contain'; // 배경 이미지 크기 조절 (원하는대로 조절 가능)
+			iframe.style.backgroundRepeat = 'no-repeat'; // 배경 이미지 반복 방지
+			iframe.style.backgroundPosition = 'center'; // 배경 이미지 중앙 정렬
 			const div = document.createElement('div');
+			const div2 = document.createElement('div');
+			// div2 -> 블러처리
+			div2.style.width = '87%';
+			div2.style.height = '38%';
+			div2.style.backdropFilter = 'blur(5px)';
+			div2.style.position = 'absolute';
+			div2.style.top = '39%';
+			div2.style.left = '55%';
+			div2.style.transform = "translate(-50%, -50%)";
 			iframe.style.height = 'calc(100vh - 50px)';
+			iframe.style.width = '65vw';
 			iframe.allowfullscreen = true;
+			iframe.style.position = 'relative';
 			div.style.display = "flex"
 			div.style.justifyContent = "center";
 			mainContent.innerHTML = ''; // 기존 내용을 지우고
 			mainContent.appendChild(div);
-			div.appendChild(iframe); // 웹 뷰를 추가합니다.
+			div.appendChild(iframe);
+			iframe.appendChild(div2); // 웹 뷰를 추가합니다.
 		}
 		// 양방진료 - 병동별 매출(월별)
 		function harsSub3_2(){
-			const iframe = document.createElement('img');
-			iframe.src = '<%=request.getContextPath() %>/resources/img/HARS_img/0007.jpg'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요
+		//	const iframe = document.createElement('img');
+		const iframe = document.createElement('div');
+		
+		iframe.style.backgroundImage = `url('<%=request.getContextPath() %>/resources/img/HARS_img/0007.jpg')`;
+		iframe.style.backgroundSize = 'contain'; // 배경 이미지 크기 조절 (원하는대로 조절 가능)
+		iframe.style.backgroundRepeat = 'no-repeat'; // 배경 이미지 반복 방지
+		iframe.style.backgroundPosition = 'center'; // 배경 이미지 중앙 정렬
 			const div = document.createElement('div');
+			const div2 = document.createElement('div');
+			// div2 -> 블러처리
+			div2.style.width = '87%';
+			div2.style.height = '25%';
+			div2.style.backdropFilter = 'blur(5px)';
+			div2.style.position = 'absolute';
+			div2.style.top = '32%';
+			div2.style.left = '53%';
+			div2.style.transform = "translate(-50%, -50%)";
 			iframe.style.height = 'calc(100vh - 50px)';
+			iframe.style.width = '65vw';
 			iframe.allowfullscreen = true;
+			iframe.style.position = 'relative';
 			div.style.display = "flex"
 			div.style.justifyContent = "center";
 			mainContent.innerHTML = ''; // 기존 내용을 지우고
 			mainContent.appendChild(div);
-			div.appendChild(iframe); // 웹 뷰를 추가합니다.
+			div.appendChild(iframe);
+			iframe.appendChild(div2); // 웹 뷰를 추가합니다.
 		}
 		// 일당진료비 - 병동별 일당진료비(월별)
 		function harsSub4_1(){
