@@ -148,7 +148,7 @@
 	
 	
 	scanButton.addEventListener('click', () => {
-		navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+		navigator.mediaDevices.getUserMedia({ video:  { facingMode: { exact: "environment" } }, audio: true } ).then((stream) => {
 			const video = document.createElement('video');
 			const img = document.createElement('img');
 			video.srcObject = stream;
@@ -232,6 +232,7 @@
 				}
 			}).catch((err) => {
 			console.error(err);
+			alert(err);
 			// video 요소를 삭제합니다.
 			video.pause();
 			video.srcObject = null;
@@ -252,6 +253,7 @@
 			});
 		}).catch((err) => {
 		console.error(err);
+		alert(err);
 		});
 	});
 </script>

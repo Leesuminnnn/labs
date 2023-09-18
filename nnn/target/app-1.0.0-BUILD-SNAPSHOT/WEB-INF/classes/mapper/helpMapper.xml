@@ -2,25 +2,273 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace = "help">
+ 
+ 
+ 
+ 
+	
+	<select id="listselect" parameterType="String" resultType="int">
+		SELECT count(*), hidx, DATE_FORMAT(h_startTime, '%Y-%m-%d %H:%i:%s') as h_startTime, DATE_FORMAT(h_regdate, '%Y-%m-%d %H:%i:%s') as h_regdate, 
+		DATE_FORMAT(h_endTime, '%Y-%m-%d %H:%i:%s') as h_endTime, h_delyn, h_userId, h_userName, h_name, h_no, h_number, h_img, h_imgName, h_comm, midx
+		FROM csworktools.help where midx = #{midx}
+			<choose>
+				<when test="duration == 1">
+				and h_startTime BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()
+				</when>
+				<when test="duration == 3">
+				and h_startTime BETWEEN DATE_SUB(NOW(), INTERVAL 3 MONTH) AND NOW()
+				</when>
+				<when test="duration == 6">
+				and h_startTime BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+				</when>
+				<when test="duration == 7">
+				and YEARWEEK(h_regdate) = YEARWEEK(NOW())
+				</when>
+				<when test="duration == 30">
+				and Month(h_regdate)=Month(NOW())
+				</when>
+				<when test="duration == 365">
+				and YEAR(h_regdate) = YEAR(NOW())
+				</when>
+				<otherwise>
+				and DATE(h_regdate) BETWEEN #{startDate} AND #{endDate}
+				</otherwise>
+			</choose>
+			order by h_regdate desc limit 1
+	
+	</select>
 	<select id="list" resultType="helpVo">
-		
-		select * from help where h_delyn='N' order by hidx desc
-		
-		
+		SELECT hidx, DATE_FORMAT(h_startTime, '%Y-%m-%d %H:%i:%s') as h_startTime, DATE_FORMAT(h_regdate, '%Y-%m-%d %H:%i:%s') as h_regdate, 
+		DATE_FORMAT(h_endTime, '%Y-%m-%d %H:%i:%s') as h_endTime, h_delyn, h_userId, h_userName, h_name, h_no, h_number, h_img, h_imgName, h_comm, midx
+		FROM csworktools.help where midx = #{midx}
+			<choose>
+				<when test="duration == 1">
+				and h_startTime BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()
+				</when>
+				<when test="duration == 3">
+				and h_startTime BETWEEN DATE_SUB(NOW(), INTERVAL 3 MONTH) AND NOW()
+				</when>
+				<when test="duration == 6">
+				and h_startTime BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+				</when>
+				<when test="duration == 7">
+				and YEARWEEK(h_regdate) = YEARWEEK(NOW())
+				</when>
+				<when test="duration == 30">
+				and Month(h_regdate)=Month(NOW())
+				</when>
+				<when test="duration == 365">
+				and YEAR(h_regdate) = YEAR(NOW())
+				</when>
+				<otherwise>
+				and DATE(h_regdate) BETWEEN #{startDate} AND #{endDate}
+				</otherwise>
+			</choose>
+			order by h_regdate desc
 	</select>
 	
+	<select id="listAll" resultType="helpVo">
+		select hidx, DATE_FORMAT(h_startTime, '%Y-%m-%d %H:%i:%s') as h_startTime, DATE_FORMAT(h_regdate, '%Y-%m-%d %H:%i:%s') as h_regdate, mainpickItem,
+		DATE_FORMAT(h_endTime, '%Y-%m-%d %H:%i:%s') as h_endTime, h_delyn, h_userId, h_userName, h_name, h_no, h_number, h_img, h_imgName, h_comm, midx
+		from csworktools.help order by h_regdate desc 
+	</select>
+	
+	
+ <!-- 
+	<select id="list" resultType="helpVo">
+		SELECT * FROM help a 
+		INNER JOIN 
+		member b 
+		ON a.h_userId = b.m_id WHERE b.midx = #{midx} AND a.h_startTime BETWEEN DATE(#{startDate}) AND DATE(#{endDate})+1 order by h_regdate DESC
+	</select>
+	 -->
+	<select id="listInsert" resultType="helpVo">
+	<!-- 
+		SELECT h.h_endTime FROM csworktools.help h JOIN csworktools.member m ON h.h_userId = m.m_id WHERE m.midx = #{midx} ORDER BY h_regdate DESC LIMIT 1;
+		 -->
+		 SELECT h.h_endTime FROM csworktools.help h JOIN csworktools.customer m ON h.h_userId = m.m_id WHERE m.midx = #{midx} ORDER BY h_regdate DESC LIMIT 1;
+	</select>
+	<select id="search" resultType="map">
+	<!-- 
+		SELECT * FROM csworktools.help a 
+		INNER JOIN 
+		csworktools.member b 
+		ON a.h_userId = b.m_id WHERE b.midx = #{midx} AND a.h_startTime BETWEEN DATE(#{startDate}) AND DATE(#{endDate})+1 order by h_regdate DESC
+		 -->
+		 
+		SELECT * FROM csworktools.help a 
+		INNER JOIN 
+		csworktools.customer b 
+		ON a.h_userId = b.m_id WHERE b.midx = #{midx} AND a.h_startTime BETWEEN DATE(#{startDate}) AND DATE(#{endDate})+1 order by h_regdate DESC
+		
+	</select>
+	<!-- 금주 누적 데이터 가져오기 -->
+	<select id="weekCount" resultType="int">
+		SELECT COUNT(*) FROM csworktools.help WHERE midx = #{midx} AND YEARWEEK(h_regdate) = YEARWEEK(NOW())
+	</select>
+	
+	<!-- 금월 누적 데이터 가져오기 -->
+	<select id="monthCount" resultType="int">
+		SELECT COUNT(*) FROM csworktools.help WHERE midx = #{midx} AND Month(h_regdate)=Month(NOW())
+	</select>
+	
+	<!-- 연간 누적 데이터 가져오기 -->
+	<select id="yearCount" resultType="int">
+		SELECT COUNT(*) FROM csworktools.help WHERE midx = #{midx} AND YEAR(h_regdate) = YEAR(NOW())
+	</select>
+	
+	<!-- 최근 수행 일자 가져오기 -->
+	<select id="lastDate" resultType="Date">
+		SELECT h_regdate FROM csworktools.help WHERE midx = #{midx} ORDER BY h_regdate DESC LIMIT 1
+	</select>
+	
+	<!-- 글쓰기 전 유효성 -->
+	<!-- 1차 : 해당 침상 유효성 -->
+	<select id="selectHelp" resultType="int">
+		SELECT count(*) FROM csworktools.help WHERE h_name = #{h_name} AND h_no = #{h_no} AND h_number = #{h_number} 
+		AND DATE_FORMAT(h_startTime, '%Y-%m-%d') = #{date}
+		<choose>
+			<when test = "h_dayTime == B">
+			and h_dayTime = 'B'
+			</when>
+			<when test = "h_dayTime == L">
+			and h_dayTime = 'L'
+			</when>
+			<when test = "h_dayTime == D">
+			and h_dayTime = 'D'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 글쓰기 전 유효성 -->
+	<!-- 2차 : 회원이 해당 시간 대에 했는지 유효성 -->
+	<select id="selectHelp2" resultType="int">
+		SELECT COUNT(*) FROM csworktools.help WHERE	h_userId = #{h_userId} AND DATE_FORMAT(h_startTime, '%Y-%m-%d') = #{date}
+		<choose>
+			<when test = "h_dayTime == B">
+			and h_dayTime = 'B'
+			</when>
+			<when test = "h_dayTime == L">
+			and h_dayTime = 'L'
+			</when>
+			<when test = "h_dayTime == D">
+			and h_dayTime = 'D'
+			</when>
+		</choose>
+	</select>
 	<!-- 동적 SQL문으로 처리: choose-when-otherwise 구문 -->
+	<!-- 글쓰기 -->
 	<insert id="addHelp" parameterType="helpVo">
 		<![CDATA[
-		insert into help(
-						h_userId, h_userName, h_name, h_no, h_number, h_img)
-					values(#{member_id}, #{member_name}, #{h_name}, #{h_no}, #{h_number}, #{h_img})	
+		insert into csworktools.help(
+			h_userId, h_userName, h_name, h_no, h_number, h_img, midx, h_dayTime)
+			values(#{h_userId}, #{h_userName}, #{h_name}, #{h_no}, #{h_number}, #{h_img}, #{midx}, #{h_dayTime})	
 		]]>	
 	
-	
 	</insert>
+	<select id="selectend" resultType="int">
+		SELECT count(h_endTime) FROM csworktools.help WHERE 
+		<choose>
+			<when test = "h_dayTime == B">
+			h_dayTime = 'B' AND 
+			</when>
+			<when test = "h_dayTime == L">
+			h_dayTime = 'L' AND 
+			</when>
+			<when test = "h_dayTime == D">
+			h_dayTime = 'D' AND 
+			</when>
+		</choose>
+		h_name = #{h_name} and h_no = #{h_no} and h_number = #{h_number}
+		and h_userName = #{h_userName} AND DATE_FORMAT(h_startTime, '%Y-%m-%d') = #{date}
+	</select>
+	
+	<select id="selectend2" resultType="int">
+		SELECT COUNT(*) FROM csworktools.help WHERE 
+		<choose>
+			<when test = "h_dayTime == B">
+			h_dayTime = 'B' AND 
+			</when>
+			<when test = "h_dayTime == L">
+			h_dayTime = 'L' AND 
+			</when> 
+			<when test = "h_dayTime == D">
+			h_dayTime = 'D' AND 
+			</when>
+		</choose>
+		h_name = #{h_name} and h_no = #{h_no} and h_number = #{h_number}
+		AND DATE_FORMAT(h_startTime, '%Y-%m-%d') = #{date};
 
-
+	</select>
+	
+	<update id="endHelp" parameterType="map">
+		update csworktools.help set h_endTime = now(), mainpickItem = #{mainpickItem},
+		<choose>
+			<when test = "h_comm == ''">
+			h_comm = '특이사항없음'
+			</when>
+			<otherwise>
+			h_comm = #{h_comm}
+			</otherwise>
+		</choose>
+		where h_name = #{h_name} and h_no =#{h_no} and h_number = #{h_number} 
+		and h_userId = #{h_userId} and h_userName = #{h_userName} 
+		and DATE_FORMAT(h_regdate, '%Y-%m-%d') = #{date}
+		<choose>
+			<when test = "h_dayTime == B">
+			h_dayTime = 'B'
+			</when>
+			<when test = "h_dayTime == L">
+			h_dayTime = 'L'
+			</when>
+			<when test = "h_dayTime == D">
+			h_dayTime = 'D'
+			</when>
+		</choose>
+		ORDER BY h_regdate desc limit 1
+	</update>
+	
+	<select id="recentlist" resultType="map">
+	<!-- 
+	SELECT DATE_FORMAT(h_startTime, '%Y.%m.%d %H:%i') AS datetime
+		FROM csworktools.help a inner join csworktools.member b ON a.h_userId = b.m_id WHERE b.midx = #{midx}
+		UNION all
+		SELECT DATE_FORMAT(h_endTime, '%Y.%m.%d %H:%i') AS datetime
+		FROM csworktools.help a inner join csworktools.member b ON a.h_userId = b.m_id WHERE b.midx = #{midx}
+		ORDER BY datetime DESC LIMIT 2
+ -->
+ 
+	SELECT DATE_FORMAT(h_startTime, '%Y.%m.%d %H:%i') AS datetime
+		FROM csworktools.help a inner join csworktools.customer b ON a.h_userId = b.m_id WHERE b.midx = #{midx}
+		UNION all
+		SELECT DATE_FORMAT(h_endTime, '%Y.%m.%d %H:%i') AS datetime
+		FROM csworktools.help a inner join csworktools.customer b ON a.h_userId = b.m_id WHERE b.midx = #{midx}
+		ORDER BY datetime DESC LIMIT 2
+ 
+	</select>
+	
+	<select id="startlist" resultType="map">
+	<!-- 
+	select date_format(h_startTime, '%Y.%m.%d %H:%i') as h_startTime from csworktools.help a 
+	inner join csworktools.member b ON a.h_userId = b.m_id WHERE b.midx = #{midx} order by h_startTime desc limit 1
+	 -->
+	 
+	select date_format(h_startTime, '%Y.%m.%d %H:%i') as h_startTime from csworktools.help a 
+	inner join csworktools.customer b ON a.midx = b.midx WHERE b.midx = #{midx} order by h_startTime desc limit 1
+	
+	</select>
+	
+	<select id="endlist" resultType="map">
+	<!-- 
+	select date_format(h_endTime, '%Y.%m.%d %H:%i') as h_endTime from csworktools.help a 
+	inner join csworktools.member b ON a.midx = b.midx WHERE b.midx = #{midx} order by h_endTime desc limit 1
+	 -->
+	 
+	select date_format(h_endTime, '%Y.%m.%d %H:%i') as h_endTime from csworktools.help a 
+	inner join csworktools.customer b ON a.midx = b.midx WHERE b.midx = #{midx} order by h_endTime desc limit 1
+	
+	</select>
 
 </mapper>

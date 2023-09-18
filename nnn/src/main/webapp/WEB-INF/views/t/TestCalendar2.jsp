@@ -360,7 +360,16 @@ System.out.println("jsp :: "+sessionId);
   </div>
 
 </body>
+<script type="module">
+
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
+
+</script>
 <script>
+
+
 var calendarData = <%= calendarListJson %>;
   var ceoColor = '#ffc107'; //대표일정 황색
   var regColor = '#343a40';	//일반직원등록 흑색
@@ -435,7 +444,11 @@ var calendarData = <%= calendarListJson %>;
     var calendarEl = document.getElementById('calendar');
     
     calendar = new FullCalendar.Calendar(calendarEl, {
-	
+		plugins: [
+			
+    	    dayGridPlugin,
+    	    listPlugin
+    	  ],
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -469,7 +482,7 @@ var calendarData = <%= calendarListJson %>;
 		  insertModalOpen(arg);		//이벤트 사이즈 변경시(일정변경) 모달 호출
 	  },	
       editable: true,
-      dayMaxEvents: true, // allow "more" link when too many events
+      dayMaxEvents: true, // allow "more" link when too many events 
       events: [
 			//================ ajax데이터 불러올 부분 =====================//
 		  
