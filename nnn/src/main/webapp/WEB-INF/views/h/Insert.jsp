@@ -148,7 +148,7 @@
 	
 	
 	scanButton.addEventListener('click', () => {
-		navigator.mediaDevices.getUserMedia({ video:  { facingMode: { exact: "environment" } }, audio: true } ).then((stream) => {
+		navigator.mediaDevices.getUserMedia({ video:  { facingMode: { exact: "environment" } }} ).then((stream) => {
 			const video = document.createElement('video');
 			const img = document.createElement('img');
 			video.srcObject = stream;

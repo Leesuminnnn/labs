@@ -61,10 +61,11 @@
 			<div>
 				<div class="light content-text1">안녕하세요.</div>
 				<div class="normal content-text2">
-				<b class="bold content-text3">
-				${m_name}
-				<c:set var="midx" value="${detail.midx }"/>
-				</b>님[${m_no }]</div>
+					<b class="bold content-text3">
+					${m_name}
+					<c:set var="midx" value="${detail.midx }"/>
+					</b>님[${m_no }]
+				</div>
 			</div>
 		</div>
 		<div class="second-content" onclick="location.href='${pageContext.request.contextPath}/m/Point.do/${detail.midx}/1/${start}/${end}/selectOption1'">
@@ -212,8 +213,10 @@
 			
 		</form>
 		<!-- 광고 베너 -->
+		<%-- 
 		<div class="ad">
 			<div class="grayline"></div>
+			
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/img/ad1.png"></div>
@@ -221,7 +224,9 @@
 				</div>
 				<div class="page normal swiper-pagination"></div>
 			</div>
+			
 		</div>
+		 --%>
 	</div>
 </section>
 <%@ include file="../Include/Footer.jsp" %>
