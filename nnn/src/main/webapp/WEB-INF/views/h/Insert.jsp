@@ -272,12 +272,16 @@
 						<div class="textarea">
 							<textarea name="h_comm" id="h_comm"></textarea>
 						</div>
-						<div class="modal_insert" id="modal_insert" onclick="end()">
+						<!-- <div class="modal_insert" id="modal_insert" onclick="end()">
+						등록
+						</div> -->
+						<div class="modal_insert" id="modal_insert" onclick="closePopupAndRedirect()">
 						등록
 						</div>
 					</div>
 				</div>
 			</div>
+			<%-- 
 			<div class="modal2 normal">
 				<div class="modal_body2">
 					<div>
@@ -291,6 +295,7 @@
 					</div>
 				</div>
 			</div>
+			 --%>
 			<div class="enter"></div>
 			
 			<div class="imglist flex flex-center" id="recent">

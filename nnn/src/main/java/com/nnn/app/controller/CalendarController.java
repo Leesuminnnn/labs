@@ -164,18 +164,18 @@ public class CalendarController {
 		
 	}
 	
-	@RequestMapping(value = "delete")
-	public String delete(@RequestBody List<Map<String, Object>> param, HttpServletRequest request) throws Exception {
-		for (Map<String, Object> list : param) {
-			String eventName = (String) list.get("title"); // 이름 받아오기
-			System.out.println(eventName);
+	@RequestMapping(value = "delete", consumes = "application/json")
+	public String delete(@RequestBody List<Map<String, Object>> data, HttpServletRequest request) throws Exception {
+		for (Map<String, Object> list : data) {
+			request.setCharacterEncoding("UTF-8");
+			System.out.println("delete  - ajax");
+//			
 			String id = (String) list.get("id");
 			String writer = (String) list.get("writer");	// DB에 담겨있는 작성자
 			System.out.println("writer : "+writer);
 			String user = (String) list.get("user");		// 현재 로그인한 사용자
 			System.out.println("user : "+user);
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("title", eventName);
 			try{
 	            int number = Integer.parseInt(id);
 	            System.out.println(number);

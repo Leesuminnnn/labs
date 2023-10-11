@@ -18,7 +18,7 @@ String sessionId = (String)(session.getAttribute("userId"));
 String sessionNm = (String)(session.getAttribute("name"));
 
 System.out.println("jsp :: "+sessionId);
-
+System.out.println("jsp :: "+sessionNm);
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,11 +29,18 @@ System.out.println("jsp :: "+sessionId);
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script><!-- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+<script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><!-- 
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.4.2/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.4.2/main.min.js"></script> -->
+<!-- 
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+<script src="https://unpkg.com/tippy.js@6"></script> -->
+
 <style>
   body {
     margin: 40px 10px;
@@ -360,13 +367,8 @@ System.out.println("jsp :: "+sessionId);
   </div>
 
 </body>
-<script type="module">
 
-import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import listPlugin from '@fullcalendar/list';
 
-</script>
 <script>
 
 
@@ -444,11 +446,7 @@ var calendarData = <%= calendarListJson %>;
     var calendarEl = document.getElementById('calendar');
     
     calendar = new FullCalendar.Calendar(calendarEl, {
-		plugins: [
-			
-    	    dayGridPlugin,
-    	    listPlugin
-    	  ],
+		
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -701,7 +699,9 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 //  console.log("ㅇㅇㅇ"+prepare);
   //일정등록창 모달
   function insertModalOpen(arg){
-	
+	 
+	console.log('<%=sessionId%>');
+	console.log('<%=sessionNm%>');
     if('<%=sessionId%>' == null){
 		alert();
 		location.href='login.jsp';
@@ -727,7 +727,7 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 		//사용자 계정이 대표 계정이면
 		if('<%=sessionId%>' == ceo){
 			//해당 이벤트가 대표가 등록한 일정이면
-			if('<%=sessionId%>' == g_arg.event.extendedProps.regid){
+			if('<%=sessionNm%>' == g_arg.event.extendedProps.writer){
 				//대표일정은 승인/반려 버튼 숨김
 				$('.insertModal .approvalBtn').css('display', 'none');
 				$('.insertModal .rejectBtn').css('display', 'none');
@@ -749,9 +749,9 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 		//일반 임직원 계정이면
 		}else{
 			//해당 이벤트가 로그인계정이 등록한 이벤트면
-			if('<%=sessionId%>' == g_arg.event.extendedProps.regid){
+			if('<%=sessionNm%>' == g_arg.event.extendedProps.writer){
 				$('.insertModal .deleteBtn').css('display', 'inline');
-				$('.insertModal .insertBtn').css('display', 'inline');
+				$('.insertModal .insertBtn').css('display', 'none');
 			//남의 이벤트면
 			}else{
 				$('.insertModal .deleteBtn').css('display', 'none');
@@ -779,19 +779,26 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 	//모달창 show
 	$('.insertModal').modal({backdrop: 'static'});
 	console.log("모달창 오픈");
-	console.log(arg);
+	console.log(arg.event);
 	$('.insertModal #title').focus();
   }
   //일정삭제
   function deleteSch(modal, arg){
 	if(confirm('일정을 삭제하시겠습니까?')){
-		var data = {"gubun": "delete", "id" : arg.event.id, "allowyn": "0"};
+		data = [{
+			"gubun": "delete",
+			"id" : arg.event._def.publicId,
+			"allowyn": "0",
+			"writer" : arg.event._def.extendedProps.writer,
+			"user" : "<%=sessionNm%>"
+			}];
 		//DB 삭제
 		$.ajax({
-		  url: "./deleteSch.jsp",
+		  url: "${pageContext.request.contextPath}/a/delete",
 		  type: "POST",
 		  data: JSON.stringify(data),
 		  dataType: "JSON",
+		  contentType: "application/json",
 		  traditional: true,
 		  success : function(data, status, xhr){
 			  //alert(xhr.status);
@@ -800,7 +807,9 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 		  },
 		  error : function(xhr, status, error){
 			    //alert(xhr.responseText);
-			  alert('일정 삭제 실패<br>새로고침 후 재시도 해주세요');
+			    console.log(xhr.responseText);
+			  //alert('일정 삭제 실패<br>새로고침 후 재시도 해주세요');
+			  location.reload();
 		  }
 		});
 		//

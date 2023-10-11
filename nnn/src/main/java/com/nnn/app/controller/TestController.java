@@ -770,5 +770,10 @@ public class TestController {
 		mv.setViewName("t/Testsum");
 		return mv;
 	}
-	
+	@RequestMapping(value="Testform")
+	public ModelAndView testform(ModelAndView mv) {
+		
+		mv.setViewName("t/testform");
+		return mv;
+	}
 }
