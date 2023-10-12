@@ -779,7 +779,7 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 	//모달창 show
 	$('.insertModal').modal({backdrop: 'static'});
 	console.log("모달창 오픈");
-	console.log(arg.event);
+	console.log(arg);
 	$('.insertModal #title').focus();
   }
   //일정삭제
@@ -1323,12 +1323,13 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 			//	  location.reload();
 			  },
 		  error : function(xhr, status, error){
-			//    alert(xhr.responseText);
-			    console.log(xhr.responseText);
-				  initModal(modal, arg);
+			  
+//			alert(xhr.responseText);
+			console.log(xhr);
+			initModal(modal, arg);
 			//  alert('일정 등록 실패<br>새로고침 후 재시도 해주세요');
-			    location.reload();
-//			    console.log(prepare);
+			location.reload();
+//			console.log(prepare);
 		  }
 		});
 		//

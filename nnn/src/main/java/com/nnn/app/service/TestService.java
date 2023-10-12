@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.nnn.app.dao.TestDao;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.TestVo;
+import com.nnn.app.vo.TestusersVo;
 
 @Service
 public class TestService {
@@ -37,5 +38,13 @@ public class TestService {
 	
 	public int Cnt(Criteria cri) {
 		return testDao.Cnt(cri);
+	}
+
+	public TestusersVo login(TestusersVo vo) {
+		return testDao.login(vo);
+	}
+
+	public TestusersVo info(Integer idx) {
+		return testDao.info(idx);
 	}
 }

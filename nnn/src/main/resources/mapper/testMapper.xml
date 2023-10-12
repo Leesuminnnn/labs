@@ -133,6 +133,14 @@
 		#{cs_data_27}, #{cs_data_28}, #{cs_data_29})
 	</insert>
 	
+	<select id="login" parameterType="testusers" resultType="testusers">
+		select * from
+		csworktools.testusers
+		where id = #{id} and pwd = #{pwd}
+	</select>
+	<select id="info" resultType="testusers" parameterType="int">
+		select * from csworktools.testusers where idx=#{idx}
+	</select>
 	
 	
 </mapper>

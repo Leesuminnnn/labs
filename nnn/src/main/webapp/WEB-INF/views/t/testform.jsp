@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
@@ -29,9 +32,29 @@
 		</div>
 	</div>
 	<div class="footer">
-		<div></div>
+		<div class="nav">
+			<div class="prev">&lt;</div>
+			<div class="next">&gt;</div>
+		</div>
 	</div>
 </form>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+var next = document.querySelector(".next");
+var prev = document.querySelector(".prev");
+var progress = document.querySelector("#progress");
+
+next.addEventListener("click", NextPage);
+prev.addEventListener("click", PrevPage)
+function NextPage() {
+	progress.value = progress.value + 10;
+	console.log(progress.value);
+}
+
+function PrevPage() {
+	progress.value = progress.value - 10;
+	console.log(progress.value);
+}
+</script>	
 </body>
 </html>

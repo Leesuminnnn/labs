@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,6 +41,7 @@ import com.nnn.app.vo.HelpVo;
 import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
 import com.nnn.app.vo.TestVo;
+import com.nnn.app.vo.TestusersVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Controller
@@ -774,6 +776,43 @@ public class TestController {
 	public ModelAndView testform(ModelAndView mv) {
 		
 		mv.setViewName("t/testform");
+		return mv;
+	}
+	@RequestMapping(value="Testlogin")
+	public ModelAndView testlogin(ModelAndView mv) {
+		
+		mv.setViewName("t/testlogin");
+		return mv;
+	}
+	@RequestMapping(value="loginAction", method = RequestMethod.POST)
+	public String testloginaction(TestusersVo vo, HttpSession session, Model md, HttpServletRequest request) throws Exception {
+		
+		TestusersVo loginMember = testService.login(vo);
+		/*
+		 * 로그인 시 아이디와 비밀번호가 사번과 이름의 조합일 경우 비밀번호 변경페이지로 이동해야 한다.
+		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
+		 * */
+		if(loginMember == null) {
+			request.setAttribute("msg", "아이디 혹은 비밀번호를 확인해 주세요");
+			request.setAttribute("url", "t/Testlogin");
+			return "alert";
+		}else {
+			session.setAttribute("loginMember", loginMember);
+			
+			System.out.println("idx : "+loginMember.getIdx());
+			System.out.println("name : "+loginMember.getName());
+			System.out.println("pwd : "+loginMember.getPwd());
+		}
+		int idx = loginMember.getIdx();
+		md.addAttribute("loginMember", loginMember);
+		return "redirect:/t/Testinfo/"+idx;
+	}
+	@RequestMapping(value="Testinfo/{idx}")
+	public ModelAndView testinfo(ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
+		session.getAttribute("loginMember");
+		mv.addObject("info", testService.info(idx));
+		
+		mv.setViewName("t/testinfo");
 		return mv;
 	}
 }

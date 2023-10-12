@@ -153,10 +153,10 @@ public class CalendarController {
 			
 		}else {
 			System.out.println("중복");
-//			response.setContentType("text/html; charset=UTF-8");
-  //          PrintWriter out = response.getWriter();
- //           out.println("<script>alert('중복'); history.go(-1);</script>");
-//            out.flush(); 
+			response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('중복'); history.go(-1);</script>");
+            out.flush(); 
 		}
 		
 		

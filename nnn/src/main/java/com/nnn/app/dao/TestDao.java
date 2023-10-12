@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.TestVo;
+import com.nnn.app.vo.TestusersVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Repository
@@ -40,5 +41,13 @@ public class TestDao {
 	
 	public int insert(TestVo vo) {
 		return sqlSession1.insert(MAPPER+".insert", vo);
+	}
+
+	public TestusersVo login(TestusersVo vo) {
+		return sqlSession1.selectOne(MAPPER+".login", vo);
+	}
+
+	public TestusersVo info(int idx) {
+		return sqlSession1.selectOne(MAPPER+".info", idx);
 	}
 }

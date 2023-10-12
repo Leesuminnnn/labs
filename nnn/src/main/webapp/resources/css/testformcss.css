@@ -28,14 +28,16 @@ body {
     flex-wrap: wrap;
 }
 	
-}
+
 
 .progress {
+	margin: 0 auto;
 	margin-top: 80px;
 	margin-buttom: 80px;
 	display: flex;
 	align-items : center;
 	justify-content: center;
+	
 }
  #progress {
     appearance: none;
@@ -51,4 +53,16 @@ body {
     background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);
     background: linear-gradient(to right, #93F9B9, #1D976C);
 
+}
+.footer {
+	width: 680px;
+	margin: 0 auto;
+}
+.nav > div {
+	font-size: 2.5rem;
+	cursor: pointer;
+}
+.nav {
+	display: flex;
+	justify-content: space-between;
 }

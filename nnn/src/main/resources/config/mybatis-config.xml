@@ -27,6 +27,7 @@
 		<typeAlias alias="boardVo" type="com.nnn.app.vo.BoardVo"/>
 		<typeAlias alias="pointdetail" type="com.nnn.app.vo.Pointdetail"/>
 		<typeAlias alias="calen" type="com.nnn.app.vo.CalendarVo"/>
+		<typeAlias alias="testusers" type="com.nnn.app.vo.TestusersVo"/>
 		
 	</typeAliases>  
 
