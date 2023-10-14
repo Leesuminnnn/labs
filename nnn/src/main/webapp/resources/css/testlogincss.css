@@ -39,28 +39,29 @@
 	border: 1px solid;
 }
 
-.login > ul li input[type=checkbox] {
+.login > ul li input[type=radio] {
 	position: absolute;
 	left: -3000%;
 }
 
-.login > ul li input[type=checkbox] + label {
+.login > ul li input[type=radio] + label {
 	height: 36px;
 	line-height: 36px;
 }
 
-.login > ul li input[type=checkbox] + label:before{
+.login > ul li input[type=radio] + label:before{
 	content: "";
 	display: inline-block;
 	margin: 0 10px 0 0;
 	width : 18px;
 	height: 18px;
 	border:1px solid #CFCFCF;
+	border-radius: 100px;
 	vertical-align: -3px;
 }
 
-.login> ul  li input[type=checkbox]:checked + label:before {
-	background: url('../icon/check box_b.png') no-repeat center #CFCFCF;
+.login> ul li input[type=radio]:checked + label:before {
+	background: url('../icon/select_b.png') no-repeat center #fff;
 	
 }
 

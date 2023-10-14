@@ -136,11 +136,28 @@
 	<select id="login" parameterType="testusers" resultType="testusers">
 		select * from
 		csworktools.testusers
-		where id = #{id} and pwd = #{pwd}
+		where id = #{id} and 
+		<choose>
+			<when test="name == null">
+			pwd = #{pwd}
+			</when>
+			<when test="pwd == null">
+			name = #{name}
+			</when>
+			
+			<otherwise></otherwise>
+		</choose>
+		
 	</select>
 	<select id="info" resultType="testusers" parameterType="int">
 		select * from csworktools.testusers where idx=#{idx}
 	</select>
-	
-	
+	<update id="pwdinsert" parameterType="testusers">
+		update csworktools.testusers set pwd = #{pwd} where idx = #{idx}
+	</update>
+	<select id="evaluationtarget" resultType="testusers">
+		select * from csworktools.testusers 
+		where
+		code in (SELECT code FROM testusers WHERE code = #{code})
+	</select>
 </mapper>

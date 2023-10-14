@@ -1,6 +1,7 @@
 package com.nnn.app.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,17 @@ public class TestService {
 
 	public TestusersVo info(Integer idx) {
 		return testDao.info(idx);
+	}
+
+	public int pwdinsert(Map<String, Object> map) {
+		int flag = 0;
+		
+		flag = testDao.pwdinsert(map);
+		
+		return flag;
+	}
+
+	public List<TestusersVo> evaluationtarget(TestusersVo vo) {
+		return testDao.evaluationtarget(vo);
 	}
 }

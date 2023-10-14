@@ -14,11 +14,13 @@
 이곳은 마이페이지입니다.
 </div>
 <div>
-${loginMember.idx}
-</div>
-<div>
-${loginMember.name}
+${info.name} 님의 코드는 ${info.code } 입니다.
 </div>
 
+<div>
+<c:forEach items="${target}" var="t" >
+	${t.name}<br>
+</c:forEach>
+</div>
 </body>
 </html>

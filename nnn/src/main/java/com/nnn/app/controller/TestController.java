@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -785,34 +786,99 @@ public class TestController {
 		return mv;
 	}
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
-	public String testloginaction(TestusersVo vo, HttpSession session, Model md, HttpServletRequest request) throws Exception {
+	public String testloginaction(TestusersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		TestusersVo loginMember = testService.login(vo);
 		/*
 		 * 로그인 시 아이디와 비밀번호가 사번과 이름의 조합일 경우 비밀번호 변경페이지로 이동해야 한다.
 		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
 		 * */
+		
+		System.out.println("id : "+vo.getId());
+		System.out.println("name : "+vo.getName());
+		System.out.println("pwd : "+vo.getPwd());
+		
+		//아이디 혹은 비밀번호가 일치하지 않는 경우
 		if(loginMember == null) {
 			request.setAttribute("msg", "아이디 혹은 비밀번호를 확인해 주세요");
 			request.setAttribute("url", "t/Testlogin");
 			return "alert";
-		}else {
+		}
+		// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
+		else if (loginMember.getPwd() == null) {
+			System.out.println(loginMember.getIdx());
+			int idx = loginMember.getIdx();
+			request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
+			request.setAttribute("url", "t/Testpwd/"+idx);
+			return "alert";
+		}
+		// DB에 비밀번호가 있는데 이름으로 로그인 한 경우 
+		else if(loginMember.getPwd() != null && vo.getName() != null) {
+			System.out.println(loginMember.getIdx());
+			String dbpwdOk = "true"; 
+			md.addAttribute("dbpwdOk", dbpwdOk);
+			request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
+			request.setAttribute("url", "t/Testlogin");
+			return "alert";
+		}
+		// 로그인 성공
+		else {
 			session.setAttribute("loginMember", loginMember);
 			
 			System.out.println("idx : "+loginMember.getIdx());
+			System.out.println("id : "+loginMember.getId());
 			System.out.println("name : "+loginMember.getName());
 			System.out.println("pwd : "+loginMember.getPwd());
 		}
-		int idx = loginMember.getIdx();
+		
 		md.addAttribute("loginMember", loginMember);
+		int idx = loginMember.getIdx();
 		return "redirect:/t/Testinfo/"+idx;
 	}
 	@RequestMapping(value="Testinfo/{idx}")
-	public ModelAndView testinfo(ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
+	public ModelAndView testinfo(TestusersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
 		session.getAttribute("loginMember");
 		mv.addObject("info", testService.info(idx));
 		
+		mv.addObject("target", testService.evaluationtarget(testService.info(idx)));
+		
+		System.out.println(testService.evaluationtarget(testService.info(idx)));
+		
+		
+		
 		mv.setViewName("t/testinfo");
 		return mv;
+	}
+	@RequestMapping(value="Testpwd/{idx}")
+	public ModelAndView testpwd(ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
+		session.getAttribute("loginMember");
+		mv.addObject("info", testService.info(idx));
+		
+		
+		
+		mv.setViewName("t/testpwd");
+		return mv;
+	}
+	@RequestMapping(value="pwdAction/{idx}")
+	public String pwdAction(TestusersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, Model md) {
+		session.getAttribute("loginMember");
+		md.addAttribute("info", testService.info(idx));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pwd", vo.getPwd());
+		map.put("idx", vo.getIdx());
+		System.out.println("pwd : "+vo.getPwd());
+		
+		int flag = testService.pwdinsert(map);
+		
+		if(flag >= 1) {
+			System.out.println(flag);
+			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.");
+			request.setAttribute("url", "t/Testinfo/"+idx);
+			return "alert";
+		} else {
+			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
+			request.setAttribute("url", "t/Testpwd/"+idx);
+			return "alert";
+		}
 	}
 }

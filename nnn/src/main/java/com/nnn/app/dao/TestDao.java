@@ -1,6 +1,7 @@
 package com.nnn.app.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -49,5 +50,14 @@ public class TestDao {
 
 	public TestusersVo info(int idx) {
 		return sqlSession1.selectOne(MAPPER+".info", idx);
+	}
+
+	public int pwdinsert(Map<String, Object> map) {
+		
+		return sqlSession1.update(MAPPER+".pwdinsert", map);
+	}
+
+	public List<TestusersVo> evaluationtarget(TestusersVo vo) {
+		return sqlSession1.selectList(MAPPER+".evaluationtarget", vo);
 	}
 }
