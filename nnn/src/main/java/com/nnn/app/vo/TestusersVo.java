@@ -12,19 +12,16 @@ import lombok.ToString;
 @ToString
 public class TestusersVo {
 /*
-CREATE TABLE `testusers` (
-	`idx` INT(11) NOT NULL AUTO_INCREMENT,
-	`id` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
-	`pwd` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
-	`name` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
-	`reg_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-	`code` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
-	PRIMARY KEY (`idx`) USING BTREE
-)
-COLLATE='utf8_general_ci'
-ENGINE=InnoDB
-AUTO_INCREMENT=2
-;
+CREATE TABLE testusers (
+idx INT AUTO_INCREMENT PRIMARY KEY,
+id VARCHAR(30) NOT NULL COMMENT '유저 사번',
+pwd VARCHAR(50) NULL COMMENT '유저 비밀번호',
+name VARCHAR(30) NOT NULL  COMMENT '유저 이름',
+reg_date DATETIME DEFAULT NOW() COMMENT '생성일',
+hspt_name VARCHAR(30) NOT NULL COMMENT '속한 병원',
+hspt_sub VARCHAR(30) NOT NULL COMMENT '속한 부서',
+hspt_position VARCHAR(30) NOT NULL COMMENT '직책'
+);
 
 
 
@@ -35,7 +32,9 @@ AUTO_INCREMENT=2
 	private String id;
 	private String pwd;
 	private String name;
-	private String code;
+	private String hspt_name;
+	private String hspt_sub;
+	private String hspt_position;
 	
 	
 	

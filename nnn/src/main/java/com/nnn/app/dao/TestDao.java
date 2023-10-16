@@ -52,7 +52,7 @@ public class TestDao {
 		return sqlSession1.selectOne(MAPPER+".info", idx);
 	}
 
-	public int pwdinsert(Map<String, Object> map) {
+	public int pwdinsert(Map<String, Object> map ) {
 		
 		return sqlSession1.update(MAPPER+".pwdinsert", map);
 	}

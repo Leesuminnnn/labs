@@ -145,7 +145,6 @@
 			name = #{name}
 			</when>
 			
-			<otherwise></otherwise>
 		</choose>
 		
 	</select>
@@ -156,8 +155,12 @@
 		update csworktools.testusers set pwd = #{pwd} where idx = #{idx}
 	</update>
 	<select id="evaluationtarget" resultType="testusers">
-		select * from csworktools.testusers 
-		where
-		code in (SELECT code FROM testusers WHERE code = #{code})
+		SELECT *
+		FROM csworktools.testusers
+		WHERE user_code 
+		LIKE CONCAT('%',#{hspt_sub},'%')' 
+		and user_code LIKE CONCAT('%',#{hspt_position},'%') 
+		AND hspt_name = #{hspt_name}
+	
 	</select>
 </mapper>

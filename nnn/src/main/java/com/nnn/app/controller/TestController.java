@@ -1,5 +1,6 @@
 package com.nnn.app.controller;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -787,17 +788,31 @@ public class TestController {
 	}
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public String testloginaction(TestusersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 비밀번호 복호화
+		SHA256 sha256 = new SHA256();
+		//비밀번호
+		System.out.println("유저가 입력한 비밀번호 : "+vo.getPwd());
+//		String password = vo.getPwd();
+//		//	SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        System.out.println(cryptogram);
+//        //비밀번호 일치 여부
+//        boolean pwdcheck = cryptogram.equals(sha256.encrypt(password));
+//		System.out.println(pwdcheck);
 		
+        
 		TestusersVo loginMember = testService.login(vo);
 		/*
 		 * 로그인 시 아이디와 비밀번호가 사번과 이름의 조합일 경우 비밀번호 변경페이지로 이동해야 한다.
 		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
 		 * */
-		
+
+		System.out.println("#########################################");
 		System.out.println("id : "+vo.getId());
 		System.out.println("name : "+vo.getName());
 		System.out.println("pwd : "+vo.getPwd());
-		
+		System.out.println("#########################################");
+		System.out.println("DB pwd : "+loginMember.getPwd());
 		//아이디 혹은 비밀번호가 일치하지 않는 경우
 		if(loginMember == null) {
 			request.setAttribute("msg", "아이디 혹은 비밀번호를 확인해 주세요");
@@ -805,7 +820,7 @@ public class TestController {
 			return "alert";
 		}
 		// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
-		else if (loginMember.getPwd() == null) {
+		else if (loginMember.getPwd() == null || loginMember.getPwd() == "") {
 			System.out.println(loginMember.getIdx());
 			int idx = loginMember.getIdx();
 			request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
@@ -824,11 +839,13 @@ public class TestController {
 		// 로그인 성공
 		else {
 			session.setAttribute("loginMember", loginMember);
-			
+			System.out.println("#########################################");
+			System.out.println("로그인 성공");
 			System.out.println("idx : "+loginMember.getIdx());
 			System.out.println("id : "+loginMember.getId());
 			System.out.println("name : "+loginMember.getName());
 			System.out.println("pwd : "+loginMember.getPwd());
+			System.out.println("#########################################");
 		}
 		
 		md.addAttribute("loginMember", loginMember);
@@ -860,13 +877,26 @@ public class TestController {
 		return mv;
 	}
 	@RequestMapping(value="pwdAction/{idx}")
-	public String pwdAction(TestusersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, Model md) {
+	public String pwdAction(TestusersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
 		md.addAttribute("info", testService.info(idx));
+		
+//		// 암호화
+//		SHA256 sha256 = new SHA256();
+//		//비밀번호
+//        String password = vo.getPwd();
+//        //SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        
+//        System.out.println(cryptogram);
+//		//담은 변수를 DB에 넘겨준다.
+//		vo.setPwd(cryptogram);
+//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("pwd", cryptogram);
 		map.put("pwd", vo.getPwd());
 		map.put("idx", vo.getIdx());
-		System.out.println("pwd : "+vo.getPwd());
 		
 		int flag = testService.pwdinsert(map);
 		

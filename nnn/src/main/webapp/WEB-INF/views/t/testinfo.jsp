@@ -14,10 +14,11 @@
 이곳은 마이페이지입니다.
 </div>
 <div>
-${info.name} 님의 코드는 ${info.code } 입니다.
+${info.name} 님의 코드는 ${info.hspt_name } 입니다.
 </div>
-
+<br>
 <div>
+코드 ${info.hspt_name }에 속한 유저는<br>
 <c:forEach items="${target}" var="t" >
 	${t.name}<br>
 </c:forEach>
