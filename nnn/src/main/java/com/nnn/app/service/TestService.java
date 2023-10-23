@@ -41,8 +41,12 @@ public class TestService {
 		return testDao.Cnt(cri);
 	}
 
-	public TestusersVo login(TestusersVo vo) {
+	public int login(TestusersVo vo) throws Exception {
 		return testDao.login(vo);
+	}
+	
+	public TestusersVo info2(TestusersVo vo) throws Exception {
+		return testDao.info2(vo);
 	}
 
 	public TestusersVo info(Integer idx) {
@@ -57,7 +61,15 @@ public class TestService {
 		return flag;
 	}
 
-	public List<TestusersVo> evaluationtarget(TestusersVo vo) {
-		return testDao.evaluationtarget(vo);
+	public List<TestusersVo> evaluationtarget(Map<String, Object> map) {
+		return testDao.evaluationtarget(map);
+	}
+
+	public List<TestusersVo> BTlist(Map<String, Object> map) {
+		return testDao.BTlist(map);
+	}
+
+	public List<TestusersVo> BFlist(Map<String, Object> map) {
+		return testDao.BFlist(map);
 	}
 }

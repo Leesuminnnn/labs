@@ -44,20 +44,35 @@ public class TestDao {
 		return sqlSession1.insert(MAPPER+".insert", vo);
 	}
 
-	public TestusersVo login(TestusersVo vo) {
+	public int login(TestusersVo vo) throws Exception {
 		return sqlSession1.selectOne(MAPPER+".login", vo);
 	}
 
+	public TestusersVo info2(TestusersVo vo) {
+		return sqlSession1.selectOne(MAPPER+".info2", vo);
+	}
+	
 	public TestusersVo info(int idx) {
 		return sqlSession1.selectOne(MAPPER+".info", idx);
 	}
 
 	public int pwdinsert(Map<String, Object> map ) {
-		
+		System.out.println("##########################DAO");
 		return sqlSession1.update(MAPPER+".pwdinsert", map);
 	}
 
-	public List<TestusersVo> evaluationtarget(TestusersVo vo) {
-		return sqlSession1.selectList(MAPPER+".evaluationtarget", vo);
+	public List<TestusersVo> evaluationtarget(Map<String, Object> map) {
+		System.out.println("########################DAO 코드");
+		System.out.println(map);
+		System.out.println("########################DAO 코드");
+		return sqlSession1.selectList(MAPPER+".evaluationtarget", map);
+	}
+
+	public List<TestusersVo> BTlist(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".BTlist",map);
+	}
+
+	public List<TestusersVo> BFlist(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".BFlist",map);
 	}
 }

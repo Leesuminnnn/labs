@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -774,24 +776,17 @@ public class TestController {
 		mv.setViewName("t/Testsum");
 		return mv;
 	}
-	@RequestMapping(value="Testform")
-	public ModelAndView testform(ModelAndView mv) {
-		
-		mv.setViewName("t/testform");
-		return mv;
-	}
 	@RequestMapping(value="Testlogin")
 	public ModelAndView testlogin(ModelAndView mv) {
 		
 		mv.setViewName("t/testlogin");
 		return mv;
 	}
+
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public String testloginaction(TestusersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 비밀번호 복호화
-		SHA256 sha256 = new SHA256();
-		//비밀번호
-		System.out.println("유저가 입력한 비밀번호 : "+vo.getPwd());
+//		SHA256 sha256 = new SHA256();
 //		String password = vo.getPwd();
 //		//	SHA256으로 암호화된 비밀번호
 //        String cryptogram = sha256.encrypt(password);
@@ -800,68 +795,171 @@ public class TestController {
 //        boolean pwdcheck = cryptogram.equals(sha256.encrypt(password));
 //		System.out.println(pwdcheck);
 		
-        
-		TestusersVo loginMember = testService.login(vo);
-		/*
-		 * 로그인 시 아이디와 비밀번호가 사번과 이름의 조합일 경우 비밀번호 변경페이지로 이동해야 한다.
-		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
-		 * */
-
 		System.out.println("#########################################");
 		System.out.println("id : "+vo.getId());
 		System.out.println("name : "+vo.getName());
 		System.out.println("pwd : "+vo.getPwd());
 		System.out.println("#########################################");
-		System.out.println("DB pwd : "+loginMember.getPwd());
+		int loginMember = testService.login(vo);
+		String name = vo.getName();
+		System.out.println("_________________________________________");
+		/*
+		 * 로그인 시 아이디와 비밀번호가 사번과 이름의 조합일 경우 비밀번호 변경페이지로 이동해야 한다.
+		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
+		 * */
+		
+		
 		//아이디 혹은 비밀번호가 일치하지 않는 경우
-		if(loginMember == null) {
+		if(loginMember == 0) {
 			request.setAttribute("msg", "아이디 혹은 비밀번호를 확인해 주세요");
 			request.setAttribute("url", "t/Testlogin");
+			System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
 			return "alert";
 		}
-		// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
-		else if (loginMember.getPwd() == null || loginMember.getPwd() == "") {
-			System.out.println(loginMember.getIdx());
-			int idx = loginMember.getIdx();
-			request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
-			request.setAttribute("url", "t/Testpwd/"+idx);
-			return "alert";
+		// 정보가 있을 경우 
+		else if(loginMember == 1) {
+			TestusersVo info2 = testService.info2(vo);
+			int idx = info2.getIdx();
+			System.out.println("info : "+info2);
+			System.out.println("info2.idx : "+info2.getIdx());
+			// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
+			if(info2.getPwd() == null) {
+				
+				request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
+				request.setAttribute("url", "t/Testpwd/"+idx);
+				System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
+				return "alert";
+			// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
+			}else if(info2.getPwd() != null && name != null){
+				String dbpwdOk = "true"; 
+				md.addAttribute("dbpwdOk", dbpwdOk);
+				request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
+				request.setAttribute("url", "t/Testlogin");
+				return "alert";
+			}else {
+				System.out.println("#########################################");
+				System.out.println("로그인 성공");
+				System.out.println("#########################################");
+				return "redirect:/t/Testinfo/"+idx;
+			}
+			
 		}
-		// DB에 비밀번호가 있는데 이름으로 로그인 한 경우 
-		else if(loginMember.getPwd() != null && vo.getName() != null) {
-			System.out.println(loginMember.getIdx());
-			String dbpwdOk = "true"; 
-			md.addAttribute("dbpwdOk", dbpwdOk);
-			request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
-			request.setAttribute("url", "t/Testlogin");
-			return "alert";
-		}
-		// 로그인 성공
-		else {
-			session.setAttribute("loginMember", loginMember);
-			System.out.println("#########################################");
-			System.out.println("로그인 성공");
-			System.out.println("idx : "+loginMember.getIdx());
-			System.out.println("id : "+loginMember.getId());
-			System.out.println("name : "+loginMember.getName());
-			System.out.println("pwd : "+loginMember.getPwd());
-			System.out.println("#########################################");
-		}
+		return "";
 		
-		md.addAttribute("loginMember", loginMember);
-		int idx = loginMember.getIdx();
-		return "redirect:/t/Testinfo/"+idx;
+		
+		
 	}
 	@RequestMapping(value="Testinfo/{idx}")
 	public ModelAndView testinfo(TestusersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
 		session.getAttribute("loginMember");
+		System.out.println("#########################1");
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		String vtf = testService.info(idx).getHspt_V();
+		String ktf = testService.info(idx).getHspt_K();
+		String btf = testService.info(idx).getHspt_B();
+		String xtf = testService.info(idx).getHspt_X();
+		String ztf = testService.info(idx).getHspt_Z();
+		String hsptname = testService.info(idx).getHspt_name();
+		String hsptpo = testService.info(idx).getHspt_position();
+		String hsptsub = testService.info(idx).getHspt_sub();
+		String po = testService.info(idx).getHspt_position();
+		
+		System.out.println("############################1.5");
+
+		System.out.println("info : "+ testService.info(idx));
+		System.out.println("시간 출력 : "+ testService.info(idx).getReg_date());
+		System.out.println("경혁팀 여부 : "+vtf);
+		System.out.println("경혁팀장 여부 : "+ktf);
+		System.out.println("부서장 여부 : "+btf);
+		System.out.println("1인부서 여부 : "+xtf);
+		System.out.println("진료팀장 여부 : "+ztf);
+		if (po.equals("T")) {
+			boolean position = true;
+			map.put("position", position);
+			System.out.println("position : "+position);
+		}else {
+			boolean position = false;
+			map.put("position", position);
+			System.out.println("position : "+position);
+		}
+		
+		if(vtf.equals("T")) {
+			boolean v = true;
+			map.put("v", v);
+			System.out.println("경혁팀여부v : "+v);
+		}else {
+			boolean v = false;
+			map.put("v", v);
+			System.out.println("경혁팀여부v : "+v);
+		}
+		
+		if(ktf.equals("T")) {
+			boolean v = true;
+			map.put("k", v);
+			System.out.println("경혁팀장여부k : "+v);
+		}else {
+			boolean v = false;
+			map.put("k", v);
+			System.out.println("경혁팀장여부k : "+v);
+		}
+		
+		if(btf.equals("T")) {
+			boolean v = true;
+			map.put("b", v);
+			System.out.println("부서장여부b : "+v);
+		}else {
+			boolean v = false;
+			map.put("b", v);
+			System.out.println("부서장여부b : "+v);
+		}
+		
+		if(xtf.equals("T")) {
+			boolean v = true;
+			map.put("x", v);
+			System.out.println("1인부서여부x : "+v);
+		}else {
+			boolean v = false;
+			map.put("x", v);
+			System.out.println("인부서여부x : "+v);
+		}
+		
+		if(ztf.equals("T")) {
+			boolean v = true;
+			map.put("z", v);
+			System.out.println("진료팀장여부z : "+v);
+		}else {
+			boolean v = false;
+			map.put("z", v);
+			System.out.println("진료팀장여부z : "+v);
+		}
+		map.put("hspt_name",hsptname);
+		map.put("hspt_position",hsptpo);
+		map.put("hspt_sub",hsptsub);
+		map.put("idx",vo.getIdx());
+		System.out.println("info.hsptname : "+ hsptname);
+		System.out.println("info.hsptposition : "+ hsptpo);
+		System.out.println("info.hsptsub : "+ hsptsub);
+		System.out.println(vo.getIdx());
+		System.out.println(testService.info(idx));
+		System.out.println(testService.evaluationtarget(map));
+		System.out.println("#########################2");
 		mv.addObject("info", testService.info(idx));
-		
-		mv.addObject("target", testService.evaluationtarget(testService.info(idx)));
-		
-		System.out.println(testService.evaluationtarget(testService.info(idx)));
-		
-		
+		// 평가 대상 출력
+		List<TestusersVo> list1 = new ArrayList<TestusersVo>();
+		list1 = testService.evaluationtarget(map);
+		mv.addObject("target", list1);
+		System.out.println(list1);
+//		// 부서장 쿼리 출력
+//		List<TestusersVo> list2 = new ArrayList<TestusersVo>();
+//		list2 = testService.BTlist(map);
+//		mv.addObject("BTlist", list2);
+//		System.out.println(list2);
+//		// 부서원 쿼리 출력
+//		List<TestusersVo> list3 = new ArrayList<TestusersVo>();
+//		list3 = testService.BFlist(map);
+//		mv.addObject("BFlist", list3);
+//		System.out.println(list3);
 		
 		mv.setViewName("t/testinfo");
 		return mv;
@@ -910,5 +1008,14 @@ public class TestController {
 			request.setAttribute("url", "t/Testpwd/"+idx);
 			return "alert";
 		}
+	}
+	@RequestMapping(value="Testform")
+	public ModelAndView testform(ModelAndView mv, HttpSession session, HttpServletRequest request) {
+		
+		
+		
+		
+		mv.setViewName("t/Testform");
+		return mv;
 	}
 }

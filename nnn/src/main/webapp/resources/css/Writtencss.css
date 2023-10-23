@@ -174,3 +174,42 @@ input[type="radio"]:checked + label span {
 	font-size: 18pt;
 }
 
+input[type=radio], input[type=checkbox] {
+	position: absolute;
+	left: -3000%;
+}
+
+input[type=radio] + label, input[type=checkbox] + label {
+	height: 36px;
+	line-height: 36px;
+}
+input[type=radio] + label:before{
+	content: "";
+	display: inline-block;
+	margin: 0 10px 0 0;
+	width : 18px;
+	height: 18px;
+	border:1px solid #CFCFCF;
+	border-radius: 100px;
+	vertical-align: -3px;
+}
+input[type=radio]:checked + label:before {
+	background: url('../icon/select_b.png') no-repeat center #fff;
+	
+}
+input[type=checkbox] + label:before {
+	content: "";
+	display: inline-block;
+	margin: 0 10px 0 0;
+	width : 18px;
+	height: 18px;
+	border:1px solid #CFCFCF;
+	vertical-align: -3px;
+}
+input[type=checkbox]:checked + label:before {
+	background: url('../icon/check box_b.png') no-repeat center #fff;
+	
+}
+
+
+

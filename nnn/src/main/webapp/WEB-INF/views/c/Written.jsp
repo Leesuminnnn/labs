@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <!-- Web App으로 선언하여 브라우저의 UI ( URL 바 ) 를 안 보이도록 할 수 있다. -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="viewport" content="user-scalable=no">
+<meta name="viewport" content="user-scalable=yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css?after">
@@ -112,6 +112,11 @@
   .checkbox-wrapper-13 *:before,
   .checkbox-wrapper-13 *:after {
     box-sizing: inherit;
+   
+  }
+  span {
+      line-height: 30px;
+      margin-bottom: 5px;
   }
 </style>
 </head>
@@ -126,6 +131,7 @@
     margin: 0 auto; 
 	margin-bottom: 111px;">
 <div id="capture_area" style="">
+<div>
 <input type="hidden" id="imgData" name="imgData">
 <h1 style="text-align: center; font-size: 30pt; padding-top: 70px;">입 원 서 약 서</h1>
 
@@ -136,19 +142,19 @@
 		<td class="normal" width="170px" height="56px">성명</td>
 		<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input style= "margin-left: 33px;" type="text" name="cs_data_01" value="${param1}"></td>
-		<td class="normal" width="170px" height="56px">등록번호</td>
+		<td class="normal" width="170px" height="56px">차트번호</td>
 		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" width="313px" style="text-align: left;">
-		<input style="margin-left: 33px;" name="cs_data_02" type="text"></td>
+		<input style="margin-left: 33px;" name="cs_data_02" type="text" value="${param4}"></td>
 	</tr>
 	<tr>
 		<td class="normal" height="56px">입원병실</td>
 		<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left;">
-		<input style= "margin-left: 33px;" type="text" name="cs_data_03"></td>
+		<input style= "margin-left: 33px;" type="text" name="cs_data_03" value="${param5}"></td>
 		<td class="normal" height="56px">성별 </td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
-		<label style="cursor: pointer;"><input type="radio" name="cs_data_04" value="남성" style="cursor: pointer;" <c:if test="${param2 eq '남성' }">checked</c:if>>남</label></td>
+		<input type="radio" name="cs_data_04" value="남성" style="cursor: pointer;" id="genderM" <c:if test="${param2 eq '남성' }">checked</c:if>><label for="genderM" style="cursor: pointer;">남</label></td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
-		<label style="cursor: pointer;"><input type="radio" name="cs_data_04" value="여성" <c:if test="${param2 eq '여성' }">checked</c:if>>여</label></td>
+		<input type="radio" name="cs_data_04" value="여성" id="genderF"<c:if test="${param2 eq '여성' }">checked</c:if>><label for="genderF" style="cursor: pointer;">여</label></td>
 	</tr>
 	<tr>
 		<td class="normal" height="56px">생년월일</td>
@@ -156,105 +162,60 @@
 		<input style= "margin-left: 33px;" type="text" name="cs_data_05" value="${param3 }"></td>
 		<td class="normal" height="56px">전화</td>
 		<td style="text-align: left;" class="light" colspan="2" onclick="this.querySelector('input').focus();">
-		<input style="margin-left: 33px;" type="text" name="cs_data_06" value=""></td>
+		<input style="margin-left: 33px;" type="text" name="cs_data_06" value="${param6 }"></td>
 	</tr>
 </table>
 </div>
 <div class="light" style="font-size:14pt; color:#222222; width:966px; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
-<p> 
-&nbsp;본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당
-</p>
-<p style="margin-bottom: 10px;">
-한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
-</p>
-<p class="" style="color:#f87b0c;">
-1. 입원 기간 중 예기치 않은 사고(골절, 타박상, 개방성 상처 등)나 응급상황 시 본원에서 치료할 수 없는 상태이거나 의료진 판단
-</p>
-<p style="color:#f87b0c;">
-으로 응급처치 가능한 병원으로 전원을 요구할 수 있으며 또한 환자 및 보호자가 원할 경우  담당의사와 상의 후 타 병원으로 전원 
-</p>
-<p style="color:#f87b0c; margin-bottom: 10px;">
-할 수 있습니다.
-</p>
-<p class="" style="color:#f87b0c;">
-2. 노인은 골다공증, 피부의 약화로 쉽게 골절 또는 멍이 들 수 있으므로 의료기관의 정당한 진료지침이나 교육에 반하는 무단 외
-</p>
-<p style="color:#f87b0c; margin-bottom: 10px;">
-출・외박 등으로 인하여 발생하는 환자의 손해에 대한 책임은 원칙적으로 모두 환자에게 있습니다.
-</p>
-<p>
-3. 진료 상 발생하는 모든 문제에 대하여 분쟁이 생겼을 때에는 『의료사고 피해구제 및 의료분쟁 조정 등에 관한 법률』에 의한 한국
-</p>
-<p style="margin-bottom: 10px;">
-의료분쟁조정중재원에 그 조정을 신청할 수 있음에 동의합니다.
-</p>
-<p>
-4. 입원기간 동안 발생하는 진료비는 귀 의료기관에서 정하는 납부기한 내에 납부(연대보증인이 있는 경우에는 환자와 연대보증
-</p>
-<p>
-인이 연대하여 납부)하겠으며, 정당한 이유 없이 체납될 때에는 채권확보를 위한 법적조치에 이의가 없고, 만일 본건을 기초로 의
-</p>
-<p style="margin-bottom: 10px;">
-료분쟁 등으로 소송을 제기할 경우 관할법원의 민사소송법에 따릅니다.
-</p>
-<p>
-5. 입원기간 중에 환자 및 보호자가 귀 의료기관의 비품이나 기물을 고의 또는 과실로 파괴, 망실, 훼손한 때에는 이를 변상(현물, 
-</p>
-<p style="margin-bottom: 10px;">
-현금)합니다.
-</p>
-<p class="" style="color:#f87b0c;">
-6. 입원기간 중 환자 또는 보호자 등이 소지 중인 현금, 기타 귀중품 및 개인소지품(완전틀니, 부분틀니 포함, 안경, 보청기등)은 귀 
-</p>
-<p style="color:#f87b0c;">
-의료기관이 지정한 보관 장소가 있는 경우에는 보관 장소에 보관하고, 보관 장소가 따로 없는 경우에는 귀 의료기관이 지정한 직원
-</p>
-<p style="color:#f87b0c; margin-bottom: 10px;">
-에게 보관을 의뢰합니다. 이를 이행치 아니하여 분실 및 훼손되어 발생한 손해에 대하여는 귀 의료기관은 책임이 없습니다.
-</p>
-<p>
+<span> 
+&nbsp;본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
+</span>
+<span class="" style="color:#f87b0c;">
+1. 입원 기간 중 예기치 않은 사고(골절, 타박상, 개방성 상처 등)나 응급상황 시 본원에서 치료할 수 없는 상태이거나 의료진 판단으로 응급처치 가능한 병원으로 전원을 요구할 수 있으며 또한 환자 및 보호자가 원할 경우  담당의사와 상의 후 타 병원으로 전원 할 수 있습니다.
+</span>
+<span class="" style="color:#f87b0c;">
+2. 노인은 골다공증, 피부의 약화로 쉽게 골절 또는 멍이 들 수 있으므로 의료기관의 정당한 진료지침이나 교육에 반하는 무단 외출・외박 등으로 인하여 발생하는 환자의 손해에 대한 책임은 원칙적으로 모두 환자에게 있습니다.
+</span>
+<span>
+3. 진료 상 발생하는 모든 문제에 대하여 분쟁이 생겼을 때에는 『의료사고 피해구제 및 의료분쟁 조정 등에 관한 법률』에 의한 한국 의료분쟁조정중재원에 그 조정을 신청할 수 있음에 동의합니다.
+</span>
+<span>
+4. 입원기간 동안 발생하는 진료비는 귀 의료기관에서 정하는 납부기한 내에 납부(연대보증인이 있는 경우에는 환자와 연대보증인이 연대하여 납부)하겠으며, 정당한 이유 없이 체납될 때에는 채권확보를 위한 법적조치에 이의가 없고, 만일 본건을 기초로 의료분쟁 등으로 소송을 제기할 경우 관할법원의 민사소송법에 따릅니다.
+</span>
+<span>
+5. 입원기간 중에 환자 및 보호자가 귀 의료기관의 비품이나 기물을 고의 또는 과실로 파괴, 망실, 훼손한 때에는 이를 변상(현물, 현금)합니다.
+</span>
+<span class="" style="color:#f87b0c;">
+6. 입원기간 중 환자 또는 보호자 등이 소지 중인 현금, 기타 귀중품 및 개인소지품(완전틀니, 부분틀니 포함, 안경, 보청기등)은 귀 의료기관이 지정한 보관 장소가 있는 경우에는 보관 장소에 보관하고, 보관 장소가 따로 없는 경우에는 귀 의료기관이 지정한 직원에게 보관을 의뢰합니다. 이를 이행치 아니하여 분실 및 훼손되어 발생한 손해에 대하여는 귀 의료기관은 책임이 없습니다.
+</span>
+<span>
 7. 개인정보 수집 및 활용 동의
-</p>
-<p>  본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되
-</p>
-<p style="margin-bottom: 10px;">
-며, 동의를 하지 않더라도 진료에는 불이익이 없음.
-</p>
-<p> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</p>
-<p style="margin-bottom: 10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </p>
-<p style="margin-bottom: 10px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</p>
-<p style="margin-bottom: 10px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</p>
-<p style="margin-bottom: 10px;">
- (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</p>
-<br><br>
-<p class="bold" style="color:#303030; font-size: 16pt;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</p>
-<br>
-<p>
-1. 주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입
-</p>
-<p>
-원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 
-</p>
-<p style="margin-bottom: 10px;">
-통해서만 가능합니다.</p>
-<p>
+</span>
+<span>  본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.
+</span>
+<span> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</span>
+<span style="margin-bottom: 10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </span>
+<span style="margin-bottom: 10px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</span>
+<span style="margin-bottom: 10px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</span>
+<span style="margin-bottom: 20px;">
+ (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</span>
+ 
+<span class="bold" style="color:#303030; font-size: 16pt;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
+
+<span>
+1. 주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.</span>
+<span>
 2. 주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
-</p>
-<p style="margin-bottom: 10px;">
+</span>
+<span style="margin-bottom: 10px;">
 (보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
-</p>
-<p>
-3. 주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동
-</p>
-<p style="margin-bottom: 10px;">
-의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
-</p>
-<p>
-4. 입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b>법적</b> 
-</p>
-<p>
-<b>대리인</b>이 됩니다.
-</p>
+</span>
+<span>
+3. 주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
+</span>
+<span>
+4. 입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b>법적 대리인</b>이 됩니다.
+</span>
 </div>
 <br>
 
@@ -289,8 +250,8 @@
 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11"style="cursor: pointer;"> 비용안내</label></div>
 		 -->
 		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
-		  <label for="cs_data_11"><input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
-		  비용안내</label>
+		  <input id="cs_data_11" id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
+		  <label for="cs_data_11" for="cs_data_11">비용안내</label>
 		</div>
 		</td>
 		
@@ -334,8 +295,8 @@
 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div>
 		 -->
 		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
-		  <label for="cs_data_16"><input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
-		  비용안내</label>
+		  <input id="cs_data_16" id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
+		  <label for="cs_data_16" for="cs_data_16">비용안내</label>
 		</div>
 		
 		</td>
@@ -356,8 +317,8 @@ border: 1px solid #c7c7c7;" >
 		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <label for="cs_data_17"><input style="margin-left: 21px;" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
-		  환자의 신체적 정신적 장애로 의사결정 불가</label>
+		  <input style="margin-left: 21px;" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
+		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
 		</div>
 		</td>
 		<td style="text-align: center; border-bottom: none; border-left:none; border-right: none;">
@@ -366,8 +327,8 @@ border: 1px solid #c7c7c7;" >
 		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <label for="cs_data_18"><input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
-		  환자위임</label>
+		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
+		  <label for="cs_data_18">환자위임</label>
 		</div>
 		
 		</td>
@@ -378,8 +339,8 @@ border: 1px solid #c7c7c7;" >
 		 응급 상황</label></div>
 		  -->
 		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
-		  <label for="cs_data_19"><input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황">
-		  응급 상황</label>
+		  <input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황">
+		  <label for="cs_data_19">응급 상황</label>
 		</div>
 		 </td>
 	</tr>
@@ -391,8 +352,8 @@ border: 1px solid #c7c7c7;" >
 		 내용 설명 시 환자의 심신에 중대한 영향 우려</label>
 		  -->
 		<div class="checkbox-wrapper-13" style="margin-left:21px;">
-		  <label for="cs_data_20"><input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려">
-		  내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려">
+		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
 		</div>
 		 </td>
 		<td style="border-right: none; border-top:none; border-left: none;">
@@ -401,8 +362,8 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;"/> 미성년자</label></div>
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <label for="cs_data_21"><input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
-		  미성년자</label>
+		  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
+		  <label for="cs_data_21">미성년자</label>
 		</div>
 		</td>
 		<td style="border-left: none; border-top:none; text-align: center;">
@@ -422,8 +383,8 @@ border: 1px solid #c7c7c7;" >
 		 상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
 		  -->
 		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
-		  <label for="cs_data_22"><input style="font-size:14pt; margin-left: 21px;" id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실">
-		  상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+		  <input style="font-size:14pt; margin-left: 21px;" id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실">
+		  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
 		</div>
 		 
 		</td>
@@ -440,24 +401,24 @@ border: 1px solid #c7c7c7;" >
 		<input style="cursor: pointer;" name="cs_data_24" id="cs_data_24" value="특실" type="checkbox" disabled="disabled"/> 특실</label>&emsp;&emsp;
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <label for="cs_data_24"><input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled">
-		  특실</label>&emsp;&emsp;
+		  <input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled">
+		  <label for="cs_data_24">특실</label>&emsp;&emsp;
 		</div>
 		<!-- 
 		<label for="cs_data_25" style="cursor: pointer;">
 		<input style="cursor: pointer;" name="cs_data_25" id="cs_data_25" value="1인실" type="checkbox" disabled="disabled"/> 1인실</label>&emsp;&emsp;
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <label for="cs_data_25"><input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled">
-		  1인실</label>&emsp;&emsp;
+		  <input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled">
+		  <label for="cs_data_25">1인실</label>&emsp;&emsp;
 		</div>
 		<!-- 
 		<label for="cs_data_26" style="cursor: pointer;">
 		<input style="cursor: pointer;" name="cs_data_26" id="cs_data_26" value="2인실" type="checkbox" disabled="disabled"/> 2인실</label>
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <label for="cs_data_26"><input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled">
-		  2인실</label>
+		  <input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled">
+		  <label for="cs_data_26">2인실</label>
 		</div>
 		</div>
 		
@@ -487,6 +448,7 @@ border: 1px solid #c7c7c7;" >
 	</div>
 </div>
 <br><br>
+</div>
 </div>
 <br><br><br><br><br><br><br>
 
@@ -1118,6 +1080,10 @@ function toggleCheckbox() {
 		checkbox25.disabled = true;
 		checkbox26.disabled = true;
 		checkbox27.disabled = true;
+		
+		$("#cs_data_24").prop("checked", false);
+		$("#cs_data_25").prop("checked", false);
+		$("#cs_data_26").prop("checked", false);
 		
 	}
 }

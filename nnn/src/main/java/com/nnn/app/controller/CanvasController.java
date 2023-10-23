@@ -106,7 +106,9 @@ public class CanvasController {
 			@RequestParam(name="param2", defaultValue = "")String param2,
 			@RequestParam(name="param3", defaultValue = "")String param3,
 			@RequestParam(name="param4", defaultValue = "")String param4,
-			@RequestParam(name="param5", defaultValue = "")String param5) throws Exception{
+			@RequestParam(name="param5", defaultValue = "")String param5,
+			@RequestParam(name="param6", defaultValue = "")String param6
+			) throws Exception{
 
 		System.out.println("written oath 페이지");
 		mav.addObject("param1",param1);
@@ -114,6 +116,7 @@ public class CanvasController {
 		mav.addObject("param3",param3);
 		mav.addObject("param4",param4);
 		mav.addObject("param5",param5);
+		mav.addObject("param6",param6);
 		
 		mav.setViewName("c/Written");
 		return mav;
