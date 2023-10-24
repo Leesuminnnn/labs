@@ -329,8 +329,11 @@
 			hspt_name = #{hspt_name} and user_code LIKE '%BF%'
 			</when>
 			
-			<!-- 부서원 --><!-- 경혁팀 / 1인부서 -->
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
+			AND
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
 			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
@@ -387,7 +390,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -449,7 +453,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -505,7 +510,8 @@
 			<!-- 부서원 -->
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
-			OR
+			AND
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
 			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
@@ -564,7 +570,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -621,7 +628,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -678,7 +686,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -736,7 +745,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -767,7 +777,7 @@
 	
 	<!-- 영양과 -->
 	<when test='hspt_sub.equals("J00")'>
-	hspt_name = #{hspt_name} AND (user_code LIKE 'J00%'
+	hspt_name = #{hspt_name} AND user_code LIKE 'J00%'
 	<choose>
 			<!-- 경혁팀장 / 부서장 -->
 			<when test='b == true and k == true'>
@@ -793,7 +803,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -824,7 +835,7 @@
 	
 	<!-- 물리치료실 -->
 	<when test='hspt_sub.equals("K00")'>
-	hspt_name = #{hspt_name} AND (user_code LIKE 'K00%'
+	hspt_name = #{hspt_name} AND user_code LIKE 'K00%'
 	<choose>
 			<!-- 경혁팀장 / 부서장 -->
 			<when test='b == true and k == true'>
@@ -850,7 +861,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -908,7 +920,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -965,7 +978,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1022,7 +1036,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1053,7 +1068,7 @@
 	
 	<!-- 인공신장 -->
 	<when test='hspt_sub.equals("O00")'>
-		hspt_name = #{hspt_name} AND (user_code LIKE 'O00%'
+		hspt_name = #{hspt_name} AND user_code LIKE 'O00%'
 		<choose>
 			<!-- 경혁팀장 / 부서장 -->
 			<when test='b == true and k == true'>
@@ -1079,7 +1094,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1136,7 +1152,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1193,7 +1210,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1248,7 +1266,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1304,7 +1323,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1360,7 +1380,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1416,7 +1437,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1472,7 +1494,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1528,7 +1551,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1584,7 +1608,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1640,7 +1665,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1696,7 +1722,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1752,7 +1779,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1808,7 +1836,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1864,7 +1893,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1920,7 +1950,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -1975,7 +2006,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -2030,7 +2062,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -2085,7 +2118,8 @@
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
 			AND
-			user_code LIKE 'A00%' OR
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>
 			<!-- 경혁팀 / 부서원 -->
@@ -2138,7 +2172,8 @@
 			<!-- 부서원 -->
 			<!-- 경혁팀 / 1인부서 -->
 			<when test='b == false and v == true and x == true'>
-			OR
+			AND
+			user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
 			hspt_name = #{hspt_name} and user_code LIKE 'A00%' OR
 			hspt_name = #{hspt_name} and user_code LIKE '%VT%'
 			</when>

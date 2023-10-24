@@ -1009,11 +1009,15 @@ public class TestController {
 			return "alert";
 		}
 	}
-	@RequestMapping(value="Testform")
-	public ModelAndView testform(ModelAndView mv, HttpSession session, HttpServletRequest request) {
-		
-		
-		
+	@RequestMapping(value="Testform/{idx}/{idx2}")
+	public ModelAndView testform(ModelAndView mv, HttpSession session, HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2) {
+		session.getAttribute("loginMember");
+		mv.addObject("info", testService.info(idx));
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println( testService.info(idx));
+		System.out.println( testService.info(idx2));
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		mv.addObject("target", testService.info(idx2));
 		
 		mv.setViewName("t/Testform");
 		return mv;

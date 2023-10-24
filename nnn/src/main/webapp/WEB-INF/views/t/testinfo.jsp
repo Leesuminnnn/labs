@@ -17,6 +17,7 @@ text-align: center;
 </style>
 </head>
 <body>
+<form action="${pageContext.request.contextPath}/t/Testform" method="post">
 <div style="margin : 20px 0 20px 0;">
 <c:choose>
 	<c:when test=""></c:when>
@@ -124,14 +125,20 @@ text-align: center;
 <script>
 </script>
 <c:choose>
-<c:when test="${info.hspt_X == 'T' and info.hspt_V == 'F' }">
+<c:when test="${info.hspt_X == 'T' && info.hspt_V == 'F' }">
 평가 대상자가 아닙니다.
 </c:when>
 <c:otherwise>
 
 
 
-<div style="display:<c:if test="${info.hspt_sub == 'A00'}">none</c:if>;">
+<div style="display:<c:if test="${(info.hspt_sub == 'A00' && info.hspt_Z == 'F' && info.hspt_V == 'F') || (info.hspt_V == 'F' && info.hspt_B == 'T') || (info.hspt_V == 'F' && info.hspt_B == 'F' && info.hspt_Z == 'F')}">none</c:if>;">
+<!-- 진료부만 해당될 경우 진료팀장이 아닐경우,
+경혁팀이 아니고 부서장만 해당될 경우
+경혁팀이 아니고 부서원만 해당될 경우
+
+
+ -->
 ▶ 진료부 평가
 <div>
 <table style="border:1px solid #000; border-collapse: collapse;">
@@ -140,57 +147,26 @@ text-align: center;
 	</tr>
 <c:set var="index" value="1" />
 <c:forEach items="${target}" var="t">
-<c:set var="sub" value = "${t.hspt_sub }"/>
-    <c:if test="${t.idx != info.idx && fn:startsWith(t.user_code, 'A')}">
-	<tr>
-		<td>${index}</td>
-		<td>
-			<c:choose>
-				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
-				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
-				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
-				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
-				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
-				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
-				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
-				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
-				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
-				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
-				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
-				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
-				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
-				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
-				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
-				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
-				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
-				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
-				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
-				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
-				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
-				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
-				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
-			</c:choose>
-		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform">평가하기</a></td><td>평가완료</td>
-	</tr>
-	    </c:if>
-	    <c:set var="index" value="${index + 1}" />
+	<c:set var="sub" value = "${t.hspt_sub }"/>
+    <c:if test="${t.idx != info.idx}">
+	    <c:if test="${sub == 'A00'}">
+		    <tr>
+				<td>${index}</td>
+				<td>
+					진료부
+				</td>
+				<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+			</tr>
+			   <c:set var="index" value="${index + 1}" />
+		</c:if>
+	</c:if>
+ 
 </c:forEach>
 </table>
 </div>
 </div>
 <!-- 경혁팀 -->
-<div style="display:<c:if test="${info.hspt_V == 'F' and info.hspt_sub != 'A00'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_sub != 'A00'}">none</c:if>;">
 ▶ 경혁팀 평가
 <div>
 <c:set var="index1" value="1" />
@@ -241,7 +217,7 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
 	</tr>
 	    <c:set var="index1" value="${index1 + 1}" />
 	    </c:if>
@@ -250,7 +226,7 @@ text-align: center;
 </div>
 </div>
 <!-- 부서장 -->
-<div style="display:<c:if test="${info.hspt_sub == 'A00' or info.hspt_B =='T'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
 ▶ 부서장 평가
 <div>
 <table style="border:1px solid #000; border-collapse: collapse;">
@@ -261,10 +237,9 @@ text-align: center;
 <c:set var="index2" value="1" />
 <c:forEach items="${target}" var="t">
 <c:set var="sub" value = "${t.hspt_sub }"/>
-<c:if test="${t.idx != info.idx and t.hspt_B == 'T'}">
-<script>
-</script>
-    
+<c:choose>
+	<c:when test="${info.hspt_V == 'T' }">
+	<c:if test="${t.hspt_B == 'T' && t.hspt_sub != 'A00' && info.hspt_sub == sub}">
 	<tr>
 		<td>${index2}</td>
 		<td>
@@ -304,17 +279,69 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
 	</tr>
+	  <c:set var="index2" value="${index2 + 1}" />
+	</c:if>
+	</c:when>
+	<c:when test="${info.hspt_V == 'F' }">
+		<c:if test="${t.hspt_B == 'T'}">
+		<tr>
+		<td>${index2}</td>
+		<td>
+			<c:choose>
+				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
+				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
+				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
+				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
+				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
+				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
+				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
+				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
+				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
+				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
+				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
+				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
+				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
+				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
+				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
+				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
+				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
+				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
+				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
+				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
+				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
+				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
+				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
+			</c:choose>
+		</td>
+		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+	</tr>
+	  <c:set var="index2" value="${index2 + 1}" />
+		</c:if>
+	</c:when>
+</c:choose>
 
-	    <c:set var="index2" value="${index2 + 1}" />
-	    </c:if>
+
+
+
+
 </c:forEach>
 </table>
 </div>
 </div>
 <!-- 부서원 -->
-<div style="display:<c:if test="${info.hspt_sub == 'A00'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;">
 ▶ 부서원 평가
 <div>
 <table style="border:1px solid #000; border-collapse: collapse;">
@@ -325,10 +352,10 @@ text-align: center;
 <c:set var="index3" value="1" />
 <c:forEach items="${target}" var="t">
 <c:set var="sub" value = "${t.hspt_sub }"/>
-<c:if test="${t.idx != info.idx and t.hspt_B == 'F' and t.hspt_V == 'F' and t.hspt_sub != 'A00'}">
-<script>
-</script>
-    
+<c:choose>
+	<c:when test="${info.hspt_V == 'T' && t.hspt_V =='F'}">
+	<!-- 경혁팀 / 부서원 -->
+	<c:if test="${info.hspt_sub == t.hspt_sub && info.id != t.id && t.hspt_B == 'F'}">
 	<tr>
 		<td>${index3}</td>
 		<td>
@@ -368,17 +395,72 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
 	</tr>
+	 <c:set var="index3" value="${index3 + 1}" />
+	</c:if>
+	</c:when>
+	<c:when test="${info.hspt_V == 'F'}">
+	<!-- 부서원 -->
+	
+	
+	<c:if test="${info.hspt_sub == t.hspt_sub && info.id != t.id && t.hspt_B == 'F'}">
+	<tr>
+		<td>${index3}</td>
+		<td>
+			<c:choose>
+				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
+				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
+				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
+				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
+				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
+				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
+				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
+				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
+				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
+				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
+				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
+				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
+				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
+				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
+				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
+				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
+				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
+				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
+				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
+				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
+				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
+				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
+				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
+				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
+			</c:choose>
+		</td>
+		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+	</tr>
+	 <c:set var="index3" value="${index3 + 1}" />
+	</c:if>
+	</c:when>
+	
+</c:choose>
 
-	    <c:set var="index3" value="${index3 + 1}" />
-	    </c:if>
+    	
+
 </c:forEach>
 </table>
 </div>
 </div>
 
 </c:otherwise>
+
 </c:choose>
 
 
@@ -386,5 +468,6 @@ text-align: center;
 <div>
 코어솔루션 로고가 들어갈 영역
 </div>
+</form>
 </body>
 </html>
