@@ -40,7 +40,7 @@ td {
 			</div>
 			 -->
 			<div class="info">
-				<p>▣ 평가자 및 평가대상자 정보를 확인해주세요.</p>
+				<p style="margin-bottom: 10px;">▣ 평가자 및 평가대상자 정보를 확인해주세요.</p>
 				<div style="display: flex; justify-content: space-around; align-items: center; ">
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
@@ -139,16 +139,99 @@ td {
 					</table>
 				</div>
 			</div>
+			<div style="border-bottom:3px double #000; margin-top: 15px; margin-bottom: 15px;"></div>
 			<div class="area">
-				<p>Q1. 질문이 들어갑니다.</p>
-				<p>
-					<label><input type="radio" name="q1" value=""/>답변 1</label>
-					<label><input type="radio" name="q1" value=""/>답변 2</label>
-					<label><input type="radio" name="q1" value=""/>답변 3</label>
-				</p>
+				<b>[ 섬김 ]</b><br><br>
+				<c:set var="index" value="1"/>
+				<c:set var="a" value="1"/>
+					<c:forEach items="${evf}" var="ev">
+						<c:if test="${ev.d3 eq '섬김' }"><p>${index}. ${ev.d1}</p><br>
+							<p>
+								<label><input type="radio" name="a${a}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${a}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${a}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${a}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${a}" value="1"/>매우미흡</label>
+							</p><br><br>
+						</c:if>
+						<c:set var="index" value="${index + 1}"/>
+						<c:set var="a" value="${a +1 }"/>
+					</c:forEach>
+				<b>[ 배움 ]</b><br><br>
+				<c:set var="index1" value="1"/>
+				<c:set var="b" value="1"/>
+					<c:forEach items="${evf}" var="ev">
+						<c:if test="${ev.d3 eq '배움' }"><p>${index1}. ${ev.d1}</p><br>
+							<p>
+								<label><input type="radio" name="b${b}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${b}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${b}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${b}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${b}" value="1"/>매우미흡</label>
+							</p><br><br>
+						</c:if>
+						<c:set var="index1" value="${index1 + 1}"/>
+						<c:set var="b" value="${b +1 }"/>
+					</c:forEach>
+				<b>[ 키움 ]</b><br><br>
+				<c:set var="index2" value="1"/>
+				<c:set var="c" value="1"/>
+					<c:forEach items="${evf}" var="ev">
+						<c:if test="${ev.d3 eq '키움' }"><p>${index2}. ${ev.d1}</p><br>
+							<p>
+								<label><input type="radio" name="c${c}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${c}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${c}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${c}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${c}" value="1"/>매우미흡</label>
+							</p><br><br>
+						</c:if>
+						<c:set var="index2" value="${index2 + 1}"/>
+						<c:set var="c" value="${c +1 }"/>
+					</c:forEach>
+				<b>[ 나눔 ]</b><br><br>
+				<c:set var="index3" value="1"/>
+				<c:set var="d" value="1"/>
+					<c:forEach items="${evf}" var="ev">
+						<c:if test="${ev.d3 eq '나눔' }"><p>${index3}. ${ev.d1}</p><br>
+							<p>
+								<label><input type="radio" name="d${d}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${d}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${d}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${d}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${d}" value="1"/>매우미흡</label>
+							</p><br><br>
+						</c:if>
+						<c:set var="index3" value="${index3 + 1}"/>
+						<c:set var="d" value="${d +1 }"/>
+					</c:forEach>
+				<b>[ 목표관리 ]</b><br><br>
+				<c:set var="index4" value="1"/>
+				<c:set var="e" value="1"/>
+					<c:forEach items="${evf}" var="ev">
+						<c:if test="${ev.d3 eq '목표관리' }"><p>${index4}. ${ev.d1}</p><br>
+							<p>
+								<label><input type="radio" name="e${e}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${e}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${e}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${e}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${e}" value="1"/>매우미흡</label>
+							</p><br><br>
+						</c:if>
+						<c:set var="index4" value="${index4 + 1}"/>
+						<c:set var="e" value="${e +1 }"/>
+					</c:forEach>
+				<b>[ 종합평가 ]</b><br><br>
+					<c:forEach items="${evf}" var="ev">
+						<c:if test="${ev.d3 eq '주관식' }"><p>${ev.d1}</p><br>
+							<textarea style="width: 520px; height: 90px;"></textarea>
+							<br><br>
+						</c:if>
+					</c:forEach>
 			</div>
 		</div>
 	</div>
+	<!-- 
 	<div class="footer">
 		<div></div>
 		<div class="nav">
@@ -156,10 +239,11 @@ td {
 			<div class="next">&gt;</div>
 		</div>
 	</div>
+	 -->
 </form>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+/* 
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
 var progress = document.querySelector("#progress");
@@ -173,6 +257,7 @@ function PrevPage() {
 	progress.value = progress.value - 10;
 	console.log(progress.value);
 }
+ */
 </script>	
 </body>
 </html>

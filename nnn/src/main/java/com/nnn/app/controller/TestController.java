@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +42,7 @@ import com.nnn.app.service.TestService;
 import com.nnn.app.vo.AjaxResponse;
 import com.nnn.app.vo.CalendarVo;
 import com.nnn.app.vo.Criteria;
+import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.HelpVo;
 import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
@@ -1009,17 +1011,130 @@ public class TestController {
 			return "alert";
 		}
 	}
-	@RequestMapping(value="Testform/{idx}/{idx2}")
-	public ModelAndView testform(ModelAndView mv, HttpSession session, HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2) {
+	@RequestMapping(value="Testform/{idx}/{idx2}/{team}")
+	public ModelAndView testform(ModelAndView mv, HttpSession session, 
+			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
+			@PathVariable("team") String team) {
 		session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<String, Object>();
 		mv.addObject("info", testService.info(idx));
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println( testService.info(idx));
 		System.out.println( testService.info(idx2));
+		System.out.println(team);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
 		mv.addObject("target", testService.info(idx2));
+		// 진료부, 경혁팀, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+			String ev = "AA";
+			System.out.println("ev : " + ev);
+			map.put("d2",ev);
+		}
+		// 부서원 영역
+		else if (team.equals("D")) {
+			String ev = "AB";
+			System.out.println("ev : " + ev);
+			map.put("d2",ev);
+		}
+		List<EvaluationVo> list1 = new ArrayList<EvaluationVo>();
+		list1 = testService.evlist(map);
+		mv.addObject("evf", list1);
 		
 		mv.setViewName("t/Testform");
 		return mv;
+	}
+	// 평가 후 Db저장
+	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
+	public String fromAction(TestusersVo vo, HttpSession session, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, @PathVariable("team") String team, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+		session.getAttribute("loginMember");
+		md.addAttribute("info", testService.info(idx));
+		
+//		// 암호화
+//		SHA256 sha256 = new SHA256();
+//		//비밀번호
+//        String password = vo.getPwd();
+//        //SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        
+//        System.out.println(cryptogram);
+//		//담은 변수를 DB에 넘겨준다.
+//		vo.setPwd(cryptogram);
+//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("pwd", cryptogram);
+		map.put("pwd", vo.getPwd());
+		map.put("idx", vo.getIdx());
+		
+		int flag = testService.pwdinsert(map);
+		
+		if(flag >= 1) {
+			System.out.println(flag);
+			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.");
+			request.setAttribute("url", "t/Testinfo/"+idx);
+			return "alert";
+		} else {
+			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
+			request.setAttribute("url", "t/Testpwd/"+idx);
+			return "alert";
+		}
+	}
+	
+
+	@RequestMapping(value="Insert.do/{midx}")
+	public String insert(Model model, HttpSession session, @PathVariable("midx") Integer midx,HelpVo helpVo,HttpServletRequest request,
+			@ModelAttribute("h_userId")String h_userId, @ModelAttribute("h_userName")String h_userName) throws Exception {
+		System.out.println("#########################");
+		System.out.println("insert접속");
+		//저장되어 있는 세션 꺼내오기
+		session.getAttribute("loginMember");
+		session.getAttribute("email");
+    	session.getAttribute("name");
+    	session.getAttribute("userId");
+    	session.getAttribute("access_Token");
+		session.getAttribute("m_status");
+		session.getAttribute("midx");
+//		String currentUrl = request.getRequestURL().toString();
+//		session.setAttribute("previousUrl", currentUrl);
+//		
+//		System.out.println("previousUrl"+currentUrl);
+		
+//		String previousUrl = (String) session.getAttribute("previousUrl");
+//		String queryString = request.getQueryString();
+//		System.out.println("#########################");
+//		System.out.println("previousUrl : "+previousUrl);
+//		System.out.println("queryString : "+queryString);
+//		if (queryString != null && !queryString.isEmpty()) {
+//		    previousUrl += "?" + queryString;
+//		}
+//		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("h_userName", m_name);
+//		map.put("midx", midx);
+//		map.put("midx",memberService.detail2((String)session.getAttribute("name")).getMidx());
+//		model.addAttribute("detail", memberService.detail2((String)session.getAttribute("name")));
+		
+		//시연용
+		map.put("midx", midx);
+		model.addAttribute("detail", memberService.detail3((String)session.getAttribute("name")));
+		
+		List<HelpVo> recentlist = helpService.recentlist(map);
+		List<HelpVo> startlist = helpService.startlist(map);
+		List<HelpVo> endlist = helpService.endlist(map);
+		model.addAttribute("startlist", startlist);
+		model.addAttribute("endlist", endlist);
+		model.addAttribute("recentlist",recentlist);
+		model.addAttribute("h_userId",session.getAttribute("userId"));
+		model.addAttribute("h_userName",session.getAttribute("name"));
+		model.addAttribute("m_name",session.getAttribute("name"));
+		System.out.println("sessionid : "+session.getAttribute("userId"));
+		System.out.println("sessionname : "+session.getAttribute("name"));
+		System.out.println(midx);
+		System.out.println("recentlist : "+recentlist);
+		System.out.println("endlist : "+endlist);
+		System.out.println("startlist : "+startlist);
+		System.out.println("#########################");
+		
+		return "t/Testinsert";
 	}
 }

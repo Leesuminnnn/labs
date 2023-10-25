@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.Criteria;
+import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
 import com.nnn.app.vo.WrittenVo;
@@ -74,5 +75,9 @@ public class TestDao {
 
 	public List<TestusersVo> BFlist(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".BFlist",map);
+	}
+
+	public List<EvaluationVo> evList(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".evList", map);
 	}
 }

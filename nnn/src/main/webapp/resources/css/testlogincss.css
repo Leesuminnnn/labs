@@ -1,6 +1,9 @@
 @charset "UTF-8";
 .login {
 	width: 410px;
+	
+}
+section {
 	position: absolute;
 	left: 50%;
 	top: 50%;

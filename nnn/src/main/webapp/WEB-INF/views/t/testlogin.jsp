@@ -15,7 +15,11 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/t/loginAction" method="post">
-	<section class="login">
+	<section>
+	<div class="notice" style="display: none;">
+		<p>공지사항</p>
+	</div>
+	<div class="login">
 		<h2>로그인</h2>
 		<ul>
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
@@ -30,6 +34,7 @@
 				<li>회원가입</li>				
 			</ul>
 		</div>
+	</div>
 	</section>
 </form>
 </body>

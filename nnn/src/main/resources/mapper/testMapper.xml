@@ -2222,6 +2222,10 @@
 		from csworktools.testusers where user_code like '%BF%' and hspt_sub = #{hspt_sub}
 	</select>
 	
+	<select id="evList" resultType="evaluation" parameterType="evaluation">
+		select * from csworktools.evaluation where d2 = #{d2}
+	</select>
+	
 	
 	
 </mapper>

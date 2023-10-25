@@ -8,30 +8,30 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css">
+
 <style>
-td {
-border:1px solid #000;
-padding: 15px;
-text-align: center;
-}
+
 </style>
 </head>
 <body>
+<div class="main">
 <form action="${pageContext.request.contextPath}/t/Testform" method="post">
-<div style="margin : 20px 0 20px 0;">
+<div class="logo">
 <c:choose>
 	<c:when test=""></c:when>
 	<c:when test=""></c:when>
 	<c:when test=""></c:when>
 </c:choose>
 
-로고가 들어갈 영역입니다
+소속 기관 로고
 </div>
 <div>
 ▣ 사원정보( ※ 개인정보를 확인해주세요 )
 </div>
-<div>
-	<table style="border:1px solid #000; border-collapse: collapse;">
+<div class="info">
+	<table class="infotb">
 		<tr>
 			<td>기관명</td>
 			<td>부서명</td>
@@ -121,7 +121,7 @@ text-align: center;
 </div>
 
 <div style="border-bottom: 3px solid #000; margin: 10px 0 10px 0;"></div>
-<div><span>▣ 평가대상자( ※ 평가대상자를 확인 후 평가를 진행해주세요)</span></div>
+<div class="target-text"><span>▣ 평가대상자( ※ 평가대상자를 확인 후 평가를 진행해주세요)</span></div>
 <script>
 </script>
 <c:choose>
@@ -141,7 +141,7 @@ text-align: center;
  -->
 ▶ 진료부 평가
 <div>
-<table style="border:1px solid #000; border-collapse: collapse;">
+<table class="targettb_A"style="">
 	<tr>
 		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
 	</tr>
@@ -155,7 +155,7 @@ text-align: center;
 				<td>
 					진료부
 				</td>
-				<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+				<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/A">평가하기</a></td><td>미평가</td>
 			</tr>
 			   <c:set var="index" value="${index + 1}" />
 		</c:if>
@@ -164,13 +164,14 @@ text-align: center;
 </c:forEach>
 </table>
 </div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 </div>
 <!-- 경혁팀 -->
 <div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_sub != 'A00'}">none</c:if>;">
 ▶ 경혁팀 평가
 <div>
 <c:set var="index1" value="1" />
-<table style="border:1px solid #000; border-collapse: collapse;">
+<table>
 	<tr>
 		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
 	</tr>
@@ -217,19 +218,20 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/B">평가하기</a></td><td>미평가</td>
 	</tr>
 	    <c:set var="index1" value="${index1 + 1}" />
 	    </c:if>
 </c:forEach>
 </table>
 </div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 </div>
 <!-- 부서장 -->
 <div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
 ▶ 부서장 평가
 <div>
-<table style="border:1px solid #000; border-collapse: collapse;">
+<table>
 	<tr>
 		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
 	</tr>
@@ -279,7 +281,7 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/C">평가하기</a></td><td>미평가</td>
 	</tr>
 	  <c:set var="index2" value="${index2 + 1}" />
 	</c:if>
@@ -325,7 +327,7 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/D">평가하기</a></td><td>미평가</td>
 	</tr>
 	  <c:set var="index2" value="${index2 + 1}" />
 		</c:if>
@@ -339,6 +341,7 @@ text-align: center;
 </c:forEach>
 </table>
 </div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 </div>
 <!-- 부서원 -->
 <div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;">
@@ -395,7 +398,7 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/D">평가하기</a></td><td>미평가</td>
 	</tr>
 	 <c:set var="index3" value="${index3 + 1}" />
 	</c:if>
@@ -444,7 +447,7 @@ text-align: center;
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>평가완료</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>미평가</td>
 	</tr>
 	 <c:set var="index3" value="${index3 + 1}" />
 	</c:if>
@@ -465,9 +468,10 @@ text-align: center;
 
 
 <div style="border-bottom: 3px solid #000; margin: 10px 0 10px 0;"></div>
-<div>
-코어솔루션 로고가 들어갈 영역
+<div style="text-align: right;">
+<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 </div>
 </form>
+</div>
 </body>
 </html>

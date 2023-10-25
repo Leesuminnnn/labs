@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.TestDao;
 import com.nnn.app.vo.Criteria;
+import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
 
@@ -71,5 +72,9 @@ public class TestService {
 
 	public List<TestusersVo> BFlist(Map<String, Object> map) {
 		return testDao.BFlist(map);
+	}
+
+	public List<EvaluationVo> evlist(Map<String, Object> map) {
+		return testDao.evList(map);
 	}
 }

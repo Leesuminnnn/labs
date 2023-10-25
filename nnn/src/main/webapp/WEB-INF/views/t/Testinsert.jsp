@@ -18,7 +18,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Insertcss.css">
 <style>
-
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://unpkg.com/@zxing/library@latest"></script>
@@ -90,7 +89,6 @@
 	
 </script>
 </head>
-
 <body>
 <%@ include file="../Include/Header3.jsp" %>
 <section>
@@ -135,9 +133,6 @@
 				</div>
 			</div>
 <script type="text/javascript">	
-
-
-
 	const codeReader = new ZXing.BrowserQRCodeReader();
 	const scanButton = document.getElementById('scanButton');
 	const h_name = document.getElementById('h_name');
@@ -148,8 +143,7 @@
 	
 	
 	scanButton.addEventListener('click', () => {
-		console.log("click");
-		navigator.mediaDevices.getUserMedia({ video:  { facingMode: { exact: "environment" } }} ).then((stream) => {
+		navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
 			const video = document.createElement('video');
 			const img = document.createElement('img');
 			video.srcObject = stream;
@@ -233,7 +227,6 @@
 				}
 			}).catch((err) => {
 			console.error(err);
-			alert(err);
 			// video 요소를 삭제합니다.
 			video.pause();
 			video.srcObject = null;
@@ -254,7 +247,6 @@
 			});
 		}).catch((err) => {
 		console.error(err);
-		alert(err);
 		});
 	});
 </script>
@@ -273,30 +265,25 @@
 						<div class="textarea">
 							<textarea name="h_comm" id="h_comm"></textarea>
 						</div>
-						<!-- <div class="modal_insert" id="modal_insert" onclick="end()">
-						등록
-						</div> -->
-						<div class="modal_insert" id="modal_insert" onclick="closePopupAndRedirect()">
+						<div class="modal_insert" id="modal_insert" onclick="end()">
 						등록
 						</div>
 					</div>
 				</div>
 			</div>
-			<%-- 
 			<div class="modal2 normal">
 				<div class="modal_body2">
 					<div>
 						<img class="modal2_img" src="${pageContext.request.contextPath}/resources/img/white.png" style="width: 680px; height: 680px;">
 						<!-- <img class="modal2_img" src="" style="width: 680px; height: 680px;"> -->
 						<div class="text text3" id="result"></div>
-						<input type="hidden" value="" name="mainpickItem" id="mainpickItem">
+
 						<div class="modal_insert" id="" onclick="closePopupAndRedirect2()">
 						확인
 						</div>
 					</div>
 				</div>
 			</div>
-			 --%>
 			<div class="enter"></div>
 			
 			<div class="imglist flex flex-center" id="recent">
@@ -347,36 +334,31 @@
 	
 </section>
 <script>
-
-
-
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const modal2 = document.querySelector('.modal2');
-const btnOpenPopup = document.querySelector('#end');
+const btnOpenPopup = document.querySelector('#end');						
+
 //const modal2Open = document.querySelector('#modal_insert');
-var result = document.querySelector('#result')
+var result = document.querySelector('#result');
 var modal2img = document.querySelector('.modal2_img');
-var MainpickItem = $("#mainpickItem").val();
 function getRandRange(min,max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 function getRandWeight(listItem){
-    var pickVal = Number.MAX_VALUE;
-    var pickItem = null;
-    for(var item in listItem){
-        if(listItem.hasOwnProperty(item)){
-            var tmpVal = -Math.log(Math.random()) / listItem[item];
-            if(tmpVal < pickVal){
-                pickVal = tmpVal;
-                pickItem = item;
-            }
-        }
-    }
-    return pickItem;
+  var pickVal = Number.MAX_VALUE;
+  var pickItem = null;
+  for(var item in listItem){
+      if(listItem.hasOwnProperty(item)){
+          var tmpVal = -Math.log(Math.random()) / listItem[item];
+          if(tmpVal < pickVal){
+              pickVal = tmpVal;
+              pickItem = item;
+          }
+      }
+  }
+  return pickItem;
 }
-
 btnOpenPopup.addEventListener('click', () => {
 	
 		let h_name = $("#h_name").val();
@@ -400,37 +382,36 @@ btnOpenPopup.addEventListener('click', () => {
 	
 	
 	modal.classList.toggle('show');
-
 	if (modal.classList.contains('show')) {
 		body.style.overflow = 'hidden';
 	}
 });
 /* 
-modal2Open.addEventListener('click', () => {
-	modal2.classList.toggle('show');
-
-	if (modal2.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
-});
- */
-function end(){
-	
-	if (textareaIsEmpty()) {
+ * 
+ modal2Open.addEventListener('click', () => {
+		modal2.classList.toggle('show');
+		if (modal2.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+	});
+	 */
+	function end(){
+		modal2.classList.toggle('show');
+		
+		if (modal2.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+ 
+ if (textareaIsEmpty()) {
 		// textarea가 비어있는 경우
+
 		const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
 		if (confirmed) {
-			modal2.classList.toggle('show');
-			
-			if (modal2.classList.contains('show')) {
-				body.style.overflow = 'hidden';
-			}
-
 			$(document).ready(function(){
 				var str = "";
 				var listItem = [];
-				listItem["당첨"] = 30;
-				listItem["꽝"] = 70;
+				listItem["당첨"] = 50;
+				listItem["꽝"] = 50;
 				
 				// 꽝
 				var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -447,9 +428,8 @@ function end(){
 					modal2img.src = src2;
 				}
 				console.log(str + pickItem +"입니다");
-				$("#mainpickItem").val(pickItem);
-				console.log(MainpickItem);
-				console.log("#mainpickItem.val() = "+$("#mainpickItem").val());
+				
+				
 				result.textContent = str + pickItem +"입니다";
 //				alert(str + pickItem +" 입니다");
 				
@@ -469,8 +449,8 @@ function end(){
 		$(document).ready(function(){
 			var str = "";
 			var listItem = [];
-			listItem["당첨"] = 30;
-			listItem["꽝"] = 70;
+			listItem["당첨"] = 50;
+			listItem["꽝"] = 50;
 			
 			// 꽝
 			var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -487,9 +467,8 @@ function end(){
 				modal2img.src = src2;
 			}
 			console.log(str + pickItem +"입니다");
-			MainpickItem = pickItem;
-			console.log(MainpickItem);
-			console.log($("#mainpickItem").val());
+			
+			
 			result.textContent = str + pickItem +"입니다";
 //			alert(str + pickItem +" 입니다");
 			
@@ -497,21 +476,21 @@ function end(){
 	}
 }
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
+
+
 modal.addEventListener('click', (event) => {
 	
 	
 	if (event.target === modal) {
 		// 모달 바깥 영역을 클릭했을 때
 		const confirmed = window.confirm('등록하시겠습니까?');
+
 		if (confirmed){
 			// 예
 			if (textareaIsEmpty()) {
@@ -519,17 +498,11 @@ modal.addEventListener('click', (event) => {
 				const confirmed = window.confirm('내용을 입력하지 않으셨습니다. 그대로 등록하시겠습니까?');
 				if (confirmed) {
 					// 예
-					modal2.classList.toggle('show');
-				
-					if (modal2.classList.contains('show')) {
-						body.style.overflow = 'hidden';
-					}
-					
 					$(document).ready(function(){
 					var str = "";
 					var listItem = [];
-					listItem["당첨"] = 30;
-					listItem["꽝"] = 70;
+					listItem["당첨"] = 50;
+					listItem["꽝"] = 50;
 					
 					// 꽝
 					var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -547,8 +520,7 @@ modal.addEventListener('click', (event) => {
 					}
 					console.log(str + pickItem +"입니다");
 					
-					MainpickItem = pickItem;
-					console.log(MainpickItem);
+					
 					result.textContent = str + pickItem +"입니다";
 	//				alert(str + pickItem +" 입니다");
 					});
@@ -567,8 +539,8 @@ modal.addEventListener('click', (event) => {
 				$(document).ready(function(){
 					var str = "";
 					var listItem = [];
-					listItem["당첨"] = 30;
-					listItem["꽝"] = 70;
+					listItem["당첨"] = 50;
+					listItem["꽝"] = 50;
 					
 					// 꽝
 					var src1 = "${pageContext.request.contextPath}/resources/img/25.png";
@@ -590,7 +562,6 @@ modal.addEventListener('click', (event) => {
 					result.textContent = str + pickItem +"입니다";
 //					alert(str + pickItem +" 입니다");
 					
-					console.log(MainpickItem);
 				});
 //				closePopupAndRedirect();
 			}
@@ -598,12 +569,9 @@ modal.addEventListener('click', (event) => {
 			// 아니오
 			closePopup();
 		}
+
 	}
 });
-
-
-
-
 function namechange(){
 	let value = $('#h_name').val();
 	console.log(value);
@@ -626,6 +594,7 @@ function closePopupAndRedirect() {
 	let h_number = $("#h_number").val();
 	let midx = "${sessionScope.midx}"
 	let h_comm = $("#h_comm").val();
+	
 	console.log(h_name);
 	console.log(h_no);
 	console.log(h_number);
@@ -634,8 +603,6 @@ function closePopupAndRedirect() {
 	//window.location.href = '${pageContext.request.contextPath}/h/end.do/${sessionScope.midx}';
 	
 }
-
-
 function closePopup(){
 	modal.classList.toggle('show');
 	if (!modal.classList.contains('show')) {
@@ -649,7 +616,6 @@ function closePopup2(){
 		body.style.overflow = 'auto';
 	}
 }
-
 function closePopupAndRedirect2(){
 	modal2.classList.toggle('show');
 	if (!modal2.classList.contains('show')) {
@@ -664,22 +630,20 @@ function closePopupAndRedirect2(){
 	let h_number = $("#h_number").val();
 	let midx = "${sessionScope.midx}"
 	let h_comm = $("#h_comm").val();
-	let MainpickItem = $("#mainpickItem").val();
 	
 	console.log(h_name);
 	console.log(h_no);
 	console.log(h_number);
 	console.log(h_comm);
-	console.log(MainpickItem);
 	$("#frm").attr("action","${pageContext.request.contextPath}/h/end.do/${detail.midx}").submit();
+	
+	
 }
-
 function textareaIsEmpty() {
 	const textarea = modal.querySelector('textarea');
 	return textarea.value.trim() === '';
 }
 </script>
 <%@ include file="../Include/Footer.jsp" %>
-
 </body>
 </html>
