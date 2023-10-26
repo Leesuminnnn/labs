@@ -29,6 +29,7 @@
 		<typeAlias alias="calen" type="com.nnn.app.vo.CalendarVo"/>
 		<typeAlias alias="testusers" type="com.nnn.app.vo.TestusersVo"/>
 		<typeAlias alias="evaluation" type="com.nnn.app.vo.EvaluationVo"/>
+		<typeAlias alias="answer" type="com.nnn.app.vo.AnswerVo"/>
 		
 	</typeAliases>  
 

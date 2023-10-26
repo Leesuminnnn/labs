@@ -155,7 +155,7 @@
 				<td>
 					진료부
 				</td>
-				<td>${t.id }</td><td>${t.name}</td><td><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/A">평가하기</a></td><td>미평가</td>
+				<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/A">평가하기</a></td><td>미평가</td>
 			</tr>
 			   <c:set var="index" value="${index + 1}" />
 		</c:if>
@@ -327,7 +327,7 @@
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/D">평가하기</a></td><td>미평가</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/C">평가하기</a></td><td>미평가</td>
 	</tr>
 	  <c:set var="index2" value="${index2 + 1}" />
 		</c:if>
@@ -358,7 +358,7 @@
 <c:choose>
 	<c:when test="${info.hspt_V == 'T' && t.hspt_V =='F'}">
 	<!-- 경혁팀 / 부서원 -->
-	<c:if test="${info.hspt_sub == t.hspt_sub && info.id != t.id && t.hspt_B == 'F'}">
+	<c:if test="${info.hspt_sub == t.hspt_sub && info.id != t.id && t.hspt_B == 'F' || t.hspt_X == 'T'}">
 	<tr>
 		<td>${index3}</td>
 		<td>
@@ -447,7 +447,7 @@
 				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
 			</c:choose>
 		</td>
-		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}">평가하기</a></td><td>미평가</td>
+		<td>${t.id }</td><td>${t.name}</td><td class="form_go"><a href="${pageContext.request.contextPath}/t/Testform/${info.idx}/${t.idx}/D">평가하기</a></td><td>미평가</td>
 	</tr>
 	 <c:set var="index3" value="${index3 + 1}" />
 	</c:if>
