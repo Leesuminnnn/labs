@@ -80,4 +80,8 @@ public class TestDao {
 	public List<EvaluationVo> evList(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".evList", map);
 	}
+
+	public int frominsert(Map<String, Object> map) {
+		return sqlSession1.insert(MAPPER+".forminsert", map);
+	}
 }

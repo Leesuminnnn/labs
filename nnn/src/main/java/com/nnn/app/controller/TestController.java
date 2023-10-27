@@ -40,6 +40,7 @@ import com.nnn.app.service.PointService;
 import com.nnn.app.service.PointplusService;
 import com.nnn.app.service.TestService;
 import com.nnn.app.vo.AjaxResponse;
+import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.CalendarVo;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
@@ -777,6 +778,11 @@ public class TestController {
 		
 		mv.setViewName("t/Testsum");
 		return mv;
+	}@RequestMapping(value="test")
+	public ModelAndView test(ModelAndView mv) {
+		
+		mv.setViewName("t/post");
+		return mv;
 	}
 	@RequestMapping(value="Testlogin")
 	public ModelAndView testlogin(ModelAndView mv) {
@@ -1044,10 +1050,44 @@ public class TestController {
 		return mv;
 	}
 	// 평가 후 Db저장
-	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
-	public String fromAction(TestusersVo vo, HttpSession session, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, @PathVariable("team") String team, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+	@ResponseBody
+	@RequestMapping(value="formAction/{idx}/{idx2}")
+	public String fromAction(AnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, 
+			HttpServletRequest request, HttpServletResponse response, Model md,
+			@RequestParam(name="a1", required = false) String a1, @RequestParam(name="a2", required = false) String a2, @RequestParam(name="a3", required = false) String a3, @RequestParam(name="a4", required = false) String a4, 
+			@RequestParam(name="a5", required = false) String a5, @RequestParam(name="a6", required = false) String a6, @RequestParam(name="a7", required = false) String a7, 
+			@RequestParam(name="b1", required = false) String b1, @RequestParam(name="b2", required = false) String b2, @RequestParam(name="b3", required = false) String b3, 
+			@RequestParam(name="b4", required = false) String b4, @RequestParam(name="b5", required = false) String b5, 
+			@RequestParam(name="c1", required = false) String c1, @RequestParam(name="c2", required = false) String c2, @RequestParam(name="c3", required = false) String c3, @RequestParam(name="c4", required = false) String c4,
+			@RequestParam(name="d1", required = false) String d1, @RequestParam(name="d2", required = false) String d2, @RequestParam(name="e1", required = false) String e1, @RequestParam(name="e2", required = false) String e2, 
+			@RequestParam(name="f1", required = false) String f1
+			) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
-		md.addAttribute("info", testService.info(idx));
+		
+		
+		System.out.println(a1);
+		System.out.println(a2);
+		System.out.println(a3);
+		System.out.println(a4);
+		System.out.println(a5);
+		System.out.println(a6);
+		System.out.println(a7);
+		System.out.println(b1);
+		System.out.println(b2);
+		System.out.println(b3);
+		System.out.println(b4);
+		System.out.println(b5);
+		System.out.println(c1);
+		System.out.println(c2);
+		System.out.println(d1);
+		System.out.println(d2);
+		System.out.println(e1);
+		System.out.println(e2);
+		System.out.println(f1);
+		
+		List<AnswerVo> list = new ArrayList<AnswerVo>();
+		
+		// 나중에 암호화 해야함
 		
 //		// 암호화
 //		SHA256 sha256 = new SHA256();
@@ -1056,27 +1096,33 @@ public class TestController {
 //        //SHA256으로 암호화된 비밀번호
 //        String cryptogram = sha256.encrypt(password);
 //        
-//        System.out.println(cryptogram);
+//        System.out.prIntegerln(cryptogram);
 //		//담은 변수를 DB에 넘겨준다.
 //		vo.setPwd(cryptogram);
 //		System.out.println("암호화된 페스워드 : "+cryptogram);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("pwd", cryptogram);
-		map.put("pwd", vo.getPwd());
-		map.put("idx", vo.getIdx());
+//		map.put("d1", vo.getPwd());		//답안
+//		map.put("d2", );				// 문제은행 idx
+		map.put("d3", infoidx);				// 평가자 사번
+		map.put("d4", targetidx);			// 평가 대상자 사번
 		
-		int flag = testService.pwdinsert(map);
 		
+		System.out.println("###########################################################");
+		System.out.println(vo);
+		System.out.println();
+		System.out.println(infoidx);
+		System.out.println(targetidx);
+		System.out.println("###########################################################");
+		int flag = testService.frominsert(map);
+		// db 전송 이후 
 		if(flag >= 1) {
-			System.out.println(flag);
-			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.");
-			request.setAttribute("url", "t/Testinfo/"+idx);
-			return "alert";
+			
+			return "t/testformend";
 		} else {
-			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
-			request.setAttribute("url", "t/Testpwd/"+idx);
-			return "alert";
+			
+			return "";
 		}
 	}
 	

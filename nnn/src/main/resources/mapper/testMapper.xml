@@ -2226,6 +2226,9 @@
 		select * from csworktools.evaluation where d2 = #{d2}
 	</select>
 	
-	
+	<insert id="forminsert" parameterType="answer">
+		insert into cswrorktools.answer (d1, d2, d3, d4)
+		values (#{d1}, #{d2}, #{d3}, #{d4})
+	</insert>
 	
 </mapper>

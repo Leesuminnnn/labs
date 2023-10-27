@@ -77,4 +77,8 @@ public class TestService {
 	public List<EvaluationVo> evlist(Map<String, Object> map) {
 		return testDao.evList(map);
 	}
+
+	public int frominsert(Map<String, Object> map) {
+		return testDao.frominsert(map);
+	}
 }

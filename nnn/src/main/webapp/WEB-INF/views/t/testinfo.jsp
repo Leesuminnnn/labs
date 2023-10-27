@@ -140,10 +140,10 @@
 
  -->
 ▶ 진료부 평가
-<div>
+<div class="targetA_area">
 <table class="targettb_A"style="">
 	<tr>
-		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
 	</tr>
 <c:set var="index" value="1" />
 <c:forEach items="${target}" var="t">
@@ -169,11 +169,11 @@
 <!-- 경혁팀 -->
 <div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_sub != 'A00'}">none</c:if>;">
 ▶ 경혁팀 평가
-<div>
+<div class="targetB_area">
 <c:set var="index1" value="1" />
-<table>
+<table class="targettb_B">
 	<tr>
-		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
 	</tr>
 
 <c:forEach items="${target}" var="t">
@@ -230,10 +230,10 @@
 <!-- 부서장 -->
 <div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
 ▶ 부서장 평가
-<div>
-<table>
+<div class="targetC_area">
+<table class="targettb_C">
 	<tr>
-		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
 	</tr>
 	
 <c:set var="index2" value="1" />
@@ -346,10 +346,10 @@
 <!-- 부서원 -->
 <div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;">
 ▶ 부서원 평가
-<div>
-<table style="border:1px solid #000; border-collapse: collapse;">
+<div class="targetD_area">
+<table class="targettb_D" style="border:1px solid #000; border-collapse: collapse;">
 	<tr>
-		<td></td><td>부서명</td><td>사원번호</td><td>성명</td><td rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
 	</tr>
 	
 <c:set var="index3" value="1" />

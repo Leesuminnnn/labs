@@ -56,6 +56,21 @@ body {
     background: linear-gradient(to right, #93F9B9, #1D976C);
 
 }
+.end-area {
+    display: flex;
+    justify-content: center;
+}
+.end {
+	background-color: #D9EAD3;
+	width: 230px;
+	height: 57px;
+   	border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #93C47D;
+}
+
 .footer {
 	width: 680px;
 	margin: 0 auto;

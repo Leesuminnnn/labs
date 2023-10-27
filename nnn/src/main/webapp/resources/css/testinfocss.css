@@ -29,9 +29,28 @@ text-align: center;
 .target-text {
 	margin-bottom: 10px;
 }
-.targettb_A {
-	
+.targettb_A, .targettb_B,.targettb_C, .targettb_D {
+	width: 100%;
 }
 .form_go {
 	background-color: #D9EAD3;
+}
+.targetA_area, .targetB_area, .targetC_area, .targetD_area {
+	padding : 15px;
+}
+
+.td1{
+	width: 10%;
+}
+.td2{
+	width: 25%;
+}
+.td3{
+	width: 12.5%;
+}
+.td4{
+	width: 12.5%;
+}
+.td5{
+	width: 20%;
 }
