@@ -79,6 +79,18 @@ public class TestService {
 	}
 
 	public int frominsert(Map<String, Object> map) {
-		return testDao.frominsert(map);
+		int flag = 0;
+		
+		flag = testDao.frominsert(map);
+		
+		return flag;
+	}
+
+	public int whether(Map<String, Object> map2) {
+		int flag = 0;
+		
+		flag = testDao.whether(map2);
+		
+		return flag;
 	}
 }

@@ -147,11 +147,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '섬김' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="a${status.count}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${status.count}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${status.count}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${status.count}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${status.count}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="a${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="1"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="a" value="${a +1 }"/>
@@ -161,11 +161,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '배움' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="b${b}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${b}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${b}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${b}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${b}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="b${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="1"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="b" value="${b +1 }"/>
@@ -173,42 +173,42 @@ td {
 				<b>[ 키움 ]</b><br><br>
 				
 				<c:set var="c" value="1"/>
-					<c:forEach items="${evf}" var="ev">
+					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '키움' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="c${c}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${c}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${c}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${c}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${c}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="c${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="1"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="c" value="${c +1 }"/>
 					</c:forEach>
 				<b>[ 나눔 ]</b><br><br>
 				<c:set var="d" value="1"/>
-					<c:forEach items="${evf}" var="ev">
+					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '나눔' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="d${d}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${d}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${d}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${d}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${d}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="d${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="1"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="d" value="${d +1 }"/>
 					</c:forEach>
 				<b>[ 목표관리 ]</b><br><br>
 				<c:set var="e" value="1"/>
-					<c:forEach items="${evf}" var="ev">
+					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '목표관리' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="e${e}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${e}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${e}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${e}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${e}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="e${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="1"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="e" value="${e +1 }"/>
@@ -216,7 +216,7 @@ td {
 				<b>[ 종합평가 ]</b><br><br>
 					<c:forEach items="${evf}" var="ev">
 						<c:if test="${ev.d3 eq '주관식' }"><p>${ev.d1}</p><br>
-							<textarea style="width: 520px; height: 90px;" name="f"></textarea>
+							<textarea style="width: 520px; height: 90px;" name="f${ev.idx }"></textarea>
 							<br><br>
 						</c:if>
 					</c:forEach>

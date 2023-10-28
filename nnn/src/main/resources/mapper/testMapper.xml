@@ -2230,5 +2230,8 @@
 		insert into cswrorktools.answer (d1, d2, d3, d4)
 		values (#{d1}, #{d2}, #{d3}, #{d4})
 	</insert>
-	
+	<insert id="whether" parameterType="whether">
+		insert into csworktools.whether (d1, d2, d3)
+		values (#{d1}, #{d2}, #{d3})
+	</insert>
 </mapper>

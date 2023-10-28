@@ -84,4 +84,8 @@ public class TestDao {
 	public int frominsert(Map<String, Object> map) {
 		return sqlSession1.insert(MAPPER+".forminsert", map);
 	}
+
+	public int whether(Map<String, Object> map2) {
+		return sqlSession1.insert(MAPPER+".whether", map2);
+	}
 }
