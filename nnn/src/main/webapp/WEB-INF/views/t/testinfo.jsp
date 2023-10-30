@@ -341,7 +341,7 @@
 </c:forEach>
 </table>
 </div>
-<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;"></div>
 </div>
 <!-- 부서원 -->
 <div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;">

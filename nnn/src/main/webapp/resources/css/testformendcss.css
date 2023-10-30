@@ -83,3 +83,15 @@ body {
 	display: flex;
 	justify-content: flex-end;
 }
+.area {
+	text-align: center;
+	padding: 30px;
+	
+}
+.ps {
+	text-align: right;
+}
+
+.ps2 {
+	color: #0000FF;
+}

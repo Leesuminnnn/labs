@@ -21,7 +21,7 @@ d3 varchar(10) null comment '진행 여부'
 @ToString
 public class WhetherVo {
 
-	private String d1;
-	private String d2;
+	private int d1;
+	private int d2;
 	private String d3;
 }
