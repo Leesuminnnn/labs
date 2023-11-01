@@ -2237,4 +2237,7 @@
 		insert into csworktools.whether (d1, d2, d3)
 		values (#{d1}, #{d2}, #{d3})
 	</insert>
+	<select id="noticeselect" resultType="map" parameterType="map">
+		select * from csworktools.notice 
+	</select>
 </mapper>

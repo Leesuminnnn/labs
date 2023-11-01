@@ -8,10 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +42,7 @@ import com.nnn.app.vo.CalendarVo;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.HelpVo;
+import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
 import com.nnn.app.vo.TestVo;
@@ -785,7 +783,12 @@ public class TestController {
 		return mv;
 	}
 	@RequestMapping(value="Testlogin")
-	public ModelAndView testlogin(ModelAndView mv) {
+	public ModelAndView testlogin(ModelAndView mv, NoticeVo vo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<NoticeVo> list = testService.noticeSelect(map);
+		
+		mv.addObject("notice", list);
+		
 		
 		mv.setViewName("t/testlogin");
 		return mv;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.nnn.app.dao.TestDao;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
 
@@ -92,5 +93,9 @@ public class TestService {
 		flag = testDao.whether(map2);
 		
 		return flag;
+	}
+
+	public List<NoticeVo> noticeSelect(Map<String, Object> map) {
+		return testDao.noticeSelect(map);
 	}
 }
