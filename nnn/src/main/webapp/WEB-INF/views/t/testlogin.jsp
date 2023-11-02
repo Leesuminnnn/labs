@@ -17,6 +17,23 @@
 <body>
 <form action="${pageContext.request.contextPath}/t/loginAction" method="post">
 	<section>
+	
+	<div class="login">
+		<h2>로그인</h2>
+		<ul>
+			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
+			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
+			<li><input type="radio" name="radio" id="chk_name" <c:if test="${dbpwdOk != 'true'}">checked</c:if>><label for="chk_name">사번/이름</label>
+				<input type="radio" name="radio" id="chk_no" <c:if test="${dbpwdOk == 'true'}">checked</c:if>><label for="chk_no">사번/비밀번호</label>
+			</li>
+			<li><button>로그인</button></li>			
+		</ul>
+		<div style="display: none;">
+			<ul>
+				<li>회원가입</li>				
+			</ul>
+		</div>
+	</div>
 	<div class="notice" style="">
 		<h2>공지사항</h2>
 		<div class="area">
@@ -40,22 +57,6 @@
 			</table>
 			
 			
-		</div>
-	</div>
-	<div class="login">
-		<h2>로그인</h2>
-		<ul>
-			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
-			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
-			<li><input type="radio" name="radio" id="chk_name" <c:if test="${dbpwdOk != 'true'}">checked</c:if>><label for="chk_name">사번/이름</label>
-				<input type="radio" name="radio" id="chk_no" <c:if test="${dbpwdOk == 'true'}">checked</c:if>><label for="chk_no">사번/비밀번호</label>
-			</li>
-			<li><button>로그인</button></li>			
-		</ul>
-		<div>
-			<ul>
-				<li>회원가입</li>				
-			</ul>
 		</div>
 	</div>
 	</section>

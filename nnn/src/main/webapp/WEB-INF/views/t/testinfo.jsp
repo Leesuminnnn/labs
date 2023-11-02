@@ -21,12 +21,17 @@
 <form action="${pageContext.request.contextPath}/t/Testform" method="post">
 <div class="logo">
 <c:choose>
-	<c:when test=""></c:when>
-	<c:when test=""></c:when>
-	<c:when test=""></c:when>
+	<c:when test="${info.hspt_name == 1}">
+		<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
+	</c:when>
+	<c:when test="${info.hspt_name == 2}">
+		<img src="${pageContext.request.contextPath}/resources/img/2hspt.png">
+	</c:when>
+	<c:when test="${info.hspt_name == 3}">
+		<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
+	</c:when>
 </c:choose>
 
-소속 기관 로고
 </div>
 <div>
 ▣ 사원정보( ※ 개인정보를 확인해주세요 )
@@ -40,8 +45,6 @@
 			<td>직급/직책</td>
 			<td>사원명</td>
 			<td>입사일자</td>
-			<td>경혁팀</td>
-			<td>1인부서</td>
 			
 		</tr>
 		<tr>
@@ -105,18 +108,6 @@
 			<td>
 				<fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}
 			</td>
-			<td>
-				<c:choose>
-					<c:when test="${info.hspt_V == 'T'}">O</c:when>
-					<c:when test="${info.hspt_V == 'F'}">X</c:when>
-				</c:choose>
-			</td>
-			<td>
-				<c:choose>
-					<c:when test="${info.hspt_X == 'T'}">O</c:when>
-					<c:when test="${info.hspt_X == 'F'}">X</c:when>
-				</c:choose>
-			</td>
 		</tr>
 	</table>
 </div>
@@ -144,7 +135,7 @@
 <div class="targetA_area">
 <table class="targettb_A"style="">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
 	</tr>
 <c:set var="index" value="1" />
 <c:forEach items="${target}" var="t">
@@ -174,7 +165,7 @@
 <c:set var="index1" value="1" />
 <table class="targettb_B">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
 	</tr>
 
 <c:forEach items="${target}" var="t">
@@ -234,7 +225,7 @@
 <div class="targetC_area">
 <table class="targettb_C">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
 	</tr>
 	
 <c:set var="index2" value="1" />
@@ -350,7 +341,7 @@
 <div class="targetD_area">
 <table class="targettb_D" style="border:1px solid #000; border-collapse: collapse;">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5" rowspan="1"></td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
 	</tr>
 	
 <c:set var="index3" value="1" />

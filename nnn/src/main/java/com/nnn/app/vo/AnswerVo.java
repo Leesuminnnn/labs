@@ -7,44 +7,42 @@ import lombok.ToString;
 
 /*
 
+
 create table answer (
 idx int(11) AUTO_INCREMENT not null PRIMARY KEY,
-d2 varchar(10) not null COMMENT '평가자 사번',
-d3 varchar(10) not null comment '평가 대상자 사번',
-d4 varchar(10) null comment '문제답안',
-d5 varchar(10) null comment '문제답안',
-d6 varchar(10) null comment '문제답안',
-d7 varchar(10) null comment '문제답안',
-d8 varchar(10) null comment '문제답안',
-d9 varchar(10) null comment '문제답안',
-d10 varchar(10) null comment '문제답안',
-d11 varchar(10) null comment '문제답안',
-d12 varchar(10) null comment '문제답안',
-d13 varchar(10) null comment '문제답안',
-d14 varchar(10) null comment '문제답안',
-d15 varchar(10) null comment '문제답안',
-d16 varchar(10) null comment '문제답안',
-d17 varchar(10) null comment '문제답안',
-d18 varchar(10) null comment '문제답안',
-d19 varchar(10) null comment '문제답안',
-d20 varchar(10) null comment '문제답안',
-d21 varchar(10) null comment '문제답안',
-d22 varchar(10) null comment '문제답안',
-d23 varchar(10) null comment '문제답안',
-d24 varchar(10) null comment '문제답안',
-d25 varchar(10) null comment '문제답안',
-d26 varchar(10) null comment '문제답안',
-d27 varchar(10) null comment '문제답안',
-d28 varchar(10) null comment '문제답안',
-d29 varchar(10) null comment '문제답안',
-d30 varchar(10) null comment '문제답안',
-d31 varchar(10) null comment '문제답안',
-d32 varchar(10) null comment '문제답안',
-d33 varchar(10) null comment '문제답안',
-d34 varchar(10) null comment '문제답안',
-d35 varchar(10) null comment '문제답안'
+u1 varchar(30) not null COMMENT '기관명',
+u2 varchar(30) not null COMMENT '평가자 부서명',
+u3 varchar(10) not null comment '평가자 직책',
+u4 varchar(10) null comment '평가자 이름',
+u5 varchar(10) null comment '평가자 사번',
+t1 varchar(10) null comment '평가대상자 부서',
+t2 varchar(10) null comment '평가대상자 직책',
+t3 varchar(10) null comment '평가대상자 이름',
+t4 varchar(10) null comment '평가대상자 사번',
+ev varchar(5) not null comment '평가 유형',
+d1 varchar(50) null comment '문제답안',
+d2 varchar(50) null comment '문제답안',
+d3 varchar(50) null comment '문제답안',
+d4 varchar(50) null comment '문제답안',
+d5 varchar(50) null comment '문제답안',
+d6 varchar(50) null comment '문제답안',
+d7 varchar(50) null comment '문제답안',
+d8 varchar(50) null comment '문제답안',
+d9 varchar(50) null comment '문제답안',
+d10 varchar(50) null comment '문제답안',
+d11 varchar(50) null comment '문제답안',
+d12 varchar(50) null comment '문제답안',
+d13 varchar(50) null comment '문제답안',
+d14 varchar(50) null comment '문제답안',
+d15 varchar(50) null comment '문제답안',
+d16 varchar(50) null comment '문제답안',
+d17 varchar(50) null comment '문제답안',
+d18 varchar(50) null comment '문제답안',
+d19 varchar(50) null comment '문제답안',
+d20 varchar(50) null comment '문제답안',
+d21 varchar(50) null comment '문제답안'
 );
-);
+
 
 */
 
@@ -53,38 +51,35 @@ d35 varchar(10) null comment '문제답안'
 @ToString
 public class AnswerVo {
 	private int idx;
-	private int d2;
-	private int d3;
-	private int d4;
-	private int d5;
-	private int d6;
-	private int d7;
-	private int d8;
-	private int d9;
-	private int d10;
-	private int d11;
-	private int d12;
-	private int d13;
+	private String u1;
+	private String u2;
+	private String u3;
+	private String u4;
+	private String u5;
+	private String t1;
+	private String t2;
+	private String t3;
+	private String t4;
+	private String ev;
+	private String d1;
+	private String d2;
+	private String d3;
+	private String d4;
+	private String d5;
+	private String d6;
+	private String d7;
+	private String d8;
+	private String d9;
+	private String d10;
+	private String d11;
+	private String d12;
+	private String d13;
 	private String d14;
-	private int d15;
-	private int d16;
-	private int d17;
-	private int d18;
-	private int d19;
-	private int d20;
-	private int d21;
-	private int d22;
-	private int d23;
-	private int d24;
-	private int d25;
-	private int d26;
-	private int d27;
-	private int d28;
-	private int d29;
-	private int d30;
-	private int d31;
-	private int d32;
-	private int d33;
-	private int d34;
-	private String d35;
+	private String d15;
+	private String d16;
+	private String d17;
+	private String d18;
+	private String d19;
+	private String d20;
+	private String d21;
 }

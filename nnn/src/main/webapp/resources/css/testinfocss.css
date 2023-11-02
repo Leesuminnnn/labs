@@ -17,13 +17,17 @@ text-align: center;
 	margin : 20px 0 20px 0;
 	text-align: center;
 }
+.logo img {
+	width: 300px;
+}
 .info{
 	height: 150px;
 	display: flex;
 	padding: 15px;
 }
-.infotb tr:first-child{
-	background-color: #d9d9d9;
+.infotb tr:first-child, .targettb_A tr:first-child, .targettb_B tr:first-child, .targettb_C tr:first-child, .targettb_D tr:first-child{
+	background-color: #08254c;
+	color: #fff;
 }
 
 .target-text {
@@ -46,11 +50,8 @@ text-align: center;
 	width: 25%;
 }
 .td3{
-	width: 12.5%;
+	width: 13.5%;
 }
 .td4{
-	width: 12.5%;
-}
-.td5{
-	width: 20%;
+	width: 14.5%;
 }

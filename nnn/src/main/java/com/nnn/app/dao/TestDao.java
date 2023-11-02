@@ -93,4 +93,8 @@ public class TestDao {
 	public List<NoticeVo> noticeSelect(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".noticeselect", map);
 	}
+
+	public int loginlog(Map<String, Object> map) {
+		return sqlSession1.insert(MAPPER+".loginlog", map);
+	}
 }

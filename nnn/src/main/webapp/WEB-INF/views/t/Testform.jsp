@@ -21,16 +21,20 @@ td {
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/t/formAction/${info.idx}/${target.idx}">
+<form action="${pageContext.request.contextPath}/t/formAction/${info.idx}/${target.idx}/${team}">
 	<div class="header">
-		<div style="margin : 20px auto 20px auto; text-align: center;">
+		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
 			<c:choose>
-				<c:when test=""></c:when>
-				<c:when test=""></c:when>
-				<c:when test=""></c:when>
+				<c:when test="${info.hspt_name == 1}">
+					<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
+				</c:when>
+				<c:when test="${info.hspt_name == 2}">
+					<img src="${pageContext.request.contextPath}/resources/img/2hspt.png">
+				</c:when>
+				<c:when test="${info.hspt_name == 3}">
+					<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
+				</c:when>
 			</c:choose>
-			
-			로고가 들어갈 영역입니다
 		</div>
 	</div>
 	<div class="section">
@@ -45,7 +49,7 @@ td {
 				<div style="display: flex; justify-content: space-around; align-items: center; ">
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
-							<td colspan="3">평가자</td>
+							<td style="background-color: #08254c; color: #fff;" colspan="3">평가자</td>
 						</tr>
 						<tr>
 							<td>부서명</td><td>사원번호</td><td>사원명</td>
@@ -93,7 +97,7 @@ td {
 					<div>==========></div>
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
-							<td colspan="3">평가대상자</td>
+							<td style="background-color: #08254c; color: #fff;" colspan="3">평가대상자</td>
 						</tr>
 						<tr>
 							<td>부서명</td><td>사원번호</td><td>사원명</td>
@@ -148,11 +152,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '섬김' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="a${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="a${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="a${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="a" value="${a +1 }"/>
@@ -162,11 +166,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '배움' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="b${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="b${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="b${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="b" value="${b +1 }"/>
@@ -177,11 +181,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '키움' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="c${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="c${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="c${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="c" value="${c +1 }"/>
@@ -191,11 +195,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '나눔' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="d${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="d${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="d${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="d" value="${d +1 }"/>
@@ -205,11 +209,11 @@ td {
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '목표관리' }"><p>${status.count}. ${ev.d1}</p><br>
 							<p>
-								<label><input type="radio" name="e${ev.idx}" value="5"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="4"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="3"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="2"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="1"/>매우미흡</label>
+								<label><input type="radio" name="e${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
+								<label><input type="radio" name="e${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
 						<c:set var="e" value="${e +1 }"/>

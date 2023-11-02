@@ -784,6 +784,7 @@ public class TestController {
 	}
 	@RequestMapping(value="Testlogin")
 	public ModelAndView testlogin(ModelAndView mv, NoticeVo vo) {
+		// 공지사항 영역 리스트로 출력
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<NoticeVo> list = testService.noticeSelect(map);
 		
@@ -805,7 +806,7 @@ public class TestController {
 //        //비밀번호 일치 여부
 //        boolean pwdcheck = cryptogram.equals(sha256.encrypt(password));
 //		System.out.println(pwdcheck);
-		
+		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("#########################################");
 		System.out.println("id : "+vo.getId());
 		System.out.println("name : "+vo.getName());
@@ -848,10 +849,12 @@ public class TestController {
 				request.setAttribute("url", "t/Testlogin");
 				return "alert";
 			}else {
-				// 로그인 시 접속 기록을 DB에 insert 해야함.
-				// 나중에!!
 				System.out.println("#########################################");
 				System.out.println("로그인 성공");
+				//로그인 기록 저장
+				map.put("id", vo.getId());
+				map.put("name", info2.getName());
+				testService.loginlog(map);
 				System.out.println("#########################################");
 				return "redirect:/t/Testinfo/"+idx;
 			}
@@ -1056,7 +1059,8 @@ public class TestController {
 		map2.put("d3", "1");
 		
 		// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
-		
+		// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
+		// 검색 후 기록이 없으면 insert, 
 		int flag = testService.whether(map2);
 		// 평가 진행후 
 		System.out.println("평가 진행 여부 table insert  :  "+flag);
@@ -1065,24 +1069,36 @@ public class TestController {
 		return mv;
 	}
 	// 평가 후 Db저장
-	@RequestMapping(value="formAction/{idx}/{idx2}")
-	public String fromAction(AnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, 
+	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
+	public String fromAction(AnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
 			HttpServletRequest request, HttpServletResponse response, Model md,
-			@RequestParam(name="a1", required = false) Integer a1, @RequestParam(name="a2", required = false) Integer a2, @RequestParam(name="b3", required = false) Integer b3, 
-			@RequestParam(name="b4", required = false) Integer b4, @RequestParam(name="c5", required = false) Integer c5, @RequestParam(name="c6", required = false) Integer c6, 
-			@RequestParam(name="d7", required = false) Integer d7, @RequestParam(name="d8", required = false) Integer d8, @RequestParam(name="e9", required = false) Integer e9, 
-			@RequestParam(name="e10", required = false) Integer e10, @RequestParam(name="f11", required = false) String f11, @RequestParam(name="a12", required = false) Integer a12, 
-			@RequestParam(name="a13", required = false) Integer a13, @RequestParam(name="a14", required = false) Integer a14, @RequestParam(name="a15", required = false) Integer a15, 
-			@RequestParam(name="a16", required = false) Integer a16, @RequestParam(name="a17", required = false) Integer a17, @RequestParam(name="a18", required = false) Integer a18, 
-			@RequestParam(name="b19", required = false) Integer b19, @RequestParam(name="b20", required = false) Integer b20, @RequestParam(name="b21", required = false) Integer b21, 
-			@RequestParam(name="b22", required = false) Integer b22, @RequestParam(name="b23", required = false) Integer b23, @RequestParam(name="c24", required = false) Integer c24, 
-			@RequestParam(name="c25", required = false) Integer c25, @RequestParam(name="c26", required = false) Integer c26, @RequestParam(name="c27", required = false) Integer c27, 
-			@RequestParam(name="d28", required = false) Integer d28, @RequestParam(name="d29", required = false) Integer d29, @RequestParam(name="e30", required = false) Integer e30, 
-			@RequestParam(name="e31", required = false) Integer e31, @RequestParam(name="f32", required = false) String f32
+			@RequestParam(name="a1", required = false) String a1, @RequestParam(name="a2", required = false) String a2, @RequestParam(name="b3", required = false) String b3, 
+			@RequestParam(name="b4", required = false) String b4, @RequestParam(name="c5", required = false) String c5, @RequestParam(name="c6", required = false) String c6, 
+			@RequestParam(name="d7", required = false) String d7, @RequestParam(name="d8", required = false) String d8, @RequestParam(name="e9", required = false) String e9, 
+			@RequestParam(name="e10", required = false) String e10, @RequestParam(name="f11", required = false) String f11, @RequestParam(name="a12", required = false) String a12, 
+			@RequestParam(name="a13", required = false) String a13, @RequestParam(name="a14", required = false) String a14, @RequestParam(name="a15", required = false) String a15, 
+			@RequestParam(name="a16", required = false) String a16, @RequestParam(name="a17", required = false) String a17, @RequestParam(name="a18", required = false) String a18, 
+			@RequestParam(name="b19", required = false) String b19, @RequestParam(name="b20", required = false) String b20, @RequestParam(name="b21", required = false) String b21, 
+			@RequestParam(name="b22", required = false) String b22, @RequestParam(name="b23", required = false) String b23, @RequestParam(name="c24", required = false) String c24, 
+			@RequestParam(name="c25", required = false) String c25, @RequestParam(name="c26", required = false) String c26, @RequestParam(name="c27", required = false) String c27, 
+			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
+			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32
 			) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
 		md.addAttribute("info", testService.info(infoidx));
 		md.addAttribute("target", testService.info(targetidx));
+		md.addAttribute("team", team);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String u1 = testService.info(infoidx).getHspt_name();		// 기관명
+		String u2 = testService.info(infoidx).getHspt_sub();		// 평가자 부서명
+		String u3 = testService.info(infoidx).getHspt_position();	// 직급/직책
+		String u4 = testService.info(infoidx).getName();			// 평가자 이름
+		String u5 = testService.info(infoidx).getId();				// 평가자 사번
+		String t1 = testService.info(targetidx).getHspt_sub();		// 평가대상자 부서
+		String t2 = testService.info(targetidx).getHspt_position();	// 평가대상자 직책
+		String t3 = testService.info(targetidx).getName();			// 평가대상자 이름
+		String t4 = testService.info(targetidx).getId();			// 평가대상자 사번
 		
 		
 		System.out.println(a1);
@@ -1118,6 +1134,59 @@ public class TestController {
 		System.out.println(e31);
 		System.out.println(f32);
 		
+		map.put("u1", u1);
+		map.put("u2", u2);
+		map.put("u3", u3);
+		map.put("u4", u4);
+		map.put("u5", u5);
+		map.put("t1", t1);
+		map.put("t2", t2);
+		map.put("t3", t3);
+		map.put("t4", t4);
+		// 진료부, 경혁팀, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+			String ev = "AA";
+			System.out.println("ev : " + ev);
+			map.put("ev",ev);
+			map.put("d1", a1);
+			map.put("d2", a2);
+			map.put("d3", b3);
+			map.put("d4", b4);
+			map.put("d5", c5);
+			map.put("d6", c6);
+			map.put("d7", d7);
+			map.put("d8", d8);
+			map.put("d9", e9);
+			map.put("d10", e10);
+			map.put("d11", f11);
+		}
+		// 부서원 영역
+		else if (team.equals("D")) {
+			String ev = "AB";
+			System.out.println("ev : " + ev);
+			map.put("ev",ev);
+			map.put("d1", a12);
+			map.put("d2", a13);
+			map.put("d3", a14);
+			map.put("d4", a15);
+			map.put("d5", a16);
+			map.put("d6", a17);
+			map.put("d7", a18);
+			map.put("d8", b19);
+			map.put("d9", b20);
+			map.put("d10", b21);
+			map.put("d11", b22);
+			map.put("d12", b23);
+			map.put("d13", c24);
+			map.put("d14", c25);
+			map.put("d15", c26);
+			map.put("d16", c27);
+			map.put("d17", d28);
+			map.put("d18", d29);
+			map.put("d19", e30);
+			map.put("d20", e31);
+			map.put("d21", f32);
+		}
 		List<AnswerVo> list = new ArrayList<AnswerVo>();
 		
 		// 나중에 암호화 해야함
@@ -1134,46 +1203,10 @@ public class TestController {
 //		vo.setPwd(cryptogram);
 //		System.out.println("암호화된 페스워드 : "+cryptogram);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("d2", infoidx);				// 평가자 사번
-		map.put("d3", targetidx);			// 평가 대상자 사번
-		map.put("d4", a1);
-		map.put("d5", a2);
-		map.put("d6", b3);
-		map.put("d7", b4);
-		map.put("d8", c5);
-		map.put("d9", c6);
-		map.put("d10", d7);
-		map.put("d11", d8);
-		map.put("d12", e9);
-		map.put("d13", e10);
-		map.put("d14", f11);		// 주관식
-		map.put("d15", a12);
-		map.put("d16", a13);
-		map.put("d17", a14);
-		map.put("d18", a15);
-		map.put("d19", a16);
-		map.put("d20", a17);
-		map.put("d21", a18);
-		map.put("d22", b19);
-		map.put("d23", b20);
-		map.put("d24", b21);
-		map.put("d25", b22);
-		map.put("d26", b23);
-		map.put("d27", c24);
-		map.put("d28", c25);
-		map.put("d29", c26);
-		map.put("d30", c27);
-		map.put("d31", d28);
-		map.put("d32", d29);
-		map.put("d33", e30);
-		map.put("d34", e31);
-		map.put("d35", f32);		// 주관식
 		
 		
 		
 		System.out.println("###########################################################");
-		System.out.println(vo);
 		System.out.println();
 		System.out.println(infoidx);
 		System.out.println(targetidx);

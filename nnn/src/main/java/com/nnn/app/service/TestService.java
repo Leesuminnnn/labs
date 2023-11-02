@@ -98,4 +98,10 @@ public class TestService {
 	public List<NoticeVo> noticeSelect(Map<String, Object> map) {
 		return testDao.noticeSelect(map);
 	}
+
+	public int loginlog(Map<String, Object> map) {
+		int flag = 0;
+		flag = testDao.loginlog(map);
+		return flag;
+	}
 }

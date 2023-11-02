@@ -23,14 +23,18 @@ td {
 
 <form action="${pageContext.request.contextPath}/t/formAction/${info.idx}/${target.idx}">
 	<div class="header">
-		<div style="margin : 20px auto 20px auto; text-align: center;">
+		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
 			<c:choose>
-				<c:when test=""></c:when>
-				<c:when test=""></c:when>
-				<c:when test=""></c:when>
+				<c:when test="${info.hspt_name == 1}">
+					<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
+				</c:when>
+				<c:when test="${info.hspt_name == 2}">
+					<img src="${pageContext.request.contextPath}/resources/img/2hspt.png">
+				</c:when>
+				<c:when test="${info.hspt_name == 3}">
+					<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
+				</c:when>
 			</c:choose>
-			
-			로고가 들어갈 영역입니다
 		</div>
 	</div>
 	<div class="section">
@@ -45,7 +49,7 @@ td {
 				<div style="display: flex; justify-content: space-around; align-items: center; ">
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
-							<td colspan="3">평가자</td>
+							<td style="background-color: #08254c; color: #fff;" colspan="3">평가자</td>
 						</tr>
 						<tr>
 							<td>부서명</td><td>사원번호</td><td>사원명</td>
@@ -93,7 +97,7 @@ td {
 					<div>==========></div>
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
-							<td colspan="3">평가대상자</td>
+							<td style="background-color: #08254c; color: #fff;" colspan="3">평가대상자</td>
 						</tr>
 						<tr>
 							<td>부서명</td><td>사원번호</td><td>사원명</td>
@@ -142,7 +146,7 @@ td {
 			</div>
 			<div style="border-bottom:3px double #000; margin-top: 15px; margin-bottom: 15px;"></div>
 			<div class="area">
-				<p>[${target.name }] 평가가 완료 되었습니다.
+				<p>[ ${target.name } ] 평가가 완료 되었습니다.
 				<p>2023년도 직원평가에 응답해주셔서 감사합니다.<br><br>
 				
 				<p>먼저 지난 일 년 동안 함께 울고 웃으며 수고해주신 여러분의 노고에 감사한 마음을 표현하고 싶습니다.

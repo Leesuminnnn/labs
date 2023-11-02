@@ -32,6 +32,7 @@
 		<typeAlias alias="answer" type="com.nnn.app.vo.AnswerVo"/>
 		<typeAlias alias="whether" type="com.nnn.app.vo.WhetherVo"/>
 		<typeAlias alias="notice" type="com.nnn.app.vo.NoticeVo"/>
+		<typeAlias alias="loginlog" type="com.nnn.app.vo.LoginlogVo"/>
 		
 	</typeAliases>  
 
