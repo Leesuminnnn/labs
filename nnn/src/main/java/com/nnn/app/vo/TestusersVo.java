@@ -43,4 +43,9 @@ user_code VARCHAR(30) NOT NULL COMMENT '코드'
 	private String hspt_X;
 	private String hspt_Z;
 	private String user_code;
+	
+	private int d1;
+	private int d2;
+	private String d3;
+	
 }

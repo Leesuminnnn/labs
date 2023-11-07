@@ -47,6 +47,7 @@ import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.WhetherVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Controller
@@ -966,6 +967,11 @@ public class TestController {
 		list1 = testService.evaluationtarget(map);
 		mv.addObject("target", list1);
 		System.out.println(list1);
+		// 평가 완료한 리스트 출력?		join해서 필요 없음.
+		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
+		list2 = testService.whetherSelect(map);
+		System.out.println("평가 완료 리스트 출력 : "+list2);
+		mv.addObject("endlist", list2);
 //		// 부서장 쿼리 출력
 //		List<TestusersVo> list2 = new ArrayList<TestusersVo>();
 //		list2 = testService.BTlist(map);
@@ -1053,17 +1059,8 @@ public class TestController {
 		}
 		List<EvaluationVo> list1 = new ArrayList<EvaluationVo>();
 		list1 = testService.evlist(map);
-		// 평가 시작하면 whether 테이블에 평가자와 평가 대상자 , 진행 여부 insert
-		map2.put("d1", idx);
-		map2.put("d2", idx2);
-		map2.put("d3", "1");
 		
-		// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
-		// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
-		// 검색 후 기록이 없으면 insert, 
-		int flag = testService.whether(map2);
-		// 평가 진행후 
-		System.out.println("평가 진행 여부 table insert  :  "+flag);
+		
 		mv.addObject("evf", list1);
 		mv.setViewName("t/Testform");
 		return mv;
@@ -1089,6 +1086,7 @@ public class TestController {
 		md.addAttribute("target", testService.info(targetidx));
 		md.addAttribute("team", team);
 		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
 		
 		String u1 = testService.info(infoidx).getHspt_name();		// 기관명
 		String u2 = testService.info(infoidx).getHspt_sub();		// 평가자 부서명
@@ -1099,8 +1097,10 @@ public class TestController {
 		String t2 = testService.info(targetidx).getHspt_position();	// 평가대상자 직책
 		String t3 = testService.info(targetidx).getName();			// 평가대상자 이름
 		String t4 = testService.info(targetidx).getId();			// 평가대상자 사번
-		
-		
+
+		// 평가 시작하면 whether 테이블에 평가자와 평가 대상자 , 진행 여부 insert
+		map2.put("d1", infoidx);
+		map2.put("d2", targetidx);
 		System.out.println(a1);
 		System.out.println(a2);
 		System.out.println(b3);
@@ -1148,44 +1148,19 @@ public class TestController {
 			String ev = "AA";
 			System.out.println("ev : " + ev);
 			map.put("ev",ev);
-			map.put("d1", a1);
-			map.put("d2", a2);
-			map.put("d3", b3);
-			map.put("d4", b4);
-			map.put("d5", c5);
-			map.put("d6", c6);
-			map.put("d7", d7);
-			map.put("d8", d8);
-			map.put("d9", e9);
-			map.put("d10", e10);
-			map.put("d11", f11);
+			String d1 = a1+","+a2+","+b3+","+b4+","+c5+","+c6+","+d7+","+d8+","+e9+","+e10+","+f11;
+			System.out.println(d1);
+			
+			map.put("d1", d1);
 		}
 		// 부서원 영역
 		else if (team.equals("D")) {
 			String ev = "AB";
 			System.out.println("ev : " + ev);
 			map.put("ev",ev);
-			map.put("d1", a12);
-			map.put("d2", a13);
-			map.put("d3", a14);
-			map.put("d4", a15);
-			map.put("d5", a16);
-			map.put("d6", a17);
-			map.put("d7", a18);
-			map.put("d8", b19);
-			map.put("d9", b20);
-			map.put("d10", b21);
-			map.put("d11", b22);
-			map.put("d12", b23);
-			map.put("d13", c24);
-			map.put("d14", c25);
-			map.put("d15", c26);
-			map.put("d16", c27);
-			map.put("d17", d28);
-			map.put("d18", d29);
-			map.put("d19", e30);
-			map.put("d20", e31);
-			map.put("d21", f32);
+			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+b23+","+c24+
+					","+c25+","+c26+","+c27+","+d28+","+d29+","+e30+","+e31+","+f32;
+			map.put("d1", d1);
 		}
 		List<AnswerVo> list = new ArrayList<AnswerVo>();
 		
@@ -1216,6 +1191,12 @@ public class TestController {
 		if(flag >= 1) {
 			request.setAttribute("msg", "평가가 완료되었습니다.");
 			request.setAttribute("url", "t/formEnd/"+infoidx+"/"+targetidx);
+			// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
+			// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
+			// 검색 후 기록이 없으면 insert, 
+			int flag2 = testService.whether(map2);
+			// 평가 진행후 
+			System.out.println("평가 진행 여부 table insert  :  "+flag2);
 			return "alert";
 		} else {
 

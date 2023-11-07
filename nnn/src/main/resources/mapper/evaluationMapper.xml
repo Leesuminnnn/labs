@@ -1,0 +1,2002 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace = "evaluation">
+
+<select id="login" parameterType="users" resultType="int">
+		select count(*) from
+		csworktools.users__
+		where id = #{id} and 
+		<choose>
+			<when test="name == null">
+			pwd = #{pwd}
+			</when>
+			<when test="pwd == null">
+			name = #{name}
+			</when>
+			
+		</choose>
+		
+	</select>
+	<select id="info" resultType="users" parameterType="int">
+		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, user_code
+		from csworktools.users__ where idx=#{idx}
+	</select>
+	<select id="info2" resultType="users" parameterType="users">
+		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, user_code
+		from csworktools.users__ where id=#{id}
+	</select>
+	<update id="pwdinsert" parameterType="users">
+		update csworktools.users__ set pwd = #{pwd} where idx = #{idx}
+	</update>
+
+<select id="evaluationtarget" resultType="users">
+	<!-- SELECT idx, id, pwd, name, reg_date, hspt_name, hspt_subcode, hspt_position, hspt_V, 
+	hspt_K, hspt_B, hspt_X, hspt_Z, user_code
+    FROM csworktools.users__
+    where  -->
+    SELECT u.idx, u.id, u.pwd, u.name, u.reg_date, u.hspt_name, u.hspt_subcode, u.hspt_position, u.hspt_V, 
+    u.hspt_K, u.hspt_B, u.hspt_X, u.hspt_Z, u.user_code, w.d1, w.d2, w.d3
+	FROM csworktools.users__ u
+	left JOIN csworktools.whether w ON u.idx = w.d2 where
+    <choose>
+   	<!-- 진료부 -->
+	<when test='hspt_subcode.equals("A00") and z == true'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'A00%') or 
+	(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+	
+		
+	</when>
+	
+	<when test='hspt_subcode.equals("A00") and z == false'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE '%VT%')
+		
+	
+	</when>
+	
+	<!-- 원무부 -->
+	<when test='hspt_subcode.equals("B00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'B00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			and u.hspt_name = #{hspt_name} and u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			u.hspt_name = #{hspt_name} and u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			u.hspt_name = #{hspt_name} and u.user_code like '%BT%') OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+		<!-- 총무부 -->
+	<when test='hspt_subcode.equals("C00")'>
+		(u.hspt_name = #{hspt_name} and u.user_code LIKE 'C00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			and u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 관리과 -->
+	<when test='hspt_subcode.equals("D00")'>
+	(u.hspt_name = #{hspt_name} and u.user_code LIKE 'D00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- QPS -->
+	<when test='hspt_subcode.equals("E00")'>
+	(u.hspt_name = #{hspt_name} and u.user_code LIKE 'E00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	
+	<!-- 임상병리 -->
+	<when test='hspt_subcode.equals("F00")'>
+	(u.hspt_name = #{hspt_name} and u.user_code LIKE 'F00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 방사선 -->
+	<when test='hspt_subcode.equals("G00")'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'G00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 약국 -->
+	<when test='hspt_subcode.equals("H00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'H00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 사회사업실 -->
+	<when test='hspt_subcode.equals("I00")'>
+	
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'I00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 영양과 -->
+	<when test='hspt_subcode.equals("J00")'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'J00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 물리치료실 -->
+	<when test='hspt_subcode.equals("K00")'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'K00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 작업치료실 -->
+	
+	<when test='hspt_subcode.equals("L00")'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'L00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 외래 -->
+	<when test='hspt_subcode.equals("M00")'>
+	(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'M00%'
+	<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 가정간호 -->
+	<when test='hspt_subcode.equals("N00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'N00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 인공신장 -->
+	<when test='hspt_subcode.equals("O00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'O00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 감염관리 -->
+	<when test='hspt_subcode.equals("P00")'>
+		u.hspt_name = #{hspt_name} AND u.user_code LIKE 'P00%')
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<!-- 각 병동 (Q뒤에 숫자) -->
+	<when test='hspt_subcode.equals("Q01")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q01%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	<when test='hspt_subcode.equals("Q02")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q02%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q03")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q03%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q04")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q04%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q05")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q05%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q06")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q06%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q07")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q07%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q08")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q08%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q09")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q09%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q10")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q10%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q11")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q11%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			(u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("Q12")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'Q12%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("R00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'R00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%' OR)
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("S00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'S00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%')or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			and u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("T00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'T00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("U00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'U00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("V00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'V00%'
+		<choose>
+			<!-- 경혁팀장 / 부서장 -->
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%' OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%' OR
+			u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%'
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	<when test='hspt_subcode.equals("W00")'>
+		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'W00%'
+		<choose>
+			<when test='b == true and k == true'>
+			and u.user_code LIKE '%BF%') OR 
+		    (u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') and u.user_code LIKE '%BF%') OR 
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%XT%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%')
+			
+			</when>
+			<!-- 경혁팀 / 부서장 -->
+			<when test='b == true and k == false'>
+			and u.user_code LIKE '%BF%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%') or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%') 
+			</when>
+			<!-- 부서장 -->
+			<when test='b == true'>
+			u.hspt_name = #{hspt_name} and AND u.user_code LIKE '%BF%')
+			</when>
+			
+			<!-- 부서원 -->
+			<!-- 경혁팀 / 1인부서 -->
+			<when test='b == false and v == true and x == true'>
+			AND
+			u.user_code LIKE 'A00%') OR		<!-- 의미없는 코드 (1인부서라서 해당 부서 X) -->
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE 'A00%') OR
+			(u.hspt_name = #{hspt_name} and u.user_code LIKE '%VT%')
+			</when>
+			<!-- 경혁팀 / 부서원 -->
+			<when test='b == false and v == true'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like 'A00%')
+		    or
+		    (u.hspt_name = #{hspt_name} and u.user_code like '%VT%')
+			</when>
+			<!-- 1인부서 -->
+			<when test='b == false and x == true'>
+			<!-- 평가 제외 -->
+			
+			</when>
+			<!-- 부서원 -->
+			
+			<when test='b == false'>
+			AND u.user_code like '%BT%')
+		    OR
+		    (u.hspt_name = #{hspt_name} and u.user_code like concat (#{hspt_subcode}, '%') AND u.user_code like '%BF%') 
+			</when>
+		</choose>
+	</when>
+	
+	
+	<otherwise></otherwise>
+	</choose>
+	
+	</select>
+	
+	<!-- 부서장만 뽑아내는 쿼리 -->
+	<!-- 만약 진료부라면 진료부 평가가 따로 있기 때문에 진료부 부서장은 제거 해야한다. -->
+	<select id="BTlist" resultType="users" parameterType="users">
+		select idx, id, pwd, name, reg_date, hspt_name, hspt_subcode, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, user_code
+		from csworktools.users__ where user_code like '%BT%' and hspt_subcode = #{hspt_subcode}
+	</select>
+	<!-- 부서원만 뽑아내는 쿼리 -->
+	<select id="BFlist" resultType="users" parameterType="users">
+		select idx, id, pwd, name, reg_date, hspt_name, hspt_subcode, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, user_code
+		from csworktools.users__ where user_code like '%BF%' and hspt_subcode = #{hspt_subcode}
+	</select>
+	
+	<select id="evList" resultType="evaluation" parameterType="evaluation">
+		select * from csworktools.evaluation where d2 = #{d2}
+	</select>
+	
+	<insert id="forminsert" parameterType="answer">
+		insert into csworktools.answer (u1, u2, u3, u4, u5, t1, t2, t3, t4, ev, d1)
+		values (
+		#{u1}, #{u2}, #{u3}, #{u4}, #{u5}, #{t1}, #{t2}, #{t3}, #{t4}, #{ev}, #{d1}	)
+	</insert>
+	<!--  평가 완료 표시  -->
+	<insert id="whether" parameterType="whether">
+		insert into csworktools.whether (d1, d2, d3)
+		values (#{d1}, #{d2}, "평가완료")
+	</insert>
+	<!-- 리스트에서 평가 완료 확인 -->
+	<select id="whetherselect" resultType="map" parameterType="map">
+		select d2, d3 from csworktools.whether where d1 = #{idx}
+	</select>
+	<select id="noticeselect" resultType="map" parameterType="map">
+		select * from csworktools.notice 
+	</select>
+	<insert id="loginlog" parameterType="loginlog">
+		insert into csworktools.loginlog (id, d1) values (#{id}, #{name})
+	</insert>
+
+</mapper>

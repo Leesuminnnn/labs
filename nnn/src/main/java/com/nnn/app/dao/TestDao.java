@@ -13,6 +13,7 @@ import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.WhetherVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Repository
@@ -96,5 +97,9 @@ public class TestDao {
 
 	public int loginlog(Map<String, Object> map) {
 		return sqlSession1.insert(MAPPER+".loginlog", map);
+	}
+
+	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".whetherselect", map);
 	}
 }

@@ -18,16 +18,16 @@
 </head>
 <body>
 <div class="main">
-<form action="${pageContext.request.contextPath}/t/Testform" method="post">
+<form action="${pageContext.request.contextPath}/e/Form" method="post">
 <div class="logo">
 <c:choose>
-	<c:when test="${info.hspt_name == 1}">
+	<c:when test="${info.hspt_name eq '효사랑전주요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
 	</c:when>
-	<c:when test="${info.hspt_name == 2}">
+	<c:when test="${info.hspt_name == '효사랑가족요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/2hspt.png">
 	</c:when>
-	<c:when test="${info.hspt_name == 3}">
+	<c:when test="${info.hspt_name == '가족사랑요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
 	</c:when>
 </c:choose>
@@ -49,48 +49,11 @@
 		</tr>
 		<tr>
 			<td>
-				<c:choose>
-					<c:when test="${info.hspt_name == 1}">효사랑가족요양병원</c:when>
-					<c:when test="${info.hspt_name == 2}">효사랑전주요양병원</c:when>
-					<c:when test="${info.hspt_name == 3}">가족사랑요양병원</c:when>
-				</c:choose>
+				${info.hspt_name}
 			</td>
+			<!-- 1,2,3병원별 설정 필요 -->
 			<td>
-				<c:choose>
-					<c:when test="${info.hspt_sub == 'A00'}">진료부</c:when>
-					<c:when test="${info.hspt_sub == 'B00'}">원무부</c:when>
-					<c:when test="${info.hspt_sub == 'C00'}">총무부</c:when>
-					<c:when test="${info.hspt_sub == 'D00'}">관리과</c:when>
-					<c:when test="${info.hspt_sub == 'E00'}">QPS</c:when>
-					<c:when test="${info.hspt_sub == 'F00'}">임상병리</c:when>
-					<c:when test="${info.hspt_sub == 'G00'}">방사선</c:when>
-					<c:when test="${info.hspt_sub == 'H00'}">약국</c:when>
-					<c:when test="${info.hspt_sub == 'I00'}">사회사업실</c:when>
-					<c:when test="${info.hspt_sub == 'J00'}">영양과</c:when>
-					<c:when test="${info.hspt_sub == 'K00'}">물리치료실</c:when>
-					<c:when test="${info.hspt_sub == 'L00'}">작업치료실</c:when>
-					<c:when test="${info.hspt_sub == 'M00'}">외래</c:when>
-					<c:when test="${info.hspt_sub == 'N00'}">가정간호</c:when>
-					<c:when test="${info.hspt_sub == 'O00'}">인공신장</c:when>
-					<c:when test="${info.hspt_sub == 'P00'}">감염관리</c:when>
-					<c:when test="${info.hspt_sub == 'Q01'}">1병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q02'}">2병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q03'}">3병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q04'}">4병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q05'}">5병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q06'}">6병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q07'}">7병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q08'}">8병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q09'}">9병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q10'}">10병동</c:when>
-					<c:when test="${info.hspt_sub == 'Q11'}">11병동</c:when>
-					<c:when test="${info.hspt_sub == 'R00'}">경영전략연구소</c:when>
-					<c:when test="${info.hspt_sub == 'S00'}">고객지원</c:when>
-					<c:when test="${info.hspt_sub == 'T00'}">의료정보실</c:when>
-					<c:when test="${info.hspt_sub == 'U00'}">장래문화원</c:when>
-					<c:when test="${info.hspt_sub == 'V00'}">재활치료실</c:when>
-					<c:when test="${info.hspt_sub == 'W00'}">홍보기획실</c:when>
-				</c:choose>
+				${info.hspt_subname }
 			</td>
 			<td>
 				${info.id}
@@ -124,7 +87,7 @@
 
 
 
-<div style="display:<c:if test="${(info.hspt_sub == 'A00' && info.hspt_Z == 'F' && info.hspt_V == 'F') || (info.hspt_V == 'F' && info.hspt_B == 'T') || (info.hspt_V == 'F' && info.hspt_B == 'F' && info.hspt_Z == 'F')}">none</c:if>;">
+<div style="display:<c:if test="${(info.hspt_subcode == 'A00' && info.hspt_Z == 'F' && info.hspt_V == 'F') || (info.hspt_V == 'F' && info.hspt_B == 'T') || (info.hspt_V == 'F' && info.hspt_B == 'F' && info.hspt_Z == 'F')}">none</c:if>;">
 <!-- 진료부만 해당될 경우 진료팀장이 아닐경우,
 경혁팀이 아니고 부서장만 해당될 경우
 경혁팀이 아니고 부서원만 해당될 경우
@@ -139,7 +102,7 @@
 	</tr>
 <c:set var="index" value="1" />
 <c:forEach items="${target}" var="t">
-	<c:set var="sub" value = "${t.hspt_sub }"/>
+	<c:set var="sub" value = "${t.hspt_subcode }"/>
     <c:if test="${t.idx != info.idx && info.idx != t.d1}">
 	    <c:if test="${sub == 'A00'}">
 		    <tr>
@@ -197,7 +160,7 @@
 <div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 </div>
 <!-- 경혁팀 -->
-<div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_sub != 'A00'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_subcode != 'A00'}">none</c:if>;">
 ▶ 경혁팀 평가
 <div class="targetB_area">
 <c:set var="index1" value="1" />
@@ -207,7 +170,7 @@
 	</tr>
 
 <c:forEach items="${target}" var="t">
-<c:set var="sub" value = "${t.hspt_sub }"/>
+<c:set var="sub" value = "${t.hspt_subcode }"/>
     <c:if test="${t.idx != info.idx && info.idx != t.d1 && fn:contains(t.user_code, 'VT') && not fn:contains(t.user_code, 'A00')}">
 	<tr>
 		<td>${index1}</td>
@@ -268,10 +231,10 @@
 </c:forEach>
 </table>
 </div>
-<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_X == 'T'}">none</c:if>;"></div>
 </div>
 <!-- 부서장 -->
-<div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
 ▶ 부서장 평가
 <div class="targetC_area">
 <table class="targettb_C">
@@ -281,10 +244,10 @@
 	
 <c:set var="index2" value="1" />
 <c:forEach items="${target}" var="t">
-<c:set var="sub" value = "${t.hspt_sub }"/>
+<c:set var="sub" value = "${t.hspt_subcode }"/>
 <c:choose>
 	<c:when test="${info.hspt_V == 'T' }">
-	<c:if test="${t.idx != info.idx && t.hspt_B == 'T' && t.hspt_sub != 'A00' && info.hspt_sub == sub}">
+	<c:if test="${t.idx != info.idx && t.hspt_B == 'T' && t.hspt_subcode != 'A00' && info.hspt_subcode == sub}">
 	<tr>
 		<td>${index2}</td>
 		<td>
@@ -410,10 +373,10 @@
 </c:forEach>
 </table>
 </div>
-<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;"></div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_X == 'T'}">none</c:if>;"></div>
 </div>
 <!-- 부서원 -->
-<div style="display:<c:if test="${info.hspt_sub == 'A00' || info.hspt_X == 'T'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_X == 'T'}">none</c:if>;">
 ▶ 부서원 평가
 <div class="targetD_area">
 <table class="targettb_D" style="border:1px solid #000; border-collapse: collapse;">
@@ -423,11 +386,11 @@
 	
 <c:set var="index3" value="1" />
 <c:forEach items="${target}" var="t">
-<c:set var="sub" value = "${t.hspt_sub }"/>
+<c:set var="sub" value = "${t.hspt_subcode }"/>
 <c:choose>
 	<c:when test="${info.hspt_V == 'T' && t.hspt_V =='F'}">
 	<!-- 경혁팀 / 부서원 -->
-	<c:if test="${info.hspt_sub == t.hspt_sub && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F' || t.hspt_X == 'T'}">
+	<c:if test="${info.hspt_subcode == t.hspt_subcode && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F' || t.hspt_X == 'T'}">
 	<tr>
 		<td>${index3}</td>
 		<td>
@@ -489,7 +452,7 @@
 	<!-- 부서원 -->
 	
 	
-	<c:if test="${info.hspt_sub == t.hspt_sub && info.id != t.id  && t.hspt_B == 'F'}">
+	<c:if test="${info.hspt_subcode == t.hspt_subcode && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F'}">
 	<tr>
 		<td>${index3}</td>
 		<td>
@@ -577,7 +540,7 @@ function formgo(element) {
 	var targetidx = element.getAttribute("data-t-idx");
 	var ev = element.getAttribute("data-ev");
 	var eidx = element.getAttribute("data-e-idx");
-	var link = "${pageContext.request.contextPath}/t/Testform/${info.idx}/"+targetidx+"/"+ev
+	var link = "${pageContext.request.contextPath}/e/Form/${info.idx}/"+targetidx+"/"+ev
 	
 	console.log(infoidx);
 	console.log(targetidx);

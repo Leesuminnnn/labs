@@ -12,6 +12,7 @@ import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.WhetherVo;
 
 @Service
 public class TestService {
@@ -103,5 +104,9 @@ public class TestService {
 		int flag = 0;
 		flag = testDao.loginlog(map);
 		return flag;
+	}
+
+	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+		return testDao.whetherSelect(map);
 	}
 }

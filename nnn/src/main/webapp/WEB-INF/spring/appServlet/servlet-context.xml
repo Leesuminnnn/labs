@@ -55,6 +55,7 @@
 			<exclude-mapping path="/saveImage"/>
 			<exclude-mapping path="/saveImage*"/>
 			<exclude-mapping path="/t/**"/>
+			<exclude-mapping path="/e/**"/>
 			
 			<exclude-mapping path="/resources/**"/>
 			<beans:bean id="loginInterceptor" class="com.nnn.app.interceptor.LoginInterceptor"/>
