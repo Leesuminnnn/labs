@@ -79,11 +79,7 @@
 <div class="target-text"><span>▣ 평가대상자( ※ 평가대상자를 확인 후 평가를 진행해주세요)</span></div>
 <script>
 </script>
-<c:choose>
-<c:when test="${info.hspt_X == 'T' && info.hspt_V == 'F' }">
-평가 대상자가 아닙니다.
-</c:when>
-<c:otherwise>
+
 
 
 
@@ -103,12 +99,14 @@
 <c:set var="index" value="1" />
 <c:forEach items="${target}" var="t">
 	<c:set var="sub" value = "${t.hspt_subcode }"/>
-    <c:if test="${t.idx != info.idx && info.idx != t.d1}">
-	    <c:if test="${sub == 'A00'}">
+	<!-- 평가자와 평가대상자의 idx가 다른 -->
+	<!-- 평가자idx와 평가완료테이블의 d1이 같은것만  -->
+    <c:if test="${t.idx != info.idx && (info.idx == t.d1 || t.d1 == 0)}">
+	    <c:if test="${sub == 'A00' || sub == 'A01'}">
 		    <tr>
 				<td>${index}</td>
 				<td>
-					진료부
+					${t.hspt_subname }
 				</td>
 				<td>${t.id }</td><td>${t.name}</td>
 				<td class="form_go" onclick="formgo(this)" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
@@ -160,7 +158,7 @@
 <div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 </div>
 <!-- 경혁팀 -->
-<div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_subcode != 'A00'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_subcode != 'A00' && info.hspt_S != 'T' && info.hspt_subcode != 'F00' && info.hspt_subcode != 'E00' && info.hspt_subcode != 'G00' && info.hspt_subcode != 'I00'}">none</c:if>;">
 ▶ 경혁팀 평가
 <div class="targetB_area">
 <c:set var="index1" value="1" />
@@ -171,45 +169,11 @@
 
 <c:forEach items="${target}" var="t">
 <c:set var="sub" value = "${t.hspt_subcode }"/>
-    <c:if test="${t.idx != info.idx && info.idx != t.d1 && fn:contains(t.user_code, 'VT') && not fn:contains(t.user_code, 'A00')}">
+    <c:if test="${t.idx != info.idx && fn:contains(t.user_code, 'VT') && not fn:contains(t.user_code, 'A00') && (info.idx == t.d1 || t.d1 == 0)}">
 	<tr>
 		<td>${index1}</td>
 		<td>
-			<c:choose>
-				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
-				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
-				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
-				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
-				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
-				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
-				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
-				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
-				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
-				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
-				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
-				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
-				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
-				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
-				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
-				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
-				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
-				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
-				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
-				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
-				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
-				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
-				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
-			</c:choose>
+			${t.hspt_subname }
 		</td>
 		<td>${t.id }</td><td>${t.name}</td>
 		<td class="form_go" onclick="formgo(this)" data-ev="B" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
@@ -247,45 +211,11 @@
 <c:set var="sub" value = "${t.hspt_subcode }"/>
 <c:choose>
 	<c:when test="${info.hspt_V == 'T' }">
-	<c:if test="${t.idx != info.idx && t.hspt_B == 'T' && t.hspt_subcode != 'A00' && info.hspt_subcode == sub}">
+	<c:if test="${t.idx != info.idx && t.hspt_B == 'T' && t.hspt_subcode != 'A00' && info.hspt_subcode == sub && (info.idx == t.d1 || t.d1 == 0)}">
 	<tr>
 		<td>${index2}</td>
 		<td>
-			<c:choose>
-				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
-				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
-				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
-				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
-				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
-				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
-				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
-				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
-				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
-				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
-				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
-				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
-				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
-				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
-				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
-				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
-				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
-				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
-				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
-				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
-				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
-				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
-				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
-			</c:choose>
+			${t.hspt_subname }
 		</td>
 		<td>${t.id }</td><td>${t.name}</td>
 		<td class="form_go" onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
@@ -310,44 +240,10 @@
 		<tr>
 		<td>${index2}</td>
 		<td>
-			<c:choose>
-				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
-				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
-				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
-				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
-				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
-				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
-				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
-				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
-				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
-				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
-				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
-				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
-				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
-				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
-				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
-				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
-				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
-				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
-				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
-				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
-				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
-				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
-				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
-			</c:choose>
+			${t.hspt_subname }
 		</td>
 		<td>${t.id }</td><td>${t.name}</td>
-		<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
+		<td class="form_go"  onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
@@ -373,10 +269,12 @@
 </c:forEach>
 </table>
 </div>
-<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_X == 'T'}">none</c:if>;"></div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_subcode == 'A00' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">none</c:if>;"></div>
+<%--여기 설정 해야함 --%>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_subcode == 'A00' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">block</c:if>;"></div>
 </div>
 <!-- 부서원 -->
-<div style="display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_X == 'T'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_subcode == 'A00' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">none</c:if>;">
 ▶ 부서원 평가
 <div class="targetD_area">
 <table class="targettb_D" style="border:1px solid #000; border-collapse: collapse;">
@@ -390,48 +288,17 @@
 <c:choose>
 	<c:when test="${info.hspt_V == 'T' && t.hspt_V =='F'}">
 	<!-- 경혁팀 / 부서원 -->
-	<c:if test="${info.hspt_subcode == t.hspt_subcode && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F' || t.hspt_X == 'T'}">
+	<%--
+	${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && info.idx != t.d1 && (t.hspt_B == 'F' || t.hspt_X == 'T') && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S = 'T'}
+	 --%>
+	<c:if test="${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S == 'T'}">
 	<tr>
 		<td>${index3}</td>
 		<td>
-			<c:choose>
-				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
-				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
-				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
-				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
-				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
-				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
-				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
-				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
-				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
-				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
-				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
-				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
-				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
-				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
-				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
-				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
-				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
-				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
-				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
-				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
-				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
-				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
-				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
-			</c:choose>
+			${t.hspt_subname }
 		</td>
 		<td>${t.id }</td><td>${t.name}</td>
-		<td class="form_go"  onclick="formgo(this)" data-ev="E" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
+		<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
@@ -448,52 +315,18 @@
 	 <c:set var="index3" value="${index3 + 1}" />
 	</c:if>
 	</c:when>
-	<c:when test="${info.hspt_V == 'F'}">
+	<c:when test="${info.hspt_V == 'F' &&info.hspt_V == 'F'}">
 	<!-- 부서원 -->
 	
 	
-	<c:if test="${info.hspt_subcode == t.hspt_subcode && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F'}">
+	<c:if test="${info.hspt_subcode == t.hspt_subcode && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F' }">
 	<tr>
 		<td>${index3}</td>
 		<td>
-			<c:choose>
-				<c:when test="${fn:contains(sub, 'A00')}">진료부</c:when>
-				<c:when test="${fn:contains(sub, 'B00')}">원무부</c:when>
-				<c:when test="${fn:contains(sub, 'C00')}">총무과</c:when>
-				<c:when test="${fn:contains(sub, 'D00')}">관리과</c:when>
-				<c:when test="${fn:contains(sub, 'E00')}">QPS</c:when>
-				<c:when test="${fn:contains(sub, 'F00')}">임상병리</c:when>
-				<c:when test="${fn:contains(sub, 'G00')}">방사선</c:when>
-				<c:when test="${fn:contains(sub, 'H00')}">약국</c:when>
-				<c:when test="${fn:contains(sub, 'I00')}">사회사업실</c:when>
-				<c:when test="${fn:contains(sub, 'J00')}">영양과</c:when>
-				<c:when test="${fn:contains(sub, 'K00')}">물리치료실</c:when>
-				<c:when test="${fn:contains(sub, 'L00')}">작업치료실</c:when>
-				<c:when test="${fn:contains(sub, 'M00')}">외래</c:when>
-				<c:when test="${fn:contains(sub, 'N00')}">가정간호</c:when>
-				<c:when test="${fn:contains(sub, 'O00')}">인공신장</c:when>
-				<c:when test="${fn:contains(sub, 'P00')}">감염관리</c:when>
-				<c:when test="${fn:contains(sub, 'Q01')}">1병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q02')}">2병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q03')}">3병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q04')}">4병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q05')}">5병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q06')}">6병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q07')}">7병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q08')}">8병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q09')}">9병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q10')}">10병동</c:when>
-				<c:when test="${fn:contains(sub, 'Q11')}">11병동</c:when>
-				<c:when test="${fn:contains(sub, 'R00')}">경영전략연구소</c:when>
-				<c:when test="${fn:contains(sub, 'S00')}">고객지원</c:when>
-				<c:when test="${fn:contains(sub, 'T00')}">의료정보실</c:when>
-				<c:when test="${fn:contains(sub, 'U00')}">장래문화원</c:when>
-				<c:when test="${fn:contains(sub, 'V00')}">재활치료실</c:when>
-				<c:when test="${fn:contains(sub, 'W00')}">홍보기획실</c:when>
-			</c:choose>
+			${t.hspt_subname }
 		</td>
 		<td>${t.id }</td><td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-ev="E" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
@@ -519,10 +352,6 @@
 </table>
 </div>
 </div>
-
-</c:otherwise>
-
-</c:choose>
 
 
 <div style="border-bottom: 3px solid #000; margin: 10px 0 10px 0;"></div>

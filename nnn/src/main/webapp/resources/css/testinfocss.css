@@ -38,6 +38,7 @@ text-align: center;
 }
 .form_go {
 	background-color: #eeaa28;
+	cursor: pointer;
 }
 .targetA_area, .targetB_area, .targetC_area, .targetD_area {
 	padding : 15px;
@@ -50,7 +51,7 @@ text-align: center;
 	width: 25%;
 }
 .td3{
-	width: 13.5%;
+	width: 14.5%;
 }
 .td4{
 	width: 14.5%;
