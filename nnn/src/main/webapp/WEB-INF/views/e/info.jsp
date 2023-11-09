@@ -42,7 +42,7 @@
 			<td>기관명</td>
 			<td>부서명</td>
 			<td>사원번호</td>
-			<td>직급/직책</td>
+			<td>직급 / 직책</td>
 			<td>사원명</td>
 			<td>입사일자</td>
 			
@@ -84,9 +84,7 @@
 
 
 <div style="display:<c:if test="${(info.hspt_subcode == 'A00' && info.hspt_Z == 'F' && info.hspt_V == 'F') || (info.hspt_V == 'F' && info.hspt_B == 'T') || (info.hspt_V == 'F' && info.hspt_B == 'F' && info.hspt_Z == 'F')}">none</c:if>;">
-<!-- 진료부만 해당될 경우 진료팀장이 아닐경우,
-경혁팀이 아니고 부서장만 해당될 경우
-경혁팀이 아니고 부서원만 해당될 경우
+<!-- 진료부만 해당될 경우 진료팀장이 아닐경우, 경혁팀일 경우
 
 
  -->
@@ -94,38 +92,46 @@
 <div class="targetA_area">
 <table class="targettb_A"style="">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
 <c:set var="index" value="1" />
 <c:forEach items="${target}" var="t">
 	<c:set var="sub" value = "${t.hspt_subcode }"/>
 	<!-- 평가자와 평가대상자의 idx가 다른 -->
-	<!-- 평가자idx와 평가완료테이블의 d1이 같은것만  -->
-    <c:if test="${t.idx != info.idx && (info.idx == t.d1 || t.d1 == 0)}">
-	    <c:if test="${sub == 'A00' || sub == 'A01'}">
-		    <tr>
-				<td>${index}</td>
-				<td>
-					${t.hspt_subname }
-				</td>
-				<td>${t.id }</td><td>${t.name}</td>
-				<td class="form_go" onclick="formgo(this)" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
-				
-				
-				평가하기
-				</td>
-				<td>
-					<c:choose>
-						<c:when test="${t.d2 == t.idx }">
-							평가완료
-						</c:when>
-						<c:otherwise>
-							미평가
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</tr>
-		   <c:set var="index" value="${index + 1}" />
+	<!-- 평가자idx와 평가완료테이블의 d1이 같은것만 d1이 0인것  -->
+	<!-- 평가자 idx와 d1이 다르고 평가완료된것 -->
+    <c:if test="${t.idx != info.idx}">
+	    <c:if test="${info.idx == t.d1 || t.d1 == 0 || (info.idx != d1 && fn:contains(t.d3, '평가완료'))}">
+		    <c:if test="${sub == 'A00' || sub == 'A01'}">
+			    <tr>
+					<td>${index}</td>
+					<td>
+						${t.hspt_subname }
+					</td>
+					<td>${t.id }</td>
+					<td>
+						${t.hspt_position }
+					</td>
+					<td>${t.name}</td>
+					<td class="form_go" onclick="formgo(this)" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
+					
+					
+					평가하기
+					</td>
+					<td>
+							<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+						<c:choose>
+							<c:when test="${t.d2 == t.idx && t.d1 == info.idx }">
+								평가완료
+							</c:when>
+							<c:otherwise>
+								미평가
+							</c:otherwise>
+						</c:choose>
+					</td>
+				</tr>
+			   <c:set var="index" value="${index + 1}" />
+			</c:if>
 		</c:if>
 	</c:if>
 </c:forEach>
@@ -158,13 +164,14 @@
 <div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 </div>
 <!-- 경혁팀 -->
-<div style="display:<c:if test="${info.hspt_V == 'F' && info.hspt_subcode != 'A00' && info.hspt_S != 'T' && info.hspt_subcode != 'F00' && info.hspt_subcode != 'E00' && info.hspt_subcode != 'G00' && info.hspt_subcode != 'I00'}">none</c:if>;">
+<div style="display:
+<c:if test="${info.hspt_V == 'F' || info.hspt_subcode != 'A00' || info.hspt_subcode != 'A01' || info.hspt_S != 'T' || info.hspt_subcode != 'F00' || info.hspt_subcode != 'E00' || info.hspt_subcode != 'G00' || info.hspt_subcode != 'I00' || info.hspt_subcode != 'X00' || info.hspt_subcode != 'Y00' || info.hspt_subcode != 'Z00'}">none</c:if>;">
 ▶ 경혁팀 평가
 <div class="targetB_area">
 <c:set var="index1" value="1" />
 <table class="targettb_B">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
 
 <c:forEach items="${target}" var="t">
@@ -175,7 +182,11 @@
 		<td>
 			${t.hspt_subname }
 		</td>
-		<td>${t.id }</td><td>${t.name}</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
 		<td class="form_go" onclick="formgo(this)" data-ev="B" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
@@ -195,15 +206,16 @@
 </c:forEach>
 </table>
 </div>
-<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_X == 'T'}">none</c:if>;"></div>
+<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;display:
+<c:if test="${info.hspt_subcode == 'A00' || info.hspt_subcode == 'A01' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;"></div>
 </div>
 <!-- 부서장 -->
-<div style="display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_subcode == 'A00' || info.hspt_subcode == 'A01' || info.hspt_B =='T' || info.hspt_X =='T'}">none</c:if>;">
 ▶ 부서장 평가
 <div class="targetC_area">
 <table class="targettb_C">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
 	
 <c:set var="index2" value="1" />
@@ -217,7 +229,11 @@
 		<td>
 			${t.hspt_subname }
 		</td>
-		<td>${t.id }</td><td>${t.name}</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
 		<td class="form_go" onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
@@ -242,7 +258,11 @@
 		<td>
 			${t.hspt_subname }
 		</td>
-		<td>${t.id }</td><td>${t.name}</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
 		<td class="form_go"  onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
@@ -270,16 +290,14 @@
 </table>
 </div>
 <div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_subcode == 'A00' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">none</c:if>;"></div>
-<%--여기 설정 해야함 --%>
-<div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0; display:<c:if test="${info.hspt_subcode == 'A00' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">block</c:if>;"></div>
 </div>
 <!-- 부서원 -->
-<div style="display:<c:if test="${info.hspt_subcode == 'A00' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_subcode == 'A00'|| info.hspt_subcode == 'A01' || (info.hspt_X == 'T' && info.hspt_K == 'F')}">none</c:if>;">
 ▶ 부서원 평가
 <div class="targetD_area">
 <table class="targettb_D" style="border:1px solid #000; border-collapse: collapse;">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td4">성명</td><td class="td5">평가진행</td><td>평가진행률</td>
+		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
 	
 <c:set var="index3" value="1" />
@@ -297,7 +315,11 @@
 		<td>
 			${t.hspt_subname }
 		</td>
-		<td>${t.id }</td><td>${t.name}</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
 		<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
@@ -325,7 +347,11 @@
 		<td>
 			${t.hspt_subname }
 		</td>
-		<td>${t.id }</td><td>${t.name}</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
 		<td class="form_go" onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>

@@ -81,7 +81,7 @@ public class EvaluationController {
 			request.setAttribute("msg", "아이디 혹은 비밀번호를 확인해 주세요");
 			request.setAttribute("url", "e/Login");
 			System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
-			return "alert";
+			return "alert5";
 		}
 		// 정보가 있을 경우 
 		else if(loginMember == 1) {
@@ -95,14 +95,14 @@ public class EvaluationController {
 				request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
 				request.setAttribute("url", "e/Pwd/"+idx);
 				System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
-				return "alert";
+				return "alert5";
 			// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
 			}else if(info2.getPwd() != null && name != null){
 				String dbpwdOk = "true"; 
 				md.addAttribute("dbpwdOk", dbpwdOk);
 				request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
 				request.setAttribute("url", "e/Login");
-				return "alert";
+				return "alert5";
 			}else {
 				System.out.println("#########################################");
 				System.out.println("로그인 성공");
@@ -217,7 +217,7 @@ public class EvaluationController {
 		System.out.println(evaluationService.evaluationtarget(map));
 		System.out.println("#########################2");
 		mv.addObject("info", evaluationService.info(idx));
-		// 평가 대상 출력
+		// 평가 대상 출력		다른 사람이 평가완료 했을 경우 평가 받은사람이 여러개가 뜸. -> 
 		List<UsersVo> list1 = new ArrayList<UsersVo>();
 		list1 = evaluationService.evaluationtarget(map);
 		mv.addObject("target", list1);
@@ -279,11 +279,11 @@ public class EvaluationController {
 			System.out.println(flag);
 			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.");
 			request.setAttribute("url", "e/Info/"+idx);
-			return "alert";
+			return "alert5";
 		} else {
 			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
 			request.setAttribute("url", "e/Pwd/"+idx);
-			return "alert";
+			return "alert5";
 		}
 	}
 	@RequestMapping(value="Form/{idx}/{idx2}/{team}")
@@ -452,12 +452,12 @@ public class EvaluationController {
 			int flag2 = evaluationService.whether(map2);
 			// 평가 진행후 
 			System.out.println("평가 진행 여부 table insert  :  "+flag2);
-			return "alert";
+			return "alert5";
 		} else {
 
 			request.setAttribute("msg", "오류발생");
 			request.setAttribute("url", "e/info/"+infoidx);
-			return "alert";
+			return "alert5";
 		}
 	}
 	

@@ -5,6 +5,9 @@ package com.nnn.app;
 
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nnn.app.service.EvaluationService;
 import com.nnn.app.service.HelpService;
 import com.nnn.app.service.MemberService;
 import com.nnn.app.vo.CustomerVo;
+import com.nnn.app.vo.NoticeVo;
 
 /**
  * Handles requests for the application home page.
@@ -28,11 +33,13 @@ public class HomeController {
 	
 	private HelpService helpService;
 	private MemberService memberService;
+	private EvaluationService evaluationService;
 	
 	@Autowired
-	public HomeController(HelpService helpService, MemberService memberService) {
+	public HomeController(HelpService helpService, MemberService memberService, EvaluationService evaluationService) {
 		this.helpService = helpService;
 		this.memberService = memberService;
+		this.evaluationService = evaluationService;
 	}
 	
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
@@ -57,6 +64,10 @@ public class HomeController {
 	public String alert3(HttpSession session) {
 		
 		return "alert3";
+	}@RequestMapping(value = "/alert5.do", method = RequestMethod.GET)
+	public String alert5(HttpSession session) {
+		
+		return "alert5";
 	}
 	@RequestMapping(value = "/alert2.do", method = RequestMethod.GET)
 	public String alert2(HttpSession session) {
@@ -80,6 +91,7 @@ public class HomeController {
 		session.getAttribute("midx");
 		return "alert4";
 	}
+	/*
 	@RequestMapping(value="/")
 	public ModelAndView main2(ModelAndView mav, HttpSession session, CustomerVo vo, HttpServletRequest request) throws Exception {
 		System.out.println("-----------------1");
@@ -121,6 +133,21 @@ public class HomeController {
 		mav.setViewName("h/Main");
 		
 		return mav;
+	}
+	
+	
+	*/
+	@RequestMapping(value="/")
+	public ModelAndView main2(ModelAndView mv, HttpSession session, CustomerVo vo, HttpServletRequest request) throws Exception {
+		// 공지사항 영역 리스트로 출력
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<NoticeVo> list = evaluationService.noticeSelect(map);
+		
+		mv.addObject("notice", list);
+		
+		
+		mv.setViewName("e/login");
+		return mv;
 	}
 	public static void alertAndGo(HttpServletResponse response, String msg, String url) {
 	    try {

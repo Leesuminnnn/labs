@@ -93,6 +93,7 @@ td {
 				
 				<p class="ps2">※ 모든 직원의 평가가 완료되지 않으신 직원은 아래 "목록 돌아가기" 버튼을 클릭하여, 평가를 계속 진행해주시기 바랍니다.
 				<br><br><br>
+				<!-- <div onclick="back()" style="border: 1px solid #000; padding: 15px; background-color: #D9EAD3;"></div> -->
 				<a style="border: 1px solid #000; padding: 15px; background-color: #D9EAD3;" href="${pageContext.request.contextPath}/e/Info/${info.idx}">평가대상자 목록 돌아가기</a>
 				</div>
 				</div>
@@ -107,6 +108,14 @@ td {
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+function back() {
+	var infoidx = ${info.idx};
+	var link = "${pageContext.request.contextPath}/e/Info/"+infoidx;
+	
+	// 링크 이동
+	location.replace(link);
+}
+
 /* 
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");

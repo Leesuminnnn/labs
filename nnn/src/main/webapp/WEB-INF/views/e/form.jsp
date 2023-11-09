@@ -21,7 +21,7 @@ td {
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}/${team}">
+<form id="frm" onsubmit="return false;">
 	<div class="header">
 		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
 			<c:choose>
@@ -160,7 +160,7 @@ td {
 			</div>
 			<div class="end-area">
 			<!--  -->
-				<button class="end" >
+				<button class="end" id="end">
 					평가완료
 				</button>
 			</div>
@@ -177,6 +177,28 @@ td {
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+var form = document.getElementById("frm");
+
+$("#end").click(function() {
+
+	frm.action = "${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}/${team}";
+	form.submit();
+});
+
+
+
+
+/* 
+$(document).ready(function(){ 
+    window.onbeforeunload = function(){
+        doExit();
+    };
+});
+
+function doExit(){
+    event.returnValue = '"페이지를 벗어 나시겠습니까?"';
+}
+ */
 /* 
 var next = document.querySelector(".next");
 var prev = document.querySelector(".prev");
