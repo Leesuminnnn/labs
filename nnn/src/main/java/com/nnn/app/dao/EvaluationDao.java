@@ -16,11 +16,13 @@ import com.nnn.app.vo.WhetherVo;
 @Repository
 public class EvaluationDao {
 
-	//1 : hwtools, 2 : counselman
+	//1 : hwtools, 2 : counselman 3: 서버 이관(csworktools2)
 	@Resource(name="sqlSession2")
 	private SqlSession sqlSession2;
 	@Resource(name="sqlSession1")
 	private SqlSession sqlSession1;
+	@Resource(name="sqlSession3")
+	private SqlSession sqlSession3;
 	
 	public static final String MAPPER = "evaluation";
 	

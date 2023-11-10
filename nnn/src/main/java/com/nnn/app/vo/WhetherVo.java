@@ -24,4 +24,5 @@ public class WhetherVo {
 	private int d1;
 	private int d2;
 	private String d3;
+	private String ev;
 }

@@ -180,7 +180,7 @@ td {
 var form = document.getElementById("frm");
 
 $("#end").click(function() {
-
+	alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
 	frm.action = "${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}/${team}";
 	form.submit();
 });

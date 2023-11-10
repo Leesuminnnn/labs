@@ -220,8 +220,12 @@ public class EvaluationController {
 		// 평가 대상 출력		다른 사람이 평가완료 했을 경우 평가 받은사람이 여러개가 뜸. -> 
 		List<UsersVo> list1 = new ArrayList<UsersVo>();
 		list1 = evaluationService.evaluationtarget(map);
+		System.out.println("#############################");
 		mv.addObject("target", list1);
 		System.out.println(list1);
+		System.out.println("#############################");
+		System.out.println(list1.get(0));
+		System.out.println("#############################");
 		// 평가 완료한 리스트 출력?		join해서 필요 없음.
 		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
 		list2 = evaluationService.whetherSelect(map);

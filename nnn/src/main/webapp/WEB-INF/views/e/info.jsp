@@ -119,15 +119,14 @@
 					평가하기
 					</td>
 					<td>
-							<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-						<c:choose>
-							<c:when test="${t.d2 == t.idx && t.d1 == info.idx }">
-								평가완료
-							</c:when>
-							<c:otherwise>
-								미평가
-							</c:otherwise>
-						</c:choose>
+						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+						<c:forEach items="${endlist}" var="e">
+							<c:choose>
+								<c:when test="${t.idx == e.d2}">
+									${e.d3 }
+								</c:when>
+							</c:choose>
+						</c:forEach>
 					</td>
 				</tr>
 			   <c:set var="index" value="${index + 1}" />
@@ -165,7 +164,7 @@
 </div>
 <!-- 경혁팀 -->
 <div style="display:
-<c:if test="${info.hspt_V == 'F' || info.hspt_subcode != 'A00' || info.hspt_subcode != 'A01' || info.hspt_S != 'T' || info.hspt_subcode != 'F00' || info.hspt_subcode != 'E00' || info.hspt_subcode != 'G00' || info.hspt_subcode != 'I00' || info.hspt_subcode != 'X00' || info.hspt_subcode != 'Y00' || info.hspt_subcode != 'Z00'}">none</c:if>;">
+<c:if test="">none</c:if>;">
 ▶ 경혁팀 평가
 <div class="targetB_area">
 <c:set var="index1" value="1" />
@@ -191,14 +190,14 @@
 		평가하기
 		</td>
 		<td>
-			<c:choose>
-				<c:when test="${t.d2 == t.idx }">
-					평가완료
-				</c:when>
-				<c:otherwise>
-					미평가
-				</c:otherwise>
-			</c:choose>
+			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx == e.d2}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
 		</td>
 	</tr>
 	    <c:set var="index1" value="${index1 + 1}" />
@@ -238,14 +237,14 @@
 		평가하기
 		</td>
 		<td>
-			<c:choose>
-				<c:when test="${t.d2 == t.idx }">
-					평가완료
-				</c:when>
-				<c:otherwise>
-					미평가
-				</c:otherwise>
-			</c:choose>
+			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx == e.d2}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
 		</td>
 	</tr>
 	  <c:set var="index2" value="${index2 + 1}" />
@@ -267,14 +266,14 @@
 		평가하기
 		</td>
 		<td>
-			<c:choose>
-				<c:when test="${t.d2 == t.idx }">
-					평가완료
-				</c:when>
-				<c:otherwise>
-					미평가
-				</c:otherwise>
-			</c:choose>
+			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx == e.d2}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
 		</td>
 	</tr>
 	  <c:set var="index2" value="${index2 + 1}" />
@@ -304,12 +303,18 @@
 <c:forEach items="${target}" var="t">
 <c:set var="sub" value = "${t.hspt_subcode }"/>
 <c:choose>
-	<c:when test="${info.hspt_V == 'T' && t.hspt_V =='F'}">
+	<c:when test="${info.hspt_V == 'T' && t.hspt_B == 'F'}">
 	<!-- 경혁팀 / 부서원 -->
-	<%--
+	<!-- 3병원 외 간호과장 (M00) -->
+	<c:choose>
+		<c:when test="${info.hspt_name ne '가족사랑요양병원' }">
+		<%--
 	${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && info.idx != t.d1 && (t.hspt_B == 'F' || t.hspt_X == 'T') && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S = 'T'}
 	 --%>
-	<c:if test="${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S == 'T'}">
+	 <c:if test="${t.hspt_subcode != 'Q06'}">
+	 <c:if test="${t.hspt_V eq 'F'}">
+	 <c:if test="${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S == 'T' }">
+	<%-- <c:if test="${sub != 'A00' && sub != 'A01' && info.id != t.id && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S == 'T' || (sub == 'B00' && t.hspt_V == 'T')}"> --%>
 	<tr>
 		<td>${index3}</td>
 		<td>
@@ -324,22 +329,64 @@
 		평가하기
 		</td>
 		<td>
-			<c:choose>
-				<c:when test="${t.d2 == t.idx }">
-					평가완료
-				</c:when>
-				<c:otherwise>
-					미평가
-				</c:otherwise>
-			</c:choose>
+			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx == e.d2}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
 		</td>
 	</tr>
 	 <c:set var="index3" value="${index3 + 1}" />
 	</c:if>
-	</c:when>
-	<c:when test="${info.hspt_V == 'F' &&info.hspt_V == 'F'}">
-	<!-- 부서원 -->
+	</c:if>
+	</c:if>
+		</c:when>
+		<c:otherwise>
+		<%--
+	${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && info.idx != t.d1 && (t.hspt_B == 'F' || t.hspt_X == 'T') && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S = 'T'}
+	 --%>
+	 <c:if test="${t.hspt_V eq 'F'}">
+	 <c:if test="${t.hspt_subcode != 'A00' && t.hspt_subcode != 'A01' && info.id != t.id && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S == 'T'}">
+	<%-- <c:if test="${sub != 'A00' && sub != 'A01' && info.id != t.id && (info.idx == t.d1 || t.d1 == 0) || t.hspt_S == 'T' || (sub == 'B00' && t.hspt_V == 'T')}"> --%>
+	<tr>
+		<td>${index3}</td>
+		<td>
+			${t.hspt_subname }
+		</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
+		<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 == t.idx}">${e.d2}</c:if>">
+		평가하기
+		</td>
+		<td>
+			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx == e.d2}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
+		</td>
+	</tr>
+	 <c:set var="index3" value="${index3 + 1}" />
+	</c:if></c:if>
+		</c:otherwise>
+	</c:choose>
 	
+	
+	</c:when>
+	
+	
+	
+	<c:when test="${info.hspt_V == 'F'}">
+	<!-- 부서원 -->
 	
 	<c:if test="${info.hspt_subcode == t.hspt_subcode && info.id != t.id && info.idx != t.d1 && t.hspt_B == 'F' }">
 	<tr>
@@ -356,14 +403,14 @@
 		평가하기
 		</td>
 		<td>
-			<c:choose>
-				<c:when test="${t.d2 == t.idx }">
-					평가완료
-				</c:when>
-				<c:otherwise>
-					미평가
-				</c:otherwise>
-			</c:choose>
+			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx == e.d2}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
 		</td>
 	</tr>
 	 <c:set var="index3" value="${index3 + 1}" />
@@ -381,7 +428,7 @@
 
 
 <div style="border-bottom: 3px solid #000; margin: 10px 0 10px 0;"></div>
-<div style="text-align: right;">
+<div style="text-align: center;">
 <img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 </div>
 </form>
