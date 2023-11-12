@@ -44,8 +44,8 @@ public class EvaluationController {
 		List<NoticeVo> list = evaluationService.noticeSelect(map);
 		
 		mv.addObject("notice", list);
-		
-		
+		// 초기 로그인페이지 들어오면 사번/비밀번호로
+		mv.addObject("dbpwdOk", true);
 		mv.setViewName("e/login");
 		return mv;
 	}

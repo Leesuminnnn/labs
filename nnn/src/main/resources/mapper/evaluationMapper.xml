@@ -21,12 +21,12 @@
 	</select>
 	<select id="info" resultType="users" parameterType="int">
 		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, user_code
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
 		from users__ where idx=#{idx}
 	</select>
 	<select id="info2" resultType="users" parameterType="users">
 		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, user_code
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
 		from users__ where id=#{id}
 	</select>
 	<update id="pwdinsert" parameterType="users">
@@ -35,7 +35,7 @@
 
 <select id="evaluationtarget" resultType="users">
 	SELECT idx, id, pwd, name, reg_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
-	hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, user_code
+	hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
     FROM users__ u
     where
     <!-- 
@@ -2915,13 +2915,13 @@
 	<!-- 만약 진료부라면 진료부 평가가 따로 있기 때문에 진료부 부서장은 제거 해야한다. -->
 	<select id="BTlist" resultType="users" parameterType="users">
 		select idx, id, pwd, name, reg_date, hspt_name, hspt_subname, hspt_subcode, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, user_code
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_J, user_code
 		from users__ where user_code like '%BT%' and hspt_subcode = #{hspt_subcode}
 	</select>
 	<!-- 부서원만 뽑아내는 쿼리 -->
 	<select id="BFlist" resultType="users" parameterType="users">
 		select idx, id, pwd, name, reg_date, hspt_name, hspt_subname, hspt_subcode, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, user_code
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_J, user_code
 		from users__ where user_code like '%BF%' and hspt_subcode = #{hspt_subcode}
 	</select>
 	

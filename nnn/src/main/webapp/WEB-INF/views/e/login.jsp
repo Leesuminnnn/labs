@@ -24,8 +24,8 @@
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
 			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
 			<li style="color: red; font-size:12px;"><b>※ 개인 비번을 설정 하신 후 로그인시 사번/비밀번호 체크후 사번과 비번을 입력부탁드립니다.</b></li>
-			<li><input type="radio" name="radio" id="chk_name" <c:if test="${dbpwdOk != 'true'}">checked</c:if>><label for="chk_name">사번/이름</label>
-				<input type="radio" name="radio" id="chk_no" <c:if test="${dbpwdOk == 'true'}">checked</c:if>><label for="chk_no">사번/비밀번호</label>
+			<li><input type="radio" name="radio" id="chk_name" checked <%-- <c:if test="${dbpwdOk != true}">checked</c:if> --%>><label for="chk_name">사번/이름</label>
+				<input type="radio" name="radio" id="chk_no" <%-- <c:if test="${dbpwdOk == true}">checked</c:if> --%>><label for="chk_no">사번/비밀번호</label>
 			</li>
 			<li><button>로그인</button></li>			
 		</ul>
@@ -72,8 +72,12 @@
 </form>
 </body>
 <script>
+var namechk = $('#chk_name').prop("checked");
+var nochk = $('#chk_no').prop("checked");
 
-console.log($('#chk_name').prop("checked"));
+
+console.log(namechk);
+console.log(nochk);
 var dbpwdok = "${dbpwdOk}"; 
 $(document).ready(function () {
 	
