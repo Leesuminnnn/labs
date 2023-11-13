@@ -78,7 +78,7 @@ public class EvaluationController {
 		
 		//아이디 혹은 비밀번호가 일치하지 않는 경우
 		if(loginMember == 0) {
-			request.setAttribute("msg", "아이디 혹은 비밀번호를 확인해 주세요");
+			request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.\\n아이디 혹은 비밀번호를 확인해 주세요");
 			request.setAttribute("url", "e/Login");
 			System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
 			return "alert5";
@@ -92,7 +92,7 @@ public class EvaluationController {
 			// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
 			if(info2.getPwd() == null) {
 				
-				request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
+				request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
 				request.setAttribute("url", "e/Pwd/"+idx);
 				System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
 				return "alert5";
@@ -224,8 +224,6 @@ public class EvaluationController {
 		mv.addObject("target", list1);
 		System.out.println(list1);
 		System.out.println("#############################");
-		System.out.println(list1.get(0));
-		System.out.println("#############################");
 		// 평가 완료한 리스트 출력?		join해서 필요 없음.
 		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
 		list2 = evaluationService.whetherSelect(map);
@@ -281,7 +279,7 @@ public class EvaluationController {
 		
 		if(flag >= 1) {
 			System.out.println(flag);
-			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.");
+			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다. \\n사번/비밀번호로 체크 후 로그인해주세요");
 			request.setAttribute("url", "e/Info/"+idx);
 			return "alert5";
 		} else {
@@ -309,11 +307,13 @@ public class EvaluationController {
 			String ev = "AA";
 			System.out.println("ev : " + ev);
 			map.put("d2",ev);
+			mv.addObject("ev", team);
 		}
 		// 부서원 영역
 		else if (team.equals("D")) {
 			String ev = "AB";
 			System.out.println("ev : " + ev);
+			mv.addObject("ev", team);
 			map.put("d2",ev);
 		}
 		List<EvaluationVo> list1 = new ArrayList<EvaluationVo>();
@@ -335,7 +335,7 @@ public class EvaluationController {
 			@RequestParam(name="a13", required = false) String a13, @RequestParam(name="a14", required = false) String a14, @RequestParam(name="a15", required = false) String a15, 
 			@RequestParam(name="a16", required = false) String a16, @RequestParam(name="a17", required = false) String a17, @RequestParam(name="a18", required = false) String a18, 
 			@RequestParam(name="b19", required = false) String b19, @RequestParam(name="b20", required = false) String b20, @RequestParam(name="b21", required = false) String b21, 
-			@RequestParam(name="b22", required = false) String b22, @RequestParam(name="b23", required = false) String b23, @RequestParam(name="c24", required = false) String c24, 
+			@RequestParam(name="b22", required = false) String b22, @RequestParam(name="c23", required = false) String c23, @RequestParam(name="c24", required = false) String c24, 
 			@RequestParam(name="c25", required = false) String c25, @RequestParam(name="c26", required = false) String c26, @RequestParam(name="c27", required = false) String c27, 
 			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
 			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32
@@ -348,14 +348,9 @@ public class EvaluationController {
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		
 		String u1 = evaluationService.info(infoidx).getHspt_name();		// 기관명
-		String u2 = evaluationService.info(infoidx).getHspt_subcode();		// 평가자 부서명
-		String u3 = evaluationService.info(infoidx).getHspt_position();	// 직급/직책
-		String u4 = evaluationService.info(infoidx).getName();			// 평가자 이름
-		String u5 = evaluationService.info(infoidx).getId();				// 평가자 사번
-		String t1 = evaluationService.info(targetidx).getHspt_subcode();		// 평가대상자 부서
-		String t2 = evaluationService.info(targetidx).getHspt_position();	// 평가대상자 직책
-		String t3 = evaluationService.info(targetidx).getName();			// 평가대상자 이름
-		String t4 = evaluationService.info(targetidx).getId();			// 평가대상자 사번
+		String u2 = evaluationService.info(infoidx).getId();				// 평가자 사번
+		String t1 = evaluationService.info(targetidx).getId();			// 평가대상자 사번
+	
 
 		// 평가 시작하면 whether 테이블에 평가자와 평가 대상자 , 진행 여부 insert
 		map2.put("d1", infoidx);
@@ -382,7 +377,7 @@ public class EvaluationController {
 		System.out.println(b20);
 		System.out.println(b21);
 		System.out.println(b22);
-		System.out.println(b23);
+		System.out.println(c23);
 		System.out.println(c24);
 		System.out.println(c25);
 		System.out.println(c26);
@@ -395,18 +390,13 @@ public class EvaluationController {
 		
 		map.put("u1", u1);
 		map.put("u2", u2);
-		map.put("u3", u3);
-		map.put("u4", u4);
-		map.put("u5", u5);
 		map.put("t1", t1);
-		map.put("t2", t2);
-		map.put("t3", t3);
-		map.put("t4", t4);
+		map.put("team", team);
+		map2.put("ev",team);
 		// 진료부, 경혁팀, 부서장 영역
 		if(team.equals("A") || team.equals("B") || team.equals("C")) {
 			String ev = "AA";
 			System.out.println("ev : " + ev);
-			map.put("ev",ev);
 			String d1 = a1+","+a2+","+b3+","+b4+","+c5+","+c6+","+d7+","+d8+","+e9+","+e10+","+f11;
 			System.out.println(d1);
 			
@@ -416,8 +406,7 @@ public class EvaluationController {
 		else if (team.equals("D")) {
 			String ev = "AB";
 			System.out.println("ev : " + ev);
-			map.put("ev",ev);
-			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+b23+","+c24+
+			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+c23+","+c24+
 					","+c25+","+c26+","+c27+","+d28+","+d29+","+e30+","+e31+","+f32;
 			map.put("d1", d1);
 		}
@@ -445,9 +434,21 @@ public class EvaluationController {
 		System.out.println(infoidx);
 		System.out.println(targetidx);
 		System.out.println("###########################################################");
+		
+		// DB 전송 전 중복 체크
+		int selectflag;
+		try {
+			selectflag = evaluationService.formcheck(map2);
+			System.out.println(selectflag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		int flag = evaluationService.frominsert(map);
 		 ///db 전송 이후 
-		if(flag >= 1) {
+		if(flag == 1) {
 			request.setAttribute("msg", "평가가 완료되었습니다.");
 			request.setAttribute("url", "e/FormEnd/"+infoidx+"/"+targetidx);
 			// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음

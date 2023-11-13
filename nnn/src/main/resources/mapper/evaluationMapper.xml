@@ -2930,13 +2930,19 @@
 	</select>
 	
 	<insert id="forminsert" parameterType="answer">
-		insert into answer (u1, u2, u3, u4, u5, t1, t2, t3, t4, ev, d1)
+		insert into answer (u1, u2, t1, team, d1)
 		values (
-		#{u1}, #{u2}, #{u3}, #{u4}, #{u5}, #{t1}, #{t2}, #{t3}, #{t4}, #{ev}, #{d1}	)
+		#{u1}, #{u2}, #{t1}, #{team}, #{d1}	)
 	</insert>
+	<!-- 평가 완료 중복 체크 -->
+	<select id="formcheck" resultType="map" parameterType="map">
+		select * from whether where d1 = #{d1} and d2 = #{d2} and team = #{ev} 
+	</select>
+	
+	
 	<!--  평가 완료 표시  -->
 	<insert id="whether" parameterType="whether">
-		insert into whether (d1, d2, d3, ev)
+		insert into whether (d1, d2, d3, team)
 		values (#{d1}, #{d2}, "평가완료", #{ev})
 	</insert>
 	<!-- 리스트에서 평가 완료 확인 -->

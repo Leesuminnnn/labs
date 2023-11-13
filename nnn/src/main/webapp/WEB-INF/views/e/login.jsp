@@ -19,13 +19,13 @@
 	<section>
 	
 	<div class="login">
-		<h2>2023 효사랑 & 가족사랑<br>직원근무평가 시스템</h2>
+		<h2>2023 효사랑 & 가족사랑<br>직원근무평가</h2>
 		<ul>
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
 			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
-			<li style="color: red; font-size:12px;"><b>※ 개인 비번을 설정 하신 후 로그인시 사번/비밀번호 체크후 사번과 비번을 입력부탁드립니다.</b></li>
-			<li><input type="radio" name="radio" id="chk_name" checked <%-- <c:if test="${dbpwdOk != true}">checked</c:if> --%>><label for="chk_name">사번/이름</label>
-				<input type="radio" name="radio" id="chk_no" <%-- <c:if test="${dbpwdOk == true}">checked</c:if> --%>><label for="chk_no">사번/비밀번호</label>
+			<li style="color: red; font-size:12px;"><b>※ 개인 비밀번호를 설정 하신 후 로그인시 아래의 사번/비밀번호 체크후 사번과 비밀번호를 입력부탁드립니다.</b></li>
+			<li><input type="radio" name="radio" id="chk_name" checked <%-- <c:if test="${dbpwdOk != true}">checked</c:if> --%>><label for="chk_name">사번/이름<b style="color: red">(비밀번호 설정 전)</b></label>
+				<input type="radio" name="radio" id="chk_no" <%-- <c:if test="${dbpwdOk == true}">checked</c:if> --%>><label for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
 			</li>
 			<li><button>로그인</button></li>			
 		</ul>

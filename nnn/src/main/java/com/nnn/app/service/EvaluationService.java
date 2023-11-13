@@ -89,4 +89,10 @@ public class EvaluationService {
 	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
 		return evaluationDao.whetherSelect(map);
 	}
+
+	public int formcheck(Map<String, Object> map) throws Exception {
+		int flag = 0;
+		flag = evaluationDao.formcheck(map);
+		return flag;
+	}
 }

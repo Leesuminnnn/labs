@@ -49,29 +49,35 @@ td {
 				<div style="display: flex; justify-content: space-around; align-items: center; ">
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
-							<td style="background-color: #08254c; color: #fff;" colspan="3">평가자</td>
+							<td style="background-color: #08254c; color: #fff;" colspan="4">평가자</td>
 						</tr>
 						<tr>
-							<td>부서명</td><td>사원번호</td><td>사원명</td>
+							<td>부서명</td><td>사원번호</td><td>직급</td><td>사원명</td>
 						</tr>
 						<tr>
 							<td>
 							${info.hspt_subname }
-							</td><td>${info.id }</td><td>${info.name }</td>
+							</td>
+							<td>${info.id }</td>
+							<td>${info.hspt_position }</td>
+							<td>${info.name }</td>
 						</tr>
 					</table>
 					<div>==========></div>
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
-							<td style="background-color: #08254c; color: #fff;" colspan="3">평가대상자</td>
+							<td style="background-color: #08254c; color: #fff;" colspan="4">평가대상자</td>
 						</tr>
 						<tr>
-							<td>부서명</td><td>사원번호</td><td>사원명</td>
+							<td>부서명</td><td>사원번호</td><td>직급</td><td>사원명</td>
 						</tr>
 						<tr>
 							<td>
 							${target.hspt_subname }
-							</td><td>${target.id }</td><td>${target.name }</td>
+							</td>
+							<td>${target.id }</td>
+							<td>${target.hspt_position }</td>
+							<td>${target.name }</td>
 						</tr>
 					</table>
 				</div>
@@ -153,7 +159,7 @@ td {
 				<b>[ 종합평가 ]</b><br><br>
 					<c:forEach items="${evf}" var="ev">
 						<c:if test="${ev.d3 eq '주관식' }"><p>${ev.d1}</p><br>
-							<textarea style="width: 520px; height: 90px;" name="f${ev.idx }"></textarea>
+							<textarea style="width: 99%; height: 90px;" name="f${ev.idx }" id="f${ev.idx }"></textarea>
 							<br><br>
 						</c:if>
 					</c:forEach>
@@ -178,11 +184,71 @@ td {
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 var form = document.getElementById("frm");
+// 문제유형
+var ev = "${ev}";
+console.log(ev);
+
 
 $("#end").click(function() {
-	alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
-	frm.action = "${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}/${team}";
+	// 답안 체크
+	var a1 = $('input[name=a1]').is(":checked");
+	var a2 = $('input[name=a2]').is(":checked");
+	var b3 = $('input[name=b3]').is(":checked");
+	var b4 = $('input[name=b4]').is(":checked");
+	var c5 = $('input[name=c5]').is(":checked");
+	var c6 = $('input[name=c6]').is(":checked");
+	var d7 = $('input[name=d7]').is(":checked");
+	var d8 = $('input[name=d8]').is(":checked");
+	var e9 = $('input[name=e9]').is(":checked");
+	var e10 = $('input[name=e10]').is(":checked");
+	var f11 = $("#f11").val();
+
+	var a12 = $('input[name=a12]').is(":checked");
+	var a13 = $('input[name=a13]').is(":checked");
+	var a14 = $('input[name=a14]').is(":checked");
+	var a15 = $('input[name=a15]').is(":checked");
+	var a16 = $('input[name=a16]').is(":checked");
+	var a17 = $('input[name=a17]').is(":checked");
+	var a18 = $('input[name=a18]').is(":checked");
+	var b19 = $('input[name=b19]').is(":checked");
+	var b20 = $('input[name=b20]').is(":checked");
+	var b21 = $('input[name=b21]').is(":checked");
+	var b22 = $('input[name=b22]').is(":checked");
+	var c23 = $('input[name=c23]').is(":checked");
+	var c24 = $('input[name=c24]').is(":checked");
+	var c25 = $('input[name=c25]').is(":checked");
+	var c26 = $('input[name=c26]').is(":checked");
+	var c27 = $('input[name=c27]').is(":checked");
+	var d28 = $('input[name=d28]').is(":checked");
+	var d29 = $('input[name=d29]').is(":checked");
+	var e30 = $('input[name=e30]').is(":checked");
+	var e31 = $('input[name=e31]').is(":checked");
+	var f32 = $("#f32").val();
+	
+	// 문제유형으로 나누기
+	// A, B, C 인 경우와 D인 경우
+	if(ev == 'A' || ev == 'B' || ev == 'C'){
+		if(!a1 || !a2 || !b3 || !b4 || !c5 || !c6 || !d7 || !d8 || !e9 || !e10 || $.trim(f11) === ''){
+			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			return false;
+		}
+	}else {
+		if(!a12 || !a13 || !a14 || !a15 || !a16 || !a17 || !a18 || 
+				!b19 || !b20 || !b21 || !b22 || 
+				!c23 || !c24 || !c25 || !c26 || !c27 ||
+				!d28 || !d29|| !e30|| !e31 ||				
+				$.trim(f32) === ''){
+			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			return false;
+		}
+	}
+	form.action = "${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}/${team}";
 	form.submit();
+	// 뒤로가기 버튼 비활성화
+	window.history.pushState(null, null, window.location.href);
+	window.onpopstate = function(event) {
+	    window.history.pushState(null, null, window.location.href);
+	};
 });
 
 

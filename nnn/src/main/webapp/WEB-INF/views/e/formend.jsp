@@ -76,7 +76,7 @@ td {
 							<td>${target.hspt_subname }
 							</td>
 							<td>${target.id }</td>
-							<td>${info.hspt_position }</td>
+							<td>${target.hspt_position }</td>
 							<td>${target.name }</td>
 						</tr>
 					</table>

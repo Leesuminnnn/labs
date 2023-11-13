@@ -116,20 +116,20 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go" onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
-					
-					
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
+<c:forEach items="${endlist}" var="e">
+						
 						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-						<c:forEach items="${endlist}" var="e">
 							<c:choose>
-								<c:when test="${t.idx eq e.d2}">
+								<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
 									${e.d3 }
 								</c:when>
 							</c:choose>
-						</c:forEach>
+</c:forEach>
+						
 					</td>
 				</tr>
 		    	</c:when>
@@ -144,16 +144,16 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go" onclick="formgo(this)" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'A'}">${e.d3 }</c:if></c:forEach>" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					
 					
 					평가하기
 					</td>
 					<td>
-						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-						<c:forEach items="${endlist}" var="e">
+<c:forEach items="${endlist}" var="e">
+						
 							<c:choose>
-								<c:when test="${t.idx eq e.d2}">
+								<c:when test="${t.idx eq e.d2 and e.team eq 'A'}">
 									${e.d3 }
 								</c:when>
 							</c:choose>
@@ -225,14 +225,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-ev="B" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'B'}">${e.d3 }</c:if></c:forEach>" data-ev="B" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
-			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2}">
+					<c:when test="${t.idx eq e.d2 and e.team eq 'B'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -262,6 +261,64 @@
 <c:if test="${t.idx ne info.idx}">
 <c:set var="sub" value = "${t.hspt_subcode }"/>
 <c:choose>
+	<c:when test="${info.hspt_name eq '효사랑가족요양병원' and info.hspt_subcode eq 'J01'}">			<!-- 2병원 영양과 부서원의 경우 -->
+	<c:if test="${t.hspt_B eq 'T' }">
+	<tr>
+		<td>${index2}</td>
+		<td>
+			${t.hspt_subname }
+		</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		평가하기
+		</td>
+		<td>
+			<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
+		</td>
+	</tr>
+	<c:set var="index2" value="${index2 + 1}" />
+	</c:if>
+	</c:when>
+	
+	<c:when test="${info.hspt_name eq '효사랑전주요양병원' and info.hspt_subcode eq 'C01'}">			<!-- 1병원 관리과의 경우 -->
+	<c:if test="${t.hspt_B eq 'T' }">
+	<tr>
+		<td>${index2}</td>
+		<td>
+			${t.hspt_subname }
+		</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		평가하기
+		</td>
+		<td>
+				<c:forEach items="${endlist}" var="e">
+				<c:choose>
+					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+						${e.d3 }
+					</c:when>
+				</c:choose>
+			</c:forEach>
+		</td>
+	</tr>
+	<c:set var="index2" value="${index2 + 1}" />
+	</c:if>
+	</c:when>
+	
 	<c:when test="${info.hspt_V eq 'T' and info.hspt_B eq 'F' and info.hspt_X eq 'F'}">				<!-- 경혁팀 / 부서원 -->
 	<c:if test="${t.hspt_B eq 'T' and t.hspt_subcode ne 'A00' and info.hspt_subcode eq sub}">
 	<tr>
@@ -274,14 +331,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
-			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-			<c:forEach items="${endlist}" var="e">
+				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2}">
+					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -304,14 +360,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
-			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-			<c:forEach items="${endlist}" var="e">
+				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2}">
+					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -334,14 +389,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
-			<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-			<c:forEach items="${endlist}" var="e">
+				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2}">
+					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -364,7 +418,7 @@
 
 </div>
 <!-- 부서원 -->
-<div style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F')}">none</c:if>;">
+<div style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T')}">none</c:if>;">
 <div style="border-bottom: 2px dotted #000; margin: 10px 0 10px 0;"></div>
 ▶ 부서원 평가
 <div class="targetD_area">
@@ -392,14 +446,13 @@
 				${t.hspt_position }
 			</td>
 			<td>${t.name}</td>
-			<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+			<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 			평가하기
 			</td>
 			<td>
-				<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2}">
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -409,6 +462,66 @@
 		<c:set var="index3" value="${index3 + 1}" />
 		</c:if>
 </c:when>
+<c:when test="${info.hspt_name eq '효사랑전주요양병원' and info.hspt_subcode eq 'C00' and info.hspt_B eq 'T'}">			<!-- 1병원 총무부 부서장의 경우 -->
+	<c:if test="${t.hspt_subcode eq 'C00' or t.hspt_subcode eq 'C01'}">
+	
+	<tr>
+		<td>${index2}</td>
+		<td>
+			${t.hspt_subname }
+		</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		평가하기
+		</td>
+		<td>
+				<c:forEach items="${endlist}" var="e">
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
+		</td>
+	</tr>
+	<c:set var="index2" value="${index2 + 1}" />
+	</c:if>
+	</c:when>
+	
+	<c:when test="${info.hspt_name eq '효사랑가족요양병원' and info.hspt_subcode eq 'J00' and info.hspt_B eq 'T'}">			<!-- 2병원 영양과(본관) 부서장  경우 -->
+	<c:if test="${t.hspt_subcode eq 'J00' or t.hspt_subcode eq 'J01'}">
+	
+	<tr>
+		<td>${index2}</td>
+		<td>
+			${t.hspt_subname }
+		</td>
+		<td>${t.id }</td>
+		<td>
+			${t.hspt_position }
+		</td>
+		<td>${t.name}</td>
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		평가하기
+		</td>
+		<td>
+				<c:forEach items="${endlist}" var="e">
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
+		</td>
+	</tr>
+	<c:set var="index2" value="${index2 + 1}" />
+	</c:if>
+	</c:when>
+
 <c:when test="${info.hspt_B eq 'T' and info.hspt_V eq 'T' and info.hspt_K eq 'F' }">	<!-- 경혁팀 / 부서장 -->
 	<c:choose>
 		<c:when test="${(info.hspt_name eq '효사랑전주요양병원' or info.hspt_name eq '효사랑가족요양병원')}">
@@ -424,18 +537,17 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
-						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
-						<c:forEach items="${endlist}" var="e">
-							<c:choose>
-								<c:when test="${t.idx eq e.d2}">
-									${e.d3 }
-								</c:when>
-							</c:choose>
-						</c:forEach>
+							<c:forEach items="${endlist}" var="e">
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
 					</td>
 				</tr>
 				
@@ -455,18 +567,17 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
-						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 						<c:forEach items="${endlist}" var="e">
-							<c:choose>
-								<c:when test="${t.idx eq e.d2}">
-									${e.d3 }
-								</c:when>
-							</c:choose>
-						</c:forEach>
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
 					</td>
 				</tr>
 				
@@ -488,18 +599,17 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
-		<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 		<c:forEach items="${endlist}" var="e">
-			<c:choose>
-				<c:when test="${t.idx eq e.d2}">
-					${e.d3 }
-				</c:when>
-			</c:choose>
-		</c:forEach>
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
 	</td>
 </tr>
 
@@ -517,18 +627,17 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
-		<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 		<c:forEach items="${endlist}" var="e">
-			<c:choose>
-				<c:when test="${t.idx eq e.d2}">
-					${e.d3 }
-				</c:when>
-			</c:choose>
-		</c:forEach>
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
 	</td>
 </tr>
 <c:set var="index3" value="${index3 + 1}" />
@@ -547,18 +656,17 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
-		<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 		<c:forEach items="${endlist}" var="e">
-			<c:choose>
-				<c:when test="${t.idx eq e.d2}">
-					${e.d3 }
-				</c:when>
-			</c:choose>
-		</c:forEach>
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
 	</td>
 </tr>
 <c:set var="index3" value="${index3 + 1}" />
@@ -576,18 +684,17 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
-		<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 		<c:forEach items="${endlist}" var="e">
-			<c:choose>
-				<c:when test="${t.idx eq e.d2}">
-					${e.d3 }
-				</c:when>
-			</c:choose>
-		</c:forEach>
+					<c:choose>
+						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+							${e.d3 }
+						</c:when>
+					</c:choose>
+				</c:forEach>
 	</td>
 </tr>
 
@@ -614,24 +721,32 @@
 </body>
 
 <script>
-// 평가 진행 완료 시 이동 막기
+// 뒤로가기 버튼을 비활성화하는 함수
+function disableBackButton() {
+	window.history.pushState(null, '', window.location.href);
+	window.onpopstate = function () {
+		window.history.pushState(null, '', window.location.href);
+	};
+}
 function formgo(element) {
 	var infoidx = ${info.idx};
 	var targetidx = element.getAttribute("data-t-idx");
 	var ev = element.getAttribute("data-ev");
 	var eidx = element.getAttribute("data-e-idx");
 	var link = "${pageContext.request.contextPath}/e/Form/${info.idx}/"+targetidx+"/"+ev
+	var d3 = element.getAttribute("data-d3");
 	
-	console.log(infoidx);
-	console.log(targetidx);
-	console.log("${endlist}");
 	
-	if(targetidx == eidx){
+	 
+	
+	if(d3 === '평가완료'){
 		alert("이미 평가가 완료된 대상입니다.");
 	}else{
 		//링크 이동
-		location.href=link;
-//		location.replace(link); 
+//		location.href=link;
+		window.location.replace(link);
+		// 뒤로가기 버튼 비활성화
+		disableBackButton();
 	}
 	
 }
