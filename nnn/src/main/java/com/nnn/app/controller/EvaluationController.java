@@ -75,46 +75,58 @@ public class EvaluationController {
 		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
 		 * */
 		
-		
-		//아이디 혹은 비밀번호가 일치하지 않는 경우
-		if(loginMember == 0) {
-			request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.\\n아이디 혹은 비밀번호를 확인해 주세요");
+		// 먼저 사번이 DB에 있는지 검색
+		int Dbcheck = evaluationService.dbcheck(vo);
+		if (Dbcheck == 0) {
+			System.out.println(Dbcheck);
+			System.out.println("Db에 id 없음");
+			request.setAttribute("msg", "2023년도 직원근무평가 대상직원이 아닙니다.");
 			request.setAttribute("url", "e/Login");
-			System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
 			return "alert5";
-		}
-		// 정보가 있을 경우 
-		else if(loginMember == 1) {
-			UsersVo info2 = evaluationService.info2(vo);
-			int idx = info2.getIdx();
-			System.out.println("info : "+info2);
-			System.out.println("info2.idx : "+info2.getIdx());
-			// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
-			if(info2.getPwd() == null) {
-				
-				request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
-				request.setAttribute("url", "e/Pwd/"+idx);
-				System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
-				return "alert5";
-			// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
-			}else if(info2.getPwd() != null && name != null){
-				String dbpwdOk = "true"; 
-				md.addAttribute("dbpwdOk", dbpwdOk);
-				request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
+		}else {
+
+			//아이디 혹은 비밀번호가 일치하지 않는 경우
+			if(loginMember == 0) {
+				request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.\\n아이디 혹은 비밀번호를 확인해 주세요");
 				request.setAttribute("url", "e/Login");
+				System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
 				return "alert5";
-			}else {
-				System.out.println("#########################################");
-				System.out.println("로그인 성공");
-				//로그인 기록 저장
-				map.put("id", vo.getId());
-				map.put("name", info2.getName());
-				evaluationService.loginlog(map);
-				System.out.println("#########################################");
-				return "redirect:/e/Info/"+idx;
 			}
-			
+			// 정보가 있을 경우 
+			else if(loginMember == 1) {
+				UsersVo info2 = evaluationService.info2(vo);
+				int idx = info2.getIdx();
+				System.out.println("info : "+info2);
+				System.out.println("info2.idx : "+info2.getIdx());
+				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
+				if(info2.getPwd() == null) {
+					
+					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
+					request.setAttribute("url", "e/Pwd/"+idx);
+					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
+					return "alert5";
+				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
+				}else if(info2.getPwd() != null && name != null){
+					String dbpwdOk = "true"; 
+					md.addAttribute("dbpwdOk", dbpwdOk);
+					request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
+					request.setAttribute("url", "e/Login");
+					return "alert5";
+				}else {
+					System.out.println("#########################################");
+					System.out.println("로그인 성공");
+					//로그인 기록 저장
+					map.put("id", vo.getId());
+					map.put("name", info2.getName());
+					evaluationService.loginlog(map);
+					System.out.println("#########################################");
+					return "redirect:/e/Info/"+idx;
+				}
+				
+			}
 		}
+		
+		
 		return "";
 		
 		
@@ -339,7 +351,7 @@ public class EvaluationController {
 			@RequestParam(name="c25", required = false) String c25, @RequestParam(name="c26", required = false) String c26, @RequestParam(name="c27", required = false) String c27, 
 			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
 			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32
-			) throws NoSuchAlgorithmException {
+			) throws Exception {
 		session.getAttribute("loginMember");
 		md.addAttribute("info", evaluationService.info(infoidx));
 		md.addAttribute("target", evaluationService.info(targetidx));
@@ -436,34 +448,36 @@ public class EvaluationController {
 		System.out.println("###########################################################");
 		
 		// DB 전송 전 중복 체크
-		int selectflag;
-		try {
-			selectflag = evaluationService.formcheck(map2);
-			System.out.println(selectflag);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
-		
-		
-		int flag = evaluationService.frominsert(map);
-		 ///db 전송 이후 
-		if(flag == 1) {
-			request.setAttribute("msg", "평가가 완료되었습니다.");
-			request.setAttribute("url", "e/FormEnd/"+infoidx+"/"+targetidx);
-			// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
-			// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
-			// 검색 후 기록이 없으면 insert, 
-			int flag2 = evaluationService.whether(map2);
-			// 평가 진행후 
-			System.out.println("평가 진행 여부 table insert  :  "+flag2);
+		int selectflag = evaluationService.formcheck(map2);
+		System.out.println(selectflag);
+		if (selectflag == 1) {
+			request.setAttribute("msg", "이미 평가가 완료된 대상입니다.");
+			request.setAttribute("url", "e/Info/"+infoidx);
 			return "alert5";
-		} else {
+		}else {
+			int flag = evaluationService.frominsert(map);
+			 ///db 전송 이후 
+			if(flag == 1) {
+				request.setAttribute("msg", "평가가 완료되었습니다.");
+				request.setAttribute("url", "e/FormEnd/"+infoidx+"/"+targetidx);
+				// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
+				// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
+				// 검색 후 기록이 없으면 insert, 
+				int flag2 = evaluationService.whether(map2);
+				// 평가 진행후 
+				System.out.println("평가 진행 여부 table insert  :  "+flag2);
+				return "alert5";
+			} else {
 
-			request.setAttribute("msg", "오류발생");
-			request.setAttribute("url", "e/info/"+infoidx);
-			return "alert5";
+				request.setAttribute("msg", "오류발생");
+				request.setAttribute("url", "e/Info/"+infoidx);
+				return "alert5";
+			}
 		}
+		
+		
+		
 	}
 	
 

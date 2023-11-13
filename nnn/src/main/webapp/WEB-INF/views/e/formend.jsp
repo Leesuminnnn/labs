@@ -47,7 +47,7 @@ td {
 			 -->
 			<div class="info">
 				<p style="margin-bottom: 10px;">▣ 평가자 및 평가대상자 정보를 확인해주세요.</p>
-				<div style="display: flex; justify-content: space-around; align-items: center; ">
+				<div class="infobox">
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
 							<td style="background-color: #08254c; color: #fff;" colspan="4">평가자</td>

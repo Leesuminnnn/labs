@@ -95,4 +95,10 @@ public class EvaluationService {
 		flag = evaluationDao.formcheck(map);
 		return flag;
 	}
+
+	public int dbcheck(UsersVo vo) {
+		int flag = 0;
+		flag = evaluationDao.dbcheck(vo);
+		return flag;
+	}
 }

@@ -4,6 +4,10 @@
   
 <mapper namespace = "evaluation">
 
+<select id="dbcheck" parameterType="users" resultType="int">
+	select count(*) from users__ where id = #{id}
+</select>
+
 <select id="login" parameterType="users" resultType="int">
 		select count(*) from
 		users__
@@ -2935,8 +2939,8 @@
 		#{u1}, #{u2}, #{t1}, #{team}, #{d1}	)
 	</insert>
 	<!-- 평가 완료 중복 체크 -->
-	<select id="formcheck" resultType="map" parameterType="map">
-		select * from whether where d1 = #{d1} and d2 = #{d2} and team = #{ev} 
+	<select id="formcheck" resultType="int" parameterType="map">
+		select count(*) from whether where d1 = #{d1} and d2 = #{d2} and team = #{ev} 
 	</select>
 	
 	

@@ -99,4 +99,10 @@ public class EvaluationDao {
 //		return sqlSession1.selectOne(MAPPER+".formcheck", map);
 		return sqlSession3.selectOne(MAPPER+".formcheck", map);
 	}
+
+	public int dbcheck(UsersVo vo) {
+		
+//		return sqlSession1.selectOne(MAPPER+".dbcheck", vo);
+		return sqlSession3.selectOne(MAPPER+".dbcheck", vo);
+	}
 }
