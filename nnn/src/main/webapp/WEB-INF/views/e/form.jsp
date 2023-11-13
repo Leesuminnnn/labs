@@ -46,7 +46,7 @@ td {
 			 -->
 			<div class="info">
 				<p style="margin-bottom: 10px;">▣ 평가자 및 평가대상자 정보를 확인해주세요.</p>
-				<div style="display: flex; justify-content: space-around; align-items: center; ">
+				<div class="infobox">
 					<table style="border:1px solid #000; border-collapse: collapse;">
 						<tr>
 							<td style="background-color: #08254c; color: #fff;" colspan="4">평가자</td>
@@ -55,9 +55,7 @@ td {
 							<td>부서명</td><td>사원번호</td><td>직급</td><td>사원명</td>
 						</tr>
 						<tr>
-							<td>
-							${info.hspt_subname }
-							</td>
+							<td>${info.hspt_subname }</td>
 							<td>${info.id }</td>
 							<td>${info.hspt_position }</td>
 							<td>${info.name }</td>
@@ -72,9 +70,7 @@ td {
 							<td>부서명</td><td>사원번호</td><td>직급</td><td>사원명</td>
 						</tr>
 						<tr>
-							<td>
-							${target.hspt_subname }
-							</td>
+							<td>${target.hspt_subname }</td>
 							<td>${target.id }</td>
 							<td>${target.hspt_position }</td>
 							<td>${target.name }</td>
@@ -159,7 +155,7 @@ td {
 				<b>[ 종합평가 ]</b><br><br>
 					<c:forEach items="${evf}" var="ev">
 						<c:if test="${ev.d3 eq '주관식' }"><p>${ev.d1}</p><br>
-							<textarea style="width: 99%; height: 90px;" name="f${ev.idx }" id="f${ev.idx }"></textarea>
+							<textarea style="width: 99%; height: 90px;" id="f${ev.idx }" name="f${ev.idx }"></textarea>
 							<br><br>
 						</c:if>
 					</c:forEach>
@@ -184,11 +180,10 @@ td {
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 var form = document.getElementById("frm");
-// 문제유형
+
+//문제유형
 var ev = "${ev}";
 console.log(ev);
-
-
 $("#end").click(function() {
 	// 답안 체크
 	var a1 = $('input[name=a1]').is(":checked");
@@ -202,7 +197,6 @@ $("#end").click(function() {
 	var e9 = $('input[name=e9]').is(":checked");
 	var e10 = $('input[name=e10]').is(":checked");
 	var f11 = $("#f11").val();
-
 	var a12 = $('input[name=a12]').is(":checked");
 	var a13 = $('input[name=a13]').is(":checked");
 	var a14 = $('input[name=a14]').is(":checked");
@@ -229,6 +223,10 @@ $("#end").click(function() {
 	// A, B, C 인 경우와 D인 경우
 	if(ev == 'A' || ev == 'B' || ev == 'C'){
 		if(!a1 || !a2 || !b3 || !b4 || !c5 || !c6 || !d7 || !d8 || !e9 || !e10 || $.trim(f11) === ''){
+			console.log(a1);console.log(a2);console.log(b3);console.log(b4);console.log(c5);console.log(c6);
+			console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);
+			
+			
 			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
 			return false;
 		}
