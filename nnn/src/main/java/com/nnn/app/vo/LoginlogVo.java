@@ -14,4 +14,5 @@ public class LoginlogVo {
 	private String id;
 	private String d1;
 	private Date d2;
+	private String ip;
 }

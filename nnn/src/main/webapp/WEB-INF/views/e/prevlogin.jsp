@@ -20,12 +20,13 @@
 	
 	<div class="login">
 		<h2>2023 효사랑 & 가족사랑<br>직원근무평가</h2>
+		<%-- 
 		<ul>
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
 			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
 			<li style="color: red; font-size:12px;"><b>※ 개인 비밀번호를 설정 하신 후 로그인시 아래의 사번/비밀번호 체크후 사번과 비밀번호를 입력부탁드립니다.</b></li>
-			<li style="display: flex; flex-wrap: wrap;"><input type="radio" name="radio" id="chk_name" checked <%-- <c:if test="${dbpwdOk != true}">checked</c:if> --%>><label style="cursor:pointer;" for="chk_name">사번/이름<b style="color: red">(비밀번호 설정 전)&nbsp;&nbsp;</b></label>
-				<input type="radio" name="radio" id="chk_no" <%-- <c:if test="${dbpwdOk == true}">checked</c:if> --%>><label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
+			<li style="display: flex; flex-wrap: wrap;"><input type="radio" name="radio" id="chk_name" checked <c:if test="${dbpwdOk != true}">checked</c:if>><label style="cursor:pointer;" for="chk_name">사번/이름<b style="color: red">(비밀번호 설정 전)&nbsp;&nbsp;</b></label>
+				<input type="radio" name="radio" id="chk_no" <c:if test="${dbpwdOk == true}">checked</c:if>><label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
 			</li>
 			<li><button>로그인</button></li>			
 		</ul>
@@ -33,6 +34,9 @@
 			<ul>
 				<li>회원가입</li>				
 			</ul>
+		</div> --%>
+		<div style="display: flex; flex-wrap: wrap; color: red; font-weight: bold; text-align: center; padding : 10px 0 10px 0; justify-content: center; font-size: 22px;">
+			<div>2023년 11월 16일 목요일 10시 </div><div>오픈예정입니다.</div>
 		</div>
 	</div>
 	<div class="notice" style="">

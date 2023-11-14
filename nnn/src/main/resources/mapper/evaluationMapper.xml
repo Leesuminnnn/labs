@@ -2940,24 +2940,29 @@
 	</insert>
 	<!-- 평가 완료 중복 체크 -->
 	<select id="formcheck" resultType="int" parameterType="map">
-		select count(*) from whether where d1 = #{d1} and d2 = #{d2} and team = #{ev} 
+		select count(*) from whether where d1 = #{d1} and d2 = #{d2} and ev = #{ev} 
 	</select>
 	
 	
 	<!--  평가 완료 표시  -->
 	<insert id="whether" parameterType="whether">
-		insert into whether (d1, d2, d3, team)
+		insert into whether (d1, d2, d3, ev)
 		values (#{d1}, #{d2}, "평가완료", #{ev})
 	</insert>
 	<!-- 리스트에서 평가 완료 확인 -->
 	<select id="whetherselect" resultType="map" parameterType="map">
 		select * from whether where d1 = #{idx}
+		<!-- 
+		select * from whether where d1 = #{id}
+		
+		 -->
 	</select>
 	<select id="noticeselect" resultType="map" parameterType="map">
 		select * from notice 
 	</select>
+	<!-- 로그인 기록 저장 -->
 	<insert id="loginlog" parameterType="loginlog">
-		insert into loginlog (id, d1) values (#{id}, #{name})
+		insert into loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
 	</insert>
 
 </mapper>

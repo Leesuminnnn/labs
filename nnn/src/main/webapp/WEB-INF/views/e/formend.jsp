@@ -110,11 +110,12 @@ td {
 						<p class="ps">가족사랑요양병원 이사장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박진만
 					</c:when>
 				</c:choose>
+				<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/e/Logout">로그아웃</a>
 				</div>
 				
 				<div style="border-bottom:1px solid #000; margin-top: 50px; margin-bottom: 30px;"></div>
 				
-				<p class="ps2">※ 모든 직원의 평가가 완료되지 않으신 직원은 아래 "목록 돌아가기" 버튼을 클릭하여, 평가를 계속 진행해주시기 바랍니다.
+				<p class="ps2">※ 모든 평가가 완료되지 않으신 직원은 아래 "평가대상자 목록 돌아가기" 버튼을 클릭하여, 평가를 계속 진행해주시기 바랍니다.
 				<br><br><br>
 				<!-- <div onclick="back()" style="border: 1px solid #000; padding: 15px; background-color: #D9EAD3;"></div> -->
 				<a style="border: 1px solid #000; padding: 15px; margin-bottom: 15px;; background-color: #D9EAD3; display: inline-block;" href="${pageContext.request.contextPath}/e/Info/${info.idx}">평가대상자 목록 돌아가기</a>

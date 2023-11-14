@@ -15,8 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.EvaluationService;
@@ -145,8 +148,9 @@ public class HomeController {
 		
 		mv.addObject("notice", list);
 		
-		
+		//15일 오후 퇴근 전에 바꾸기
 		mv.setViewName("e/login");
+//		mv.setViewName("e/prevlogin");
 		return mv;
 	}
 	public static void alertAndGo(HttpServletResponse response, String msg, String url) {
@@ -159,6 +163,17 @@ public class HomeController {
 	    } catch(Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+	@RequestMapping(value = "/w", method = RequestMethod.GET)
+	public String writIp(Model model) {	
+		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String ip = req.getHeader("X-FORWARDED-FOR");
+		if (ip == null) {
+			ip = req.getRemoteAddr();
+		}
+		model.addAttribute("clientIP", ip);
+		System.out.println(ip);
+		return "writIp";
 	}
 	
 }

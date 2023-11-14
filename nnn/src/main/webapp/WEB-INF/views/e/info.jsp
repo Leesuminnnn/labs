@@ -20,6 +20,7 @@
 <div class="main">
 <form action="${pageContext.request.contextPath}/e/Form" method="post">
 <div class="logo">
+
 <c:choose>
 	<c:when test="${info.hspt_name eq '효사랑전주요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
@@ -31,7 +32,7 @@
 		<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
 	</c:when>
 </c:choose>
-
+<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/e/Logout">로그아웃</a>
 </div>
 <div>
 ▣ 사원정보( ※ 개인정보를 확인해주세요 )
@@ -116,7 +117,7 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
@@ -124,7 +125,7 @@
 						
 						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 							<c:choose>
-								<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+								<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 									${e.d3 }
 								</c:when>
 							</c:choose>
@@ -144,7 +145,7 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'A'}">${e.d3 }</c:if></c:forEach>" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'A'}">${e.d3 }</c:if></c:forEach>" data-ev="A" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					
 					
 					평가하기
@@ -153,7 +154,7 @@
 <c:forEach items="${endlist}" var="e">
 						
 							<c:choose>
-								<c:when test="${t.idx eq e.d2 and e.team eq 'A'}">
+								<c:when test="${t.idx eq e.d2 and e.ev eq 'A'}">
 									${e.d3 }
 								</c:when>
 							</c:choose>
@@ -225,13 +226,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'B'}">${e.d3 }</c:if></c:forEach>" data-ev="B" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'B'}">${e.d3 }</c:if></c:forEach>" data-ev="B" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2 and e.team eq 'B'}">
+					<c:when test="${t.idx eq e.d2 and e.ev eq 'B'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -273,13 +274,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+					<c:when test="${t.idx eq e.d2 and e.ev eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -302,13 +303,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+					<c:when test="${t.idx eq e.d2 and e.ev eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -331,13 +332,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+					<c:when test="${t.idx eq e.d2 and e.ev eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -360,13 +361,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+					<c:when test="${t.idx eq e.d2 and e.ev eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -389,13 +390,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 				<c:forEach items="${endlist}" var="e">
 				<c:choose>
-					<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
+					<c:when test="${t.idx eq e.d2 and e.ev eq 'C'}">
 						${e.d3 }
 					</c:when>
 				</c:choose>
@@ -446,13 +447,13 @@
 				${t.hspt_position }
 			</td>
 			<td>${t.name}</td>
-			<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+			<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 			평가하기
 			</td>
 			<td>
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -475,13 +476,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -505,13 +506,13 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -537,13 +538,13 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
 							<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -567,13 +568,13 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
 						<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -599,13 +600,13 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
 		<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -627,13 +628,13 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
 		<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -656,13 +657,13 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
 		<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -684,13 +685,13 @@
 		${t.hspt_position }
 	</td>
 	<td>${t.name}</td>
-	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+	<td class="form_go"  onclick="formgo(this)" data-ev="D" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 	평가하기
 	</td>
 	<td>
 		<c:forEach items="${endlist}" var="e">
 					<c:choose>
-						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+						<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 							${e.d3 }
 						</c:when>
 					</c:choose>
@@ -721,6 +722,9 @@
 </body>
 
 <script>
+var id = ${sessionScope.loginmember};
+console.log("특정 날짜를 넘겼는지 확인 "+ ${specificDate});
+
 // 뒤로가기 버튼을 비활성화하는 함수
 function disableBackButton() {
 	window.history.pushState(null, '', window.location.href);
@@ -728,6 +732,7 @@ function disableBackButton() {
 		window.history.pushState(null, '', window.location.href);
 	};
 }
+
 function formgo(element) {
 	var infoidx = ${info.idx};
 	var targetidx = element.getAttribute("data-t-idx");

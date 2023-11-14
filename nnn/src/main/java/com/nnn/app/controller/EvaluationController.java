@@ -1,7 +1,13 @@
 package com.nnn.app.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +23,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.EvaluationService;
@@ -63,6 +71,11 @@ public class EvaluationController {
 //		System.out.println(pwdcheck);
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("#########################################");
+		
+		
+		
+		
+		
 		System.out.println("id : "+vo.getId());
 		System.out.println("name : "+vo.getName());
 		System.out.println("pwd : "+vo.getPwd());
@@ -118,23 +131,40 @@ public class EvaluationController {
 					//로그인 기록 저장
 					map.put("id", vo.getId());
 					map.put("name", info2.getName());
-					evaluationService.loginlog(map);
 					System.out.println("#########################################");
+					// 로그인 한 유저 ip 알아내기
+					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+					String ip = req.getHeader("X-FORWARDED-FOR");
+					if (ip == null) {
+						ip = req.getRemoteAddr();
+					}
+					map.put("ip", ip);
+					System.out.println(ip);
+					evaluationService.loginlog(map);
+					// 세션 저장
+					session.setAttribute("loginmember", vo.getId());
 					return "redirect:/e/Info/"+idx;
 				}
 				
 			}
 		}
-		
-		
 		return "";
-		
-		
-		
 	}
+	
+	@RequestMapping("Logout")
+	public ModelAndView logout(HttpSession session, ModelAndView mav) {
+
+		session.invalidate();
+		mav.setViewName("redirect:/");
+		return mav;
+
+	}
+	
+	
 	@RequestMapping(value="Info/{idx}")
 	public ModelAndView info(UsersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
 		session.getAttribute("loginMember");
+		
 		System.out.println("#########################1");
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -236,11 +266,28 @@ public class EvaluationController {
 		mv.addObject("target", list1);
 		System.out.println(list1);
 		System.out.println("#############################");
-		// 평가 완료한 리스트 출력?		join해서 필요 없음.
+		// 평가 완료한 리스트 출력?		
 		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
 		list2 = evaluationService.whetherSelect(map);
 		System.out.println("평가 완료 리스트 출력 : "+list2);
 		mv.addObject("endlist", list2);
+		
+		LocalDateTime now = LocalDateTime.now();
+		mv.addObject("now", now);
+		System.out.println(now);
+		// 비교할 특정 날짜 설정 (예: 2023년 1월 1일)
+        LocalDateTime specificDate = LocalDateTime.of(2023, Month.DECEMBER, 1, 10, 0);
+        // 현재 시간이 특정 날짜를 넘었는지 확인
+        if (now.isAfter(specificDate)) {
+        	// 넘김
+            System.out.println("0");
+            mv.addObject("specificDate", "0");
+        } else {
+        	// 안넘김
+            System.out.println("1");
+            mv.addObject("specificDate", "1");
+        }
+		
 //		// 부서장 쿼리 출력
 //		List<TestusersVo> list2 = new ArrayList<TestusersVo>();
 //		list2 = testService.BTlist(map);
@@ -494,6 +541,14 @@ public class EvaluationController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		mv.setViewName("e/formend");
+		return mv;
+	}
+	
+	@RequestMapping(value="admin")
+	public ModelAndView admin(HttpSession session, ModelAndView mv) throws Exception {
+		
+		
+		mv.setViewName("e/admin");
 		return mv;
 	}
 }
