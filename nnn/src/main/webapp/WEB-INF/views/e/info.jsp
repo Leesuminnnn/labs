@@ -722,9 +722,14 @@
 </body>
 
 <script>
-var id = ${sessionScope.loginmember};
-console.log("특정 날짜를 넘겼는지 확인 "+ ${specificDate});
-
+var id = "${sessionScope.loginmember}";
+var info = "${info.id}";
+var date = ${specificDate};
+console.log("특정 날짜를 넘겼는지 확인 "+ date);
+if(id != info && id != '12365478'){
+	alert("잘못된 접근입니다.");
+	location.href = "${pageContext.request.contextPath}/";
+}
 // 뒤로가기 버튼을 비활성화하는 함수
 function disableBackButton() {
 	window.history.pushState(null, '', window.location.href);
@@ -742,17 +747,25 @@ function formgo(element) {
 	var d3 = element.getAttribute("data-d3");
 	
 	
+	if(date == 1){
+		console.log("아직안넘음");
+		alert("11월 16일 10시 오픈 예정입니다.");
+	}else {
+		console.log("넘음");
+		if(d3 === '평가완료'){
+			alert("이미 평가가 완료된 대상입니다.");
+		}else{
+			//링크 이동
+//			location.href=link;
+			window.location.replace(link);
+			// 뒤로가기 버튼 비활성화
+			disableBackButton();
+		}
+	}
+	
 	 
 	
-	if(d3 === '평가완료'){
-		alert("이미 평가가 완료된 대상입니다.");
-	}else{
-		//링크 이동
-//		location.href=link;
-		window.location.replace(link);
-		// 뒤로가기 버튼 비활성화
-		disableBackButton();
-	}
+	
 	
 }
 </script>

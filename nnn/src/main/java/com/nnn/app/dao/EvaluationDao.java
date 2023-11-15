@@ -105,4 +105,8 @@ public class EvaluationDao {
 //		return sqlSession1.selectOne(MAPPER+".dbcheck", vo);
 		return sqlSession3.selectOne(MAPPER+".dbcheck", vo);
 	}
+
+	public List<UsersVo> users(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".users", map);
+	}
 }

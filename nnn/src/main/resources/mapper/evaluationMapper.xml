@@ -2964,5 +2964,9 @@
 	<insert id="loginlog" parameterType="loginlog">
 		insert into loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
 	</insert>
+	
+	<select id="users" resultType="map" parameterType="map">
+		select * from users__
+	</select>
 
 </mapper>

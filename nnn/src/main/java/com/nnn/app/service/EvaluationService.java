@@ -101,4 +101,8 @@ public class EvaluationService {
 		flag = evaluationDao.dbcheck(vo);
 		return flag;
 	}
+
+	public List<UsersVo> users(Map<String, Object> map) {
+		return evaluationDao.users(map);
+	}
 }

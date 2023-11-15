@@ -14,7 +14,10 @@
 <body>
 <form>
 <section>
+<c:forEach items="${users }" var="u">
+<a href="${pageContext.request.contextPath}/e/Info/${u.idx}">${u.name }</a><br>
 
+</c:forEach>
 </section>
 </form>
 </body>

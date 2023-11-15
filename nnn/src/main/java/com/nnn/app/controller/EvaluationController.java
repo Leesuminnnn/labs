@@ -143,7 +143,12 @@ public class EvaluationController {
 					evaluationService.loginlog(map);
 					// 세션 저장
 					session.setAttribute("loginmember", vo.getId());
-					return "redirect:/e/Info/"+idx;
+					if(info2.getHspt_name().equals("관리자")) {
+						return "redirect:/e/admin";
+					}else {
+						return "redirect:/e/Info/"+idx;
+					}
+					
 				}
 				
 			}
@@ -276,7 +281,7 @@ public class EvaluationController {
 		mv.addObject("now", now);
 		System.out.println(now);
 		// 비교할 특정 날짜 설정 (예: 2023년 1월 1일)
-        LocalDateTime specificDate = LocalDateTime.of(2023, Month.DECEMBER, 1, 10, 0);
+        LocalDateTime specificDate = LocalDateTime.of(2023, Month.NOVEMBER, 16, 10, 0);
         // 현재 시간이 특정 날짜를 넘었는지 확인
         if (now.isAfter(specificDate)) {
         	// 넘김
@@ -546,7 +551,11 @@ public class EvaluationController {
 	
 	@RequestMapping(value="admin")
 	public ModelAndView admin(HttpSession session, ModelAndView mv) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users(map);
 		
+		mv.addObject("users", list);
+
 		
 		mv.setViewName("e/admin");
 		return mv;
