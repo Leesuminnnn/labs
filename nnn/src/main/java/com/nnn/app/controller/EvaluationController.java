@@ -1,13 +1,9 @@
 package com.nnn.app.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,14 +19,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.EvaluationService;
+import com.nnn.app.vo.AjaxResponse4;
+import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
@@ -281,7 +282,7 @@ public class EvaluationController {
 		mv.addObject("now", now);
 		System.out.println(now);
 		// 비교할 특정 날짜 설정 (예: 2023년 1월 1일)
-        LocalDateTime specificDate = LocalDateTime.of(2023, Month.NOVEMBER, 16, 10, 0);
+        LocalDateTime specificDate = LocalDateTime.of(2023, Month.DECEMBER, 1, 0, 0);
         // 현재 시간이 특정 날짜를 넘었는지 확인
         if (now.isAfter(specificDate)) {
         	// 넘김
@@ -550,14 +551,95 @@ public class EvaluationController {
 	}
 	
 	@RequestMapping(value="admin")
-	public ModelAndView admin(HttpSession session, ModelAndView mv) throws Exception {
+	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users(map);
-		
+		List<UsersVo> list1 = evaluationService.users1(map);
+		List<UsersVo> list2 = evaluationService.users2(map);
+		List<UsersVo> list3 = evaluationService.users3(map);
+		List<LoginlogVo> log = evaluationService.log(map);
+		List<UserPh> ph = evaluationService.ph(map);
 		mv.addObject("users", list);
-
-		
+		request.setAttribute("users", list);
+		mv.addObject("users1", list1);
+		request.setAttribute("users1", list1);
+		mv.addObject("users2", list2);
+		request.setAttribute("users2", list2);
+		mv.addObject("users3", list3);
+		request.setAttribute("users3", list3);
+		mv.addObject("log", log);
+		request.setAttribute("log",log);
+		mv.addObject("ph",ph);
+		request.setAttribute("ph", ph);
 		mv.setViewName("e/admin");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="usersAll")
+	public AjaxResponse4 usersall(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse4 response = new AjaxResponse4();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users(map);
+		request.setAttribute("users", list);
+		response.setUsersall(list);
+
+		List<UserPh> ph = evaluationService.ph(map);
+		request.setAttribute("ph", ph);
+		response.setUserph(ph);
+		
+		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="users1")
+	public AjaxResponse5 users1(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse5 response = new AjaxResponse5();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users1(map);
+		request.setAttribute("users", list);
+		response.setUsers(list);
+		
+		List<UserPh> ph = evaluationService.ph(map);
+		request.setAttribute("ph", ph);
+		response.setUserph(ph);
+		
+		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="users2")
+	public AjaxResponse5 users2(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse5 response = new AjaxResponse5();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users2(map);
+		request.setAttribute("users", list);
+		response.setUsers(list);
+		
+		List<UserPh> ph = evaluationService.ph(map);
+		request.setAttribute("ph", ph);
+		response.setUserph(ph);
+		
+		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="users3")
+	public AjaxResponse5 users3(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse5 response = new AjaxResponse5();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users3(map);
+		request.setAttribute("users", list);
+		response.setUsers(list);
+		
+		List<UserPh> ph = evaluationService.ph(map);
+		request.setAttribute("ph", ph);
+		response.setUserph(ph);
+		
+		return response;
 	}
 }

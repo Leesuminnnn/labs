@@ -9,7 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
@@ -108,5 +110,25 @@ public class EvaluationDao {
 
 	public List<UsersVo> users(Map<String, Object> map) {
 		return sqlSession3.selectList(MAPPER+".users", map);
+	}
+	
+	public List<UsersVo> users1(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".users1", map);
+	}
+	
+	public List<UsersVo> users2(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".users2", map);
+	}
+	
+	public List<UsersVo> users3(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".users3", map);
+	}
+
+	public List<LoginlogVo> log(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".log", map);
+	}
+
+	public List<UserPh> ph(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".ph", map);
 	}
 }

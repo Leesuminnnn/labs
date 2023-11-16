@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.EvaluationDao;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
-import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
@@ -104,5 +105,25 @@ public class EvaluationService {
 
 	public List<UsersVo> users(Map<String, Object> map) {
 		return evaluationDao.users(map);
+	}
+	
+	public List<UsersVo> users1(Map<String, Object> map) {
+		return evaluationDao.users1(map);
+	}
+	
+	public List<UsersVo> users2(Map<String, Object> map) {
+		return evaluationDao.users2(map);
+	}
+	
+	public List<UsersVo> users3(Map<String, Object> map) {
+		return evaluationDao.users3(map);
+	}
+
+	public List<LoginlogVo> log(Map<String, Object> map) {
+		return evaluationDao.log(map);
+	}
+
+	public List<UserPh> ph(Map<String, Object> map) {
+		return evaluationDao.ph(map);
 	}
 }
