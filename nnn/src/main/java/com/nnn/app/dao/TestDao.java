@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.WhetherVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Repository
@@ -79,5 +81,25 @@ public class TestDao {
 
 	public List<EvaluationVo> evList(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".evList", map);
+	}
+
+	public int frominsert(Map<String, Object> map) {
+		return sqlSession1.insert(MAPPER+".forminsert", map);
+	}
+
+	public int whether(Map<String, Object> map2) {
+		return sqlSession1.insert(MAPPER+".whether", map2);
+	}
+
+	public List<NoticeVo> noticeSelect(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".noticeselect", map);
+	}
+
+	public int loginlog(Map<String, Object> map) {
+		return sqlSession1.insert(MAPPER+".loginlog", map);
+	}
+
+	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".whetherselect", map);
 	}
 }

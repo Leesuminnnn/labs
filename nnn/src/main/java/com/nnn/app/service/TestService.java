@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.nnn.app.dao.TestDao;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.WhetherVo;
 
 @Service
 public class TestService {
@@ -76,5 +78,35 @@ public class TestService {
 
 	public List<EvaluationVo> evlist(Map<String, Object> map) {
 		return testDao.evList(map);
+	}
+
+	public int frominsert(Map<String, Object> map) {
+		int flag = 0;
+		
+		flag = testDao.frominsert(map);
+		
+		return flag;
+	}
+
+	public int whether(Map<String, Object> map2) {
+		int flag = 0;
+		
+		flag = testDao.whether(map2);
+		
+		return flag;
+	}
+
+	public List<NoticeVo> noticeSelect(Map<String, Object> map) {
+		return testDao.noticeSelect(map);
+	}
+
+	public int loginlog(Map<String, Object> map) {
+		int flag = 0;
+		flag = testDao.loginlog(map);
+		return flag;
+	}
+
+	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+		return testDao.whetherSelect(map);
 	}
 }

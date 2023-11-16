@@ -7,13 +7,16 @@ import lombok.ToString;
 
 /*
 
+
 create table answer (
 idx int(11) AUTO_INCREMENT not null PRIMARY KEY,
-d1 varchar(100) not null COMMENT '답안',
-d2 int(11) not null comment '문제은행 idx',
-d3 varchar(10) not null comment '평가자 사번',
-d4 varchar(10) not null comment '평가 대상자 사번'
+u1 varchar(30) not null COMMENT '기관명',
+u2 varchar(10) null comment '평가자 사번',
+t1 varchar(10) null comment '평가대상자 사번',
+team varchar(5) not null comment '평가 유형',
+d1 varchar(1000) null comment '문제답안'
 );
+
 
 */
 
@@ -22,8 +25,9 @@ d4 varchar(10) not null comment '평가 대상자 사번'
 @ToString
 public class AnswerVo {
 	private int idx;
+	private String u1;
+	private String u2;
+	private String t1;
+	private String team;
 	private String d1;
-	private String d2;
-	private String d3;
-	private String d4;
 }

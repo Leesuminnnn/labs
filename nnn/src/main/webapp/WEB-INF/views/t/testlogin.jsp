@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testlogincss.css">
 <title>로그인</title>
@@ -16,9 +17,7 @@
 <body>
 <form action="${pageContext.request.contextPath}/t/loginAction" method="post">
 	<section>
-	<div class="notice" style="display: none;">
-		<p>공지사항</p>
-	</div>
+	
 	<div class="login">
 		<h2>로그인</h2>
 		<ul>
@@ -29,10 +28,35 @@
 			</li>
 			<li><button>로그인</button></li>			
 		</ul>
-		<div>
+		<div style="display: none;">
 			<ul>
 				<li>회원가입</li>				
 			</ul>
+		</div>
+	</div>
+	<div class="notice" style="">
+		<h2>공지사항</h2>
+		<div class="area">
+			<table>
+			<c:forEach items="${notice}" var="n">
+				<tr>
+					<td>
+						${n.idx }
+					</td>
+					<td>
+						<c:if test="${n.d1 == 1}">병원 공지사항</c:if>
+					</td>
+					<td>
+						${n.d2 }
+					</td>
+					<td>
+						${n.d3 }
+					</td>
+				</tr>
+			</c:forEach>
+			</table>
+			
+			
 		</div>
 	</div>
 	</section>

@@ -9,8 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css">
-<title>설문조사</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformendcss.css">
+<title>평가완료</title>
 <style>
 td {
 	border: 1px solid #000;
@@ -21,7 +21,7 @@ td {
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/t/formAction/${info.idx}/${target.idx}/${team}">
+<form action="${pageContext.request.contextPath}/t/formAction/${info.idx}/${target.idx}">
 	<div class="header">
 		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
 			<c:choose>
@@ -146,94 +146,25 @@ td {
 			</div>
 			<div style="border-bottom:3px double #000; margin-top: 15px; margin-bottom: 15px;"></div>
 			<div class="area">
-				<b>[ 섬김 ]</b><br><br>
-				<c:set var="index" value="1"/>
-				<c:set var="a" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '섬김' }"><p>${status.count}. ${ev.d1}</p><br>
-							<p>
-								<label><input type="radio" name="a${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="a${ev.idx}" value="매우미흡"/>매우미흡</label>
-							</p><br><br>
-						</c:if>
-						<c:set var="a" value="${a +1 }"/>
-					</c:forEach>
-				<b>[ 배움 ]</b><br><br>
-				<c:set var="b" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '배움' }"><p>${status.count}. ${ev.d1}</p><br>
-							<p>
-								<label><input type="radio" name="b${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="b${ev.idx}" value="매우미흡"/>매우미흡</label>
-							</p><br><br>
-						</c:if>
-						<c:set var="b" value="${b +1 }"/>
-					</c:forEach>
-				<b>[ 키움 ]</b><br><br>
+				<p>[ ${target.name } ] 평가가 완료 되었습니다.
+				<p>2023년도 직원평가에 응답해주셔서 감사합니다.<br><br>
 				
-				<c:set var="c" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '키움' }"><p>${status.count}. ${ev.d1}</p><br>
-							<p>
-								<label><input type="radio" name="c${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="c${ev.idx}" value="매우미흡"/>매우미흡</label>
-							</p><br><br>
-						</c:if>
-						<c:set var="c" value="${c +1 }"/>
-					</c:forEach>
-				<b>[ 나눔 ]</b><br><br>
-				<c:set var="d" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '나눔' }"><p>${status.count}. ${ev.d1}</p><br>
-							<p>
-								<label><input type="radio" name="d${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="d${ev.idx}" value="매우미흡"/>매우미흡</label>
-							</p><br><br>
-						</c:if>
-						<c:set var="d" value="${d +1 }"/>
-					</c:forEach>
-				<b>[ 목표관리 ]</b><br><br>
-				<c:set var="e" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '목표관리' }"><p>${status.count}. ${ev.d1}</p><br>
-							<p>
-								<label><input type="radio" name="e${ev.idx}" value="매우우수"/>매우우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="우수"/>우수</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="보통"/>보통</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="미흡"/>미흡</label>&nbsp;&nbsp;
-								<label><input type="radio" name="e${ev.idx}" value="매우미흡"/>매우미흡</label>
-							</p><br><br>
-						</c:if>
-						<c:set var="e" value="${e +1 }"/>
-					</c:forEach>
-				<b>[ 종합평가 ]</b><br><br>
-					<c:forEach items="${evf}" var="ev">
-						<c:if test="${ev.d3 eq '주관식' }"><p>${ev.d1}</p><br>
-							<textarea style="width: 520px; height: 90px;" name="f${ev.idx }"></textarea>
-							<br><br>
-						</c:if>
-					</c:forEach>
-			</div>
-			<div class="end-area">
-			<!--  -->
-				<button class="end" >
-					평가완료
-				</button>
-			</div>
-		
-		</div>
+				<p>먼저 지난 일 년 동안 함께 울고 웃으며 수고해주신 여러분의 노고에 감사한 마음을 표현하고 싶습니다.
+				<p>넘겨진 11장의 달력보다 마지막 남은 1장의 달력이 더욱 소중하다 여겨지는 순간입니다.
+				<p>오늘에 최선을 다하고 내일을 기대하는 것처럼, 연초에 계획한 모든 일들을 잘 마무리 하시길 바랍니다.
+				<br><br>
+				<p>다가오는 2024년 청룡의 해를 맞이하여
+				<p>직원 모두가 승천하는 푸르른 용처럼 큰 뜻을 펼칠수 있는 한 해가 되었으면 합니다.
+				<p>행복한 연말 되시길 바라며, 건강과 행복을 기원합니다.
+				<br><br><br>
+				<p class="ps">효사랑가족요양병원장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;김정연
+				<br><br><br><br>
+				
+				<p class="ps2">※ 모든 직원의 평가가 완료되지 않으신 직원은 아래 "목록 돌아가기" 버튼을 클릭하여, 평가를 계속 진행해주시기 바랍니다.
+				<br><br><br>
+				<a style="border: 1px solid #000; padding: 15px; background-color: #D9EAD3;" href="${pageContext.request.contextPath}/t/Testinfo/${info.idx}">평가대상자 목록 돌아가기</a>
+				</div>
+				</div>
 	</div>
 	
 	<div class="footer">
@@ -260,7 +191,6 @@ function PrevPage() {
 	console.log(progress.value);
 }
  */
-
 
 </script>	
 </body>
