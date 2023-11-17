@@ -317,8 +317,10 @@
 
 			<div class="flex flex-center"
 				<c:if test="${listInsert == null}">style="display:none;"</c:if>>
-				<div class="btn btn2 btn3 shadow insert flex flex-center normal"
-					onclick="location.href='${pageContext.request.contextPath}/h/Insert.do/${detail.midx}'">신규등록</div>
+				<%-- <div class="btn btn2 btn3 shadow insert flex flex-center normal"
+					onclick="location.href='${pageContext.request.contextPath}/h/Insert.do/${detail.midx}'">신규등록</div> --%>
+					<div class="btn btn2 btn3 shadow insert flex flex-center normal"
+					onclick="location.href='${pageContext.request.contextPath}/t/Insert.do/${detail.midx}'">신규등록</div>
 			</div>
 
 		</div>

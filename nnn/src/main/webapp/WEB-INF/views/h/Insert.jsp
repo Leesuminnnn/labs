@@ -148,7 +148,8 @@
 	
 	
 	scanButton.addEventListener('click', () => {
-		navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+		console.log("click");
+		navigator.mediaDevices.getUserMedia({ video:  { facingMode: { exact: "environment" } }} ).then((stream) => {
 			const video = document.createElement('video');
 			const img = document.createElement('img');
 			video.srcObject = stream;
@@ -232,6 +233,7 @@
 				}
 			}).catch((err) => {
 			console.error(err);
+			alert(err);
 			// video 요소를 삭제합니다.
 			video.pause();
 			video.srcObject = null;
@@ -252,6 +254,7 @@
 			});
 		}).catch((err) => {
 		console.error(err);
+		alert(err);
 		});
 	});
 </script>
@@ -270,12 +273,16 @@
 						<div class="textarea">
 							<textarea name="h_comm" id="h_comm"></textarea>
 						</div>
-						<div class="modal_insert" id="modal_insert" onclick="end()">
+						<!-- <div class="modal_insert" id="modal_insert" onclick="end()">
+						등록
+						</div> -->
+						<div class="modal_insert" id="modal_insert" onclick="closePopupAndRedirect()">
 						등록
 						</div>
 					</div>
 				</div>
 			</div>
+			<%-- 
 			<div class="modal2 normal">
 				<div class="modal_body2">
 					<div>
@@ -289,6 +296,7 @@
 					</div>
 				</div>
 			</div>
+			 --%>
 			<div class="enter"></div>
 			
 			<div class="imglist flex flex-center" id="recent">

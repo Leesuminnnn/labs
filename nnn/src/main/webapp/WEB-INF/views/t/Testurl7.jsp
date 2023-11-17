@@ -316,7 +316,8 @@ a {
                     <!-- 구분 st -->
 					<div style="border-top:1px solid #fff; margin-top: 16px;"></div>
 					<!-- 구분 ed -->
-					<a href="#" class="nav__link2" style="margin-bottom: 0; grid-template-columns: auto; justify-content: space-evenly;" data-menu="harsMain2">
+					<a href="#" class="nav__link2" style="margin-bottom: 0; grid-template-columns: auto; 
+					justify-content: space-evenly;" data-menu="harsMain2">
 						<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
 						<span class="nav__name2 nav_name">HARS</span>
 					</a>
@@ -650,7 +651,8 @@ a {
             </div>
         </nav>
     </div>
-	<div class="nav__link2" style="margin: 0; position: fixed; bottom: 0; width: calc(var(--nav--width) + 9.25rem); background-color: #08254c; z-index: 100;
+	<div class="nav__link2" style="margin: 0; position: fixed; bottom: 0;
+	 width: calc(var(--nav--width) + 9.25rem); background-color: #08254c; z-index: 100;
 	display: flex; justify-content: space-evenly; left: 0; align-items: center; border-radius: 0;">
 		<div style="display: flex; justify-content: center;">
 			<img style="width: 90%;" src="<%=request.getContextPath() %>/resources/img/core_logo.png">
@@ -658,7 +660,8 @@ a {
 	</div>
 			<!-- 나머지 컨텐츠 -->
 			<main id="main-content" 
-			style="width : calc(100vw - (var(--nav--width) + 9.25rem)); height : 100%; margin-left: calc(var(--nav--width) + 9.25rem);">
+			style="width : calc(100vw - (var(--nav--width) + 9.25rem)); height : 100%; 
+			margin-left: calc(var(--nav--width) + 9.25rem);">
 				<!-- 내용을 이곳에 추가 -->
 				<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 			</main>
@@ -808,6 +811,10 @@ a {
 			mainContent.innerHTML = ''; // 기존 내용을 지우고
 			mainContent.appendChild(iframe); // 웹 뷰를 추가합니다.
 		}
+		
+		
+		
+		
 		function showGoogleSheetWebView() {
 			const iframe = document.createElement('iframe');
 			iframe.src = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR6JOk436AoXyveEv4VWOQ5CrbgL3orbrEysB9rQnY5BGLMpmii72CuJVKUTst_TZrRnFmMJyhzqCrM/pubhtml'; // 여기에 구글 시트 웹 뷰 URL을 입력하세요

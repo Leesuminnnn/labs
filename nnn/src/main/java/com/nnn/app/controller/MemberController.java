@@ -536,7 +536,7 @@ public class MemberController {
 			RedirectAttributes redirectAttributes) throws Exception {
 		System.out.println("code : " + code);
 		
-		String access_Token = memberService.getAccessToken(code);
+		String access_Token = memberService.getAccessToken(code, request);
 		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
 		System.out.println("login Controller : " + userInfo);
 		System.out.println("controller access_Token : " + access_Token);

@@ -8,33 +8,44 @@
 		
 		
 		
-		
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSource1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <!-- 
         <property name="url" 
-        value="jdbc:mysql://localhost:3306/testdb?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root" />  
-         -->
-       
-        <property name="url" 
-        value="jdbc:mysql://csworktools.cafe24.com:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;"/>
+        value="jdbc:mysql://csworktools.cafe24.com:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/>
         <property name="username" value="csworktools"/>
-	   	<property name="password" value="cs12365478!@" /> 
-      
-          
+	   	<property name="password" value="cs12365478!@" />
+	   	
     </bean>
+    <!-- 입원 서약서 -->
+    <bean id="dataSource2" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" 
+		value="jdbc:mysql://counsel.sldb.iwinv.net:3306/counselman?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/>
+		<property name="username" value="hswuser"/>
+		<property name="password" value="zhdjthffntus!_!" />
+	</bean>   
     
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath:mapper/**/*Mapper.xml" />
-    </bean>
     
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
-    </bean>
+    
+	<bean id="sqlSessionFactory1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource1"/>
+		<property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:mapper/**/*Mapper.xml" />
+	</bean>
+	
+	<bean id="sqlSession1" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory1"/>
+	</bean>
+	
+	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource2"/>
+		<property name="configLocation" value="classpath:config/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:mapper/**/*Mapper.xml" />
+	</bean>
+	
+	<bean id="sqlSession2" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory2"/>
+	</bean>
 		
 		
 		

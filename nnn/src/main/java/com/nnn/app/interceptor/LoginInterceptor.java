@@ -16,10 +16,11 @@ public class LoginInterceptor implements HandlerInterceptor{
 	// HandlerInterceptor 인터페이스에서 JDK8 이후부터는 3개의 메소드를 디폴트 메소드로 정의해 둠
 	// preGandle(), postHandle(), afterCompletion()
 	// 이들 가운데 필요한 메소드를 Override해서 사용함
-		
+	/*
 	@Override	// 사용자 요청이 Controller로 전달되기 전에 요청을 가로채어서 메소드 실행
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
 			throws Exception {
+		
 		HttpSession session = request.getSession();
 		String email = (String)session.getAttribute("email");
 //		MemberVo memberVo = new MemberVo();
@@ -37,9 +38,9 @@ public class LoginInterceptor implements HandlerInterceptor{
 			session.setAttribute("previousUrl : ", previousUrl);
 			session.setAttribute("params", params);
 			try {
-				/*
-				 	파라미터 값들을 받아서 변수에 저장하고, 세션에 저장
-				*/
+				
+				 	//파라미터 값들을 받아서 변수에 저장하고, 세션에 저장
+				
 				String h_name = (String)request.getParameter("h_name");
 				String h_no = (String)request.getParameter("h_no");
 				String h_number = (String)request.getParameter("h_number");
@@ -72,9 +73,10 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 		
 		return true;	// Controller로 사용자 요청이 전달되게 함
+		
 	}
 	
-	
+	*/
 	
 	
 	

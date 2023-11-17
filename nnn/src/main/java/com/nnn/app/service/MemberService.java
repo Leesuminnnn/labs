@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +91,7 @@ public class MemberService {
 	
 	
 	// 카카오 로그인 서비스
-	public String getAccessToken(String authorize_code) {
+	public String getAccessToken(String authorize_code, HttpServletRequest request) {
 		String access_Token = "";
 		String refresh_Token = "";
 		String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -98,12 +99,30 @@ public class MemberService {
 //		String now_addres = javax.servlet.http.HttpUtils.getRequestURL(request).toString();
 		System.out.println("########################");
 //		System.out.println("now_addres : "+now_addres);
-		
-		
+		// 사용자가 들어온 URL을 가져오기
+		String requestUrl = request.getRequestURL().toString();
+		System.out.println(requestUrl);
+		// 기본 리다이렉트 URI 설정
+		String redirectUri = "http://localhost:8080/app/m/kakao/callback"; // 기본값
+		System.out.println(requestUrl);
+		// URL에 따라 다른 리다이렉트 URI 설정
+//		if (requestUrl.equals("http://localhost:8090/app/m/login.do")) {
+//		    redirectUri = "http://localhost:8090/app/m/kakao/callback"; // 해당 URL일 경우의 리다이렉트 URI
+//		} else if (requestUrl.equals("https://hwtools.kr/m/login.do")) {
+//		    redirectUri = "https://hwtools.kr/m/kakao/callback"; // 해당 URL일 경우의 리다이렉트 URI
+//		} else if (requestUrl.equals("http://hwtools.kr/m/login.do")) {
+//		    redirectUri = "http://hwtools.kr/m/kakao/callback"; // 해당 URL일 경우의 리다이렉트 URI
+//		} else if (requestUrl.equals("http://localhost:8080/app/m/login.do")) {
+//		    redirectUri = "http://localhost:8080/app/m/kakao/callback"; // 해당 URL일 경우의 리다이렉트 URI
+//		}
+//		
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+			
+
+			
 			// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
@@ -113,7 +132,8 @@ public class MemberService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=ecfda70a16078a6b5a64478901f3dfb3");
-			
+//			sb.append("&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8"));
+//			sb.append("&redirect_uri=http://localhost:8080/app/m/kakao/callback");			//로컬사이트
 //			sb.append("&redirect_uri=http://localhost:8090/app/m/kakao/callback");			//로컬사이트
 //			sb.append("&redirect_uri=http://csworktools.cafe24.com/m/kakao/callback");		//cswork
 			sb.append("&redirect_uri=https://hwtools.kr/m/kakao/callback");					//hwtools(https)

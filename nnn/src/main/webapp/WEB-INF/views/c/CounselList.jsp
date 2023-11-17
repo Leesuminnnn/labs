@@ -64,13 +64,17 @@
 		<div class="dv_tx" style="width:95px;">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
 		<div class="dv_tx" style="width:145px;">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
 		<div class="dv_tx" style="width:145px;">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
-		<input class="ip_sb" style="cursor: pointer;" type="submit" value="검색"/>
+		<input class="ip_sb" style="cursor: pointer;" type="submit" value="검색"/>&nbsp;
+		<a class="ip_sb" href="${pageContext.request.contextPath}/c/Written.do" style="cursor: pointer;     display: flex;
+    justify-content: center;
+    align-items: center;" >등록</a>
 	</div>
 	<div style="border-bottom: 1px solid #ddd"></div>
 	<div id="list">
 	<table style=" width: 100%; text-align: center; font-size: 18pt; border-collapse: collapse;">
 		<tr class="" style="height: 70px; background-color: #03a9d0; border: 1px solid #03a9d0;color:#ffffff;">
 			<td>작성일</td>
+			<td>차트번호</td>
 			<td>환자명</td>
 			<td>신청자</td>
 			<td>주보호자</td>
@@ -84,6 +88,7 @@
 				<c:forEach items="${cslist}" var="list">
 				<tr class="light list-tr" style="height: 78px; border-bottom: 1px solid #e9e9e9; color: #000000;">
 					<td>${list.cs_data_31}</td>
+					<td>${list.cs_data_02}</td>
 					<td>${list.cs_data_01}</td>
 					<td>${list.cs_data_29}</td>
 					<td>${list.cs_data_07}</td>
@@ -100,14 +105,21 @@
 						</c:choose>
 					</td>
 					<td>
-						<c:choose>
-							<c:when test="${list.cs_data_30 == 1}">
-								<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/c/WrittenModify.do/${list.cs_idx}'">서명</div>
-							</c:when>
-							<c:otherwise>
-								<div class="sb flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/c/WrittenView.do/${list.cs_idx}'">보기</div>
-							</c:otherwise>
-						</c:choose>
+						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center;;">
+							<c:choose>
+								<c:when test="${list.cs_data_30 == 1}">
+									<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/c/WrittenModify.do/${list.cs_idx}'">서명</div>
+								</c:when>
+								<c:otherwise>
+									<div class="sb flex flex-center" style="cursor: pointer; margin-right: 5px;" onclick="location.href='${pageContext.request.contextPath}/c/WrittenView.do/${list.cs_idx}'">보기</div>
+									<div class="sb flex flex-center" style="cursor: pointer; margin-left: 5px;">
+									<a download="${list.cs_idx}" href="${pageContext.request.contextPath}/c/WrittenView.do/${list.cs_idx}" >
+									<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 50px; vertical-align: middle;">
+									</a>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							</div>
 					</td>
 				</tr>
 				<c:set value="1" var="keyword"/>
@@ -117,6 +129,7 @@
 				<c:forEach items="${matchingList}" var="list">
 				<tr class="light list-tr" style="height: 78px; border-bottom: 1px solid #e9e9e9; color: #000000; <c:if test ="${keyword == 1}">display:none;</c:if>" >
 					<td>${list.cs_data_31}</td>
+					<td>${list.cs_data_02}</td>
 					<td>${list.cs_data_01}</td>
 					<td>${list.cs_data_29}</td>
 					<td>${list.cs_data_07}</td>
