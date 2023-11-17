@@ -345,7 +345,7 @@
 			</c:forEach>
 		</td>
 	</tr>
-	  <c:set var="index2" value="${index2 + 1}" />
+	<c:set var="index2" value="${index2 + 1}" />
 	</c:if>
 	</c:when>
 	
@@ -374,7 +374,7 @@
 			</c:forEach>
 		</td>
 	</tr>
-	  <c:set var="index2" value="${index2 + 1}" />
+	<c:set var="index2" value="${index2 + 1}" />
 	</c:if>
 	</c:when>
 	
@@ -403,7 +403,7 @@
 			</c:forEach>
 		</td>
 	</tr>
-	  <c:set var="index2" value="${index2 + 1}" />
+	<c:set var="index2" value="${index2 + 1}" />
 	
 	</c:when>
 	
@@ -467,7 +467,7 @@
 	<c:if test="${t.hspt_subcode eq 'C00' or t.hspt_subcode eq 'C01'}">
 	
 	<tr>
-		<td>${index2}</td>
+		<td>${index3}</td>
 		<td>
 			${t.hspt_subname }
 		</td>
@@ -489,7 +489,7 @@
 				</c:forEach>
 		</td>
 	</tr>
-	<c:set var="index2" value="${index2 + 1}" />
+	<c:set var="index3" value="${index3 + 1}" />
 	</c:if>
 	</c:when>
 	
@@ -497,7 +497,7 @@
 	<c:if test="${t.hspt_subcode eq 'J00' or t.hspt_subcode eq 'J01'}">
 	
 	<tr>
-		<td>${index2}</td>
+		<td>${index3}</td>
 		<td>
 			${t.hspt_subname }
 		</td>
@@ -519,7 +519,7 @@
 				</c:forEach>
 		</td>
 	</tr>
-	<c:set var="index2" value="${index2 + 1}" />
+	<c:set var="index3" value="${index3 + 1}" />
 	</c:if>
 	</c:when>
 
@@ -764,11 +764,31 @@ function formgo(element) {
 			disableBackButton();
 		}
 	}
-	
-	 
-	
-	
-	
 }
+
+
+
+var idx = ${index-1};
+var idx1 = ${index1-1};
+var idx2 = ${index2-1};
+var idx3 = ${index3-1};
+
+console.log(idx);
+
+if(${info.hspt_V == 'F'}){
+	console.log(idx1-1);
+}else{
+	console.log(idx1);
+}
+
+console.log(idx2);
+
+if(${info.hspt_subcode == 'A00' or 'A01'}){
+	idx3 =0;
+	console.log(idx3);
+}else{
+	console.log(idx3);
+}
+
 </script>
 </html>

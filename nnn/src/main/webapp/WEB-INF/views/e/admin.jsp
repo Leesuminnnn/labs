@@ -44,15 +44,15 @@
 					
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-						<span class="nav_subname">&nbsp;&nbsp;효사랑전주요양병원 직원명부</span>
+						<span class="nav_subname">&nbsp;효사랑전주요양병원 직원명부 ${p1}/${h1}</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user2" data-content="content2">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-						<span class="nav_subname">&nbsp;&nbsp;효사랑가족요양병원 직원명부</span>
+						<span class="nav_subname">&nbsp;효사랑가족요양병원 직원명부 ${p2}/${h2}</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user3" data-content="content3">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-						<span class="nav_subname">&nbsp;&nbsp;가족사랑요양병원 직원명부</span>
+						<span class="nav_subname">&nbsp;가족사랑요양병원 직원명부 ${p3}/${h3}</span>
 					</a>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per1" data-content="content1">
@@ -87,31 +87,30 @@
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 		<table style="">
 			<tr>
-				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>핸드폰번호</td>
+				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>핸드폰번호</td><td>비밀번호초기화</td>
 			</tr>
 		
-		<c:forEach items="${users }" var="u">
-			<c:if test="${u.id ne 12365478 }">
-			<tr style="<c:if test="${empty u.pwd }">background: #eaeaea;</c:if>">
-				<td>${u.idx }</td>
-				<td>${u.hspt_name }</td>
-				<td>${u.hspt_subname }</td>
-				<td>${u.id }</td>
-				<td>${u.hspt_position }</td>
-				<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/e/Info/${u.idx}'">${u.name }</td>
-				<c:forEach items="${ph }" var="p">
-					<c:if test="${u.id eq p.id }">
-					<td>
-						${p.number }
-					</td>
-					</c:if>
-					
-				</c:forEach>
-				
-				
-				
-			</tr>
-			</c:if>
+			<c:forEach items="${users }" var="u">
+				<c:if test="${u.id ne 12365478 }">
+					<tr style="<c:if test="${empty u.pwd }">background: #eaeaea;</c:if>">
+						<td>${u.idx }</td>
+						<td>${u.hspt_name }</td>
+						<td>${u.hspt_subname }</td>
+						<td>${u.id }</td>
+						<td>${u.hspt_position }</td>
+						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/e/Info/${u.idx}'">${u.name }</td>
+						<c:forEach items="${ph }" var="p">
+							<c:if test="${u.id eq p.id }">
+								<td>
+									${p.number }
+								</td>
+							</c:if>
+						</c:forEach>
+						<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" style="cursor:pointer;"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
+						
+						
+					</tr>
+				</c:if>
 			</c:forEach>
 		</table>
 	</main>
@@ -187,6 +186,8 @@ function userall(contentId) {
 	 				maintd7.textContent = "이름";
 	 				var maintd8 = document.createElement("TD");
 	 				maintd8.textContent = "핸드폰번호";
+	 				var maintd9 = document.createElement("TD");
+	 				maintd9.textContent = "비밀번호초기화";
 	 				
 	 				tb.appendChild(maintr);
 	 				maintr.appendChild(maintd1);
@@ -196,6 +197,7 @@ function userall(contentId) {
 	 				maintr.appendChild(maintd6);
 	 				maintr.appendChild(maintd7);
 	 				maintr.appendChild(maintd8);
+	 				maintr.appendChild(maintd9);
 	 				
 	 				listall.forEach(function (list) {
 	 					if(list.id != 12365478){
@@ -240,7 +242,14 @@ function userall(contentId) {
 		 					if(id == phid){
 		 						tdph.textContent = phnumber;
 		 					}
-		 					
+		 					var tdpwdselect = document.createElement("TD");
+		 					tdpwdselect.setAttribute("data-name", name);
+		 					tdpwdselect.setAttribute("data-id", id);
+		 					if(list.pwd){
+		 						tdpwdselect.textContent = '초기화';
+		 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
+		 						tdpwdselect.setAttribute("style", "cursor:pointer;");
+		 					}
 		 					//
 		 					
 		 					tb.appendChild(tr);
@@ -251,6 +260,7 @@ function userall(contentId) {
 		 					tr.appendChild(tdpo);
 		 					tr.appendChild(tdname);
 							tr.appendChild(tdph);
+							tr.appendChild(tdpwdselect);
 	 					}	
  					});
         	 }
@@ -294,6 +304,9 @@ function user1(contentId) {
 	 				maintd7.textContent = "이름";
 	 				var maintd8 = document.createElement("TD");
 	 				maintd8.textContent = "핸드폰번호";
+	 				var maintd9 = document.createElement("TD");
+	 				maintd9.textContent = "비밀번호초기화";
+	 				
 	 				tb.appendChild(maintr);
 	 				maintr.appendChild(maintd1);
 	 				maintr.appendChild(maintd2);
@@ -302,6 +315,8 @@ function user1(contentId) {
 	 				maintr.appendChild(maintd6);
 	 				maintr.appendChild(maintd7);
 	 				maintr.appendChild(maintd8);
+	 				maintr.appendChild(maintd9);
+	 				
 	 				list1.forEach(function (list) {
 	 					if(list.id != 12365478){
 	 						var matchingPh = ph.find(function (phn) {
@@ -345,6 +360,14 @@ function user1(contentId) {
 		 					if(id == phid){
 		 						tdph.textContent = phnumber;
 		 					}
+		 					var tdpwdselect = document.createElement("TD");
+		 					tdpwdselect.setAttribute("data-name", name);
+		 					tdpwdselect.setAttribute("data-id", id);
+		 					if(list.pwd){
+		 						tdpwdselect.textContent = '초기화';
+		 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
+		 						tdpwdselect.setAttribute("style", "cursor:pointer;");
+		 					}
 		 					//
 		 					
 		 					tb.appendChild(tr);
@@ -355,6 +378,7 @@ function user1(contentId) {
 		 					tr.appendChild(tdpo);
 		 					tr.appendChild(tdname);
 							tr.appendChild(tdph);
+							tr.appendChild(tdpwdselect);
 	 					}
 	 					
 	 				});
@@ -396,6 +420,9 @@ function user2() {
  				maintd7.textContent = "이름";
  				var maintd8 = document.createElement("TD");
  				maintd8.textContent = "핸드폰번호";
+ 				var maintd9 = document.createElement("TD");
+ 				maintd9.textContent = "비밀번호초기화";
+ 				
  				tb.appendChild(maintr);
  				maintr.appendChild(maintd1);
  				maintr.appendChild(maintd2);
@@ -404,6 +431,8 @@ function user2() {
  				maintr.appendChild(maintd6);
  				maintr.appendChild(maintd7);
  				maintr.appendChild(maintd8);
+ 				maintr.appendChild(maintd9);
+ 				
  				list1.forEach(function (list) {
  					if(list.id != 12365478){
  						var matchingPh = ph.find(function (phn) {
@@ -447,6 +476,14 @@ function user2() {
 	 					if(id == phid){
 	 						tdph.textContent = phnumber;
 	 					}
+	 					var tdpwdselect = document.createElement("TD");
+	 					tdpwdselect.setAttribute("data-name", name);
+	 					tdpwdselect.setAttribute("data-id", id);
+	 					if(list.pwd){
+	 						tdpwdselect.textContent = '초기화';
+	 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
+	 						tdpwdselect.setAttribute("style", "cursor:pointer;");
+	 					}
 	 					
 	 					//
 	 					
@@ -458,6 +495,7 @@ function user2() {
 	 					tr.appendChild(tdpo);
 	 					tr.appendChild(tdname);
 						tr.appendChild(tdph);
+						tr.appendChild(tdpwdselect);
  					}
  					
  				});
@@ -499,6 +537,8 @@ function user3() {
  				maintd7.textContent = "이름";
  				var maintd8 = document.createElement("TD");
  				maintd8.textContent = "핸드폰번호";
+ 				var maintd9 = document.createElement("TD");
+ 				maintd9.textContent = "비밀번호초기화";
  				
  				tb.appendChild(maintr);
  				maintr.appendChild(maintd1);
@@ -508,6 +548,8 @@ function user3() {
  				maintr.appendChild(maintd6);
  				maintr.appendChild(maintd7);
  				maintr.appendChild(maintd8);
+ 				maintr.appendChild(maintd9);
+ 				
  				
  				list1.forEach(function (list) {
  					if(list.id != 12365478){
@@ -552,6 +594,14 @@ function user3() {
 	 					if(id == phid){
 	 						tdph.textContent = phnumber;
 	 					}
+	 					var tdpwdselect = document.createElement("TD");
+	 					tdpwdselect.setAttribute("data-name", name);
+	 					tdpwdselect.setAttribute("data-id", id);
+	 					if(list.pwd){
+	 						tdpwdselect.textContent = '초기화';
+	 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
+	 						tdpwdselect.setAttribute("style", "cursor:pointer;");
+	 					}
 	 					//
 	 					
 	 					tb.appendChild(tr);
@@ -562,6 +612,7 @@ function user3() {
 	 					tr.appendChild(tdpo);
 	 					tr.appendChild(tdname);
 						tr.appendChild(tdph);
+						tr.appendChild(tdpwdselect);
  					}
  					
  				});
@@ -676,6 +727,246 @@ function per1() {
      });
 }
 
+
+function per2() {
+	$.ajax({
+        url: '${pageContext.request.contextPath}/e/per2',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+       	 if(response.result === "Y"){
+				var list1 = response.users;
+				var ph = response.userph;
+				
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+				var tb = document.createElement("TABLE");
+				mainContent.appendChild(tb);
+				var maintr = document.createElement("TR");
+				var maintd1 = document.createElement("TD");
+				maintd1.textContent = "idx";
+				var maintd2 = document.createElement("TD");
+				maintd2.textContent = "병원명";
+				var maintd3 = document.createElement("TD");
+				maintd3.textContent = "부서명";
+				var maintd4 = document.createElement("TD");
+				maintd4.textContent = "사번";
+				var maintd6 = document.createElement("TD");
+				maintd6.textContent = "직책";
+				var maintd7 = document.createElement("TD");
+				maintd7.textContent = "이름";
+				var maintd8 = document.createElement("TD");
+				maintd8.textContent = "핸드폰번호";
+				
+				tb.appendChild(maintr);
+				maintr.appendChild(maintd1);
+				maintr.appendChild(maintd2);
+				maintr.appendChild(maintd3);
+				maintr.appendChild(maintd4);
+				maintr.appendChild(maintd6);
+				maintr.appendChild(maintd7);
+				maintr.appendChild(maintd8);
+				
+				list1.forEach(function (list) {
+					if(list.id != 12365478){
+						var matchingPh = ph.find(function (phn) {
+					         return phn.id === list.id;
+					      });
+						var phid, phnumber;
+						
+						 if (matchingPh) {
+	                        phid = matchingPh.id;
+	                        phnumber = matchingPh.number;
+	                     }
+						 
+						var idx = list.idx;
+	 					var hname = list.hspt_name;
+	 					var sname = list.hspt_subname;
+	 					var id = list.id;
+	 					var position = list.hspt_position;
+	 					var name = list.name;
+	 					
+	 					
+	 					var tr = document.createElement("TR");
+	 					if(!list.pwd){
+	 						tr.setAttribute("style", "background: #eaeaea;")
+	 					}
+	 					var tdidx = document.createElement("TD");
+	 					tdidx.textContent = idx;
+	 					var tdhname = document.createElement("TD");
+	 					tdhname.textContent = hname;
+	 					var tdsname = document.createElement("TD");
+	 					tdsname.textContent = sname;
+	 					var tdid = document.createElement("TD");
+	 					tdid.textContent = id;
+	 					var tdpo = document.createElement("TD");
+	 					tdpo.textContent = position;
+	 					var tdname = document.createElement("TD");
+	 					tdname.textContent = name;
+	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					tdname.setAttribute("onclick","location.href='" + url + "'");
+	 					tdname.setAttribute("style", "cursor:pointer;");
+	 					var tdph = document.createElement("TD");
+	 					if(id == phid){
+	 						tdph.textContent = phnumber;
+	 					}
+	 					//
+	 					
+	 					tb.appendChild(tr);
+	 					tr.appendChild(tdidx);
+	 					tr.appendChild(tdhname);
+	 					tr.appendChild(tdsname);
+	 					tr.appendChild(tdid);
+	 					tr.appendChild(tdpo);
+	 					tr.appendChild(tdname);
+						tr.appendChild(tdph);
+					}
+					
+				});
+       	 }
+        },
+        error: function(error) {
+           console.error('Error fetching data:', error);
+        }
+     });
+}
+
+
+function per3() {
+	$.ajax({
+        url: '${pageContext.request.contextPath}/e/per3',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+       	 if(response.result === "Y"){
+				var list1 = response.users;
+				var ph = response.userph;
+				
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+				var tb = document.createElement("TABLE");
+				mainContent.appendChild(tb);
+				var maintr = document.createElement("TR");
+				var maintd1 = document.createElement("TD");
+				maintd1.textContent = "idx";
+				var maintd2 = document.createElement("TD");
+				maintd2.textContent = "병원명";
+				var maintd3 = document.createElement("TD");
+				maintd3.textContent = "부서명";
+				var maintd4 = document.createElement("TD");
+				maintd4.textContent = "사번";
+				var maintd6 = document.createElement("TD");
+				maintd6.textContent = "직책";
+				var maintd7 = document.createElement("TD");
+				maintd7.textContent = "이름";
+				var maintd8 = document.createElement("TD");
+				maintd8.textContent = "핸드폰번호";
+				
+				tb.appendChild(maintr);
+				maintr.appendChild(maintd1);
+				maintr.appendChild(maintd2);
+				maintr.appendChild(maintd3);
+				maintr.appendChild(maintd4);
+				maintr.appendChild(maintd6);
+				maintr.appendChild(maintd7);
+				maintr.appendChild(maintd8);
+				
+				list1.forEach(function (list) {
+					if(list.id != 12365478){
+						var matchingPh = ph.find(function (phn) {
+					         return phn.id === list.id;
+					      });
+						var phid, phnumber;
+						
+						 if (matchingPh) {
+	                        phid = matchingPh.id;
+	                        phnumber = matchingPh.number;
+	                     }
+						 
+						var idx = list.idx;
+	 					var hname = list.hspt_name;
+	 					var sname = list.hspt_subname;
+	 					var id = list.id;
+	 					var position = list.hspt_position;
+	 					var name = list.name;
+	 					
+	 					
+	 					var tr = document.createElement("TR");
+	 					if(!list.pwd){
+	 						tr.setAttribute("style", "background: #eaeaea;")
+	 					}
+	 					var tdidx = document.createElement("TD");
+	 					tdidx.textContent = idx;
+	 					var tdhname = document.createElement("TD");
+	 					tdhname.textContent = hname;
+	 					var tdsname = document.createElement("TD");
+	 					tdsname.textContent = sname;
+	 					var tdid = document.createElement("TD");
+	 					tdid.textContent = id;
+	 					var tdpo = document.createElement("TD");
+	 					tdpo.textContent = position;
+	 					var tdname = document.createElement("TD");
+	 					tdname.textContent = name;
+	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					tdname.setAttribute("onclick","location.href='" + url + "'");
+	 					tdname.setAttribute("style", "cursor:pointer;");
+	 					var tdph = document.createElement("TD");
+	 					if(id == phid){
+	 						tdph.textContent = phnumber;
+	 					}
+	 					//
+	 					
+	 					tb.appendChild(tr);
+	 					tr.appendChild(tdidx);
+	 					tr.appendChild(tdhname);
+	 					tr.appendChild(tdsname);
+	 					tr.appendChild(tdid);
+	 					tr.appendChild(tdpo);
+	 					tr.appendChild(tdname);
+						tr.appendChild(tdph);
+					}
+					
+				});
+       	 }
+        },
+        error: function(error) {
+           console.error('Error fetching data:', error);
+        }
+     });
+}
+
+//비밀번호 초기화
+function pwdreset(element){
+	var name = element.getAttribute('data-name');
+	var id = element.getAttribute('data-id');
+	console.log(name);
+	console.log(id);
+	alert("[" + name + "]님의 비밀번호를 초기화 합니다.");
+	
+	prmpwd = window.prompt('비밀번호를 입력해주세요');
+	if(prmpwd == '123qwe'){
+		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
+		$.ajax({
+			url: '${pageContext.request.contextPath}/e/pwdreset/'+id,
+			type: 'post',
+			dataType: 'json',
+			success: function(response){
+				if(response.result === "Y"){
+					
+					location.reload();
+				}
+			},
+			error: function(error) {
+				console.error('Error fetching data:', error);
+			}
+			
+		});
+		
+	}else {
+		alert('인증 실패');
+	}
+	
+}
+
+
 const menuScripts = [
 	{ id: 'userall', contentId: 'all', script: userall },
 	{ id: 'user1', contentId: 'content1', script: user1 },
@@ -708,6 +999,9 @@ function activateMenu(menuIndex) {
         }
     }
 }
+
+
+// 검색기능?
 function findStr() {
     var n = 0;
     var str = document.getElementById("str").value;

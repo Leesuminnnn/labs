@@ -2986,9 +2986,49 @@
 		from users__ where hspt_name = "가족사랑요양병원"
 	</select>
 	<select id="log" resultType="map" parameterType="map">
-		select * from loginlog order by d2 desc;
+		select * from loginlog where id = #{id} order by d2 desc;
 	</select>
 	<select id="ph" resultType="map" parameterType="map">
 		select * from user__phone
 	</select>
+	
+	<!-- 비밀번호 초기화 -->
+	<update id="pwdreset" parameterType="map">
+		update users__ set pwd = null where id = #{id}
+	</update>
+	<update id="pwdreset1" parameterType="map">
+		update users__ set pwd = null where hspt_name = '효사랑전주요양병원' and id = #{id}
+	</update>
+	<update id="pwdreset2" parameterType="map">
+		update users__ set pwd = null where hspt_name = '효사랑가족요양병원' and id = #{id}
+	</update>
+	<update id="pwdreset3" parameterType="map">
+		update users__ set pwd = null where hspt_name = '가족사랑요양병원' and id = #{id}
+	</update>
+	
+	<!-- 비밀번호 설정한 직원 명부 -->
+	<select id="hsptselect1" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = '효사랑전주요양병원'
+	</select>
+	
+	<select id="hsptselect2" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = '효사랑가족요양병원'
+	</select>
+	
+	<select id="hsptselect3" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = '가족사랑요양병원'
+	</select>
+	
+	<select id="hsptpwdselect1" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = '효사랑전주요양병원' and pwd is NOT NULL;
+	</select>
+	<select id="hsptpwdselect2" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = '효사랑가족요양병원' and pwd is NOT NULL;
+	</select>
+	<select id="hsptpwdselect3" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = '가족사랑요양병원' and pwd is NOT NULL;
+	</select>
+	
+	
+	
 </mapper>

@@ -126,4 +126,46 @@ public class EvaluationService {
 	public List<UserPh> ph(Map<String, Object> map) {
 		return evaluationDao.ph(map);
 	}
+
+	public int pwdreset(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.pwdreset(map);
+		return flag;
+	}
+	public int pwdreset1(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.pwdreset1(map);
+		return flag;
+	}
+	public int pwdreset2(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.pwdreset2(map);
+		return flag;
+	}
+	public int pwdreset3(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.pwdreset3(map);
+		return flag;
+	}
+	public int hsptselect1(Map<String, Object> map) {
+		return evaluationDao.hsptselect1(map);
+	}
+	public int hsptselect2(Map<String, Object> map) {
+		return evaluationDao.hsptselect2(map);
+	}
+	public int hsptselect3(Map<String, Object> map) {
+		return evaluationDao.hsptselect3(map);
+	}
+
+	public int hsptpwdselect1(Map<String, Object> map) {
+		return evaluationDao.hsptselectpwd1(map);
+	}
+	public int hsptpwdselect2(Map<String, Object> map) {
+		return evaluationDao.hsptselectpwd2(map);
+	}
+	public int hsptpwdselect3(Map<String, Object> map) {
+		return evaluationDao.hsptselectpwd3(map);
+	}
+
+	
 }
