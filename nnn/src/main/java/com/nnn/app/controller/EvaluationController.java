@@ -554,12 +554,15 @@ public class EvaluationController {
 	@RequestMapping(value="admin")
 	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users(map);
 		List<UsersVo> list1 = evaluationService.users1(map);
 		List<UsersVo> list2 = evaluationService.users2(map);
 		List<UsersVo> list3 = evaluationService.users3(map);
 		List<LoginlogVo> log = evaluationService.log(map);
 		List<UserPh> ph = evaluationService.ph(map);
+		
+		
 		int hspt1 = evaluationService.hsptselect1(map);
 		int hspt2 = evaluationService.hsptselect2(map);
 		int hspt3 = evaluationService.hsptselect3(map);
