@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.EvaluationDao;
+import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
@@ -110,15 +112,24 @@ public class EvaluationService {
 	public List<UsersVo> users1(Map<String, Object> map) {
 		return evaluationDao.users1(map);
 	}
+	public List<UsersVo> users1pwd(Map<String, Object> map) {
+		return evaluationDao.users1pwd(map);
+	}
 	
 	public List<UsersVo> users2(Map<String, Object> map) {
 		return evaluationDao.users2(map);
+	}
+	public List<UsersVo> users2pwd(Map<String, Object> map) {
+		return evaluationDao.users2pwd(map);
 	}
 	
 	public List<UsersVo> users3(Map<String, Object> map) {
 		return evaluationDao.users3(map);
 	}
-
+	public List<UsersVo> users3pwd(Map<String, Object> map) {
+		return evaluationDao.users3pwd(map);
+	}
+	
 	public List<LoginlogVo> log(Map<String, Object> map) {
 		return evaluationDao.log(map);
 	}
@@ -126,7 +137,12 @@ public class EvaluationService {
 	public List<UserPh> ph(Map<String, Object> map) {
 		return evaluationDao.ph(map);
 	}
-
+	
+	public int phOne(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.phOne(map);
+		return flag;
+	}
 	public int pwdreset(Map<String, Object> map) {
 		int flag = 0;
 		flag = evaluationDao.pwdreset(map);
@@ -166,6 +182,23 @@ public class EvaluationService {
 	public int hsptpwdselect3(Map<String, Object> map) {
 		return evaluationDao.hsptselectpwd3(map);
 	}
+
+	public List<TargetVo> target(Map<String, Object> map) {
+		return evaluationDao.target(map);
+	}
+
+	public List<AnswerVo> answerselect(Map<String, Object> map) {
+		return evaluationDao.answerselect(map);
+	}
+
+	public int pwdajax(Map<String, Object> map) {
+		
+		int flag = 0;
+		flag = evaluationDao.pwdajax(map);
+		return flag;
+	}
+
+	
 
 	
 }

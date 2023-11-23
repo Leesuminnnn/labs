@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.CalenService;
+import com.nnn.app.service.EvaluationService;
 import com.nnn.app.service.HelpService;
 import com.nnn.app.service.ImageService;
 import com.nnn.app.service.MemberService;
@@ -37,6 +38,8 @@ import com.nnn.app.service.PointService;
 import com.nnn.app.service.PointplusService;
 import com.nnn.app.service.TestService;
 import com.nnn.app.vo.AjaxResponse;
+import com.nnn.app.vo.AjaxResponse5;
+import com.nnn.app.vo.AjaxResponse8;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.CalendarVo;
 import com.nnn.app.vo.Criteria;
@@ -47,6 +50,7 @@ import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 import com.nnn.app.vo.WrittenVo;
 
@@ -61,10 +65,11 @@ public class TestController {
 	private HelpService helpService;
 	private PointService pointService;
 	private CalenService calenService;
+	private EvaluationService evaluationService;
 	
 	@Autowired
 	public TestController(MemberService memberService, PointplusService pointplusService, TestService testService, AES256Util aes, ImageService imageService,
-			HelpService helpService, PointService pointService, CalenService calenService) {
+			HelpService helpService, PointService pointService, CalenService calenService, EvaluationService evaluationService) {
 		this.memberService = memberService;
 		this.pointplusService = pointplusService;
 		this.testService = testService;
@@ -73,6 +78,7 @@ public class TestController {
 		this.helpService = helpService;
 		this.pointService = pointService;
 		this.calenService = calenService;
+		this.evaluationService = evaluationService;
 	}
 
 	@RequestMapping(value = "test.do")
@@ -787,15 +793,83 @@ public class TestController {
 	public ModelAndView testlogin(ModelAndView mv, NoticeVo vo) {
 		// 공지사항 영역 리스트로 출력
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<NoticeVo> list = testService.noticeSelect(map);
+		List<NoticeVo> list = evaluationService.noticeSelect(map);
 		
 		mv.addObject("notice", list);
-		
-		
-		mv.setViewName("t/testlogin");
+		// 초기 로그인페이지 들어오면 사번/비밀번호로
+		mv.addObject("dbpwdOk", true);
+		mv.setViewName("t/login");
 		return mv;
 	}
-
+	
+	@RequestMapping(value="Findpwd")
+	public ModelAndView findpwd(ModelAndView mv, NoticeVo vo) {
+		mv.setViewName("t/findpwd");
+		return mv;
+	}
+	// 비밀번호 찾기 전 회원정보 일치하는지 ajax
+	@ResponseBody
+	@RequestMapping(value="FindpwdAjax")
+	public AjaxResponse5 per1(HttpSession session, HttpServletRequest request, @RequestParam("id")String id, @RequestParam("ph")String ph) throws Exception {
+		AjaxResponse5 response = new AjaxResponse5();
+		response.setResult("N");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("ph", ph);
+		
+//		List<UsersVo> list = evaluationService.users1(map);
+		
+		int phOne = evaluationService.phOne(map);
+		
+		if(phOne == 1) {
+			response.setResult("Y");
+		}else {
+			response.setResult("N");
+		}
+		
+		/*
+		private String result;
+		private List<UsersVo> users;
+		private List<UserPh> userph;
+		private List<UsersVo> listpwd1;
+		*/
+		response.setUserph(phOne);
+		
+		
+		return response;
+	}
+	@ResponseBody
+	@RequestMapping(value="PwdActAjax/{id}")
+	public AjaxResponse8 pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, Model md) throws NoSuchAlgorithmException {
+		AjaxResponse8 response = new AjaxResponse8();
+		response.setResult("N");
+//		// 암호화
+//		SHA256 sha256 = new SHA256();
+//		//비밀번호
+//        String password = vo.getPwd();
+//        //SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        
+//        System.out.println(cryptogram);
+//		//담은 변수를 DB에 넘겨준다.
+//		vo.setPwd(cryptogram);
+//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("pwd", cryptogram);
+		map.put("pwd", vo.getPwd());
+		map.put("id", vo.getId());
+		
+		int flag = evaluationService.pwdajax(map);
+		
+		if(flag >= 1) {
+			System.out.println(flag);
+			response.setResult("Y");
+			return response;
+		} else {
+			return response;
+		}
+	}
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public String testloginaction(TestusersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 비밀번호 복호화

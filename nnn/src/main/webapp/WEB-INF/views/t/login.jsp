@@ -28,7 +28,7 @@
 				<input type="radio" name="radio" id="chk_no" <%-- <c:if test="${dbpwdOk == true}">checked</c:if> --%>><label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
 			</li>
 			<li><button>로그인</button></li>
-			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/e/Findpwd'"><small style="cursor:pointer;">비밀번호를 잊으셨나요?</small></li>			
+			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/e/Findpwd'"><small style="cursor:pointer;">비밀번호를 잊으셨나요?</small></li>
 		</ul>
 		<div style="display: none;">
 			<ul>

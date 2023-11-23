@@ -36,6 +36,7 @@ td {
 					<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
 				</c:when>
 			</c:choose>
+			<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/e/Logout">로그아웃</a>
 		</div>
 	</div>
 	<div class="section">
@@ -110,7 +111,7 @@ td {
 						<p class="ps">가족사랑요양병원 이사장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박진만
 					</c:when>
 				</c:choose>
-				<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/e/Logout">로그아웃</a>
+				
 				</div>
 				
 				<div style="border-bottom:1px solid #000; margin-top: 50px; margin-bottom: 30px;"></div>

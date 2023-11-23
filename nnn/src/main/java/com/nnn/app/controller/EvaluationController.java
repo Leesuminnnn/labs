@@ -28,10 +28,12 @@ import com.nnn.app.service.EvaluationService;
 import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
+import com.nnn.app.vo.AjaxResponse7;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
@@ -60,6 +62,19 @@ public class EvaluationController {
 		return mv;
 	}
 
+	@RequestMapping(value="Loginprev")
+	public ModelAndView login2(ModelAndView mv, NoticeVo vo) {
+		// 공지사항 영역 리스트로 출력
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<NoticeVo> list = evaluationService.noticeSelect(map);
+		
+		mv.addObject("notice", list);
+		// 초기 로그인페이지 들어오면 사번/비밀번호로
+		mv.addObject("dbpwdOk", true);
+		mv.setViewName("e/prevlogin");
+		return mv;
+	}
+	
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public String loginaction(UsersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 비밀번호 복호화
@@ -115,7 +130,7 @@ public class EvaluationController {
 				System.out.println("info2.idx : "+info2.getIdx());
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
 				if(info2.getPwd() == null) {
-					
+					session.setAttribute("loginmember", vo.getId());
 					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
 					request.setAttribute("url", "e/Pwd/"+idx);
 					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
@@ -134,6 +149,7 @@ public class EvaluationController {
 					map.put("id", vo.getId());
 					map.put("name", info2.getName());
 					System.out.println("#########################################");
+					md.addAttribute("info", evaluationService.info(idx));
 					// 로그인 한 유저 ip 알아내기
 					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 					String ip = req.getHeader("X-FORWARDED-FOR");
@@ -319,6 +335,11 @@ public class EvaluationController {
 		mv.setViewName("e/pwd");
 		return mv;
 	}
+	@RequestMapping(value="Findpwd")
+	public ModelAndView findpwd(ModelAndView mv, NoticeVo vo) {
+		mv.setViewName("e/findpwd");
+		return mv;
+	}
 	@RequestMapping(value="pwdAction/{idx}")
 	public String pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
@@ -351,6 +372,34 @@ public class EvaluationController {
 		} else {
 			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
 			request.setAttribute("url", "e/Pwd/"+idx);
+			return "alert5";
+		}
+	}
+	@RequestMapping(value="pwdActAjax/{id}")
+	public String pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+//		// 암호화
+//		SHA256 sha256 = new SHA256();
+//		//비밀번호
+//        String password = vo.getPwd();
+//        //SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        
+//        System.out.println(cryptogram);
+//		//담은 변수를 DB에 넘겨준다.
+//		vo.setPwd(cryptogram);
+//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("pwd", cryptogram);
+		map.put("pwd", vo.getPwd());
+		map.put("id", vo.getId());
+		
+		int flag = evaluationService.pwdajax(map);
+		
+		if(flag >= 1) {
+			System.out.println(flag);
+			return "alert5";
+		} else {
 			return "alert5";
 		}
 	}
@@ -458,14 +507,15 @@ public class EvaluationController {
 		map.put("u2", u2);
 		map.put("t1", t1);
 		map.put("team", team);
-		map2.put("ev",team);
+		map2.put("team",team);
 		// 진료부, 경혁팀, 부서장 영역
 		if(team.equals("A") || team.equals("B") || team.equals("C")) {
 			String ev = "AA";
 			System.out.println("ev : " + ev);
 			String d1 = a1+","+a2+","+b3+","+b4+","+c5+","+c6+","+d7+","+d8+","+e9+","+e10+","+f11;
 			System.out.println(d1);
-			
+			map.put("ev", ev);
+			map2.put("ev", ev);
 			map.put("d1", d1);
 		}
 		// 부서원 영역
@@ -475,7 +525,10 @@ public class EvaluationController {
 			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+c23+","+c24+
 					","+c25+","+c26+","+c27+","+d28+","+d29+","+e30+","+e31+","+f32;
 			map.put("d1", d1);
+			map2.put("ev", ev);
+			map.put("ev", ev);
 		}
+		
 		List<AnswerVo> list = new ArrayList<AnswerVo>();
 		
 		// 나중에 암호화 해야함
@@ -559,6 +612,9 @@ public class EvaluationController {
 		List<UsersVo> list1 = evaluationService.users1(map);
 		List<UsersVo> list2 = evaluationService.users2(map);
 		List<UsersVo> list3 = evaluationService.users3(map);
+		List<UsersVo> listpwd1 = evaluationService.users1pwd(map);
+		List<UsersVo> listpwd2 = evaluationService.users2pwd(map);
+		List<UsersVo> listpwd3 = evaluationService.users3pwd(map);
 		List<LoginlogVo> log = evaluationService.log(map);
 		List<UserPh> ph = evaluationService.ph(map);
 		
@@ -579,6 +635,14 @@ public class EvaluationController {
 		request.setAttribute("users2", list2);
 		mv.addObject("users3", list3);
 		request.setAttribute("users3", list3);
+		
+		mv.addObject("userspwd1", listpwd1);
+		request.setAttribute("userspwd1", listpwd1);
+		mv.addObject("userspwd2", listpwd2);
+		request.setAttribute("users2pwd", listpwd2);
+		mv.addObject("userspwd3", listpwd3);
+		request.setAttribute("userspwd3", listpwd3);
+		
 		mv.addObject("log", log);
 		request.setAttribute("log",log);
 		mv.addObject("ph",ph);
@@ -600,23 +664,41 @@ public class EvaluationController {
 		return mv;
 	}
 	
-	@ResponseBody
+//	@ResponseBody
+//	@RequestMapping(value="pwdreset/{id}")
+//	public AjaxResponse6 pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse6 response = new AjaxResponse6();
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("id", id);
+//		int flag = evaluationService.pwdreset(map);
+//		
+//		if(flag == 1) {
+//			response.setResult("Y");
+//			return response;
+//		}else {
+//			response.setResult("N");
+//			return response;
+//		}
+//	}
+	
 	@RequestMapping(value="pwdreset/{id}")
-	public AjaxResponse6 pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-		AjaxResponse6 response = new AjaxResponse6();
+	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		int flag = evaluationService.pwdreset(map);
 		
 		if(flag == 1) {
-			response.setResult("Y");
-			return response;
+			request.setAttribute("msg", "초기화 완료");
+			request.setAttribute("url", "e/admin");
+			return "alert";
 		}else {
-			response.setResult("N");
-			return response;
+			request.setAttribute("msg", "오류발생");
+			return "alert";
 		}
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="pwdreset1/{id}")
 	public AjaxResponse6 pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
@@ -688,17 +770,20 @@ public class EvaluationController {
 	
 	@ResponseBody
 	@RequestMapping(value="users1")
-	public AjaxResponse5 users1(HttpSession session, HttpServletRequest request) throws Exception {
+	public AjaxResponse5 users1(HttpSession session, HttpServletRequest request, Model md) throws Exception {
 		AjaxResponse5 response = new AjaxResponse5();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users1(map);
+		List<UsersVo> listpwd1 = evaluationService.users1pwd(map);
+		request.setAttribute("userspwd1", listpwd1);
 		request.setAttribute("users", list);
 		response.setUsers(list);
+		response.setListpwd1(listpwd1);
 		
 		List<UserPh> ph = evaluationService.ph(map);
 		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		response.setUserphList(ph);
 		
 		return response;
 	}
@@ -715,7 +800,7 @@ public class EvaluationController {
 		
 		List<UserPh> ph = evaluationService.ph(map);
 		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		response.setUserphList(ph);
 		
 		return response;
 	}
@@ -732,59 +817,108 @@ public class EvaluationController {
 		
 		List<UserPh> ph = evaluationService.ph(map);
 		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		response.setUserphList(ph);
+		
+		return response;
+	}
+
+	
+	
+	@ResponseBody
+	@RequestMapping(value="perall")
+	public AjaxResponse7 perall(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse7 response = new AjaxResponse7();
+		response.setResult("Y");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users(map);
+		List<TargetVo> target = evaluationService.target(map);
+		List<AnswerVo> answer = evaluationService.answerselect(map);
+		response.setUsersall(list);
+		response.setTarget(target);
+		response.setAnswer(answer);
+		
 		
 		return response;
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="per1")
-	public AjaxResponse5 per1(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse5 response = new AjaxResponse5();
-		response.setResult("Y");		
+	public AjaxResponse7 per1(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse7 response = new AjaxResponse7();
+		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users1(map);
-		request.setAttribute("users", list);
-		response.setUsers(list);
-		
-		List<UserPh> ph = evaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		List<TargetVo> target = evaluationService.target(map);
+		List<AnswerVo> answer = evaluationService.answerselect(map);
+		response.setUsersall(list);
+		response.setTarget(target);
+		response.setAnswer(answer);
 		
 		return response;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="per2")
-	public AjaxResponse5 per2(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse5 response = new AjaxResponse5();
-		response.setResult("Y");		
+	public AjaxResponse7 per2(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse7 response = new AjaxResponse7();
+		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users2(map);
-		request.setAttribute("users", list);
-		response.setUsers(list);
-		
-		List<UserPh> ph = evaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		List<TargetVo> target = evaluationService.target(map);
+		List<AnswerVo> answer = evaluationService.answerselect(map);
+		response.setUsersall(list);
+		response.setTarget(target);
+		response.setAnswer(answer);
 		
 		return response;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="per3")
-	public AjaxResponse5 per3(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse5 response = new AjaxResponse5();
+	public AjaxResponse7 per3(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse7 response = new AjaxResponse7();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users3(map);
-		request.setAttribute("users", list);
-		response.setUsers(list);
-		
-		List<UserPh> ph = evaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		List<TargetVo> target = evaluationService.target(map);
+		List<AnswerVo> answer = evaluationService.answerselect(map);
+		response.setUsersall(list);
+		response.setTarget(target);
+		response.setAnswer(answer);
 		
 		return response;
+	}
+	
+	
+	
+	@RequestMapping(value="test1")
+	public ModelAndView per1_(ModelAndView mv, HttpSession session, HttpServletRequest request) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users(map);
+		List<TargetVo> list1 = evaluationService.target(map);
+		List<AnswerVo> list2 = evaluationService.answerselect(map);
+		System.out.println(list2);
+		mv.addObject("list",list);
+		mv.addObject("target", list1);
+		mv.addObject("answer", list2);
+		System.out.println(list1);
+		mv.setViewName("e/per1");
+		return mv;
+	}
+	
+	@RequestMapping(value="test2")
+	public ModelAndView test(ModelAndView mv, HttpSession session, HttpServletRequest request) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = evaluationService.users(map);
+		List<TargetVo> list1 = evaluationService.target(map);
+		List<AnswerVo> list2 = evaluationService.answerselect(map);
+		System.out.println(list2);
+		mv.addObject("list",list);
+		mv.addObject("target", list1);
+		mv.addObject("answer", list2);
+		System.out.println(list1);
+		mv.setViewName("e/test");
+		return mv;
 	}
 }

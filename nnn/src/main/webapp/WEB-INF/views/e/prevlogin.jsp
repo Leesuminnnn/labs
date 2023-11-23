@@ -36,7 +36,7 @@
 			</ul>
 		</div> --%>
 		<div style="display: flex; flex-wrap: wrap; color: red; font-weight: bold; text-align: center; padding : 10px 0 10px 0; justify-content: center; font-size: 22px;">
-			<div>2023년 11월 16일 목요일 10시 </div><div>오픈예정입니다.</div>
+			<div>2023년 12월 1일 금요일 10시 </div><div>오픈예정입니다.</div>
 		</div>
 	</div>
 	<div class="notice" style="">

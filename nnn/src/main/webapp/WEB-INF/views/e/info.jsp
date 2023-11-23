@@ -157,6 +157,9 @@
 								<c:when test="${t.idx eq e.d2 and e.ev eq 'A'}">
 									${e.d3 }
 								</c:when>
+								<c:otherwise>
+									미진행
+								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 					</td>
@@ -725,6 +728,8 @@
 var id = "${sessionScope.loginmember}";
 var info = "${info.id}";
 var date = ${specificDate};
+console.log("세션아이디 ${sessionScope.loginmember}");
+console.log("model아이디 ${info.id}");
 console.log("특정 날짜를 넘겼는지 확인 "+ date);
 
 if(id != info && id != '12365478'){

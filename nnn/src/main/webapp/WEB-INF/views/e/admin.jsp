@@ -11,9 +11,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css">
 <title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<style>
+
+</style>
 </head>
 <body>
-<form>
+<form id="frm">
 <section>
 <div style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px; padding-left: 33px;
     transition: .5s; z-index: 101; position: fixed; width: calc(var(--nav--width) + 9.25rem); top: 0; left: 0; height: 80px;">
@@ -38,7 +41,6 @@
 				 -->
 				<div class="nav__list">
 					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="userall" data-content="all">
-					<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
 						<span class="nav_name">1,2,3병원 직원명부 Total</span>
 					</a>
 					
@@ -55,17 +57,20 @@
 						<span class="nav_subname">&nbsp;가족사랑요양병원 직원명부 ${p3}/${h3}</span>
 					</a>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="perall" data-content="all">
+						<span class="nav_name">1,2,3병원 평가진행률 Total</span>
+					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per1" data-content="content1">
-					<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-						<span class="nav_name" style="font-size: 18px;">효사랑전주요양병원 평가진행률</span>
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;효사랑전주요양병원 평가진행률</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per2" data-content="content2">
-					<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-						<span class="nav_name" style="font-size: 18px;">효사랑가족요양병원 평가진행률</span>
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;효사랑가족요양병원 평가진행률</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per3" data-content="content3">
-					<!-- <ion-icon name="home-outline" class="nav__icon"></ion-icon> -->
-						<span class="nav_name" style="font-size: 18px;">가족사랑요양병원 평가진행률</span>
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;가족사랑요양병원 평가진행률</span>
 					</a>
 				</div>
             </div>
@@ -116,6 +121,9 @@
 	</main>
 
 </section>
+<nav>
+	<div style="position: fixed; right: 10px; bottom: 10px; border: 1px solid; padding: 10px; border-radius: 100px; cursor:pointer;" onclick="javascript:window.scrollTo(0,0);">Top</div>
+</nav>
 </form>
 </body>
 <script>
@@ -166,7 +174,7 @@ function userall(contentId) {
 	         success: function(response) {
 	        	 if(response.result === "Y"){
 	 				var listall = response.usersall;
-	 				var ph = response.userph;
+	 				var ph = response.userphList;
 	 				
 	 				mainContent.innerHTML = ''; // 기존 내용을 지우고
 	 				var tb = document.createElement("TABLE");
@@ -284,7 +292,7 @@ function user1(contentId) {
 	         success: function(response) {
 	        	 if(response.result === "Y"){
 	 				var list1 = response.users;
-	 				var ph = response.userph;
+	 				var ph = response.userphList;
 	 				
 	 				mainContent.innerHTML = ''; // 기존 내용을 지우고
 	 				var tb = document.createElement("TABLE");
@@ -306,7 +314,6 @@ function user1(contentId) {
 	 				maintd8.textContent = "핸드폰번호";
 	 				var maintd9 = document.createElement("TD");
 	 				maintd9.textContent = "비밀번호초기화";
-	 				
 	 				tb.appendChild(maintr);
 	 				maintr.appendChild(maintd1);
 	 				maintr.appendChild(maintd2);
@@ -400,7 +407,7 @@ function user2() {
          success: function(response) {
         	 if(response.result === "Y"){
  				var list1 = response.users;
- 				var ph = response.userph;
+ 				var ph = response.userphList;
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
  				var tb = document.createElement("TABLE");
@@ -517,7 +524,7 @@ function user3() {
          success: function(response) {
         	 if(response.result === "Y"){
  				var list1 = response.users;
- 				var ph = response.userph;
+ 				var ph = response.userphList;
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
  				var tb = document.createElement("TABLE");
@@ -625,15 +632,15 @@ function user3() {
 
 }
 
-function per1() {
+function asc1() {
 	$.ajax({
-        url: '${pageContext.request.contextPath}/e/per1',
+        url: '${pageContext.request.contextPath}/e/users1',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
        	 if(response.result === "Y"){
-				var list1 = response.users;
-				var ph = response.userph;
+				var list1 = response.listpwd1;
+				var ph = response.userphList;
 				
 				mainContent.innerHTML = ''; // 기존 내용을 지우고
 				var tb = document.createElement("TABLE");
@@ -653,6 +660,11 @@ function per1() {
 				maintd7.textContent = "이름";
 				var maintd8 = document.createElement("TD");
 				maintd8.textContent = "핸드폰번호";
+ 				var maintd9 = document.createElement("TD");
+ 				maintd9.textContent = "비밀번호초기화";
+ 				maintd9.setAttribute("data-menu","user1");
+ 				maintd9.setAttribute("data-content","content1");
+ 				maintd9.setAttribute("style","cursor:pointer;");
 				
 				tb.appendChild(maintr);
 				maintr.appendChild(maintd1);
@@ -662,6 +674,7 @@ function per1() {
 				maintr.appendChild(maintd6);
 				maintr.appendChild(maintd7);
 				maintr.appendChild(maintd8);
+ 				maintr.appendChild(maintd9);
 				
 				list1.forEach(function (list) {
 					if(list.id != 12365478){
@@ -706,6 +719,14 @@ function per1() {
 	 					if(id == phid){
 	 						tdph.textContent = phnumber;
 	 					}
+	 					var tdpwdselect = document.createElement("TD");
+	 					tdpwdselect.setAttribute("data-name", name);
+	 					tdpwdselect.setAttribute("data-id", id);
+	 					if(list.pwd){
+	 						tdpwdselect.textContent = '초기화';
+	 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
+	 						tdpwdselect.setAttribute("style", "cursor:pointer;");
+	 					}
 	 					//
 	 					
 	 					tb.appendChild(tr);
@@ -716,7 +737,336 @@ function per1() {
 	 					tr.appendChild(tdpo);
 	 					tr.appendChild(tdname);
 						tr.appendChild(tdph);
+						tr.appendChild(tdpwdselect);
 					}
+					
+				});
+       	 }
+        },
+        error: function(error) {
+           console.error('Error fetching data:', error);
+        }
+     });
+}
+
+function perall(contentId) {
+	if (contentId === 'all') {
+	      
+	      $.ajax({
+	         url: '${pageContext.request.contextPath}/e/perall',
+	         type: 'GET',
+	         dataType: 'json',
+	         success: function(response) {
+	        	 if(response.result === "Y"){
+	 				var listall = response.usersall;
+	 				var target = response.target;
+	 				var answer = response.answer;
+	 				
+	 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+	 				var dv = document.createElement("div");
+	 				dv.setAttribute("class","scroll-container");
+	 				var tb = document.createElement("TABLE");
+ 					tb.setAttribute("class","scrolltable");
+ 					
+	 				var thead = document.createElement("THEAD");
+	 				
+	 				var maintr1 = document.createElement("TR");
+	 				var maintd1 = document.createElement("TD");
+	 				maintd1.textContent = "평가자정보";
+	 				maintd1.setAttribute("colspan","5");
+	 				var maintd2 = document.createElement("TD");
+	 				maintd2.textContent = "평가대상자수";
+	 				maintd2.setAttribute("rowspan","2");
+	 				maintd2.setAttribute("style","width: 140px;");
+	 				var maintd3 = document.createElement("TD");
+	 				maintd3.textContent = "평가결과수";
+	 				maintd3.setAttribute("rowspan","2");
+	 				maintd3.setAttribute("style","width: 120px;");
+	 				var maintd4 = document.createElement("TD");
+	 				maintd4.textContent = "진행율";
+	 				maintd4.setAttribute("rowspan","2");
+	 				var maintd7 = document.createElement("TD");
+	 				maintd7.textContent = "평가자 마이페이지";
+	 				maintd7.setAttribute("style","width: 187px;");
+	 				maintd7.setAttribute("rowspan","2");
+	 				
+	 				var maintr2 = document.createElement("TR");
+
+					var maintd9 = document.createElement("TD");
+					maintd9.textContent = "기관명";
+	 				maintd9.setAttribute("style","width: 210px;");
+					var maintd10 = document.createElement("TD");
+					maintd10.textContent = "부서명";
+					maintd10.setAttribute("style","width: 150px;");
+					var maintd11 = document.createElement("TD");
+					maintd11.textContent = "직급/직책";
+					maintd11.setAttribute("style","width: 195px;");
+					var maintd12 = document.createElement("TD");
+					maintd12.textContent = "사원명";
+					
+	 				var tbody = document.createElement("TBODY");
+					
+					
+	 				mainContent.appendChild(dv);
+	 				dv.appendChild(tb);
+	 				tb.appendChild(thead);
+	 				thead.appendChild(maintr1);
+	 				maintr1.appendChild(maintd1);
+	 				maintr1.appendChild(maintd2);
+	 				maintr1.appendChild(maintd3);
+	 				maintr1.appendChild(maintd4);
+	 				maintr1.appendChild(maintd7);
+	 				thead.appendChild(maintr2);
+	 				maintr2.appendChild(maintd9);
+	 				maintr2.appendChild(maintd10);
+	 				maintr2.appendChild(maintd11);
+	 				maintr2.appendChild(maintd12);
+
+	 				tb.appendChild(tbody);
+	 				
+	 				listall.forEach(function (list) {
+	 				//	if(list.id != 12365478){		// 관리자 제거
+	 						
+	 						var matchingTarget = target.find(function (tg) {
+	 							return tg.id === list.id;
+	 						});
+	 						
+	 						var targetid, tgt
+	 						if(matchingTarget) {
+	 							targetid = matchingTarget.id;
+	 							tgt = matchingTarget.target;
+	 						}
+	 						
+	 						var matchingAnswer = answer.filter(function (as) {
+	 							return as.u2 === list.id;
+	 						});
+	 						var answerid
+	 						if (matchingAnswer && matchingAnswer.length > 0) {
+	 					        answerid = matchingAnswer[0].id;
+	 					    }
+	 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
+
+	 					    // Calculate the percentage, handle division by zero or empty string
+	 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+	 					    
+	 						var idx = list.idx;
+		 					var code = list.user_code;
+		 					var hname = list.hspt_name;
+		 					var subname = list.hspt_subname;
+		 					var position = list.hspt_position
+		 					var name = list.name;
+		 					
+		 					
+		 					
+		 					var tr = document.createElement("TR");
+		 					
+		 					var tdhname = document.createElement("TD");
+		 					tdhname.textContent = hname;
+		 					tdhname.setAttribute("style","width: 210px;");
+		 					var tdsname = document.createElement("TD");
+		 					tdsname.textContent = subname;
+		 					tdsname.setAttribute("style","width: 150px;");
+		 					var tdpo = document.createElement("TD");
+		 					tdpo.textContent = position;
+		 					tdpo.setAttribute("style","width: 195px;");
+		 					var tdname = document.createElement("TD");
+		 					tdname.textContent = name;
+		 					
+		 					var tdtarget = document.createElement("TD");
+		 					tdtarget.setAttribute("style","width: 140px;");
+		 					tdtarget.textContent = tgt;
+		 					
+		 					var tdanswer = document.createElement("TD");
+		 					tdanswer.setAttribute("style","width: 120px;");
+		 					tdanswer.textContent = answercnt;
+		 					
+		 					var tdpersent = document.createElement("TD");
+		 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
+		 					
+		 					var tdinfo = document.createElement("TD");
+		 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+		 					tdinfo.textContent = "링크";
+		 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
+		 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
+		 					
+		 					
+		 					//
+		 					
+		 					tbody.appendChild(tr);
+		 					tr.appendChild(tdhname);
+		 					tr.appendChild(tdsname);
+		 					tr.appendChild(tdpo);
+		 					tr.appendChild(tdname);
+		 					tr.appendChild(tdtarget);
+		 					tr.appendChild(tdanswer);
+		 					tr.appendChild(tdpersent);
+		 					
+		 					
+		 					tr.appendChild(tdinfo);
+	 	//				}			// 관리자 제거
+ 					});
+        	 }
+         },
+         error: function(error) {
+            console.error('Error fetching data:', error);
+         }
+      });
+	}
+}
+
+function per1() {
+	$.ajax({
+        url: '${pageContext.request.contextPath}/e/per1',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+       	 if(response.result === "Y"){
+				var listall = response.usersall;
+				var target = response.target;
+ 				var answer = response.answer;
+ 				
+ 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+ 				var dv = document.createElement("div");
+ 				dv.setAttribute("class","scroll-container");
+ 				var tb = document.createElement("TABLE");
+					tb.setAttribute("class","scrolltable");
+					
+ 				var thead = document.createElement("THEAD");
+ 				
+ 				var maintr1 = document.createElement("TR");
+ 				var maintd1 = document.createElement("TD");
+ 				maintd1.textContent = "평가자정보";
+ 				maintd1.setAttribute("colspan","5");
+ 				var maintd2 = document.createElement("TD");
+ 				maintd2.textContent = "평가대상자수";
+ 				maintd2.setAttribute("rowspan","2");
+ 				maintd2.setAttribute("style","width: 140px;");
+ 				var maintd3 = document.createElement("TD");
+ 				maintd3.textContent = "평가결과수";
+ 				maintd3.setAttribute("rowspan","2");
+ 				maintd3.setAttribute("style","width: 120px;");
+ 				var maintd4 = document.createElement("TD");
+ 				maintd4.textContent = "진행율";
+ 				maintd4.setAttribute("rowspan","2");
+ 				var maintd7 = document.createElement("TD");
+ 				maintd7.textContent = "평가자 마이페이지";
+ 				maintd7.setAttribute("style","width: 187px;");
+ 				maintd7.setAttribute("rowspan","2");
+ 				
+ 				var maintr2 = document.createElement("TR");
+
+				var maintd9 = document.createElement("TD");
+				maintd9.textContent = "기관명";
+ 				maintd9.setAttribute("style","width: 210px;");
+				var maintd10 = document.createElement("TD");
+				maintd10.textContent = "부서명";
+				maintd10.setAttribute("style","width: 150px;");
+				var maintd11 = document.createElement("TD");
+				maintd11.textContent = "직급/직책";
+				maintd11.setAttribute("style","width: 195px;");
+				var maintd12 = document.createElement("TD");
+				maintd12.textContent = "사원명";
+				
+ 				var tbody = document.createElement("TBODY");
+				
+				
+ 				mainContent.appendChild(dv);
+ 				dv.appendChild(tb);
+ 				tb.appendChild(thead);
+ 				thead.appendChild(maintr1);
+ 				maintr1.appendChild(maintd1);
+ 				maintr1.appendChild(maintd2);
+ 				maintr1.appendChild(maintd3);
+ 				maintr1.appendChild(maintd4);
+ 				maintr1.appendChild(maintd7);
+ 				thead.appendChild(maintr2);
+ 				maintr2.appendChild(maintd9);
+ 				maintr2.appendChild(maintd10);
+ 				maintr2.appendChild(maintd11);
+ 				maintr2.appendChild(maintd12);
+
+ 				tb.appendChild(tbody);
+ 				
+ 				listall.forEach(function (list) {
+ 				//	if(list.id != 12365478){		// 관리자 제거
+ 						
+ 						var matchingTarget = target.find(function (tg) {
+ 							return tg.id === list.id;
+ 						});
+ 						
+ 						var targetid, tgt
+ 						if(matchingTarget) {
+ 							targetid = matchingTarget.id;
+ 							tgt = matchingTarget.target;
+ 						}
+ 						
+ 						var matchingAnswer = answer.filter(function (as) {
+ 							return as.u2 === list.id;
+ 						});
+ 						var answerid
+ 						if (matchingAnswer && matchingAnswer.length > 0) {
+ 					        answerid = matchingAnswer[0].id;
+ 					    }
+ 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
+
+ 					    // Calculate the percentage, handle division by zero or empty string
+ 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+ 					    
+ 						var idx = list.idx;
+	 					var code = list.user_code;
+	 					var hname = list.hspt_name;
+	 					var subname = list.hspt_subname;
+	 					var position = list.hspt_position
+	 					var name = list.name;
+	 					
+	 					
+	 					
+	 					var tr = document.createElement("TR");
+	 					
+	 					var tdhname = document.createElement("TD");
+	 					tdhname.textContent = hname;
+	 					tdhname.setAttribute("style","width: 210px;");
+	 					var tdsname = document.createElement("TD");
+	 					tdsname.textContent = subname;
+	 					tdsname.setAttribute("style","width: 150px;");
+	 					var tdpo = document.createElement("TD");
+	 					tdpo.textContent = position;
+	 					tdpo.setAttribute("style","width: 195px;");
+	 					var tdname = document.createElement("TD");
+	 					tdname.textContent = name;
+	 					
+	 					var tdtarget = document.createElement("TD");
+	 					tdtarget.setAttribute("style","width: 140px;");
+	 					tdtarget.textContent = tgt;
+	 					
+	 					var tdanswer = document.createElement("TD");
+	 					tdanswer.setAttribute("style","width: 120px;");
+	 					tdanswer.textContent = answercnt;
+	 					
+	 					var tdpersent = document.createElement("TD");
+	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
+	 					
+	 					var tdinfo = document.createElement("TD");
+	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					tdinfo.textContent = "링크";
+	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
+	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
+	 					
+	 					
+	 					//
+	 					
+	 					tbody.appendChild(tr);
+	 					tr.appendChild(tdhname);
+	 					tr.appendChild(tdsname);
+	 					tr.appendChild(tdpo);
+	 					tr.appendChild(tdname);
+	 					tr.appendChild(tdtarget);
+	 					tr.appendChild(tdanswer);
+	 					tr.appendChild(tdpersent);
+	 					
+	 					
+	 					tr.appendChild(tdinfo);
+ 	//				}			// 관리자 제거
 					
 				});
        	 }
@@ -735,91 +1085,152 @@ function per2() {
         dataType: 'json',
         success: function(response) {
        	 if(response.result === "Y"){
-				var list1 = response.users;
-				var ph = response.userph;
+				var listall = response.usersall;
+				var target = response.target;
+ 				var answer = response.answer;
+ 				
+ 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+ 				var dv = document.createElement("div");
+ 				dv.setAttribute("class","scroll-container");
+ 				var tb = document.createElement("TABLE");
+					tb.setAttribute("class","scrolltable");
+					
+ 				var thead = document.createElement("THEAD");
+ 				
+ 				var maintr1 = document.createElement("TR");
+ 				var maintd1 = document.createElement("TD");
+ 				maintd1.textContent = "평가자정보";
+ 				maintd1.setAttribute("colspan","5");
+ 				var maintd2 = document.createElement("TD");
+ 				maintd2.textContent = "평가대상자수";
+ 				maintd2.setAttribute("rowspan","2");
+ 				maintd2.setAttribute("style","width: 140px;");
+ 				var maintd3 = document.createElement("TD");
+ 				maintd3.textContent = "평가결과수";
+ 				maintd3.setAttribute("rowspan","2");
+ 				maintd3.setAttribute("style","width: 120px;");
+ 				var maintd4 = document.createElement("TD");
+ 				maintd4.textContent = "진행율";
+ 				maintd4.setAttribute("rowspan","2");
+ 				var maintd7 = document.createElement("TD");
+ 				maintd7.textContent = "평가자 마이페이지";
+ 				maintd7.setAttribute("style","width: 187px;");
+ 				maintd7.setAttribute("rowspan","2");
+ 				
+ 				var maintr2 = document.createElement("TR");
+
+				var maintd9 = document.createElement("TD");
+				maintd9.textContent = "기관명";
+ 				maintd9.setAttribute("style","width: 210px;");
+				var maintd10 = document.createElement("TD");
+				maintd10.textContent = "부서명";
+				maintd10.setAttribute("style","width: 150px;");
+				var maintd11 = document.createElement("TD");
+				maintd11.textContent = "직급/직책";
+				maintd11.setAttribute("style","width: 195px;");
+				var maintd12 = document.createElement("TD");
+				maintd12.textContent = "사원명";
 				
-				mainContent.innerHTML = ''; // 기존 내용을 지우고
-				var tb = document.createElement("TABLE");
-				mainContent.appendChild(tb);
-				var maintr = document.createElement("TR");
-				var maintd1 = document.createElement("TD");
-				maintd1.textContent = "idx";
-				var maintd2 = document.createElement("TD");
-				maintd2.textContent = "병원명";
-				var maintd3 = document.createElement("TD");
-				maintd3.textContent = "부서명";
-				var maintd4 = document.createElement("TD");
-				maintd4.textContent = "사번";
-				var maintd6 = document.createElement("TD");
-				maintd6.textContent = "직책";
-				var maintd7 = document.createElement("TD");
-				maintd7.textContent = "이름";
-				var maintd8 = document.createElement("TD");
-				maintd8.textContent = "핸드폰번호";
+ 				var tbody = document.createElement("TBODY");
 				
-				tb.appendChild(maintr);
-				maintr.appendChild(maintd1);
-				maintr.appendChild(maintd2);
-				maintr.appendChild(maintd3);
-				maintr.appendChild(maintd4);
-				maintr.appendChild(maintd6);
-				maintr.appendChild(maintd7);
-				maintr.appendChild(maintd8);
 				
-				list1.forEach(function (list) {
-					if(list.id != 12365478){
-						var matchingPh = ph.find(function (phn) {
-					         return phn.id === list.id;
-					      });
-						var phid, phnumber;
-						
-						 if (matchingPh) {
-	                        phid = matchingPh.id;
-	                        phnumber = matchingPh.number;
-	                     }
-						 
-						var idx = list.idx;
+ 				mainContent.appendChild(dv);
+ 				dv.appendChild(tb);
+ 				tb.appendChild(thead);
+ 				thead.appendChild(maintr1);
+ 				maintr1.appendChild(maintd1);
+ 				maintr1.appendChild(maintd2);
+ 				maintr1.appendChild(maintd3);
+ 				maintr1.appendChild(maintd4);
+ 				maintr1.appendChild(maintd7);
+ 				thead.appendChild(maintr2);
+ 				maintr2.appendChild(maintd9);
+ 				maintr2.appendChild(maintd10);
+ 				maintr2.appendChild(maintd11);
+ 				maintr2.appendChild(maintd12);
+
+ 				tb.appendChild(tbody);
+ 				
+ 				listall.forEach(function (list) {
+ 				//	if(list.id != 12365478){		// 관리자 제거
+ 						
+ 						var matchingTarget = target.find(function (tg) {
+ 							return tg.id === list.id;
+ 						});
+ 						
+ 						var targetid, tgt
+ 						if(matchingTarget) {
+ 							targetid = matchingTarget.id;
+ 							tgt = matchingTarget.target;
+ 						}
+ 						
+ 						var matchingAnswer = answer.filter(function (as) {
+ 							return as.u2 === list.id;
+ 						});
+ 						var answerid
+ 						if (matchingAnswer && matchingAnswer.length > 0) {
+ 					        answerid = matchingAnswer[0].id;
+ 					    }
+ 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
+
+ 					    // Calculate the percentage, handle division by zero or empty string
+ 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+ 					    
+ 						var idx = list.idx;
+	 					var code = list.user_code;
 	 					var hname = list.hspt_name;
-	 					var sname = list.hspt_subname;
-	 					var id = list.id;
-	 					var position = list.hspt_position;
+	 					var subname = list.hspt_subname;
+	 					var position = list.hspt_position
 	 					var name = list.name;
 	 					
 	 					
+	 					
 	 					var tr = document.createElement("TR");
-	 					if(!list.pwd){
-	 						tr.setAttribute("style", "background: #eaeaea;")
-	 					}
-	 					var tdidx = document.createElement("TD");
-	 					tdidx.textContent = idx;
+	 					
 	 					var tdhname = document.createElement("TD");
 	 					tdhname.textContent = hname;
+	 					tdhname.setAttribute("style","width: 210px;");
 	 					var tdsname = document.createElement("TD");
-	 					tdsname.textContent = sname;
-	 					var tdid = document.createElement("TD");
-	 					tdid.textContent = id;
+	 					tdsname.textContent = subname;
+	 					tdsname.setAttribute("style","width: 150px;");
 	 					var tdpo = document.createElement("TD");
 	 					tdpo.textContent = position;
+	 					tdpo.setAttribute("style","width: 195px;");
 	 					var tdname = document.createElement("TD");
 	 					tdname.textContent = name;
+	 					
+	 					var tdtarget = document.createElement("TD");
+	 					tdtarget.setAttribute("style","width: 140px;");
+	 					tdtarget.textContent = tgt;
+	 					
+	 					var tdanswer = document.createElement("TD");
+	 					tdanswer.setAttribute("style","width: 120px;");
+	 					tdanswer.textContent = answercnt;
+	 					
+	 					var tdpersent = document.createElement("TD");
+	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
+	 					
+	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
-	 					tdname.setAttribute("onclick","location.href='" + url + "'");
-	 					tdname.setAttribute("style", "cursor:pointer;");
-	 					var tdph = document.createElement("TD");
-	 					if(id == phid){
-	 						tdph.textContent = phnumber;
-	 					}
+	 					tdinfo.textContent = "링크";
+	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
+	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
+	 					
+	 					
 	 					//
 	 					
-	 					tb.appendChild(tr);
-	 					tr.appendChild(tdidx);
+	 					tbody.appendChild(tr);
 	 					tr.appendChild(tdhname);
 	 					tr.appendChild(tdsname);
-	 					tr.appendChild(tdid);
 	 					tr.appendChild(tdpo);
 	 					tr.appendChild(tdname);
-						tr.appendChild(tdph);
-					}
+	 					tr.appendChild(tdtarget);
+	 					tr.appendChild(tdanswer);
+	 					tr.appendChild(tdpersent);
+	 					
+	 					
+	 					tr.appendChild(tdinfo);
+ 	//				}			// 관리자 제거
 					
 				});
        	 }
@@ -838,91 +1249,152 @@ function per3() {
         dataType: 'json',
         success: function(response) {
        	 if(response.result === "Y"){
-				var list1 = response.users;
-				var ph = response.userph;
+				var listall = response.usersall;
+				var target = response.target;
+ 				var answer = response.answer;
+ 				
+ 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+ 				var dv = document.createElement("div");
+ 				dv.setAttribute("class","scroll-container");
+ 				var tb = document.createElement("TABLE");
+					tb.setAttribute("class","scrolltable");
+					
+ 				var thead = document.createElement("THEAD");
+ 				
+ 				var maintr1 = document.createElement("TR");
+ 				var maintd1 = document.createElement("TD");
+ 				maintd1.textContent = "평가자정보";
+ 				maintd1.setAttribute("colspan","5");
+ 				var maintd2 = document.createElement("TD");
+ 				maintd2.textContent = "평가대상자수";
+ 				maintd2.setAttribute("rowspan","2");
+ 				maintd2.setAttribute("style","width: 140px;");
+ 				var maintd3 = document.createElement("TD");
+ 				maintd3.textContent = "평가결과수";
+ 				maintd3.setAttribute("rowspan","2");
+ 				maintd3.setAttribute("style","width: 120px;");
+ 				var maintd4 = document.createElement("TD");
+ 				maintd4.textContent = "진행율";
+ 				maintd4.setAttribute("rowspan","2");
+ 				var maintd7 = document.createElement("TD");
+ 				maintd7.textContent = "평가자 마이페이지";
+ 				maintd7.setAttribute("style","width: 187px;");
+ 				maintd7.setAttribute("rowspan","2");
+ 				
+ 				var maintr2 = document.createElement("TR");
+
+				var maintd9 = document.createElement("TD");
+				maintd9.textContent = "기관명";
+ 				maintd9.setAttribute("style","width: 210px;");
+				var maintd10 = document.createElement("TD");
+				maintd10.textContent = "부서명";
+				maintd10.setAttribute("style","width: 150px;");
+				var maintd11 = document.createElement("TD");
+				maintd11.textContent = "직급/직책";
+				maintd11.setAttribute("style","width: 195px;");
+				var maintd12 = document.createElement("TD");
+				maintd12.textContent = "사원명";
 				
-				mainContent.innerHTML = ''; // 기존 내용을 지우고
-				var tb = document.createElement("TABLE");
-				mainContent.appendChild(tb);
-				var maintr = document.createElement("TR");
-				var maintd1 = document.createElement("TD");
-				maintd1.textContent = "idx";
-				var maintd2 = document.createElement("TD");
-				maintd2.textContent = "병원명";
-				var maintd3 = document.createElement("TD");
-				maintd3.textContent = "부서명";
-				var maintd4 = document.createElement("TD");
-				maintd4.textContent = "사번";
-				var maintd6 = document.createElement("TD");
-				maintd6.textContent = "직책";
-				var maintd7 = document.createElement("TD");
-				maintd7.textContent = "이름";
-				var maintd8 = document.createElement("TD");
-				maintd8.textContent = "핸드폰번호";
+ 				var tbody = document.createElement("TBODY");
 				
-				tb.appendChild(maintr);
-				maintr.appendChild(maintd1);
-				maintr.appendChild(maintd2);
-				maintr.appendChild(maintd3);
-				maintr.appendChild(maintd4);
-				maintr.appendChild(maintd6);
-				maintr.appendChild(maintd7);
-				maintr.appendChild(maintd8);
 				
-				list1.forEach(function (list) {
-					if(list.id != 12365478){
-						var matchingPh = ph.find(function (phn) {
-					         return phn.id === list.id;
-					      });
-						var phid, phnumber;
-						
-						 if (matchingPh) {
-	                        phid = matchingPh.id;
-	                        phnumber = matchingPh.number;
-	                     }
-						 
-						var idx = list.idx;
+ 				mainContent.appendChild(dv);
+ 				dv.appendChild(tb);
+ 				tb.appendChild(thead);
+ 				thead.appendChild(maintr1);
+ 				maintr1.appendChild(maintd1);
+ 				maintr1.appendChild(maintd2);
+ 				maintr1.appendChild(maintd3);
+ 				maintr1.appendChild(maintd4);
+ 				maintr1.appendChild(maintd7);
+ 				thead.appendChild(maintr2);
+ 				maintr2.appendChild(maintd9);
+ 				maintr2.appendChild(maintd10);
+ 				maintr2.appendChild(maintd11);
+ 				maintr2.appendChild(maintd12);
+
+ 				tb.appendChild(tbody);
+ 				
+ 				listall.forEach(function (list) {
+ 				//	if(list.id != 12365478){		// 관리자 제거
+ 						
+ 						var matchingTarget = target.find(function (tg) {
+ 							return tg.id === list.id;
+ 						});
+ 						
+ 						var targetid, tgt
+ 						if(matchingTarget) {
+ 							targetid = matchingTarget.id;
+ 							tgt = matchingTarget.target;
+ 						}
+ 						
+
+ 						var matchingAnswer = answer.filter(function (as) {
+ 							return as.u2 === list.id;
+ 						});
+ 						var answerid
+ 						if (matchingAnswer && matchingAnswer.length > 0) {
+ 					        answerid = matchingAnswer[0].id;
+ 					    }
+ 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
+
+ 					    // Calculate the percentage, handle division by zero or empty string
+ 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+ 					    
+ 						var idx = list.idx;
+	 					var code = list.user_code;
 	 					var hname = list.hspt_name;
-	 					var sname = list.hspt_subname;
-	 					var id = list.id;
-	 					var position = list.hspt_position;
+	 					var subname = list.hspt_subname;
+	 					var position = list.hspt_position
 	 					var name = list.name;
 	 					
-	 					
 	 					var tr = document.createElement("TR");
-	 					if(!list.pwd){
-	 						tr.setAttribute("style", "background: #eaeaea;")
-	 					}
-	 					var tdidx = document.createElement("TD");
-	 					tdidx.textContent = idx;
+	 					
 	 					var tdhname = document.createElement("TD");
 	 					tdhname.textContent = hname;
+	 					tdhname.setAttribute("style","width: 210px;");
 	 					var tdsname = document.createElement("TD");
-	 					tdsname.textContent = sname;
-	 					var tdid = document.createElement("TD");
-	 					tdid.textContent = id;
+	 					tdsname.textContent = subname;
+	 					tdsname.setAttribute("style","width: 150px;");
 	 					var tdpo = document.createElement("TD");
 	 					tdpo.textContent = position;
+	 					tdpo.setAttribute("style","width: 195px;");
 	 					var tdname = document.createElement("TD");
 	 					tdname.textContent = name;
+	 					
+	 					var tdtarget = document.createElement("TD");
+	 					tdtarget.setAttribute("style","width: 140px;");
+	 					tdtarget.textContent = tgt;
+	 					
+	 					var tdanswer = document.createElement("TD");
+	 					tdanswer.setAttribute("style","width: 120px;");
+	 					tdanswer.textContent = answercnt;
+	 					
+	 					var tdpersent = document.createElement("TD");
+	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
+	 					
+	 					
+	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
-	 					tdname.setAttribute("onclick","location.href='" + url + "'");
-	 					tdname.setAttribute("style", "cursor:pointer;");
-	 					var tdph = document.createElement("TD");
-	 					if(id == phid){
-	 						tdph.textContent = phnumber;
-	 					}
+	 					tdinfo.textContent = "링크";
+	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
+	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
+	 					
+	 					
 	 					//
 	 					
-	 					tb.appendChild(tr);
-	 					tr.appendChild(tdidx);
+	 					tbody.appendChild(tr);
 	 					tr.appendChild(tdhname);
 	 					tr.appendChild(tdsname);
-	 					tr.appendChild(tdid);
 	 					tr.appendChild(tdpo);
 	 					tr.appendChild(tdname);
-						tr.appendChild(tdph);
-					}
+	 					tr.appendChild(tdtarget);
+	 					tr.appendChild(tdanswer);
+	 					tr.appendChild(tdpersent);
+	 					
+	 					
+	 					tr.appendChild(tdinfo);
+ 	//				}			// 관리자 제거
 					
 				});
        	 }
@@ -935,6 +1407,7 @@ function per3() {
 
 //비밀번호 초기화
 function pwdreset(element){
+	var frm = $("#frm");
 	var name = element.getAttribute('data-name');
 	var id = element.getAttribute('data-id');
 	console.log(name);
@@ -944,7 +1417,9 @@ function pwdreset(element){
 	prmpwd = window.prompt('비밀번호를 입력해주세요');
 	if(prmpwd == '123qwe'){
 		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
-		$.ajax({
+		
+		frm.attr("action","${pageContext.request.contextPath}/e/pwdreset/"+id).submit();
+		/* $.ajax({
 			url: '${pageContext.request.contextPath}/e/pwdreset/'+id,
 			type: 'post',
 			dataType: 'json',
@@ -959,7 +1434,9 @@ function pwdreset(element){
 			}
 			
 		});
-		
+		 */
+		 
+		 
 	}else {
 		alert('인증 실패');
 	}
@@ -975,6 +1452,7 @@ const menuScripts = [
 	{ id: 'per1', contentId: 'content1', script: per1 },
 	{ id: 'per2', contentId: 'content2', script: per2 },
 	{ id: 'per3', contentId: 'content3', script: per3 },
+	{ id: 'perall', contentId: 'all', script: perall },
 ];
 function activateMenu(menuIndex) {
 
@@ -1021,5 +1499,6 @@ function findStr() {
         window.find(str);
     }
 }
+
 </script>
 </html>

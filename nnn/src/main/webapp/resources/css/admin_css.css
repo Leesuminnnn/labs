@@ -11,7 +11,7 @@
 
     /* Fuente y tipografia */
     --body-font: 'Poppins', sans-serif;
-    --normal-font-size: 1.4rem;
+    --normal-font-size: 1.3rem;
     --small-font-size: 1rem;
 
     /* z index */
@@ -226,7 +226,42 @@ table {
 a {
 	cursor: pointer;
 }
-
-
-
+td {
+	border: 1px solid #000;
+}
+.scrolltable {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid #888;
+}
+.scrolltable thead {
+    display:block;
+    background: #094477;
+    color:#fff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+}
+.scrolltable tbody {
+    display:block;/* 
+    height:89vh;
+	overflow-y: overlay;
+	overflow-x: hidden;  */
+}
+/* 행 장식 */
+.scrolltable th, .scrolltable td {
+  padding: 10px;
+  text-align: left;
+  width: 100px;
+  text-align: center;
+  font-size: 0.875em;
+}
+.scrolltable tbody tr:nth-child(2n+1){
+    background-color: #f0f0f0;
+}
+.scroll-container {
+      /* overflow-y: overlay; */
+      /* height: 89vh; */
+      position: relative;
+    }
 

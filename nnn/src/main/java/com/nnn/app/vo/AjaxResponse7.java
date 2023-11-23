@@ -9,17 +9,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AjaxResponse5 {
+public class AjaxResponse7 {
 
 	private String result;
-	private List<UsersVo> users;
-	private int userph;
-	private List<UserPh> userphList;
-	private List<UsersVo> listpwd1;
-	
-	
-	
-	
+	private List<UsersVo> usersall;
+	private List<TargetVo> target;
+	private List<AnswerVo> answer;
 	
 	
 }

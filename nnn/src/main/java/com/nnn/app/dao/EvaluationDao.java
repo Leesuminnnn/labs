@@ -8,9 +8,11 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
@@ -117,15 +119,27 @@ public class EvaluationDao {
 //		return sqlSession1.selectList(MAPPER+".users1", map);
 		return sqlSession3.selectList(MAPPER+".users1", map);
 	}
+	public List<UsersVo> users1pwd(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users1", map);
+		return sqlSession3.selectList(MAPPER+".users1pwd", map);
+	}
 	
 	public List<UsersVo> users2(Map<String, Object> map) {
 //		return sqlSession1.selectList(MAPPER+".users2", map);
 		return sqlSession3.selectList(MAPPER+".users2", map);
 	}
+	public List<UsersVo> users2pwd(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users2", map);
+		return sqlSession3.selectList(MAPPER+".users2pwd", map);
+	}
 	
 	public List<UsersVo> users3(Map<String, Object> map) {
 //		return sqlSession1.selectList(MAPPER+".users3", map);
 		return sqlSession3.selectList(MAPPER+".users3", map);
+	}
+	public List<UsersVo> users3pwd(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users3", map);
+		return sqlSession3.selectList(MAPPER+".users3pwd", map);
 	}
 
 	public List<LoginlogVo> log(Map<String, Object> map) {
@@ -137,7 +151,11 @@ public class EvaluationDao {
 //		return sqlSession1.selectList(MAPPER+".ph", map);
 		return sqlSession3.selectList(MAPPER+".ph", map);
 	}
-
+	public int phOne(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".ph", map);
+		return sqlSession3.selectOne(MAPPER+".phOne", map);
+	}
+	
 	public int pwdreset(Map<String, Object> map) {
 //		return  sqlSession1.update(MAPPER+".pwdreset", map);
 		return  sqlSession3.update(MAPPER+".pwdreset", map);
@@ -180,6 +198,23 @@ public class EvaluationDao {
 //		return sqlSession1.selectOne(MAPPER+".hsptpwdselect3", map);
 		return sqlSession3.selectOne(MAPPER+".hsptpwdselect3", map);
 	}
+
+	public List<TargetVo> target(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".target", map);
+		return sqlSession3.selectList(MAPPER+".target", map);
+	}
+
+	public List<AnswerVo> answerselect(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".answerselect", map);
+		return sqlSession3.selectList(MAPPER+".answerselect", map);
+	}
+
+	public int pwdajax(Map<String, Object> map) {
+//		return sqlSession1.update(MAPPER+".pwdajax", map);
+		return sqlSession3.update(MAPPER+".pwdajax", map);
+	}
+	
+	
 
 	
 }

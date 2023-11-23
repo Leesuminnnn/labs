@@ -35,6 +35,7 @@
 		<typeAlias alias="loginlog" type="com.nnn.app.vo.LoginlogVo"/>
 		<typeAlias alias="users" type="com.nnn.app.vo.UsersVo"/>
 		<typeAlias alias="ph" type="com.nnn.app.vo.UserPh"/>
+		<typeAlias alias="target" type="com.nnn.app.vo.TargetVo"/>
 		
 	</typeAliases>  
 

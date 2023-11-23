@@ -32,6 +32,8 @@
 </body>
 <script>
 
+console.log("세션아이디 ${sessionScope.loginmember}");
+console.log("model아이디 ${info.id}");
 $(document).ready(function () {
 
 	var btn = $("#btn");
