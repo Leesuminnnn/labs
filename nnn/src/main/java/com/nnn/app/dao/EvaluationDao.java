@@ -20,7 +20,7 @@ import com.nnn.app.vo.WhetherVo;
 @Repository
 public class EvaluationDao {
 
-	//1 : hwtools, 2 : counselman 3: 서버 이관(csworktools2)
+	//1 : csworktools.cafe24.com, 2 : counselman 3: 서버 이관(csworktools2) hwtools.kr
 	@Resource(name="sqlSession2")
 	private SqlSession sqlSession2;
 	@Resource(name="sqlSession1")

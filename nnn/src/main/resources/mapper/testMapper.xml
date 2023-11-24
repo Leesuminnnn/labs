@@ -2252,4 +2252,8 @@
 	<insert id="loginlog" parameterType="loginlog">
 		insert into csworktools.loginlog (id, d1) values (#{id}, #{name})
 	</insert>
+	<insert id="guserinsert" parameterType="guser">
+		insert into googleuser (googleId, email)
+		values (#{googleId}, #{email})
+	</insert>
 </mapper>

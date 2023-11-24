@@ -763,7 +763,7 @@ public class EvaluationController {
 
 		List<UserPh> ph = evaluationService.ph(map);
 		request.setAttribute("ph", ph);
-		response.setUserph(ph);
+		response.setUserphList(ph);
 		
 		return response;
 	}

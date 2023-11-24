@@ -20,7 +20,10 @@
 	<section>
 	
 	<div class="login">
-		<h2>비밀번호 변경</h2>
+		<div>
+			<img style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/'" src="${pageContext.request.contextPath}/resources/icon/arrow2.png">
+			<h2>비밀번호 변경</h2>
+		</div>
 		<ul>
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
 			<li><input type="text" name="ph" id="ph" placeholder="휴대폰번호" title="휴대폰번호입력"></li>
@@ -154,17 +157,17 @@ $(document).ready(function () {
 		if(pwd == "") {
 			alert("비밀번호를 입력해주세요.");
 			$("#pwd").focus();
-			return false
+			return false;
 		}
 		if(pwd2 == "") {
 			alert("비밀번호를 입력해주세요.");
 			$("#pwd2").focus();
-			return false
+			return false;
 		}
 		if(pwd != pwd2) {
 			alert("비밀번호가 일치하지 않습니다.");
 			$("#pwd2").focus();
-			return false
+			return false;
 		}
 		$.ajax({
 			url: '${pageContext.request.contextPath}/t/PwdActAjax/'+id,
@@ -175,7 +178,7 @@ $(document).ready(function () {
 				'pwd': pwd
 			},
 			success: function(response) {
-				var link = "${pageContext.request.contextPath}/e/Login";
+				var link = "${pageContext.request.contextPath}/";
 				
 				// 링크 이동
 				if(response.result === "Y") {

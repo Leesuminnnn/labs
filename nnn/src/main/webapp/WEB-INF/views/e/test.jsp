@@ -25,6 +25,7 @@
     #tabs {
       display: flex;
       flex-direction: row;
+      height: 64px;
     }
 
     .tab {
@@ -52,30 +53,30 @@
       flex-grow: 1;
       height: 22px;
       width: 200px;
-      
     }
+
     .remove-button {
-    background-color: #ff0000;
-    color: #fff;
-    padding: 5px 10px;
-    cursor: pointer;
-    position: relative;
-    top: -21px;
-    width: 10px;
-    right: -175px;
-}
+      color: #000;
+      padding: 5px 10px;
+      cursor: pointer;
+      position: relative;
+      top: -21px;
+      width: 10px;
+      right: -175px;
     }
   </style>
 </head>
 <body>
 
 <div id="sidebar">
-  <div class="tab" onclick="showContent('tab1')">Tab 1</div>
-  <div class="tab" onclick="showContent('tab2')">Tab 2</div>
-  <div class="tab" onclick="showContent('tab3')">Tab 3</div>
+	<div class="tab" onclick="showContent('tab1')">Tab 1</div>
+	<div class="tab" onclick="showContent('tab2')">Tab 2</div>
+	<div class="tab" onclick="showContent('tab3')">Tab 3</div>
 </div>
-
-<div id="tabs"></div>
+<div id="content">
+	<div id="tabs"></div>
+	<div class="main">asdasdsa</div>
+</div>
 
 
 <script>
@@ -98,7 +99,7 @@
       };
       newTab.appendChild(removeButton);
 
-      // Display the new tab
+      // Display the new tab and content area
       document.getElementById('tabs').appendChild(newTab);
 
       // Deactivate all tabs

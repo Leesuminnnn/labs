@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +29,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.nnn.app.service.CalenService;
 import com.nnn.app.service.EvaluationService;
 import com.nnn.app.service.HelpService;
@@ -44,6 +53,9 @@ import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.CalendarVo;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.GoogleOAuthRequest;
+import com.nnn.app.vo.GoogleOAuthResponse;
+import com.nnn.app.vo.GoogleuserVo;
 import com.nnn.app.vo.HelpVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.Paging;
@@ -55,6 +67,7 @@ import com.nnn.app.vo.WhetherVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Controller
+@Component
 @RequestMapping(value = "t/*")
 public class TestController {
 	private MemberService memberService;
@@ -67,19 +80,37 @@ public class TestController {
 	private CalenService calenService;
 	private EvaluationService evaluationService;
 	
+	final static String GOOGLE_AUTH_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth";
+	final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
+	final static String GOOGLE_REVOKE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/revoke";
+
+	@Value("${api.client_id}")
+	String clientId;
+	@Value("${api.client_secret}")
+	String clientSecret;
+	
 	@Autowired
-	public TestController(MemberService memberService, PointplusService pointplusService, TestService testService, AES256Util aes, ImageService imageService,
-			HelpService helpService, PointService pointService, CalenService calenService, EvaluationService evaluationService) {
-		this.memberService = memberService;
-		this.pointplusService = pointplusService;
-		this.testService = testService;
-		this.aes = aes;
-		this.imageService = imageService;
-		this.helpService = helpService;
-		this.pointService = pointService;
-		this.calenService = calenService;
-		this.evaluationService = evaluationService;
-	}
+	public TestController(
+		MemberService memberService, 
+		PointplusService pointplusService, 
+		TestService testService, 
+		AES256Util aes, 
+		ImageService imageService,
+		HelpService helpService, 
+		PointService pointService, 
+		CalenService calenService, 
+		EvaluationService evaluationService
+		) {
+			this.memberService = memberService;
+			this.pointplusService = pointplusService;
+			this.testService = testService;
+			this.aes = aes;
+			this.imageService = imageService;
+			this.helpService = helpService;
+			this.pointService = pointService;
+			this.calenService = calenService;
+			this.evaluationService = evaluationService;
+		}
 
 	@RequestMapping(value = "test.do")
 	public ModelAndView test(ModelAndView mav, HttpSession session, 
@@ -1295,5 +1326,74 @@ public class TestController {
 		
 		mv.setViewName("t/Testformend");
 		return mv;
+	}
+	
+	@RequestMapping(value="GLtest")
+	public ModelAndView gltest(ModelAndView mv) throws Exception {
+		
+		
+		mv.setViewName("t/GLtest");
+		return mv;
+	}
+	@RequestMapping(value="google")
+	public ModelAndView index(ModelAndView mv) throws Exception {
+		
+		
+		mv.setViewName("t/google");
+		return mv;
+	}
+	@GetMapping("google/auth")
+	public String googleAuth(Model model, @RequestParam(value = "code") String authCode)
+			throws JsonProcessingException {
+		
+		//HTTP Request를 위한 RestTemplate
+		RestTemplate restTemplate = new RestTemplate();
+
+		//Google OAuth Access Token 요청을 위한 파라미터 세팅
+		GoogleOAuthRequest googleOAuthRequestParam = GoogleOAuthRequest
+				.builder()
+				.clientId(clientId)
+				.clientSecret(clientSecret)
+				.code(authCode)
+				.redirectUri("http://localhost:8090/app/t/google")
+				.grantType("authorization_code").build();
+
+		
+		//JSON 파싱을 위한 기본값 세팅
+		//요청시 파라미터는 스네이크 케이스로 세팅되므로 Object mapper에 미리 설정해준다.
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+
+		//AccessToken 발급 요청
+		ResponseEntity<String> resultEntity = restTemplate.postForEntity(GOOGLE_TOKEN_BASE_URL, googleOAuthRequestParam, String.class);
+
+		//Token Request
+		GoogleOAuthResponse result = mapper.readValue(resultEntity.getBody(), new TypeReference<GoogleOAuthResponse>() {
+		});
+
+		//ID Token만 추출 (사용자의 정보는 jwt로 인코딩 되어있다)
+		String jwtToken = result.getIdToken();
+		String requestUrl = UriComponentsBuilder.fromHttpUrl("https://oauth2.googleapis.com/tokeninfo")
+		.queryParam("id_token", jwtToken).toUriString();
+		
+		String resultJson = restTemplate.getForObject(requestUrl, String.class);
+		
+		Map<String,String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>(){});
+		model.addAllAttributes(userInfo);
+		model.addAttribute("token", result.getAccessToken());
+		System.out.println(userInfo);
+		
+		// Save user information to the database
+        GoogleuserVo user = new GoogleuserVo();
+        user.setGoogleId(userInfo.get("sub"));
+        user.setEmail(userInfo.get("email"));
+        // Set other user fields as needed
+
+        testService.guserinsert(user);
+		
+
+		return "/google";
+
 	}
 }

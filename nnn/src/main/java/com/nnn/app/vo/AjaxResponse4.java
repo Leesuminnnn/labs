@@ -2,30 +2,19 @@ package com.nnn.app.vo;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class AjaxResponse4 {
 
 	private String result;
 	private List<UsersVo> usersall;
-	private List<UserPh> userph;
+	private List<UserPh> userphList;
 	
-	public String getResult() {
-		return result;
-	}
-	public void setResult(String result) {
-		this.result = result;
-	}
-	public List<UsersVo> getUsersall() {
-		return usersall;
-	}
-	public void setUsersall(List<UsersVo> usersall) {
-		this.usersall = usersall;
-	}
-	public List<UserPh> getUserph() {
-		return userph;
-	}
-	public void setUserph(List<UserPh> userph) {
-		this.userph = userph;
-	}
 	
 	
 	
