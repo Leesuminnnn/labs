@@ -4,29 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- content에 자신의 OAuth2.0 클라이언트ID를 넣습니다. -->
+<meta name ="google-signin-client_id" content="1063815197397-8kjbtqv17dtknb5715762mhskl5rrbpu.apps.googleusercontent.com">
 <title>HELLO OAuth</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
-	<fieldset>
-		<label>로그인</label> <br>
-		<div id="googleLoginBtn" style="cursor: pointer">
-			<img id="googleLoginImg" src="${pageContext.request.contextPath}/resources/img/btn_google_signin_light_pressed_web.png">
-		</div>
-	</fieldset>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div id="g_id_onload"
+         data-client_id="1063815197397-8kjbtqv17dtknb5715762mhskl5rrbpu.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+    <script>
+    google.accounts.id.initialize(IdConfiguration)
+    function handleCredentialResponse(response) {
+      console.log("Encoded JWT ID token: " + response.credential);
+    }
+    window.onload = function () {
+    google.accounts.id.initialize({
+      client_id: '1063815197397-8kjbtqv17dtknb5715762mhskl5rrbpu.apps.googleusercontent.com',
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.prompt();
+    
+  };
+    </script>
 </body>
-<script>
-const onClickGoogleLogin = (e) => {
-		window.location.replace("https://accounts.google.com/o/oauth2/v2/auth?client_id=1063815197397-8kjbtqv17dtknb5715762mhskl5rrbpu.apps.googleusercontent.com&redirect_uri=http://localhost:8090/app/t/google&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline")
-	}
-	
-	const googleLoginBtn = document.getElementById("googleLoginBtn");
-	googleLoginBtn.addEventListener("click", onClickGoogleLogin);
-	
-	/*
-	code=4/0AfJohXlEzsRg2Y_Aw8wXnr4agpgmYWCb_q4Folm-c5yMF6aRtgEp6KsNLH9AGHyrzw-56g&scope=email%20profile%20openid%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=0&prompt=consent
-	*/ 
-	/*
-	code=4/0AfJohXkrOv7WpkYUJ8a-Jv9gkYivzRGnm06k4J6nJGIWcjRfh3rzljvwp62hgb5RAdOlUw&scope=email%20profile%20openid%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=0&prompt=consent
-	*/
-</script>
 </html>

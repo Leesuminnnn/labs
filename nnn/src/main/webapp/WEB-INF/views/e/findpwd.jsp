@@ -25,6 +25,7 @@
 			<h2>비밀번호 변경</h2>
 		</div>
 		<ul>
+			<li><p style="text-align: center;">사번과 본인휴대폰번호를 입력 후 정보확인을 눌러주세요.</p></li>
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
 			<li><input type="text" name="ph" id="ph" placeholder="휴대폰번호" title="휴대폰번호입력"></li>
 			<li><button type="button" id="find">정보확인</button></li>
@@ -63,7 +64,7 @@ $(document).ready(function () {
 		$("#result").val('');
 	});
 	
-	var $div = $('<div calss="pwd"><ul><li><input type="password" placeholder="비밀번호" name="pwd" id="pwd"/></li><li><input type="password" placeholder="비밀번호확인" name="pwd2" id="pwd2"/></li><li><button type="button" id="pwdAct">비밀번호 변경</button></li></div>');
+	var $div = $('<p style="text-align: center; margin-bottom:10px; color:#000;">변경하실 비밀번호와 비밀번호를 한번더 입력 후 비밀번호 변경을 누르시면 비밀번호 변경이 완료됩니다.</p><div calss="pwd"><ul><li><input type="password" placeholder="비밀번호" name="pwd" id="pwd"/></li><li><input type="password" placeholder="비밀번호확인" name="pwd2" id="pwd2"/></li><li><button type="button" id="pwdAct">비밀번호 변경</button></li></div>');
 	var div = document.createElement('div');
 	var $div2 = $('<div calss="result2"></div>');
 	var div2 = document.createElement('div');
