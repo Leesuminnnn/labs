@@ -27,7 +27,7 @@
 		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
 		from coopusers where idx=#{idx}
 	</select>
-	<select id="info2" resultType="cusers" parameterType="users">
+	<select id="info2" resultType="cusers" parameterType="cusers">
 		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
 		from coopusers where id=#{id}
 	</select>

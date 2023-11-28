@@ -15,7 +15,6 @@ import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
-import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
 @Repository
@@ -36,12 +35,12 @@ public class CoopEvaluationDao {
 //		return sqlSession3.selectOne(MAPPER+".login", vo);
 	}
 
-	public UsersVo info2(CoopusersVo vo) {
+	public CoopusersVo info2(CoopusersVo vo) {
 		return sqlSession1.selectOne(MAPPER+".info2", vo);
 //		return sqlSession3.selectOne(MAPPER+".info2", vo);
 	}
 	
-	public UsersVo info(int idx) {
+	public CoopusersVo info(int idx) {
 		return sqlSession1.selectOne(MAPPER+".info", idx);
 //		return sqlSession3.selectOne(MAPPER+".info", idx);
 	}
@@ -52,7 +51,7 @@ public class CoopEvaluationDao {
 //		return sqlSession3.update(MAPPER+".pwdinsert", map);
 	}
 
-	public List<UsersVo> evaluationtarget(Map<String, Object> map) {
+	public List<CoopusersVo> evaluationtarget(Map<String, Object> map) {
 		System.out.println("########################DAO 코드");
 		System.out.println(map);
 		System.out.println("########################DAO 코드");
@@ -60,12 +59,12 @@ public class CoopEvaluationDao {
 //		return sqlSession3.selectList(MAPPER+".evaluationtarget", map);
 	}
 
-	public List<UsersVo> BTlist(Map<String, Object> map) {
+	public List<CoopusersVo> BTlist(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".BTlist",map);
 //		return sqlSession3.selectList(MAPPER+".BTlist",map);
 	}
 
-	public List<UsersVo> BFlist(Map<String, Object> map) {
+	public List<CoopusersVo> BFlist(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".BFlist",map);
 //		return sqlSession3.selectList(MAPPER+".BFlist",map);
 	}
@@ -111,34 +110,34 @@ public class CoopEvaluationDao {
 //		return sqlSession3.selectOne(MAPPER+".dbcheck", vo);
 	}
 
-	public List<UsersVo> users(Map<String, Object> map) {
+	public List<CoopusersVo> users(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users", map);
 //		return sqlSession3.selectList(MAPPER+".users", map);
 	}
 	
-	public List<UsersVo> users1(Map<String, Object> map) {
+	public List<CoopusersVo> users1(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users1", map);
 //		return sqlSession3.selectList(MAPPER+".users1", map);
 	}
-	public List<UsersVo> users1pwd(Map<String, Object> map) {
+	public List<CoopusersVo> users1pwd(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users1", map);
 //		return sqlSession3.selectList(MAPPER+".users1pwd", map);
 	}
 	
-	public List<UsersVo> users2(Map<String, Object> map) {
+	public List<CoopusersVo> users2(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users2", map);
 //		return sqlSession3.selectList(MAPPER+".users2", map);
 	}
-	public List<UsersVo> users2pwd(Map<String, Object> map) {
+	public List<CoopusersVo> users2pwd(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users2", map);
 //		return sqlSession3.selectList(MAPPER+".users2pwd", map);
 	}
 	
-	public List<UsersVo> users3(Map<String, Object> map) {
+	public List<CoopusersVo> users3(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users3", map);
 //		return sqlSession3.selectList(MAPPER+".users3", map);
 	}
-	public List<UsersVo> users3pwd(Map<String, Object> map) {
+	public List<CoopusersVo> users3pwd(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users3", map);
 //		return sqlSession3.selectList(MAPPER+".users3pwd", map);
 	}

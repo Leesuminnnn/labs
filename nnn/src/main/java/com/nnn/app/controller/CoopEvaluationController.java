@@ -36,7 +36,6 @@ import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
-import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
 @Controller
@@ -79,14 +78,17 @@ public class CoopEvaluationController {
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public String loginaction(CoopusersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 비밀번호 복호화
-//		SHA256 sha256 = new SHA256();
-//		String password = vo.getPwd();
-//		//	SHA256으로 암호화된 비밀번호
-//        String cryptogram = sha256.encrypt(password);
-//        System.out.println(cryptogram);
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+		
+		String password = vo.getPwd();
+//		//	aes128으로 암호화된 비밀번호
+        String cryptogram = aes128.encrypt(password);
+        System.out.println(cryptogram);
 //        //비밀번호 일치 여부
-//        boolean pwdcheck = cryptogram.equals(sha256.encrypt(password));
-//		System.out.println(pwdcheck);
+        boolean pwdcheck = cryptogram.equals(aes128.encrypt(password));
+		System.out.println(pwdcheck);
+		vo.setPwd(cryptogram);
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("#########################################");
 		
@@ -96,7 +98,7 @@ public class CoopEvaluationController {
 		
 		System.out.println("id : "+vo.getId());
 		System.out.println("name : "+vo.getName());
-		System.out.println("pwd : "+vo.getPwd());
+		
 		System.out.println("#########################################");
 		int loginMember = coopevaluationService.login(vo);
 		String name = vo.getName();
@@ -125,7 +127,7 @@ public class CoopEvaluationController {
 			}
 			// 정보가 있을 경우 
 			else if(loginMember == 1) {
-				UsersVo info2 = coopevaluationService.info2(vo);
+				CoopusersVo info2 = coopevaluationService.info2(vo);
 				int idx = info2.getIdx();
 				System.out.println("info : "+info2);
 				System.out.println("info2.idx : "+info2.getIdx());
@@ -136,14 +138,14 @@ public class CoopEvaluationController {
 					request.setAttribute("url", "d/Pwd/"+idx);
 					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
 					// 로그인 한 유저 ip 알아내기
-					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-					String ip = req.getHeader("X-FORWARDED-FOR");
-					if (ip == null) {
-						ip = req.getRemoteAddr();
-					}
-					map.put("ip", ip);
-					System.out.println(ip);
-					coopevaluationService.loginlog(map);
+//					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+//					String ip = req.getHeader("X-FORWARDED-FOR");
+//					if (ip == null) {
+//						ip = req.getRemoteAddr();
+//					}
+//					map.put("ip", ip);
+//					System.out.println(ip);
+//					coopevaluationService.loginlog(map);
 					return "alert5";
 				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
 				}else if(info2.getPwd() != null && name != null){
@@ -161,21 +163,21 @@ public class CoopEvaluationController {
 					System.out.println("#########################################");
 					md.addAttribute("info", coopevaluationService.info(idx));
 					// 로그인 한 유저 ip 알아내기
-					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-					String ip = req.getHeader("X-FORWARDED-FOR");
-					if (ip == null) {
-						ip = req.getRemoteAddr();
-					}
-					map.put("ip", ip);
-					System.out.println(ip);
-					coopevaluationService.loginlog(map);
-					// 세션 저장
-					session.setAttribute("loginmember", vo.getId());
-					if(info2.getHspt_name().equals("코어솔루션")) {
-						return "redirect:/d/admin";
-					}else {
+//					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+//					String ip = req.getHeader("X-FORWARDED-FOR");
+//					if (ip == null) {
+//						ip = req.getRemoteAddr();
+//					}
+//					map.put("ip", ip);
+//					System.out.println(ip);
+//					coopevaluationService.loginlog(map);
+//					// 세션 저장
+//					session.setAttribute("loginmember", vo.getId());
+//					if(info2.getHspt_name().equals("코어솔루션")) {
+//						return "redirect:/d/admin";
+//					}else {
 						return "redirect:/d/Info/"+idx;
-					}
+//					}
 					
 				}
 				
@@ -201,103 +203,103 @@ public class CoopEvaluationController {
 		System.out.println("#########################1");
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		String vtf = coopevaluationService.info(idx).getHspt_V();
-		String ktf = coopevaluationService.info(idx).getHspt_K();
-		String btf = coopevaluationService.info(idx).getHspt_B();
-		String xtf = coopevaluationService.info(idx).getHspt_X();
-		String ztf = coopevaluationService.info(idx).getHspt_Z();
-		String hsptname = coopevaluationService.info(idx).getHspt_name();
-		String hsptpo = coopevaluationService.info(idx).getHspt_position();
-		String hsptsubcode = coopevaluationService.info(idx).getHspt_subcode();
-		String hsptsubname = coopevaluationService.info(idx).getHspt_subname();
-		String po = coopevaluationService.info(idx).getHspt_position();
+//		String vtf = coopevaluationService.info(idx).getHspt_V();
+//		String ktf = coopevaluationService.info(idx).getHspt_K();
+//		String btf = coopevaluationService.info(idx).getHspt_B();
+//		String xtf = coopevaluationService.info(idx).getHspt_X();
+//		String ztf = coopevaluationService.info(idx).getHspt_Z();
+//		String hsptname = coopevaluationService.info(idx).getHspt_name();
+//		String hsptpo = coopevaluationService.info(idx).getHspt_position();
+//		String hsptsubcode = coopevaluationService.info(idx).getHspt_subcode();
+//		String hsptsubname = coopevaluationService.info(idx).getHspt_subname();
+//		String po = coopevaluationService.info(idx).getHspt_position();
 		
 		System.out.println("############################1.5");
 
 		System.out.println("info : "+ coopevaluationService.info(idx));
 		System.out.println("시간 출력 : "+ coopevaluationService.info(idx).getReg_date());
-		System.out.println("경혁팀 여부 : "+vtf);
-		System.out.println("경혁팀장 여부 : "+ktf);
-		System.out.println("부서장 여부 : "+btf);
-		System.out.println("1인부서 여부 : "+xtf);
-		System.out.println("진료팀장 여부 : "+ztf);
-		if (po.equals("T")) {
-			boolean position = true;
-			map.put("position", position);
-			System.out.println("position : "+position);
-		}else {
-			boolean position = false;
-			map.put("position", position);
-			System.out.println("position : "+position);
-		}
-		
-		if(vtf.equals("T")) {
-			boolean v = true;
-			map.put("v", v);
-			System.out.println("경혁팀여부v : "+v);
-		}else {
-			boolean v = false;
-			map.put("v", v);
-			System.out.println("경혁팀여부v : "+v);
-		}
-		
-		if(ktf.equals("T")) {
-			boolean v = true;
-			map.put("k", v);
-			System.out.println("경혁팀장여부k : "+v);
-		}else {
-			boolean v = false;
-			map.put("k", v);
-			System.out.println("경혁팀장여부k : "+v);
-		}
-		
-		if(btf.equals("T")) {
-			boolean v = true;
-			map.put("b", v);
-			System.out.println("부서장여부b : "+v);
-		}else {
-			boolean v = false;
-			map.put("b", v);
-			System.out.println("부서장여부b : "+v);
-		}
-		
-		if(xtf.equals("T")) {
-			boolean v = true;
-			map.put("x", v);
-			System.out.println("1인부서여부x : "+v);
-		}else {
-			boolean v = false;
-			map.put("x", v);
-			System.out.println("인부서여부x : "+v);
-		}
-		
-		if(ztf.equals("T")) {
-			boolean v = true;
-			map.put("z", v);
-			System.out.println("진료팀장여부z : "+v);
-		}else {
-			boolean v = false;
-			map.put("z", v);
-			System.out.println("진료팀장여부z : "+v);
-		}
-		map.put("hspt_name",hsptname);
-		map.put("hspt_position",hsptpo);
-		map.put("hspt_subcode",hsptsubcode);
+//		System.out.println("경혁팀 여부 : "+vtf);
+//		System.out.println("경혁팀장 여부 : "+ktf);
+//		System.out.println("부서장 여부 : "+btf);
+//		System.out.println("1인부서 여부 : "+xtf);
+//		System.out.println("진료팀장 여부 : "+ztf);
+//		if (po.equals("T")) {
+//			boolean position = true;
+//			map.put("position", position);
+//			System.out.println("position : "+position);
+//		}else {
+//			boolean position = false;
+//			map.put("position", position);
+//			System.out.println("position : "+position);
+//		}
+//		
+//		if(vtf.equals("T")) {
+//			boolean v = true;
+//			map.put("v", v);
+//			System.out.println("경혁팀여부v : "+v);
+//		}else {
+//			boolean v = false;
+//			map.put("v", v);
+//			System.out.println("경혁팀여부v : "+v);
+//		}
+//		
+//		if(ktf.equals("T")) {
+//			boolean v = true;
+//			map.put("k", v);
+//			System.out.println("경혁팀장여부k : "+v);
+//		}else {
+//			boolean v = false;
+//			map.put("k", v);
+//			System.out.println("경혁팀장여부k : "+v);
+//		}
+//		
+//		if(btf.equals("T")) {
+//			boolean v = true;
+//			map.put("b", v);
+//			System.out.println("부서장여부b : "+v);
+//		}else {
+//			boolean v = false;
+//			map.put("b", v);
+//			System.out.println("부서장여부b : "+v);
+//		}
+//		
+//		if(xtf.equals("T")) {
+//			boolean v = true;
+//			map.put("x", v);
+//			System.out.println("1인부서여부x : "+v);
+//		}else {
+//			boolean v = false;
+//			map.put("x", v);
+//			System.out.println("인부서여부x : "+v);
+//		}
+//		
+//		if(ztf.equals("T")) {
+//			boolean v = true;
+//			map.put("z", v);
+//			System.out.println("진료팀장여부z : "+v);
+//		}else {
+//			boolean v = false;
+//			map.put("z", v);
+//			System.out.println("진료팀장여부z : "+v);
+//		}
+//		map.put("hspt_name",hsptname);
+//		map.put("hspt_position",hsptpo);
+//		map.put("hspt_subcode",hsptsubcode);
 		map.put("idx",vo.getIdx());
-		System.out.println("info.hsptname : "+ hsptname);
-		System.out.println("info.hsptposition : "+ hsptpo);
-		System.out.println("info.hsptsubcode : "+ hsptsubcode);
+//		System.out.println("info.hsptname : "+ hsptname);
+//		System.out.println("info.hsptposition : "+ hsptpo);
+//		System.out.println("info.hsptsubcode : "+ hsptsubcode);
 		System.out.println(vo.getIdx());
 		System.out.println(coopevaluationService.info(idx));
-		System.out.println(coopevaluationService.evaluationtarget(map));
+//		System.out.println(coopevaluationService.evaluationtarget(map));
 		System.out.println("#########################2");
 		mv.addObject("info", coopevaluationService.info(idx));
 		// 평가 대상 출력		다른 사람이 평가완료 했을 경우 평가 받은사람이 여러개가 뜸. -> 
-		List<UsersVo> list1 = new ArrayList<UsersVo>();
-		list1 = coopevaluationService.evaluationtarget(map);
+		List<CoopusersVo> list1 = new ArrayList<CoopusersVo>();
+//		list1 = coopevaluationService.evaluationtarget(map);
 		System.out.println("#############################");
-		mv.addObject("target", list1);
-		System.out.println(list1);
+//		mv.addObject("target", list1);
+//		System.out.println(list1);
 		System.out.println("#############################");
 		// 평가 완료한 리스트 출력?		
 		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
@@ -351,21 +353,22 @@ public class CoopEvaluationController {
 		return mv;
 	}
 	@RequestMapping(value="pwdAction/{idx}")
-	public String pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+	public String pwdAction(CoopusersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
 		md.addAttribute("info", coopevaluationService.info(idx));
 		
-//		// 암호화
-//		SHA256 sha256 = new SHA256();
-//		//비밀번호
-//        String password = vo.getPwd();
-//        //SHA256으로 암호화된 비밀번호
-//        String cryptogram = sha256.encrypt(password);
-//        
-//        System.out.println(cryptogram);
-//		//담은 변수를 DB에 넘겨준다.
-//		vo.setPwd(cryptogram);
-//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		// 암호화
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+		//비밀번호
+        String password = vo.getPwd();
+        //aes128으로 암호화된 비밀번호
+        String cryptogram = aes128.encrypt(password);
+        
+        System.out.println(cryptogram);
+		//담은 변수를 DB에 넘겨준다.
+		vo.setPwd(cryptogram);
+		System.out.println("암호화된 페스워드 : "+cryptogram);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("pwd", cryptogram);
@@ -384,35 +387,37 @@ public class CoopEvaluationController {
 			request.setAttribute("url", "d/Pwd/"+idx);
 			return "alert5";
 		}
+		
+		
 	}
-	@RequestMapping(value="pwdActAjax/{id}")
-	public String pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
-//		// 암호화
-//		SHA256 sha256 = new SHA256();
-//		//비밀번호
-//        String password = vo.getPwd();
-//        //SHA256으로 암호화된 비밀번호
-//        String cryptogram = sha256.encrypt(password);
-//        
-//        System.out.println(cryptogram);
-//		//담은 변수를 DB에 넘겨준다.
-//		vo.setPwd(cryptogram);
-//		System.out.println("암호화된 페스워드 : "+cryptogram);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("pwd", cryptogram);
-		map.put("pwd", vo.getPwd());
-		map.put("id", vo.getId());
-		
-		int flag = coopevaluationService.pwdajax(map);
-		
-		if(flag >= 1) {
-			System.out.println(flag);
-			return "alert5";
-		} else {
-			return "alert5";
-		}
-	}
+//	@RequestMapping(value="pwdActAjax/{id}")
+//	public String pwdActAjax(CoopusersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+////		// 암호화
+////		SHA256 sha256 = new SHA256();
+////		//비밀번호
+////        String password = vo.getPwd();
+////        //SHA256으로 암호화된 비밀번호
+////        String cryptogram = sha256.encrypt(password);
+////        
+////        System.out.println(cryptogram);
+////		//담은 변수를 DB에 넘겨준다.
+////		vo.setPwd(cryptogram);
+////		System.out.println("암호화된 페스워드 : "+cryptogram);
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+////		map.put("pwd", cryptogram);
+//		map.put("pwd", vo.getPwd());
+//		map.put("id", vo.getId());
+//		
+//		int flag = coopevaluationService.pwdajax(map);
+//		
+//		if(flag >= 1) {
+//			System.out.println(flag);
+//			return "alert5";
+//		} else {
+//			return "alert5";
+//		}
+//	}
 	@RequestMapping(value="Form/{idx}/{idx2}/{team}")
 	public ModelAndView form(ModelAndView mv, HttpSession session, 
 			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
@@ -472,7 +477,7 @@ public class CoopEvaluationController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		
-		String u1 = coopevaluationService.info(infoidx).getHspt_name();		// 기관명
+//		String u1 = coopevaluationService.info(infoidx).getHspt_name();		// 기관명
 		String u2 = coopevaluationService.info(infoidx).getId();				// 평가자 사번
 		String t1 = coopevaluationService.info(targetidx).getId();			// 평가대상자 사번
 	
@@ -513,7 +518,7 @@ public class CoopEvaluationController {
 		System.out.println(e31);
 		System.out.println(f32);
 		
-		map.put("u1", u1);
+//		map.put("u1", u1);
 		map.put("u2", u2);
 		map.put("t1", t1);
 		map.put("team", team);
@@ -618,57 +623,57 @@ public class CoopEvaluationController {
 	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users(map);
-		List<UsersVo> list1 = coopevaluationService.users1(map);
-		List<UsersVo> list2 = coopevaluationService.users2(map);
-		List<UsersVo> list3 = coopevaluationService.users3(map);
-		List<UsersVo> listpwd1 = coopevaluationService.users1pwd(map);
-		List<UsersVo> listpwd2 = coopevaluationService.users2pwd(map);
-		List<UsersVo> listpwd3 = coopevaluationService.users3pwd(map);
-		List<LoginlogVo> log = coopevaluationService.log(map);
-		List<UserPh> ph = coopevaluationService.ph(map);
+//		List<CoopusersVo> list = coopevaluationService.users(map);
+//		List<CoopusersVo> list1 = coopevaluationService.users1(map);
+//		List<CoopusersVo> list2 = coopevaluationService.users2(map);
+//		List<CoopusersVo> list3 = coopevaluationService.users3(map);
+//		List<CoopusersVo> listpwd1 = coopevaluationService.users1pwd(map);
+//		List<CoopusersVo> listpwd2 = coopevaluationService.users2pwd(map);
+//		List<CoopusersVo> listpwd3 = coopevaluationService.users3pwd(map);
+//		List<LoginlogVo> log = coopevaluationService.log(map);
+//		List<UserPh> ph = coopevaluationService.ph(map);
+//		
+//		
+//		int hspt1 = coopevaluationService.hsptselect1(map);
+//		int hspt2 = coopevaluationService.hsptselect2(map);
+//		int hspt3 = coopevaluationService.hsptselect3(map);
+//
+//		int hsptpwdselect1 = coopevaluationService.hsptpwdselect1(map);
+//		int hsptpwdselect2 = coopevaluationService.hsptpwdselect2(map);
+//		int hsptpwdselect3 = coopevaluationService.hsptpwdselect3(map);
 		
-		
-		int hspt1 = coopevaluationService.hsptselect1(map);
-		int hspt2 = coopevaluationService.hsptselect2(map);
-		int hspt3 = coopevaluationService.hsptselect3(map);
-
-		int hsptpwdselect1 = coopevaluationService.hsptpwdselect1(map);
-		int hsptpwdselect2 = coopevaluationService.hsptpwdselect2(map);
-		int hsptpwdselect3 = coopevaluationService.hsptpwdselect3(map);
-		
-		mv.addObject("users", list);
-		request.setAttribute("users", list);
-		mv.addObject("users1", list1);
-		request.setAttribute("users1", list1);
-		mv.addObject("users2", list2);
-		request.setAttribute("users2", list2);
-		mv.addObject("users3", list3);
-		request.setAttribute("users3", list3);
-		
-		mv.addObject("userspwd1", listpwd1);
-		request.setAttribute("userspwd1", listpwd1);
-		mv.addObject("userspwd2", listpwd2);
-		request.setAttribute("users2pwd", listpwd2);
-		mv.addObject("userspwd3", listpwd3);
-		request.setAttribute("userspwd3", listpwd3);
-		
-		mv.addObject("log", log);
-		request.setAttribute("log",log);
-		mv.addObject("ph",ph);
-		request.setAttribute("ph", ph);
-		mv.addObject("h1", hspt1);
-		mv.addObject("h2", hspt2);
-		mv.addObject("h3", hspt3);
-		mv.addObject("p1", hsptpwdselect1);
-		mv.addObject("p2", hsptpwdselect2);
-		mv.addObject("p3", hsptpwdselect3);
-		request.setAttribute("h1", hspt1);
-		request.setAttribute("h2", hspt2);
-		request.setAttribute("h3", hspt3);
-		request.setAttribute("p1", hsptpwdselect1);
-		request.setAttribute("p2", hsptpwdselect2);
-		request.setAttribute("p3", hsptpwdselect3);
+//		mv.addObject("users", list);
+//		request.setAttribute("users", list);
+//		mv.addObject("users1", list1);
+//		request.setAttribute("users1", list1);
+//		mv.addObject("users2", list2);
+//		request.setAttribute("users2", list2);
+//		mv.addObject("users3", list3);
+//		request.setAttribute("users3", list3);
+//		
+//		mv.addObject("userspwd1", listpwd1);
+//		request.setAttribute("userspwd1", listpwd1);
+//		mv.addObject("userspwd2", listpwd2);
+//		request.setAttribute("users2pwd", listpwd2);
+//		mv.addObject("userspwd3", listpwd3);
+//		request.setAttribute("userspwd3", listpwd3);
+//		
+//		mv.addObject("log", log);
+//		request.setAttribute("log",log);
+//		mv.addObject("ph",ph);
+//		request.setAttribute("ph", ph);
+//		mv.addObject("h1", hspt1);
+//		mv.addObject("h2", hspt2);
+//		mv.addObject("h3", hspt3);
+//		mv.addObject("p1", hsptpwdselect1);
+//		mv.addObject("p2", hsptpwdselect2);
+//		mv.addObject("p3", hsptpwdselect3);
+//		request.setAttribute("h1", hspt1);
+//		request.setAttribute("h2", hspt2);
+//		request.setAttribute("h3", hspt3);
+//		request.setAttribute("p1", hsptpwdselect1);
+//		request.setAttribute("p2", hsptpwdselect2);
+//		request.setAttribute("p3", hsptpwdselect3);
 		
 		mv.setViewName("d/admin");
 		return mv;
@@ -691,215 +696,215 @@ public class CoopEvaluationController {
 //			return response;
 //		}
 //	}
-	
-	@RequestMapping(value="pwdreset/{id}")
-	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		int flag = coopevaluationService.pwdreset(map);
-		
-		if(flag == 1) {
-			request.setAttribute("msg", "초기화 완료");
-			request.setAttribute("url", "d/admin");
-			return "alert";
-		}else {
-			request.setAttribute("msg", "오류발생");
-			return "alert";
-		}
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="pwdreset1/{id}")
-	public AjaxResponse6 pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-		AjaxResponse6 response = new AjaxResponse6();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		int flag = coopevaluationService.pwdreset1(map);
-		
-		if(flag == 1) {
-			response.setResult("Y");
-			return response;
-		}else {
-			response.setResult("N");
-			return response;
-		}
-	}
-	@ResponseBody
-	@RequestMapping(value="pwdreset2/{id}")
-	public AjaxResponse6 pwdreset2(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-		AjaxResponse6 response = new AjaxResponse6();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		int flag = coopevaluationService.pwdreset2(map);
-		
-		if(flag == 1) {
-			response.setResult("Y");
-			return response;
-		}else {
-			response.setResult("N");
-			return response;
-		}
-	}
-	@ResponseBody
-	@RequestMapping(value="pwdreset3/{id}")
-	public AjaxResponse6 pwdreset3(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-		AjaxResponse6 response = new AjaxResponse6();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		int flag = coopevaluationService.pwdreset3(map);
-		
-		if(flag == 1) {
-			response.setResult("Y");
-			return response;
-		}else {
-			response.setResult("N");
-			return response;
-		}
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="usersAll")
-	public AjaxResponse4 usersall(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse4 response = new AjaxResponse4();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users(map);
-		request.setAttribute("users", list);
-		response.setUsersall(list);
-
-		List<UserPh> ph = coopevaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserphList(ph);
-		
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="users1")
-	public AjaxResponse5 users1(HttpSession session, HttpServletRequest request, Model md) throws Exception {
-		AjaxResponse5 response = new AjaxResponse5();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users1(map);
-		List<UsersVo> listpwd1 = coopevaluationService.users1pwd(map);
-		request.setAttribute("userspwd1", listpwd1);
-		request.setAttribute("users", list);
-		response.setUsers(list);
-		response.setListpwd1(listpwd1);
-		
-		List<UserPh> ph = coopevaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserphList(ph);
-		
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="users2")
-	public AjaxResponse5 users2(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse5 response = new AjaxResponse5();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users2(map);
-		request.setAttribute("users", list);
-		response.setUsers(list);
-		
-		List<UserPh> ph = coopevaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserphList(ph);
-		
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="users3")
-	public AjaxResponse5 users3(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse5 response = new AjaxResponse5();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users3(map);
-		request.setAttribute("users", list);
-		response.setUsers(list);
-		
-		List<UserPh> ph = coopevaluationService.ph(map);
-		request.setAttribute("ph", ph);
-		response.setUserphList(ph);
-		
-		return response;
-	}
-
-	
-	
-	@ResponseBody
-	@RequestMapping(value="perall")
-	public AjaxResponse7 perall(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
-		response.setResult("Y");
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users(map);
-		List<TargetVo> target = coopevaluationService.target(map);
-		List<AnswerVo> answer = coopevaluationService.answerselect(map);
-		response.setUsersall(list);
-		response.setTarget(target);
-		response.setAnswer(answer);
-		
-		
-		return response;
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="per1")
-	public AjaxResponse7 per1(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
-		response.setResult("Y");
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users1(map);
-		List<TargetVo> target = coopevaluationService.target(map);
-		List<AnswerVo> answer = coopevaluationService.answerselect(map);
-		response.setUsersall(list);
-		response.setTarget(target);
-		response.setAnswer(answer);
-		
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="per2")
-	public AjaxResponse7 per2(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
-		response.setResult("Y");
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users2(map);
-		List<TargetVo> target = coopevaluationService.target(map);
-		List<AnswerVo> answer = coopevaluationService.answerselect(map);
-		response.setUsersall(list);
-		response.setTarget(target);
-		response.setAnswer(answer);
-		
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="per3")
-	public AjaxResponse7 per3(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = coopevaluationService.users3(map);
-		List<TargetVo> target = coopevaluationService.target(map);
-		List<AnswerVo> answer = coopevaluationService.answerselect(map);
-		response.setUsersall(list);
-		response.setTarget(target);
-		response.setAnswer(answer);
-		
-		return response;
-	}
-	
+//	
+//	@RequestMapping(value="pwdreset/{id}")
+//	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("id", id);
+//		int flag = coopevaluationService.pwdreset(map);
+//		
+//		if(flag == 1) {
+//			request.setAttribute("msg", "초기화 완료");
+//			request.setAttribute("url", "d/admin");
+//			return "alert";
+//		}else {
+//			request.setAttribute("msg", "오류발생");
+//			return "alert";
+//		}
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="pwdreset1/{id}")
+//	public AjaxResponse6 pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse6 response = new AjaxResponse6();
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("id", id);
+//		int flag = coopevaluationService.pwdreset1(map);
+//		
+//		if(flag == 1) {
+//			response.setResult("Y");
+//			return response;
+//		}else {
+//			response.setResult("N");
+//			return response;
+//		}
+//	}
+//	@ResponseBody
+//	@RequestMapping(value="pwdreset2/{id}")
+//	public AjaxResponse6 pwdreset2(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse6 response = new AjaxResponse6();
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("id", id);
+//		int flag = coopevaluationService.pwdreset2(map);
+//		
+//		if(flag == 1) {
+//			response.setResult("Y");
+//			return response;
+//		}else {
+//			response.setResult("N");
+//			return response;
+//		}
+//	}
+//	@ResponseBody
+//	@RequestMapping(value="pwdreset3/{id}")
+//	public AjaxResponse6 pwdreset3(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse6 response = new AjaxResponse6();
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("id", id);
+//		int flag = coopevaluationService.pwdreset3(map);
+//		
+//		if(flag == 1) {
+//			response.setResult("Y");
+//			return response;
+//		}else {
+//			response.setResult("N");
+//			return response;
+//		}
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="usersAll")
+//	public AjaxResponse4 usersall(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse4 response = new AjaxResponse4();
+//		response.setResult("Y");		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users(map);
+//		request.setAttribute("users", list);
+////		response.setUsersall(list);
+//
+//		List<UserPh> ph = coopevaluationService.ph(map);
+//		request.setAttribute("ph", ph);
+//		response.setUserphList(ph);
+//		
+//		return response;
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="users1")
+//	public AjaxResponse5 users1(HttpSession session, HttpServletRequest request, Model md) throws Exception {
+//		AjaxResponse5 response = new AjaxResponse5();
+//		response.setResult("Y");		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users1(map);
+//		List<CoopusersVo> listpwd1 = coopevaluationService.users1pwd(map);
+//		request.setAttribute("userspwd1", listpwd1);
+//		request.setAttribute("users", list);
+//		response.setUsers(list);
+//		response.setListpwd1(listpwd1);
+//		
+//		List<UserPh> ph = coopevaluationService.ph(map);
+//		request.setAttribute("ph", ph);
+//		response.setUserphList(ph);
+//		
+//		return response;
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="users2")
+//	public AjaxResponse5 users2(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse5 response = new AjaxResponse5();
+//		response.setResult("Y");		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users2(map);
+//		request.setAttribute("users", list);
+//		response.setUsers(list);
+//		
+//		List<UserPh> ph = coopevaluationService.ph(map);
+//		request.setAttribute("ph", ph);
+//		response.setUserphList(ph);
+//		
+//		return response;
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="users3")
+//	public AjaxResponse5 users3(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse5 response = new AjaxResponse5();
+//		response.setResult("Y");		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users3(map);
+//		request.setAttribute("users", list);
+//		response.setUsers(list);
+//		
+//		List<UserPh> ph = coopevaluationService.ph(map);
+//		request.setAttribute("ph", ph);
+//		response.setUserphList(ph);
+//		
+//		return response;
+//	}
+//
+//	
+//	
+//	@ResponseBody
+//	@RequestMapping(value="perall")
+//	public AjaxResponse7 perall(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse7 response = new AjaxResponse7();
+//		response.setResult("Y");
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users(map);
+//		List<TargetVo> target = coopevaluationService.target(map);
+//		List<AnswerVo> answer = coopevaluationService.answerselect(map);
+//		response.setUsersall(list);
+//		response.setTarget(target);
+//		response.setAnswer(answer);
+//		
+//		
+//		return response;
+//	}
+//	
+//	
+//	@ResponseBody
+//	@RequestMapping(value="per1")
+//	public AjaxResponse7 per1(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse7 response = new AjaxResponse7();
+//		response.setResult("Y");
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users1(map);
+//		List<TargetVo> target = coopevaluationService.target(map);
+//		List<AnswerVo> answer = coopevaluationService.answerselect(map);
+//		response.setUsersall(list);
+//		response.setTarget(target);
+//		response.setAnswer(answer);
+//		
+//		return response;
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="per2")
+//	public AjaxResponse7 per2(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse7 response = new AjaxResponse7();
+//		response.setResult("Y");
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users2(map);
+//		List<TargetVo> target = coopevaluationService.target(map);
+//		List<AnswerVo> answer = coopevaluationService.answerselect(map);
+//		response.setUsersall(list);
+//		response.setTarget(target);
+//		response.setAnswer(answer);
+//		
+//		return response;
+//	}
+//	
+//	@ResponseBody
+//	@RequestMapping(value="per3")
+//	public AjaxResponse7 per3(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse7 response = new AjaxResponse7();
+//		response.setResult("Y");		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		List<CoopusersVo> list = coopevaluationService.users3(map);
+//		List<TargetVo> target = coopevaluationService.target(map);
+//		List<AnswerVo> answer = coopevaluationService.answerselect(map);
+//		response.setUsersall(list);
+//		response.setTarget(target);
+//		response.setAnswer(answer);
+//		
+//		return response;
+//	}
+//	
 	
 	
 }
