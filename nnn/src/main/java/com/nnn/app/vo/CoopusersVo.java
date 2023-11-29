@@ -22,22 +22,21 @@ id VARCHAR(30) NOT NULL COMMENT '사원번호',
 pwd VARCHAR(100) NULL COMMENT '비밀번호',
 c_position VARCHAR(30) NOT NULL COMMENT '직급/직책',
 name VARCHAR(30) NOT NULL COMMENT '사원명',
-reg_date DATETIME DEFAULT NOW() COMMENT '입사일자',csworktools
+reg_date DATETIME DEFAULT NOW() COMMENT '입사일자',
 end_date datetime default null comment '퇴사일자',
-del_yn char(5) not null comment '평가제외 여부',
-c_B VARCHAR(30) NOT NULL COMMENT '부서장 여부',
+phone varchar(20) not null comment '핸드폰번호',
+del_yn char(5) not null default 'N' comment '평가제외 여부',
 c_M VARCHAR(30) NOT NULL COMMENT '운영진간 평가',
-down VARCHAR(30) NOT NULL COMMENT '상하평가',
-none VARCHAR(30) NOT NULL COMMENT '변수)제외코드',
+grade VARCHAR(10) NOT NULL COMMENT '등급',
 user_code VARCHAR(30) NOT NULL COMMENT '코드'
-);
+
 	
 	*/
 	
 	private int idx;
 	private String c_name;
 	private String c_name2;
-	private String c_subnabe;
+	private String c_subname;
 	private String c_subcode;
 	private String id;
 	private String pwd;
@@ -45,11 +44,10 @@ user_code VARCHAR(30) NOT NULL COMMENT '코드'
 	private String name;
 	private Date reg_date;
 	private Date end_date;
+	private String phone;
 	private String del_yn;
-	private String c_B;
 	private String c_M;
-	private String down;
-	private String none;
+	private String grade;
 	private String user_code;
 	
 	

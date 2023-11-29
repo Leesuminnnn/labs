@@ -81,14 +81,7 @@ public class CoopEvaluationController {
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
 		
-		String password = vo.getPwd();
-//		//	aes128으로 암호화된 비밀번호
-        String cryptogram = aes128.encrypt(password);
-        System.out.println(cryptogram);
-//        //비밀번호 일치 여부
-        boolean pwdcheck = cryptogram.equals(aes128.encrypt(password));
-		System.out.println(pwdcheck);
-		vo.setPwd(cryptogram);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println("#########################################");
 		
@@ -98,7 +91,17 @@ public class CoopEvaluationController {
 		
 		System.out.println("id : "+vo.getId());
 		System.out.println("name : "+vo.getName());
+		// 비밀번호 복호화
 		
+		// 유저가 입력한 비밀번호
+		String password = vo.getPwd();
+		
+		// 비밀번호 암호화
+        String cryptogram = aes128.encrypt(password); 
+        System.out.println(cryptogram);
+        // 암호화된 비밀번호로 DB와 일치하는지 체크
+		vo.setPwd(cryptogram);
+        //비밀번호 일치 여부
 		System.out.println("#########################################");
 		int loginMember = coopevaluationService.login(vo);
 		String name = vo.getName();
@@ -131,7 +134,12 @@ public class CoopEvaluationController {
 				int idx = info2.getIdx();
 				System.out.println("info : "+info2);
 				System.out.println("info2.idx : "+info2.getIdx());
+				System.out.println("입력한 비번 : "+ vo.getPwd());
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
+				
+
+				
+				
 				if(info2.getPwd() == null) {
 					session.setAttribute("loginmember", vo.getId());
 					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
@@ -171,13 +179,14 @@ public class CoopEvaluationController {
 //					map.put("ip", ip);
 //					System.out.println(ip);
 //					coopevaluationService.loginlog(map);
-//					// 세션 저장
-//					session.setAttribute("loginmember", vo.getId());
-//					if(info2.getHspt_name().equals("코어솔루션")) {
-//						return "redirect:/d/admin";
-//					}else {
+					// 세션 저장
+					
+					session.setAttribute("loginmember", vo.getId());
+					if(info2.getName().equals("관리자")) {
+						return "redirect:/d/admin";
+					}else {
 						return "redirect:/d/Info/"+idx;
-//					}
+					}
 					
 				}
 				
@@ -203,92 +212,42 @@ public class CoopEvaluationController {
 		System.out.println("#########################1");
 		Map<String, Object> map = new HashMap<String, Object>();
 
-//		String vtf = coopevaluationService.info(idx).getHspt_V();
-//		String ktf = coopevaluationService.info(idx).getHspt_K();
-//		String btf = coopevaluationService.info(idx).getHspt_B();
-//		String xtf = coopevaluationService.info(idx).getHspt_X();
-//		String ztf = coopevaluationService.info(idx).getHspt_Z();
-//		String hsptname = coopevaluationService.info(idx).getHspt_name();
-//		String hsptpo = coopevaluationService.info(idx).getHspt_position();
-//		String hsptsubcode = coopevaluationService.info(idx).getHspt_subcode();
-//		String hsptsubname = coopevaluationService.info(idx).getHspt_subname();
-//		String po = coopevaluationService.info(idx).getHspt_position();
+		String cname1 = coopevaluationService.info(idx).getC_name();
+		String cname2 = coopevaluationService.info(idx).getC_name2();
+		String csubcode = coopevaluationService.info(idx).getC_subcode();
+		String csubname = coopevaluationService.info(idx).getC_subname();
+		String po = coopevaluationService.info(idx).getC_position();
+		String grade = coopevaluationService.info(idx).getGrade();
+		String cm = coopevaluationService.info(idx).getC_M();
+		String ph = coopevaluationService.info(idx).getPhone();
 		
 		System.out.println("############################1.5");
 
 		System.out.println("info : "+ coopevaluationService.info(idx));
 		System.out.println("시간 출력 : "+ coopevaluationService.info(idx).getReg_date());
-//		System.out.println("경혁팀 여부 : "+vtf);
-//		System.out.println("경혁팀장 여부 : "+ktf);
-//		System.out.println("부서장 여부 : "+btf);
-//		System.out.println("1인부서 여부 : "+xtf);
-//		System.out.println("진료팀장 여부 : "+ztf);
-//		if (po.equals("T")) {
-//			boolean position = true;
-//			map.put("position", position);
-//			System.out.println("position : "+position);
-//		}else {
-//			boolean position = false;
-//			map.put("position", position);
-//			System.out.println("position : "+position);
-//		}
+		System.out.println("기관명 : "+cname1);
+		System.out.println("소속기관명 : "+cname2);
+		System.out.println("직급/직책 : "+po);
+		System.out.println("등급 : "+grade);
+		
+		if (cm.equals("T")) {
+			boolean management = true;
+			map.put("management", management);
+			System.out.println("management : "+management);
+		}else {
+			boolean management = false;
+			map.put("management", management);
+			System.out.println("management : "+management);
+		}
 //		
-//		if(vtf.equals("T")) {
-//			boolean v = true;
-//			map.put("v", v);
-//			System.out.println("경혁팀여부v : "+v);
-//		}else {
-//			boolean v = false;
-//			map.put("v", v);
-//			System.out.println("경혁팀여부v : "+v);
-//		}
-//		
-//		if(ktf.equals("T")) {
-//			boolean v = true;
-//			map.put("k", v);
-//			System.out.println("경혁팀장여부k : "+v);
-//		}else {
-//			boolean v = false;
-//			map.put("k", v);
-//			System.out.println("경혁팀장여부k : "+v);
-//		}
-//		
-//		if(btf.equals("T")) {
-//			boolean v = true;
-//			map.put("b", v);
-//			System.out.println("부서장여부b : "+v);
-//		}else {
-//			boolean v = false;
-//			map.put("b", v);
-//			System.out.println("부서장여부b : "+v);
-//		}
-//		
-//		if(xtf.equals("T")) {
-//			boolean v = true;
-//			map.put("x", v);
-//			System.out.println("1인부서여부x : "+v);
-//		}else {
-//			boolean v = false;
-//			map.put("x", v);
-//			System.out.println("인부서여부x : "+v);
-//		}
-//		
-//		if(ztf.equals("T")) {
-//			boolean v = true;
-//			map.put("z", v);
-//			System.out.println("진료팀장여부z : "+v);
-//		}else {
-//			boolean v = false;
-//			map.put("z", v);
-//			System.out.println("진료팀장여부z : "+v);
-//		}
-//		map.put("hspt_name",hsptname);
-//		map.put("hspt_position",hsptpo);
-//		map.put("hspt_subcode",hsptsubcode);
+		map.put("cname1",cname1);
+		map.put("cname2",cname2);
+		map.put("csubcode",csubcode);
+		map.put("csubname",csubname);
+		map.put("po",po);
+		map.put("grade",grade);
+		map.put("ph",ph);
 		map.put("idx",vo.getIdx());
-//		System.out.println("info.hsptname : "+ hsptname);
-//		System.out.println("info.hsptposition : "+ hsptpo);
-//		System.out.println("info.hsptsubcode : "+ hsptsubcode);
 		System.out.println(vo.getIdx());
 		System.out.println(coopevaluationService.info(idx));
 //		System.out.println(coopevaluationService.evaluationtarget(map));
@@ -296,9 +255,9 @@ public class CoopEvaluationController {
 		mv.addObject("info", coopevaluationService.info(idx));
 		// 평가 대상 출력		다른 사람이 평가완료 했을 경우 평가 받은사람이 여러개가 뜸. -> 
 		List<CoopusersVo> list1 = new ArrayList<CoopusersVo>();
-//		list1 = coopevaluationService.evaluationtarget(map);
+		list1 = coopevaluationService.coopevaluationtarget(map);
 		System.out.println("#############################");
-//		mv.addObject("target", list1);
+		mv.addObject("target", list1);
 //		System.out.println(list1);
 		System.out.println("#############################");
 		// 평가 완료한 리스트 출력?		
@@ -623,7 +582,7 @@ public class CoopEvaluationController {
 	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
-//		List<CoopusersVo> list = coopevaluationService.users(map);
+		List<CoopusersVo> list = coopevaluationService.users(map);
 //		List<CoopusersVo> list1 = coopevaluationService.users1(map);
 //		List<CoopusersVo> list2 = coopevaluationService.users2(map);
 //		List<CoopusersVo> list3 = coopevaluationService.users3(map);
@@ -642,8 +601,8 @@ public class CoopEvaluationController {
 //		int hsptpwdselect2 = coopevaluationService.hsptpwdselect2(map);
 //		int hsptpwdselect3 = coopevaluationService.hsptpwdselect3(map);
 		
-//		mv.addObject("users", list);
-//		request.setAttribute("users", list);
+		mv.addObject("users", list);
+		request.setAttribute("users", list);
 //		mv.addObject("users1", list1);
 //		request.setAttribute("users1", list1);
 //		mv.addObject("users2", list2);

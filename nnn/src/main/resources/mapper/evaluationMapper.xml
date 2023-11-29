@@ -2368,7 +2368,7 @@
 			</when>
 		</choose>
 	</when>
-	<!-- 장래문화원 -->
+	<!-- 장례문화원 -->
 	<when test='hspt_subcode.equals("U00")'>
 		(u.hspt_name = #{hspt_name} AND u.user_code LIKE 'U00%'
 		<choose>

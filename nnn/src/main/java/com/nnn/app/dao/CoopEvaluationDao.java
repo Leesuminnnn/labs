@@ -51,12 +51,12 @@ public class CoopEvaluationDao {
 //		return sqlSession3.update(MAPPER+".pwdinsert", map);
 	}
 
-	public List<CoopusersVo> evaluationtarget(Map<String, Object> map) {
+	public List<CoopusersVo> coopevaluationtarget(Map<String, Object> map) {
 		System.out.println("########################DAO 코드");
 		System.out.println(map);
 		System.out.println("########################DAO 코드");
-		return sqlSession1.selectList(MAPPER+".evaluationtarget", map);
-//		return sqlSession3.selectList(MAPPER+".evaluationtarget", map);
+		return sqlSession1.selectList(MAPPER+".coopevaluationtarget", map);
+//		return sqlSession3.selectList(MAPPER+".coopevaluationtarget", map);
 	}
 
 	public List<CoopusersVo> BTlist(Map<String, Object> map) {

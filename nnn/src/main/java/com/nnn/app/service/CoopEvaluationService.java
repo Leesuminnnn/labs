@@ -47,9 +47,9 @@ public class CoopEvaluationService {
 		return flag;
 	}
 
-//	public List<CoopusersVo> evaluationtarget(Map<String, Object> map) {
-//		return evaluationDao.evaluationtarget(map);
-//	}
+	public List<CoopusersVo> coopevaluationtarget(Map<String, Object> map) {
+		return evaluationDao.coopevaluationtarget(map);
+	}
 
 	public List<CoopusersVo> BTlist(Map<String, Object> map) {
 		return evaluationDao.BTlist(map);
@@ -105,9 +105,9 @@ public class CoopEvaluationService {
 		return flag;
 	}
 
-//	public List<CoopusersVo> users(Map<String, Object> map) {
-//		return evaluationDao.users(map);
-//	}
+	public List<CoopusersVo> users(Map<String, Object> map) {
+		return evaluationDao.users(map);
+	}
 //	
 //	public List<CoopusersVo> users1(Map<String, Object> map) {
 //		return evaluationDao.users1(map);

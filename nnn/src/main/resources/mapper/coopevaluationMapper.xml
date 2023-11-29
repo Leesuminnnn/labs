@@ -24,11 +24,11 @@
 		
 	</select>
 	<select id="info" resultType="cusers" parameterType="int">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where idx=#{idx}
 	</select>
 	<select id="info2" resultType="cusers" parameterType="cusers">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where id=#{id}
 	</select>
 	<update id="pwdinsert" parameterType="cusers">
@@ -74,35 +74,36 @@
 	<insert id="loginlog" parameterType="loginlog">
 		insert into loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
 	</insert>
-	
-	<select id="users" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
-		from coopusers 
+	 <select id="users" resultType="map" parameterType="map">
+		select u.idx, u.c_name, u.c_name2, u.c_subname, u.c_subcode, u.id, u.pwd, u.c_position, u.name, u.reg_date, u.end_date, u.phone, u.del_yn, u.c_M, 
+		u.grade, u.user_code
+		from coopusers u
 	</select>
+	 
 	<select id="users1" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where hspt_name = "효사랑전주요양병원"
 	</select>
 	<select id="users1pwd" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where hspt_name = "효사랑전주요양병원" order by pwd asc
 	</select>
 	
 	<select id="users2" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where hspt_name = "효사랑가족요양병원"
 	</select>
 	<select id="users2pwd" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where hspt_name = "효사랑가족요양병원" order by pwd asc
 	</select>
 	
 	<select id="users3" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where hspt_name = "가족사랑요양병원"
 	</select>
 	<select id="users3pwd" resultType="map" parameterType="map">
-		select idx, id, pwd, name, reg_date, end_date, c_name, c_name2, c_subcode, c_subname, c_position, c_B, c_M, del_yn, down, none, user_code
+		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
 		from coopusers where hspt_name = "가족사랑요양병원" order by pwd asc
 	</select>
 	
@@ -174,4 +175,107 @@
 		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from answer
 	</select>
 	 -->
+	 
+	 <!-- 평가 대상자 쿼리 -->
+	 
+	 <select id="coopevaluationtarget" resultType="cusers">
+	 	select u.idx, u.c_name, u.c_name2, u.c_subname, u.c_subcode, u.id, u.pwd, u.c_position, u.name, u.reg_date, u.end_date, u.phone, u.del_yn, u.c_M, 
+			u.grade, u.user_code
+			FROM coopusers u
+			where u.del_yn = 'N' and 
+	    
+	    <choose>
+	    	<!-- 등급이 1인 직원 (대표이사) -->
+	    	<when test="grade == 1">
+	    	u.c_name = '정성모아' and u.c_subcode = 'AC0'
+	    	</when>
+	    	<!-- 등급이 2인 직원 (부장급) -->
+	    	<when test="grade == 2">
+	    		<choose>
+	    			<!-- 1병원 -->
+	    			<when test='cname2.equals("효사랑전주요양병원")'>
+	    			u.c_name = '정성모아' and u.c_name2 = '효사랑전주요양병원' and u.grade = 6
+					or
+					u.del_yn = 'N' and u.c_name = '사랑모아' and u.c_name2 = '효사랑전주요양병원' and u.grade = 6
+						    			
+	    			</when>
+	    			<!-- 2병원 -->
+	    			<when test='cname2.equals("효사랑가족요양병원")'>
+	    			u.c_name = '정성모아' and u.c_name2 = '효사랑가족요양병원' and u.grade = 6
+	    			</when>
+	    			<!-- 3병원 -->
+	    			<when test='cname2.equals("가족사랑요양병원")'>
+	    			u.c_name = '정성모아' and u.c_name2 = '가족사랑요양병원' and u.grade = 6
+	    			or
+	    			u.del_yn = 'N' and u.c_name = '사랑모아' and u.c_name2 = '가족사랑요양병원' and u.grade = 6
+	    			</when>
+	    		</choose>
+	    	</when>
+	    	<!-- 등급이 3인 직원 (부서장, 상호) -->
+	    	<when test="grade == 3">
+	    		<choose>
+	    			<!-- 변수) 등급 3인 직원 중 상호, 상하 평가 하는 직원 -->
+	    			<!--  -->
+	    			<when test='csubcode.equals("C00")'>
+	    				
+	    			</when>
+	    			<!--  -->
+	    			<when test='csubcode.equals("AD0")'>
+	    				
+	    			</when>
+	    			<!-- 변수) 운영진 -->
+	    			<otherwise>
+	    				u.c_name = #{cname1} and u.grade = 5
+	    			</otherwise>
+	    		</choose>
+	    		
+	    	</when>
+	    	<!-- 등급이 4인 직원 (부서장, 상하) -->
+	    	<when test="grade == 4">
+	    		u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 6
+	    	</when>
+	    	<!-- 등급이 5인 직원 (부서원, 상호) -->
+	    	<when test="grade == 5">
+	    		<choose>
+	    			<!-- 변수) 운영진간 평가 -->
+	    			<when test='management == true'>
+	    			u.c_name = #{cname1} and c_M = 'T'
+	    			</when>
+	    			<when test="">
+	    			u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 5
+		    		or
+		    		u.del_yn = 'N' and u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 3
+	    			</when>
+	    			<otherwise>
+	    			u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 5
+		    		or
+		    		u.del_yn = 'N' and u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 3
+	    			</otherwise>
+	    		</choose>
+	    	</when>
+	    	<otherwise>
+	    		idx = #{idx}
+	    	</otherwise>
+	    </choose>
+	    	
+	 </select>
+	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 </mapper>
