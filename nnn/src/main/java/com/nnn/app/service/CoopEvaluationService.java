@@ -191,12 +191,12 @@ public class CoopEvaluationService {
 //		return evaluationDao.answerselect(map);
 //	}
 //
-//	public int pwdajax(Map<String, Object> map) {
-//		
-//		int flag = 0;
-//		flag = evaluationDao.pwdajax(map);
-//		return flag;
-//	}
+	public int pwdajax(Map<String, Object> map) {
+		
+		int flag = 0;
+		flag = evaluationDao.pwdajax(map);
+		return flag;
+	}
 
 	
 

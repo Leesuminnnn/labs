@@ -28,7 +28,7 @@
 				<input type="radio" name="radio" id="chk_no" <%-- <c:if test="${dbpwdOk == true}">checked</c:if> --%>><label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
 			</li>
 			<li><button>로그인</button></li>
-			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/d/Findpwd'"><small style="cursor:pointer;">비밀번호를 잊으셨나요?</small></li>			
+			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/d/Findpwd'"><p style="cursor:pointer; color: #000099; "><b style="border-bottom: 1px solid;">비밀번호를 잊으셨나요?</b></p></li>			
 		</ul>
 		<div style="display: none;">
 			<ul>
@@ -42,10 +42,10 @@
 			<table style="width:100%; font-weight: bold">
 			<c:forEach items="${notice}" var="n">
 				<tr>
-					<td>
+					<td <c:if test="${n.idx eq '11' }">colspan="2"</c:if>>
 						${n.d2 }
 					</td>
-					<td style="<c:if test="${n.idx eq '10' }">color:red;</c:if>">
+					<td style="<c:if test="${n.idx eq '9' }">color:red;</c:if>">
 						${n.d3 }
 					</td>
 				</tr>

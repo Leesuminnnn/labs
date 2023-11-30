@@ -12,6 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/coopinfocss.css">
 
 <style>
 
@@ -88,24 +89,38 @@ ${info.c_name }
 <div class="targetC_area">
 <table class="targettb_C">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
+		<td class="td1"></td><td class="td8">기관명</td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
+	
 	<c:set var="index1" value="1" />
 	<c:forEach items="${target }" var="t">
 		<c:if test="${t.idx ne info.idx}">
 			<c:if test="${t.c_M eq 'T'}">
 				<tr>
 					<td>${index1 }</td>
+					<td>${t.c_name }</td>
 					<td>${t.c_subname }</td>
 					<td>${t.id }</td>
 					<td>${t.c_position }</td>
 					<td>${t.name }</td>
-					<td>평가하기</td>
-					<td></td>	
-				</tr>			
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
+					<c:if test="${t.idx eq e.d2 and e.ev eq 'E'}">${e.d3 }</c:if></c:forEach>" 
+					data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					평가하기
+					</td>
+					<c:forEach items="${endlist}" var="e">
+						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
+							<c:choose>
+								<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
+									${e.d3 }
+								</c:when>
+							</c:choose>
+					</c:forEach>	
+				</tr>
+				<c:set var="index1" value="${index1 + 1}" />	
 			</c:if>
 		</c:if>
-		<c:set var="index1" value="${index1 + 1}" />
+		
 	</c:forEach>
 </table>
 </div>
@@ -114,12 +129,12 @@ ${info.c_name }
 
 
 <!-- 부서장 -->
-<div style="display:<c:if test="${info.grade ne 5 or info.grade ne 6 }">none</c:if>;">
+<div style="display:<c:if test="${info.grade < 5 or info.id eq '621003'}">none</c:if>;">
 ▶ 부서장 평가
 <div class="targetC_area">
 <table class="targettb_C">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
+		<td class="td1"></td><td class="td8">기관명</td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
 	<c:set var="index2" value="1" />
 	<c:forEach items="${target }" var="t">
@@ -127,16 +142,28 @@ ${info.c_name }
 			<c:if test="${t.grade == 1 or t.grade == 2 or t.grade == 3  }">
 				<tr>
 					<td>${index2 }</td>
+					<td>${t.c_name }</td>
 					<td>${t.c_subname }</td>
 					<td>${t.id }</td>
 					<td>${t.c_position }</td>
 					<td>${t.name }</td>
-					<td>평가하기</td>
-					<td></td>	
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" 
+					data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					평가하기
+					</td>
+					<td>
+						<c:forEach items="${endlist}" var="e">
+							<c:choose>
+								<c:when test="${t.idx eq e.d2 and e.ev eq 'C'}">
+									${e.d3 }
+								</c:when>
+							</c:choose>
+						</c:forEach>
+					</td>
 				</tr>			
+		<c:set var="index2" value="${index2 + 1}" />
 			</c:if>
 		</c:if>
-		<c:set var="index2" value="${index2 + 1}" />
 	</c:forEach>
 </table>
 </div>
@@ -149,28 +176,97 @@ ${info.c_name }
 <div class="targetD_area">
 <table class="targettb_D" style="border:1px solid #000; border-collapse: collapse;">
 	<tr>
-		<td class="td1"></td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
+		<td class="td1"></td><td class="td8">기관명</td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td5">평가진행</td><td class="td7">평가진행률</td>
 	</tr>
 	<c:set var="index3" value="1" />
 	<c:forEach items="${target }" var="t">
 		<c:if test="${t.idx ne info.idx}">
-			<c:if test="${t.grade eq 5 or t.grade eq 6}">
-				<c:if test="${t.c_M ne 'T' }">
+			<c:choose>
+				<c:when test="${info.grade eq 1 }">
+				<!-- 대표이사의 경우 -->
 					<tr>
 						<td>${index3 }</td>
+						<td>${t.c_name }</td>
 						<td>${t.c_subname }</td>
 						<td>${t.id }</td>
 						<td>${t.c_position }</td>
 						<td>${t.name }</td>
-						<td>평가하기</td>
-						<td></td>	
-					</tr>		
-				</c:if>	
-			</c:if>
+						<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
+						<c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+						data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+						평가하기
+						</td>
+						<td>
+							<c:forEach items="${endlist}" var="e">
+								<c:choose>
+									<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
+										${e.d3 }
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</td>
+					</tr>	
+			<c:set var="index3" value="${index3 + 1}" />
+				</c:when>
+				<c:when test="${info.id eq 722000}">
+				<!-- 대표이사의 경우 -->
+					<tr>
+						<td>${index3 }</td>
+						<td>${t.c_name }</td>
+						<td>${t.c_subname }</td>
+						<td>${t.id }</td>
+						<td>${t.c_position }</td>
+						<td>${t.name }</td>
+						<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
+						<c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+						data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+						평가하기
+						</td>
+						<td>
+							<c:forEach items="${endlist}" var="e">
+								<c:choose>
+									<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
+										${e.d3 }
+									</c:when>
+								</c:choose>
+							</c:forEach>
+						</td>
+					</tr>	
+			<c:set var="index3" value="${index3 + 1}" />
+				</c:when>
+				<c:otherwise>
+					<c:if test="${t.grade eq 5 or t.grade eq 6}">
+						<c:if test="${t.c_M ne 'T' }">
+							<tr>
+								<td>${index3 }</td>
+								<td>${t.c_name }</td>
+								<td>${t.c_subname }</td>
+								<td>${t.id }</td>
+								<td>${t.c_position }</td>
+								<td>${t.name }</td>
+								<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
+								<c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+								data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+								평가하기
+								</td>
+								<td>
+									<c:forEach items="${endlist}" var="e">
+										<c:choose>
+											<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
+												${e.d3 }
+											</c:when>
+										</c:choose>
+									</c:forEach>
+								</td>
+							</tr>		
+							<c:set var="index3" value="${index3 + 1}" />
+						</c:if>	
+					</c:if>
+				</c:otherwise>
+			</c:choose>
 		</c:if>
-		<c:set var="index3" value="${index3 + 1}" />
-	</c:forEach>
-</table>
+	</c:forEach> 
+</table> 
 </div>
 </div>
 
@@ -205,11 +301,13 @@ function formgo(element) {
 	var eidx = element.getAttribute("data-e-idx");
 	var link = "${pageContext.request.contextPath}/d/Form/${info.idx}/"+targetidx+"/"+ev
 	var d3 = element.getAttribute("data-d3");
-	
-	
+	window.location.replace(link);
+	// 뒤로가기 버튼 비활성화
+	disableBackButton();
+	/* 
 	if(date == 1){
 		console.log("아직안넘음");
-		alert("12월 1일 오픈 예정입니다. \n직원평가기간은 12월1일(금)~12월5일(화) 입니다.");
+		alert("12월 6일 오픈 예정입니다. \n직원평가기간은 12월6일(수)~12월8일(금) 입니다.");
 	}else {
 		console.log("넘음");
 		if(d3 === '평가완료'){
@@ -221,7 +319,7 @@ function formgo(element) {
 			// 뒤로가기 버튼 비활성화
 			disableBackButton();
 		}
-	}
+	} */
 }
 
 </script>

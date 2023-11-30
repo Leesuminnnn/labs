@@ -42,7 +42,7 @@
 				<div class="nav__list">
 				
 					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="userall" data-content="all">
-						<span class="nav_name">1,2,3병원 직원명부 Total</span>
+						<span class="nav_name">계열사 직원명부 Total</span>
 					</a>
 					<%-- 
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user1" data-content="content1">
@@ -75,10 +75,10 @@
 					</a>
 					 --%>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
-					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="setting" data-content="setting">
+					<!-- <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="setting" data-content="setting">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;설정관리</span>
-					</a>
+					</a> -->
 				</div>
             </div>
         </nav>

@@ -270,7 +270,7 @@ public class CoopEvaluationController {
 		mv.addObject("now", now);
 		System.out.println(now);
 		// 비교할 특정 날짜 설정 (예: 2023년 1월 1일)
-        LocalDateTime specificDate = LocalDateTime.of(2023, Month.DECEMBER, 1, 0, 0);
+        LocalDateTime specificDate = LocalDateTime.of(2023, Month.DECEMBER, 6, 0, 0);
         // 현재 시간이 특정 날짜를 넘었는지 확인
         if (now.isAfter(specificDate)) {
         	// 넘김
@@ -349,34 +349,34 @@ public class CoopEvaluationController {
 		
 		
 	}
-//	@RequestMapping(value="pwdActAjax/{id}")
-//	public String pwdActAjax(CoopusersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
-////		// 암호화
-////		SHA256 sha256 = new SHA256();
-////		//비밀번호
-////        String password = vo.getPwd();
-////        //SHA256으로 암호화된 비밀번호
-////        String cryptogram = sha256.encrypt(password);
-////        
-////        System.out.println(cryptogram);
-////		//담은 변수를 DB에 넘겨준다.
-////		vo.setPwd(cryptogram);
-////		System.out.println("암호화된 페스워드 : "+cryptogram);
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-////		map.put("pwd", cryptogram);
-//		map.put("pwd", vo.getPwd());
-//		map.put("id", vo.getId());
-//		
-//		int flag = coopevaluationService.pwdajax(map);
-//		
-//		if(flag >= 1) {
-//			System.out.println(flag);
-//			return "alert5";
-//		} else {
-//			return "alert5";
-//		}
-//	}
+	@RequestMapping(value="pwdActAjax/{id}")
+	public String pwdActAjax(CoopusersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+//		// 암호화
+//		SHA256 sha256 = new SHA256();
+//		//비밀번호
+//        String password = vo.getPwd();
+//        //SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        
+//        System.out.println(cryptogram);
+//		//담은 변수를 DB에 넘겨준다.
+//		vo.setPwd(cryptogram);
+//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("pwd", cryptogram);
+		map.put("pwd", vo.getPwd());
+		map.put("id", vo.getId());
+		
+		int flag = coopevaluationService.pwdajax(map);
+		
+		if(flag >= 1) {
+			System.out.println(flag);
+			return "alert5";
+		} else {
+			return "alert5";
+		}
+	}
 	@RequestMapping(value="Form/{idx}/{idx2}/{team}")
 	public ModelAndView form(ModelAndView mv, HttpSession session, 
 			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
@@ -391,8 +391,8 @@ public class CoopEvaluationController {
 		System.out.println(team);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
 		mv.addObject("target", coopevaluationService.info(idx2));
-		// 진료부, 경혁팀, 부서장 영역
-		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+		// 운영진, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C") || team.equals("E")) {
 			String ev = "AA";
 			System.out.println("ev : " + ev);
 			map.put("d2",ev);
@@ -436,7 +436,7 @@ public class CoopEvaluationController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		
-//		String u1 = coopevaluationService.info(infoidx).getHspt_name();		// 기관명
+		String u1 = coopevaluationService.info(infoidx).getC_name();		// 기관명
 		String u2 = coopevaluationService.info(infoidx).getId();				// 평가자 사번
 		String t1 = coopevaluationService.info(targetidx).getId();			// 평가대상자 사번
 	
@@ -477,7 +477,7 @@ public class CoopEvaluationController {
 		System.out.println(e31);
 		System.out.println(f32);
 		
-//		map.put("u1", u1);
+		map.put("u1", u1);
 		map.put("u2", u2);
 		map.put("t1", t1);
 		map.put("team", team);

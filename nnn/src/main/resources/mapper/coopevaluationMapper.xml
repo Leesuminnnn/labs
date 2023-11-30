@@ -188,6 +188,8 @@
 	    	<!-- 등급이 1인 직원 (대표이사) -->
 	    	<when test="grade == 1">
 	    	u.c_name = '정성모아' and u.c_subcode = 'AC0'
+	    	or
+			del_yn = 'N' and c_name = '정성모아' and c_name2 = '효사랑가족요양병원';
 	    	</when>
 	    	<!-- 등급이 2인 직원 (부장급) -->
 	    	<when test="grade == 2">
@@ -201,7 +203,10 @@
 	    			</when>
 	    			<!-- 2병원 -->
 	    			<when test='cname2.equals("효사랑가족요양병원")'>
-	    			u.c_name = '정성모아' and u.c_name2 = '효사랑가족요양병원' and u.grade = 6
+	    			<![CDATA[
+	    			u.c_name = '정성모아' and u.c_name2 = '효사랑가족요양병원' and u.grade = 6 and u.c_subname != '정성모아'
+	    			
+	    			]]>
 	    			</when>
 	    			<!-- 3병원 -->
 	    			<when test='cname2.equals("가족사랑요양병원")'>
@@ -217,13 +222,30 @@
 	    			<!-- 변수) 등급 3인 직원 중 상호, 상하 평가 하는 직원 -->
 	    			<!--  -->
 	    			<when test='csubcode.equals("C00")'>
-	    				
+	    				u.c_name2 = #{cname2} and u.c_subcode like 'C0%'
 	    			</when>
 	    			<!--  -->
 	    			<when test='csubcode.equals("AD0")'>
-	    				
+	    				u.c_subcode like 'AD0'
 	    			</when>
 	    			<!-- 변수) 운영진 -->
+	    			<when test='csubcode.equals("AG0")'>
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = #{csubcode}
+	    				or
+	    				u.c_name = #{cname1} and u.c_M = 'T'
+	    			</when>
+	    			<when test='csubcode.equals("AH0")'>
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = #{csubcode}
+	    				or
+	    				u.c_name = #{cname1} and u.c_M = 'T'
+	    			</when>
+	    			<when test='csubcode.equals("AI0")'>
+	    				<![CDATA[
+		    				u.c_subcode = #{csubcode} and u.grade = 5
+	    			
+	    				]]>
+	    				
+	    			</when>
 	    			<otherwise>
 	    				u.c_name = #{cname1} and u.grade = 5
 	    			</otherwise>
@@ -232,7 +254,14 @@
 	    	</when>
 	    	<!-- 등급이 4인 직원 (부서장, 상하) -->
 	    	<when test="grade == 4">
-	    		u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 6
+	    		<choose>
+	    			<when test='csubcode.equals("AI0")'>
+	    				u.c_subcode = #{csubcode}
+	    			</when>
+	    			<otherwise>
+						u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 6
+	    			</otherwise>
+	    		</choose>
 	    	</when>
 	    	<!-- 등급이 5인 직원 (부서원, 상호) -->
 	    	<when test="grade == 5">
@@ -241,10 +270,10 @@
 	    			<when test='management == true'>
 	    			u.c_name = #{cname1} and c_M = 'T'
 	    			</when>
-	    			<when test="">
-	    			u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 5
+	    			<when test='csubcode.equals("AD0")'>
+	    			u.c_subcode = #{csubcode} and u.grade = 5
 		    		or
-		    		u.del_yn = 'N' and u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 3
+		    		u.del_yn = 'N' and u.c_subcode = #{csubcode} and u.grade = 3
 	    			</when>
 	    			<otherwise>
 	    			u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 5

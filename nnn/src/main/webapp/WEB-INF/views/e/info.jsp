@@ -118,19 +118,20 @@
 						${t.hspt_position }
 					</td>
 					<td>${t.name}</td>
-					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+					<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
+					<c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+					data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 					평가하기
 					</td>
 					<td>
-<c:forEach items="${endlist}" var="e">
-						
+					<c:forEach items="${endlist}" var="e">
 						<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 							<c:choose>
 								<c:when test="${t.idx eq e.d2 and e.ev eq 'D'}">
 									${e.d3 }
 								</c:when>
 							</c:choose>
-</c:forEach>
+					</c:forEach>
 						
 					</td>
 				</tr>
@@ -278,7 +279,8 @@
 			${t.hspt_position }
 		</td>
 		<td>${t.name}</td>
-		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+		<td class="form_go" onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'C'}">${e.d3 }</c:if></c:forEach>" 
+		data-ev="C" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 		평가하기
 		</td>
 		<td>
@@ -451,7 +453,9 @@
 				${t.hspt_position }
 			</td>
 			<td>${t.name}</td>
-			<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+			<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
+			<c:if test="${t.idx eq e.d2 and e.ev eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+			data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 			평가하기
 			</td>
 			<td>

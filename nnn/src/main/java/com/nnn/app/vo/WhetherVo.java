@@ -23,7 +23,8 @@ ev varchar(10) null comment '문제유형'
 @Setter
 @ToString
 public class WhetherVo {
-
+	
+	private int idx;
 	private int d1;
 	private int d2;
 	private String d3;

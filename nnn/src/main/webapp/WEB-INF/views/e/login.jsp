@@ -24,7 +24,7 @@
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
 			<li><input type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호입력"></li>
 			<li style="color: red; font-size:12px;"><b>※ 개인 비밀번호를 설정 하신 후 로그인시 아래의 사번/비밀번호 체크후 사번과 비밀번호를 입력부탁드립니다.</b></li>
-			<li style="display: flex; flex-wrap: wrap;"><input type="radio" name="radio" id="chk_name" ><label style="cursor:pointer;" for="chk_name">사번/이름<b style="color: red">(비밀번호 설정 전)&nbsp;&nbsp;</b></label>
+			<li style="display: flex; flex-wrap: wrap;"><input type="radio" name="radio" id="chk_name" >
 				<input type="radio" name="radio" id="chk_no" checked><label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
 			</li>
 			<li><button>로그인</button></li>
@@ -32,7 +32,7 @@
 		</ul>
 		<div style="display: none;">
 			<ul>
-				<li>회원가입</li>				
+				<li>회원가입</li>
 			</ul>
 		</div>
 	</div>
@@ -99,7 +99,7 @@ $(document).ready(function () {
 });
 
 $("#manual").click(function(){
-	var url = "https://docs.google.com/presentation/d/e/2PACX-1vQDDbRPv-8YJWGIav7J1ekxztcSnr4lRNrA-kRkQIMMsf9tiIQK6Wldp7xBCgEs2JVMa6rMCSj2ZA50/pub?start=false&loop=false&delayms=3000&slide=id.p";
+	var url = "https://docs.google.com/presentation/d/e/2PACX-1vSpjrgtqmbGU1w_ZaCkBMbIYB_t-CEOWK10c6muP81HiYiAbFMnymGslgVhu5e36WZ62n3GpCX6hR9A/pub?start=false&loop=false&delayms=3000";
 	window.open(url);
 })
 
