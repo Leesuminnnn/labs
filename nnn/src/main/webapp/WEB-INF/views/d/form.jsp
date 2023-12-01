@@ -24,6 +24,14 @@ td {
 <form id="frm" onsubmit="return false;">
 	<div class="header">
 		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
+			<c:if test="${ sessionScope.loginmember eq '12365478' or sessionScope.loginmember eq '1' or empty sessionScope.loginmember }">
+				<div style="position:absolute; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border: 1px solid; border-radius: 30px; cursor: pointer;"
+					onclick="location.href='${pageContext.request.contextPath}/d/admin'">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+					    <path d="M21 11H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H21v-2z"/>
+					</svg>
+				</div>
+			</c:if>
 			<%-- <c:choose>
 				<c:when test="${info.hspt_name eq '효사랑전주요양병원'}">
 					<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
@@ -229,7 +237,7 @@ $("#end").click(function() {
 	
 	// 문제유형으로 나누기
 	// A, B, C 인 경우와 D인 경우
-	if(ev == 'A' || ev == 'B' || ev == 'C' || ev == 'E'){
+	if(ev == 'A' || ev == 'B' || ev == 'C'){
 		if(!a1 || !a2 || !b3 || !b4 || !c5 || !c6 || !d7 || !d8 || !e9 || !e10 || $.trim(f11) === ''){
 			console.log(a1);console.log(a2);console.log(b3);console.log(b4);console.log(c5);console.log(c6);
 			console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);

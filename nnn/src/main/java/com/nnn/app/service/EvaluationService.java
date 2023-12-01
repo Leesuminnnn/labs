@@ -198,7 +198,37 @@ public class EvaluationService {
 		return flag;
 	}
 
-	
+	public int targetsum(Map<String, Object> map) {
+		return evaluationDao.targetsum(map);
+	}
 
+	public int answersum(Map<String, Object> map) {
+		return evaluationDao.answersum(map);
+	}
+
+	public int targetsum1(Map<String, Object> map) {
+		return evaluationDao.targetsum1(map);
+	}
+
+	public int answersum1(Map<String, Object> map) {
+		return evaluationDao.answersum1(map);
+	}
+
+	public int targetsum2(Map<String, Object> map) {
+		return evaluationDao.targetsum2(map);
+	}
+
+	public int answersum2(Map<String, Object> map) {
+		return evaluationDao.answersum2(map);
+	}
+	
+	public int targetsum3(Map<String, Object> map) {
+		return evaluationDao.targetsum3(map);
+	}
+
+	public int answersum3(Map<String, Object> map) {
+		return evaluationDao.answersum3(map);
+	}
+	
 	
 }

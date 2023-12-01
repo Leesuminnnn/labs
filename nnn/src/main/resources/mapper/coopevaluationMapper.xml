@@ -110,11 +110,8 @@
 	<select id="log" resultType="map" parameterType="map">
 		select * from loginlog where id = #{id} order by d2 desc;
 	</select>
-	<select id="ph" resultType="map" parameterType="map">
-		select * from user__phone
-	</select>
 	<select id="phOne" resultType="int" parameterType="map">
-		select count(*) from user__phone where id = #{id} and number = #{ph}
+		select count(*) from coopusers where id = #{id} and phone = #{ph}
 	</select>
 	<!-- 비밀번호 초기화 -->
 	<!-- 

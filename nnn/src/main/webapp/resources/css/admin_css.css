@@ -72,7 +72,7 @@ a {
     height: calc(100% - 64.14px - 80px);
     background-color: var(--bg-color);
     color: var(--white-color);
-    padding: 1.5rem 1.5rem 10px;	/* 위, 오른쪽 왼쪽, 아래 순서 */
+    padding: 0.5rem 0.7rem 10px;	/* 위, 오른쪽 왼쪽, 아래 순서 */
     transition: .5s;
     z-index: var(--z-fixed);
     
@@ -88,6 +88,9 @@ a {
 	overflow-y: scroll;
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
 	scrollbar-width: none; /* for Firefox */
+	background: #19375f;
+    border-radius: 10px;
+    padding: 0px;
 }
 
 .nav__brand {
@@ -175,6 +178,7 @@ a {
 /* Active links menu */
 .active {
     background-color: var(--first-color);
+    margin: 0.4rem;
 }
 
 /* COLLAPSE */
@@ -260,8 +264,12 @@ td {
     background-color: #f0f0f0;
 }
 .scroll-container {
-      /* overflow-y: overlay; */
-      /* height: 89vh; */
-      position: relative;
-    }
+	/* overflow-y: overlay; */
+	/* height: 89vh; */
+	position: relative;
+}
+main {
+	font-size: 20px;
+}
+  
 

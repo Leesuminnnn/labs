@@ -25,6 +25,14 @@ td {
 <form action="${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}">
 	<div class="header">
 		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
+			<c:if test="${ sessionScope.loginmember eq '12365478' or sessionScope.loginmember eq '1' or empty sessionScope.loginmember }">
+				<div style="position:absolute; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border: 1px solid; border-radius: 30px; cursor: pointer;"
+					onclick="location.href='${pageContext.request.contextPath}/d/admin'">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+					    <path d="M21 11H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H21v-2z"/>
+					</svg>
+				</div>
+			</c:if>
 			<%-- <c:choose>
 				<c:when test="${info.hspt_name eq '효사랑전주요양병원'}">
 					<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
@@ -36,7 +44,7 @@ td {
 					<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
 				</c:when>
 			</c:choose> --%>${info.c_name }
-			<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/e/Logout">로그아웃</a>
+			<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/d/Logout">로그아웃</a>
 		</div>
 	</div>
 	<div class="section">
@@ -113,7 +121,7 @@ td {
 						<p class="ps">효사랑가족요양병원장&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;김정연
 					</c:when>
 					<c:when test="${info.c_name == '핵심인재개발원'}">
-						<p class="ps">핵심인재개발원 대표이사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;김정연
+						<p class="ps">핵심인재개발원 대표이사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박진만
 					</c:when>
 					<c:when test="${info.c_name == '(주)조이'}">
 						<p class="ps">(주)조이 대표이사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;박진상&nbsp;김정연
@@ -130,7 +138,7 @@ td {
 				<p class="ps2">※ 모든 평가가 완료되지 않으신 직원은 아래 "평가대상자 목록 돌아가기" 버튼을 클릭하여, 평가를 계속 진행해주시기 바랍니다.
 				<br><br><br>
 				<!-- <div onclick="back()" style="border: 1px solid #000; padding: 15px; background-color: #D9EAD3;"></div> -->
-				<a style="border: 1px solid #000; padding: 15px; margin-bottom: 15px;; background-color: #D9EAD3; display: inline-block;" href="${pageContext.request.contextPath}/e/Info/${info.idx}">평가대상자 목록 돌아가기</a>
+				<a style="border: 1px solid #000; padding: 15px; margin-bottom: 15px;; background-color: #D9EAD3; display: inline-block;" href="${pageContext.request.contextPath}/d/Info/${info.idx}">평가대상자 목록 돌아가기</a>
 				</div>
 				</div>
 	</div>
@@ -146,7 +154,7 @@ td {
 <script type="text/javascript">
 function back() {
 	var infoidx = ${info.idx};
-	var link = "${pageContext.request.contextPath}/e/Info/"+infoidx;
+	var link = "${pageContext.request.contextPath}/d/Info/"+infoidx;
 	
 	// 링크 이동
 	location.replace(link);

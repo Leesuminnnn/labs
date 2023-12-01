@@ -116,7 +116,7 @@ $(document).ready(function () {
 //			console.log(ph);
 		}
 		$.ajax({
-			url: '${pageContext.request.contextPath}/t/FindpwdAjax',
+			url: '${pageContext.request.contextPath}/e/FindpwdAjax',
 			type: 'post',
 			dataType: 'json',
 			data: {

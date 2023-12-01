@@ -3069,4 +3069,30 @@
 	<select id="answerselect" parameterType="map" resultType="map">
 		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from answer
 	</select>
+	
+	<select id="targetsum" parameterType="map" resultType="int">
+		select sum(target) from target where target
+	</select>
+	<select id="answersum" parameterType="map" resultType="int">
+		select count(*) from answer
+	</select>
+	
+	<select id="targetsum1" parameterType="map" resultType="int">
+		select sum(target) from target where id like '1%' and id != '12365478'
+	</select>
+	<select id="targetsum2" parameterType="map" resultType="int">
+		select sum(target) from target where id like '2%' or id like '5%'
+	</select>
+	<select id="targetsum3" parameterType="map" resultType="int">
+		select sum(target) from target where id like '3%'
+	</select>
+	<select id="answersum1" parameterType="map" resultType="int">
+		select count(*) from answer where u2 like '1%'
+	</select>
+	<select id="answersum2" parameterType="map" resultType="int">
+		select count(*) from answer where u2 like '2%' or u2 like '5%'
+	</select>
+	<select id="answersum3" parameterType="map" resultType="int">
+		select count(*) from answer where u2 like '3%'
+	</select>
 </mapper>

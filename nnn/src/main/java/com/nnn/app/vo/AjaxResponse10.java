@@ -8,12 +8,11 @@ import lombok.ToString;
 
 @Getter
 @Setter
-public class AjaxResponse4 {
+public class AjaxResponse10 {
 
 	private String result;
-	private List<UsersVo> usersall;
-	private List<UserPh> userphList;
-	
+	private List<CoopusersVo> users;
+	private String userph;
 	
 	
 	

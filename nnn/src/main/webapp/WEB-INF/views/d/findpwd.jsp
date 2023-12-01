@@ -113,7 +113,7 @@ $(document).ready(function () {
 			var ph3 = ph.substring(7);
 //			console.log(ph3);
 			ph = ph1+"-"+ph2+"-"+ph3;
-//			console.log(ph);
+			console.log(ph);
 		}
 		$.ajax({
 			url: '${pageContext.request.contextPath}/d/FindpwdAjax',

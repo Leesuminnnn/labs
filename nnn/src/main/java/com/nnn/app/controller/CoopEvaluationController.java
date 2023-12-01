@@ -20,22 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.CoopEvaluationService;
-import com.nnn.app.vo.AjaxResponse4;
-import com.nnn.app.vo.AjaxResponse5;
-import com.nnn.app.vo.AjaxResponse6;
-import com.nnn.app.vo.AjaxResponse7;
+import com.nnn.app.vo.AjaxResponse10;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.CoopusersVo;
 import com.nnn.app.vo.EvaluationVo;
-import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
-import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
+import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
 @Controller
@@ -311,6 +305,32 @@ public class CoopEvaluationController {
 		mv.setViewName("d/findpwd");
 		return mv;
 	}
+	
+	// 비밀번호 찾기 전 회원정보 일치하는지 ajax
+	@ResponseBody
+	@RequestMapping(value="FindpwdAjax")
+	public AjaxResponse10 per1(HttpSession session, HttpServletRequest request, @RequestParam("id")String id, @RequestParam("ph")String ph) throws Exception {
+		AjaxResponse10 response = new AjaxResponse10();
+		response.setResult("N");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("ph", ph);
+		System.out.println(id);
+		System.out.println(ph);
+//			List<UsersVo> list = evaluationService.users1(map);
+		
+		int phOne = coopevaluationService.phOne(map);
+		
+		if(phOne == 1) {
+			response.setResult("Y");
+		}else {
+			response.setResult("N");
+		}
+		
+		
+		
+		return response;
+	}
 	@RequestMapping(value="pwdAction/{idx}")
 	public String pwdAction(CoopusersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
@@ -351,21 +371,21 @@ public class CoopEvaluationController {
 	}
 	@RequestMapping(value="pwdActAjax/{id}")
 	public String pwdActAjax(CoopusersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
-//		// 암호화
-//		SHA256 sha256 = new SHA256();
-//		//비밀번호
-//        String password = vo.getPwd();
-//        //SHA256으로 암호화된 비밀번호
-//        String cryptogram = sha256.encrypt(password);
-//        
-//        System.out.println(cryptogram);
-//		//담은 변수를 DB에 넘겨준다.
-//		vo.setPwd(cryptogram);
-//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		// 암호화
+		SHA256 sha256 = new SHA256();
+		//비밀번호
+        String password = vo.getPwd();
+        //SHA256으로 암호화된 비밀번호
+        String cryptogram = sha256.encrypt(password);
+        
+        System.out.println(cryptogram);
+		//담은 변수를 DB에 넘겨준다.
+		vo.setPwd(cryptogram);
+		System.out.println("암호화된 페스워드 : "+cryptogram);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("pwd", cryptogram);
-		map.put("pwd", vo.getPwd());
+		map.put("pwd", cryptogram);
+//		map.put("pwd", vo.getPwd());
 		map.put("id", vo.getId());
 		
 		int flag = coopevaluationService.pwdajax(map);
@@ -493,7 +513,7 @@ public class CoopEvaluationController {
 			map.put("d1", d1);
 		}
 		// 부서원 영역
-		else if (team.equals("D")) {
+		else if (team.equals("D") || team.equals("E")) {
 			String ev = "AB";
 			System.out.println("ev : " + ev);
 			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+c23+","+c24+
@@ -640,9 +660,9 @@ public class CoopEvaluationController {
 	
 //	@ResponseBody
 //	@RequestMapping(value="pwdreset/{id}")
-//	public AjaxResponse6 pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		AjaxResponse6 response = new AjaxResponse6();
-//		
+//	public AjaxResponse pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse response = new AjaxResponse6();
+//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("id", id);
 //		int flag = evaluationService.pwdreset(map);
@@ -675,9 +695,9 @@ public class CoopEvaluationController {
 //	
 //	@ResponseBody
 //	@RequestMapping(value="pwdreset1/{id}")
-//	public AjaxResponse6 pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		AjaxResponse6 response = new AjaxResponse6();
-//		
+//	public AjaxResponse pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse response = new AjaxResponse6();
+//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("id", id);
 //		int flag = coopevaluationService.pwdreset1(map);
@@ -692,9 +712,9 @@ public class CoopEvaluationController {
 //	}
 //	@ResponseBody
 //	@RequestMapping(value="pwdreset2/{id}")
-//	public AjaxResponse6 pwdreset2(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		AjaxResponse6 response = new AjaxResponse6();
-//		
+//	public AjaxResponse pwdreset2(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse response = new AjaxResponse6();
+//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("id", id);
 //		int flag = coopevaluationService.pwdreset2(map);
@@ -709,9 +729,9 @@ public class CoopEvaluationController {
 //	}
 //	@ResponseBody
 //	@RequestMapping(value="pwdreset3/{id}")
-//	public AjaxResponse6 pwdreset3(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		AjaxResponse6 response = new AjaxResponse6();
-//		
+//	public AjaxResponse pwdreset3(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+//		AjaxResponse response = new AjaxResponse6();
+//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		map.put("id", id);
 //		int flag = coopevaluationService.pwdreset3(map);
@@ -727,8 +747,9 @@ public class CoopEvaluationController {
 //	
 //	@ResponseBody
 //	@RequestMapping(value="usersAll")
-//	public AjaxResponse4 usersall(HttpSession session, HttpServletRequest request) throws Exception {
-//		AjaxResponse4 response = new AjaxResponse4();
+//	public AjaxResponse usersall(HttpSession session, HttpServletRequest request) throws Exception {
+//		AjaxResponse response = new AjaxResponse4();
+//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");		
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users(map);
@@ -744,8 +765,9 @@ public class CoopEvaluationController {
 //	
 //	@ResponseBody
 //	@RequestMapping(value="users1")
-//	public AjaxResponse5 users1(HttpSession session, HttpServletRequest request, Model md) throws Exception {
-//		AjaxResponse5 response = new AjaxResponse5();
+//	public AjaxResponse users1(HttpSession session, HttpServletRequest request, Model md) throws Exception {
+//		AjaxResponse response = new AjaxResponse5();
+//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");		
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users1(map);
@@ -766,6 +788,7 @@ public class CoopEvaluationController {
 //	@RequestMapping(value="users2")
 //	public AjaxResponse5 users2(HttpSession session, HttpServletRequest request) throws Exception {
 //		AjaxResponse5 response = new AjaxResponse5();
+	//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");		
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users2(map);
@@ -783,6 +806,7 @@ public class CoopEvaluationController {
 //	@RequestMapping(value="users3")
 //	public AjaxResponse5 users3(HttpSession session, HttpServletRequest request) throws Exception {
 //		AjaxResponse5 response = new AjaxResponse5();
+	//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");		
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users3(map);
@@ -802,6 +826,7 @@ public class CoopEvaluationController {
 //	@RequestMapping(value="perall")
 //	public AjaxResponse7 perall(HttpSession session, HttpServletRequest request) throws Exception {
 //		AjaxResponse7 response = new AjaxResponse7();
+	//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users(map);
@@ -820,6 +845,7 @@ public class CoopEvaluationController {
 //	@RequestMapping(value="per1")
 //	public AjaxResponse7 per1(HttpSession session, HttpServletRequest request) throws Exception {
 //		AjaxResponse7 response = new AjaxResponse7();
+	//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users1(map);
@@ -836,6 +862,7 @@ public class CoopEvaluationController {
 //	@RequestMapping(value="per2")
 //	public AjaxResponse7 per2(HttpSession session, HttpServletRequest request) throws Exception {
 //		AjaxResponse7 response = new AjaxResponse7();
+	//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users2(map);
@@ -852,6 +879,7 @@ public class CoopEvaluationController {
 //	@RequestMapping(value="per3")
 //	public AjaxResponse7 per3(HttpSession session, HttpServletRequest request) throws Exception {
 //		AjaxResponse7 response = new AjaxResponse7();
+	//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
 //		response.setResult("Y");		
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		List<CoopusersVo> list = coopevaluationService.users3(map);

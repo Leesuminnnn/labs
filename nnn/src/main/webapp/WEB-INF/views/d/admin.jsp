@@ -99,7 +99,7 @@
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 		<table style="">
 			<tr>
-				<td>idx</td><td>기관명</td><td>소속기관명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>핸드폰번호</td>
+				<td>idx</td><td>기관명</td><td>소속기관명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>핸드폰번호</td><td>비밀번호초기화</td>
 			</tr>
 		
 			<c:forEach items="${users }" var="u">
@@ -110,7 +110,7 @@
 						<td>${u.c_name2 }</td>
 						<td>${u.c_subname }</td>
 						<td>${u.id }</td>
-						<td>${u.hspt_position }</td>
+						<td>${u.c_position }</td>
 						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/d/Info/${u.idx}'">${u.name }</td>
 						<td>
 							${u.phone }
@@ -183,9 +183,9 @@ function pwdreset(element){
 	if(prmpwd == '123qwe' || prmpwd == '123ㅂㅈㄷ'){
 		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
 		
-		frm.attr("action","${pageContext.request.contextPath}/e/pwdreset/"+id).submit();
+		frm.attr("action","${pageContext.request.contextPath}/d/pwdreset/"+id).submit();
 		/* $.ajax({
-			url: '${pageContext.request.contextPath}/e/pwdreset/'+id,
+			url: '${pageContext.request.contextPath}/d/pwdreset/'+id,
 			type: 'post',
 			dataType: 'json',
 			success: function(response){

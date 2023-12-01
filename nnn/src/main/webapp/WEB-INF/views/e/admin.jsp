@@ -761,6 +761,8 @@ function perall(contentId) {
 	 				var listall = response.usersall;
 	 				var target = response.target;
 	 				var answer = response.answer;
+	 				var targetsum = response.targetsum;
+	 				var answersum = response.answersum;
 	 				
 	 				mainContent.innerHTML = ''; // 기존 내용을 지우고
 	 				var dv = document.createElement("div");
@@ -773,7 +775,7 @@ function perall(contentId) {
 	 				var maintr1 = document.createElement("TR");
 	 				var maintd1 = document.createElement("TD");
 	 				maintd1.textContent = "평가자정보";
-	 				maintd1.setAttribute("colspan","5");
+	 				maintd1.setAttribute("colspan","4");
 	 				var maintd2 = document.createElement("TD");
 	 				maintd2.textContent = "평가대상자수";
 	 				maintd2.setAttribute("rowspan","2");
@@ -804,6 +806,24 @@ function perall(contentId) {
 					var maintd12 = document.createElement("TD");
 					maintd12.textContent = "사원명";
 					
+					var maintr3 = document.createElement("TR");
+					maintr3.setAttribute("style","width: 195px; background:#00A8E4;");
+					var maintd13 = document.createElement("TD");
+					maintd13.setAttribute("colspan","4");
+					maintd13.textContent = "전 직원 정보";
+					
+					var maintd14 = document.createElement("TD");	// 대상자수
+					maintd14.textContent = targetsum;
+					
+					var maintd15 = document.createElement("TD");	// 평가 결과수
+					maintd15.textContent = answersum;
+					
+					var maintd16 = document.createElement("TD");
+					var percentageall =  (answersum / targetsum) * 100;
+					maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
+					
+					var maintd17 = document.createElement("TD");
+					maintd17.textContent = "-"
 	 				var tbody = document.createElement("TBODY");
 					
 					
@@ -821,7 +841,13 @@ function perall(contentId) {
 	 				maintr2.appendChild(maintd10);
 	 				maintr2.appendChild(maintd11);
 	 				maintr2.appendChild(maintd12);
-
+	 				thead.appendChild(maintr3);
+	 				maintr3.appendChild(maintd13);
+	 				maintr3.appendChild(maintd14);
+	 				maintr3.appendChild(maintd15);
+	 				maintr3.appendChild(maintd16);
+	 				maintr3.appendChild(maintd17);
+	 				
 	 				tb.appendChild(tbody);
 	 				
 	 				listall.forEach(function (list) {
@@ -847,7 +873,7 @@ function perall(contentId) {
 	 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
 
 	 					    // Calculate the percentage, handle division by zero or empty string
-	 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+ 					    var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
 	 					    
 	 						var idx = list.idx;
 		 					var code = list.user_code;
@@ -924,6 +950,8 @@ function per1() {
 				var listall = response.usersall;
 				var target = response.target;
  				var answer = response.answer;
+ 				var targetsum = response.targetsum;
+ 				var answersum = response.answersum;
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
  				var dv = document.createElement("div");
@@ -936,7 +964,7 @@ function per1() {
  				var maintr1 = document.createElement("TR");
  				var maintd1 = document.createElement("TD");
  				maintd1.textContent = "평가자정보";
- 				maintd1.setAttribute("colspan","5");
+ 				maintd1.setAttribute("colspan","4");
  				var maintd2 = document.createElement("TD");
  				maintd2.textContent = "평가대상자수";
  				maintd2.setAttribute("rowspan","2");
@@ -967,6 +995,25 @@ function per1() {
 				var maintd12 = document.createElement("TD");
 				maintd12.textContent = "사원명";
 				
+				var maintr3 = document.createElement("TR");
+				maintr3.setAttribute("style","width: 195px; background:#00A8E4;");
+				var maintd13 = document.createElement("TD");
+				maintd13.setAttribute("colspan","4");
+				maintd13.textContent = "전 직원 정보";
+				
+				var maintd14 = document.createElement("TD");	// 대상자수
+				maintd14.textContent = targetsum;
+				
+				var maintd15 = document.createElement("TD");	// 평가 결과수
+				maintd15.textContent = answersum;
+				
+				var maintd16 = document.createElement("TD");
+				var percentageall =  (answersum / targetsum) * 100;
+				maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
+				
+				var maintd17 = document.createElement("TD");
+				maintd17.textContent = "-"
+				
  				var tbody = document.createElement("TBODY");
 				
 				
@@ -984,6 +1031,12 @@ function per1() {
  				maintr2.appendChild(maintd10);
  				maintr2.appendChild(maintd11);
  				maintr2.appendChild(maintd12);
+ 				thead.appendChild(maintr3);
+ 				maintr3.appendChild(maintd13);
+ 				maintr3.appendChild(maintd14);
+ 				maintr3.appendChild(maintd15);
+ 				maintr3.appendChild(maintd16);
+ 				maintr3.appendChild(maintd17);
 
  				tb.appendChild(tbody);
  				
@@ -1010,7 +1063,7 @@ function per1() {
  						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
 
  					    // Calculate the percentage, handle division by zero or empty string
- 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+ 					    var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
  					    
  						var idx = list.idx;
 	 					var code = list.user_code;
@@ -1088,6 +1141,8 @@ function per2() {
 				var listall = response.usersall;
 				var target = response.target;
  				var answer = response.answer;
+ 				var targetsum = response.targetsum;
+ 				var answersum = response.answersum;
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
  				var dv = document.createElement("div");
@@ -1100,7 +1155,7 @@ function per2() {
  				var maintr1 = document.createElement("TR");
  				var maintd1 = document.createElement("TD");
  				maintd1.textContent = "평가자정보";
- 				maintd1.setAttribute("colspan","5");
+ 				maintd1.setAttribute("colspan","4");
  				var maintd2 = document.createElement("TD");
  				maintd2.textContent = "평가대상자수";
  				maintd2.setAttribute("rowspan","2");
@@ -1131,6 +1186,25 @@ function per2() {
 				var maintd12 = document.createElement("TD");
 				maintd12.textContent = "사원명";
 				
+				var maintr3 = document.createElement("TR");
+				maintr3.setAttribute("style","width: 195px; background:#00A8E4;");
+				var maintd13 = document.createElement("TD");
+				maintd13.setAttribute("colspan","4");
+				maintd13.textContent = "전 직원 정보";
+				
+				var maintd14 = document.createElement("TD");	// 대상자수
+				maintd14.textContent = targetsum;
+				
+				var maintd15 = document.createElement("TD");	// 평가 결과수
+				maintd15.textContent = answersum;
+				
+				var maintd16 = document.createElement("TD");
+				var percentageall =  (answersum / targetsum) * 100;
+				maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
+				
+				var maintd17 = document.createElement("TD");
+				maintd17.textContent = "-"
+				
  				var tbody = document.createElement("TBODY");
 				
 				
@@ -1148,6 +1222,12 @@ function per2() {
  				maintr2.appendChild(maintd10);
  				maintr2.appendChild(maintd11);
  				maintr2.appendChild(maintd12);
+ 				thead.appendChild(maintr3);
+ 				maintr3.appendChild(maintd13);
+ 				maintr3.appendChild(maintd14);
+ 				maintr3.appendChild(maintd15);
+ 				maintr3.appendChild(maintd16);
+ 				maintr3.appendChild(maintd17);
 
  				tb.appendChild(tbody);
  				
@@ -1174,8 +1254,7 @@ function per2() {
  						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
 
  					    // Calculate the percentage, handle division by zero or empty string
- 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
- 					    
+ 					    var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
  						var idx = list.idx;
 	 					var code = list.user_code;
 	 					var hname = list.hspt_name;
@@ -1252,6 +1331,8 @@ function per3() {
 				var listall = response.usersall;
 				var target = response.target;
  				var answer = response.answer;
+ 				var targetsum = response.targetsum;
+ 				var answersum = response.answersum;
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
  				var dv = document.createElement("div");
@@ -1264,7 +1345,7 @@ function per3() {
  				var maintr1 = document.createElement("TR");
  				var maintd1 = document.createElement("TD");
  				maintd1.textContent = "평가자정보";
- 				maintd1.setAttribute("colspan","5");
+ 				maintd1.setAttribute("colspan","4");
  				var maintd2 = document.createElement("TD");
  				maintd2.textContent = "평가대상자수";
  				maintd2.setAttribute("rowspan","2");
@@ -1295,6 +1376,25 @@ function per3() {
 				var maintd12 = document.createElement("TD");
 				maintd12.textContent = "사원명";
 				
+				var maintr3 = document.createElement("TR");
+				maintr3.setAttribute("style","width: 195px; background:#00A8E4;");
+				var maintd13 = document.createElement("TD");
+				maintd13.setAttribute("colspan","4");
+				maintd13.textContent = "전 직원 정보";
+				
+				var maintd14 = document.createElement("TD");	// 대상자수
+				maintd14.textContent = targetsum;
+				
+				var maintd15 = document.createElement("TD");	// 평가 결과수
+				maintd15.textContent = answersum;
+				
+				var maintd16 = document.createElement("TD");
+				var percentageall =  (answersum / targetsum) * 100;
+				maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
+				
+				var maintd17 = document.createElement("TD");
+				maintd17.textContent = "-"
+				
  				var tbody = document.createElement("TBODY");
 				
 				
@@ -1312,6 +1412,12 @@ function per3() {
  				maintr2.appendChild(maintd10);
  				maintr2.appendChild(maintd11);
  				maintr2.appendChild(maintd12);
+ 				thead.appendChild(maintr3);
+ 				maintr3.appendChild(maintd13);
+ 				maintr3.appendChild(maintd14);
+ 				maintr3.appendChild(maintd15);
+ 				maintr3.appendChild(maintd16);
+ 				maintr3.appendChild(maintd17);
 
  				tb.appendChild(tbody);
  				
@@ -1339,7 +1445,7 @@ function per3() {
  						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
 
  					    // Calculate the percentage, handle division by zero or empty string
- 					    var percentage = answercnt > 0 ? (tgt / answercnt) * 100 : 0;
+ 					    var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
  					    
  						var idx = list.idx;
 	 					var code = list.user_code;

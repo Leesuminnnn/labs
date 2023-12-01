@@ -138,11 +138,11 @@ public class CoopEvaluationService {
 //		return evaluationDao.ph(map);
 //	}
 //	
-//	public int phOne(Map<String, Object> map) {
-//		int flag = 0;
-//		flag = evaluationDao.phOne(map);
-//		return flag;
-//	}
+	public int phOne(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.phOne(map);
+		return flag;
+	}
 //	public int pwdreset(Map<String, Object> map) {
 //		int flag = 0;
 //		flag = evaluationDao.pwdreset(map);

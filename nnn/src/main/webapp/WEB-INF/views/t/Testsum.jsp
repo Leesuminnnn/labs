@@ -11,108 +11,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-<li class="contact_row_w100p">
-    <div>
-        <label class="jt_label" for=""><span class="ftcdanger fc-red">*</span>방문총인원</label>
-    </div>
-     <div>
-     <div class="form_control_wrap mt10">
-        <input type="text" class="jt_form_field mr5 wt1" value="10대" readonly="readonly" style="text-align:center;"/>
-        <input type="text" id="resv_age10" name="resv_age10" class="jt_form_field wt500" />
-    </div>
-     <div class="form_control_wrap mt10">
-         <input type="text" class="jt_form_field mr5 wt1" value="20대" readonly="readonly" style="text-align:center;"/>
-        <input type="text" id="resv_age20" name="resv_age20" class="jt_form_field wt500" />
-    </div>
-     <div class="form_control_wrap mt10">
-         <input type="text" class="jt_form_field mr5 wt1" value="30대" readonly="readonly" style="text-align:center;"/>
-        <input type="text" id="resv_age30" name="resv_age30" class="jt_form_field wt500" />
-    </div>
-     <div class="form_control_wrap mt10">
-         <input type="text" class="jt_form_field mr5 wt1" value="40대" readonly="readonly" style="text-align:center;"/>
-        <input type="text" id="resv_age40" name="resv_age40" class="jt_form_field wt500" />
-    </div>
-     <div class="form_control_wrap mt10">
-         <input type="text" class="jt_form_field mr5 wt1" value="50대 이상" readonly="readonly" style="text-align:center;"/>
-        <input type="text" id="resv_age50" name="resv_age50" class="jt_form_field wt500" />
-    </div>
-     <div class="form_control_wrap mt10">
-         <input type="text" class="jt_form_field mr5 wt1" value="합계" readonly="readonly" style="text-align:center;"/>
-        <input type="text" id="resv_number" name="resv_number" class="jt_form_field wt500" readonly="readonly"/>
-    </div>
-    </div>
-</li>
+
+<svg role="presentation" class="icon--arrow" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<path d="M24 17H15L19.6957 23L24 17Z" fill="#767676" />
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="currentColor">
+    <path d="M12 2L0 13h4v9h16v-9h4z"/>
+</svg>
+
+<div style="width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border: 1px solid; border-radius: 30px;">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+	    <path d="M21 11H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H21v-2z"/>
+	</svg>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-$(document).ready(function() {
-	alertResMsg(gTxt("${resMap.msg}"));
-	 
-	$("#resv_age10").on("propertychange change paste input", function() {
-	 
-	    var resv_age10 = fnReplace($("#resv_age10").val());
-	    var resv_age20 = fnReplace($("#resv_age20").val());
-	    var resv_age30 = fnReplace($("#resv_age30").val());
-	    var resv_age40 = fnReplace($("#resv_age40").val());
-	    var resv_age50 = fnReplace($("#resv_age50").val());
-	    
-	    $("#resv_number").val(resv_age10 + resv_age20 + resv_age30 + resv_age40 + resv_age50);
-	});
-	 
-	$("#resv_age20").on("propertychange change paste input", function() {
-	 
-	    var resv_age10 = fnReplace($("#resv_age10").val());
-	    var resv_age20 = fnReplace($("#resv_age20").val());
-	    var resv_age30 = fnReplace($("#resv_age30").val());
-	    var resv_age40 = fnReplace($("#resv_age40").val());
-	    var resv_age50 = fnReplace($("#resv_age50").val());
-	    
-	    $("#resv_number").val(resv_age10 + resv_age20 + resv_age30 + resv_age40 + resv_age50 );
-	});
-	 
-	$("#resv_age30").on("propertychange change paste input", function() {
-	 
-	    var resv_age10 = fnReplace($("#resv_age10").val());
-	    var resv_age20 = fnReplace($("#resv_age20").val());
-	    var resv_age30 = fnReplace($("#resv_age30").val());
-	    var resv_age40 = fnReplace($("#resv_age40").val());
-	    var resv_age50 = fnReplace($("#resv_age50").val());
-	    
-	    $("#resv_number").val(resv_age10 + resv_age20 + resv_age30 + resv_age40 + resv_age50 );
-	});
-	 
-	$("#resv_age40").on("propertychange change paste input", function() {
-	 
-	    var resv_age10 = fnReplace($("#resv_age10").val());
-	    var resv_age20 = fnReplace($("#resv_age20").val());
-	    var resv_age30 = fnReplace($("#resv_age30").val());
-	    var resv_age40 = fnReplace($("#resv_age40").val());
-	    var resv_age50 = fnReplace($("#resv_age50").val());
-	    
-	    $("#resv_number").val(resv_age10 + resv_age20 + resv_age30 + resv_age40 + resv_age50 );
-	});
-	 
-	$("#resv_age50").on("propertychange change paste input", function() {
-	 
-	    var resv_age10 = fnReplace($("#resv_age10").val());
-	    var resv_age20 = fnReplace($("#resv_age20").val());
-	    var resv_age30 = fnReplace($("#resv_age30").val());
-	    var resv_age40 = fnReplace($("#resv_age40").val());
-	    var resv_age50 = fnReplace($("#resv_age50").val());
-	    
-	    $("#resv_number").val(resv_age10 + resv_age20 + resv_age30 + resv_age40 + resv_age50 );
-	});
-	 
-	});
-	 
-	 
-	function fnReplace(val) {
-	    var ret = 0;
-	    if(typeof val != "undefined" && val != null && val != ""){
-	        ret = Number(val.replace(/,/gi,''));
-	    }
-	    return ret;        
-	}
+
 </script>
 </body>
 </html>

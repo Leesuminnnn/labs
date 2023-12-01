@@ -8,7 +8,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class AjaxResponse5 {
 
 	private String result;
@@ -16,7 +15,6 @@ public class AjaxResponse5 {
 	private int userph;
 	private List<UserPh> userphList;
 	private List<UsersVo> listpwd1;
-	
 	
 	
 	

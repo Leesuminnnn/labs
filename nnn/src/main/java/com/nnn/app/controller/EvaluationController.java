@@ -29,6 +29,7 @@ import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
 import com.nnn.app.vo.AjaxResponse7;
+import com.nnn.app.vo.AjaxResponse9;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
@@ -340,6 +341,39 @@ public class EvaluationController {
 		mv.setViewName("e/findpwd");
 		return mv;
 	}
+	
+	// 비밀번호 찾기 전 회원정보 일치하는지 ajax
+	@ResponseBody
+	@RequestMapping(value="FindpwdAjax")
+	public AjaxResponse5 per1(HttpSession session, HttpServletRequest request, @RequestParam("id")String id, @RequestParam("ph")String ph) throws Exception {
+		AjaxResponse5 response = new AjaxResponse5();
+		response.setResult("N");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("ph", ph);
+		
+//		List<UsersVo> list = evaluationService.users1(map);
+		
+		int phOne = evaluationService.phOne(map);
+		
+		if(phOne == 1) {
+			response.setResult("Y");
+		}else {
+			response.setResult("N");
+		}
+		
+		/*
+		private String result;
+		private List<UsersVo> users;
+		private List<UserPh> userph;
+		private List<UsersVo> listpwd1;
+		*/
+//		response.setUserph(phOne);
+		
+		
+		return response;
+	}
+	
 	@RequestMapping(value="pwdAction/{idx}")
 	public String pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
@@ -826,17 +860,20 @@ public class EvaluationController {
 	
 	@ResponseBody
 	@RequestMapping(value="perall")
-	public AjaxResponse7 perall(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
+	public AjaxResponse9 perall(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users(map);
 		List<TargetVo> target = evaluationService.target(map);
 		List<AnswerVo> answer = evaluationService.answerselect(map);
+		int targetsum = evaluationService.targetsum(map);
+		int answersum = evaluationService.answersum(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
-		
+		response.setTargetsum(targetsum);
+		response.setAnswersum(answersum);
 		
 		return response;
 	}
@@ -844,48 +881,60 @@ public class EvaluationController {
 	
 	@ResponseBody
 	@RequestMapping(value="per1")
-	public AjaxResponse7 per1(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
+	public AjaxResponse9 per1(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users1(map);
 		List<TargetVo> target = evaluationService.target(map);
 		List<AnswerVo> answer = evaluationService.answerselect(map);
+		int targetsum1 = evaluationService.targetsum1(map);
+		int answersum1 = evaluationService.answersum1(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
+		response.setTargetsum(targetsum1);
+		response.setAnswersum(answersum1);
 		
 		return response;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="per2")
-	public AjaxResponse7 per2(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
+	public AjaxResponse9 per2(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users2(map);
 		List<TargetVo> target = evaluationService.target(map);
 		List<AnswerVo> answer = evaluationService.answerselect(map);
+		int targetsum2 = evaluationService.targetsum2(map);
+		int answersum2 = evaluationService.answersum2(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
+		response.setTargetsum(targetsum2);
+		response.setAnswersum(answersum2);
 		
 		return response;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="per3")
-	public AjaxResponse7 per3(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse7 response = new AjaxResponse7();
+	public AjaxResponse9 per3(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UsersVo> list = evaluationService.users3(map);
 		List<TargetVo> target = evaluationService.target(map);
 		List<AnswerVo> answer = evaluationService.answerselect(map);
+		int targetsum3 = evaluationService.targetsum3(map);
+		int answersum3 = evaluationService.answersum3(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
+		response.setTargetsum(targetsum3);
+		response.setAnswersum(answersum3);
 		
 		return response;
 	}
@@ -898,11 +947,11 @@ public class EvaluationController {
 		List<UsersVo> list = evaluationService.users(map);
 		List<TargetVo> list1 = evaluationService.target(map);
 		List<AnswerVo> list2 = evaluationService.answerselect(map);
-		System.out.println(list2);
+//		System.out.println(list2);
 		mv.addObject("list",list);
 		mv.addObject("target", list1);
 		mv.addObject("answer", list2);
-		System.out.println(list1);
+//		System.out.println(list1);
 		mv.setViewName("e/per1");
 		return mv;
 	}
@@ -913,11 +962,11 @@ public class EvaluationController {
 		List<UsersVo> list = evaluationService.users(map);
 		List<TargetVo> list1 = evaluationService.target(map);
 		List<AnswerVo> list2 = evaluationService.answerselect(map);
-		System.out.println(list2);
+//		System.out.println(list2);
 		mv.addObject("list",list);
 		mv.addObject("target", list1);
 		mv.addObject("answer", list2);
-		System.out.println(list1);
+//		System.out.println(list1);
 		mv.setViewName("e/test");
 		return mv;
 	}
