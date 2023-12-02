@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.CoopEvaluationService;
 import com.nnn.app.vo.AjaxResponse10;
+import com.nnn.app.vo.AjaxResponse8;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.CoopusersVo;
 import com.nnn.app.vo.EvaluationVo;
@@ -369,19 +371,25 @@ public class CoopEvaluationController {
 		
 		
 	}
-	@RequestMapping(value="pwdActAjax/{id}")
-	public String pwdActAjax(CoopusersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
+	@ResponseBody
+	@RequestMapping(value="PwdActAjax/{id}")
+	public AjaxResponse8 pwdActAjax(CoopusersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, Model md) throws NoSuchAlgorithmException {
+		AjaxResponse8 response = new AjaxResponse8();
+		response.setResult("N");
 		// 암호화
-		SHA256 sha256 = new SHA256();
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
 		//비밀번호
         String password = vo.getPwd();
-        //SHA256으로 암호화된 비밀번호
-        String cryptogram = sha256.encrypt(password);
+        //aes128으로 암호화된 비밀번호
+        String cryptogram = aes128.encrypt(password);
         
         System.out.println(cryptogram);
 		//담은 변수를 DB에 넘겨준다.
 		vo.setPwd(cryptogram);
 		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pwd", cryptogram);
@@ -391,11 +399,11 @@ public class CoopEvaluationController {
 		int flag = coopevaluationService.pwdajax(map);
 		
 		if(flag >= 1) {
-			System.out.println(flag);
-			return "alert5";
+			response.setResult("Y");
 		} else {
-			return "alert5";
+			response.setResult("N");
 		}
+		return response;
 	}
 	@RequestMapping(value="Form/{idx}/{idx2}/{team}")
 	public ModelAndView form(ModelAndView mv, HttpSession session, 
@@ -503,7 +511,7 @@ public class CoopEvaluationController {
 		map.put("team", team);
 		map2.put("team",team);
 		// 진료부, 경혁팀, 부서장 영역
-		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+		if(team.equals("A") || team.equals("B") || team.equals("C") || team.equals("E")) {
 			String ev = "AA";
 			System.out.println("ev : " + ev);
 			String d1 = a1+","+a2+","+b3+","+b4+","+c5+","+c6+","+d7+","+d8+","+e9+","+e10+","+f11;
@@ -513,7 +521,7 @@ public class CoopEvaluationController {
 			map.put("d1", d1);
 		}
 		// 부서원 영역
-		else if (team.equals("D") || team.equals("E")) {
+		else if (team.equals("D")) {
 			String ev = "AB";
 			System.out.println("ev : " + ev);
 			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+c23+","+c24+

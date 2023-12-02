@@ -44,18 +44,34 @@
 					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="userall" data-content="all">
 						<span class="nav_name">계열사 직원명부 Total</span>
 					</a>
-					<%-- 
+					
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-						<span class="nav_subname">&nbsp;효사랑전주요양병원 직원명부 ${p1}/${h1}</span>
+						<span class="nav_subname">&nbsp;정성/사랑모아 (1병원) ${p1}/${h1}</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user2" data-content="content2">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-						<span class="nav_subname">&nbsp;효사랑가족요양병원 직원명부 ${p2}/${h2}</span>
+						<span class="nav_subname">&nbsp;정성/사랑모아 (2병원) ${p2}/${h2}</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user3" data-content="content3">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-						<span class="nav_subname">&nbsp;가족사랑요양병원 직원명부 ${p3}/${h3}</span>
+						<span class="nav_subname">&nbsp;정성/사랑모아 (3병원) ${p3}/${h3}</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser1" data-content="content4">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname">&nbsp;효사랑장례문화원 ${p4}/${h4}</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser2" data-content="content5">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname">&nbsp;(주)조이 ${p5}/${h5}</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser3" data-content="content6">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname">&nbsp;핵심인재개발원 ${p6}/${h6}</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser4" data-content="content7">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname">&nbsp;자야(주) ${p7}/${h7}</span>
 					</a>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="perall" data-content="all">
@@ -73,7 +89,7 @@
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;가족사랑요양병원 평가진행률</span>
 					</a>
-					 --%>
+					
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<!-- <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="setting" data-content="setting">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
@@ -377,6 +393,10 @@ const menuScripts = [
 	{ id: 'user1', contentId: 'content1', script: user1 },
 	{ id: 'user2', contentId: 'content2', script: user2 },
 	{ id: 'user3', contentId: 'content3', script: user3 },
+	{ id: 'coopuser1', contentId: 'content4', script: coopuser1 },
+	{ id: 'coopuser2', contentId: 'content5', script: coopuser2 },
+	{ id: 'coopuser3', contentId: 'content6', script: coopuser3 },
+	{ id: 'coopuser4', contentId: 'content7', script: coopuser4 },
 	{ id: 'per1', contentId: 'content1', script: per1 },
 	{ id: 'per2', contentId: 'content2', script: per2 },
 	{ id: 'per3', contentId: 'content3', script: per3 },

@@ -179,7 +179,7 @@ $(document).ready(function () {
 				'pwd': pwd
 			},
 			success: function(response) {
-				var link = "${pageContext.request.contextPath}/";
+				var link = "${pageContext.request.contextPath}/d/Login";
 				
 				// 링크 이동
 				if(response.result === "Y") {

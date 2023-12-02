@@ -200,8 +200,7 @@ ${info.c_name }
 						<td>${t.id }</td>
 						<td>${t.c_position }</td>
 						<td>${t.name }</td>
-						<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
-						<c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+						<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
 						data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 						평가하기
 						</td>
@@ -226,8 +225,7 @@ ${info.c_name }
 						<td>${t.id }</td>
 						<td>${t.c_position }</td>
 						<td>${t.name }</td>
-						<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
-						<c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+						<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
 						data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 						평가하기
 						</td>
@@ -253,8 +251,7 @@ ${info.c_name }
 								<td>${t.id }</td>
 								<td>${t.c_position }</td>
 								<td>${t.name }</td>
-								<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e">
-								<c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+								<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
 								data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
 								평가하기
 								</td>
@@ -310,12 +307,10 @@ function formgo(element) {
 	var eidx = element.getAttribute("data-e-idx");
 	var link = "${pageContext.request.contextPath}/d/Form/${info.idx}/"+targetidx+"/"+ev
 	var d3 = element.getAttribute("data-d3");
-	window.location.replace(link);
-	// 뒤로가기 버튼 비활성화
-	disableBackButton();
 	
 	if(d3 === '평가완료'){
 		alert("이미 평가가 완료된 대상입니다.");
+		window.location.reload();
 	}else{
 		//링크 이동
 //		location.href=link;

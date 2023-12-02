@@ -129,17 +129,17 @@
 	</update>
 	 -->
 	<!-- 비밀번호 설정한 직원 명부 -->
-	<!-- 
+	
 	<select id="hsptselect1" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '효사랑전주요양병원'
+		select count(*) from coopusers where c_name2 = '효사랑전주요양병원'
 	</select>
 	
 	<select id="hsptselect2" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '효사랑가족요양병원'
+		select count(*) from coopusers where c_name2 = '효사랑가족요양병원'
 	</select>
 	
 	<select id="hsptselect3" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '가족사랑요양병원'
+		select count(*) from coopusers where c_name2 = '가족사랑요양병원'
 	</select>
 	
 	<select id="hsptpwdselect1" parameterType="map" resultType="int">
@@ -151,7 +151,7 @@
 	<select id="hsptpwdselect3" parameterType="map" resultType="int">
 		select count(*) from coopusers where hspt_name = '가족사랑요양병원' and pwd is NOT NULL;
 	</select>
-	 -->
+	
 	<!-- 부서별 비밀번호 설정한 인원? -->
 	<!-- 
 	<select id="hsptselect1sub" parameterType="map" resultType="int">

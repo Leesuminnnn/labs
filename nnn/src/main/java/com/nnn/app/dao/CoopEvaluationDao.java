@@ -152,7 +152,7 @@ public class CoopEvaluationDao {
 //		return sqlSession3.selectList(MAPPER+".ph", map);
 	}
 	public int phOne(Map<String, Object> map) {
-		return sqlSession1.selectOne(MAPPER+".ph", map);
+		return sqlSession1.selectOne(MAPPER+".phOne", map);
 //		return sqlSession3.selectOne(MAPPER+".phOne", map);
 	}
 	

@@ -42,10 +42,10 @@
 			<table style="width:100%; font-weight: bold">
 			<c:forEach items="${notice}" var="n">
 				<tr>
-					<td>
+					<td <c:if test="${n.idx eq '1' }">colspan="2"</c:if>  style="<c:if test="${n.idx eq '1' }">color:red; font-size:15px; font-weight: bolder;</c:if>">
 						${n.d2 }
 					</td>
-					<td style="<c:if test="${n.idx eq '3' }">color:red;</c:if>">
+					<td style="<c:if test="${n.idx eq '3' or n.idx eq '12'}">color:red;</c:if>">
 						${n.d3 }
 					</td>
 				</tr>
