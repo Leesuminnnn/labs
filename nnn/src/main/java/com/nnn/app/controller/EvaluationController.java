@@ -698,23 +698,7 @@ public class EvaluationController {
 		return mv;
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value="pwdreset/{id}")
-//	public AjaxResponse6 pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		AjaxResponse6 response = new AjaxResponse6();
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("id", id);
-//		int flag = evaluationService.pwdreset(map);
-//		
-//		if(flag == 1) {
-//			response.setResult("Y");
-//			return response;
-//		}else {
-//			response.setResult("N");
-//			return response;
-//		}
-//	}
+
 	
 	@RequestMapping(value="pwdreset/{id}")
 	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {

@@ -37,7 +37,10 @@
 		<typeAlias alias="ph" type="com.nnn.app.vo.UserPh"/>
 		<typeAlias alias="target" type="com.nnn.app.vo.TargetVo"/>
 		<typeAlias alias="guser" type="com.nnn.app.vo.GoogleuserVo"/>
+		
 		<typeAlias alias="cusers" type="com.nnn.app.vo.CoopusersVo"/>
+		<typeAlias alias="cwhether" type="com.nnn.app.vo.CWhetherVo"/>
+		<typeAlias alias="canswer" type="com.nnn.app.vo.CAnswerVo"/>
 		
 	</typeAliases>  
 

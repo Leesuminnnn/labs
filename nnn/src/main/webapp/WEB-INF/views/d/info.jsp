@@ -307,7 +307,7 @@ function formgo(element) {
 	var eidx = element.getAttribute("data-e-idx");
 	var link = "${pageContext.request.contextPath}/d/Form/${info.idx}/"+targetidx+"/"+ev
 	var d3 = element.getAttribute("data-d3");
-	
+	/* 
 	if(d3 === '평가완료'){
 		alert("이미 평가가 완료된 대상입니다.");
 		window.location.reload();
@@ -318,7 +318,8 @@ function formgo(element) {
 		// 뒤로가기 버튼 비활성화
 		disableBackButton();
 	}
-	/* 
+	 */
+	
 	if(date == 1){
 		console.log("아직안넘음");
 		alert("12월 6일 오픈 예정입니다. \n직원평가기간은 12월6일(수)~12월8일(금) 입니다.");
@@ -334,7 +335,7 @@ function formgo(element) {
 			// 뒤로가기 버튼 비활성화
 			disableBackButton();
 		}
-	}  */
+	}
 }
 
 </script>

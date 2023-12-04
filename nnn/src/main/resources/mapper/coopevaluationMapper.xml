@@ -43,25 +43,25 @@
 		select * from evaluation where d2 = #{d2}
 	</select>
 	
-	<insert id="forminsert" parameterType="answer">
-		insert into answer (u1, u2, t1, team, d1, ev)
+	<insert id="forminsert" parameterType="canswer">
+		insert into canswer (u1, u2, t1, team, d1, ev)
 		values (
 		#{u1}, #{u2}, #{t1}, #{team}, #{d1}, #{ev})
 	</insert>
 	<!-- 평가 완료 중복 체크 -->
 	<select id="formcheck" resultType="int" parameterType="map">
-		select count(*) from whether where d1 = #{d1} and d2 = #{d2} and team = #{team} 
+		select count(*) from cwhether where d1 = #{d1} and d2 = #{d2} and team = #{team} and del_yn = 'N'
 	</select>
 	
 	
 	<!--  평가 완료 표시  -->
-	<insert id="whether" parameterType="whether">
-		insert into whether (d1, d2, d3, ev, team)
+	<insert id="whether" parameterType="cwhether">
+		insert into cwhether (d1, d2, d3, ev, team)
 		values (#{d1}, #{d2}, "평가완료", #{ev}, #{team})
 	</insert>
 	<!-- 리스트에서 평가 완료 확인 -->
 	<select id="whetherselect" resultType="map" parameterType="map">
-		select * from whether where d1 = #{idx}
+		select * from cwhether where d1 = #{idx} and del_yn = 'N'
 		<!-- 
 		select * from whether where d1 = #{id}
 		
@@ -114,10 +114,11 @@
 		select count(*) from coopusers where id = #{id} and phone = #{ph}
 	</select>
 	<!-- 비밀번호 초기화 -->
-	<!-- 
 	<update id="pwdreset" parameterType="map">
 		update coopusers set pwd = null where id = #{id}
 	</update>
+	<!-- 계열사 별 초기화 해야함 -->
+	<!-- 
 	<update id="pwdreset1" parameterType="map">
 		update coopusers set pwd = null where hspt_name = '효사랑전주요양병원' and id = #{id}
 	</update>
@@ -127,7 +128,9 @@
 	<update id="pwdreset3" parameterType="map">
 		update coopusers set pwd = null where hspt_name = '가족사랑요양병원' and id = #{id}
 	</update>
-	 -->
+	
+	-->
+	
 	<!-- 비밀번호 설정한 직원 명부 -->
 	
 	<select id="hsptselect1" parameterType="map" resultType="int">

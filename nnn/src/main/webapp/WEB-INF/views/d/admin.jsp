@@ -178,7 +178,7 @@ const mainContent = document.getElementById('main-content');
 menuLinks.forEach(link => {
 	link.addEventListener('click', function(event){
 		event.preventDefault();
-		currentMenuIndex = Array.from(menuLinks).indexOf(this);	// 클린된 메뉴의 인덱스를 업데이트
+		currentMenuIndex = Array.from(menuLinks).indexOf(this);	// 클릭된 메뉴의 인덱스를 업데이트
 		activateMenu(currentMenuIndex);
 		
 	});
@@ -200,22 +200,7 @@ function pwdreset(element){
 		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
 		
 		frm.attr("action","${pageContext.request.contextPath}/d/pwdreset/"+id).submit();
-		/* $.ajax({
-			url: '${pageContext.request.contextPath}/d/pwdreset/'+id,
-			type: 'post',
-			dataType: 'json',
-			success: function(response){
-				if(response.result === "Y"){
-					
-					location.reload();
-				}
-			},
-			error: function(error) {
-				console.error('Error fetching data:', error);
-			}
-			
-		});
-		 */
+		
 		 
 		 
 	}else {

@@ -820,6 +820,7 @@ function perall(contentId) {
 					
 					var maintd16 = document.createElement("TD");
 					var percentageall =  (answersum / targetsum) * 100;
+					
 					maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
 					
 					var maintd17 = document.createElement("TD");
@@ -873,7 +874,7 @@ function perall(contentId) {
 	 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
 
 	 					    // Calculate the percentage, handle division by zero or empty string
- 					    var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
+ 					    	var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
 	 					    
 	 						var idx = list.idx;
 		 					var code = list.user_code;
@@ -909,6 +910,14 @@ function perall(contentId) {
 		 					var tdpersent = document.createElement("TD");
 		 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
 		 					
+		 					
+		 					if (tdanswer.innerText === tdtarget.innerText) {
+		 						tdpersent.setAttribute("style", "background:#32b0ca;");
+							} else if (tdanswer.innerText == 0) {
+								tdpersent.setAttribute("style", "background: red; color: #fff");
+							}
+		 					
+							
 		 					var tdinfo = document.createElement("TD");
 		 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
 		 					tdinfo.textContent = "링크";
@@ -1098,7 +1107,11 @@ function per1() {
 	 					
 	 					var tdpersent = document.createElement("TD");
 	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
-	 					
+	 					if (tdanswer.innerText === tdtarget.innerText) {
+	 						tdpersent.setAttribute("style", "background:#32b0ca;");
+						} else if (tdanswer.innerText == 0) {
+							tdpersent.setAttribute("style", "background: red; color: #fff");
+						}
 	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
 	 					tdinfo.textContent = "링크";
@@ -1288,7 +1301,11 @@ function per2() {
 	 					
 	 					var tdpersent = document.createElement("TD");
 	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
-	 					
+	 					if (tdanswer.innerText === tdtarget.innerText) {
+	 						tdpersent.setAttribute("style", "background:#32b0ca;");
+						} else if (tdanswer.innerText == 0) {
+							tdpersent.setAttribute("style", "background: red; color: #fff");
+						}
 	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
 	 					tdinfo.textContent = "링크";
@@ -1478,7 +1495,11 @@ function per3() {
 	 					
 	 					var tdpersent = document.createElement("TD");
 	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
-	 					
+	 					if (tdanswer.innerText === tdtarget.innerText) {
+	 						tdpersent.setAttribute("style", "background:#32b0ca;");
+						} else if (tdanswer.innerText == 0) {
+							tdpersent.setAttribute("style", "background: red; color: #fff");
+						}
 	 					
 	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;

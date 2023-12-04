@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nnn.app.service.CoopEvaluationService;
 import com.nnn.app.vo.AjaxResponse10;
 import com.nnn.app.vo.AjaxResponse8;
-import com.nnn.app.vo.AnswerVo;
+import com.nnn.app.vo.CAnswerVo;
+import com.nnn.app.vo.CWhetherVo;
 import com.nnn.app.vo.CoopusersVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.NoticeVo;
-import com.nnn.app.vo.UserPh;
-import com.nnn.app.vo.UsersVo;
-import com.nnn.app.vo.WhetherVo;
 
 @Controller
 @RequestMapping(value="d/*")
@@ -257,7 +254,7 @@ public class CoopEvaluationController {
 //		System.out.println(list1);
 		System.out.println("#############################");
 		// 평가 완료한 리스트 출력?		
-		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
+		List<CWhetherVo> list2 = new ArrayList<CWhetherVo>();
 		list2 = coopevaluationService.whetherSelect(map);
 		System.out.println("평가 완료 리스트 출력 : "+list2);
 		mv.addObject("endlist", list2);
@@ -443,7 +440,7 @@ public class CoopEvaluationController {
 	}
 	// 평가 후 Db저장
 	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
-	public String fromAction(AnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
+	public String fromAction(CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
 			HttpServletRequest request, HttpServletResponse response, Model md,
 			@RequestParam(name="a1", required = false) String a1, @RequestParam(name="a2", required = false) String a2, @RequestParam(name="b3", required = false) String b3, 
 			@RequestParam(name="b4", required = false) String b4, @RequestParam(name="c5", required = false) String c5, @RequestParam(name="c6", required = false) String c6, 
@@ -531,7 +528,7 @@ public class CoopEvaluationController {
 			map.put("ev", ev);
 		}
 		
-		List<AnswerVo> list = new ArrayList<AnswerVo>();
+		List<CAnswerVo> list = new ArrayList<CAnswerVo>();
 		
 		// 나중에 암호화 해야함
 		
@@ -666,40 +663,23 @@ public class CoopEvaluationController {
 		return mv;
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value="pwdreset/{id}")
-//	public AjaxResponse pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		AjaxResponse response = new AjaxResponse6();
-//		//AjaxResponse10 이후로 써야함 효사랑그룹이랑 계열사 직원 DB다름
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("id", id);
-//		int flag = evaluationService.pwdreset(map);
-//		
-//		if(flag == 1) {
-//			response.setResult("Y");
-//			return response;
-//		}else {
-//			response.setResult("N");
-//			return response;
-//		}
-//	}
-//	
-//	@RequestMapping(value="pwdreset/{id}")
-//	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("id", id);
-//		int flag = coopevaluationService.pwdreset(map);
-//		
-//		if(flag == 1) {
-//			request.setAttribute("msg", "초기화 완료");
-//			request.setAttribute("url", "d/admin");
-//			return "alert";
-//		}else {
-//			request.setAttribute("msg", "오류발생");
-//			return "alert";
-//		}
-//	}
+
+	@RequestMapping(value="pwdreset/{id}")
+	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		int flag = coopevaluationService.pwdreset(map);
+		
+		if(flag == 1) {
+			request.setAttribute("msg", "초기화 완료");
+			request.setAttribute("url", "d/admin");
+			return "alert";
+		}else {
+			request.setAttribute("msg", "오류발생");
+			return "alert";
+		}
+	}
 //	
 //	@ResponseBody
 //	@RequestMapping(value="pwdreset1/{id}")

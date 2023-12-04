@@ -8,14 +8,14 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.nnn.app.vo.AnswerVo;
+import com.nnn.app.vo.CAnswerVo;
+import com.nnn.app.vo.CWhetherVo;
 import com.nnn.app.vo.CoopusersVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
-import com.nnn.app.vo.WhetherVo;
 
 @Repository
 public class CoopEvaluationDao {
@@ -94,7 +94,7 @@ public class CoopEvaluationDao {
 //		return sqlSession3.insert(MAPPER+".loginlog", map);
 	}
 
-	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+	public List<CWhetherVo> whetherSelect(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".whetherselect", map);
 //		return sqlSession3.selectList(MAPPER+".whetherselect", map);
 	}
@@ -204,7 +204,7 @@ public class CoopEvaluationDao {
 //		return sqlSession3.selectList(MAPPER+".target", map);
 	}
 
-	public List<AnswerVo> answerselect(Map<String, Object> map) {
+	public List<CAnswerVo> answerselect(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".answerselect", map);
 //		return sqlSession3.selectList(MAPPER+".answerselect", map);
 	}

@@ -7,14 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.CoopEvaluationDao;
-import com.nnn.app.vo.AnswerVo;
+import com.nnn.app.vo.CWhetherVo;
 import com.nnn.app.vo.CoopusersVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
-import com.nnn.app.vo.WhetherVo;
 
 
 @Service
@@ -89,7 +88,7 @@ public class CoopEvaluationService {
 		return flag;
 	}
 
-	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+	public List<CWhetherVo> whetherSelect(Map<String, Object> map) {
 		return evaluationDao.whetherSelect(map);
 	}
 
@@ -143,11 +142,11 @@ public class CoopEvaluationService {
 		flag = evaluationDao.phOne(map);
 		return flag;
 	}
-//	public int pwdreset(Map<String, Object> map) {
-//		int flag = 0;
-//		flag = evaluationDao.pwdreset(map);
-//		return flag;
-//	}
+	public int pwdreset(Map<String, Object> map) {
+		int flag = 0;
+		flag = evaluationDao.pwdreset(map);
+		return flag;
+	}
 //	public int pwdreset1(Map<String, Object> map) {
 //		int flag = 0;
 //		flag = evaluationDao.pwdreset1(map);
