@@ -1396,4 +1396,11 @@ public class TestController {
 		return "/google";
 
 	}
+	@RequestMapping(value="testalert")
+	public ModelAndView testalert(ModelAndView mv) throws Exception {
+		
+		
+		mv.setViewName("t/testalert");
+		return mv;
+	}
 }

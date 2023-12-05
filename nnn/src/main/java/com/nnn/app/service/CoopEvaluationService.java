@@ -107,23 +107,61 @@ public class CoopEvaluationService {
 	public List<CoopusersVo> users(Map<String, Object> map) {
 		return evaluationDao.users(map);
 	}
-//	
-//	public List<CoopusersVo> users1(Map<String, Object> map) {
-//		return evaluationDao.users1(map);
-//	}
+	
+	public List<CoopusersVo> user1(Map<String, Object> map) {
+		return evaluationDao.user1(map);
+	}
+	
+	public List<CoopusersVo> user2(Map<String, Object> map) {
+		return evaluationDao.user2(map);
+	}
+	
+	public List<CoopusersVo> user3(Map<String, Object> map) {
+		return evaluationDao.user3(map);
+	}
+	
+	public List<CoopusersVo> user4(Map<String, Object> map) {
+		return evaluationDao.user4(map);
+	}
+	
+	public List<CoopusersVo> user5(Map<String, Object> map) {
+		return evaluationDao.user5(map);
+	}
+	
+	public List<CoopusersVo> user6(Map<String, Object> map) {
+		return evaluationDao.user6(map);
+	}
+	
+	public List<CoopusersVo> user7(Map<String, Object> map) {
+		return evaluationDao.user7(map);
+	}
+	public int usercnt1(Map<String, Object> map) {
+		return evaluationDao.usercnt1(map);
+	}
+	public int usercnt2(Map<String, Object> map) {
+		return evaluationDao.usercnt2(map);
+	}
+	public int usercnt3(Map<String, Object> map) {
+		return evaluationDao.usercnt3(map);
+	}
+	public int usercnt4(Map<String, Object> map) {
+		return evaluationDao.usercnt4(map);
+	}
+	public int usercnt5(Map<String, Object> map) {
+		return evaluationDao.usercnt5(map);
+	}
+	public int usercnt6(Map<String, Object> map) {
+		return evaluationDao.usercnt6(map);
+	}
+	public int usercnt7(Map<String, Object> map) {
+		return evaluationDao.usercnt7(map);
+	}
+	
 //	public List<CoopusersVo> users1pwd(Map<String, Object> map) {
 //		return evaluationDao.users1pwd(map);
 //	}
-//	
-//	public List<CoopusersVo> users2(Map<String, Object> map) {
-//		return evaluationDao.users2(map);
-//	}
 //	public List<CoopusersVo> users2pwd(Map<String, Object> map) {
 //		return evaluationDao.users2pwd(map);
-//	}
-//	
-//	public List<CoopusersVo> users3(Map<String, Object> map) {
-//		return evaluationDao.users3(map);
 //	}
 //	public List<UsersVo> users3pwd(Map<String, Object> map) {
 //		return evaluationDao.users3pwd(map);
@@ -161,15 +199,6 @@ public class CoopEvaluationService {
 //		int flag = 0;
 //		flag = evaluationDao.pwdreset3(map);
 //		return flag;
-//	}
-//	public int hsptselect1(Map<String, Object> map) {
-//		return evaluationDao.hsptselect1(map);
-//	}
-//	public int hsptselect2(Map<String, Object> map) {
-//		return evaluationDao.hsptselect2(map);
-//	}
-//	public int hsptselect3(Map<String, Object> map) {
-//		return evaluationDao.hsptselect3(map);
 //	}
 //
 //	public int hsptpwdselect1(Map<String, Object> map) {

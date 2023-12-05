@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
 <title>근무평가</title>
 <style>
 td {
@@ -20,7 +21,6 @@ td {
 </style>
 </head>
 <body>
-
 <form id="frm" onsubmit="return false;">
 	<div class="header">
 		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
@@ -188,203 +188,222 @@ td {
 	
 	<div class="footer">
 		<div class="nav">
-<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+			<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 		</div>
 	</div>
-	
+	<div class="modal normal">
+		<div class="modal_body">
+			<div>
+				<div class="menu_msg">현재 답변하지 않은 평가가 있습니다. 확인해주세요.</div>
+				<div class="btn pink_btn" id="modal_insert" onclick="closePopup()">
+				확인
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal2 normal">
+		<div class="modal_body2">
+			<div>
+				<div class="menu_msg2">d</div>
+				<div class="munu_btn">
+					<div class="btn pink_btn" id="modal_insert" onclick="closePopup2redirect()">
+					확인
+					</div>
+					<div class="btn pink_btn cs_btn" id="modal_insert" onclick="closePopup2()">
+					취소
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 var form = document.getElementById("frm");
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const modal2 = document.querySelector('.modal2');
+const msg = document.querySelector('.menu_msg');
+const msg2 = document.querySelector('.menu_msg2');
 
 //문제유형
 var ev = "${ev}";
 console.log(ev);
-$("#end").click(function() {
-	// 답안 체크
-	var a1 = $('input[name=a1]').is(":checked");
-	var a2 = $('input[name=a2]').is(":checked");
-	var b3 = $('input[name=b3]').is(":checked");
-	var b4 = $('input[name=b4]').is(":checked");
-	var c5 = $('input[name=c5]').is(":checked");
-	var c6 = $('input[name=c6]').is(":checked");
-	var d7 = $('input[name=d7]').is(":checked");
-	var d8 = $('input[name=d8]').is(":checked");
-	var e9 = $('input[name=e9]').is(":checked");
-	var e10 = $('input[name=e10]').is(":checked");
-	var f11 = $("#f11").val();
-	
-	var a12 = $('input[name=a12]').is(":checked");
-	var a13 = $('input[name=a13]').is(":checked");
-	var a14 = $('input[name=a14]').is(":checked");
-	var a15 = $('input[name=a15]').is(":checked");
-	var a16 = $('input[name=a16]').is(":checked");
-	var a17 = $('input[name=a17]').is(":checked");
-	var a18 = $('input[name=a18]').is(":checked");
-	var b19 = $('input[name=b19]').is(":checked");
-	var b20 = $('input[name=b20]').is(":checked");
-	var b21 = $('input[name=b21]').is(":checked");
-	var b22 = $('input[name=b22]').is(":checked");
-	var c23 = $('input[name=c23]').is(":checked");
-	var c24 = $('input[name=c24]').is(":checked");
-	var c25 = $('input[name=c25]').is(":checked");
-	var c26 = $('input[name=c26]').is(":checked");
-	var c27 = $('input[name=c27]').is(":checked");
-	var d28 = $('input[name=d28]').is(":checked");
-	var d29 = $('input[name=d29]').is(":checked");
-	var e30 = $('input[name=e30]').is(":checked");
-	var e31 = $('input[name=e31]').is(":checked");
-	var f32 = $("#f32").val();
-	
-	// AA
-	var g1 = $('input[name=a1]:checked').val();
-	var g2 = $('input[name=a2]:checked').val();
-	var g3 = $('input[name=b3]:checked').val();
-	var g4 = $('input[name=b4]:checked').val();
-	var g5 = $('input[name=c5]:checked').val();
-	var g6 = $('input[name=c6]:checked').val();
-	var g7 = $('input[name=d7]:checked').val();
-	var g8 = $('input[name=d8]:checked').val();
-	var g9 = $('input[name=e9]:checked').val();
-	var g10 = $('input[name=e10]:checked').val();
-	// AB
-	var k1 = $('input[name=a12]:checked').val();
-	var k2 = $('input[name=a13]:checked').val();
-	var k3 = $('input[name=a14]:checked').val();
-	var k4 = $('input[name=a15]:checked').val();
-	var k5 = $('input[name=a16]:checked').val();
-	var k6 = $('input[name=a17]:checked').val();
-	var k7 = $('input[name=a18]:checked').val();
-	var k8 = $('input[name=b19]:checked').val();
-	var k9 = $('input[name=b20]:checked').val();
-	var k10 = $('input[name=b21]:checked').val();
-	var k11 = $('input[name=b22]:checked').val();
-	var k12 = $('input[name=c23]:checked').val();
-	var k13 = $('input[name=c24]:checked').val();
-	var k14 = $('input[name=c25]:checked').val();
-	var k15 = $('input[name=c26]:checked').val();
-	var k16 = $('input[name=c27]:checked').val();
-	var k17 = $('input[name=d28]:checked').val();
-	var k18 = $('input[name=d29]:checked').val();
-	var k19 = $('input[name=e30]:checked').val();
-	var k20 = $('input[name=e31]:checked').val();
-	
-	function mapValueToScore(value) {
-	    switch (value) {
-	        case '매우우수':
-	            return 5;
-	        case '우수':
-	            return 4;
-	        case '보통':
-	            return 3;
-	        case '미흡':
-	            return 2;
-	        case '매우미흡':
-	            return 1;
-	        default:
-	            return 0; 
-	    }
-	}
-	function mapValueToScore2(value) {
-	    switch (value) {
-	        case '매우우수':
-	            return 10;
-	        case '우수':
-	            return 8;
-	        case '보통':
-	            return 6;
-	        case '미흡':
-	            return 4;
-	        case '매우미흡':
-	            return 2;
-	        default:
-	            return 0; 
-	    }
-	}
-	
-	var sumAA = mapValueToScore2(g1) + mapValueToScore2(g2) + mapValueToScore2(g3) + mapValueToScore2(g4) + mapValueToScore2(g5) + mapValueToScore2(g6) + mapValueToScore2(g7) + mapValueToScore2(g8) + mapValueToScore2(g9) + mapValueToScore2(g10);
-	var sumAB = mapValueToScore(k1) + mapValueToScore(k2) + mapValueToScore(k3) + mapValueToScore(k4) + mapValueToScore(k5) + mapValueToScore(k6) + mapValueToScore(k7) + mapValueToScore(k8) + mapValueToScore(k9) + mapValueToScore(k10) + mapValueToScore(k11) + mapValueToScore(k12) + mapValueToScore(k13) + mapValueToScore(k14) + mapValueToScore(k15) + mapValueToScore(k16) + mapValueToScore(k17) + mapValueToScore(k18) + mapValueToScore(k19) + mapValueToScore(k20);
-	
-	// 문제유형으로 나누기
-	// A, B, C 인 경우와 D인 경우
-	if(ev == 'A' || ev == 'B' || ev == 'C' || ev == 'E'){
-		if(!a1 || !a2 || !b3 || !b4 || !c5 || !c6 || !d7 || !d8 || !e9 || !e10 || $.trim(f11) === ''){
-			console.log(a1);console.log(a2);console.log(b3);console.log(b4);console.log(c5);console.log(c6);
-			console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);
-			
-			
-			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
-			return false;
-		} else {
-			if(window.confirm("${target.name} 님의 평가 예상점수는 "+sumAA+"점입니다.\n평가완료 후 재평가(수정)이 안됩니다. \n평가완료를 하시겠습니까?")){
-				form.action = "${pageContext.request.contextPath}/d/formAction/${info.idx}/${target.idx}/${team}";
-				form.submit();
-				// 뒤로가기 버튼 비활성화
-				window.history.pushState(null, null, window.location.href);
-				window.onpopstate = function(event) {
-				    window.history.pushState(null, null, window.location.href);
-				};
-			}else{
-				
-			}
+$(function () {
+	$(document).on("click", "#end", function () {
+		// 답안 체크
+		var a1 = $('input[name=a1]').is(":checked");
+		var a2 = $('input[name=a2]').is(":checked");
+		var b3 = $('input[name=b3]').is(":checked");
+		var b4 = $('input[name=b4]').is(":checked");
+		var c5 = $('input[name=c5]').is(":checked");
+		var c6 = $('input[name=c6]').is(":checked");
+		var d7 = $('input[name=d7]').is(":checked");
+		var d8 = $('input[name=d8]').is(":checked");
+		var e9 = $('input[name=e9]').is(":checked");
+		var e10 = $('input[name=e10]').is(":checked");
+		var f11 = $("#f11").val();
+		
+		var a12 = $('input[name=a12]').is(":checked");
+		var a13 = $('input[name=a13]').is(":checked");
+		var a14 = $('input[name=a14]').is(":checked");
+		var a15 = $('input[name=a15]').is(":checked");
+		var a16 = $('input[name=a16]').is(":checked");
+		var a17 = $('input[name=a17]').is(":checked");
+		var a18 = $('input[name=a18]').is(":checked");
+		var b19 = $('input[name=b19]').is(":checked");
+		var b20 = $('input[name=b20]').is(":checked");
+		var b21 = $('input[name=b21]').is(":checked");
+		var b22 = $('input[name=b22]').is(":checked");
+		var c23 = $('input[name=c23]').is(":checked");
+		var c24 = $('input[name=c24]').is(":checked");
+		var c25 = $('input[name=c25]').is(":checked");
+		var c26 = $('input[name=c26]').is(":checked");
+		var c27 = $('input[name=c27]').is(":checked");
+		var d28 = $('input[name=d28]').is(":checked");
+		var d29 = $('input[name=d29]').is(":checked");
+		var e30 = $('input[name=e30]').is(":checked");
+		var e31 = $('input[name=e31]').is(":checked");
+		var f32 = $("#f32").val();
+		
+		// AA
+		var g1 = $('input[name=a1]:checked').val();
+		var g2 = $('input[name=a2]:checked').val();
+		var g3 = $('input[name=b3]:checked').val();
+		var g4 = $('input[name=b4]:checked').val();
+		var g5 = $('input[name=c5]:checked').val();
+		var g6 = $('input[name=c6]:checked').val();
+		var g7 = $('input[name=d7]:checked').val();
+		var g8 = $('input[name=d8]:checked').val();
+		var g9 = $('input[name=e9]:checked').val();
+		var g10 = $('input[name=e10]:checked').val();
+		// AB
+		var k1 = $('input[name=a12]:checked').val();
+		var k2 = $('input[name=a13]:checked').val();
+		var k3 = $('input[name=a14]:checked').val();
+		var k4 = $('input[name=a15]:checked').val();
+		var k5 = $('input[name=a16]:checked').val();
+		var k6 = $('input[name=a17]:checked').val();
+		var k7 = $('input[name=a18]:checked').val();
+		var k8 = $('input[name=b19]:checked').val();
+		var k9 = $('input[name=b20]:checked').val();
+		var k10 = $('input[name=b21]:checked').val();
+		var k11 = $('input[name=b22]:checked').val();
+		var k12 = $('input[name=c23]:checked').val();
+		var k13 = $('input[name=c24]:checked').val();
+		var k14 = $('input[name=c25]:checked').val();
+		var k15 = $('input[name=c26]:checked').val();
+		var k16 = $('input[name=c27]:checked').val();
+		var k17 = $('input[name=d28]:checked').val();
+		var k18 = $('input[name=d29]:checked').val();
+		var k19 = $('input[name=e30]:checked').val();
+		var k20 = $('input[name=e31]:checked').val();
+		
+		function mapValueToScore(value) {
+		    switch (value) {
+		        case '매우우수':
+		            return 5;
+		        case '우수':
+		            return 4;
+		        case '보통':
+		            return 3;
+		        case '미흡':
+		            return 2;
+		        case '매우미흡':
+		            return 1;
+		        default:
+		            return 0; 
+		    }
 		}
-	}else {
-		if(!a12 || !a13 || !a14 || !a15 || !a16 || !a17 || !a18 || 
-				!b19 || !b20 || !b21 || !b22 || 
-				!c23 || !c24 || !c25 || !c26 || !c27 ||
-				!d28 || !d29|| !e30|| !e31 ||				
-				$.trim(f32) === ''){
-			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
-			return false;
+		function mapValueToScore2(value) {
+		    switch (value) {
+		        case '매우우수':
+		            return 10;
+		        case '우수':
+		            return 8;
+		        case '보통':
+		            return 6;
+		        case '미흡':
+		            return 4;
+		        case '매우미흡':
+		            return 2;
+		        default:
+		            return 0; 
+		    }
+		}
+		
+		var sumAA = mapValueToScore2(g1) + mapValueToScore2(g2) + mapValueToScore2(g3) + mapValueToScore2(g4) + mapValueToScore2(g5) + mapValueToScore2(g6) + mapValueToScore2(g7) + mapValueToScore2(g8) + mapValueToScore2(g9) + mapValueToScore2(g10);
+		var sumAB = mapValueToScore(k1) + mapValueToScore(k2) + mapValueToScore(k3) + mapValueToScore(k4) + mapValueToScore(k5) + mapValueToScore(k6) + mapValueToScore(k7) + mapValueToScore(k8) + mapValueToScore(k9) + mapValueToScore(k10) + mapValueToScore(k11) + mapValueToScore(k12) + mapValueToScore(k13) + mapValueToScore(k14) + mapValueToScore(k15) + mapValueToScore(k16) + mapValueToScore(k17) + mapValueToScore(k18) + mapValueToScore(k19) + mapValueToScore(k20);
+		
+		// 문제유형으로 나누기
+		// A, B, C 인 경우와 D인 경우
+		if(ev == 'A' || ev == 'B' || ev == 'C' || ev == 'E'){
+			if(!a1 || !a2 || !b3 || !b4 || !c5 || !c6 || !d7 || !d8 || !e9 || !e10 || $.trim(f11) === ''){
+				console.log(a1);console.log(a2);console.log(b3);console.log(b4);console.log(c5);console.log(c6);
+				console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);
+				
+				msg.innerText = "현재 답변하지 않은 평가가 있습니다. 확인해주세요."
+				modal.classList.toggle('show');
+				
+				if (modal.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
+			} else {
+				msg2.innerHTML = "<p>${target.name} 님의 평가 <b style='color:red;'>예상점수는 "+sumAA+"점</b>입니다.<br>평가완료 후 재평가(수정)이 안됩니다. 평가완료를 하시겠습니까?</p>";
+				modal2.classList.toggle('show');
+		   		
+		   		if (modal2.classList.contains('show')) {
+		   			body.style.overflow = 'hidden';
+		   		}
+			}
 		}else {
-			if(window.confirm("${target.name} 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료 후 재평가(수정)이 안됩니다. \n평가완료를 하시겠습니까?")){
-				form.action = "${pageContext.request.contextPath}/d/formAction/${info.idx}/${target.idx}/${team}";
-				form.submit();
-				// 뒤로가기 버튼 비활성화
-				window.history.pushState(null, null, window.location.href);
-				window.onpopstate = function(event) {
-				    window.history.pushState(null, null, window.location.href);
-				};
-			}else{
+			if(!a12 || !a13 || !a14 || !a15 || !a16 || !a17 || !a18 || 
+					!b19 || !b20 || !b21 || !b22 || 
+					!c23 || !c24 || !c25 || !c26 || !c27 ||
+					!d28 || !d29|| !e30|| !e31 ||				
+					$.trim(f32) === ''){
+				msg.innerText = "현재 답변하지 않은 평가가 있습니다. 확인해주세요."
+				modal.classList.toggle('show');
 				
+				if (modal.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
+			}else {
+				msg2.innerHTML = "<p>${target.name} 님의 평가 <b style='color:red;'>예상점수는 "+sumAB+"점</b>입니다.<br>평가완료 후 재평가(수정)이 안됩니다. 평가완료를 하시겠습니까?</p>";
+				modal2.classList.toggle('show');
+		   		
+		   		if (modal2.classList.contains('show')) {
+		   			body.style.overflow = 'hidden';
+		   		}
 			}
 		}
+		
+		
+	});
+	
+
+});
+function closePopup2redirect(){
+	modal2.classList.toggle('show');
+	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
 	}
-	
-	
-});
-
-
-
-
-/* 
-$(document).ready(function(){ 
-    window.onbeforeunload = function(){
-        doExit();
-    };
-});
-
-function doExit(){
-    event.returnValue = '"페이지를 벗어 나시겠습니까?"';
+	form.action = "${pageContext.request.contextPath}/d/formAction/${info.idx}/${target.idx}/${team}";
+	form.submit();
 }
- */
-/* 
-var next = document.querySelector(".next");
-var prev = document.querySelector(".prev");
-var progress = document.querySelector("#progress");
-next.addEventListener("click", NextPage);
-prev.addEventListener("click", PrevPage)
-function NextPage() {
-	progress.value = progress.value + 10;
-	console.log(progress.value);
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
 }
-function PrevPage() {
-	progress.value = progress.value - 10;
-	console.log(progress.value);
+function closePopup2(){
+	modal2.classList.toggle('show');
+	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
 }
- */
-
-
 </script>	
 </body>
 </html>

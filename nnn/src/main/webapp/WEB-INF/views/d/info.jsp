@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/coopinfocss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
 
 <style>
 
@@ -22,7 +23,7 @@
 <div class="main">
 <form action="${pageContext.request.contextPath}/d/Form" method="post">
 <div class="logo">
-<c:if test="${ sessionScope.loginmember eq '12365478' or sessionScope.loginmember eq '1' or empty sessionScope.loginmember }">
+<c:if test="${ sessionScope.loginmember eq '12365478' or empty sessionScope.loginmember }">
 	<div style="position:absolute; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border: 1px solid; border-radius: 30px; cursor: pointer;"
 		onclick="location.href='${pageContext.request.contextPath}/d/admin'">
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
@@ -31,18 +32,20 @@
 	</div>
 </c:if>
 
-<%-- <c:choose>
-	<c:when test="${info.hspt_name eq '효사랑전주요양병원'}">
+<c:choose>
+	<c:when test="${info.c_name2 eq '효사랑전주요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/1hspt.png">
 	</c:when>
-	<c:when test="${info.hspt_name eq '효사랑가족요양병원'}">
+	<c:when test="${info.c_name2 eq '효사랑가족요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/2hspt.png">
 	</c:when>
-	<c:when test="${info.hspt_name eq '가족사랑요양병원'}">
+	<c:when test="${info.c_name2 eq '가족사랑요양병원'}">
 		<img src="${pageContext.request.contextPath}/resources/img/3hspt.png">
 	</c:when>
-</c:choose> --%>
-${info.c_name }
+	<c:otherwise>
+		${info.c_name }
+	</c:otherwise>
+</c:choose>
 <a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/d/Logout">로그아웃</a>
 </div>
 <div>
@@ -93,7 +96,7 @@ ${info.c_name }
 
 <!-- 운영진 -->
 <div style="display:<c:if test="${info.c_M eq 'F' }">none</c:if>;">
-▶ 운영진 평가
+▶ 부서장간 평가
 <div class="targetC_area">
 <table class="targettb_C">
 	<tr>
@@ -268,6 +271,30 @@ ${info.c_name }
 							<c:set var="index3" value="${index3 + 1}" />
 						</c:if>	
 					</c:if>
+					<c:if test="${t.grade eq 99 or t.grade eq 98}">
+						<tr>
+							<td>${index3 }</td>
+							<td>${t.c_name }</td>
+							<td>${t.c_subname }</td>
+							<td>${t.id }</td>
+							<td>${t.c_position }</td>
+							<td>${t.name }</td>
+							<td class="form_go"  onclick="formgo(this)" data-d3="<c:forEach items="${endlist }" var="e"><c:if test="${t.idx eq e.d2 and e.team eq 'D'}">${e.d3 }</c:if></c:forEach>" 
+							data-ev="D" data-t-idx="${t.idx }" data-e-idx="<c:if test="${e.d2 eq t.idx}">${e.d2}</c:if>">
+							평가하기
+							</td>
+							<td>
+								<c:forEach items="${endlist}" var="e">
+									<c:choose>
+										<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
+											${e.d3 }
+										</c:when>
+									</c:choose>
+								</c:forEach>
+							</td>
+						</tr>		
+						<c:set var="index3" value="${index3 + 1}" />
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 		</c:if>
@@ -281,8 +308,20 @@ ${info.c_name }
 <div style="text-align: center;">
 <img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 </div>
+
 </form>
 </div>
+<div class="modal normal">
+	<div class="modal_body">
+		<div>
+			<div class="menu_msg">현재 답변하지 않은 평가가 있습니다. 확인해주세요.</div>
+			<div class="btn pink_btn" id="modal_insert" onclick="closePopup()">
+			확인
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
 
 <script>
@@ -292,12 +331,22 @@ var date = ${specificDate};
 console.log("세션아이디 ${sessionScope.loginmember}");
 console.log("model아이디 ${info.id}");
 console.log("특정 날짜를 넘겼는지 확인 "+ date);
-// 뒤로가기 버튼을 비활성화하는 함수
-function disableBackButton() {
-	window.history.pushState(null, '', window.location.href);
-	window.onpopstate = function () {
-		window.history.pushState(null, '', window.location.href);
-	};
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const msg = document.querySelector('.menu_msg');
+
+function end(){
+modal.classList.toggle('show');
+msg.innerText = "이미 평가가 완료된 대상입니다."
+if (modal.classList.contains('show')) {
+	body.style.overflow = 'hidden';
+}
+}
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
 }
 
 function formgo(element) {
@@ -309,8 +358,11 @@ function formgo(element) {
 	var d3 = element.getAttribute("data-d3");
 	/* 
 	if(d3 === '평가완료'){
-		alert("이미 평가가 완료된 대상입니다.");
-		window.location.reload();
+		modal.classList.toggle('show');
+		msg.innerText = "이미 평가가 완료된 대상입니다."
+		if (modal.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
 	}else{
 		//링크 이동
 //		location.href=link;
@@ -322,12 +374,23 @@ function formgo(element) {
 	
 	if(date == 1){
 		console.log("아직안넘음");
-		alert("12월 6일 오픈 예정입니다. \n직원평가기간은 12월6일(수)~12월8일(금) 입니다.");
-		window.location.reload();
+		modal.classList.toggle('show');
+		msg.innerText = "12월 6일 오픈 예정입니다. \n직원평가기간은 12월6일(수)~12월8일(금) 입니다."
+		if (modal.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+		//alert("12월 6일 오픈 예정입니다. \n직원평가기간은 12월6일(수)~12월8일(금) 입니다.");
+		//window.location.reload();
+		return false;
 	}else {
 		console.log("넘음");
 		if(d3 === '평가완료'){
-			alert("이미 평가가 완료된 대상입니다.");
+//			alert("이미 평가가 완료된 대상입니다.");
+			modal.classList.toggle('show');
+			msg.innerText = "이미 평가가 완료된 대상입니다."
+			if (modal.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
 		}else{
 			//링크 이동
 //			location.href=link;
@@ -335,7 +398,8 @@ function formgo(element) {
 			// 뒤로가기 버튼 비활성화
 			disableBackButton();
 		}
-	}
+	} 
+	
 }
 
 </script>

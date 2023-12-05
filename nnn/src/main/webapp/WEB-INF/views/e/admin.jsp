@@ -23,9 +23,8 @@
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
 				<div class="nav__brand" style="">
-					<a href="#" class="nav__logo" onclick="window.location.reload()">관리자 페이지</a>
-					
-					
+					<a href="${pageContext.request.contextPath}/e/admin" class="nav__logo" >효사랑</a>
+					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a>
 				</div>
 			</div>
 		</div>
@@ -915,6 +914,8 @@ function perall(contentId) {
 		 						tdpersent.setAttribute("style", "background:#32b0ca;");
 							} else if (tdanswer.innerText == 0) {
 								tdpersent.setAttribute("style", "background: red; color: #fff");
+							}else if (Number(tdtarget.innerText) < Number(tdanswer.innerText)){
+								tr.setAttribute("style", "background: #E6B8AF;")
 							}
 		 					
 							
@@ -1111,6 +1112,8 @@ function per1() {
 	 						tdpersent.setAttribute("style", "background:#32b0ca;");
 						} else if (tdanswer.innerText == 0) {
 							tdpersent.setAttribute("style", "background: red; color: #fff");
+						}else if (Number(tdtarget.innerText) < Number(tdanswer.innerText)){
+							tr.setAttribute("style", "background: #E6B8AF;")
 						}
 	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
@@ -1305,6 +1308,8 @@ function per2() {
 	 						tdpersent.setAttribute("style", "background:#32b0ca;");
 						} else if (tdanswer.innerText == 0) {
 							tdpersent.setAttribute("style", "background: red; color: #fff");
+						}else if (Number(tdtarget.innerText) < Number(tdanswer.innerText)){
+							tr.setAttribute("style", "background: #E6B8AF;")
 						}
 	 					var tdinfo = document.createElement("TD");
 	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
@@ -1499,6 +1504,8 @@ function per3() {
 	 						tdpersent.setAttribute("style", "background:#32b0ca;");
 						} else if (tdanswer.innerText == 0) {
 							tdpersent.setAttribute("style", "background: red; color: #fff");
+						} else if (Number(tdtarget.innerText) < Number(tdanswer.innerText)){
+							tr.setAttribute("style", "background: #E6B8AF;")
 						}
 	 					
 	 					var tdinfo = document.createElement("TD");

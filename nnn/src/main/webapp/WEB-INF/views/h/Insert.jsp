@@ -350,8 +350,6 @@
 
 
 
-const body = document.querySelector('body');
-const modal = document.querySelector('.modal');
 const modal2 = document.querySelector('.modal2');
 const btnOpenPopup = document.querySelector('#end');
 //const modal2Open = document.querySelector('#modal_insert');

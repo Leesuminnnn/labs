@@ -23,9 +23,8 @@
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
 				<div class="nav__brand" style="">
-					<a href="#" class="nav__logo" onclick="window.location.reload()">관리자 페이지</a>
-					
-					
+					<a href="${pageContext.request.contextPath}/e/admin" class="nav__logo" >효사랑</a>
+					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a>
 				</div>
 			</div>
 		</div>
@@ -57,25 +56,25 @@
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;정성/사랑모아 (3병원) ${p3}/${h3}</span>
 					</a>
-					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser1" data-content="content4">
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user4" data-content="content4">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;효사랑장례문화원 ${p4}/${h4}</span>
 					</a>
-					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser2" data-content="content5">
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user5" data-content="content5">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;(주)조이 ${p5}/${h5}</span>
 					</a>
-					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser3" data-content="content6">
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user6" data-content="content6">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;핵심인재개발원 ${p6}/${h6}</span>
 					</a>
-					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="coopuser4" data-content="content7">
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user7" data-content="content7">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;자야(주) ${p7}/${h7}</span>
 					</a>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="perall" data-content="all">
-						<span class="nav_name">1,2,3병원 평가진행률 Total</span>
+						<span class="nav_name">계열사 평가진행률 Total</span>
 					</a>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
@@ -89,7 +88,22 @@
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;가족사랑요양병원 평가진행률</span>
 					</a>
-					
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per4" data-content="content4">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;효사랑장례문화원 평가진행률</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per5" data-content="content5">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;(주)조이 평가진행률</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per6" data-content="content6">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;핵심인재개발원 평가진행률</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per7" data-content="content7">
+						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+						<span class="nav_subname" style="font-size: 18px;">&nbsp;재무국 평가진행률</span>
+					</a>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<!-- <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="setting" data-content="setting">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>

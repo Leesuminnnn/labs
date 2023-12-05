@@ -608,23 +608,31 @@ public class CoopEvaluationController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		List<CoopusersVo> list = coopevaluationService.users(map);
-//		List<CoopusersVo> list1 = coopevaluationService.users1(map);
-//		List<CoopusersVo> list2 = coopevaluationService.users2(map);
-//		List<CoopusersVo> list3 = coopevaluationService.users3(map);
-//		List<CoopusersVo> listpwd1 = coopevaluationService.users1pwd(map);
-//		List<CoopusersVo> listpwd2 = coopevaluationService.users2pwd(map);
-//		List<CoopusersVo> listpwd3 = coopevaluationService.users3pwd(map);
-//		List<LoginlogVo> log = coopevaluationService.log(map);
-//		List<UserPh> ph = coopevaluationService.ph(map);
-//		
-//		
-//		int hspt1 = coopevaluationService.hsptselect1(map);
-//		int hspt2 = coopevaluationService.hsptselect2(map);
-//		int hspt3 = coopevaluationService.hsptselect3(map);
-//
-//		int hsptpwdselect1 = coopevaluationService.hsptpwdselect1(map);
-//		int hsptpwdselect2 = coopevaluationService.hsptpwdselect2(map);
-//		int hsptpwdselect3 = coopevaluationService.hsptpwdselect3(map);
+		List<CoopusersVo> list1 = coopevaluationService.user1(map);
+		List<CoopusersVo> list2 = coopevaluationService.user2(map);
+		List<CoopusersVo> list3 = coopevaluationService.user3(map);
+		List<CoopusersVo> list4 = coopevaluationService.user4(map);
+		List<CoopusersVo> list5 = coopevaluationService.user5(map);
+		List<CoopusersVo> list6 = coopevaluationService.user6(map);
+		List<CoopusersVo> list7 = coopevaluationService.user7(map);
+
+		int coop1 = coopevaluationService.usercnt1(map);
+		int coop2 = coopevaluationService.usercnt2(map);
+		int coop3 = coopevaluationService.usercnt3(map);
+		int coop4 = coopevaluationService.usercnt4(map);
+		int coop5 = coopevaluationService.usercnt5(map);
+		int coop6 = coopevaluationService.usercnt6(map);
+		int coop7 = coopevaluationService.usercnt7(map);
+		
+//		List<CoopusersVo> listpwd1 = coopevaluationService.userpwd1(map);
+//		List<CoopusersVo> listpwd2 = coopevaluationService.userpwd2(map);
+//		List<CoopusersVo> listpwd3 = coopevaluationService.userpwd3(map);
+//		List<CoopusersVo> listpwd4 = coopevaluationService.userpwd4(map);
+//		List<CoopusersVo> listpwd5 = coopevaluationService.userpwd5(map);
+//		List<CoopusersVo> listpwd6 = coopevaluationService.userpwd6(map);
+//		List<CoopusersVo> listpwd7 = coopevaluationService.userpwd7(map);
+		
+		
 		
 		mv.addObject("users", list);
 		request.setAttribute("users", list);

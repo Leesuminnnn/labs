@@ -77,7 +77,7 @@
 	 <select id="users" resultType="map" parameterType="map">
 		select u.idx, u.c_name, u.c_name2, u.c_subname, u.c_subcode, u.id, u.pwd, u.c_position, u.name, u.reg_date, u.end_date, u.phone, u.del_yn, u.c_M, 
 		u.grade, u.user_code
-		from coopusers u
+		from coopusers u where u.del_yn = 'N'
 	</select>
 	 
 	<select id="users1" resultType="map" parameterType="map">
@@ -117,65 +117,6 @@
 	<update id="pwdreset" parameterType="map">
 		update coopusers set pwd = null where id = #{id}
 	</update>
-	<!-- 계열사 별 초기화 해야함 -->
-	<!-- 
-	<update id="pwdreset1" parameterType="map">
-		update coopusers set pwd = null where hspt_name = '효사랑전주요양병원' and id = #{id}
-	</update>
-	<update id="pwdreset2" parameterType="map">
-		update coopusers set pwd = null where hspt_name = '효사랑가족요양병원' and id = #{id}
-	</update>
-	<update id="pwdreset3" parameterType="map">
-		update coopusers set pwd = null where hspt_name = '가족사랑요양병원' and id = #{id}
-	</update>
-	
-	-->
-	
-	<!-- 비밀번호 설정한 직원 명부 -->
-	
-	<select id="hsptselect1" parameterType="map" resultType="int">
-		select count(*) from coopusers where c_name2 = '효사랑전주요양병원'
-	</select>
-	
-	<select id="hsptselect2" parameterType="map" resultType="int">
-		select count(*) from coopusers where c_name2 = '효사랑가족요양병원'
-	</select>
-	
-	<select id="hsptselect3" parameterType="map" resultType="int">
-		select count(*) from coopusers where c_name2 = '가족사랑요양병원'
-	</select>
-	
-	<select id="hsptpwdselect1" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '효사랑전주요양병원' and pwd is NOT NULL;
-	</select>
-	<select id="hsptpwdselect2" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '효사랑가족요양병원' and pwd is NOT NULL;
-	</select>
-	<select id="hsptpwdselect3" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '가족사랑요양병원' and pwd is NOT NULL;
-	</select>
-	
-	<!-- 부서별 비밀번호 설정한 인원? -->
-	<!-- 
-	<select id="hsptselect1sub" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '효사랑전주요양병원' and pwd is NOT NULL and user_code like concat (#{sub}, '%');
-	</select>
-	<select id="hsptselect2sub" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '효사랑가족요양병원' and pwd is NOT NULL and user_code like concat (#{sub}, '%');
-	</select>
-	<select id="hsptselect3sub" parameterType="map" resultType="int">
-		select count(*) from coopusers where hspt_name = '가족사랑요양병원' and pwd is NOT NULL and user_code like concat (#{sub}, '%');
-	</select>
-	
-	<select id="target" parameterType="map" resultType="map">
-		select * from target
-	</select>
-	
-	<select id="answerselect" parameterType="map" resultType="map">
-		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from answer
-	</select>
-	 -->
-	 
 	 <!-- 평가 대상자 쿼리 -->
 	 
 	 <select id="coopevaluationtarget" resultType="cusers">
@@ -232,10 +173,14 @@
 	    			<when test='csubcode.equals("AG0")'>
 	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = #{csubcode}
 	    				or
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = 'AH0'
+	    				or
 	    				u.c_name = #{cname1} and u.c_M = 'T'
 	    			</when>
 	    			<when test='csubcode.equals("AH0")'>
 	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = #{csubcode}
+	    				or
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = 'AG0'
 	    				or
 	    				u.c_name = #{cname1} and u.c_M = 'T'
 	    			</when>
@@ -275,6 +220,20 @@
 		    		or
 		    		u.del_yn = 'N' and u.c_subcode = #{csubcode} and u.grade = 3
 	    			</when>
+	    			<when test='csubcode.equals("AG0")'>
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = #{csubcode}
+	    				or
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = 'AH0'
+	    				or
+	    				u.c_name = #{cname1} and u.c_M = 'T'
+	    			</when>
+	    			<when test='csubcode.equals("AH0")'>
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = #{csubcode}
+	    				or
+	    				u.c_name = #{cname1} and u.grade = 5 and u.c_subcode = 'AG0'
+	    				or
+	    				u.c_name = #{cname1} and u.c_M = 'T'
+	    			</when>
 	    			<otherwise>
 	    			u.c_name2 = #{cname2} and u.c_subcode = #{csubcode} and u.grade = 5
 		    		or
@@ -282,29 +241,153 @@
 	    			</otherwise>
 	    		</choose>
 	    	</when>
+	    	<when test="grade == 99">
+	    		u.c_subcode = 'ZZ0'
+	    	</when>
 	    	<otherwise>
 	    		idx = #{idx}
 	    	</otherwise>
 	    </choose>
 	    	
 	 </select>
+	<!-- 비밀번호 설정해야하는 인원 -->
 	
+	<select id="usercnt1" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑전주요양병원';
+		]]>
+	</select>
+	<select id="user1" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑전주요양병원';
+		]]>
+	</select>
+	
+	<select id="usercnt2" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑가족요양병원';
+		]]>
+	</select>
+	<select id="user2" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑가족요양병원';
+		]]>
+	</select>
+	
+	<select id="usercnt3" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '가족사랑요양병원';
+	]]>
+	</select>
+	<select id="user3" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '가족사랑요양병원';
+	]]>
+	</select>
+	
+	<select id="usercnt4" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑장례문화원';
+	]]>
+	</select>
+	<select id="user4" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑장례문화원';
+	]]>
+	</select>
+	
+	<select id="usercnt5" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_subname = '구이아마존';
+		]]>
+	</select>
+	<select id="user5" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_subname = '구이아마존';
+		]]>
+	</select>
+	
+	<select id="usercnt6" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '핵심인재개발원';
+		]]>
+	</select>
+	<select id="user6" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '핵심인재개발원';
+		]]>
+	</select>
+	
+	<select id="usercnt7" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_subname = '재무국';
+		]]>
+	</select>
+	<select id="user7" parameterType="map" resultType="map">
+	<![CDATA[
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_subname = '재무국';
+		]]>
+	</select>
+	
+	<select id="userpwd1" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑전주요양병원' and pwd is NOT NULL;
+		]]>
+	</select>
+	
+	<select id="userpwd2" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑가족요양병원' and pwd is NOT NULL;
+	]]>
+	</select>
+	
+	<select id="userpwd3" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '가족사랑요양병원' and pwd is NOT NULL;
+	]]>
+	</select>
+	
+	<select id="userpwd4" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑장례문화원' and pwd is NOT NULL;
+	]]>
+	</select>
+	
+	<select id="userpwd5" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_subname = '구이아마존' and pwd is NOT NULL;
+	]]>
+	</select>
+	
+	<select id="userpwd6" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '핵심인재개발원' and pwd is NOT NULL;
+	]]>
+	</select>
+	
+	<select id="userpwd7" parameterType="map" resultType="int">
+	<![CDATA[
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_subname = '재무국' and pwd is NOT NULL;
+	]]>
+	</select>
+	
+	
+	
+	<!-- 
+	<select id="target" parameterType="map" resultType="map">
+		select * from target
+	</select>
+	
+	<select id="answerselect" parameterType="map" resultType="map">
+		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from answer
+	</select>
+	 -->
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	
+	
+	
+	
+	
+	
+	
 </mapper>
