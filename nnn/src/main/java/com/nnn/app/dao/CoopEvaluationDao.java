@@ -105,7 +105,10 @@ public class CoopEvaluationDao {
 		return sqlSession1.selectOne(MAPPER+".dbcheck", vo);
 //		return sqlSession3.selectOne(MAPPER+".dbcheck", vo);
 	}
-
+	public List<CoopusersVo> user(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".user", map);
+//		return sqlSession3.selectList(MAPPER+".users", map);
+	}
 	public List<CoopusersVo> users(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users", map);
 //		return sqlSession3.selectList(MAPPER+".users", map);
@@ -213,28 +216,99 @@ public class CoopEvaluationDao {
 //		return sqlSession3.selectOne(MAPPER+".usercnt7", map);
 	}
 	
-
-	public int hsptselectpwd1(Map<String, Object> map) {
-		return sqlSession1.selectOne(MAPPER+".hsptpwdselect1", map);
-//		return sqlSession3.selectOne(MAPPER+".hsptpwdselect1", map);
+	public int userpwd1(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd1", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd1", map);
 	}
-	public int hsptselectpwd2(Map<String, Object> map) {
-		return sqlSession1.selectOne(MAPPER+".hsptpwdselect2", map);
-//		return sqlSession3.selectOne(MAPPER+".hsptpwdselect2", map);
+	public int userpwd2(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd2", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd2", map);
 	}
-	public int hsptselectpwd3(Map<String, Object> map) {
-		return sqlSession1.selectOne(MAPPER+".hsptpwdselect3", map);
-//		return sqlSession3.selectOne(MAPPER+".hsptpwdselect3", map);
+	public int userpwd3(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd3", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd3", map);
+	}
+	public int userpwd4(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd4", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd4", map);
+	}
+	public int userpwd5(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd5", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd5", map);
+	}
+	public int userpwd6(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd6", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd6", map);
+	}
+	public int userpwd7(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".userpwd7", map);
+//		return sqlSession3.selectOne(MAPPER+".userpwd7", map);
 	}
 
 	public List<TargetVo> target(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".target", map);
 //		return sqlSession3.selectList(MAPPER+".target", map);
 	}
+	public List<TargetVo> target1(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target1", map);
+//		return sqlSession3.selectList(MAPPER+".target1", map);
+	}
+	public List<TargetVo> target2(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target2", map);
+//		return sqlSession3.selectList(MAPPER+".target2", map);
+	}
+	public List<TargetVo> target3(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target3", map);
+//		return sqlSession3.selectList(MAPPER+".target3", map);
+	}
+	public List<TargetVo> target4(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target4", map);
+//		return sqlSession3.selectList(MAPPER+".target4", map);
+	}
+	public List<TargetVo> target5(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target5", map);
+//		return sqlSession3.selectList(MAPPER+".target5", map);
+	}
+	public List<TargetVo> target6(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target6", map);
+//		return sqlSession3.selectList(MAPPER+".target6", map);
+	}
+	public List<TargetVo> target7(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".target7", map);
+//		return sqlSession3.selectList(MAPPER+".target7", map);
+	}
 
 	public List<CAnswerVo> answerselect(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".answerselect", map);
 //		return sqlSession3.selectList(MAPPER+".answerselect", map);
+	}
+	public List<CAnswerVo> answerselect1(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect1", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect1", map);
+	}
+	public List<CAnswerVo> answerselect2(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect2", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect2", map);
+	}
+	public List<CAnswerVo> answerselect3(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect3", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect3", map);
+	}
+	public List<CAnswerVo> answerselect4(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect4", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect4", map);
+	}
+	public List<CAnswerVo> answerselect5(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect5", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect5", map);
+	}
+	public List<CAnswerVo> answerselect6(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect6", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect6", map);
+	}
+	public List<CAnswerVo> answerselect7(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".answerselect7", map);
+//		return sqlSession3.selectList(MAPPER+".answerselect7", map);
 	}
 
 	public int pwdajax(Map<String, Object> map) {
@@ -242,6 +316,85 @@ public class CoopEvaluationDao {
 //		return sqlSession3.update(MAPPER+".pwdajax", map);
 	}
 	
+	public int targetsum(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum", map);
+	}
+
+	public int answersum(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum", map);
+	}
+	
+	public int targetsum1(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum1", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum1", map);
+	}
+
+	public int answersum1(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum1", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum1", map);
+	}
+	
+	public int targetsum2(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum2", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum2", map);
+	}
+
+	public int answersum2(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum2", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum2", map);
+	}
+	
+	public int targetsum3(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum3", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum3", map);
+	}
+
+	public int answersum3(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum3", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum3", map);
+	}
+	
+	public int targetsum4(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum4", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum4", map);
+	}
+
+	public int answersum4(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum4", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum4", map);
+	}
+	
+	public int targetsum5(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum5", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum5", map);
+	}
+
+	public int answersum5(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum5", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum5", map);
+	}
+	
+	public int targetsum6(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum6", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum6", map);
+	}
+
+	public int answersum6(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum6", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum6", map);
+	}
+	
+	public int targetsum7(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".targetsum7", map);
+//		return sqlSession3.selectOne(MAPPER+".targetsum7", map);
+	}
+
+	public int answersum7(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answersum7", map);
+//		return sqlSession3.selectOne(MAPPER+".answersum7", map);
+	}
 	
 
 	

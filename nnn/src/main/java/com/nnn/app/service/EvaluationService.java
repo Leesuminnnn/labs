@@ -229,6 +229,10 @@ public class EvaluationService {
 	public int answersum3(Map<String, Object> map) {
 		return evaluationDao.answersum3(map);
 	}
+
+	public List<UsersVo> my(Map<String, Object> map) {
+		return evaluationDao.my(map);
+	}
 	
 	
 }

@@ -80,32 +80,7 @@
 		from coopusers u where u.del_yn = 'N'
 	</select>
 	 
-	<select id="users1" resultType="map" parameterType="map">
-		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
-		from coopusers where hspt_name = "효사랑전주요양병원"
-	</select>
-	<select id="users1pwd" resultType="map" parameterType="map">
-		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
-		from coopusers where hspt_name = "효사랑전주요양병원" order by pwd asc
-	</select>
 	
-	<select id="users2" resultType="map" parameterType="map">
-		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
-		from coopusers where hspt_name = "효사랑가족요양병원"
-	</select>
-	<select id="users2pwd" resultType="map" parameterType="map">
-		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
-		from coopusers where hspt_name = "효사랑가족요양병원" order by pwd asc
-	</select>
-	
-	<select id="users3" resultType="map" parameterType="map">
-		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
-		from coopusers where hspt_name = "가족사랑요양병원"
-	</select>
-	<select id="users3pwd" resultType="map" parameterType="map">
-		select idx, c_name, c_name2, c_subname, c_subcode, id, pwd, c_position, name, reg_date, end_date, phone, del_yn, c_M, grade, user_code
-		from coopusers where hspt_name = "가족사랑요양병원" order by pwd asc
-	</select>
 	
 	<select id="log" resultType="map" parameterType="map">
 		select * from loginlog where id = #{id} order by d2 desc;
@@ -254,34 +229,34 @@
 	
 	<select id="usercnt1" parameterType="map" resultType="int">
 	<![CDATA[
-		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑전주요양병원';
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '효사랑전주요양병원';
 		]]>
 	</select>
 	<select id="user1" parameterType="map" resultType="map">
 	<![CDATA[
-		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑전주요양병원';
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '효사랑전주요양병원';
 		]]>
 	</select>
 	
 	<select id="usercnt2" parameterType="map" resultType="int">
 	<![CDATA[
-		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑가족요양병원';
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '효사랑가족요양병원';
 		]]>
 	</select>
 	<select id="user2" parameterType="map" resultType="map">
 	<![CDATA[
-		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑가족요양병원';
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '효사랑가족요양병원';
 		]]>
 	</select>
 	
 	<select id="usercnt3" parameterType="map" resultType="int">
 	<![CDATA[
-		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '가족사랑요양병원';
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '가족사랑요양병원';
 	]]>
 	</select>
 	<select id="user3" parameterType="map" resultType="map">
 	<![CDATA[
-		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '가족사랑요양병원';
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '가족사랑요양병원';
 	]]>
 	</select>
 	
@@ -331,19 +306,19 @@
 	
 	<select id="userpwd1" parameterType="map" resultType="int">
 	<![CDATA[
-		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑전주요양병원' and pwd is NOT NULL;
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '효사랑전주요양병원' and pwd is NOT NULL;
 		]]>
 	</select>
 	
 	<select id="userpwd2" parameterType="map" resultType="int">
 	<![CDATA[
-		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '효사랑가족요양병원' and pwd is NOT NULL;
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '효사랑가족요양병원' and pwd is NOT NULL;
 	]]>
 	</select>
 	
 	<select id="userpwd3" parameterType="map" resultType="int">
 	<![CDATA[
-		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name = '가족사랑요양병원' and pwd is NOT NULL;
+		select count(*) from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N' and c_name2 = '가족사랑요양병원' and pwd is NOT NULL;
 	]]>
 	</select>
 	
@@ -371,17 +346,91 @@
 	]]>
 	</select>
 	
-	
-	
-	<!-- 
-	<select id="target" parameterType="map" resultType="map">
-		select * from target
+	<select id="user" parameterType="map" resultType="map">
+		select * from coopusers where grade != 6 and grade != 99 and grade != 98 and del_yn = 'N';
 	</select>
+	
+	<select id="target" parameterType="map" resultType="map">
+		select * from ctarget
+	</select>
+	<select id="target1" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '효사랑전주요양병원'
+	</select>
+	<select id="target2" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '효사랑가족요양병원';
+	</select>
+	<select id="target3" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '가족사랑요양병원';
+	</select>
+	<select id="target4" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '효사랑장례문화원';
+	</select>
+	<select id="target5" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_subname = '구이아마존';
+	</select>
+	<select id="target6" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_name = '핵심인재개발원';
+	</select>
+	<select id="target7" parameterType="map" resultType="map">
+		select * from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '재무국';
+	</select>
+	
+	
 	
 	<select id="answerselect" parameterType="map" resultType="map">
-		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from answer
+		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from canswer where del_yn = 'N'
 	</select>
-	 -->
+	
+	<select id="targetsum" parameterType="map" resultType="int">
+		select sum(target) from ctarget where target
+	</select>
+	<select id="answersum" parameterType="map" resultType="int">
+		select count(*) from canswer
+	</select>
+	
+	<select id="targetsum1" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '효사랑전주요양병원'
+	</select>
+	<select id="targetsum2" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '효사랑가족요양병원';
+	</select>
+	<select id="targetsum3" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '가족사랑요양병원';
+	</select>
+	<select id="targetsum4" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '효사랑장례문화원';
+	</select>
+	<select id="targetsum5" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_subname = '구이아마존';
+	</select>
+	<select id="targetsum6" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_name = '핵심인재개발원';
+	</select>
+	<select id="targetsum7" parameterType="map" resultType="int">
+		select sum(c.target) from coopusers a join ctarget c on a.id = c.id where a.c_name2 = '재무국';
+	</select>
+	
+	<select id="answersum1" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name2 = '효사랑전주요양병원' and b.del_yn = 'N';
+	</select>
+	<select id="answersum2" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name2 = '효사랑가족요양병원' and b.del_yn = 'N';
+	</select>
+	<select id="answersum3" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name2 = '가족사랑요양병원' and b.del_yn = 'N';
+	</select>
+	<select id="answersum4" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name2 = '효사랑장례문화원' and b.del_yn = 'N';
+	</select>
+	<select id="answersum5" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_subname = '구이아마존' and b.del_yn = 'N';
+	</select>
+	<select id="answersum6" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name = '핵심인재개발원' and b.del_yn = 'N';
+	</select>
+	<select id="answersum7" parameterType="map" resultType="int">
+		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name2 = '재무국' and b.del_yn = 'N';
+	</select>
 	 
 	
 	

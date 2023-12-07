@@ -3,22 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" >
-<title>마이페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss2.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
-
-<style>
-
-</style>
-</head>
-<body>
 <div class="main">
 <form action="${pageContext.request.contextPath}/e/Form" method="post">
 <div class="logo">
@@ -732,32 +720,8 @@
 		</div>
 	</div>
 </div>
-</body>
 
 <script>
-const body = document.querySelector('body');
-const modal = document.querySelector('.modal');
-const modal2 = document.querySelector('.modal2');
-const msg = document.querySelector('.menu_msg');
-const msg2 = document.querySelector('.menu_msg2');
-var id = "${sessionScope.loginmember}";
-var info = "${info.id}";
-var date = ${specificDate};
-console.log("세션아이디 ${sessionScope.loginmember}");
-console.log("model아이디 ${info.id}");
-console.log("특정 날짜를 넘겼는지 확인 "+ date);
-
-if(id != info && id != '12365478'){
-	alert("잘못된 접근입니다.");
-	location.href = "${pageContext.request.contextPath}/";
-}
-
-function closePopup(){
-	modal.classList.toggle('show');
-	if (!modal.classList.contains('show')) {
-		body.style.overflow = 'auto';
-	}
-}
 
 function formgo(element) {
 	var infoidx = ${info.idx};
@@ -792,9 +756,6 @@ function formgo(element) {
 	}
 	
 }
-
-
-
-
 </script>
-</html>
+
+

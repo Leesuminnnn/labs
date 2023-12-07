@@ -3,6 +3,8 @@ package com.nnn.app.controller;
 import java.security.NoSuchAlgorithmException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -1401,6 +1403,143 @@ public class TestController {
 		
 		
 		mv.setViewName("t/testalert");
+		return mv;
+	}
+	@RequestMapping(value="Mypage")
+	public ModelAndView mypage(ModelAndView mv) throws Exception {
+		
+		
+		mv.setViewName("t/Mypage");
+		return mv;
+	}
+	@RequestMapping(value="Info2/{idx}")
+	public ModelAndView info2(UsersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) throws Exception {
+session.getAttribute("loginMember");
+		
+		System.out.println("#########################1");
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		String vtf = evaluationService.info(idx).getHspt_V();
+		String ktf = evaluationService.info(idx).getHspt_K();
+		String btf = evaluationService.info(idx).getHspt_B();
+		String xtf = evaluationService.info(idx).getHspt_X();
+		String ztf = evaluationService.info(idx).getHspt_Z();
+		String hsptname = evaluationService.info(idx).getHspt_name();
+		String hsptpo = evaluationService.info(idx).getHspt_position();
+		String hsptsubcode = evaluationService.info(idx).getHspt_subcode();
+		String hsptsubname = evaluationService.info(idx).getHspt_subname();
+		String po = evaluationService.info(idx).getHspt_position();
+		
+		System.out.println("############################1.5");
+
+		System.out.println("info : "+ evaluationService.info(idx));
+		System.out.println("시간 출력 : "+ evaluationService.info(idx).getReg_date());
+		System.out.println("경혁팀 여부 : "+vtf);
+		System.out.println("경혁팀장 여부 : "+ktf);
+		System.out.println("부서장 여부 : "+btf);
+		System.out.println("1인부서 여부 : "+xtf);
+		System.out.println("진료팀장 여부 : "+ztf);
+		if (po.equals("T")) {
+			boolean position = true;
+			map.put("position", position);
+			System.out.println("position : "+position);
+		}else {
+			boolean position = false;
+			map.put("position", position);
+			System.out.println("position : "+position);
+		}
+		
+		if(vtf.equals("T")) {
+			boolean v = true;
+			map.put("v", v);
+			System.out.println("경혁팀여부v : "+v);
+		}else {
+			boolean v = false;
+			map.put("v", v);
+			System.out.println("경혁팀여부v : "+v);
+		}
+		
+		if(ktf.equals("T")) {
+			boolean v = true;
+			map.put("k", v);
+			System.out.println("경혁팀장여부k : "+v);
+		}else {
+			boolean v = false;
+			map.put("k", v);
+			System.out.println("경혁팀장여부k : "+v);
+		}
+		
+		if(btf.equals("T")) {
+			boolean v = true;
+			map.put("b", v);
+			System.out.println("부서장여부b : "+v);
+		}else {
+			boolean v = false;
+			map.put("b", v);
+			System.out.println("부서장여부b : "+v);
+		}
+		
+		if(xtf.equals("T")) {
+			boolean v = true;
+			map.put("x", v);
+			System.out.println("1인부서여부x : "+v);
+		}else {
+			boolean v = false;
+			map.put("x", v);
+			System.out.println("인부서여부x : "+v);
+		}
+		
+		if(ztf.equals("T")) {
+			boolean v = true;
+			map.put("z", v);
+			System.out.println("진료팀장여부z : "+v);
+		}else {
+			boolean v = false;
+			map.put("z", v);
+			System.out.println("진료팀장여부z : "+v);
+		}
+		map.put("hspt_name",hsptname);
+		map.put("hspt_position",hsptpo);
+		map.put("hspt_subcode",hsptsubcode);
+		map.put("idx",vo.getIdx());
+		System.out.println("info.hsptname : "+ hsptname);
+		System.out.println("info.hsptposition : "+ hsptpo);
+		System.out.println("info.hsptsubcode : "+ hsptsubcode);
+		System.out.println(vo.getIdx());
+		System.out.println(evaluationService.info(idx));
+		System.out.println(evaluationService.evaluationtarget(map));
+		System.out.println("#########################2");
+		mv.addObject("info", evaluationService.info(idx));
+		// 평가 대상 출력		다른 사람이 평가완료 했을 경우 평가 받은사람이 여러개가 뜸. -> 
+		List<UsersVo> list1 = new ArrayList<UsersVo>();
+		list1 = evaluationService.evaluationtarget(map);
+		System.out.println("#############################");
+		mv.addObject("target", list1);
+		System.out.println(list1);
+		System.out.println("#############################");
+		// 평가 완료한 리스트 출력?		
+		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
+		list2 = evaluationService.whetherSelect(map);
+		System.out.println("평가 완료 리스트 출력 : "+list2);
+		mv.addObject("endlist", list2);
+		
+		LocalDateTime now = LocalDateTime.now();
+		mv.addObject("now", now);
+		System.out.println(now);
+		// 비교할 특정 날짜 설정 (예: 2023년 1월 1일)
+        LocalDateTime specificDate = LocalDateTime.of(2023, Month.DECEMBER, 1, 0, 0);
+        // 현재 시간이 특정 날짜를 넘었는지 확인
+        if (now.isAfter(specificDate)) {
+        	// 넘김
+            System.out.println("0");
+            mv.addObject("specificDate", "0");
+        } else {
+        	// 안넘김
+            System.out.println("1");
+            mv.addObject("specificDate", "1");
+        }
+		
+		mv.setViewName("t/info2");
 		return mv;
 	}
 }

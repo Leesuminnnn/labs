@@ -954,4 +954,29 @@ public class EvaluationController {
 		mv.setViewName("e/test");
 		return mv;
 	}
+
+	@ResponseBody
+	@RequestMapping(value="sub/{idx}")
+	public AjaxResponse9 sub(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
+		AjaxResponse9 response = new AjaxResponse9();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", "218");
+//		List<UsersVo> list = evaluationService.my(map);
+//		System.out.println("");
+//		System.out.println(list);
+//		System.out.println("");
+		List<TargetVo> target = evaluationService.target(map);
+		List<AnswerVo> answer = evaluationService.answerselect(map);
+		int targetsum3 = evaluationService.targetsum3(map);
+		int answersum3 = evaluationService.answersum3(map);
+//		response.setUsersall(list);
+		response.setTarget(target);
+		response.setAnswer(answer);
+		response.setTargetsum(targetsum3);
+		response.setAnswersum(answersum3);
+		
+		return response;
+	}
+	
 }

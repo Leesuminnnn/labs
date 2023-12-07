@@ -253,4 +253,9 @@ public class EvaluationDao {
 //		return sqlSession1.selectOne(MAPPER+".answersum3", map);
 		return sqlSession3.selectOne(MAPPER+".answersum3", map);
 	}
+
+	public List<UsersVo> my(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".my", map);
+		return sqlSession3.selectOne(MAPPER+".my", map);
+	}
 }

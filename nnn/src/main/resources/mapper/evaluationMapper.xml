@@ -3095,4 +3095,22 @@
 	<select id="answersum3" parameterType="map" resultType="int">
 		select count(*) from answer where u2 like '3%'
 	</select>
+	
+	<select id="my" parameterType="map" resultType="map">
+		select * from users__ where idx = #{idx}
+	</select>
+	<!-- 부서원 평가 결과 리포트 -->
+	<!-- 예시 : 4병동장으로 로그인 했을때. -->
+	<select id="sub" parameterType="map" resultType="map">
+		select * from users__ u join answer a on u.id = a.u2 where u.hspt_subcode = 'Q04' and u.hspt_B = 'F';
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

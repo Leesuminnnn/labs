@@ -94,11 +94,14 @@ td {
 
 			<div class="scrollbase">
 			<div class="area">
-				<b>[ 섬김 ]</b><br><br>
-				<c:set var="index" value="1"/>
-				<c:set var="a" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '섬김' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+				<c:choose>
+					<c:when test="${ev eq 'D' }">
+					<!-- 병원 -->
+					<b>[ 근무태도 ]</b><br><br>
+					<c:set var="index" value="1"/>
+					<c:set var="a" value="1"/>
+					<c:forEach items="${evf }" var="ev" varStatus="status">
+						<c:if test="${ev.d3 eq '근무태도' }"><p class="question">${status.count}. ${ev.d1}</p><br>
 							<p class="answer">
 								<label><input type="radio" name="a${ev.idx}" value="매우우수"/>매우우수</label>
 								<label><input type="radio" name="a${ev.idx}" value="우수"/>우수</label>
@@ -109,10 +112,10 @@ td {
 						</c:if>
 						<c:set var="a" value="${a +1 }"/>
 					</c:forEach>
-				<b>[ 배움 ]</b><br><br>
-				<c:set var="b" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '배움' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+					<b>[ 처리능력 ]</b><br><br>
+					<c:set var="b" value="1"/>
+					<c:forEach items="${evf }" var="ev" varStatus="status">
+						<c:if test="${ev.d3 eq '처리능력' }"><p class="question">${status.count}. ${ev.d1}</p><br>
 							<p class="answer">
 								<label><input type="radio" name="b${ev.idx}" value="매우우수"/>매우우수</label>
 								<label><input type="radio" name="b${ev.idx}" value="우수"/>우수</label>
@@ -121,13 +124,12 @@ td {
 								<label><input type="radio" name="b${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
-						<c:set var="b" value="${b +1 }"/>
+						<c:set var="a" value="${a +1 }"/>
 					</c:forEach>
-				<b>[ 키움 ]</b><br><br>
-				
-				<c:set var="c" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '키움' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+					<b>[ 업무실적 ]</b><br><br>
+					<c:set var="c" value="1"/>
+					<c:forEach items="${evf }" var="ev" varStatus="status">
+						<c:if test="${ev.d3 eq '업무실적' }"><p class="question">${status.count}. ${ev.d1}</p><br>
 							<p class="answer">
 								<label><input type="radio" name="c${ev.idx}" value="매우우수"/>매우우수</label>
 								<label><input type="radio" name="c${ev.idx}" value="우수"/>우수</label>
@@ -136,40 +138,139 @@ td {
 								<label><input type="radio" name="c${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
-						<c:set var="c" value="${c +1 }"/>
+						<c:set var="a" value="${a +1 }"/>
 					</c:forEach>
-				<b>[ 나눔 ]</b><br><br>
-				<c:set var="d" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '나눔' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+					
+					</c:when>
+					<c:when test="${ev eq 'F' }">
+					<!-- 계열사 -->
+					<b>[ 근무태도 ]</b><br><br>
+					<c:set var="index" value="1"/>
+					<c:set var="a" value="1"/>
+					<c:forEach items="${evf }" var="ev" varStatus="status">
+						<c:if test="${ev.d3 eq '근무태도' }"><p class="question">${status.count}. ${ev.d1}</p><br>
 							<p class="answer">
-								<label><input type="radio" name="d${ev.idx}" value="매우우수"/>매우우수</label>
-								<label><input type="radio" name="d${ev.idx}" value="우수"/>우수</label>
-								<label><input type="radio" name="d${ev.idx}" value="보통"/>보통</label>
-								<label><input type="radio" name="d${ev.idx}" value="미흡"/>미흡</label>
-								<label><input type="radio" name="d${ev.idx}" value="매우미흡"/>매우미흡</label>
+								<label><input type="radio" name="a${ev.idx}" value="매우우수"/>매우우수</label>
+								<label><input type="radio" name="a${ev.idx}" value="우수"/>우수</label>
+								<label><input type="radio" name="a${ev.idx}" value="보통"/>보통</label>
+								<label><input type="radio" name="a${ev.idx}" value="미흡"/>미흡</label>
+								<label><input type="radio" name="a${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
-						<c:set var="d" value="${d +1 }"/>
+						<c:set var="a" value="${a +1 }"/>
 					</c:forEach>
-				<b>[ 목표관리 ]</b><br><br>
-				<c:set var="e" value="1"/>
-					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '목표관리' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+					<b>[ 처리능력 ]</b><br><br>
+					<c:set var="b" value="1"/>
+					<c:forEach items="${evf }" var="ev" varStatus="status">
+						<c:if test="${ev.d3 eq '처리능력' }"><p class="question">${status.count}. ${ev.d1}</p><br>
 							<p class="answer">
-								<label><input type="radio" name="e${ev.idx}" value="매우우수"/>매우우수</label>
-								<label><input type="radio" name="e${ev.idx}" value="우수"/>우수</label>
-								<label><input type="radio" name="e${ev.idx}" value="보통"/>보통</label>
-								<label><input type="radio" name="e${ev.idx}" value="미흡"/>미흡</label>
-								<label><input type="radio" name="e${ev.idx}" value="매우미흡"/>매우미흡</label>
+								<label><input type="radio" name="b${ev.idx}" value="매우우수"/>매우우수</label>
+								<label><input type="radio" name="b${ev.idx}" value="우수"/>우수</label>
+								<label><input type="radio" name="b${ev.idx}" value="보통"/>보통</label>
+								<label><input type="radio" name="b${ev.idx}" value="미흡"/>미흡</label>
+								<label><input type="radio" name="b${ev.idx}" value="매우미흡"/>매우미흡</label>
 							</p><br><br>
 						</c:if>
-						<c:set var="e" value="${e +1 }"/>
+						<c:set var="a" value="${a +1 }"/>
 					</c:forEach>
+					<b>[ 업무실적 ]</b><br><br>
+					<c:set var="c" value="1"/>
+					<c:forEach items="${evf }" var="ev" varStatus="status">
+						<c:if test="${ev.d3 eq '업무실적' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+							<p class="answer">
+								<label><input type="radio" name="c${ev.idx}" value="매우우수"/>매우우수</label>
+								<label><input type="radio" name="c${ev.idx}" value="우수"/>우수</label>
+								<label><input type="radio" name="c${ev.idx}" value="보통"/>보통</label>
+								<label><input type="radio" name="c${ev.idx}" value="미흡"/>미흡</label>
+								<label><input type="radio" name="c${ev.idx}" value="매우미흡"/>매우미흡</label>
+							</p><br><br>
+						</c:if>
+						<c:set var="a" value="${a +1 }"/>
+					</c:forEach>
+					</c:when>
+					<c:otherwise>
+					<!-- 부서장 -->
+						<b>[ 근무태도 ]</b><br><br>
+						<c:set var="index" value="1"/>
+						<c:set var="a" value="1"/>
+						<c:forEach items="${evf }" var="ev" varStatus="status">
+							<c:if test="${ev.d3 eq '근무태도' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+								<p class="answer">
+									<label><input type="radio" name="a${ev.idx}" value="매우우수"/>매우우수</label>
+									<label><input type="radio" name="a${ev.idx}" value="우수"/>우수</label>
+									<label><input type="radio" name="a${ev.idx}" value="보통"/>보통</label>
+									<label><input type="radio" name="a${ev.idx}" value="미흡"/>미흡</label>
+									<label><input type="radio" name="a${ev.idx}" value="매우미흡"/>매우미흡</label>
+								</p><br><br>
+							</c:if>
+							<c:set var="a" value="${a +1 }"/>
+						</c:forEach>
+						<b>[ 리더쉽 ]</b><br><br>
+						<c:set var="index" value="1"/>
+						<c:set var="b" value="1"/>
+						<c:forEach items="${evf }" var="ev" varStatus="status">
+							<c:if test="${ev.d3 eq '리더쉽' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+								<p class="answer">
+									<label><input type="radio" name="b${ev.idx}" value="매우우수"/>매우우수</label>
+									<label><input type="radio" name="b${ev.idx}" value="우수"/>우수</label>
+									<label><input type="radio" name="b${ev.idx }" value="보통"/>보통</label>
+									<label><input type="radio" name="b${ev.idx}" value="미흡"/>미흡</label>
+									<label><input type="radio" name="b${ev.idx}" value="매우미흡"/>매우미흡</label>
+								</p><br><br>
+							</c:if>
+							<c:set var="a" value="${a +1 }"/>
+						</c:forEach>
+						<b>[ 조직관리 ]</b><br><br>
+						<c:set var="index" value="1"/>
+						<c:set var="c" value="1"/>
+						<c:forEach items="${evf }" var="ev" varStatus="status">
+							<c:if test="${ev.d3 eq '조직관리' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+								<p class="answer">
+									<label><input type="radio" name="c${ev.idx}" value="매우우수"/>매우우수</label>
+									<label><input type="radio" name="c${ev.idx}" value="우수"/>우수</label>
+									<label><input type="radio" name="c${ev.idx}" value="보통"/>보통</label>
+									<label><input type="radio" name="c${ev.idx}" value="미흡"/>미흡</label>
+									<label><input type="radio" name="c${ev.idx}" value="매우미흡"/>매우미흡</label>
+								</p><br><br>
+							</c:if>
+							<c:set var="a" value="${a +1 }"/>
+						</c:forEach>
+						<b>[ 업무처리 ]</b><br><br>
+						<c:set var="index" value="1"/>
+						<c:set var="d" value="1"/>
+						<c:forEach items="${evf }" var="ev" varStatus="status">
+							<c:if test="${ev.d3 eq '업무처리' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+								<p class="answer">
+									<label><input type="radio" name="d${ev.idx}" value="매우우수"/>매우우수</label>
+									<label><input type="radio" name="d${ev.idx}" value="우수"/>우수</label>
+									<label><input type="radio" name="d${ev.idx}" value="보통"/>보통</label>
+									<label><input type="radio" name="d${ev.idx}" value="미흡"/>미흡</label>
+									<label><input type="radio" name="d${ev.idx}" value="매우미흡"/>매우미흡</label>
+								</p><br><br>
+							</c:if>
+							<c:set var="a" value="${a +1 }"/>
+						</c:forEach>
+						<b>[ 소통 및 화합 ]</b><br><br>
+						<c:set var="index" value="1"/>
+						<c:set var="e" value="1"/>
+						<c:forEach items="${evf }" var="ev" varStatus="status">
+							<c:if test="${ev.d3 eq '소통 및 화합' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+								<p class="answer">
+									<label><input type="radio" name="e${ev.idx}" value="매우우수"/>매우우수</label>
+									<label><input type="radio" name="e${ev.idx}" value="우수"/>우수</label>
+									<label><input type="radio" name="e${ev.idx}" value="보통"/>보통</label>
+									<label><input type="radio" name="e${ev.idx}" value="미흡"/>미흡</label>
+									<label><input type="radio" name="e${ev.idx}" value="매우미흡"/>매우미흡</label>
+								</p><br><br>
+							</c:if>
+							<c:set var="a" value="${a +1 }"/>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 				<b>[ 종합평가 ]</b><br><br>
 					<c:forEach items="${evf}" var="ev">
 						<c:if test="${ev.d3 eq '주관식' }"><p class="question">${ev.d1}</p><br>
-							<textarea style="width: 99%; height: 90px; padding:5px;" id="f${ev.idx }" name="f${ev.idx }"></textarea>
+							<textarea style="width: 99%; height: 90px; padding:5px;" id="g${ev.idx }" name="g${ev.idx }"></textarea>
 							<br><br>
 						</c:if>
 					</c:forEach>
@@ -233,72 +334,125 @@ console.log(ev);
 $(function () {
 	$(document).on("click", "#end", function () {
 		// 답안 체크
-		var a1 = $('input[name=a1]').is(":checked");
-		var a2 = $('input[name=a2]').is(":checked");
-		var b3 = $('input[name=b3]').is(":checked");
-		var b4 = $('input[name=b4]').is(":checked");
-		var c5 = $('input[name=c5]').is(":checked");
-		var c6 = $('input[name=c6]').is(":checked");
-		var d7 = $('input[name=d7]').is(":checked");
-		var d8 = $('input[name=d8]').is(":checked");
-		var e9 = $('input[name=e9]').is(":checked");
-		var e10 = $('input[name=e10]').is(":checked");
-		var f11 = $("#f11").val();
+		// AC		C , E
+		var a33 = $('input[name=a33]').is(":checked");
+		var a34 = $('input[name=a34]').is(":checked");
+		var b35 = $('input[name=b35]').is(":checked");
+		var b36 = $('input[name=b36]').is(":checked");
+		var c37 = $('input[name=c37]').is(":checked");
+		var c38 = $('input[name=c38]').is(":checked");
+		var d39 = $('input[name=d39]').is(":checked");
+		var d40 = $('input[name=d40]').is(":checked");
+		var e41 = $('input[name=e41]').is(":checked");
+		var e42 = $('input[name=e42]').is(":checked");
+		var g83 = $("#g83").val();
 		
-		var a12 = $('input[name=a12]').is(":checked");
-		var a13 = $('input[name=a13]').is(":checked");
-		var a14 = $('input[name=a14]').is(":checked");
-		var a15 = $('input[name=a15]').is(":checked");
-		var a16 = $('input[name=a16]').is(":checked");
-		var a17 = $('input[name=a17]').is(":checked");
-		var a18 = $('input[name=a18]').is(":checked");
-		var b19 = $('input[name=b19]').is(":checked");
-		var b20 = $('input[name=b20]').is(":checked");
-		var b21 = $('input[name=b21]').is(":checked");
-		var b22 = $('input[name=b22]').is(":checked");
-		var c23 = $('input[name=c23]').is(":checked");
-		var c24 = $('input[name=c24]').is(":checked");
-		var c25 = $('input[name=c25]').is(":checked");
-		var c26 = $('input[name=c26]').is(":checked");
-		var c27 = $('input[name=c27]').is(":checked");
-		var d28 = $('input[name=d28]').is(":checked");
-		var d29 = $('input[name=d29]').is(":checked");
-		var e30 = $('input[name=e30]').is(":checked");
-		var e31 = $('input[name=e31]').is(":checked");
-		var f32 = $("#f32").val();
+		// AD	D
+		var a43 = $('input[name=a43]').is(":checked");
+		var a44 = $('input[name=a44]').is(":checked");
+		var a45 = $('input[name=a45]').is(":checked");
+		var a46 = $('input[name=a46]').is(":checked");
+		var a47 = $('input[name=a47]').is(":checked");
+		var a48 = $('input[name=a48]').is(":checked");
+		var a49 = $('input[name=a49]').is(":checked");
+		var a50 = $('input[name=a50]').is(":checked");
+		var a51 = $('input[name=a51]').is(":checked");
+		var a52 = $('input[name=a52]').is(":checked");
+		var b53 = $('input[name=b53]').is(":checked");
+		var b54 = $('input[name=b54]').is(":checked");
+		var b55 = $('input[name=b55]').is(":checked");
+		var b56 = $('input[name=b56]').is(":checked");
+		var b57 = $('input[name=b57]').is(":checked");
+		var c58 = $('input[name=c58]').is(":checked");
+		var c59 = $('input[name=c59]').is(":checked");
+		var c60 = $('input[name=c60]').is(":checked");
+		var c61 = $('input[name=c61]').is(":checked");
+		var c62 = $('input[name=c62]').is(":checked");
+		var g84 = $("#g84").val();
 		
-		// AA
-		var g1 = $('input[name=a1]:checked').val();
-		var g2 = $('input[name=a2]:checked').val();
-		var g3 = $('input[name=b3]:checked').val();
-		var g4 = $('input[name=b4]:checked').val();
-		var g5 = $('input[name=c5]:checked').val();
-		var g6 = $('input[name=c6]:checked').val();
-		var g7 = $('input[name=d7]:checked').val();
-		var g8 = $('input[name=d8]:checked').val();
-		var g9 = $('input[name=e9]:checked').val();
-		var g10 = $('input[name=e10]:checked').val();
-		// AB
-		var k1 = $('input[name=a12]:checked').val();
-		var k2 = $('input[name=a13]:checked').val();
-		var k3 = $('input[name=a14]:checked').val();
-		var k4 = $('input[name=a15]:checked').val();
-		var k5 = $('input[name=a16]:checked').val();
-		var k6 = $('input[name=a17]:checked').val();
-		var k7 = $('input[name=a18]:checked').val();
-		var k8 = $('input[name=b19]:checked').val();
-		var k9 = $('input[name=b20]:checked').val();
-		var k10 = $('input[name=b21]:checked').val();
-		var k11 = $('input[name=b22]:checked').val();
-		var k12 = $('input[name=c23]:checked').val();
-		var k13 = $('input[name=c24]:checked').val();
-		var k14 = $('input[name=c25]:checked').val();
-		var k15 = $('input[name=c26]:checked').val();
-		var k16 = $('input[name=c27]:checked').val();
-		var k17 = $('input[name=d28]:checked').val();
-		var k18 = $('input[name=d29]:checked').val();
-		var k19 = $('input[name=e30]:checked').val();
-		var k20 = $('input[name=e31]:checked').val();
+		// AE		F
+		var a63 = $('input[name=a63]').is(":checked");
+		var a64 = $('input[name=a64]').is(":checked");
+		var a65 = $('input[name=a65]').is(":checked");
+		var a66 = $('input[name=a66]').is(":checked");
+		var a67 = $('input[name=a67]').is(":checked");
+		var a68 = $('input[name=a68]').is(":checked");
+		var a69 = $('input[name=a69]').is(":checked");
+		var a70 = $('input[name=a70]').is(":checked");
+		var a71 = $('input[name=a71]').is(":checked");
+		var a72 = $('input[name=a72]').is(":checked");
+		var b73 = $('input[name=b73]').is(":checked");
+		var b74 = $('input[name=b74]').is(":checked");
+		var b75 = $('input[name=b75]').is(":checked");
+		var b76 = $('input[name=b76]').is(":checked");
+		var b77 = $('input[name=b77]').is(":checked");
+		var c78 = $('input[name=c78]').is(":checked");
+		var c79 = $('input[name=c79]').is(":checked");
+		var c80 = $('input[name=c80]').is(":checked");
+		var c81 = $('input[name=c81]').is(":checked");
+		var c82 = $('input[name=c82]').is(":checked");
+		var g85 = $("#g85").val();
+		
+		// 점수
+		// AC
+		var g1 = $('input[name=a33]:checked').val();
+		var g2 = $('input[name=a34]:checked').val();
+		var g3 = $('input[name=b35]:checked').val();
+		var g4 = $('input[name=b36]:checked').val();
+		var g5 = $('input[name=c37]:checked').val();
+		var g6 = $('input[name=c38]:checked').val();
+		var g7 = $('input[name=d39]:checked').val();
+		var g8 = $('input[name=d40]:checked').val();
+		var g9 = $('input[name=e41]:checked').val();
+	   var g10 = $('input[name=e42]:checked').val();
+		
+	    if(ev === 'D') {
+	    	// AD
+			var k1  = $('input[name=a43]:checked').val();
+			var k2  = $('input[name=a44]:checked').val();
+			var k3  = $('input[name=a45]:checked').val();
+			var k4  = $('input[name=a46]:checked').val();
+			var k5  = $('input[name=a47]:checked').val();
+			var k6  = $('input[name=a48]:checked').val();
+			var k7  = $('input[name=a49]:checked').val();
+			var k8  = $('input[name=a50]:checked').val();
+			var k9  = $('input[name=a51]:checked').val();
+			var k10 = $('input[name=a52]:checked').val();
+			var k11 = $('input[name=b53]:checked').val();
+			var k12 = $('input[name=b54]:checked').val();
+			var k13 = $('input[name=b55]:checked').val();
+			var k14 = $('input[name=b56]:checked').val();
+			var k15 = $('input[name=b57]:checked').val();
+			var k16 = $('input[name=c58]:checked').val();
+			var k17 = $('input[name=c59]:checked').val();
+			var k18 = $('input[name=c60]:checked').val();
+			var k19 = $('input[name=c61]:checked').val();
+			var k20 = $('input[name=c62]:checked').val();
+	    }else if (ev === 'F') {
+	    	// AE
+			var k1  = $('input[name=a63]:checked').val();
+			var k2  = $('input[name=a64]:checked').val();
+			var k3  = $('input[name=a65]:checked').val();
+			var k4  = $('input[name=a66]:checked').val();
+			var k5  = $('input[name=a67]:checked').val();
+			var k6  = $('input[name=a68]:checked').val();
+			var k7  = $('input[name=a69]:checked').val();
+			var k8  = $('input[name=b70]:checked').val();
+			var k9  = $('input[name=a71]:checked').val();
+			var k10 = $('input[name=a72]:checked').val();
+			var k11 = $('input[name=b73]:checked').val();
+			var k12 = $('input[name=b74]:checked').val();
+			var k13 = $('input[name=b75]:checked').val();
+			var k14 = $('input[name=b76]:checked').val();
+			var k15 = $('input[name=b77]:checked').val();
+			var k16 = $('input[name=c78]:checked').val();
+			var k17 = $('input[name=c79]:checked').val();
+			var k18 = $('input[name=c80]:checked').val();
+			var k19 = $('input[name=c81]:checked').val();
+			var k20 = $('input[name=c82]:checked').val();
+	    }
+		
+		
 		
 		function mapValueToScore(value) {
 		    switch (value) {
@@ -338,10 +492,19 @@ $(function () {
 		
 		// 문제유형으로 나누기
 		// A, B, C 인 경우와 D인 경우
-		if(ev == 'A' || ev == 'B' || ev == 'C' || ev == 'E'){
-			if(!a1 || !a2 || !b3 || !b4 || !c5 || !c6 || !d7 || !d8 || !e9 || !e10 || $.trim(f11) === ''){
-				console.log(a1);console.log(a2);console.log(b3);console.log(b4);console.log(c5);console.log(c6);
-				console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);
+		if(ev === 'A' || ev === 'B' || ev === 'C' || ev === 'E'){
+			console.log("A B C E 	");
+			if(!a33 || !a34 || !b35 || !b36 || !c37 || !c38 || !d39 || !d40 || !e41 || !e42 || $.trim(g83) === ''){
+				console.log(a33);
+				console.log(a34);
+				console.log(b35);
+				console.log(b36);
+				console.log(c37);
+				console.log(c38);
+				console.log(d39);
+				console.log(d40);
+				console.log(e41);
+				console.log(e42);
 				
 				msg.innerText = "현재 답변하지 않은 평가가 있습니다. 확인해주세요."
 				modal.classList.toggle('show');
@@ -357,26 +520,53 @@ $(function () {
 		   			body.style.overflow = 'hidden';
 		   		}
 			}
-		}else {
-			if(!a12 || !a13 || !a14 || !a15 || !a16 || !a17 || !a18 || 
-					!b19 || !b20 || !b21 || !b22 || 
-					!c23 || !c24 || !c25 || !c26 || !c27 ||
-					!d28 || !d29|| !e30|| !e31 ||				
-					$.trim(f32) === ''){
-				msg.innerText = "현재 답변하지 않은 평가가 있습니다. 확인해주세요."
-				modal.classList.toggle('show');
-				
-				if (modal.classList.contains('show')) {
-					body.style.overflow = 'hidden';
+		}else if (ev === 'D' || ev === 'F') {
+			if (ev === 'D') {
+				console.log("D");
+				if(!a43 || !a44 || !a45 || !a46 || !a47 || !a48 || !a49 || 
+						!a50 || !a51 || !a52 || !b53 || 
+						!b54 || !b55 || !b56 || !b57 || !c58 ||
+						!c59 || !c60 || !c61 || !c62 ||				
+						$.trim(g84) === ''){
+					
+					msg.innerText = "현재 답변하지 않은 평가가 있습니다. 확인해주세요."
+					modal.classList.toggle('show');
+					
+					if (modal.classList.contains('show')) {
+						body.style.overflow = 'hidden';
+					}
 				}
-			}else {
-				msg2.innerHTML = "<p>${target.name} 님의 평가 <b style='color:red;'>예상점수는 "+sumAB+"점</b>입니다.<br>평가완료 후 재평가(수정)이 안됩니다. 평가완료를 하시겠습니까?</p>";
-				modal2.classList.toggle('show');
-		   		
-		   		if (modal2.classList.contains('show')) {
-		   			body.style.overflow = 'hidden';
-		   		}
+				else {
+					msg2.innerHTML = "<p>${target.name} 님의 평가 <b style='color:red;'>예상점수는 "+sumAB+"점</b>입니다.<br>평가완료 후 재평가(수정)이 안됩니다. 평가완료를 하시겠습니까?</p>";
+					modal2.classList.toggle('show');
+			   		
+			   		if (modal2.classList.contains('show')) {
+			   			body.style.overflow = 'hidden';
+			   		}
+				}
+			}else if (ev === 'F') {
+				console.log("F");
+				if(!a63 || !a64 || !a65 || !a66 || !a67 || !a68 || !a69 || 
+						!a70 || !a71 || !a72 || !b73 || 
+						!b74 || !b75 || !b76 || !b77 || !c78 ||
+						!c79 || !c80 || !c81 || !c82 ||				
+						$.trim(g85) === ''){
+					msg.innerText = "현재 답변하지 않은 평가가 있습니다. 확인해주세요."
+					modal.classList.toggle('show');
+					
+					if (modal.classList.contains('show')) {
+						body.style.overflow = 'hidden';
+					}
+				}else {
+					msg2.innerHTML = "<p>${target.name} 님의 평가 <b style='color:red;'>예상점수는 "+sumAB+"점</b>입니다.<br>평가완료 후 재평가(수정)이 안됩니다. 평가완료를 하시겠습니까?</p>";
+					modal2.classList.toggle('show');
+			   		
+			   		if (modal2.classList.contains('show')) {
+			   			body.style.overflow = 'hidden';
+			   		}
+				}
 			}
+			
 		}
 		
 		

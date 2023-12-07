@@ -18,7 +18,7 @@
 		<div class="modal_body">
 			<div>
 				<div class="menu_msg">현재 답변하지 않은 평가가 있습니다. 확인해주세요.</div>
-				<div class="btn pink_btn" id="modal_insert" onclick="closePopup()">
+				<div style="top:28%;" class="btn pink_btn" id="modal_insert" onclick="closePopup()">
 				확인
 				</div>
 			</div>
@@ -71,12 +71,12 @@
     console.log(msg.innerText)
     
    	function end(){
-    	msg.innerText = "이미 평가가 완료된 대상입니다~~."
-		modal.classList.toggle('show');
-		
-		if (modal.classList.contains('show')) {
-			body.style.overflow = 'hidden';
-		}
+    	modal.classList.toggle('show');
+    	msg.style.top = '34%';
+    	msg.innerHTML = "<p><b>[ 직원 근무평가 마감 ]</b><p><br><p>2023년도 직원 근무평가가 마감되었습니다.</p><p>평가에 응해주셔서 대단히 감사드립니다.</p><p>- (주)코어솔루션 -</p>"
+    	if (modal.classList.contains('show')) {
+    		body.style.overflow = 'hidden';
+    	}
    	}
 	function closePopup(){
 		modal.classList.toggle('show');

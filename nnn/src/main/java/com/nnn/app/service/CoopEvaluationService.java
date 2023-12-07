@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.CoopEvaluationDao;
+import com.nnn.app.vo.AnswerVo;
+import com.nnn.app.vo.CAnswerVo;
 import com.nnn.app.vo.CWhetherVo;
 import com.nnn.app.vo.CoopusersVo;
 import com.nnn.app.vo.EvaluationVo;
@@ -103,7 +105,9 @@ public class CoopEvaluationService {
 		flag = evaluationDao.dbcheck(vo);
 		return flag;
 	}
-
+	public List<CoopusersVo> user(Map<String, Object> map) {
+		return evaluationDao.user(map);
+	}
 	public List<CoopusersVo> users(Map<String, Object> map) {
 		return evaluationDao.users(map);
 	}
@@ -201,32 +205,140 @@ public class CoopEvaluationService {
 //		return flag;
 //	}
 //
-//	public int hsptpwdselect1(Map<String, Object> map) {
-//		return evaluationDao.hsptselectpwd1(map);
-//	}
-//	public int hsptpwdselect2(Map<String, Object> map) {
-//		return evaluationDao.hsptselectpwd2(map);
-//	}
-//	public int hsptpwdselect3(Map<String, Object> map) {
-//		return evaluationDao.hsptselectpwd3(map);
-//	}
-//
-//	public List<TargetVo> target(Map<String, Object> map) {
-//		return evaluationDao.target(map);
-//	}
-//
-//	public List<AnswerVo> answerselect(Map<String, Object> map) {
-//		return evaluationDao.answerselect(map);
-//	}
-//
+	public int userpwd1(Map<String, Object> map) {
+		return evaluationDao.userpwd1(map);
+	}
+	public int userpwd2(Map<String, Object> map) {
+		return evaluationDao.userpwd2(map);
+	}
+	public int userpwd3(Map<String, Object> map) {
+		return evaluationDao.userpwd3(map);
+	}
+	public int userpwd4(Map<String, Object> map) {
+		return evaluationDao.userpwd4(map);
+	}
+	public int userpwd5(Map<String, Object> map) {
+		return evaluationDao.userpwd5(map);
+	}
+	public int userpwd6(Map<String, Object> map) {
+		return evaluationDao.userpwd6(map);
+	}
+	public int userpwd7(Map<String, Object> map) {
+		return evaluationDao.userpwd7(map);
+	}
+
+	public List<TargetVo> target(Map<String, Object> map) {
+		return evaluationDao.target(map);
+	}
+	public List<TargetVo> target1(Map<String, Object> map) {
+		return evaluationDao.target1(map);
+	}
+	public List<TargetVo> target2(Map<String, Object> map) {
+		return evaluationDao.target2(map);
+	}
+	public List<TargetVo> target3(Map<String, Object> map) {
+		return evaluationDao.target3(map);
+	}
+	public List<TargetVo> target4(Map<String, Object> map) {
+		return evaluationDao.target4(map);
+	}
+	public List<TargetVo> target5(Map<String, Object> map) {
+		return evaluationDao.target5(map);
+	}
+	public List<TargetVo> target6(Map<String, Object> map) {
+		return evaluationDao.target6(map);
+	}
+	public List<TargetVo> target7(Map<String, Object> map) {
+		return evaluationDao.target7(map);
+	}
+
+	public List<CAnswerVo> answerselect(Map<String, Object> map) {
+		return evaluationDao.answerselect(map);
+	}
+	public List<CAnswerVo> answerselect1(Map<String, Object> map) {
+		return evaluationDao.answerselect1(map);
+	}
+	public List<CAnswerVo> answerselect2(Map<String, Object> map) {
+		return evaluationDao.answerselect2(map);
+	}
+	public List<CAnswerVo> answerselect3(Map<String, Object> map) {
+		return evaluationDao.answerselect3(map);
+	}
+	public List<CAnswerVo> answerselect4(Map<String, Object> map) {
+		return evaluationDao.answerselect4(map);
+	}
+	public List<CAnswerVo> answerselect5(Map<String, Object> map) {
+		return evaluationDao.answerselect5(map);
+	}
+	public List<CAnswerVo> answerselect6(Map<String, Object> map) {
+		return evaluationDao.answerselect6(map);
+	}
+	public List<CAnswerVo> answerselect7(Map<String, Object> map) {
+		return evaluationDao.answerselect7(map);
+	}
+
 	public int pwdajax(Map<String, Object> map) {
 		
 		int flag = 0;
 		flag = evaluationDao.pwdajax(map);
 		return flag;
 	}
+	public int targetsum(Map<String, Object> map) {
+		return evaluationDao.targetsum(map);
+	}
 
+	public int answersum(Map<String, Object> map) {
+		return evaluationDao.answersum(map);
+	}
 	
+	public int targetsum1(Map<String, Object> map) {
+		return evaluationDao.targetsum1(map);
+	}
+	public int answersum1(Map<String, Object> map) {
+		return evaluationDao.answersum1(map);
+	}
+	
+	public int targetsum2(Map<String, Object> map) {
+		return evaluationDao.targetsum2(map);
+	}
+	public int answersum2(Map<String, Object> map) {
+		return evaluationDao.answersum2(map);
+	}
+	
+	public int targetsum3(Map<String, Object> map) {
+		return evaluationDao.targetsum3(map);
+	}
+	public int answersum3(Map<String, Object> map) {
+		return evaluationDao.answersum3(map);
+	}
+	
+	public int targetsum4(Map<String, Object> map) {
+		return evaluationDao.targetsum4(map);
+	}
+	public int answersum4(Map<String, Object> map) {
+		return evaluationDao.answersum4(map);
+	}
+	
+	public int targetsum5(Map<String, Object> map) {
+		return evaluationDao.targetsum5(map);
+	}
+	public int answersum5(Map<String, Object> map) {
+		return evaluationDao.answersum5(map);
+	}
+	
+	public int targetsum6(Map<String, Object> map) {
+		return evaluationDao.targetsum6(map);
+	}
+	public int answersum6(Map<String, Object> map) {
+		return evaluationDao.answersum6(map);
+	}
+	
+	public int targetsum7(Map<String, Object> map) {
+		return evaluationDao.targetsum7(map);
+	}
+	public int answersum7(Map<String, Object> map) {
+		return evaluationDao.answersum7(map);
+	}
 
 	
 }
