@@ -3096,20 +3096,30 @@
 		select count(*) from answer where u2 like '3%'
 	</select>
 	
-	<select id="my" parameterType="map" resultType="map">
+	<select id="my" parameterType="int" resultType="users">
 		select * from users__ where idx = #{idx}
 	</select>
 	<!-- 부서원 평가 결과 리포트 -->
 	<!-- 예시 : 4병동장으로 로그인 했을때. -->
 	<select id="sub" parameterType="map" resultType="map">
-		select * from users__ u join answer a on u.id = a.u2 where u.hspt_subcode = 'Q04' and u.hspt_B = 'F';
+		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
+	</select>
+	<select id="subcnt" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = #{hname} and hspt_subcode = #{subcode};
 	</select>
 	
+	<!-- 직원이 평가 받은 리스트 -->
+	<select id="answerlist" parameterType="map" resultType="map">
+		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
+	</select>
 	
+	<select id="user" parameterType="map" resultType="map">
+		select * from answer a join users__ u on a.u2 = u.id where a.t1 = #{id}
+	</select>
 	
-	
-	
-	
+	<select id="subanswerlist" parameterType="map" resultType="map">
+		select * from answer a join users__ u on a.u2 = u.id where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
+	</select>
 	
 	
 	

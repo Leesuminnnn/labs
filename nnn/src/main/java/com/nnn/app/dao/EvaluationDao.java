@@ -254,8 +254,29 @@ public class EvaluationDao {
 		return sqlSession3.selectOne(MAPPER+".answersum3", map);
 	}
 
-	public List<UsersVo> my(Map<String, Object> map) {
-//		return sqlSession1.selectOne(MAPPER+".my", map);
-		return sqlSession3.selectOne(MAPPER+".my", map);
+	public UsersVo my(UsersVo vo) {
+//		return sqlSession1.selectOne(MAPPER+".my", vo);
+		return sqlSession3.selectOne(MAPPER+".my", vo);
 	}
+
+	public int subcnt(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".subcnt", map);
+		return sqlSession3.selectOne(MAPPER+".subcnt", map);
+	}
+
+	public List<UsersVo> sub(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".sub", map);
+		return sqlSession3.selectList(MAPPER+".sub", map);
+	}
+
+	public List<AnswerVo> user(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".user", map);
+		return sqlSession3.selectList(MAPPER+".user", map);
+	}
+
+	public List<AnswerVo> subanswerlist(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".subanswerlist", map);
+		return sqlSession3.selectList(MAPPER+".subanswerlist", map);
+	}
+
 }

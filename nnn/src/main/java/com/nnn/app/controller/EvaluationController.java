@@ -25,10 +25,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.EvaluationService;
+import com.nnn.app.vo.AjaxResponse13;
 import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
-import com.nnn.app.vo.AjaxResponse7;
 import com.nnn.app.vo.AjaxResponse9;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
@@ -954,29 +954,67 @@ public class EvaluationController {
 		mv.setViewName("e/test");
 		return mv;
 	}
-
+	@RequestMapping(value="Mypage/{idx}")
+	public ModelAndView mypage(UsersVo vo, @PathVariable("idx") Integer idx, ModelAndView mv) throws Exception {
+		mv.addObject("info", evaluationService.info(idx));
+		
+		mv.setViewName("t/Mypage");
+		return mv;
+	}
 	@ResponseBody
 	@RequestMapping(value="sub/{idx}")
-	public AjaxResponse9 sub(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
-		AjaxResponse9 response = new AjaxResponse9();
+	public AjaxResponse13 sub(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
+		AjaxResponse13 response = new AjaxResponse13();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", "218");
-//		List<UsersVo> list = evaluationService.my(map);
-//		System.out.println("");
-//		System.out.println(list);
-//		System.out.println("");
-		List<TargetVo> target = evaluationService.target(map);
-		List<AnswerVo> answer = evaluationService.answerselect(map);
-		int targetsum3 = evaluationService.targetsum3(map);
-		int answersum3 = evaluationService.answersum3(map);
-//		response.setUsersall(list);
-		response.setTarget(target);
-		response.setAnswer(answer);
-		response.setTargetsum(targetsum3);
-		response.setAnswersum(answersum3);
-		
+		map.put("idx", idx);
+		evaluationService.my(vo);
+		String subcode = evaluationService.my(vo).getHspt_subcode();
+		String hname = evaluationService.my(vo).getHspt_name();
+		map.put("hname", hname);
+		map.put("subcode", subcode);
+		int subcnt = evaluationService.subcnt(map);
+		List<UsersVo> list = evaluationService.sub(map);
+		List<AnswerVo> list2 = evaluationService.subanswerlist(map);
+		System.out.println("");
+		System.out.println(evaluationService.my(vo));
+		System.out.println("");
+		response.setUsers(evaluationService.my(vo));
+		System.out.println(subcnt);
+		response.setSubcnt(subcnt);
+		response.setList(list);
+		response.setList2(list2);
+		System.out.println(list);
+		System.out.println(list2);
 		return response;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="s/{idx}")
+	public AjaxResponse13 s(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
+		AjaxResponse13 response = new AjaxResponse13();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		evaluationService.my(vo);
+		String id = evaluationService.my(vo).getId();
+		String subcode = evaluationService.my(vo).getHspt_subcode();
+		String hname = evaluationService.my(vo).getHspt_name();
+		map.put("hname", hname);
+		map.put("subcode", subcode);
+		map.put("id", id);
+		// 해당 id의 직원이 평가를 받은 리스트
+		List<AnswerVo> list2 = evaluationService.user(map);
+		List<UsersVo> list = evaluationService.sub(map);
+		int subcnt = evaluationService.subcnt(map);
+		System.out.println("");
+		System.out.println(evaluationService.my(vo));
+		System.out.println("");
+		response.setUsers(evaluationService.my(vo));
+		System.out.println(subcnt);
+		response.setSubcnt(subcnt);
+		response.setList(list);
+		System.out.println(list2);
+		response.setList2(list2);
+		return response;
+	}
 }

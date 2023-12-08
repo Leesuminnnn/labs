@@ -74,7 +74,7 @@
 		<!-- 내용을 이곳에 추가 -->
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 		<div class="main-logo"><img src="${pageContext.request.contextPath}/resources/img/2hspt.png"></div>
-		<div class="main-section">
+		<div class="main-section" id="main-section">
 			<table style="width: 100%;">
 				<tr>
 					<td style="text-align: left; border:none;" colspan="8">▣ 본인의 정보를 확인해 주세요</td>
@@ -83,7 +83,7 @@
 					<td>기관명</td><td>부서명</td><td>직급/직책</td><td>사원번호</td><td>이름</td><td>연락처</td><td>입사일자</td>
 				</tr>
 				<tr style="">
-					<td>효사랑가족요양병원</td><td>5병동</td><td>병동장</td><td>사원번호</td><td>장ㅇㅇ</td><td>010-0000-0000</td><td>18.05.25</td>
+					<td>${info.hspt_name }</td><td>${info.hspt_subname }</td><td>${info.hspt_position }</td><td>${info.id}</td><td>${info.name }</td><td>010-0000-0000</td><td>${info.reg_date }</td>
 				</tr>
 				
 			</table>
@@ -123,7 +123,7 @@ for(i=0;i<linkCollapse.length;i++) {
         rotate.classList.toggle('rotate')
     });
 }
-const mainContent = document.getElementById('main-content-my');
+const mainContent = document.getElementById('main-section');
 
 menuLinks.forEach(link => {
 	link.addEventListener('click', function(event){
@@ -138,7 +138,7 @@ function info() {
 	mainContent.innerHTML = ''; // 기존 내용을 지우고
 	// Fetch the content of Info.jsp using AJAX
 	var iframe = document.createElement("iframe");
-	iframe.src = '${pageContext.request.contextPath}/e/Info/218'
+	iframe.src = '${pageContext.request.contextPath}/e/Info/${info.idx}'
 	iframe.width = "100%";
 	iframe.style.height = "99vh";
 	iframe.style.border = 'none';
@@ -147,12 +147,176 @@ function info() {
 
 function submember() {
 	$.ajax({
-		url: '${pageContext.request.contextPath}/e/sub/218',
+		url: '${pageContext.request.contextPath}/e/sub/${info.idx}',
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
 			if (response.result === "Y"){
 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+				
+				const u = response.users;
+				const c = response.subcnt;
+				const list = response.list;
+				const list2 = response.list2;
+				
+				const tb = document.createElement("TABLE");
+ 				
+				const maintr = document.createElement("TR");
+ 				
+				const maintd1 = document.createElement("TD");
+ 				maintd1.textContent = "소속기관";
+ 				const maintd2 = document.createElement("TD");
+ 				maintd2.textContent = u.hspt_name;
+ 				
+ 				const maintd3 = document.createElement("TD");
+ 				maintd3.textContent = "부서명";
+ 				const maintd4 = document.createElement("TD");
+ 				maintd4.textContent = u.hspt_subname;
+ 				
+ 				const maintd5 = document.createElement("TD");
+ 				maintd5.textContent = "부서인원";
+ 				const maintd6 = document.createElement("TD");
+ 				maintd6.textContent = c;
+ 				
+ 				const maintd7 = document.createElement("TD");
+ 				maintd7.textContent = "부서원 평균점수";
+ 				const maintd8 = document.createElement("TD");
+ 				maintd8.textContent = "";
+ 				
+ 				const div = document.createElement("div");
+ 				div.setAttribute("style", "text-align: left;");
+ 				div.textContent = "▣ 평가조회 버튼을 클릭하여 개인별 평가결과를 확인해주세요.";
+				
+ 				const tb2 = document.createElement("TABLE");
+				const maintr2 = document.createElement("TR");
+ 				
+				const maintd21 = document.createElement("TD");
+ 				maintd21.textContent = "소속기관";
+ 				const maintd22 = document.createElement("TD");
+ 				maintd22.textContent = "직급";
+ 				
+ 				const maintd23 = document.createElement("TD");
+ 				maintd23.textContent = "사원번호";
+ 				const maintd24 = document.createElement("TD");
+ 				maintd24.textContent = "성명";
+ 				
+ 				const maintd25 = document.createElement("TD");
+ 				maintd25.textContent = "평가점수";
+ 				const maintd26 = document.createElement("TD");
+ 				maintd26.textContent = "평가순위";
+ 				
+ 				const maintd27 = document.createElement("TD");
+ 				maintd27.textContent = "평가등급";
+ 				const maintd28 = document.createElement("TD");
+ 				maintd28.textContent = "평가조회";
+ 				
+ 				
+ 				mainContent.appendChild(tb);
+ 				tb.appendChild(maintr);
+ 				mainContent.appendChild(div);
+ 				maintr.appendChild(maintd1);
+ 				maintr.appendChild(maintd2);
+ 				maintr.appendChild(maintd3);
+ 				maintr.appendChild(maintd4);
+ 				maintr.appendChild(maintd5);
+ 				maintr.appendChild(maintd6);
+ 				maintr.appendChild(maintd7);
+ 				maintr.appendChild(maintd8);
+ 				tb2.appendChild(maintr2);
+ 				maintr2.appendChild(maintd21);
+ 				maintr2.appendChild(maintd22);
+ 				maintr2.appendChild(maintd23);
+ 				maintr2.appendChild(maintd24);
+ 				maintr2.appendChild(maintd25);
+ 				maintr2.appendChild(maintd26);
+ 				maintr2.appendChild(maintd27);
+ 				maintr2.appendChild(maintd28);
+
+ 				mainContent.append(tb2);
+ 				const tr = document.createElement("TR");
+ 				const td1 = document.createElement("TD");
+ 				const td2 = document.createElement("TD");
+ 				const td3 = document.createElement("TD");
+ 				const td4 = document.createElement("TD");
+ 				const td5 = document.createElement("TD");
+ 				const td6 = document.createElement("TD");
+ 				const td7 = document.createElement("TD");
+ 				const td8 = document.createElement("TD");
+ 				
+ 				function mapValueToScore(value) {
+ 				    switch (value) {
+ 				        case '매우우수':
+ 				            return 5;
+ 				        case '우수':
+ 				            return 4;
+ 				        case '보통':
+ 				            return 3;
+ 				        case '미흡':
+ 				            return 2;
+ 				        case '매우미흡':
+ 				            return 1;
+ 				        default:
+ 				            return 0; 
+ 				    }
+ 				}
+	
+				const idScores = {};
+ 				
+ 				$.each (list, function (index, l) {
+ 					$.each (list2, function (index, t) {
+// 						console.log(t.t1)
+	 				    const values = t.d1.toLowerCase().split(',').map(value => value.trim());
+	 				    // 숫자로 변환한 답안을 더하기
+	 				  const as = mapValueToScore(values[0]);
+	 				    console.log(as);
+ 		 				    values.forEach(value => {
+ 		 				        const score = mapValueToScore(value) || 0;
+ 		 				        idScores[t.t1] = (idScores[t.t1] || 0) + score;
+ 		 				    });
+ 		 				    
+ 		 				});
+ 		 				Object.keys(idScores).forEach(id => {
+ 		 					
+ 		 				    console.log(`t.t1: ${id}, Total Score: ${idScores[id]}`);
+ 		 				});
+ 						const tr = document.createElement("TR");
+
+ 	 				    // Append cells to the row
+ 	 				    const td1 = document.createElement("TD");
+ 	 				    td1.textContent = l.hspt_name;
+
+ 	 				    const td2 = document.createElement("TD");
+ 						td2.textContent = l.hspt_position;
+ 	 				    const td3 = document.createElement("TD");
+ 						td3.textContent = l.id;
+ 	 				    const td4 = document.createElement("TD");
+ 						td4.textContent = l.name;
+ 	 				    const td5 = document.createElement("TD");
+ 						td5.textContent = "asd";
+ 	 				    const td6 = document.createElement("TD");
+ 						td6.textContent = "";
+ 	 				    const td7 = document.createElement("TD");
+ 						td7.textContent = "";
+ 	 				    const td8 = document.createElement("TD");
+ 	 				    td8.textContent ="평가조회";
+ 	 				    td8.setAttribute("style", "cursor:pointer;");
+ 	 				    td8.setAttribute("data-idx", l.idx);
+ 	 				    td8.setAttribute("onclick", "search(this);");
+ 	 				    
+ 	 				    tr.appendChild(td1);
+ 	 				    tr.appendChild(td2);
+ 	 				    tr.appendChild(td3);
+ 	 				    tr.appendChild(td4);
+ 	 				    tr.appendChild(td5);
+ 	 				    tr.appendChild(td6);
+ 	 				    tr.appendChild(td7);
+ 	 				    tr.appendChild(td8);
+
+ 	 				    // Append the row to the table
+ 	 				    tb2.appendChild(tr);
+ 					});
+ 					
+ 					
 			}
 		},
 		error: function(error) {
@@ -161,6 +325,259 @@ function submember() {
 	});
 }
 
+function search(element) {
+	const idx = element.getAttribute("data-idx");
+	const link = "${pageContext.request.contextPath}/e/s/"+idx;
+	console.log(idx);
+	
+	$.ajax({
+		url: link,
+		type: 'GET',
+		dataType: 'json',
+		success: function(response) {
+			if (response.result ==="Y") {
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+				const list = response.list2;
+				const u = response.users;
+				
+				
+				const tb = document.createElement("TABLE");
+ 				
+				const tr1 = document.createElement("TR");
+ 				
+				const td1 = document.createElement("TD");
+				td1.textContent = "소속기관";
+ 				const td2 = document.createElement("TD");
+ 				td2.textContent = u.hspt_name;
+ 				
+ 				const td3 = document.createElement("TD");
+ 				td3.textContent = "부서명";
+ 				const td4 = document.createElement("TD");
+ 				td4.textContent = u.hspt_subname;
+ 				
+ 				const td5 = document.createElement("TD");
+ 				td5.textContent = "직급";
+ 				const td6 = document.createElement("TD");
+ 				td6.textContent = u.hspt_position;
+ 				
+ 				const td7 = document.createElement("TD");
+ 				td7.textContent = "사원번호";
+ 				const td8 = document.createElement("TD");
+ 				td8.textContent = u.id;
+ 				
+ 				const tr2 = document.createElement("TR");
+ 				
+ 				const td9 = document.createElement("TD");
+ 				td9.textContent = "사원명";
+ 				const td10 = document.createElement("TD");
+ 				td10.textContent = u.name;
+ 				
+ 				const td11 = document.createElement("TD");
+ 				td11.textContent = "평가점수";
+ 				const td12 = document.createElement("TD");
+ 				td12.textContent = "";
+ 				
+ 				const td13 = document.createElement("TD");
+ 				td13.textContent = "부서원 평균점수";
+ 				const td14 = document.createElement("TD");
+ 				td14.textContent = "";
+ 				
+ 				const td15 = document.createElement("TD");
+ 				td15.textContent = "평가등급";
+ 				const td16 = document.createElement("TD");
+ 				td16.textContent = "";
+ 				
+ 				const div = document.createElement("div");
+ 				div.setAttribute("style", "text-align: left;");
+ 				div.textContent = "▣ "+u.name+" 님의 세부 평가 내역 입니다.";
+
+ 				const div2 = document.createElement("div");
+ 				div2.setAttribute("style", "overflow-x : auto;");
+ 				// 평가답안 리스트
+ 				const tb2 = document.createElement("TABLE");
+ 				
+ 				const tr3 = document.createElement("TR");
+ 				
+ 				const td17 = document.createElement("TD");
+ 				td17.textContent = "평가자정보";
+ 				const td18 = document.createElement("TD");
+ 				td18.textContent = "평가점수";
+ 				const td19 = document.createElement("TD");
+ 				td19.textContent = "종합평가";
+ 				const td20 = document.createElement("TD");
+ 				td20.textContent = "1번문항";
+ 				const td21 = document.createElement("TD");
+ 				td21.textContent = "2번문항";
+ 				const td22 = document.createElement("TD");
+ 				td22.textContent = "3번문항";
+ 				const td23 = document.createElement("TD");
+ 				td23.textContent = "4번문항";
+ 				const td24 = document.createElement("TD");
+ 				td24.textContent = "5번문항";
+ 				const td25 = document.createElement("TD");
+ 				td25.textContent = "6번문항";
+ 				const td26 = document.createElement("TD");
+ 				td26.textContent = "7번문항";
+ 				const td27 = document.createElement("TD");
+ 				td27.textContent = "8번문항";
+ 				const td28 = document.createElement("TD");
+ 				td28.textContent = "9번문항";
+ 				const td29 = document.createElement("TD");
+ 				td29.textContent = "10번문항";
+ 				const td30 = document.createElement("TD");
+ 				td30.textContent = "11번문항";
+ 				const td31 = document.createElement("TD");
+ 				td31.textContent = "12번문항";
+ 				const td32 = document.createElement("TD");
+ 				td32.textContent = "13번문항";
+ 				const td33 = document.createElement("TD");
+ 				td33.textContent = "14번문항";
+ 				const td34 = document.createElement("TD");
+ 				td34.textContent = "15번문항";
+ 				const td35 = document.createElement("TD");
+ 				td35.textContent = "16번문항";
+ 				const td36 = document.createElement("TD");
+ 				td36.textContent = "17번문항";
+ 				const td37 = document.createElement("TD");
+ 				td37.textContent = "18번문항";
+ 				const td38 = document.createElement("TD");
+ 				td38.textContent = "19번문항";
+ 				const td39 = document.createElement("TD");
+ 				td39.textContent = "20번문항";
+ 				
+ 				
+ 				
+ 				mainContent.appendChild(tb);
+ 				tb.appendChild(tr1);
+ 				tr1.appendChild(td1);
+ 				tr1.appendChild(td2);
+ 				tr1.appendChild(td3);
+ 				tr1.appendChild(td4);
+ 				tr1.appendChild(td5);
+ 				tr1.appendChild(td6);
+ 				tr1.appendChild(td7);
+ 				tr1.appendChild(td8);
+ 				tb.appendChild(tr2);
+ 				tr2.appendChild(td9);
+ 				tr2.appendChild(td10);
+ 				tr2.appendChild(td11);
+ 				tr2.appendChild(td12);
+ 				tr2.appendChild(td13);
+ 				tr2.appendChild(td14);
+ 				tr2.appendChild(td15);
+ 				tr2.appendChild(td16);
+ 				
+ 				mainContent.appendChild(div);
+ 				mainContent.appendChild(div2);
+ 				div2.appendChild(tb2);
+ 				tb2.appendChild(tr3);
+ 				tr3.appendChild(td17);
+ 				tr3.appendChild(td18);
+ 				tr3.appendChild(td19);
+ 				tr3.appendChild(td20);
+ 				tr3.appendChild(td21);
+ 				tr3.appendChild(td22);
+ 				tr3.appendChild(td23);
+ 				tr3.appendChild(td24);
+ 				tr3.appendChild(td25);
+ 				tr3.appendChild(td26);
+ 				tr3.appendChild(td27);
+ 				tr3.appendChild(td28);
+ 				tr3.appendChild(td29);
+ 				tr3.appendChild(td30);
+ 				tr3.appendChild(td31);
+ 				tr3.appendChild(td32);
+ 				tr3.appendChild(td33);
+ 				tr3.appendChild(td34);
+ 				tr3.appendChild(td35);
+ 				tr3.appendChild(td36);
+ 				tr3.appendChild(td37);
+ 				tr3.appendChild(td38);
+ 				tr3.appendChild(td39);
+ 				
+ 				$.each (list, function (index, l) {
+ 					console.log(l.d1.split(',')[0]);
+ 					const tr3 = document.createElement("TR");
+ 	 				
+ 	 				const td17 = document.createElement("TD");
+ 	 				td17.textContent = l.name;
+ 	 				const td18 = document.createElement("TD");
+ 	 				td18.textContent = "평가점수";
+ 	 				const td19 = document.createElement("TD");
+ 	 				td19.textContent = l.d1.split(',')[20];
+ 	 				const td20 = document.createElement("TD");
+ 	 				td20.textContent = l.d1.split(',')[0];
+ 	 				const td21 = document.createElement("TD");
+ 	 				td21.textContent = l.d1.split(',')[1];
+ 	 				const td22 = document.createElement("TD");
+ 	 				td22.textContent = l.d1.split(',')[2];
+ 	 				const td23 = document.createElement("TD");
+ 	 				td23.textContent = l.d1.split(',')[3];
+ 	 				const td24 = document.createElement("TD");
+ 	 				td24.textContent = l.d1.split(',')[4];
+ 	 				const td25 = document.createElement("TD");
+ 	 				td25.textContent = l.d1.split(',')[5];
+ 	 				const td26 = document.createElement("TD");
+ 	 				td26.textContent = l.d1.split(',')[6];
+ 	 				const td27 = document.createElement("TD");
+ 	 				td27.textContent = l.d1.split(',')[7];
+ 	 				const td28 = document.createElement("TD");
+ 	 				td28.textContent = l.d1.split(',')[8];
+ 	 				const td29 = document.createElement("TD");
+ 	 				td29.textContent = l.d1.split(',')[9];
+ 	 				const td30 = document.createElement("TD");
+ 	 				td30.textContent = l.d1.split(',')[10];
+ 	 				const td31 = document.createElement("TD");
+ 	 				td31.textContent = l.d1.split(',')[11];
+ 	 				const td32 = document.createElement("TD");
+ 	 				td32.textContent = l.d1.split(',')[12];
+ 	 				const td33 = document.createElement("TD");
+ 	 				td33.textContent = l.d1.split(',')[13];
+ 	 				const td34 = document.createElement("TD");
+ 	 				td34.textContent = l.d1.split(',')[14];
+ 	 				const td35 = document.createElement("TD");
+ 	 				td35.textContent = l.d1.split(',')[15];
+ 	 				const td36 = document.createElement("TD");
+ 	 				td36.textContent = l.d1.split(',')[16];
+ 	 				const td37 = document.createElement("TD");
+ 	 				td37.textContent = l.d1.split(',')[17];
+ 	 				const td38 = document.createElement("TD");
+ 	 				td38.textContent = l.d1.split(',')[18];
+ 	 				const td39 = document.createElement("TD");
+ 	 				td39.textContent = l.d1.split(',')[19];
+ 	 				
+ 	 				tb2.appendChild(tr3);
+ 	 				tr3.appendChild(td17);
+ 	 				tr3.appendChild(td18);
+ 	 				tr3.appendChild(td19);
+ 	 				tr3.appendChild(td20);
+ 	 				tr3.appendChild(td21);
+ 	 				tr3.appendChild(td22);
+ 	 				tr3.appendChild(td23);
+ 	 				tr3.appendChild(td24);
+ 	 				tr3.appendChild(td25);
+ 	 				tr3.appendChild(td26);
+ 	 				tr3.appendChild(td27);
+ 	 				tr3.appendChild(td28);
+ 	 				tr3.appendChild(td29);
+ 	 				tr3.appendChild(td30);
+ 	 				tr3.appendChild(td31);
+ 	 				tr3.appendChild(td32);
+ 	 				tr3.appendChild(td33);
+ 	 				tr3.appendChild(td34);
+ 	 				tr3.appendChild(td35);
+ 	 				tr3.appendChild(td36);
+ 	 				tr3.appendChild(td37);
+ 	 				tr3.appendChild(td38);
+ 	 				tr3.appendChild(td39);
+ 				});
+			}
+		},
+		error: function (error) {
+			console.error("Error fetching data:", error);
+		}
+	});
+}
 const menuScripts = [
 	{ id: 'info', contentId: 'all', script: info },
 	{ id: 'submember', contentId: 'all', script: submember },

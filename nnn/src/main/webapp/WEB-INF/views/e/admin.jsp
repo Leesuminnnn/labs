@@ -102,7 +102,7 @@
 						<td>${u.hspt_subname }</td>
 						<td>${u.id }</td>
 						<td>${u.hspt_position }</td>
-						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/e/Info/${u.idx}'">${u.name }</td>
+						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/e/Mypage/${u.idx}'">${u.name }</td>
 						<c:forEach items="${ph }" var="p">
 							<c:if test="${u.id eq p.id }">
 								<td>
@@ -242,7 +242,7 @@ function userall(contentId) {
 		 					tdpo.textContent = position;
 		 					var tdname = document.createElement("TD");
 		 					tdname.textContent = name;
-		 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+		 					var url = "<%=request.getContextPath() %>/e/Mypage/"+idx;
 		 					tdname.setAttribute("onclick","location.href='" + url + "'");
 		 					tdname.setAttribute("style", "cursor:pointer;");
 		 					var tdph = document.createElement("TD");

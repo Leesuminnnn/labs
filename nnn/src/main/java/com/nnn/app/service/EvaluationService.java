@@ -230,9 +230,26 @@ public class EvaluationService {
 		return evaluationDao.answersum3(map);
 	}
 
-	public List<UsersVo> my(Map<String, Object> map) {
-		return evaluationDao.my(map);
+	public UsersVo my(UsersVo vo) {
+		return evaluationDao.my(vo);
 	}
+
+	public int subcnt(Map<String, Object> map) {
+		return evaluationDao.subcnt(map);
+	}
+
+	public List<UsersVo> sub(Map<String, Object> map) {
+		return evaluationDao.sub(map);
+	}
+
+	public List<AnswerVo> user(Map<String, Object> map) {
+		return evaluationDao.user(map);
+	}
+
+	public List<AnswerVo> subanswerlist(Map<String, Object> map) {
+		return evaluationDao.subanswerlist(map);
+	}
+
 	
 	
 }

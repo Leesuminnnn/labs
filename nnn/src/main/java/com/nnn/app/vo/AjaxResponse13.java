@@ -10,7 +10,10 @@ import lombok.Setter;
 public class AjaxResponse13 {
 
 	private String result;
-	private List<UsersVo> users;
+	private UsersVo users;
+	private int subcnt;
+	private List<UsersVo> list;
+	private List<AnswerVo> list2;
 	
 	
 	

@@ -385,7 +385,7 @@
 		select sum(target) from ctarget where target
 	</select>
 	<select id="answersum" parameterType="map" resultType="int">
-		select count(*) from canswer
+		select count(*) from canswer where del_yn = 'N'
 	</select>
 	
 	<select id="targetsum1" parameterType="map" resultType="int">

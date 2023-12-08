@@ -1405,13 +1405,7 @@ public class TestController {
 		mv.setViewName("t/testalert");
 		return mv;
 	}
-	@RequestMapping(value="Mypage")
-	public ModelAndView mypage(ModelAndView mv) throws Exception {
-		
-		
-		mv.setViewName("t/Mypage");
-		return mv;
-	}
+	
 	@RequestMapping(value="Info2/{idx}")
 	public ModelAndView info2(UsersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) throws Exception {
 session.getAttribute("loginMember");
