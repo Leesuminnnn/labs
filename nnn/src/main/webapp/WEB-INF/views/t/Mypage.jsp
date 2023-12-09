@@ -181,6 +181,7 @@ function submember() {
  				const maintd7 = document.createElement("TD");
  				maintd7.textContent = "부서원 평균점수";
  				const maintd8 = document.createElement("TD");
+ 				maintd8.setAttribute("id","score");
  				maintd8.textContent = "";
  				
  				const div = document.createElement("div");
@@ -261,26 +262,34 @@ function submember() {
  				}
 	
 				const idScores = {};
- 				
+				let totalSum = 0;
+				$.each (list2, function (index, t) {
+					const values = t.d1.toLowerCase().split(',').map(value => value.trim());
+//					console.log(values);
+					values.forEach(value => {
+			           const score = mapValueToScore(value) || 0;
+			           console.log(score);
+			           idScores[t.t1] = (idScores[t.t1] || 0) + score;
+//			           console.log(idScores[t.t1]);
+			           const per = idScores[t.t1] / (c - 1);
+			          //console.log(per);
+					});
+ 				});
+				Object.keys(idScores).forEach(id => {
+// 					console.log((idScores[id] / c).toFixed(1));
+ 				});
  				$.each (list, function (index, l) {
- 					$.each (list2, function (index, t) {
-// 						console.log(t.t1)
-	 				    const values = t.d1.toLowerCase().split(',').map(value => value.trim());
-	 				    // 숫자로 변환한 답안을 더하기
-	 				  const as = mapValueToScore(values[0]);
-	 				    console.log(as);
- 		 				    values.forEach(value => {
- 		 				        const score = mapValueToScore(value) || 0;
- 		 				        idScores[t.t1] = (idScores[t.t1] || 0) + score;
- 		 				    });
- 		 				    
- 		 				});
- 		 				Object.keys(idScores).forEach(id => {
- 		 					
- 		 				    console.log(`t.t1: ${id}, Total Score: ${idScores[id]}`);
- 		 				});
+ 						
+	 					const rawValue = idScores[l.id] / (c - 1 ) || 0;
+	 				    const formattedValue = rawValue.toFixed(1);
+//	 				   console.log("l.id:", l.id, "Total Score:", formattedValue);
+	                	totalSum += rawValue;
+//	                	console.log(totalSum.toFixed(1) / (c -1));
+	                	var subper = totalSum.toFixed(1) / (c -1);
+//	                	console.log(subper);
+ 						const tdElement = $('#score');
+ 						tdElement.html(subper.toFixed(1));
  						const tr = document.createElement("TR");
-
  	 				    // Append cells to the row
  	 				    const td1 = document.createElement("TD");
  	 				    td1.textContent = l.hspt_name;
@@ -292,7 +301,7 @@ function submember() {
  	 				    const td4 = document.createElement("TD");
  						td4.textContent = l.name;
  	 				    const td5 = document.createElement("TD");
- 						td5.textContent = "asd";
+ 						td5.textContent = formattedValue;
  	 				    const td6 = document.createElement("TD");
  						td6.textContent = "";
  	 				    const td7 = document.createElement("TD");
@@ -315,7 +324,7 @@ function submember() {
  	 				    // Append the row to the table
  	 				    tb2.appendChild(tr);
  					});
- 					
+	 				
  					
 			}
 		},
@@ -323,6 +332,7 @@ function submember() {
 			console.error('Error fetching data:', error);
 		}
 	});
+ 				
 }
 
 function search(element) {
@@ -400,6 +410,7 @@ function search(element) {
  				
  				const td17 = document.createElement("TD");
  				td17.textContent = "평가자정보";
+ 				td17.setAttribute("style", "width:200px;");
  				const td18 = document.createElement("TD");
  				td18.textContent = "평가점수";
  				const td19 = document.createElement("TD");
@@ -500,7 +511,7 @@ function search(element) {
  					const tr3 = document.createElement("TR");
  	 				
  	 				const td17 = document.createElement("TD");
- 	 				td17.textContent = l.name;
+ 	 				td17.textContent = "***";
  	 				const td18 = document.createElement("TD");
  	 				td18.textContent = "평가점수";
  	 				const td19 = document.createElement("TD");
