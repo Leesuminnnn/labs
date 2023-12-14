@@ -279,4 +279,50 @@ public class EvaluationDao {
 		return sqlSession3.selectList(MAPPER+".subanswerlist", map);
 	}
 
+	public List<UsersVo> k(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".k", map);
+		return sqlSession3.selectList(MAPPER+".k", map);
+	}
+
+	public int kcnt(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".kcnt", map);
+		return sqlSession3.selectOne(MAPPER+".kcnt", map);
+	}
+
+	public List<UsersVo> klist(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".klist", map);
+		return sqlSession3.selectList(MAPPER+".klist", map);
+	}
+
+	public List<AnswerVo> kuser(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".kuser", map);
+		return sqlSession3.selectList(MAPPER+".kuser", map);
+	}
+
+	public List<UsersVo> klist2(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".klist2", map);
+		return sqlSession3.selectList(MAPPER+".klist2", map);
+	}
+
+	public int kscnt(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".kscnt", map);
+		return sqlSession3.selectOne(MAPPER+".kscnt", map);
+	}
+
+	public List<UsersVo> klistall(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".klistall", map);
+		return sqlSession3.selectList(MAPPER+".klistall", map);
+	}
+
+	public Object phselect(String id) {
+//		return sqlSession1.selectOne(MAPPER+".phselect", id);
+		return sqlSession3.selectOne(MAPPER+".phselect", id);
+	}
+
+	public List<AnswerVo> alistall(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".alistall", map);
+		return sqlSession3.selectList(MAPPER+".alistall", map);
+	}
+
+
 }

@@ -38,9 +38,15 @@
 		<typeAlias alias="target" type="com.nnn.app.vo.TargetVo"/>
 		<typeAlias alias="guser" type="com.nnn.app.vo.GoogleuserVo"/>
 		
+		<!-- 계열사 -->
 		<typeAlias alias="cusers" type="com.nnn.app.vo.CoopusersVo"/>
 		<typeAlias alias="cwhether" type="com.nnn.app.vo.CWhetherVo"/>
 		<typeAlias alias="canswer" type="com.nnn.app.vo.CAnswerVo"/>
+		
+		<!-- 설정관리? -->
+		<typeAlias alias="user" type="com.nnn.app.vo.UserVo"/>
+		<typeAlias alias="option" type="com.nnn.app.vo.UseroptionVo"/>
+		<typeAlias alias="sub" type="com.nnn.app.vo.SubVo"/>
 		
 	</typeAliases>  
 

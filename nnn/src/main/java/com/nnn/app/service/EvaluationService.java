@@ -250,6 +250,42 @@ public class EvaluationService {
 		return evaluationDao.subanswerlist(map);
 	}
 
+	public List<UsersVo> k(Map<String, Object> map) {
+		return evaluationDao.k(map);
+	}
+
+	public int kcnt(Map<String, Object> map) {
+		return evaluationDao.kcnt(map);
+	}
+
+	public List<UsersVo> klist(Map<String, Object> map) {
+		return evaluationDao.klist(map);
+	}
+
+	public List<AnswerVo> kuser(Map<String, Object> map) {
+		return evaluationDao.kuser(map);
+	}
+
+	public List<UsersVo> klist2(Map<String, Object> map) {
+		return evaluationDao.klist2(map);
+	}
+
+	public int kscnt(Map<String, Object> map) {
+		return evaluationDao.kscnt(map);
+	}
+
+	public List<UsersVo> klistall(Map<String, Object> map) {
+		return evaluationDao.klistall(map);
+	}
+
+	public Object phselect(String id) {
+		return evaluationDao.phselect(id);
+	}
+
+	public List<AnswerVo> alistall(Map<String, Object> map) {
+		return evaluationDao.alistall(map);
+	}
+
 	
 	
 }

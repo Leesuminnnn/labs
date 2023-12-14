@@ -8,7 +8,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class UsersVo {
 /*
 
@@ -57,6 +56,7 @@ user_code VARCHAR(30) NOT NULL COMMENT '코드'
 	private String hspt_J;
 	private String user_code;
 	
+	private double subscore;
 	
 	
 }

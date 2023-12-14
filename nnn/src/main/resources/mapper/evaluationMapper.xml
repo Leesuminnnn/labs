@@ -3014,6 +3014,9 @@
 	<select id="phOne" resultType="int" parameterType="map">
 		select count(*) from user__phone where id = #{id} and number = #{ph}
 	</select>
+	<select id="phselect" resultType="map" parameterType="map">
+		select * from user__phone where id = #{id}
+	</select>
 	<!-- 비밀번호 초기화 -->
 	<update id="pwdreset" parameterType="map">
 		update users__ set pwd = null where id = #{id}
@@ -3101,26 +3104,88 @@
 	</select>
 	<!-- 부서원 평가 결과 리포트 -->
 	<!-- 예시 : 4병동장으로 로그인 했을때. -->
+	<!-- 해당 부서원 리스트 -->
 	<select id="sub" parameterType="map" resultType="map">
 		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
 	</select>
+	<!-- 부서원 수 -->
 	<select id="subcnt" parameterType="map" resultType="int">
 		select count(*) from users__ where hspt_name = #{hname} and hspt_subcode = #{subcode};
 	</select>
 	
 	<!-- 직원이 평가 받은 리스트 -->
 	<select id="answerlist" parameterType="map" resultType="map">
-		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
+		select * from users__ u where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
 	</select>
 	
+	<!-- 부서원 평가 조회 하는 쿼리 (경혁팀평가 제외) -->
 	<select id="user" parameterType="map" resultType="map">
-		select * from answer a join users__ u on a.u2 = u.id where a.t1 = #{id}
+		select * from answer a join users__ u on a.u2 = u.id where a.ev = 'AB' and a.t1 = #{id}
 	</select>
-	
+	<!-- 부서장이 로그인 했을때 부서원이 평가 받은 리스트 -->
 	<select id="subanswerlist" parameterType="map" resultType="map">
-		select * from answer a join users__ u on a.u2 = u.id where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
+		select * from answer a join users__ u on a.t1 = u.id where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F' and a.team != 'B'
 	</select>
-	
+	<!-- 경혁팀 간 평가 리스트 -->
+	<select id="k" parameterType="map" resultType="map">
+		SELECT
+		    a.u1, a.u2, a.t1, a.team, a.ev, a.d1,
+		    u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name,
+		    d.hspt_subcode, d.id, d.name, d.hspt_position
+		FROM
+		    answer a
+		    JOIN users__ u ON a.t1 = u.id
+		    JOIN users__ d ON d.id = a.u2
+		WHERE
+		    u.hspt_name = #{hname}
+		    AND a.team = 'B'
+		    and d.hspt_V = 'T'
+		    AND not d.hspt_subcode LIKE 'A0%'
+	</select>
+	<!-- 경혁팀 부서원 평가 조회 하는 쿼리 -->
+	<select id="kuser" parameterType="map" resultType="map">
+		select * from answer a join users__ u on a.u2 = u.id where u.hspt_V = 'T' and a.t1 = #{id}
+	</select>
+	<!-- 경혁팀 직원 수 -->
+	<select id="klist" parameterType="map" resultType="map">
+		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_V = 'T'
+	</select>	
+	<select id="kcnt" parameterType="map" resultType="int">
+		select count(*) from users__ u  where u.hspt_name = #{hname} and u.hspt_V = 'T'
+	</select>
+	<!-- 진료부가 경혁팀 평가 전체 리스트 -->
+	<select id="klistall" parameterType="map" resultType="map">
+	select 
+		a.u1, a.t1, a.u2, a.team, a.ev, a.d1, u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name, 
+		d.hspt_subcode as tsubcode, d.id as tid, d.name as tname, d.hspt_position as tposition
+	from answer a 
+		join users__ u on a.t1 = u.id 
+		join users__ d on d.id = a.u2 
+	where u.hspt_name = #{hname} and a.team = 'B' and d.hspt_subcode like 'A0%'
+	</select>
+	<!-- 진료부가 경혁팀 평가 -->
+	<select id="klist2" parameterType="map" resultType="map">
+		select 
+			a.u1, a.t1, a.u2, a.team, a.ev, a.d1, 
+			u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name, 
+			d.hspt_subcode as tsubcode, d.id as tid, d.name as tname, d.hspt_position as tposition
+		from answer a 
+			join users__ u on a.t1 = u.id 
+			join users__ d on d.id = a.u2 
+		where 
+			u.hspt_name = #{hname} and a.team = 'B' and u.id = #{id} and d.hspt_subcode like 'A0%'
+	</select>
+	<!-- 진료부 전체 (양방/한방) 인원 수 -->
+	<select id="kscnt" parameterType="map" resultType="int">
+		select count(*) from users__ where hspt_name = #{hname} and hspt_subcode like 'A0%'
+	</select>
+	<!-- 진료부가 평가받은 전체 리스트 -->
+	<select id="alistall" parameterType="map" resultType="map">
+	select a.u1, a.u2, a.t1, a.team, a.ev, a.d1, 
+		u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name, 
+		d.hspt_subcode as tsubcode, d.id as tid, d.name as tname, d.hspt_position as tposition
+	from answer a join users__ u on a.u2 = u.id join users__ d on a.t1 = d.id where u.hspt_name = #{hname} and d.hspt_subcode like 'A%'
+	</select>
 	
 	
 </mapper>

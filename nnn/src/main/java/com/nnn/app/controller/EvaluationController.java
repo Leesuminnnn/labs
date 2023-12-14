@@ -1,5 +1,7 @@
 package com.nnn.app.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -955,9 +957,13 @@ public class EvaluationController {
 		return mv;
 	}
 	@RequestMapping(value="Mypage/{idx}")
-	public ModelAndView mypage(UsersVo vo, @PathVariable("idx") Integer idx, ModelAndView mv) throws Exception {
+	public ModelAndView mypage(UsersVo vo, UserPh ph, @PathVariable("idx") Integer idx, ModelAndView mv) throws Exception {
 		mv.addObject("info", evaluationService.info(idx));
-		
+		String id = evaluationService.info(idx).getId();
+		mv.addObject("ph", evaluationService.phselect(id));
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		System.out.println(evaluationService.phselect(id));
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		mv.setViewName("t/Mypage");
 		return mv;
 	}
@@ -977,7 +983,7 @@ public class EvaluationController {
 		List<UsersVo> list = evaluationService.sub(map);
 		List<AnswerVo> list2 = evaluationService.subanswerlist(map);
 		System.out.println("");
-		System.out.println(evaluationService.my(vo));
+//		System.out.println(evaluationService.my(vo));
 		System.out.println("");
 		response.setUsers(evaluationService.my(vo));
 		System.out.println(subcnt);
@@ -990,8 +996,10 @@ public class EvaluationController {
 	}
 	@ResponseBody
 	@RequestMapping(value="s/{idx}")
-	public AjaxResponse13 s(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
+	public AjaxResponse13 s(@RequestParam("subscore") double subscore,  UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
 		AjaxResponse13 response = new AjaxResponse13();
+		
+		
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("idx", idx);
@@ -1013,8 +1021,117 @@ public class EvaluationController {
 		System.out.println(subcnt);
 		response.setSubcnt(subcnt);
 		response.setList(list);
-		System.out.println(list2);
+//		System.out.println(list2);
 		response.setList2(list2);
+		response.setSubscore(subscore);
 		return response;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="k/{idx}")
+	public AjaxResponse13 k(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
+		AjaxResponse13 response = new AjaxResponse13();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		evaluationService.my(vo);
+		String hname = evaluationService.my(vo).getHspt_name();
+		map.put("hname", hname);
+		response.setUsers(evaluationService.my(vo));
+		// 경혁팀원 수
+		// 경혁팀 리스트
+		List<UsersVo> list3 = evaluationService.klist(map);
+		// 경혁팀간 평가 리스트
+		List<UsersVo> list = evaluationService.k(map);
+		// 진료부 -> 경혁팀 평가 리스트
+		List<UsersVo> klist2 = evaluationService.klistall(map);
+		// 진료부 인원
+		
+		int kcnt = evaluationService.kcnt(map);
+		int kscnt = evaluationService.kscnt(map);
+		response.setList(list);
+		response.setKcnt(kcnt);
+		response.setList3(list3);
+		response.setList4(klist2);
+		response.setKscnt(kscnt);
+		System.out.println(list3);
+		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="ks/{idx}")
+	public AjaxResponse13 ks(@RequestParam("subscore") double subscore,@ RequestParam("ksubscore") double ksubscore,  UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
+		AjaxResponse13 response = new AjaxResponse13();
+		
+		
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		evaluationService.my(vo);
+		String id = evaluationService.my(vo).getId();
+		String subcode = evaluationService.my(vo).getHspt_subcode();
+		String hname = evaluationService.my(vo).getHspt_name();
+		map.put("hname", hname);
+		map.put("subcode", subcode);
+		map.put("id", id);
+		// 해당 id의 직원이 평가를 받은 리스트
+		List<AnswerVo> list2 = evaluationService.kuser(map);
+		// 부서원 리스트
+		List<UsersVo> list = evaluationService.sub(map);
+		// 부서원 수
+		int subcnt = evaluationService.subcnt(map);
+		// 진료부 -> 경혁팀 평가 리스트
+		List<UsersVo> klist2 = evaluationService.klist2(map);
+		System.out.println("");
+		System.out.println(evaluationService.my(vo));
+		System.out.println("");
+		response.setUsers(evaluationService.my(vo));
+		System.out.println(subcnt);
+		response.setSubcnt(subcnt);
+		response.setList(list);
+//		System.out.println(list2);
+		response.setList2(list2);
+		response.setList4(klist2);
+		response.setSubscore(subscore);
+		response.setKsubscore(ksubscore);
+		return response;
+	}
+	@ResponseBody
+	@RequestMapping(value="a/{idx}")
+	public AjaxResponse13 a(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
+		AjaxResponse13 response = new AjaxResponse13();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		evaluationService.my(vo);
+		String subcode = evaluationService.my(vo).getHspt_subcode();
+		String hname = evaluationService.my(vo).getHspt_name();
+		map.put("hname", hname);
+		map.put("subcode", subcode);
+		// 진료부 인원 수
+		// 양방/ 한방으로 나뉠 수도 있으니 A0%로 불러옴
+		int subcnt = evaluationService.subcnt(map);
+		// 해당 진료팀의 부서원 리스트
+		List<UsersVo> list = evaluationService.sub(map);
+		// 해당 진료팀 평가 리스트
+		List<AnswerVo> list2 = evaluationService.alistall(map);
+		
+		System.out.println("");
+//		System.out.println(evaluationService.my(vo));
+		System.out.println("");
+		response.setUsers(evaluationService.my(vo));
+		response.setList(list);
+		response.setList2(list2);
+		response.setSubcnt(subcnt);
+		System.out.println(list);
+		System.out.println(list2);
+		return response;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
