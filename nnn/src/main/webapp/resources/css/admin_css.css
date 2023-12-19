@@ -272,5 +272,10 @@ main {
 	font-size: 20px;
 	/* border: 10px solid #185B77; */
 }
-  
+
+/*  css 강제적용 */
+.select {
+	background: #03166C !important;
+	color: #fff !important;
+}
 

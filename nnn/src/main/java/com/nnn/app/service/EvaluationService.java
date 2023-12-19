@@ -11,8 +11,11 @@ import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.SubVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
+import com.nnn.app.vo.UserVo;
+import com.nnn.app.vo.UseroptionVo;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
@@ -284,6 +287,18 @@ public class EvaluationService {
 
 	public List<AnswerVo> alistall(Map<String, Object> map) {
 		return evaluationDao.alistall(map);
+	}
+
+	public List<SubVo> subop(Map<String, Object> map) {
+		return evaluationDao.subop(map);
+	}
+
+	public List<UserVo> userall(Map<String, Object> map) {
+		return evaluationDao.userall(map);
+	}
+
+	public List<UseroptionVo> userop(Map<String, Object> map) {
+		return evaluationDao.userop(map);
 	}
 
 	

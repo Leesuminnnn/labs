@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.EvaluationService;
 import com.nnn.app.vo.AjaxResponse13;
+import com.nnn.app.vo.AjaxResponse14;
 import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
@@ -36,8 +37,11 @@ import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.SubVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
+import com.nnn.app.vo.UserVo;
+import com.nnn.app.vo.UseroptionVo;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
@@ -1128,9 +1132,39 @@ public class EvaluationController {
 		return response;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="setting")
+	public AjaxResponse14 setting(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse14 res = new AjaxResponse14();
+		res.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<SubVo> sub = evaluationService.subop(map);
+		List<UserVo> user = evaluationService.userall(map);
+		List<UseroptionVo> userop = evaluationService.userop(map);
+		
+		res.setSub(sub);
+		res.setUser(user);
+		res.setUserop(userop);
+
+		return res;
+	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="set2")
+	public AjaxResponse14 set2(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse14 res = new AjaxResponse14();
+		res.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<SubVo> sub = evaluationService.subop(map);
+		List<UserVo> user = evaluationService.userall(map);
+		List<UseroptionVo> userop = evaluationService.userop(map);
+		
+		res.setSub(sub);
+		res.setUser(user);
+		res.setUserop(userop);
+
+		return res;
+	}
 	
 	
 	

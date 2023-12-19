@@ -3187,5 +3187,16 @@
 	from answer a join users__ u on a.u2 = u.id join users__ d on a.t1 = d.id where u.hspt_name = #{hname} and d.hspt_subcode like 'A%'
 	</select>
 	
+	<select id="subop" parameterType="map" resultType="map">
+		select * from sub
+	</select>
 	
+	<select id="userall" parameterType="map" resultType="map">
+		select u.c_name, u.c_name2, u.subname, u.id, u.pwd, u.position, u.name, u.reg_date, u.end_date, u.phone,
+		o.k, o.v, o.b, o.x, o.z, o.a, o.del_yn from users u join useroption o on u.id = o.id
+	</select>
+	
+	<select id="userop" parameterType="map" resultType="map">
+		select * from useroption
+	</select>
 </mapper>

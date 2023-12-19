@@ -12,8 +12,11 @@ import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.SubVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
+import com.nnn.app.vo.UserVo;
+import com.nnn.app.vo.UseroptionVo;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
@@ -323,6 +326,22 @@ public class EvaluationDao {
 //		return sqlSession1.selectList(MAPPER+".alistall", map);
 		return sqlSession3.selectList(MAPPER+".alistall", map);
 	}
+	
+	public List<SubVo> subop(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".subop", map);
+//		return sqlSession3.selectList(MAPPER+".subop", map);
+	}
+
+	public List<UserVo> userall(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".userall", map);
+//		return sqlSession3.selectList(MAPPER+".userall", map);
+	}
+
+	public List<UseroptionVo> userop(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".userop", map);
+//		return sqlSession3.selectList(MAPPER+".userop", map);
+	}
+
 
 
 }

@@ -1547,198 +1547,131 @@ function per3() {
 // 설정관리
 function setting() {
 	$.ajax({
-        url: '${pageContext.request.contextPath}/e/setting',
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-       	 if(response.result === "Y"){
-				var listall = response.usersall;
-				var target = response.target;
- 				var answer = response.answer;
- 				var targetsum = response.targetsum;
- 				var answersum = response.answersum;
+		url: '${pageContext.request.contextPath}/e/setting',
+		type: 'GET',
+		dataType: 'json',
+		success: function(res) {
+			if(res.result === "Y"){
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
- 				var dv = document.createElement("div");
- 				dv.setAttribute("class","scroll-container");
- 				var tb = document.createElement("TABLE");
-					tb.setAttribute("class","scrolltable");
-					
- 				var thead = document.createElement("THEAD");
- 				
- 				var maintr1 = document.createElement("TR");
- 				var maintd1 = document.createElement("TD");
- 				maintd1.textContent = "평가자정보";
- 				maintd1.setAttribute("colspan","4");
- 				var maintd2 = document.createElement("TD");
- 				maintd2.textContent = "평가대상자수";
- 				maintd2.setAttribute("rowspan","2");
- 				maintd2.setAttribute("style","width: 140px;");
- 				var maintd3 = document.createElement("TD");
- 				maintd3.textContent = "평가결과수";
- 				maintd3.setAttribute("rowspan","2");
- 				maintd3.setAttribute("style","width: 120px;");
- 				var maintd4 = document.createElement("TD");
- 				maintd4.textContent = "진행율";
- 				maintd4.setAttribute("rowspan","2");
- 				var maintd7 = document.createElement("TD");
- 				maintd7.textContent = "평가자 마이페이지";
- 				maintd7.setAttribute("style","width: 187px;");
- 				maintd7.setAttribute("rowspan","2");
- 				
- 				var maintr2 = document.createElement("TR");
-
-				var maintd9 = document.createElement("TD");
-				maintd9.textContent = "기관명";
- 				maintd9.setAttribute("style","width: 210px;");
-				var maintd10 = document.createElement("TD");
-				maintd10.textContent = "부서명";
-				maintd10.setAttribute("style","width: 150px;");
-				var maintd11 = document.createElement("TD");
-				maintd11.textContent = "직급/직책";
-				maintd11.setAttribute("style","width: 195px;");
-				var maintd12 = document.createElement("TD");
-				maintd12.textContent = "사원명";
-				
-				var maintr3 = document.createElement("TR");
-				maintr3.setAttribute("style","width: 195px; background:#00A8E4;");
-				var maintd13 = document.createElement("TD");
-				maintd13.setAttribute("colspan","4");
-				maintd13.textContent = "전 직원 정보";
-				
-				var maintd14 = document.createElement("TD");	// 대상자수
-				maintd14.textContent = targetsum;
-				
-				var maintd15 = document.createElement("TD");	// 평가 결과수
-				maintd15.textContent = answersum;
-				
-				var maintd16 = document.createElement("TD");
-				var percentageall =  (answersum / targetsum) * 100;
-				maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
-				
-				var maintd17 = document.createElement("TD");
-				maintd17.textContent = "-"
-				
- 				var tbody = document.createElement("TBODY");
-				
-				
+ 				const sub = res.sub;
+ 				const user = res.user;
+ 				const userop = res.userop;
+//  				console.log(sub);
+//  				console.log(user);
+//  				console.log(userop);
+ 				const dv = document.createElement("div");
+ 				dv.setAttribute("style","font-size: 14px; margin: 10px; display: flex; justify-content: center; flex-direction: column;");
  				mainContent.appendChild(dv);
- 				dv.appendChild(tb);
- 				tb.appendChild(thead);
- 				thead.appendChild(maintr1);
- 				maintr1.appendChild(maintd1);
- 				maintr1.appendChild(maintd2);
- 				maintr1.appendChild(maintd3);
- 				maintr1.appendChild(maintd4);
- 				maintr1.appendChild(maintd7);
- 				thead.appendChild(maintr2);
- 				maintr2.appendChild(maintd9);
- 				maintr2.appendChild(maintd10);
- 				maintr2.appendChild(maintd11);
- 				maintr2.appendChild(maintd12);
- 				thead.appendChild(maintr3);
- 				maintr3.appendChild(maintd13);
- 				maintr3.appendChild(maintd14);
- 				maintr3.appendChild(maintd15);
- 				maintr3.appendChild(maintd16);
- 				maintr3.appendChild(maintd17);
-
- 				tb.appendChild(tbody);
+				
+ 				const dv2 = document.createElement("div");
+ 				dv2.setAttribute("style","margin: 15px 0 15px 20px; display: flex; justify-content: flex-start;");
+ 				dv.appendChild(dv2);
  				
- 				listall.forEach(function (list) {
- 				//	if(list.id != 12365478){		// 관리자 제거
- 						
- 						var matchingTarget = target.find(function (tg) {
- 							return tg.id === list.id;
- 						});
- 						
- 						var targetid, tgt
- 						if(matchingTarget) {
- 							targetid = matchingTarget.id;
- 							tgt = matchingTarget.target;
- 						}
- 						
+ 				const dv3 = document.createElement("div");
+ 				dv3.textContent = " 직원명부 ";
+ 				dv3.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+ 				dv3.setAttribute("class", "set_menu select");
+ 				dv3.setAttribute("onclick","set1();");
+ 				dv3.setAttribute("id","set_menu1");
+ 				const dv4 = document.createElement("div");
+ 				dv4.textContent = " 직원별 변수 설정 ";
+ 				dv4.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+ 				dv4.setAttribute("class", "set_menu");
+ 				dv4.setAttribute("onclick","set2();");
+ 				dv4.setAttribute("id","set_menu2");
+ 				const dv5 = document.createElement("div");
+ 				dv5.textContent = " 부서 설정 ";
+ 				dv5.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+ 				dv5.setAttribute("class", "set_menu");
+ 				dv5.setAttribute("onclick","set3();");
+ 				dv5.setAttribute("id","set_menu3");
+				dv2.appendChild(dv3);
+ 				dv2.appendChild(dv4);
+ 				dv2.appendChild(dv5);
+ 				
+ 				const maindiv = document.createElement("div");
+ 				maindiv.setAttribute("id","maindiv");
+ 				const tb = document.createElement("TABLE");
+ 				tb.setAttribute("class","st_tb");
+ 				dv.appendChild(maindiv);
+ 				maindiv.appendChild(tb);
+				
 
- 						var matchingAnswer = answer.filter(function (as) {
- 							return as.u2 === list.id;
- 						});
- 						var answerid
- 						if (matchingAnswer && matchingAnswer.length > 0) {
- 					        answerid = matchingAnswer[0].id;
- 					    }
- 						var answercnt = matchingAnswer ? matchingAnswer.length : 0;
-
- 					    // Calculate the percentage, handle division by zero or empty string
- 					    var percentage = answercnt > 0 ? (answercnt / tgt) * 100 : 0;
- 					    
- 						var idx = list.idx;
-	 					var code = list.user_code;
-	 					var hname = list.hspt_name;
-	 					var subname = list.hspt_subname;
-	 					var position = list.hspt_position
-	 					var name = list.name;
-	 					
-	 					var tr = document.createElement("TR");
-	 					
-	 					var tdhname = document.createElement("TD");
-	 					tdhname.textContent = hname;
-	 					tdhname.setAttribute("style","width: 210px;");
-	 					var tdsname = document.createElement("TD");
-	 					tdsname.textContent = subname;
-	 					tdsname.setAttribute("style","width: 150px;");
-	 					var tdpo = document.createElement("TD");
-	 					tdpo.textContent = position;
-	 					tdpo.setAttribute("style","width: 195px;");
-	 					var tdname = document.createElement("TD");
-	 					tdname.textContent = name;
-	 					
-	 					var tdtarget = document.createElement("TD");
-	 					tdtarget.setAttribute("style","width: 140px;");
-	 					tdtarget.textContent = tgt;
-	 					
-	 					var tdanswer = document.createElement("TD");
-	 					tdanswer.setAttribute("style","width: 120px;");
-	 					tdanswer.textContent = answercnt;
-	 					
-	 					var tdpersent = document.createElement("TD");
-	 					tdpersent.textContent = isFinite(percentage) ? percentage.toFixed(2) + "%" : "N/A";
-	 					if (tdanswer.innerText === tdtarget.innerText) {
-	 						tdpersent.setAttribute("style", "background:#32b0ca;");
-						} else if (tdanswer.innerText == 0) {
-							tdpersent.setAttribute("style", "background: red; color: #fff");
-						} else if (Number(tdtarget.innerText) < Number(tdanswer.innerText)){
-							tr.setAttribute("style", "background: #E6B8AF;")
-						}
-	 					
-	 					var tdinfo = document.createElement("TD");
-	 					var url = "<%=request.getContextPath() %>/e/Mypage/"+idx;
-	 					tdinfo.textContent = "링크";
-	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
-	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
-	 					
-	 					
-	 					//
-	 					
-	 					tbody.appendChild(tr);
-	 					tr.appendChild(tdhname);
-	 					tr.appendChild(tdsname);
-	 					tr.appendChild(tdpo);
-	 					tr.appendChild(tdname);
-	 					tr.appendChild(tdtarget);
-	 					tr.appendChild(tdanswer);
-	 					tr.appendChild(tdpersent);
-	 					
-	 					
-	 					tr.appendChild(tdinfo);
- 	//				}			// 관리자 제거
+				const thead = document.createElement("THEAD");
+				const tr1 = document.createElement("TR");
+				const td1 = document.createElement("TD");
+ 				td1.textContent = "기관명";
+ 				const td2 = document.createElement("TD");
+ 				td2.textContent = "소속기관명";
+ 				const td3 = document.createElement("TD");
+ 				td3.textContent = "부서명";
+ 				const td4 = document.createElement("TD");
+ 				td4.textContent = "사원번호";
+ 				const td5 = document.createElement("TD");
+ 				td5.textContent = "직급/직책";
+ 				const td6 = document.createElement("TD");
+ 				td6.textContent = "사원명";
+ 				const td7 = document.createElement("TD");
+ 				td7.textContent = "입사일자";
+ 				const td8 = document.createElement("TD");
+ 				td8.textContent = "퇴사일자";
+ 				const td9 = document.createElement("TD");
+ 				td9.textContent = "연락처";
+ 				
+ 				tb.appendChild(thead);
+ 				thead.appendChild(tr1);
+ 				tr1.appendChild(td1);
+ 				tr1.appendChild(td2);
+ 				tr1.appendChild(td3);
+ 				tr1.appendChild(td4);
+ 				tr1.appendChild(td5);
+ 				tr1.appendChild(td6);
+ 				tr1.appendChild(td7);
+ 				tr1.appendChild(td8);
+ 				tr1.appendChild(td9);
+				
+ 				$.each (user, function (index, u) {
+ 					const tr = document.createElement("TR");
+ 					
+ 					const td1 = document.createElement("TD");
+					td1.textContent = u.c_name;
+					const td2 = document.createElement("TD");
+	 				td2.textContent = u.c_name2;
+	 				const td3 = document.createElement("TD");
+	 				td3.textContent = u.subname;
+	 				const td4 = document.createElement("TD");
+	 				td4.textContent = u.id;
+	 				const td5 = document.createElement("TD");
+	 				td5.textContent = u.position;
+	 				const td6 = document.createElement("TD");
+	 				td6.textContent = u.name;
+	 				const td7 = document.createElement("TD");
+	 				td7.textContent = u.reg_date[0]+"년 "+u.reg_date[1]+"월 "+u.reg_date[2]+"일";
+	 				const td8 = document.createElement("TD");
+	 				td8.textContent = u.end_date;
+	 				const td9 = document.createElement("TD");
+	 				td9.textContent = u.phone;
+	 				tr.appendChild(td1);
+					tr.appendChild(td2);
+					tr.appendChild(td3);
+					tr.appendChild(td4);
+					tr.appendChild(td5);
+					tr.appendChild(td6);
+					tr.appendChild(td7);
+					tr.appendChild(td8);
+					tr.appendChild(td9);
 					
-				});
-       	 }
-        },
-        error: function(error) {
-           console.error('Error fetching data:', error);
-        }
-     });
+					tb.appendChild(tr);
+					
+ 				});
+ 				
+			}
+		},
+		error: function(error) {
+			console.error('Error fetching data:', error);
+		}
+	});
 }
 
 
@@ -1838,5 +1771,58 @@ function findStr() {
     }
 }
 
+function set1(){
+	setting();
+}
+
+function set2(){
+	var maindiv = document.getElementById("maindiv");
+	var dv3 = document.querySelector("#set_menu1");
+	var dv4 = document.querySelector("#set_menu2");
+	var dv5 = document.querySelector("#set_menu3");
+	dv3.classList.remove('select');
+	dv5.classList.remove('select');
+	dv4.classList.add('select');
+	$.ajax({
+		url: '${pageContext.request.contextPath}/e/setting',
+		type: 'GET',
+		dataType: 'json',
+		success: function (res) {
+			if(res.result === "Y") {
+				maindiv.innerHTML = "";
+				
+			}
+		},
+		error: function (error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+	
+}
+
+function set3(){
+	var maindiv = document.getElementById("maindiv");
+	var dv3 = document.querySelector("#set_menu1");
+	var dv4 = document.querySelector("#set_menu2");
+	var dv5 = document.querySelector("#set_menu3");
+	dv3.classList.remove('select');
+	dv5.classList.add('select');
+	dv4.classList.remove('select');
+	var maindiv = document.getElementById("maindiv");
+	$.ajax({
+		url: '${pageContext.request.contextPath}/e/setting',
+		type: 'GET',
+		dataType: 'json',
+		success: function (res) {
+			if(res.result === "Y") {
+				
+				maindiv.innerHTML = "";
+			}
+		},
+		error: function (error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+}
 </script>
 </html>
