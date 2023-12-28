@@ -1566,6 +1566,7 @@ function setting() {
 				
  				const dv2 = document.createElement("div");
  				dv2.setAttribute("style","margin: 15px 0 15px 20px; display: flex; justify-content: flex-start;");
+ 				dv2.setAttribute("id", "nav");
  				dv.appendChild(dv2);
  				
  				const dv3 = document.createElement("div");
@@ -1783,6 +1784,8 @@ function set2(){
 	dv3.classList.remove('select');
 	dv5.classList.remove('select');
 	dv4.classList.add('select');
+	
+	const nav = document.getElementById("nav");
 	$.ajax({
 		url: '${pageContext.request.contextPath}/e/setting',
 		type: 'GET',
@@ -1790,7 +1793,169 @@ function set2(){
 		success: function (res) {
 			if(res.result === "Y") {
 				maindiv.innerHTML = "";
+				const user = res.user;
+				// 중복을 제거하고 배열로
+				const uniqueValues = Array.from(new Set(user.map(u => u.c_name)));
+// 				console.log(uniqueValues);
+				const divContainer = document.createElement('div');
+				divContainer.setAttribute("style", "display: flex; justify-content: flex-start; margin-bottom: 10px;")
+				// 배열의 각 요소를 <div>로 묶음
+				let indexOf = 1;
+				uniqueValues.forEach(value => {
+				    const div = document.createElement('div');
+				    div.textContent = value;
+				    div.setAttribute("style", "margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+				    // 배열에 id부여
+				    div.setAttribute("id", "unq"+indexOf);
+				    div.setAttribute("onclick", "unq"+indexOf+"()");
+				    divContainer.appendChild(div);
+				    indexOf += 1;
+				});
 				
+				maindiv.appendChild(divContainer);
+				const btn = document.createElement('div');
+				btn.setAttribute("style", "border: 1px solid #ddd; border-radius: 25px; background: #eaeaea; padding: 15px; cursor: pointer;");
+				btn.setAttribute("onclick", "modify();");
+				btn.textContent = "수정";
+				nav.appendChild(btn);
+				const tb = document.createElement("TABLE");
+ 				tb.setAttribute("class","st_tb");
+ 				maindiv.appendChild(tb);
+				
+ 				const thead = document.createElement("THEAD");
+				const tr1 = document.createElement("TR");
+				const td1 = document.createElement("TD");
+ 				td1.textContent = "기관명";
+ 				const td2 = document.createElement("TD");
+ 				td2.textContent = "소속기관명";
+ 				const td3 = document.createElement("TD");
+ 				td3.textContent = "부서명";
+ 				const td4 = document.createElement("TD");
+ 				td4.textContent = "사원번호";
+ 				const td5 = document.createElement("TD");
+ 				td5.textContent = "직급/직책";
+ 				const td6 = document.createElement("TD");
+ 				td6.textContent = "사원명";
+ 				const td7 = document.createElement("TD");
+ 				td7.textContent = "경혁팀장여부";
+ 				const td8 = document.createElement("TD");
+ 				td8.textContent = "경혁팀여부";
+ 				const td9 = document.createElement("TD");
+ 				td9.textContent = "부서장여부";
+ 				const td10 = document.createElement("TD");
+ 				td10.textContent = "1인부서여부";
+ 				const td11 = document.createElement("TD");
+ 				td11.textContent = "진료팀장여부";
+ 				const td12 = document.createElement("TD");
+ 				td12.textContent = "진료부여부";
+ 				const td13 = document.createElement("TD");
+ 				td13.textContent = "평가제외여부";
+ 				
+ 				tb.appendChild(thead);
+ 				thead.appendChild(tr1);
+ 				tr1.appendChild(td1);
+ 				tr1.appendChild(td2);
+ 				tr1.appendChild(td3);
+ 				tr1.appendChild(td4);
+ 				tr1.appendChild(td5);
+ 				tr1.appendChild(td6);
+ 				tr1.appendChild(td7);
+ 				tr1.appendChild(td8);
+ 				tr1.appendChild(td9);
+ 				tr1.appendChild(td10);
+ 				tr1.appendChild(td11);
+ 				tr1.appendChild(td12);
+ 				tr1.appendChild(td13);
+ 				
+ 				$.each (user, function (index, u) {
+ 					const tr = document.createElement("TR");
+ 					
+ 					const td1 = document.createElement("TD");
+					td1.textContent = u.c_name;
+					const td2 = document.createElement("TD");
+	 				td2.textContent = u.c_name2;
+	 				const td3 = document.createElement("TD");
+	 				td3.textContent = u.subname;
+	 				const td4 = document.createElement("TD");
+	 				td4.textContent = u.id;
+	 				const td5 = document.createElement("TD");
+	 				td5.textContent = u.position;
+	 				const td6 = document.createElement("TD");
+	 				td6.textContent = u.name;
+	 				const td7 = document.createElement("TD");
+	 				const input7 = document.createElement("input");
+	 				input7.setAttribute("type", "checkbox");
+	 				input7.setAttribute("disabled", "disabled");
+	 				if(u.k == 'T'){
+	 					input7.setAttribute("checked", "checked");
+	 				}
+	 				td7.appendChild(input7);
+	 				const td8 = document.createElement("TD");
+	 				const input8 = document.createElement("input");
+	 				input8.setAttribute("type", "checkbox");
+	 				input8.setAttribute("disabled", "disabled");
+	 				if(u.v == 'T'){
+	 					input8.setAttribute("checked", "checked");
+	 				}
+	 				td8.appendChild(input8);
+	 				const td9 = document.createElement("TD");
+	 				const input9 = document.createElement("input");
+	 				input9.setAttribute("type", "checkbox");
+	 				input9.setAttribute("disabled", "disabled");
+	 				if(u.b == 'T'){
+	 					input9.setAttribute("checked", "checked");
+	 				}
+	 				td9.appendChild(input9);
+	 				const td10 = document.createElement("TD");
+	 				const input10 = document.createElement("input");
+	 				input10.setAttribute("type", "checkbox");
+	 				input10.setAttribute("disabled", "disabled");
+	 				if(u.x == 'T'){
+	 					input10.setAttribute("checked", "checked");
+	 				}
+	 				td10.appendChild(input10);
+	 				const td11 = document.createElement("TD");
+	 				const input11 = document.createElement("input");
+	 				input11.setAttribute("type", "checkbox");
+	 				input11.setAttribute("disabled", "disabled");
+	 				if(u.z == 'T'){
+	 					input11.setAttribute("checked", "checked");
+	 				}
+	 				td11.appendChild(input11);
+	 				const td12 = document.createElement("TD");
+	 				const input12 = document.createElement("input");
+	 				input12.setAttribute("type", "checkbox");
+	 				input12.setAttribute("disabled", "disabled");
+	 				if(u.a == 'T'){
+	 					input12.setAttribute("checked", "checked");
+	 				}
+	 				td12.appendChild(input12);
+	 				const td13 = document.createElement("TD");
+	 				const input13 = document.createElement("input");
+	 				input13.setAttribute("type", "checkbox");
+	 				input13.setAttribute("disabled", "disabled");
+	 				if(u.del_yn == 'Y'){
+	 					input13.setAttribute("checked", "checked");
+	 				}
+	 				td13.appendChild(input13);
+	 				
+	 				tr.appendChild(td1);
+					tr.appendChild(td2);
+					tr.appendChild(td3);
+					tr.appendChild(td4);
+					tr.appendChild(td5);
+					tr.appendChild(td6);
+	 				tr.appendChild(td7);
+	 				tr.appendChild(td8);
+	 				tr.appendChild(td9);
+	 				tr.appendChild(td10);
+	 				tr.appendChild(td11);
+	 				tr.appendChild(td12);
+	 				tr.appendChild(td13);
+					
+					tb.appendChild(tr);
+					
+ 				});
 			}
 		},
 		error: function (error) {
@@ -1817,6 +1982,37 @@ function set3(){
 			if(res.result === "Y") {
 				
 				maindiv.innerHTML = "";
+				const sub = res.sub;
+				
+ 				const dv = document.createElement("div");
+ 				dv.setAttribute("style","font-size: 14px; margin: 10px; display: flex; justify-content: center; flex-direction: column;");
+ 				mainContent.appendChild(dv);
+
+ 				const tb = document.createElement("TABLE");
+ 				maindiv.appendChild(tb);
+ 				const thead = document.createElement("THEAD");
+ 				const tr1 = document.createElement("TR");
+				const td1 = document.createElement("TD");
+ 				td1.textContent = "부서명";
+ 				const td2 = document.createElement("TD");
+ 				td2.textContent = "부서코드명";
+
+ 				tb.appendChild(thead);
+ 				thead.appendChild(tr1);
+ 				tr1.appendChild(td1);
+ 				tr1.appendChild(td2);
+ 				$.each (sub, function (index, s) {
+ 					const tr = document.createElement("TR");
+ 					const td1 = document.createElement("TD");
+					td1.textContent = s.subname;
+					const td2 = document.createElement("TD");
+	 				td2.textContent = s.subcode;
+
+					tb.appendChild(tr);
+	 				tr.appendChild(td1);
+					tr.appendChild(td2);
+ 				});
+				
 			}
 		},
 		error: function (error) {
@@ -1824,5 +2020,286 @@ function set3(){
 		}
 	});
 }
+
+let index = 1;
+
+function add(){
+	var maindiv = document.getElementById("maindiv");
+	
+	$.ajax({
+		url: '${pageContext.request.contextPath}/e/add',
+		type: 'GET',
+		dataType: 'json',
+		success: function(res) {
+			if(res.result === 'Y'){
+				const div = document.createElement('div');
+				const div2 = document.createElement('div');
+				const input = document.createElement('input');
+				
+				input.setAttribute("id", "col"+index);
+				maindiv.appendChild(div);
+				div.appendChild(div2);
+				div2.appendChild(input);
+				index += 1;
+				console.log(index);
+			}
+		},
+		error: function (error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+}
+
+
+
+function addcol() {
+	var maindiv = document.getElementById("maindiv");
+	$.ajax({
+		url: '${pageContext.request.contextPath}/e/addcol',
+		type: 'GET',
+		dataType: 'json',
+		success: function(res) {
+			if(res.result === 'Y') {
+				
+			}
+		},
+		error: function (error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+}
+
+function modify(){
+	var maindiv = document.getElementById("maindiv");
+	var dv3 = document.querySelector("#set_menu1");
+	var dv4 = document.querySelector("#set_menu2");
+	var dv5 = document.querySelector("#set_menu3");
+	dv3.classList.remove('select');
+	dv5.classList.remove('select');
+	dv4.classList.add('select');
+	
+	const nav = document.getElementById("nav");
+	$.ajax({
+		url: '${pageContext.request.contextPath}/e/setting',
+		type: 'GET',
+		dataType: 'json',
+		success: function (res) {
+			if(res.result === "Y") {
+				maindiv.innerHTML = "";
+				
+				const user = res.user;
+				// 중복을 제거하고 배열로
+				const uniqueValues = Array.from(new Set(user.map(u => u.c_name)));
+// 				console.log(uniqueValues);
+				const divContainer = document.createElement('div');
+				divContainer.setAttribute("style", "display: flex; justify-content: flex-start; margin-bottom: 10px;")
+				// 배열의 각 요소를 <div>로 묶음
+				let indexOf = 1;
+				uniqueValues.forEach(value => {
+				    const div = document.createElement('div');
+				    div.textContent = value;
+				    div.setAttribute("style", "margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+				    // 배열에 id부여
+				    div.setAttribute("id", "unq"+indexOf);
+				    div.setAttribute("onclick", "unq"+indexOf+"()");
+				    divContainer.appendChild(div);
+				    indexOf += 1;
+				});
+				
+				maindiv.appendChild(divContainer);
+				nav.innerHTML = "";
+				
+ 				const div3 = document.createElement("div");
+ 				div3.textContent = " 직원명부 ";
+ 				div3.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+ 				div3.setAttribute("class", "set_menu");
+ 				div3.setAttribute("onclick","set1();");
+ 				div3.setAttribute("id","set_menu1");
+ 				const div4 = document.createElement("div");
+ 				div4.textContent = " 직원별 변수 설정 ";
+ 				div4.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+ 				div4.setAttribute("class", "set_menu select");
+ 				div4.setAttribute("onclick","set2();");
+ 				div4.setAttribute("id","set_menu2");
+ 				const div5 = document.createElement("div");
+ 				div5.textContent = " 부서 설정 ";
+ 				div5.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
+ 				div5.setAttribute("class", "set_menu");
+ 				div5.setAttribute("onclick","set3();");
+ 				div5.setAttribute("id","set_menu3");
+				nav.appendChild(div3);
+ 				nav.appendChild(div4);
+ 				nav.appendChild(div5);
+ 				
+				const btn = document.createElement('div');
+				btn.setAttribute("style", "border: 1px solid #ddd; border-radius: 25px; background: #eaeaea; padding: 15px; cursor: pointer;");
+				btn.setAttribute("onclick", "btn_submit();");
+				btn.setAttribute("class", "select");
+				btn.textContent = "저장";
+				nav.appendChild(btn);
+				const tb = document.createElement("TABLE");
+ 				tb.setAttribute("class","st_tb");
+ 				maindiv.appendChild(tb);
+				
+ 				const thead = document.createElement("THEAD");
+				const tr1 = document.createElement("TR");
+				const td1 = document.createElement("TD");
+ 				td1.textContent = "기관명";
+ 				const td2 = document.createElement("TD");
+ 				td2.textContent = "소속기관명";
+ 				const td3 = document.createElement("TD");
+ 				td3.textContent = "부서명";
+ 				const td4 = document.createElement("TD");
+ 				td4.textContent = "사원번호";
+ 				const td5 = document.createElement("TD");
+ 				td5.textContent = "직급/직책";
+ 				const td6 = document.createElement("TD");
+ 				td6.textContent = "사원명";
+ 				const td7 = document.createElement("TD");
+ 				td7.textContent = "경혁팀장여부";
+ 				const td8 = document.createElement("TD");
+ 				td8.textContent = "경혁팀여부";
+ 				const td9 = document.createElement("TD");
+ 				td9.textContent = "부서장여부";
+ 				const td10 = document.createElement("TD");
+ 				td10.textContent = "1인부서여부";
+ 				const td11 = document.createElement("TD");
+ 				td11.textContent = "진료팀장여부";
+ 				const td12 = document.createElement("TD");
+ 				td12.textContent = "진료부여부";
+ 				const td13 = document.createElement("TD");
+ 				td13.textContent = "평가제외여부";
+ 				
+ 				tb.appendChild(thead);
+ 				thead.appendChild(tr1);
+ 				tr1.appendChild(td1);
+ 				tr1.appendChild(td2);
+ 				tr1.appendChild(td3);
+ 				tr1.appendChild(td4);
+ 				tr1.appendChild(td5);
+ 				tr1.appendChild(td6);
+ 				tr1.appendChild(td7);
+ 				tr1.appendChild(td8);
+ 				tr1.appendChild(td9);
+ 				tr1.appendChild(td10);
+ 				tr1.appendChild(td11);
+ 				tr1.appendChild(td12);
+ 				tr1.appendChild(td13);
+ 				
+ 				$.each (user, function (index, u) {
+ 					const tr = document.createElement("TR");
+ 					
+ 					const td1 = document.createElement("TD");
+					td1.textContent = u.c_name;
+					const td2 = document.createElement("TD");
+	 				td2.textContent = u.c_name2;
+	 				const td3 = document.createElement("TD");
+	 				td3.textContent = u.subname;
+	 				const td4 = document.createElement("TD");
+	 				td4.textContent = u.id;
+	 				const td5 = document.createElement("TD");
+	 				td5.textContent = u.position;
+	 				const td6 = document.createElement("TD");
+	 				td6.textContent = u.name;
+	 				const td7 = document.createElement("TD");
+	 				const input7 = document.createElement("input");
+	 				input7.setAttribute("type", "checkbox");
+	 				if(u.k == 'T'){
+	 					input7.setAttribute("checked", "checked");
+	 				}
+	 				td7.appendChild(input7);
+	 				const td8 = document.createElement("TD");
+	 				const input8 = document.createElement("input");
+	 				input8.setAttribute("type", "checkbox");
+	 				if(u.v == 'T'){
+	 					input8.setAttribute("checked", "checked");
+	 				}
+	 				td8.appendChild(input8);
+	 				const td9 = document.createElement("TD");
+	 				const input9 = document.createElement("input");
+	 				input9.setAttribute("type", "checkbox");
+	 				if(u.b == 'T'){
+	 					input9.setAttribute("checked", "checked");
+	 				}
+	 				td9.appendChild(input9);
+	 				const td10 = document.createElement("TD");
+	 				const input10 = document.createElement("input");
+	 				input10.setAttribute("type", "checkbox");
+	 				if(u.x == 'T'){
+	 					input10.setAttribute("checked", "checked");
+	 				}
+	 				td10.appendChild(input10);
+	 				const td11 = document.createElement("TD");
+	 				const input11 = document.createElement("input");
+	 				input11.setAttribute("type", "checkbox");
+	 				if(u.z == 'T'){
+	 					input11.setAttribute("checked", "checked");
+	 				}
+	 				td11.appendChild(input11);
+	 				const td12 = document.createElement("TD");
+	 				const input12 = document.createElement("input");
+	 				input12.setAttribute("type", "checkbox");
+	 				if(u.a == 'T'){
+	 					input12.setAttribute("checked", "checked");
+	 				}
+	 				td12.appendChild(input12);
+	 				const td13 = document.createElement("TD");
+	 				const input13 = document.createElement("input");
+	 				input13.setAttribute("type", "checkbox");
+	 				if(u.del_yn == 'Y'){
+	 					input13.setAttribute("checked", "checked");
+	 				}
+	 				td13.appendChild(input13);
+	 				
+	 				tr.appendChild(td1);
+					tr.appendChild(td2);
+					tr.appendChild(td3);
+					tr.appendChild(td4);
+					tr.appendChild(td5);
+					tr.appendChild(td6);
+	 				tr.appendChild(td7);
+	 				tr.appendChild(td8);
+	 				tr.appendChild(td9);
+	 				tr.appendChild(td10);
+	 				tr.appendChild(td11);
+	 				tr.appendChild(td12);
+	 				tr.appendChild(td13);
+					
+					tb.appendChild(tr);
+					
+ 				});
+			}
+		},
+		error: function (error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+}
+// 직원별 변수 설정 저장
+function btn_submit(){
+	
+}
+
+
+// 효사랑전주요양병원
+function unq1(){
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </html>

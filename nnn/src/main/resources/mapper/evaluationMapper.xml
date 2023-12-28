@@ -3199,4 +3199,14 @@
 	<select id="userop" parameterType="map" resultType="map">
 		select * from useroption
 	</select>
+	
+	<select id="useropadd" parameterType="map" resultType="map">
+		ALTER TABLE useroption ADD COLUMN #{col} VARCHAR(10) NOT NULL DEFAULT 'F'
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

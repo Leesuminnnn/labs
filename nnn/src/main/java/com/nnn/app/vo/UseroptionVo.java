@@ -1,12 +1,14 @@
 package com.nnn.app.vo;
 
-import java.util.Date;
+import java.util.Map;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class UseroptionVo {
 /*
 create table useroption (
@@ -29,4 +31,17 @@ del_yn char(5) not null default 'N' comment '평가제외 여부'
 	private String z;
 	private String a;
 	private String del_yn;
+	
+	// Additional dynamic properties
+	private Map<String, String> additionalProperties;
+	
+	public Map<String, String> getAdditionalProperties() {
+		return additionalProperties;
+	}
+	
+	public void setAdditionalProperties(Map<String, String> additionalProperties) {
+		this.additionalProperties = additionalProperties;
+	}
+	
+	
 }

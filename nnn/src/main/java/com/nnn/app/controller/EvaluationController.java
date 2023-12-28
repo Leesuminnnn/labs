@@ -1166,6 +1166,43 @@ public class EvaluationController {
 		return res;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="add")
+	public AjaxResponse14 add(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse14 res = new AjaxResponse14();
+		res.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<SubVo> sub = evaluationService.subop(map);
+		List<UserVo> user = evaluationService.userall(map);
+		List<UseroptionVo> userop = evaluationService.userop(map);
+		
+		res.setSub(sub);
+		res.setUser(user);
+		res.setUserop(userop);
+
+		return res;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="addcol")
+	public AjaxResponse14 addcol(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse14 res = new AjaxResponse14();
+		res.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("col", );
+		List<SubVo> sub = evaluationService.subop(map);
+		List<UserVo> user = evaluationService.userall(map);
+		List<UseroptionVo> userop = evaluationService.userop(map);
+		
+		res.setSub(sub);
+		res.setUser(user);
+		res.setUserop(userop);
+
+		return res;
+	}
+	
+	
+	
 	
 	
 }
