@@ -431,7 +431,7 @@
 	<select id="answersum7" parameterType="map" resultType="int">
 		select count(*) from coopusers a join canswer b on a.id = b.u2 where a. c_name2 = '재무국' and b.del_yn = 'N';
 	</select>
-	 
+	
 	
 	
 	

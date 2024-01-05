@@ -1529,6 +1529,491 @@ function ksearch(element) {
 	});
 }
 
+<%-- 진료부 --%>
+function asearch(element) {
+	const idx = element.getAttribute("data-idx");
+	const subscore = $("#score").text().substring(0, 4);
+	const ksubscore = $("#score2").text().substring(0, 4);
+//	console.log(score);
+//	const score2 = score.replaceAll(".","%2E");
+//	console.log(score2);
+	const link = "${pageContext.request.contextPath}/e/as/"+idx;
+//	console.log(idx);
+	
+	$.ajax({
+		url: link,
+		type: 'GET',
+		dataType: 'json',
+		data: {
+			"subscore": subscore,
+			"ksubscore": ksubscore,
+		},
+		success: function(response) {
+			if (response.result ==="Y") {
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+				const list = response.list;		
+				const list2 = response.list2;	// 경혁팀간 평가 리스트
+				const klist = response.list5;	// 경혁팀 -> 진료부 평가 리스트
+				const u = response.users;		// 본인 정보
+				const c = response.subcnt;
+				const subscore = response.subscore;
+				
+				const tb = document.createElement("TABLE");
+ 				
+				const tr1 = document.createElement("TR");
+ 				
+				const td1 = document.createElement("TD");
+				td1.textContent = "소속기관";
+ 				const td2 = document.createElement("TD");
+ 				td2.textContent = u.hspt_name;
+ 				
+ 				const td3 = document.createElement("TD");
+ 				td3.textContent = "부서명";
+ 				const td4 = document.createElement("TD");
+ 				td4.textContent = u.hspt_subname;
+ 				
+ 				const td5 = document.createElement("TD");
+ 				td5.textContent = "직급";
+ 				const td6 = document.createElement("TD");
+ 				td6.textContent = u.hspt_position;
+ 				
+ 				const td7 = document.createElement("TD");
+ 				td7.textContent = "사원번호";
+ 				const td8 = document.createElement("TD");
+ 				td8.textContent = u.id;
+ 				
+ 				const tr2 = document.createElement("TR");
+ 				
+ 				const td9 = document.createElement("TD");
+ 				td9.textContent = "사원명";
+ 				const td10 = document.createElement("TD");
+ 				td10.textContent = u.name;
+ 				
+ 				const td11 = document.createElement("TD");
+ 				td11.textContent = "경혁팀 평균점수";
+ 				const td12 = document.createElement("TD");
+ 				td12.textContent = subscore+"점";
+ 				
+ 				const td13 = document.createElement("TD");
+ 				td13.textContent = "평가점수(경혁팀)";
+ 				const td14 = document.createElement("TD");
+ 				td14.setAttribute("id","score");
+ 				td14.textContent = "";
+ 				
+ 				const td15 = document.createElement("TD");
+ 				td15.textContent = "진료부 -> 경혁팀 평균점수";
+ 				const td16 = document.createElement("TD");
+ 				td16.textContent = ksubscore+"점";
+ 				
+ 				const td43 = document.createElement("TD");
+ 				td43.textContent = "평가점수(진료부)";
+ 				const td44 = document.createElement("TD");
+ 				td44.setAttribute("id","score2");
+ 				td44.textContent = "";
+ 				
+ 				
+ 				
+ 				const div = document.createElement("div");
+ 				div.setAttribute("style", "text-align: left;");
+ 				div.textContent = "▣ "+u.name+" 님의 경혁팀 세부 평가 내역 입니다.";
+
+ 				const div2 = document.createElement("div");
+ 				div2.setAttribute("style", "overflow-x : auto;");
+ 				// 평가답안 리스트
+ 				const tb2 = document.createElement("TABLE");
+ 				
+ 				const tr3 = document.createElement("TR");
+ 				
+ 				const td17 = document.createElement("TD");
+ 				td17.textContent = "평가자정보";
+ 				td17.setAttribute("style", "width:200px;");
+ 				const td18 = document.createElement("TD");
+ 				td18.textContent = "평가점수";
+ 				const td19 = document.createElement("TD");
+ 				td19.textContent = "종합평가";
+ 				const td20 = document.createElement("TD");
+ 				td20.textContent = "1번문항";
+ 				const td21 = document.createElement("TD");
+ 				td21.textContent = "2번문항";
+ 				const td22 = document.createElement("TD");
+ 				td22.textContent = "3번문항";
+ 				const td23 = document.createElement("TD");
+ 				td23.textContent = "4번문항";
+ 				const td24 = document.createElement("TD");
+ 				td24.textContent = "5번문항";
+ 				const td25 = document.createElement("TD");
+ 				td25.textContent = "6번문항";
+ 				const td26 = document.createElement("TD");
+ 				td26.textContent = "7번문항";
+ 				const td27 = document.createElement("TD");
+ 				td27.textContent = "8번문항";
+ 				const td28 = document.createElement("TD");
+ 				td28.textContent = "9번문항";
+ 				const td29 = document.createElement("TD");
+ 				td29.textContent = "10번문항";
+ 				
+ 				
+ 				
+ 				mainContent.appendChild(tb);
+ 				tb.appendChild(tr1);
+ 				tr1.appendChild(td1);
+ 				tr1.appendChild(td2);
+ 				tr1.appendChild(td3);
+ 				tr1.appendChild(td4);
+ 				tr1.appendChild(td5);
+ 				tr1.appendChild(td6);
+ 				tr1.appendChild(td7);
+ 				tr1.appendChild(td8);
+ 				tb.appendChild(tr2);
+ 				tr2.appendChild(td9);
+ 				tr2.appendChild(td10);
+ 				tr2.appendChild(td11);
+ 				tr2.appendChild(td12);
+ 				tr2.appendChild(td13);
+ 				tr2.appendChild(td14);
+ 				tr2.appendChild(td15);
+ 				tr2.appendChild(td16);
+ 				tr2.appendChild(td43);
+ 				tr2.appendChild(td44);
+ 				
+ 				mainContent.appendChild(div);
+ 				mainContent.appendChild(div2);
+ 				div2.appendChild(tb2);
+ 				tb2.appendChild(tr3);
+ 				tr3.appendChild(td17);
+ 				tr3.appendChild(td18);
+ 				tr3.appendChild(td19);
+ 				tr3.appendChild(td20);
+ 				tr3.appendChild(td21);
+ 				tr3.appendChild(td22);
+ 				tr3.appendChild(td23);
+ 				tr3.appendChild(td24);
+ 				tr3.appendChild(td25);
+ 				tr3.appendChild(td26);
+ 				tr3.appendChild(td27);
+ 				tr3.appendChild(td28);
+ 				tr3.appendChild(td29);
+ 				
+ 				
+ 				const div3 = document.createElement("div");
+ 				div3.setAttribute("style", "text-align: left;");
+ 				div3.textContent = "▣ "+u.name+" 님의 진료부에서 세부 평가 내역 입니다.";
+
+ 				const div4 = document.createElement("div");
+ 				div4.setAttribute("style", "overflow-x : auto;");
+ 				// 평가답안 리스트
+ 				const tb3 = document.createElement("TABLE");
+ 				
+ 				const tr4 = document.createElement("TR");
+ 				
+ 				const td30 = document.createElement("TD");
+ 				td30.textContent = "평가자정보";
+ 				td30.setAttribute("style", "width:200px;");
+ 				const td31 = document.createElement("TD");
+ 				td31.textContent = "평가점수";
+ 				const td32 = document.createElement("TD");
+ 				td32.textContent = "종합평가";
+ 				const td33 = document.createElement("TD");
+ 				td33.textContent = "1번문항";
+ 				const td34 = document.createElement("TD");
+ 				td34.textContent = "2번문항";
+ 				const td35 = document.createElement("TD");
+ 				td35.textContent = "3번문항";
+ 				const td36 = document.createElement("TD");
+ 				td36.textContent = "4번문항";
+ 				const td37 = document.createElement("TD");
+ 				td37.textContent = "5번문항";
+ 				const td38 = document.createElement("TD");
+ 				td38.textContent = "6번문항";
+ 				const td39 = document.createElement("TD");
+ 				td39.textContent = "7번문항";
+ 				const td40 = document.createElement("TD");
+ 				td40.textContent = "8번문항";
+ 				const td41 = document.createElement("TD");
+ 				td41.textContent = "9번문항";
+ 				const td42 = document.createElement("TD");
+ 				td42.textContent = "10번문항";
+ 				mainContent.appendChild(div3);
+ 				mainContent.appendChild(div4);
+ 				div4.appendChild(tb3);
+ 				tb3.appendChild(tr4);
+ 				tr4.appendChild(td30);
+ 				tr4.appendChild(td31);
+ 				tr4.appendChild(td32);
+ 				tr4.appendChild(td33);
+ 				tr4.appendChild(td34);
+ 				tr4.appendChild(td35);
+ 				tr4.appendChild(td36);
+ 				tr4.appendChild(td37);
+ 				tr4.appendChild(td38);
+ 				tr4.appendChild(td39);
+ 				tr4.appendChild(td40);
+ 				tr4.appendChild(td41);
+ 				tr4.appendChild(td42);
+ 				
+ 				
+ 				
+ 				
+ 				function mapValueToScore2(value) {
+ 				    switch (value) {
+ 				        case '매우우수':
+ 				            return 10;
+ 				        case '우수':
+ 				            return 8;
+ 				        case '보통':
+ 				            return 6;
+ 				        case '미흡':
+ 				            return 4;
+ 				        case '매우미흡':
+ 				            return 2;
+ 				        default:
+ 				            return 0; 
+ 				    }
+ 				}
+ 				function mapValueToScore(value) {
+ 				    switch (value) {
+ 				        case '매우우수':
+ 				            return 5;
+ 				        case '우수':
+ 				            return 4;
+ 				        case '보통':
+ 				            return 3;
+ 				        case '미흡':
+ 				            return 2;
+ 				        case '매우미흡':
+ 				            return 1;
+ 				        default:
+ 				            return 0; 
+ 				    }
+ 				}
+ 				const u2Scores = {};
+ 				const ku2Scores = {};
+ 				const idScores = {};
+ 				const kidScores = {};
+ 				var pers = 0;
+ 				var kpers = 0;
+				let totalSum = 0;
+				let ktotalSum = 0;
+				$.each (list2, function (index, t) {
+					// Initialize the score for the current u2 if not already present
+					if (!u2Scores[t.u2]) {
+						u2Scores[t.u2] = 0;
+					}
+					
+					const values = t.d1.toLowerCase().split(',').map(value => value.trim()).slice(0, 10);
+	//				console.log(values.length);
+					
+					if(t.ev === 'AB') {
+						values.forEach(value => {
+							const score = mapValueToScore(value) || 0;
+							idScores[t.t1] = (idScores[t.t1] || 0) + score;
+							//const per = idScores[t.t1] / (c - 1);
+							const per = idScores[t.t1] / list2.length;
+							pers = per.toFixed(1);
+							u2Scores[t.u2] += score;
+						});
+					} else {
+						values.forEach(value => {
+							const score = mapValueToScore2(value) || 0;
+							idScores[t.t1] = (idScores[t.t1] || 0) + score;
+							//const per = idScores[t.t1] / (c - 1);
+							const per = idScores[t.t1] / list2.length;
+							pers = per.toFixed(1);
+							u2Scores[t.u2] += score;
+						});
+					}
+					
+			//		console.log(u2Scores[t.u2]);
+					
+ 				});
+				$.each (klist, function (index, t) {
+					// Initialize the score for the current u2 if not already present
+					if (!ku2Scores[t.u2]) {
+						ku2Scores[t.u2] = 0;
+					}
+					
+					const values = t.d1.toLowerCase().split(',').map(value => value.trim()).slice(0, 10);
+//					console.log(values);
+					
+					if(t.ev === 'AB') {
+						values.forEach(value => {
+							const score = mapValueToScore(value) || 0;
+							kidScores[t.t1] = (kidScores[t.t1] || 0) + score;
+							//const per = idScores[t.t1] / (c - 1);
+							const kper = kidScores[t.t1] / klist.length;
+							kpers = kper.toFixed(1);
+							ku2Scores[t.u2] += score;
+						});
+					} else {
+						values.forEach(value => {
+							const score = mapValueToScore2(value) || 0;
+							kidScores[t.t1] = (kidScores[t.t1] || 0) + score;
+							//const per = idScores[t.t1] / (c - 1);
+							const kper = kidScores[t.t1] / klist.length;
+							kpers = kper.toFixed(1);
+							ku2Scores[t.u2] += score;
+						});
+					}
+					
+					console.log(ku2Scores[t.u2]);
+					
+ 				});
+ 				$.each (list2, function (index, l) {
+ 					const rawValue = idScores[l.id] / (c - 1) || 0;
+ 				    const formattedValue = rawValue.toFixed(1);
+// 				   console.log("l.id:", l.id, "Total Score:", formattedValue);
+                	totalSum += rawValue;
+//                	console.log(totalSum.toFixed(1) / (c -1));
+//                	var subper = totalSum.toFixed(1) / (c -1);
+//                	console.log(subper);
+//					const tdElement = $('#score');
+//					tdElement.html(subper.toFixed(1));
+					
+ 					const tr3 = document.createElement("TR");
+ 	 				
+ 	 				const td17 = document.createElement("TD");
+ 	 				td17.textContent = "***";
+ 	 				const td18 = document.createElement("TD");
+ 	 				
+ 	 				td18.textContent = u2Scores[l.id]+"점";
+ 	 				
+
+					const tdElement = $('#score');
+					tdElement.html(pers+"점");
+ 	 				const td19 = document.createElement("TD");
+ 	 				const splitArray = l.d1.split(',');
+// 	 				console.log(splitArray.length);
+ 	 				// 쉼표 단위로 문자열을 나눴지만, 직원이 쉼표를 쓸 경우도 있기 때문에 만약 21번째 이후 쉼표가 있다면 조인
+ 					
+ 	 				
+ 	 				const td20 = document.createElement("TD");
+ 	 				td20.textContent = l.d1.split(',')[0];
+ 	 				const td21 = document.createElement("TD");
+ 	 				td21.textContent = l.d1.split(',')[1];
+ 	 				const td22 = document.createElement("TD");
+ 	 				td22.textContent = l.d1.split(',')[2];
+ 	 				const td23 = document.createElement("TD");
+ 	 				td23.textContent = l.d1.split(',')[3];
+ 	 				const td24 = document.createElement("TD");
+ 	 				td24.textContent = l.d1.split(',')[4];
+ 	 				const td25 = document.createElement("TD");
+ 	 				td25.textContent = l.d1.split(',')[5];
+ 	 				const td26 = document.createElement("TD");
+ 	 				td26.textContent = l.d1.split(',')[6];
+ 	 				const td27 = document.createElement("TD");
+ 	 				td27.textContent = l.d1.split(',')[7];
+ 	 				const td28 = document.createElement("TD");
+ 	 				td28.textContent = l.d1.split(',')[8];
+ 	 				const td29 = document.createElement("TD");
+ 	 				td29.textContent = l.d1.split(',')[9];
+ 	 				
+ 	 				if (splitArray.length >= 21) {
+ 						const truncatedString = splitArray.slice(20).join(',');
+ 						
+ 	 	 				td19.textContent = truncatedString;
+ 					}
+ 	 				if (splitArray.length < 20){
+						const truncatedString = splitArray.slice(10).join(',');
+ 						
+ 	 	 				td19.textContent = truncatedString;
+ 					}
+ 	 				tb2.appendChild(tr3);
+ 	 				tr3.appendChild(td17);
+ 	 				tr3.appendChild(td18);
+ 	 				tr3.appendChild(td19);
+ 	 				tr3.appendChild(td20);
+ 	 				tr3.appendChild(td21);
+ 	 				tr3.appendChild(td22);
+ 	 				tr3.appendChild(td23);
+ 	 				tr3.appendChild(td24);
+ 	 				tr3.appendChild(td25);
+ 	 				tr3.appendChild(td26);
+ 	 				tr3.appendChild(td27);
+ 	 				tr3.appendChild(td28);
+ 	 				tr3.appendChild(td29);
+ 				});
+ 				$.each (klist, function (index, l) {
+ 					const rawValue = kidScores[l.id] / klist.length || 0;
+ 				    const formattedValue = rawValue.toFixed(1);
+// 				   console.log("l.id:", l.id, "Total Score:", formattedValue);
+                	ktotalSum += rawValue;
+//                	console.log(totalSum.toFixed(1) / (c -1));
+//                	var subper = totalSum.toFixed(1) / (c -1);
+//                	console.log(subper);
+//					const tdElement = $('#score');
+//					tdElement.html(subper.toFixed(1));
+					
+ 					const tr3 = document.createElement("TR");
+ 	 				
+ 	 				const td17 = document.createElement("TD");
+ 	 				td17.textContent = "***";
+ 	 				const td18 = document.createElement("TD");
+ 	 				
+ 	 				td18.textContent = ku2Scores[l.u2]+"점";
+ 	 				
+
+					const tdElement = $('#score2');
+					tdElement.html(kpers+"점");
+ 	 				const td19 = document.createElement("TD");
+ 	 				const splitArray = l.d1.split(',');
+// 	 				console.log(splitArray.length);
+ 	 				// 쉼표 단위로 문자열을 나눴지만, 직원이 쉼표를 쓸 경우도 있기 때문에 만약 21번째 이후 쉼표가 있다면 조인
+ 					
+ 	 				
+ 	 				const td20 = document.createElement("TD");
+ 	 				td20.textContent = l.d1.split(',')[0];
+ 	 				const td21 = document.createElement("TD");
+ 	 				td21.textContent = l.d1.split(',')[1];
+ 	 				const td22 = document.createElement("TD");
+ 	 				td22.textContent = l.d1.split(',')[2];
+ 	 				const td23 = document.createElement("TD");
+ 	 				td23.textContent = l.d1.split(',')[3];
+ 	 				const td24 = document.createElement("TD");
+ 	 				td24.textContent = l.d1.split(',')[4];
+ 	 				const td25 = document.createElement("TD");
+ 	 				td25.textContent = l.d1.split(',')[5];
+ 	 				const td26 = document.createElement("TD");
+ 	 				td26.textContent = l.d1.split(',')[6];
+ 	 				const td27 = document.createElement("TD");
+ 	 				td27.textContent = l.d1.split(',')[7];
+ 	 				const td28 = document.createElement("TD");
+ 	 				td28.textContent = l.d1.split(',')[8];
+ 	 				const td29 = document.createElement("TD");
+ 	 				td29.textContent = l.d1.split(',')[9];
+ 	 				
+ 	 				if (splitArray.length >= 21) {
+ 						const truncatedString = splitArray.slice(20).join(',');
+ 						
+ 	 	 				td19.textContent = truncatedString;
+ 					}
+ 	 				if (splitArray.length < 20){
+						const truncatedString = splitArray.slice(10).join(',');
+ 						
+ 	 	 				td19.textContent = truncatedString;
+ 					}
+ 	 				tb3.appendChild(tr3);
+ 	 				tr3.appendChild(td17);
+ 	 				tr3.appendChild(td18);
+ 	 				tr3.appendChild(td19);
+ 	 				tr3.appendChild(td20);
+ 	 				tr3.appendChild(td21);
+ 	 				tr3.appendChild(td22);
+ 	 				tr3.appendChild(td23);
+ 	 				tr3.appendChild(td24);
+ 	 				tr3.appendChild(td25);
+ 	 				tr3.appendChild(td26);
+ 	 				tr3.appendChild(td27);
+ 	 				tr3.appendChild(td28);
+ 	 				tr3.appendChild(td29);
+ 				});
+			}
+		},
+		error: function (error) {
+			console.error("Error fetching data:", error);
+		}
+	});
+}
+
 <%-- 진료팀장 --%>
 
 function amember() {
@@ -1544,7 +2029,9 @@ function amember() {
 				const cnt = response.subcnt;
 				const list = response.list;		// 진료팀 부서원 리스트
 				const list2 = response.list2;	// 진료팀 평가 리스트		ev : AA 유형 => 경혁팀이 평가한 리스트,		AB 유형 => 진료팀장이 평가한 리스트
+				const vcnt = response.vmember;
 				
+				console.log(vcnt);
 				const tb = document.createElement("TABLE");
  				
 				const maintr = document.createElement("TR");
@@ -1700,6 +2187,7 @@ function amember() {
 							//const per = idScores[t.t1] / (c - 1);
 							const per = idScores[t.t1] / t1Counters[t.t1];
 							pers = per;
+							console.log(pers);
 						});
 					}
 					
@@ -1715,7 +2203,7 @@ function amember() {
  						//console.log(idScores);
  						const rawValue = idScores[l.id] || 0;
  						const formattedValue = rawValue;
- 						//console.log("l.id:", l.id, "Total Score:", formattedValue);
+ 						console.log("l.id:", l.id, "Total Score:", formattedValue);
  						totalSum += rawValue / t1Counters[l.id];
  						//console.log("total sum : "+totalSum);
  						var subper = totalSum / t1Counters[l.id];
@@ -1723,6 +2211,7 @@ function amember() {
  						var subtotalper = subper.toFixed(1);
  						const tdElement = $('#score');
  						//tdElement.html((subtotalper / 2).toFixed(1)+"점");
+ 						tdElement.html(100);
  						const tr = document.createElement("TR");
  						
  						const td1 = document.createElement("TD");
@@ -1771,6 +2260,8 @@ function amember() {
 	});
 					 				
 }
+
+
 const menuScripts = [
 	{ id: 'info', contentId: 'all', script: info },
 	{ id: 'submember', contentId: 'all', script: submember },

@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace = "evaluation">
+<mapper namespace="demo">
 
-<select id="dbcheck" parameterType="users" resultType="int">
-	select count(*) from users__ where id = #{id}
-</select>
-
-<select id="login" parameterType="users" resultType="int">
+	<select id="noticeselect" resultType="map" parameterType="map">
+		select * from demo_notice where d1 = 1
+	</select>
+	
+	<select id="info" resultType="users" parameterType="int">
+		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
+		from demo_users where idx=#{idx}
+	</select>
+	
+	<select id="info2" resultType="users" parameterType="users">
+		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
+		from demo_users where id=#{id}
+	</select>
+	
+	<select id="dbcheck" parameterType="users" resultType="int">
+		select count(*) from demo_users where id = #{id}
+	</select>
+	
+	<select id="login" parameterType="users" resultType="int">
 		select count(*) from
-		users__
+		demo_users
 		where id = #{id} and 
 		<choose>
 			<when test="name == null">
@@ -19,37 +34,19 @@
 			<when test="pwd == null">
 			name = #{name}
 			</when>
-			
 		</choose>
+	</select>
 		
-	</select>
-	<select id="info" resultType="users" parameterType="int">
-		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where idx=#{idx}
-	</select>
-	<select id="info2" resultType="users" parameterType="users">
-		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where id=#{id}
-	</select>
-	<update id="pwdinsert" parameterType="users">
-		update users__ set pwd = #{pwd} where idx = #{idx}
-	</update>
-	<update id="pwdajax" parameterType="map">
-		update users__ set pwd = #{pwd} where id = #{id}
-	</update>
-<select id="evaluationtarget" resultType="users">
+	<!-- 로그인 기록 저장 -->
+	<insert id="loginlog" parameterType="loginlog">
+		insert into demo_loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
+	</insert>
+	
+	<select id="evaluationtarget" resultType="users">
 	SELECT idx, id, pwd, name, reg_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
 	hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-    FROM users__ u
+    FROM demo_users u
     where
-    <!-- 
-    SELECT u.idx, u.id, u.pwd, u.name, u.reg_date, u.hspt_name, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.hspt_V, 
-    u.hspt_K, u.hspt_B, u.hspt_X, u.hspt_Z, u.user_code, hspt_S, hspt_T, w.d1, w.d2, w.d3
-	FROM users__ u
-	left JOIN whether w ON u.idx = w.d2 where
-	 -->
     <choose>
    	<!-- 진료부 -->
    	<!-- 진료팀장 -->
@@ -2917,296 +2914,96 @@
 	
 	</select>
 	
-	<!-- 부서장만 뽑아내는 쿼리 -->
-	<!-- 만약 진료부라면 진료부 평가가 따로 있기 때문에 진료부 부서장은 제거 해야한다. -->
-	<select id="BTlist" resultType="users" parameterType="users">
-		select idx, id, pwd, name, reg_date, hspt_name, hspt_subname, hspt_subcode, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_J, user_code
-		from users__ where user_code like '%BT%' and hspt_subcode = #{hspt_subcode}
+	<!-- 리스트에서 평가 완료 확인 -->
+	<select id="whetherselect" resultType="map" parameterType="map">
+		select * from demo_whether where d1 = #{idx}
+		
 	</select>
-	<!-- 부서원만 뽑아내는 쿼리 -->
-	<select id="BFlist" resultType="users" parameterType="users">
-		select idx, id, pwd, name, reg_date, hspt_name, hspt_subname, hspt_subcode, hspt_position, hspt_V, 
-		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_J, user_code
-		from users__ where user_code like '%BF%' and hspt_subcode = #{hspt_subcode}
+	
+	<select id="phOne" resultType="int" parameterType="map">
+		select count(*) from demo_user__phone where id = #{id} and number = #{ph}
 	</select>
+	
+	<update id="pwdinsert" parameterType="users">
+		update demo_users set pwd = #{pwd} where idx = #{idx}
+	</update>
+	
+	<update id="pwdajax" parameterType="map">
+		update demo_users set pwd = #{pwd} where id = #{id}
+	</update>
 	
 	<select id="evList" resultType="evaluation" parameterType="evaluation">
 		select * from evaluation where d2 = #{d2}
 	</select>
 	
 	<insert id="forminsert" parameterType="answer">
-		insert into answer (u1, u2, t1, team, d1, ev)
+		insert into demo_answer (u1, u2, t1, team, d1, ev)
 		values (
 		#{u1}, #{u2}, #{t1}, #{team}, #{d1}, #{ev})
 	</insert>
-	<!-- 평가 완료 중복 체크 -->
-	<select id="formcheck" resultType="int" parameterType="map">
-		select count(*) from whether where d1 = #{d1} and d2 = #{d2} and team = #{team} 
-	</select>
-	
 	
 	<!--  평가 완료 표시  -->
 	<insert id="whether" parameterType="whether">
-		insert into whether (d1, d2, d3, ev, team)
+		insert into demo_whether (d1, d2, d3, ev, team)
 		values (#{d1}, #{d2}, "평가완료", #{ev}, #{team})
-	</insert>
-	<!-- 리스트에서 평가 완료 확인 -->
-	<select id="whetherselect" resultType="map" parameterType="map">
-		select * from whether where d1 = #{idx}
-		<!-- 
-		select * from whether where d1 = #{id}
-		
-		 -->
-	</select>
-	<select id="noticeselect" resultType="map" parameterType="map">
-		select * from notice where d1 = 1
-	</select>
-	<!-- 로그인 기록 저장 -->
-	<insert id="loginlog" parameterType="loginlog">
-		insert into loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
 	</insert>
 	
 	<select id="users" resultType="map" parameterType="map">
 		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
 		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ 
-	</select>
-	<select id="users1" resultType="map" parameterType="map">
-		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
-		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where hspt_name = "효사랑전주요양병원"
-	</select>
-	<select id="users1pwd" resultType="map" parameterType="map">
-		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
-		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where hspt_name = "효사랑전주요양병원" order by pwd asc
+		from demo_users 
 	</select>
 	
-	<select id="users2" resultType="map" parameterType="map">
-		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
-		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where hspt_name = "효사랑가족요양병원"
-	</select>
-	<select id="users2pwd" resultType="map" parameterType="map">
-		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
-		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where hspt_name = "효사랑가족요양병원" order by pwd asc
-	</select>
-	
-	<select id="users3" resultType="map" parameterType="map">
-		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
-		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where hspt_name = "가족사랑요양병원"
-	</select>
-	<select id="users3pwd" resultType="map" parameterType="map">
-		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
-		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from users__ where hspt_name = "가족사랑요양병원" order by pwd asc
-	</select>
-	
-	<select id="log" resultType="map" parameterType="map">
-		select * from loginlog where id = #{id} order by d2 desc;
-	</select>
 	<select id="ph" resultType="map" parameterType="map">
-		select * from user__phone
+		select * from demo_user__phone
 	</select>
-	<select id="phOne" resultType="int" parameterType="map">
-		select count(*) from user__phone where id = #{id} and number = #{ph}
-	</select>
-	<select id="phselect" resultType="map" parameterType="map">
-		select * from user__phone where id = #{id}
-	</select>
-	<!-- 비밀번호 초기화 -->
-	<update id="pwdreset" parameterType="map">
-		update users__ set pwd = null where id = #{id}
-	</update>
-	<update id="pwdreset1" parameterType="map">
-		update users__ set pwd = null where hspt_name = '효사랑전주요양병원' and id = #{id}
-	</update>
-	<update id="pwdreset2" parameterType="map">
-		update users__ set pwd = null where hspt_name = '효사랑가족요양병원' and id = #{id}
-	</update>
-	<update id="pwdreset3" parameterType="map">
-		update users__ set pwd = null where hspt_name = '가족사랑요양병원' and id = #{id}
-	</update>
 	
 	<!-- 비밀번호 설정한 직원 명부 -->
 	<select id="hsptselect1" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '효사랑전주요양병원'
-	</select>
-	
-	<select id="hsptselect2" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '효사랑가족요양병원'
-	</select>
-	
-	<select id="hsptselect3" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '가족사랑요양병원'
+		select count(*) from demo_users
 	</select>
 	
 	<select id="hsptpwdselect1" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '효사랑전주요양병원' and pwd is NOT NULL;
-	</select>
-	<select id="hsptpwdselect2" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '효사랑가족요양병원' and pwd is NOT NULL;
-	</select>
-	<select id="hsptpwdselect3" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '가족사랑요양병원' and pwd is NOT NULL;
+		select count(*) from demo_users where pwd is NOT NULL;
 	</select>
 	
-	<!-- 부서별 비밀번호 설정한 인원? -->
-	<select id="hsptselect1sub" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '효사랑전주요양병원' and pwd is NOT NULL and user_code like concat (#{sub}, '%');
-	</select>
-	<select id="hsptselect2sub" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '효사랑가족요양병원' and pwd is NOT NULL and user_code like concat (#{sub}, '%');
-	</select>
-	<select id="hsptselect3sub" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = '가족사랑요양병원' and pwd is NOT NULL and user_code like concat (#{sub}, '%');
-	</select>
+	<!-- 비밀번호 초기화 -->
+	<update id="pwdreset" parameterType="map">
+		update demo_users set pwd = null where id = #{id}
+	</update>
 	
 	<select id="target" parameterType="map" resultType="map">
-		select * from target
+		select * from demo_target
 	</select>
 	
 	<select id="answerselect" parameterType="map" resultType="map">
-		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from answer
+		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from demo_answer
 	</select>
 	
 	<select id="targetsum" parameterType="map" resultType="int">
-		select sum(target) from target where target
+		select sum(target) from demo_target where target
 	</select>
 	<select id="answersum" parameterType="map" resultType="int">
-		select count(*) from answer
+		select count(*) from demo_answer
 	</select>
 	
 	<select id="targetsum1" parameterType="map" resultType="int">
-		select sum(target) from target where id like '1%' and id != '12365478'
-	</select>
-	<select id="targetsum2" parameterType="map" resultType="int">
-		select sum(target) from target where id like '2%' or id like '5%'
-	</select>
-	<select id="targetsum3" parameterType="map" resultType="int">
-		select sum(target) from target where id like '3%'
+		select sum(target) from demo_target where id like '1%' and id != '12365478'
 	</select>
 	<select id="answersum1" parameterType="map" resultType="int">
-		select count(*) from answer where u2 like '1%'
-	</select>
-	<select id="answersum2" parameterType="map" resultType="int">
-		select count(*) from answer where u2 like '2%' or u2 like '5%'
-	</select>
-	<select id="answersum3" parameterType="map" resultType="int">
-		select count(*) from answer where u2 like '3%'
+		select count(*) from demo_answer where u2 like '1%'
 	</select>
 	
-	<select id="my" parameterType="int" resultType="users">
-		select * from users__ where idx = #{idx}
-	</select>
-	<!-- 부서원 평가 결과 리포트 -->
-	<!-- 예시 : 4병동장으로 로그인 했을때. -->
-	<!-- 해당 부서원 리스트 -->
-	<select id="sub" parameterType="map" resultType="map">
-		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
-	</select>
-	<!-- 부서원 수 -->
-	<select id="subcnt" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = #{hname} and hspt_subcode = #{subcode};
+	<!-- 평가 완료 중복 체크 -->
+	<select id="formcheck" resultType="int" parameterType="map">
+		select count(*) from demo_whether where d1 = #{d1} and d2 = #{d2} and team = #{team} 
 	</select>
 	
-	<!-- 직원이 평가 받은 리스트 -->
-	<select id="answerlist" parameterType="map" resultType="map">
-		select * from users__ u where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F'
-	</select>
 	
-	<!-- 부서원 평가 조회 하는 쿼리 (경혁팀평가 제외) -->
-	<select id="user" parameterType="map" resultType="map">
-		select * from answer a join users__ u on a.u2 = u.id where a.ev = 'AB' and a.t1 = #{id}
-	</select>
-	<!-- 부서장이 로그인 했을때 부서원이 평가 받은 리스트 -->
-	<select id="subanswerlist" parameterType="map" resultType="map">
-		select * from answer a join users__ u on a.t1 = u.id where u.hspt_name = #{hname} and u.hspt_subcode = #{subcode} and u.hspt_B = 'F' and a.team != 'B'
-	</select>
-	<!-- 경혁팀 간 평가 리스트 -->
-	<select id="k" parameterType="map" resultType="map">
-		SELECT
-		    a.u1, a.u2, a.t1, a.team, a.ev, a.d1,
-		    u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name,
-		    d.hspt_subcode, d.id, d.name, d.hspt_position
-		FROM
-		    answer a
-		    JOIN users__ u ON a.t1 = u.id
-		    JOIN users__ d ON d.id = a.u2
-		WHERE
-		    u.hspt_name = #{hname}
-		    AND a.team = 'B'
-		    and d.hspt_V = 'T'
-		    AND not d.hspt_subcode LIKE 'A0%'
-	</select>
-	<!-- 경혁팀 부서원 평가 조회 하는 쿼리 -->
-	<select id="kuser" parameterType="map" resultType="map">
-		select * from answer a join users__ u on a.u2 = u.id where u.hspt_V = 'T' and a.t1 = #{id}
-	</select>
-	<!-- 경혁팀 직원 수 -->
-	<select id="klist" parameterType="map" resultType="map">
-		select * from users__ u  where u.hspt_name = #{hname} and u.hspt_V = 'T'
-	</select>	
-	<select id="kcnt" parameterType="map" resultType="int">
-		select count(*) from users__ u  where u.hspt_name = #{hname} and u.hspt_V = 'T'
-	</select>
-	<!-- 진료부가 경혁팀 평가 전체 리스트 -->
-	<select id="klistall" parameterType="map" resultType="map">
-	select 
-		a.u1, a.t1, a.u2, a.team, a.ev, a.d1, u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name, 
-		d.hspt_subcode as tsubcode, d.id as tid, d.name as tname, d.hspt_position as tposition
-	from answer a 
-		join users__ u on a.t1 = u.id 
-		join users__ d on d.id = a.u2 
-	where u.hspt_name = #{hname} and a.team = 'B' and d.hspt_subcode like 'A0%'
-	</select>
-	<!-- 진료부가 경혁팀 평가 -->
-	<select id="klist2" parameterType="map" resultType="map">
-		select 
-			a.u1, a.t1, a.u2, a.team, a.ev, a.d1, 
-			u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name, 
-			d.hspt_subcode as tsubcode, d.id as tid, d.name as tname, d.hspt_position as tposition
-		from answer a 
-			join users__ u on a.t1 = u.id 
-			join users__ d on d.id = a.u2 
-		where 
-			u.hspt_name = #{hname} and a.team = 'B' and u.id = #{id} and d.hspt_subcode like 'A0%'
-	</select>
-	<!-- 진료부 전체 (양방/한방) 인원 수 -->
-	<select id="kscnt" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_name = #{hname} and hspt_subcode like 'A0%'
-	</select>
-	<!-- 진료부가 평가받은 전체 리스트 -->
-	<select id="alistall" parameterType="map" resultType="map">
-	select a.u1, a.u2, a.t1, a.team, a.ev, a.d1, 
-		u.id, u.hspt_subcode, u.hspt_subname, u.hspt_position, u.name, 
-		d.hspt_subcode as tsubcode, d.id as tid, d.name as tname, d.hspt_position as tposition
-	from answer a join users__ u on a.u2 = u.id join users__ d on a.t1 = d.id where u.hspt_name = #{hname} and d.hspt_subcode like 'A%'
-	</select>
 	
-	<select id="subop" parameterType="map" resultType="map">
-		select * from sub
-	</select>
 	
-	<select id="userall" parameterType="map" resultType="map">
-		select u.c_name, u.c_name2, u.subname, u.id, u.pwd, u.position, u.name, u.reg_date, u.end_date, u.phone,
-		o.k, o.v, o.b, o.x, o.z, o.a, o.del_yn from users u join useroption o on u.id = o.id
-	</select>
 	
-	<select id="userop" parameterType="map" resultType="map">
-		select * from useroption
-	</select>
-	<!--  변수 추가  -->
-	<select id="useropadd" parameterType="map" resultType="map">
-		ALTER TABLE useroption ADD COLUMN #{col} VARCHAR(10) NOT NULL DEFAULT 'F'
-	</select>
-	<!--  각 병원 경혁팀 인원 수  -->
-	<select id="vmember" parameterType="map" resultType="int">
-		select count(*) from users__ where hspt_V = 'T' and hspt_name = #{hname}
-	</select>
+	
 	
 	
 	

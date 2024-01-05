@@ -23,8 +23,10 @@
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
 				<div class="nav__brand" style="">
+					<a href="${pageContext.request.contextPath}/demo/admin" class="nav__logo" >관리자페이지</a>
+				<%-- 
 					<a href="${pageContext.request.contextPath}/e/admin" class="nav__logo" >효사랑</a>
-					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a>
+					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a> --%>
 				</div>
 			</div>
 		</div>
@@ -40,9 +42,9 @@
 				 -->
 				<div class="nav__list">
 					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="userall" data-content="all">
-						<span class="nav_name">1,2,3병원 직원명부 Total</span>
+						<span class="nav_name">코어솔루션병원 직원명부 Total</span>
 					</a>
-					
+					<%-- 
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;효사랑전주요양병원 직원명부 ${p1}/${h1}</span>
@@ -54,11 +56,11 @@
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user3" data-content="content3">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;가족사랑요양병원 직원명부 ${p3}/${h3}</span>
-					</a>
+					</a> --%>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="perall" data-content="all">
-						<span class="nav_name">1,2,3병원 평가진행률 Total</span>
-					</a>
+						<span class="nav_name">코어솔루션병원 평가진행률 Total</span>
+					</a><!-- 
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;효사랑전주요양병원 평가진행률</span>
@@ -70,7 +72,7 @@
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per3" data-content="content3">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;가족사랑요양병원 평가진행률</span>
-					</a>
+					</a> -->
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="setting" data-content="">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
@@ -96,7 +98,7 @@
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 		<table style="">
 			<tr>
-				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>핸드폰번호</td><td>비밀번호초기화</td>
+				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호초기화</td>
 			</tr>
 		
 			<c:forEach items="${users }" var="u">
@@ -107,17 +109,13 @@
 						<td>${u.hspt_subname }</td>
 						<td>${u.id }</td>
 						<td>${u.hspt_position }</td>
-						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/e/Info/${u.idx}'">${u.name }</td>
-						<c:forEach items="${ph }" var="p">
-							<c:if test="${u.id eq p.id }">
-								<td>
-									${p.number }
-								</td>
-							</c:if>
-						</c:forEach>
+						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
+							<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
+    						${targetfirstName }ㅇㅇ
+							
+						</td>
+						
 						<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" style="cursor:pointer;"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
-						
-						
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -172,7 +170,7 @@ function userall(contentId) {
 	if (contentId === 'all') {
 	      
 	      $.ajax({
-	         url: '${pageContext.request.contextPath}/e/usersAll',
+	         url: '${pageContext.request.contextPath}/demo/usersAll',
 	         type: 'GET',
 	         dataType: 'json',
 	         success: function(response) {
@@ -196,8 +194,6 @@ function userall(contentId) {
 	 				maintd6.textContent = "직책";
 	 				var maintd7 = document.createElement("TD");
 	 				maintd7.textContent = "이름";
-	 				var maintd8 = document.createElement("TD");
-	 				maintd8.textContent = "핸드폰번호";
 	 				var maintd9 = document.createElement("TD");
 	 				maintd9.textContent = "비밀번호초기화";
 	 				
@@ -208,28 +204,18 @@ function userall(contentId) {
 	 				maintr.appendChild(maintd4);
 	 				maintr.appendChild(maintd6);
 	 				maintr.appendChild(maintd7);
-	 				maintr.appendChild(maintd8);
 	 				maintr.appendChild(maintd9);
 	 				
 	 				listall.forEach(function (list) {
 	 					if(list.id != 12365478){
-	 						var matchingPh = ph.find(function (phn) {
-	 					         return phn.id === list.id;
-	 					      });
-	 						var phid, phnumber;
 	 						
- 							 if (matchingPh) {
- 		                        phid = matchingPh.id;
- 		                        phnumber = matchingPh.number;
- 		                     }
- 							
 	 						var idx = list.idx;
 		 					var hname = list.hspt_name;
 		 					var sname = list.hspt_subname;
 		 					var id = list.id;
 		 					var position = list.hspt_position;
 		 					var name = list.name;
-		 					
+		 					var modifiedName = name.charAt(0) + "ㅇㅇ";
 		 					
 		 					var tr = document.createElement("TR");
 		 					if(!list.pwd){
@@ -246,14 +232,11 @@ function userall(contentId) {
 		 					var tdpo = document.createElement("TD");
 		 					tdpo.textContent = position;
 		 					var tdname = document.createElement("TD");
-		 					tdname.textContent = name;
-		 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+		 					tdname.textContent = modifiedName;
+		 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 		 					tdname.setAttribute("onclick","location.href='" + url + "'");
 		 					tdname.setAttribute("style", "cursor:pointer;");
-		 					var tdph = document.createElement("TD");
-		 					if(id == phid){
-		 						tdph.textContent = phnumber;
-		 					}
+		 					
 		 					var tdpwdselect = document.createElement("TD");
 		 					tdpwdselect.setAttribute("data-name", name);
 		 					tdpwdselect.setAttribute("data-id", id);
@@ -271,7 +254,6 @@ function userall(contentId) {
 		 					tr.appendChild(tdid);
 		 					tr.appendChild(tdpo);
 		 					tr.appendChild(tdname);
-							tr.appendChild(tdph);
 							tr.appendChild(tdpwdselect);
 	 					}	
  					});
@@ -290,7 +272,7 @@ function userall(contentId) {
 function user1(contentId) {
 	if (contentId === 'content1') {
 		$.ajax({
-	         url: '${pageContext.request.contextPath}/e/users1',
+	         url: '${pageContext.request.contextPath}/demo/users1',
 	         type: 'GET',
 	         dataType: 'json',
 	         success: function(response) {
@@ -364,7 +346,7 @@ function user1(contentId) {
 		 					tdpo.textContent = position;
 		 					var tdname = document.createElement("TD");
 		 					tdname.textContent = name;
-		 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+		 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 		 					tdname.setAttribute("onclick","location.href='" + url + "'");
 		 					tdname.setAttribute("style", "cursor:pointer;");
 		 					var tdph = document.createElement("TD");
@@ -405,7 +387,7 @@ function user1(contentId) {
 function user2() {
 
 	$.ajax({
-         url: '${pageContext.request.contextPath}/e/users2',
+         url: '${pageContext.request.contextPath}/demo/users2',
          type: 'GET',
          dataType: 'json',
          success: function(response) {
@@ -480,7 +462,7 @@ function user2() {
 	 					tdpo.textContent = position;
 	 					var tdname = document.createElement("TD");
 	 					tdname.textContent = name;
-	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 	 					tdname.setAttribute("onclick","location.href='" + url + "'");
 	 					tdname.setAttribute("style", "cursor:pointer;");
 	 					var tdph = document.createElement("TD");
@@ -522,7 +504,7 @@ function user2() {
 function user3() {
 
 	$.ajax({
-         url: '${pageContext.request.contextPath}/e/users3',
+         url: '${pageContext.request.contextPath}/demo/users3',
          type: 'GET',
          dataType: 'json',
          success: function(response) {
@@ -598,7 +580,7 @@ function user3() {
 	 					tdpo.textContent = position;
 	 					var tdname = document.createElement("TD");
 	 					tdname.textContent = name;
-	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 	 					tdname.setAttribute("onclick","location.href='" + url + "'");
 	 					tdname.setAttribute("style", "cursor:pointer;");
 	 					var tdph = document.createElement("TD");
@@ -638,7 +620,7 @@ function user3() {
 
 function asc1() {
 	$.ajax({
-        url: '${pageContext.request.contextPath}/e/users1',
+        url: '${pageContext.request.contextPath}/demo/users1',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -716,7 +698,7 @@ function asc1() {
 	 					tdpo.textContent = position;
 	 					var tdname = document.createElement("TD");
 	 					tdname.textContent = name;
-	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 	 					tdname.setAttribute("onclick","location.href='" + url + "'");
 	 					tdname.setAttribute("style", "cursor:pointer;");
 	 					var tdph = document.createElement("TD");
@@ -757,7 +739,7 @@ function perall(contentId) {
 	if (contentId === 'all') {
 	      
 	      $.ajax({
-	         url: '${pageContext.request.contextPath}/e/perall',
+	         url: '${pageContext.request.contextPath}/demo/perall',
 	         type: 'GET',
 	         dataType: 'json',
 	         success: function(response) {
@@ -886,7 +868,7 @@ function perall(contentId) {
 		 					var subname = list.hspt_subname;
 		 					var position = list.hspt_position
 		 					var name = list.name;
-		 					
+		 					var modifiedName = name.charAt(0) + "ㅇㅇ";
 		 					
 		 					
 		 					var tr = document.createElement("TR");
@@ -901,7 +883,7 @@ function perall(contentId) {
 		 					tdpo.textContent = position;
 		 					tdpo.setAttribute("style","width: 195px;");
 		 					var tdname = document.createElement("TD");
-		 					tdname.textContent = name;
+		 					tdname.textContent = modifiedName;
 		 					
 		 					var tdtarget = document.createElement("TD");
 		 					tdtarget.setAttribute("style","width: 140px;");
@@ -925,7 +907,7 @@ function perall(contentId) {
 		 					
 							
 		 					var tdinfo = document.createElement("TD");
-		 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+		 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 		 					tdinfo.textContent = "링크";
 		 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
 		 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
@@ -1121,7 +1103,7 @@ function per1() {
 							tr.setAttribute("style", "background: #E6B8AF;")
 						}
 	 					var tdinfo = document.createElement("TD");
-	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 	 					tdinfo.textContent = "링크";
 	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
 	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
@@ -1154,7 +1136,7 @@ function per1() {
 
 function per2() {
 	$.ajax({
-        url: '${pageContext.request.contextPath}/e/per2',
+        url: '${pageContext.request.contextPath}/demo/per2',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -1317,7 +1299,7 @@ function per2() {
 							tr.setAttribute("style", "background: #E6B8AF;")
 						}
 	 					var tdinfo = document.createElement("TD");
-	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 	 					tdinfo.textContent = "링크";
 	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
 	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
@@ -1350,7 +1332,7 @@ function per2() {
 
 function per3() {
 	$.ajax({
-        url: '${pageContext.request.contextPath}/e/per3',
+        url: '${pageContext.request.contextPath}/demo/per3',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -1514,7 +1496,7 @@ function per3() {
 						}
 	 					
 	 					var tdinfo = document.createElement("TD");
-	 					var url = "<%=request.getContextPath() %>/e/Info/"+idx;
+	 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 	 					tdinfo.textContent = "링크";
 	 					tdinfo.setAttribute("onclick","location.href='" + url + "'");
 	 					tdinfo.setAttribute("style","width: 187px; cursor:pointer;");
@@ -1547,7 +1529,7 @@ function per3() {
 // 설정관리
 function setting() {
 	$.ajax({
-		url: '${pageContext.request.contextPath}/e/setting',
+		url: '${pageContext.request.contextPath}/demo/setting',
 		type: 'GET',
 		dataType: 'json',
 		success: function(res) {
@@ -1689,7 +1671,7 @@ function pwdreset(element){
 	if(prmpwd == '123qwe' || prmpwd == '123ㅂㅈㄷ'){
 		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
 		
-		frm.attr("action","${pageContext.request.contextPath}/e/pwdreset/"+id).submit();
+		frm.attr("action","${pageContext.request.contextPath}/demo/pwdreset/"+id).submit();
 		/* $.ajax({
 			url: '${pageContext.request.contextPath}/e/pwdreset/'+id,
 			type: 'post',
@@ -1787,7 +1769,7 @@ function set2(){
 	
 	const nav = document.getElementById("nav");
 	$.ajax({
-		url: '${pageContext.request.contextPath}/e/setting',
+		url: '${pageContext.request.contextPath}/demo/setting',
 		type: 'GET',
 		dataType: 'json',
 		success: function (res) {

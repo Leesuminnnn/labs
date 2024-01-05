@@ -1,7 +1,5 @@
 package com.nnn.app.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -26,9 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nnn.app.service.EvaluationService;
-import com.nnn.app.vo.AjaxResponse13;
-import com.nnn.app.vo.AjaxResponse14;
+import com.nnn.app.service.DemoService;
 import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
@@ -37,101 +33,58 @@ import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
-import com.nnn.app.vo.SubVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
-import com.nnn.app.vo.UserVo;
-import com.nnn.app.vo.UseroptionVo;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WhetherVo;
 
 @Controller
-@RequestMapping(value="e/*")
-public class EvaluationController {
-	private EvaluationService evaluationService;
-	
+@RequestMapping(value="demo/*")
+public class DemoController {
 
+	private DemoService demoService;
+	
 	@Autowired
-	public EvaluationController(EvaluationService evaluationService) {
-		this.evaluationService = evaluationService;
+	public DemoController(DemoService demoservice) {
+		this.demoService = demoservice;
 	}
 	
 	@RequestMapping(value="Login")
-	public ModelAndView login(ModelAndView mv, NoticeVo vo) {
+	public ModelAndView login(ModelAndView mv, NoticeVo vo) throws Exception {
 		// 공지사항 영역 리스트로 출력
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<NoticeVo> list = evaluationService.noticeSelect(map);
+		List<NoticeVo> list = demoService.noticeSelect(map);
 		
 		mv.addObject("notice", list);
-		// 초기 로그인페이지 들어오면 사번/비밀번호로
-		mv.addObject("dbpwdOk", true);
-		mv.setViewName("e/login");
-		return mv;
-	}
-
-	@RequestMapping(value="Loginprev")
-	public ModelAndView login2(ModelAndView mv, NoticeVo vo) {
-		// 공지사항 영역 리스트로 출력
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<NoticeVo> list = evaluationService.noticeSelect(map);
 		
-		mv.addObject("notice", list);
-		// 초기 로그인페이지 들어오면 사번/비밀번호로
-		mv.addObject("dbpwdOk", true);
-		mv.setViewName("e/prevlogin");
+		mv.setViewName("demo/login");
 		return mv;
 	}
 	
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public String loginaction(UsersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 비밀번호 복호화
-//		SHA256 sha256 = new SHA256();
-//		String password = vo.getPwd();
-//		//	SHA256으로 암호화된 비밀번호
-//        String cryptogram = sha256.encrypt(password);
-//        System.out.println(cryptogram);
-//        //비밀번호 일치 여부
-//        boolean pwdcheck = cryptogram.equals(sha256.encrypt(password));
-//		System.out.println(pwdcheck);
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("#########################################");
-		
-		
-		
-		
-		
-		System.out.println("id : "+vo.getId());
-		System.out.println("name : "+vo.getName());
-		System.out.println("pwd : "+vo.getPwd());
-		System.out.println("#########################################");
-		int loginMember = evaluationService.login(vo);
+		int loginMember = demoService.login(vo);
 		String name = vo.getName();
-		System.out.println("_________________________________________");
-		/*
-		 * 로그인 시 아이디와 비밀번호가 사번과 이름의 조합일 경우 비밀번호 변경페이지로 이동해야 한다.
-		 * 아니면 ajax로 하단에 비밀번호 변경 영역이 생성되면 좋을거같다.
-		 * */
-		
 		// 먼저 사번이 DB에 있는지 검색
-		int Dbcheck = evaluationService.dbcheck(vo);
+		int Dbcheck = demoService.dbcheck(vo);
 		if (Dbcheck == 0) {
 			System.out.println(Dbcheck);
 			System.out.println("Db에 id 없음");
 			request.setAttribute("msg", "2023년도 직원근무평가 대상직원이 아닙니다.");
-			request.setAttribute("url", "e/Login");
+			request.setAttribute("url", "demo/Login");
 			return "alert5";
 		}else {
-
 			//아이디 혹은 비밀번호가 일치하지 않는 경우
 			if(loginMember == 0) {
 				request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.\\n아이디 혹은 비밀번호를 확인해 주세요");
-				request.setAttribute("url", "e/Login");
+				request.setAttribute("url", "demo/Login");
 				System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
 				return "alert5";
 			}
 			// 정보가 있을 경우 
 			else if(loginMember == 1) {
-				UsersVo info2 = evaluationService.info2(vo);
+				UsersVo info2 = demoService.info2(vo);
 				int idx = info2.getIdx();
 				System.out.println("info : "+info2);
 				System.out.println("info2.idx : "+info2.getIdx());
@@ -139,7 +92,7 @@ public class EvaluationController {
 				if(info2.getPwd() == null) {
 					session.setAttribute("loginmember", vo.getId());
 					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
-					request.setAttribute("url", "e/Pwd/"+idx);
+					request.setAttribute("url", "demo/Pwd/"+idx);
 					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
 					return "alert5";
 				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
@@ -147,7 +100,7 @@ public class EvaluationController {
 					String dbpwdOk = "true"; 
 					md.addAttribute("dbpwdOk", dbpwdOk);
 					request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
-					request.setAttribute("url", "e/Login");
+					request.setAttribute("url", "demo/Login");
 					return "alert5";
 				}else {
 					System.out.println("#########################################");
@@ -156,7 +109,7 @@ public class EvaluationController {
 					map.put("id", vo.getId());
 					map.put("name", info2.getName());
 					System.out.println("#########################################");
-					md.addAttribute("info", evaluationService.info(idx));
+					md.addAttribute("info", demoService.info(idx));
 					// 로그인 한 유저 ip 알아내기
 					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 					String ip = req.getHeader("X-FORWARDED-FOR");
@@ -165,31 +118,29 @@ public class EvaluationController {
 					}
 					map.put("ip", ip);
 					System.out.println(ip);
-					evaluationService.loginlog(map);
+					demoService.loginlog(map);
 					// 세션 저장
 					session.setAttribute("loginmember", vo.getId());
 					if(info2.getHspt_name().equals("코어솔루션")) {
-						return "redirect:/e/admin";
+						return "redirect:/demo/admin";
 					}else {
-						return "redirect:/e/Info/"+idx;
+						return "redirect:/demo/Info/"+idx;
 					}
 					
 				}
-				
 			}
 		}
 		return "";
 	}
-	
+		
 	@RequestMapping("Logout")
 	public ModelAndView logout(HttpSession session, ModelAndView mav) {
 
 		session.invalidate();
-		mav.setViewName("redirect:/");
+		mav.setViewName("redirect:/demo/Login");
 		return mav;
 
 	}
-	
 	
 	@RequestMapping(value="Info/{idx}")
 	public ModelAndView info(UsersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
@@ -198,21 +149,21 @@ public class EvaluationController {
 		System.out.println("#########################1");
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		String vtf = evaluationService.info(idx).getHspt_V();
-		String ktf = evaluationService.info(idx).getHspt_K();
-		String btf = evaluationService.info(idx).getHspt_B();
-		String xtf = evaluationService.info(idx).getHspt_X();
-		String ztf = evaluationService.info(idx).getHspt_Z();
-		String hsptname = evaluationService.info(idx).getHspt_name();
-		String hsptpo = evaluationService.info(idx).getHspt_position();
-		String hsptsubcode = evaluationService.info(idx).getHspt_subcode();
-		String hsptsubname = evaluationService.info(idx).getHspt_subname();
-		String po = evaluationService.info(idx).getHspt_position();
+		String vtf = demoService.info(idx).getHspt_V();
+		String ktf = demoService.info(idx).getHspt_K();
+		String btf = demoService.info(idx).getHspt_B();
+		String xtf = demoService.info(idx).getHspt_X();
+		String ztf = demoService.info(idx).getHspt_Z();
+		String hsptname = demoService.info(idx).getHspt_name();
+		String hsptpo = demoService.info(idx).getHspt_position();
+		String hsptsubcode = demoService.info(idx).getHspt_subcode();
+		String hsptsubname = demoService.info(idx).getHspt_subname();
+		String po = demoService.info(idx).getHspt_position();
 		
 		System.out.println("############################1.5");
 
-		System.out.println("info : "+ evaluationService.info(idx));
-		System.out.println("시간 출력 : "+ evaluationService.info(idx).getReg_date());
+		System.out.println("info : "+ demoService.info(idx));
+		System.out.println("시간 출력 : "+ demoService.info(idx).getReg_date());
 		System.out.println("경혁팀 여부 : "+vtf);
 		System.out.println("경혁팀장 여부 : "+ktf);
 		System.out.println("부서장 여부 : "+btf);
@@ -285,20 +236,20 @@ public class EvaluationController {
 		System.out.println("info.hsptposition : "+ hsptpo);
 		System.out.println("info.hsptsubcode : "+ hsptsubcode);
 		System.out.println(vo.getIdx());
-		System.out.println(evaluationService.info(idx));
-		System.out.println(evaluationService.evaluationtarget(map));
+		System.out.println(demoService.info(idx));
+		System.out.println(demoService.evaluationtarget(map));
 		System.out.println("#########################2");
-		mv.addObject("info", evaluationService.info(idx));
+		mv.addObject("info", demoService.info(idx));
 		// 평가 대상 출력		다른 사람이 평가완료 했을 경우 평가 받은사람이 여러개가 뜸. -> 
 		List<UsersVo> list1 = new ArrayList<UsersVo>();
-		list1 = evaluationService.evaluationtarget(map);
+		list1 = demoService.evaluationtarget(map);
 		System.out.println("#############################");
 		mv.addObject("target", list1);
 		System.out.println(list1);
 		System.out.println("#############################");
 		// 평가 완료한 리스트 출력?		
 		List<WhetherVo> list2 = new ArrayList<WhetherVo>();
-		list2 = evaluationService.whetherSelect(map);
+		list2 = demoService.whetherSelect(map);
 		System.out.println("평가 완료 리스트 출력 : "+list2);
 		mv.addObject("endlist", list2);
 		
@@ -329,22 +280,22 @@ public class EvaluationController {
 //		mv.addObject("BFlist", list3);
 //		System.out.println(list3);
 		
-		mv.setViewName("e/info");
+		mv.setViewName("demo/info");
 		return mv;
 	}
+	
 	@RequestMapping(value="Pwd/{idx}")
 	public ModelAndView pwd(ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
 		session.getAttribute("loginMember");
-		mv.addObject("info", evaluationService.info(idx));
+		mv.addObject("info", demoService.info(idx));
 		
-		
-		
-		mv.setViewName("e/pwd");
+		mv.setViewName("demo/pwd");
 		return mv;
 	}
+	
 	@RequestMapping(value="Findpwd")
 	public ModelAndView findpwd(ModelAndView mv, NoticeVo vo) {
-		mv.setViewName("e/findpwd");
+		mv.setViewName("demo/findpwd");
 		return mv;
 	}
 	
@@ -360,7 +311,7 @@ public class EvaluationController {
 		
 //		List<UsersVo> list = evaluationService.users1(map);
 		
-		int phOne = evaluationService.phOne(map);
+		int phOne = demoService.phOne(map);
 		
 		if(phOne == 1) {
 			response.setResult("Y");
@@ -368,22 +319,13 @@ public class EvaluationController {
 			response.setResult("N");
 		}
 		
-		/*
-		private String result;
-		private List<UsersVo> users;
-		private List<UserPh> userph;
-		private List<UsersVo> listpwd1;
-		*/
-//		response.setUserph(phOne);
-		
-		
 		return response;
 	}
 	
 	@RequestMapping(value="pwdAction/{idx}")
 	public String pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
-		md.addAttribute("info", evaluationService.info(idx));
+		md.addAttribute("info", demoService.info(idx));
 		
 //		// 암호화
 //		SHA256 sha256 = new SHA256();
@@ -402,19 +344,20 @@ public class EvaluationController {
 		map.put("pwd", vo.getPwd());
 		map.put("idx", vo.getIdx());
 		
-		int flag = evaluationService.pwdinsert(map);
+		int flag = demoService.pwdinsert(map);
 		
 		if(flag >= 1) {
 			System.out.println(flag);
 			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다. \\n사번/비밀번호로 체크 후 로그인해주세요");
-			request.setAttribute("url", "e/Info/"+idx);
+			request.setAttribute("url", "demo/Info/"+idx);
 			return "alert5";
 		} else {
 			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
-			request.setAttribute("url", "e/Pwd/"+idx);
+			request.setAttribute("url", "demo/Pwd/"+idx);
 			return "alert5";
 		}
 	}
+	
 	@RequestMapping(value="pwdActAjax/{id}")
 	public String pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 //		// 암호화
@@ -434,7 +377,7 @@ public class EvaluationController {
 		map.put("pwd", vo.getPwd());
 		map.put("id", vo.getId());
 		
-		int flag = evaluationService.pwdajax(map);
+		int flag = demoService.pwdajax(map);
 		
 		if(flag >= 1) {
 			System.out.println(flag);
@@ -443,6 +386,7 @@ public class EvaluationController {
 			return "alert5";
 		}
 	}
+
 	@RequestMapping(value="Form/{idx}/{idx2}/{team}")
 	public ModelAndView form(ModelAndView mv, HttpSession session, 
 			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
@@ -450,13 +394,13 @@ public class EvaluationController {
 		session.getAttribute("loginMember");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
-		mv.addObject("info", evaluationService.info(idx));
+		mv.addObject("info", demoService.info(idx));
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println( evaluationService.info(idx));
-		System.out.println( evaluationService.info(idx2));
+		System.out.println( demoService.info(idx));
+		System.out.println( demoService.info(idx2));
 		System.out.println(team);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-		mv.addObject("target", evaluationService.info(idx2));
+		mv.addObject("target", demoService.info(idx2));
 		// 진료부, 경혁팀, 부서장 영역
 		if(team.equals("A") || team.equals("B") || team.equals("C")) {
 			String ev = "AA";
@@ -472,13 +416,14 @@ public class EvaluationController {
 			map.put("d2",ev);
 		}
 		List<EvaluationVo> list1 = new ArrayList<EvaluationVo>();
-		list1 = evaluationService.evlist(map);
+		list1 = demoService.evlist(map);
 		
 		
 		mv.addObject("evf", list1);
-		mv.setViewName("e/form");
+		mv.setViewName("demo/form");
 		return mv;
 	}
+	
 	// 평가 후 Db저장
 	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
 	public String fromAction(AnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
@@ -496,15 +441,15 @@ public class EvaluationController {
 			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32
 			) throws Exception {
 		session.getAttribute("loginMember");
-		md.addAttribute("info", evaluationService.info(infoidx));
-		md.addAttribute("target", evaluationService.info(targetidx));
+		md.addAttribute("info", demoService.info(infoidx));
+		md.addAttribute("target", demoService.info(targetidx));
 		md.addAttribute("team", team);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		
-		String u1 = evaluationService.info(infoidx).getHspt_name();		// 기관명
-		String u2 = evaluationService.info(infoidx).getId();				// 평가자 사번
-		String t1 = evaluationService.info(targetidx).getId();			// 평가대상자 사번
+		String u1 = demoService.info(infoidx).getHspt_name();		// 기관명
+		String u2 = demoService.info(infoidx).getId();				// 평가자 사번
+		String t1 = demoService.info(targetidx).getId();			// 평가대상자 사번
 	
 
 		// 평가 시작하면 whether 테이블에 평가자와 평가 대상자 , 진행 여부 insert
@@ -596,29 +541,29 @@ public class EvaluationController {
 		
 		// DB 전송 전 중복 체크
 		
-		int selectflag = evaluationService.formcheck(map2);
+		int selectflag = demoService.formcheck(map2);
 		System.out.println(selectflag);
 		if (selectflag == 1) {
 			request.setAttribute("msg", "이미 평가가 완료된 대상입니다.");
-			request.setAttribute("url", "e/Info/"+infoidx);
+			request.setAttribute("url", "demo/Info/"+infoidx);
 			return "alert5";
 		}else {
-			int flag = evaluationService.frominsert(map);
+			int flag = demoService.forminsert(map);
 			 ///db 전송 이후 
 			if(flag == 1) {
 				request.setAttribute("msg", "평가가 완료되었습니다.");
-				request.setAttribute("url", "e/FormEnd/"+infoidx+"/"+targetidx);
+				request.setAttribute("url", "demo/FormEnd/"+infoidx+"/"+targetidx);
 				// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
 				// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
 				// 검색 후 기록이 없으면 insert, 
-				int flag2 = evaluationService.whether(map2);
+				int flag2 = demoService.whether(map2);
 				// 평가 진행후 
 				System.out.println("평가 진행 여부 table insert  :  "+flag2);
 				return "alert5";
 			} else {
 
 				request.setAttribute("msg", "오류발생");
-				request.setAttribute("url", "e/Info/"+infoidx);
+				request.setAttribute("url", "demo/Info/"+infoidx);
 				return "alert5";
 			}
 		}
@@ -627,102 +572,63 @@ public class EvaluationController {
 		
 	}
 	
-
 	@RequestMapping(value="FormEnd/{idx}/{idx2}")
 	public ModelAndView formend( @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, HttpSession session, ModelAndView mv) throws Exception {
 		
 		session.getAttribute("loginMember");
-		mv.addObject("info", evaluationService.info(infoidx));
+		mv.addObject("info", demoService.info(infoidx));
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println( evaluationService.info(infoidx));
-		System.out.println( evaluationService.info(targetidx));
+		System.out.println( demoService.info(infoidx));
+		System.out.println( demoService.info(targetidx));
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-		mv.addObject("target", evaluationService.info(targetidx));
-		Map<String, Object> map = new HashMap<String, Object>();
+		mv.addObject("target", demoService.info(targetidx));
 		
-		mv.setViewName("e/formend");
+		mv.setViewName("demo/formend");
 		return mv;
 	}
 	
+
 	@RequestMapping(value="admin")
 	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users(map);
-		List<UsersVo> list1 = evaluationService.users1(map);
-		List<UsersVo> list2 = evaluationService.users2(map);
-		List<UsersVo> list3 = evaluationService.users3(map);
-		List<UsersVo> listpwd1 = evaluationService.users1pwd(map);
-		List<UsersVo> listpwd2 = evaluationService.users2pwd(map);
-		List<UsersVo> listpwd3 = evaluationService.users3pwd(map);
-		List<LoginlogVo> log = evaluationService.log(map);
-		List<UserPh> ph = evaluationService.ph(map);
+		List<UsersVo> list = demoService.users(map);
 		
 		
-		int hspt1 = evaluationService.hsptselect1(map);
-		int hspt2 = evaluationService.hsptselect2(map);
-		int hspt3 = evaluationService.hsptselect3(map);
+		int hspt1 = demoService.hsptselect1(map);
 
-		int hsptpwdselect1 = evaluationService.hsptpwdselect1(map);
-		int hsptpwdselect2 = evaluationService.hsptpwdselect2(map);
-		int hsptpwdselect3 = evaluationService.hsptpwdselect3(map);
+		int hsptpwdselect1 = demoService.hsptpwdselect1(map);
 		
 		mv.addObject("users", list);
 		request.setAttribute("users", list);
-		mv.addObject("users1", list1);
-		request.setAttribute("users1", list1);
-		mv.addObject("users2", list2);
-		request.setAttribute("users2", list2);
-		mv.addObject("users3", list3);
-		request.setAttribute("users3", list3);
 		
-		mv.addObject("userspwd1", listpwd1);
-		request.setAttribute("userspwd1", listpwd1);
-		mv.addObject("userspwd2", listpwd2);
-		request.setAttribute("users2pwd", listpwd2);
-		mv.addObject("userspwd3", listpwd3);
-		request.setAttribute("userspwd3", listpwd3);
 		
-		mv.addObject("log", log);
-		request.setAttribute("log",log);
-		mv.addObject("ph",ph);
-		request.setAttribute("ph", ph);
 		mv.addObject("h1", hspt1);
-		mv.addObject("h2", hspt2);
-		mv.addObject("h3", hspt3);
 		mv.addObject("p1", hsptpwdselect1);
-		mv.addObject("p2", hsptpwdselect2);
-		mv.addObject("p3", hsptpwdselect3);
 		request.setAttribute("h1", hspt1);
-		request.setAttribute("h2", hspt2);
-		request.setAttribute("h3", hspt3);
 		request.setAttribute("p1", hsptpwdselect1);
-		request.setAttribute("p2", hsptpwdselect2);
-		request.setAttribute("p3", hsptpwdselect3);
 		
-		mv.setViewName("e/admin");
+		mv.setViewName("demo/admin");
 		return mv;
 	}
-	
-
 	
 	@RequestMapping(value="pwdreset/{id}")
 	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		int flag = evaluationService.pwdreset(map);
+		int flag = demoService.pwdreset(map);
 		
 		if(flag == 1) {
 			request.setAttribute("msg", "초기화 완료");
-			request.setAttribute("url", "e/admin");
+			request.setAttribute("url", "demo/admin");
 			return "alert";
 		}else {
 			request.setAttribute("msg", "오류발생");
 			return "alert";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="pwdreset1/{id}")
 	public AjaxResponse6 pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
@@ -730,7 +636,7 @@ public class EvaluationController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		int flag = evaluationService.pwdreset1(map);
+		int flag = demoService.pwdreset1(map);
 		
 		if(flag == 1) {
 			response.setResult("Y");
@@ -747,7 +653,7 @@ public class EvaluationController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		int flag = evaluationService.pwdreset2(map);
+		int flag = demoService.pwdreset2(map);
 		
 		if(flag == 1) {
 			response.setResult("Y");
@@ -764,7 +670,7 @@ public class EvaluationController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		int flag = evaluationService.pwdreset3(map);
+		int flag = demoService.pwdreset3(map);
 		
 		if(flag == 1) {
 			response.setResult("Y");
@@ -781,11 +687,11 @@ public class EvaluationController {
 		AjaxResponse4 response = new AjaxResponse4();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users(map);
+		List<UsersVo> list = demoService.users(map);
 		request.setAttribute("users", list);
 		response.setUsersall(list);
 
-		List<UserPh> ph = evaluationService.ph(map);
+		List<UserPh> ph = demoService.ph(map);
 		request.setAttribute("ph", ph);
 		response.setUserphList(ph);
 		
@@ -798,14 +704,14 @@ public class EvaluationController {
 		AjaxResponse5 response = new AjaxResponse5();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users1(map);
-		List<UsersVo> listpwd1 = evaluationService.users1pwd(map);
+		List<UsersVo> list = demoService.users1(map);
+		List<UsersVo> listpwd1 = demoService.users1pwd(map);
 		request.setAttribute("userspwd1", listpwd1);
 		request.setAttribute("users", list);
 		response.setUsers(list);
 		response.setListpwd1(listpwd1);
 		
-		List<UserPh> ph = evaluationService.ph(map);
+		List<UserPh> ph = demoService.ph(map);
 		request.setAttribute("ph", ph);
 		response.setUserphList(ph);
 		
@@ -818,11 +724,11 @@ public class EvaluationController {
 		AjaxResponse5 response = new AjaxResponse5();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users2(map);
+		List<UsersVo> list = demoService.users2(map);
 		request.setAttribute("users", list);
 		response.setUsers(list);
 		
-		List<UserPh> ph = evaluationService.ph(map);
+		List<UserPh> ph = demoService.ph(map);
 		request.setAttribute("ph", ph);
 		response.setUserphList(ph);
 		
@@ -835,11 +741,11 @@ public class EvaluationController {
 		AjaxResponse5 response = new AjaxResponse5();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users3(map);
+		List<UsersVo> list = demoService.users3(map);
 		request.setAttribute("users", list);
 		response.setUsers(list);
 		
-		List<UserPh> ph = evaluationService.ph(map);
+		List<UserPh> ph = demoService.ph(map);
 		request.setAttribute("ph", ph);
 		response.setUserphList(ph);
 		
@@ -854,11 +760,11 @@ public class EvaluationController {
 		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users(map);
-		List<TargetVo> target = evaluationService.target(map);
-		List<AnswerVo> answer = evaluationService.answerselect(map);
-		int targetsum = evaluationService.targetsum(map);
-		int answersum = evaluationService.answersum(map);
+		List<UsersVo> list = demoService.users(map);
+		List<TargetVo> target = demoService.target(map);
+		List<AnswerVo> answer = demoService.answerselect(map);
+		int targetsum = demoService.targetsum(map);
+		int answersum = demoService.answersum(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
@@ -875,11 +781,11 @@ public class EvaluationController {
 		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users1(map);
-		List<TargetVo> target = evaluationService.target(map);
-		List<AnswerVo> answer = evaluationService.answerselect(map);
-		int targetsum1 = evaluationService.targetsum1(map);
-		int answersum1 = evaluationService.answersum1(map);
+		List<UsersVo> list = demoService.users1(map);
+		List<TargetVo> target = demoService.target(map);
+		List<AnswerVo> answer = demoService.answerselect(map);
+		int targetsum1 = demoService.targetsum1(map);
+		int answersum1 = demoService.answersum1(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
@@ -895,11 +801,11 @@ public class EvaluationController {
 		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users2(map);
-		List<TargetVo> target = evaluationService.target(map);
-		List<AnswerVo> answer = evaluationService.answerselect(map);
-		int targetsum2 = evaluationService.targetsum2(map);
-		int answersum2 = evaluationService.answersum2(map);
+		List<UsersVo> list = demoService.users2(map);
+		List<TargetVo> target = demoService.target(map);
+		List<AnswerVo> answer = demoService.answerselect(map);
+		int targetsum2 = demoService.targetsum2(map);
+		int answersum2 = demoService.answersum2(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
@@ -915,11 +821,11 @@ public class EvaluationController {
 		AjaxResponse9 response = new AjaxResponse9();
 		response.setResult("Y");		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users3(map);
-		List<TargetVo> target = evaluationService.target(map);
-		List<AnswerVo> answer = evaluationService.answerselect(map);
-		int targetsum3 = evaluationService.targetsum3(map);
-		int answersum3 = evaluationService.answersum3(map);
+		List<UsersVo> list = demoService.users3(map);
+		List<TargetVo> target = demoService.target(map);
+		List<AnswerVo> answer = demoService.answerselect(map);
+		int targetsum3 = demoService.targetsum3(map);
+		int answersum3 = demoService.answersum3(map);
 		response.setUsersall(list);
 		response.setTarget(target);
 		response.setAnswer(answer);
@@ -928,323 +834,5 @@ public class EvaluationController {
 		
 		return response;
 	}
-	
-	
-	
-	@RequestMapping(value="test1")
-	public ModelAndView per1_(ModelAndView mv, HttpSession session, HttpServletRequest request) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users(map);
-		List<TargetVo> list1 = evaluationService.target(map);
-		List<AnswerVo> list2 = evaluationService.answerselect(map);
-//		System.out.println(list2);
-		mv.addObject("list",list);
-		mv.addObject("target", list1);
-		mv.addObject("answer", list2);
-//		System.out.println(list1);
-		mv.setViewName("e/per1");
-		return mv;
-	}
-	
-	@RequestMapping(value="test2")
-	public ModelAndView test(ModelAndView mv, HttpSession session, HttpServletRequest request) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<UsersVo> list = evaluationService.users(map);
-		List<TargetVo> list1 = evaluationService.target(map);
-		List<AnswerVo> list2 = evaluationService.answerselect(map);
-//		System.out.println(list2);
-		mv.addObject("list",list);
-		mv.addObject("target", list1);
-		mv.addObject("answer", list2);
-//		System.out.println(list1);
-		mv.setViewName("e/test");
-		return mv;
-	}
-	@RequestMapping(value="Mypage/{idx}")
-	public ModelAndView mypage(UsersVo vo, UserPh ph, @PathVariable("idx") Integer idx, ModelAndView mv) throws Exception {
-		mv.addObject("info", evaluationService.info(idx));
-		String id = evaluationService.info(idx).getId();
-		mv.addObject("ph", evaluationService.phselect(id));
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		System.out.println(evaluationService.phselect(id));
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		mv.setViewName("t/Mypage");
-		return mv;
-	}
-	@ResponseBody
-	@RequestMapping(value="sub/{idx}")
-	public AjaxResponse13 sub(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
-		AjaxResponse13 response = new AjaxResponse13();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", idx);
-		evaluationService.my(vo);
-		String subcode = evaluationService.my(vo).getHspt_subcode();
-		String hname = evaluationService.my(vo).getHspt_name();
-		map.put("hname", hname);
-		map.put("subcode", subcode);
-		int subcnt = evaluationService.subcnt(map);
-		List<UsersVo> list = evaluationService.sub(map);
-		List<AnswerVo> list2 = evaluationService.subanswerlist(map);
-		System.out.println("");
-//		System.out.println(evaluationService.my(vo));
-		System.out.println("");
-		response.setUsers(evaluationService.my(vo));
-		System.out.println(subcnt);
-		response.setSubcnt(subcnt);
-		response.setList(list);
-		response.setList2(list2);
-		System.out.println(list);
-		System.out.println(list2);
-		return response;
-	}
-	@ResponseBody
-	@RequestMapping(value="s/{idx}")
-	public AjaxResponse13 s(@RequestParam("subscore") double subscore,  UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
-		AjaxResponse13 response = new AjaxResponse13();
-		
-		
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", idx);
-		evaluationService.my(vo);
-		String id = evaluationService.my(vo).getId();
-		String subcode = evaluationService.my(vo).getHspt_subcode();
-		String hname = evaluationService.my(vo).getHspt_name();
-		map.put("hname", hname);
-		map.put("subcode", subcode);
-		map.put("id", id);
-		// 해당 id의 직원이 평가를 받은 리스트
-		List<AnswerVo> list2 = evaluationService.user(map);
-		List<UsersVo> list = evaluationService.sub(map);
-		int subcnt = evaluationService.subcnt(map);
-		System.out.println("");
-		System.out.println(evaluationService.my(vo));
-		System.out.println("");
-		response.setUsers(evaluationService.my(vo));
-		System.out.println(subcnt);
-		response.setSubcnt(subcnt);
-		response.setList(list);
-//		System.out.println(list2);
-		response.setList2(list2);
-		response.setSubscore(subscore);
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="k/{idx}")
-	public AjaxResponse13 k(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
-		AjaxResponse13 response = new AjaxResponse13();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", idx);
-		evaluationService.my(vo);
-		String hname = evaluationService.my(vo).getHspt_name();
-		map.put("hname", hname);
-		response.setUsers(evaluationService.my(vo));
-		// 경혁팀원 수
-		// 경혁팀 리스트
-		List<UsersVo> list3 = evaluationService.klist(map);
-		// 경혁팀간 평가 리스트
-		List<UsersVo> list = evaluationService.k(map);
-		// 진료부 -> 경혁팀 평가 리스트
-		List<UsersVo> klist2 = evaluationService.klistall(map);
-		// 진료부 인원
-		
-		int kcnt = evaluationService.kcnt(map);
-		int kscnt = evaluationService.kscnt(map);
-		response.setList(list);
-		response.setKcnt(kcnt);
-		response.setList3(list3);
-		response.setList4(klist2);
-		response.setKscnt(kscnt);
-		System.out.println(list3);
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="ks/{idx}")
-	public AjaxResponse13 ks(@RequestParam("subscore") double subscore, @RequestParam("ksubscore") double ksubscore,  UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
-		AjaxResponse13 response = new AjaxResponse13();
-		
-		
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", idx);
-		evaluationService.my(vo);
-		String id = evaluationService.my(vo).getId();
-		String subcode = evaluationService.my(vo).getHspt_subcode();
-		String hname = evaluationService.my(vo).getHspt_name();
-		map.put("hname", hname);
-		map.put("subcode", subcode);
-		map.put("id", id);
-		// 해당 id의 직원이 평가를 받은 리스트
-		List<AnswerVo> list2 = evaluationService.kuser(map);
-		// 부서원 리스트
-		List<UsersVo> list = evaluationService.sub(map);
-		// 부서원 수
-		int subcnt = evaluationService.subcnt(map);
-		// 진료부 -> 경혁팀 평가 리스트
-		List<UsersVo> klist2 = evaluationService.klist2(map);
-		System.out.println("");
-		System.out.println(evaluationService.my(vo));
-		System.out.println("");
-		response.setUsers(evaluationService.my(vo));
-		System.out.println(subcnt);
-		response.setSubcnt(subcnt);
-		response.setList(list);
-//		System.out.println(list2);
-		response.setList2(list2);
-		response.setList4(klist2);
-		response.setSubscore(subscore);
-		response.setKsubscore(ksubscore);
-		return response;
-	}
-	@ResponseBody
-	@RequestMapping(value="a/{idx}")
-	public AjaxResponse13 a(UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception {
-		AjaxResponse13 response = new AjaxResponse13();
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", idx);
-		evaluationService.my(vo);
-		String subcode = evaluationService.my(vo).getHspt_subcode();
-		String hname = evaluationService.my(vo).getHspt_name();
-		map.put("hname", hname);
-		map.put("subcode", subcode);
-		// 진료부 인원 수
-		// 양방/ 한방으로 나뉠 수도 있으니 A0%로 불러옴
-		int subcnt = evaluationService.subcnt(map);
-		// 해당 진료팀의 부서원 리스트
-		List<UsersVo> list = evaluationService.sub(map);
-		// 해당 진료팀 평가 리스트
-		List<AnswerVo> list2 = evaluationService.alistall(map);
-		// 경혁팀 인원 수
-		int vmember = evaluationService.vmember(map);
-		System.out.println("");
-//		System.out.println(evaluationService.my(vo));
-		System.out.println("");
-		response.setUsers(evaluationService.my(vo));
-		response.setList(list);
-		response.setList2(list2);
-		response.setSubcnt(subcnt);
-		response.setVmember(vmember);
-		System.out.println(list);
-		System.out.println(list2);
-		return response;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="as/{idx}")
-	public AjaxResponse13 as(@RequestParam("subscore") double subscore,@RequestParam("ksubscore") double ksubscore,  UsersVo vo, HttpSession session, HttpServletRequest request, @PathVariable("idx") Integer idx) throws Exception  {
-		AjaxResponse13 response = new AjaxResponse13();
-		
-		
-		response.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("idx", idx);
-		evaluationService.my(vo);
-		String id = evaluationService.my(vo).getId();
-		String subcode = evaluationService.my(vo).getHspt_subcode();
-		String hname = evaluationService.my(vo).getHspt_name();
-		map.put("hname", hname);
-		map.put("subcode", subcode);
-		map.put("id", id);
-		// 해당 id의 직원이 평가를 받은 리스트
-		List<AnswerVo> list2 = evaluationService.kuser(map);
-		// 부서원 리스트
-		List<UsersVo> list = evaluationService.sub(map);
-		// 부서원 수
-		int subcnt = evaluationService.subcnt(map);
-		// 경혁팀 -> 진료부 평가 리스트
-		List<AnswerVo> klist = evaluationService.alistall(map);
-		System.out.println("");
-		System.out.println(evaluationService.my(vo));
-		System.out.println("");
-		response.setUsers(evaluationService.my(vo));
-		System.out.println(subcnt);
-		response.setSubcnt(subcnt);
-		response.setList(list);
-		response.setList5(klist);
-//		System.out.println(list2);
-		response.setList2(list2);
-		response.setSubscore(subscore);
-		response.setKsubscore(ksubscore);
-		return response;
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="setting")
-	public AjaxResponse14 setting(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse14 res = new AjaxResponse14();
-		res.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<SubVo> sub = evaluationService.subop(map);
-		List<UserVo> user = evaluationService.userall(map);
-		List<UseroptionVo> userop = evaluationService.userop(map);
-		
-		res.setSub(sub);
-		res.setUser(user);
-		res.setUserop(userop);
-
-		return res;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="set2")
-	public AjaxResponse14 set2(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse14 res = new AjaxResponse14();
-		res.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<SubVo> sub = evaluationService.subop(map);
-		List<UserVo> user = evaluationService.userall(map);
-		List<UseroptionVo> userop = evaluationService.userop(map);
-		
-		res.setSub(sub);
-		res.setUser(user);
-		res.setUserop(userop);
-
-		return res;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="add")
-	public AjaxResponse14 add(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse14 res = new AjaxResponse14();
-		res.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<SubVo> sub = evaluationService.subop(map);
-		List<UserVo> user = evaluationService.userall(map);
-		List<UseroptionVo> userop = evaluationService.userop(map);
-		
-		res.setSub(sub);
-		res.setUser(user);
-		res.setUserop(userop);
-
-		return res;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="addcol")
-	public AjaxResponse14 addcol(HttpSession session, HttpServletRequest request) throws Exception {
-		AjaxResponse14 res = new AjaxResponse14();
-		res.setResult("Y");		
-		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("col", );
-		List<SubVo> sub = evaluationService.subop(map);
-		List<UserVo> user = evaluationService.userall(map);
-		List<UseroptionVo> userop = evaluationService.userop(map);
-		
-		res.setSub(sub);
-		res.setUser(user);
-		res.setUserop(userop);
-
-		return res;
-	}
-	
-	
-	
-	
 	
 }

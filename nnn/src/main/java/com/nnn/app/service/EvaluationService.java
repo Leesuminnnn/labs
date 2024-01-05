@@ -301,6 +301,10 @@ public class EvaluationService {
 		return evaluationDao.userop(map);
 	}
 
+	public int vmember(Map<String, Object> map) {
+		return evaluationDao.vmember(map);
+	}
+
 	
 	
 }

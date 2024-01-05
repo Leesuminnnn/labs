@@ -342,6 +342,11 @@ public class EvaluationDao {
 //		return sqlSession3.selectList(MAPPER+".userop", map);
 	}
 
+	public int vmember(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".vmember", map);
+		return sqlSession3.selectOne(MAPPER+".vmember", map);
+	}
+
 
 
 }

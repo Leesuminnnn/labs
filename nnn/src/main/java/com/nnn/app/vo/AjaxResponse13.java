@@ -16,11 +16,12 @@ public class AjaxResponse13 {
 	private List<AnswerVo> list2;
 	private List<UsersVo> list3;
 	private List<UsersVo> list4;
+	private List<AnswerVo> list5;
 	private double subscore;
 	private double ksubscore;
 	private int kcnt;
 	private int kscnt;
-	
+	private int vmember;
 	
 	
 	
