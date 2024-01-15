@@ -43,6 +43,9 @@
 		<typeAlias alias="cwhether" type="com.nnn.app.vo.CWhetherVo"/>
 		<typeAlias alias="canswer" type="com.nnn.app.vo.CAnswerVo"/>
 		
+		<!-- 평가 후 점수 -->
+		<typeAlias alias="score" type="com.nnn.app.vo.ScoreVo"/>
+		
 		<!-- 설정관리? -->
 		<typeAlias alias="user" type="com.nnn.app.vo.UserVo"/>
 		<typeAlias alias="option" type="com.nnn.app.vo.UseroptionVo"/>

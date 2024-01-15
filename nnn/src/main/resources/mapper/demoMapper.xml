@@ -2916,7 +2916,7 @@
 	
 	<!-- 리스트에서 평가 완료 확인 -->
 	<select id="whetherselect" resultType="map" parameterType="map">
-		select * from demo_whether where d1 = #{idx}
+		select * from demo_whether where d1 = #{idx} and del_yn = 'N'
 		
 	</select>
 	
@@ -2936,18 +2936,28 @@
 		select * from evaluation where d2 = #{d2}
 	</select>
 	
-	<insert id="forminsert" parameterType="answer">
+	<insert id="forminsert" parameterType="canswer">
 		insert into demo_answer (u1, u2, t1, team, d1, ev)
 		values (
 		#{u1}, #{u2}, #{t1}, #{team}, #{d1}, #{ev})
 	</insert>
 	
+	<!-- 평가 점수 -->
+	<insert id="scoreInsert" parameterType="score">
+		insert into demo_score (col1, col2, col3)
+		values (
+		#{col1}, #{col2}, #{score}
+		)
+	</insert>
+	<select id="scoreSelect" resultType="score" parameterType="score">
+		select * from demo_score where col1 = #{id} and del_yn = 'N'
+	</select>
+	
 	<!--  평가 완료 표시  -->
-	<insert id="whether" parameterType="whether">
+	<insert id="whether" parameterType="cwhether">
 		insert into demo_whether (d1, d2, d3, ev, team)
 		values (#{d1}, #{d2}, "평가완료", #{ev}, #{team})
 	</insert>
-	
 	<select id="users" resultType="map" parameterType="map">
 		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
 		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
@@ -2996,11 +3006,23 @@
 	
 	<!-- 평가 완료 중복 체크 -->
 	<select id="formcheck" resultType="int" parameterType="map">
-		select count(*) from demo_whether where d1 = #{d1} and d2 = #{d2} and team = #{team} 
+		select count(*) from demo_whether where d1 = #{d1} and d2 = #{d2} and team = #{team} and team = #{team} and del_yn = 'N'
+	</select>
+	<!-- 평가 진행한 답안 불러오기 -->
+	<select id="answerSelect" resultType="canswer" parameterType="map">
+	select * from demo_answer where u2 = #{u2} and t1 = #{t1} order by idx desc limit 1;
 	</select>
 	
-	
-	
+	<!-- 평가 수정하기 -->
+	<update id="whetherUpdate" parameterType="cwhether">
+		update demo_whether set del_yn = 'Y', d3 = '수정완료' where d1 = #{d1} and d2 = #{d2} and ev = #{ev} and team = #{team} and del_yn = 'N'
+	</update>
+	<update id="scoreUpdate" parameterType="score">
+		update demo_score set del_yn = 'Y' where col1 = #{col1} and col2 = #{col2} and del_yn = 'N'
+	</update>
+	<update id="formUpdate" parameterType="canswer">
+		update demo_answer set del_yn = 'Y' where u2 = #{u2} and t1 = #{t1} and team = #{team} and ev = #{ev} and del_yn = 'N'
+	</update>
 	
 	
 	

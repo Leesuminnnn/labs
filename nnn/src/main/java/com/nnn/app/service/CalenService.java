@@ -14,7 +14,6 @@ import com.nnn.app.vo.CalendarVo;
 public class CalenService {
 	
 	private CalenDao calenDao;
-	
 	@Autowired
 	public CalenService(CalenDao calenDao) {
 		this.calenDao = calenDao;
@@ -24,6 +23,9 @@ public class CalenService {
 		return calenDao.calenList();
 	}
 
+	public List<CalendarVo> calenlist2() {
+		return calenDao.calenList2();
+	}
 	public int caleninput(Map<String, Object> map) {
 		int result = 0; // 글쓰기 실패
 		
@@ -57,4 +59,9 @@ public class CalenService {
 		return result;
 		
 	}
+
+	public List<CalendarVo> selectCalendar(Map<String, Object> map) {
+		return calenDao.selectCalendar(map);
+	}
+
 }

@@ -9,12 +9,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.AnswerVo;
+import com.nnn.app.vo.CAnswerVo;
+import com.nnn.app.vo.CWhetherVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.ScoreVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
-import com.nnn.app.vo.WhetherVo;
 
 @Repository
 public class DemoDao {
@@ -64,7 +66,7 @@ public class DemoDao {
 //		return sqlSession3.selectList(MAPPER+".evaluationtarget", map);
 	}
 
-	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+	public List<CWhetherVo> whetherSelect(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".whetherselect", map);
 //		return sqlSession3.selectList(MAPPER+".whetherselect", map);
 	}
@@ -104,6 +106,11 @@ public class DemoDao {
 //		return sqlSession3.insert(MAPPER+".whether", map);
 	}
 
+	public int whetherUpdate(Map<String, Object> map) {
+		return sqlSession1.update(MAPPER+".whetherUpdate", map);
+//		return sqlSession3.update(MAPPER+".whetherUpdate", map);
+	}
+	
 	public List<UsersVo> users(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".users", map);
 //		return sqlSession3.selectList(MAPPER+".users", map);
@@ -189,7 +196,7 @@ public class DemoDao {
 //		return sqlSession3.selectList(MAPPER+".target", map);
 	}
 
-	public List<AnswerVo> answerselect(Map<String, Object> map) {
+	public List<CAnswerVo> answerselect(Map<String, Object> map) {
 		return sqlSession1.selectList(MAPPER+".answerselect", map);
 //		return sqlSession3.selectList(MAPPER+".answerselect", map);
 	}
@@ -232,6 +239,31 @@ public class DemoDao {
 	public int answersum3(Map<String, Object> map) {
 		return sqlSession1.selectOne(MAPPER+".answersum3", map);
 //		return sqlSession3.selectOne(MAPPER+".answersum3", map);
+	}
+
+	public int scoreInsert(Map<String, Object> map) {
+		return sqlSession1.insert(MAPPER+".scoreInsert", map);
+//		return sqlSession3.insert(MAPPER+".scoreInsert", map);
+	}
+
+	public List<ScoreVo> scoreSelect(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".scoreSelect", map);
+//		return sqlSession3.selectList(MAPPER+".scoreSelect", map);
+	}
+
+	public CAnswerVo answerSelect(Map<String, Object> map) {
+		return sqlSession1.selectOne(MAPPER+".answerSelect", map);
+//		return sqlSession3.selectOne(MAPPER+".answerSelect", map);
+	}
+
+	public int formUpdate(Map<String, Object> map) {
+		return sqlSession1.update(MAPPER+".formUpdate", map);
+//		return sqlSession3.update(MAPPER+".formUpdate", map);
+	}
+
+	public int scoreUpdate(Map<String, Object> map) {
+		return sqlSession1.update(MAPPER+".scoreUpdate", map);
+//		return sqlSession3.update(MAPPER+".scoreUpdate", map);
 	}
 	
 	

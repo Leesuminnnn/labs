@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.DemoDao;
 import com.nnn.app.vo.AnswerVo;
+import com.nnn.app.vo.CAnswerVo;
+import com.nnn.app.vo.CWhetherVo;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.ScoreVo;
 import com.nnn.app.vo.TargetVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
@@ -57,7 +60,7 @@ public class DemoService {
 		return demoDao.evaluationtarget(map);
 	}
 
-	public List<WhetherVo> whetherSelect(Map<String, Object> map) {
+	public List<CWhetherVo> whetherSelect(Map<String, Object> map) {
 		return demoDao.whetherSelect(map);
 	}
 
@@ -103,6 +106,13 @@ public class DemoService {
 		int flag = 0;
 		
 		flag = demoDao.whether(map);
+		
+		return flag;
+	}
+	public int whetherUpdate(Map<String, Object> map) {
+		int flag = 0;
+		
+		flag = demoDao.whetherUpdate(map);
 		
 		return flag;
 	}
@@ -186,7 +196,7 @@ public class DemoService {
 		return demoDao.target(map);
 	}
 
-	public List<AnswerVo> answerselect(Map<String, Object> map) {
+	public List<CAnswerVo> answerselect(Map<String, Object> map) {
 		return demoDao.answerselect(map);
 	}
 
@@ -220,5 +230,25 @@ public class DemoService {
 
 	public int answersum3(Map<String, Object> map) {
 		return demoDao.answersum3(map);
+	}
+
+	public int scoreInsert(Map<String, Object> map) {
+		return demoDao.scoreInsert(map);
+	}
+
+	public List<ScoreVo> scoreSelect(Map<String, Object> map) {
+		return demoDao.scoreSelect(map);
+	}
+
+	public CAnswerVo answerSelect(Map<String, Object> map) {
+		return demoDao.answerSelect(map);
+	}
+
+	public int formUpdate(Map<String, Object> map) {
+		return demoDao.formUpdate(map);
+	}
+
+	public int scoreUpdate(Map<String, Object> map) {
+		return demoDao.scoreUpdate(map);
 	}
 }

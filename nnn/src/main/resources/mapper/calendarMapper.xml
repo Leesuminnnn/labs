@@ -15,13 +15,24 @@
 		TEXTCOLOR,
 		BACKGROUNDCOLOR,
 		BORDERCOLOR,
-		DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') regdate
+		DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') regdate,
+		starttime,
+		endtime,
+		startdate,
+		enddate
 		FROM csworktools.calendar
+	</select>
+	<select id="calendarTime" resultType="calen">
+		select starttime, endtime, start, end from calendar;
 	</select>
 	<insert id="input" parameterType="calen" >
 	<![CDATA[
-		INSERT INTO csworktools.calendar (title, content, start, end, allDay, textColor, backgroundColor, borderColor, writer, regdate, run, agency, prepare, patientName, patientRoom, patientNumber)
-		SELECT #{title}, #{content}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy', #{writer}, now(), #{run}, #{agency}, #{prepare}, #{patientName}, #{patientRoom}, #{patientNumber}
+		INSERT INTO csworktools.calendar (
+			title, content, start, end, allDay, textColor, backgroundColor, borderColor, writer, regdate, run, agency, prepare, patientName, patientRoom, patientNumber,
+			starttime, endtime, startdate, enddate
+			)
+		SELECT #{title}, #{content}, #{start}, #{end}, #{allday}, 'yellow', 'navy', 'navy', #{writer}, now(), #{run}, #{agency}, #{prepare}, #{patientName}, #{patientRoom}, #{patientNumber},
+		#{starttime}, #{endtime}, #{startdate}, #{enddate}
 		FROM DUAL
 		WHERE NOT EXISTS (
 		    SELECT
@@ -35,13 +46,14 @@
 		);
 		]]>
 	</insert>
-	
+	<select id="selectCalendar" resultType="calen">
+		select starttime, startdate, endtime, enddate from calendar where startdate = #{startStr}	
+	</select>
 	<select id="calenselect" resultType="int">
 	select count(*) from csworktools.calendar where start = #{start}
 	<!--  DATE_FORMAT(#{start1}, '%Y-%m-%d %H:%i:%s') -->
 	
 	</select>
-	
 	<delete id="calendelete">
 	
 	DELETE FROM	csworktools.calendar WHERE id = #{id};

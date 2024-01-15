@@ -3,7 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.lang.*" %>
 <%@ page import="com.nnn.app.vo.CalendarVo" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
 <%List<CalendarVo> calendarList = (List<CalendarVo>) request.getAttribute("calendarList");%>
@@ -251,7 +252,10 @@ System.out.println("jsp :: "+sessionNm);
 				<option value="18:00">18:00</option>
 				<option value="18:30">18:30</option>
 			</select>
-		  </div>
+		  </div><%-- 
+		  <c:forEach items="${list }" var="l">
+		  	${fn:substring(l.start,0,10) }
+		  </c:forEach> --%>
 		   <div class="form-group">
 			<label for="end">종료시간:</label>
 			<select class="form-control" id="end">
@@ -373,6 +377,7 @@ System.out.println("jsp :: "+sessionNm);
 
 
 var calendarData = <%= calendarListJson %>;
+  //console.log(calendarData);
   var ceoColor = '#ffc107'; //대표일정 황색
   var regColor = '#343a40';	//일반직원등록 흑색
   var approvalColor = '#28a745'; //승인 녹색
@@ -393,6 +398,7 @@ var calendarData = <%= calendarListJson %>;
   
   var checkbox4 = document.getElementById('checkbox4');
   
+  var titletext = "";
   checkbox4.addEventListener('change', function() {
     if (checkbox4.checked) {
 //		prepareInput.removeAttribute('disabled');
@@ -448,15 +454,16 @@ var calendarData = <%= calendarListJson %>;
     calendar = new FullCalendar.Calendar(calendarEl, {
 		
       headerToolbar: {
-        left: 'prev,next today',
+        left: 'prevYear,prev,next,nextYear today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        right: 'timeGridDay,dayGridMonth,timeGridWeek,listMonth'
       },
       locale: 'ko',
 	  slotMinTime: '09:00',
       slotMaxTime: '19:00',
       initialDate: todayStr,
       navLinks: true, // can click day/week names to navigate views
+      fixedWeekCount: false,		// 31일 이후 다음주 까지 보이는 현상 제거
       selectable: true,
       selectMirror: true,
       select: function(arg) {
@@ -473,14 +480,15 @@ var calendarData = <%= calendarListJson %>;
 			arg.event.setEnd(end);	
 		}
 	  },
-	  eventDrop: function(arg){
+	  eventDrop: false/* function(arg){
 		  insertModalOpen(arg);		//이벤트 드래그드랍 시 모달 호출
-	  },
-	  eventResize: function(arg){
+	  } */,
+	  eventResize: false/* function(arg){
 		  insertModalOpen(arg);		//이벤트 사이즈 변경시(일정변경) 모달 호출
-	  },	
-      editable: true,
+	  } */,	
+      editable: false,
       dayMaxEvents: true, // allow "more" link when too many events 
+      
       events: [
 			//================ ajax데이터 불러올 부분 =====================//
 		  
@@ -489,7 +497,7 @@ var calendarData = <%= calendarListJson %>;
 			{
 				title : '<%=vo.getRun()%> <%=vo.getAgency()%>',
 				content : '<%=vo.getContent()%>',
-				start : '<%=vo.getStart()%>',
+				start : '<%=vo.getStart()%>',	
 				end : '<%=vo.getEnd()%>',
 				writer : '<%=vo.getWriter()%>',
 				id : '<%=vo.getId()%>',
@@ -500,12 +508,20 @@ var calendarData = <%= calendarListJson %>;
 				patientName : '<%=vo.getPatientName()%>',
 				patientRoom : '<%=vo.getPatientRoom()%>',
 				patientNumber : '<%=vo.getPatientNumber()%>',
-				regdate : '<%=vo.getRegdate()%>'
-				
+				regdate : '<%=vo.getRegdate()%>',
+				starttime : '<%=vo.getStarttime() %>',
+				endtime : '<%=vo.getEndtime()%>',
+				startdate: '',
+				enddate: ''
 			},
 			<%}
 		}%>
 	],
+	eventTimeFormat: {
+        hour: 'numeric',
+        minute: '2-digit',
+        meridiem: 'short', // or 'narrow' for abbreviated meridiems
+      },
     });
 
     calendar.render();
@@ -532,6 +548,7 @@ var calendarData = <%= calendarListJson %>;
   }
   //모달초기화
 function initModal(modal, arg){
+	
 //  	var run = $('.modal .' + modal + ' input[name="run"]:checked').val();
   	
   	var runCheckbox = $('.modal .' + modal + ' input[name="run"]:checked');
@@ -545,7 +562,12 @@ function initModal(modal, arg){
   	console.log(runValue);
   	console.log(agencyValue);
   	console.log(prepareValue);
-  	
+  	console.log(g_arg.startStr);
+	var t = document.querySelector(".modal-title");
+	var tv = t.innerHTML
+	var text = "앰뷸런스 운행 예약 요청서";
+	t.innerHTML = text;
+	console.log(t.innerHTML);
 //	var agency = $('.modal .' + modal + ' input[name="agency"]:checked').val();
 //	var prepare = $('.modal .' + modal + ' input[name="prepare"]:checked').val();
 	$('.'+modal+' #title').val('');
@@ -699,7 +721,7 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 //  console.log("ㅇㅇㅇ"+prepare);
   //일정등록창 모달
   function insertModalOpen(arg){
-	 
+	  
 	console.log('<%=sessionId%>');
 	console.log('<%=sessionNm%>');
     if('<%=sessionId%>' == null){
@@ -708,8 +730,18 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 	}
 	
 	g_arg = arg;
+	
+	
 	//값이 있는경우 세팅
 	if(g_arg.event != undefined){
+		console.log(arg.event);
+		console.log(arg.event.startStr.substring(0,10));
+		var t = document.querySelector(".modal-title");
+		var tv = t.innerHTML
+		t.innerHTML = arg.event.startStr.substring(0,10) + " " + tv;
+		console.log(t.innerHTML);
+		/* 
+		console.log(g_arg.startStr.substring(0,10)); */
 		$('.insertModal .deleteBtn').css('display', 'inline');
 		$('.insertModal .writer').css('display', 'inline');
 		$('.insertModal #writer').val(g_arg.event.extendedProps.writer);
@@ -763,6 +795,27 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 		}
 	//신규 이벤트
 	}else{
+		// 등록 창에 선택한 날짜 출력
+//		console.log(g_arg);
+//		console.log(g_arg.startStr.substring(0,10));
+		var t = document.querySelector(".modal-title");
+		var tv = t.innerHTML
+		t.innerHTML = g_arg.startStr.substring(0,10) +" "+ tv;
+//		console.log(t.innerHTML);
+		var thisDate = g_arg.startStr.substring(0,10);
+		console.log(thisDate);
+		titletext = thisDate;
+		var start_select = document.getElementById("start");
+		var options = start_select.options;
+		
+		for (var i = 0; i < options.length; i++) {
+		    var optionValue = options[i].value;
+		    console.log(optionValue);
+		    // JSTL로 출력한 날짜와 옵션의 값이 일치하는지 확인
+		    if (optionValue === thisDate) {
+		        console.log(optionValue); // 해당 날짜를 출력하거나 다른 작업을 수행할 수 있습니다.
+		    }
+		}
 		//month 외 week, day는 시간 값까지 받아와서 값 바인딩 ex)09:00
 		if(g_arg.startStr.length > 10){
 			$('.insertModal #start').val(g_arg.startStr.substr(11, 5));
@@ -775,6 +828,88 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 		$('.insertModal .deleteBtn').css('display', 'none');
 		$('.insertModal .approvalBtn').css('display', 'none');
 		$('.insertModal .rejectBtn').css('display', 'none');
+
+//		 	var calendarList = '${list}';
+//		 	var savedStartTime, savedEndTime;
+//		 	console.log(calendarList);
+//		 	// 여기서 선택한 날짜에 해당하는 데이터를 찾아서 savedStartTime과 savedEndTime을 설정합니다.
+//		 	// 예를 들어, 특정 날짜를 선택했다면 해당 날짜와 일치하는 데이터를 찾아 설정할 수 있습니다.
+//		 	for (var i = 0; i < calendarList.length; i++) {
+//		 		// 원하는 조건에 따라 날짜를 비교하고 startTime과 endTime을 설정합니다.
+//		 		// 예를 들면, 선택한 날짜와 일치하는 데이터를 찾는 로직을 구현합니다.
+//		 		if (!calendarList) {
+//		 			savedStartTime = calendarList[i].starttime;
+//		 			savedEndTime = calendarList[i].endtime;
+//		 			break; // 원하는 조건에 해당하는 첫 번째 데이터만 사용합니다.
+//		 		}
+//		 	}
+
+			// 여기에는 이전에 제공드린 JavaScript 코드를 넣어 시작 시간부터 종료 시간까지의 범위 내의 option을 disabled 상태로 만듭니다.
+			// ...
+			// DB에서 이미 저장된 starttime과 endtime을 가져옵니다.
+			let savedStartTime = "";
+			let savedEndTime = "";
+		    $.ajax({
+		    	url: '${pageContext.request.contextPath}/a/selectCalendar/'+thisDate,
+		    	type: 'GET',
+		    	dataType: 'json',
+		    	data: {
+		    		startStr : thisDate
+		    	},
+		    	success: function(res) {
+		    		if (res.result === "Y") {
+		    			var s = res.selectCalendar;
+		    			
+		    			s.forEach(function (c) {
+		    				savedStartTime = c.starttime;
+		    				savedEndTime = c.endtime;
+		    				// AJAX 요청이 완료된 후에 변수를 사용하십시오.
+		    				useSavedTimes();
+
+		    			});
+		    		}
+		    	}
+		    });
+		 // savedStartTime 및 savedEndTime을 사용하는 함수
+		    function useSavedTimes() {
+		        console.log("savedStartTime:", savedStartTime);
+		        console.log("savedEndTime:", savedEndTime);
+		        // 이곳에서 다른 로직을 처리할 수 있습니다.
+		     // 모든 option 요소를 선택합니다.
+			    const startOptions = document.getElementById("start").querySelectorAll("option");
+			    const endOptions = document.getElementById("end").querySelectorAll("option");
+
+			    let disableRange = false;
+
+			    // start select 박스의 option을 순회하면서 시작 시간부터 종료 시간까지의 option을 disabled로 설정합니다.
+			    startOptions.forEach(function(option) {
+			        if (option.value === savedStartTime) {
+			            disableRange = true;
+			        }
+			        if (disableRange) {
+			            option.disabled = true;
+			        }
+			        if (option.value === savedEndTime) {
+			            disableRange = false;  // 종료 시간까지 포함하도록 false로 변경
+			        }
+			    });
+
+			    // end select 박스의 option을 순회하면서 시작 시간부터 종료 시간까지의 option을 disabled로 설정합니다.
+			    endOptions.forEach(function(option) {
+			        if (option.value === savedStartTime) {
+			            disableRange = true;
+			        }
+			        if (disableRange) {
+			            option.disabled = true;
+			        }
+			        if (option.value === savedEndTime) {
+			            disableRange = false;  // 시작 시간까지 포함하도록 false로 변경
+			        }
+			    });
+		    }
+		    
+
+		    
 	}
 	//모달창 show
 	$('.insertModal').modal({backdrop: 'static'});
@@ -1223,7 +1358,11 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 			  		patientNumber : $('.'+modal+' #patientNumber').val(),
 			  		start : arg.startStr+'T'+$('.'+modal+' #start').val(),
 			  		end : arg.endStr+'T'+$('.'+modal+' #end').val(),
-			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
+			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),
+			  		starttime : $('.'+modal+' #start').val(),
+			  		endtime : $('.'+modal+' #end').val(),
+			  		startdate: arg.startStr,
+			  		enddate : arg.endStr,
 			  		writer: '<%=sessionNm%>'
 			  	}
 			//종일이벤트면
@@ -1251,6 +1390,8 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 			  		patientNumber : $('.'+modal+' #patientNumber').val(),
 			  		start : arg.startStr+'T00:00',
 			  		end : arg.endStr+'T00:00',
+					starttime : $('.'+modal+' #start').val(),
+					endtimg : $('.'+modal+' #end').val(),
 			  		allday : $('.'+modal+' input[name="allDay"]:checked').val(),				  		
 			  		writer: '<%=sessionNm%>'
 			  	}
@@ -1297,6 +1438,10 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 						borderColor: ceoColor,
 						textColor: textBlack,
 						writer: '<%=sessionNm%>',
+						starttime : $('.'+modal+' #start').val(),
+						endtimg : $('.'+modal+' #end').val(),
+						startdate : arg.startStr,
+						enddate : arg.endStr,
 						allDay: true
 					  });
 				  }else{
@@ -1315,6 +1460,10 @@ document.getElementById("checkbox4").addEventListener("change", updateSelectedVa
 						backgroundColor: ceoColor,
 						borderColor: ceoColor,
 						writer: '<%=sessionNm%>',
+						starttime : $('.'+modal+' #start').val(),
+						endtime : $('.'+modal+' #end').val(),
+						startdate : arg.startStr,
+						enddate : arg.endStr,
 						textColor: textBlack
 					});
 				  }
@@ -1410,5 +1559,64 @@ $(function() {
 });
  --%>
 </script>
+<script>
 
+// document.addEventListener("DOMContentLoaded", function() {
+// // 	var calendarList = '${list}';
+// // 	var savedStartTime, savedEndTime;
+// // 	console.log(calendarList);
+// // 	// 여기서 선택한 날짜에 해당하는 데이터를 찾아서 savedStartTime과 savedEndTime을 설정합니다.
+// // 	// 예를 들어, 특정 날짜를 선택했다면 해당 날짜와 일치하는 데이터를 찾아 설정할 수 있습니다.
+// // 	for (var i = 0; i < calendarList.length; i++) {
+// // 		// 원하는 조건에 따라 날짜를 비교하고 startTime과 endTime을 설정합니다.
+// // 		// 예를 들면, 선택한 날짜와 일치하는 데이터를 찾는 로직을 구현합니다.
+// // 		if (!calendarList) {
+// // 			savedStartTime = calendarList[i].starttime;
+// // 			savedEndTime = calendarList[i].endtime;
+// // 			break; // 원하는 조건에 해당하는 첫 번째 데이터만 사용합니다.
+// // 		}
+// // 	}
+
+// 	// 여기에는 이전에 제공드린 JavaScript 코드를 넣어 시작 시간부터 종료 시간까지의 범위 내의 option을 disabled 상태로 만듭니다.
+// 	// ...
+    
+    
+//     // DB에서 이미 저장된 starttime과 endtime을 가져옵니다.
+// 	const savedStartTime = "10:30";
+// 	const savedEndTime = "13:00";
+
+//     // 모든 option 요소를 선택합니다.
+//     const startOptions = document.getElementById("start").querySelectorAll("option");
+//     const endOptions = document.getElementById("end").querySelectorAll("option");
+
+//     let disableRange = false;
+
+//     // start select 박스의 option을 순회하면서 시작 시간부터 종료 시간까지의 option을 disabled로 설정합니다.
+//     startOptions.forEach(function(option) {
+//         if (option.value === savedStartTime) {
+//             disableRange = true;
+//         }
+//         if (disableRange) {
+//             option.disabled = true;
+//         }
+//         if (option.value === savedEndTime) {
+//             disableRange = false;  // 종료 시간까지 포함하도록 false로 변경
+//         }
+//     });
+
+//     // end select 박스의 option을 순회하면서 시작 시간부터 종료 시간까지의 option을 disabled로 설정합니다.
+//     endOptions.forEach(function(option) {
+//         if (option.value === savedStartTime) {
+//             disableRange = true;
+//         }
+//         if (disableRange) {
+//             option.disabled = true;
+//         }
+//         if (option.value === savedEndTime) {
+//             disableRange = false;  // 시작 시간까지 포함하도록 false로 변경
+//         }
+//     });
+// });
+
+</script>
 </html>

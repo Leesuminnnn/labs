@@ -1,19 +1,18 @@
 package com.nnn.app.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class CalendarVo {
 	private int id;
 	private String groupId;
@@ -27,6 +26,8 @@ public class CalendarVo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
 	private String end;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
 	private Date regdate;
     private boolean allday;
 	private String textColor;
@@ -44,5 +45,15 @@ public class CalendarVo {
 	private String patientRoom;
 	//환자 휴대폰번호
 	private String patientNumber;
+	
+	// 시작 시간
+	private String starttime;
+	// 종료시간
+	private String endtime;
+	// 시작 날짜
+	private String startdate;
+	// 종료 날짜
+	private String enddate;
+	
 	
     }

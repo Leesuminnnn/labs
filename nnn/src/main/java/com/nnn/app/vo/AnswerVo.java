@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 /*
@@ -23,6 +24,7 @@ regdate datetime default now() comment '답안 시간'
 
 @Getter
 @Setter
+@ToString
 public class AnswerVo {
 	private int idx;
 	private String u1;

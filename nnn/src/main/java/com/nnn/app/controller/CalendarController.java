@@ -1,16 +1,8 @@
 package com.nnn.app.controller;
 
 import java.io.PrintWriter;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.CalenService;
 import com.nnn.app.service.MemberService;
+import com.nnn.app.vo.AjaxResponse15;
 import com.nnn.app.vo.CalendarVo;
 
 @Controller
@@ -52,9 +46,13 @@ public class CalendarController {
 			calendar = calenService.calenList();
 			request.setAttribute("calendarList", calendar);
 			System.out.println("calendar : "+ calendar);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		List<CalendarVo> list2 = calenService.calenlist2();
+		mv.addObject("list", list2);
+		System.out.println(list2);
 		System.out.println(session.getAttribute("name"));
 //		mv.addObject("detail", memberService.detail2((String)session.getAttribute("name")));
 		// 시연용
@@ -68,7 +66,7 @@ public class CalendarController {
     	session.getAttribute("m_point");
     	session.getAttribute("m_in");
     	session.getAttribute("m_de");
-		
+    	mv.addObject("calendar", calendar);
 		mv.setViewName("a/fullcalendar");
 		return mv;
 	}
@@ -92,6 +90,10 @@ public class CalendarController {
 		System.out.println(CalendarVo.getPatientName());
 		System.out.println(CalendarVo.getPatientRoom());
 		System.out.println(CalendarVo.getPatientNumber());
+		System.out.println(CalendarVo.getStarttime());
+		System.out.println(CalendarVo.getEndtime());
+		System.out.println(CalendarVo.getStartdate());
+		System.out.println(CalendarVo.getEnddate());
 		System.out.println(CalendarVo.toString());
 		
 //		String[] testprepare = request.getParameterValues("prepare");
@@ -109,6 +111,11 @@ public class CalendarController {
 		String patientName = (String) CalendarVo.getPatientName();
 		String patientRoom = (String) CalendarVo.getPatientRoom();
 		String patientNumber = (String) CalendarVo.getPatientNumber();
+		String starttime = (String) CalendarVo.getStarttime();
+		String endtime = (String) CalendarVo.getEndtime();
+		String startdate = CalendarVo.getStartdate();
+		String enddate = CalendarVo.getEnddate();
+				
 				
 				
 		
@@ -128,6 +135,10 @@ public class CalendarController {
 		map.put("patientName", patientName);
 		map.put("patientRoom", patientRoom);
 		map.put("patientNumber", patientNumber);
+		map.put("starttime", starttime);
+		map.put("endtime", endtime);
+		map.put("startdate", startdate);
+		map.put("enddate", enddate);
 		
 		
 		int select = calenService.calenselect(map);
@@ -205,5 +216,29 @@ public class CalendarController {
 		return "a/delete";
 	}
 	
+	@RequestMapping("/calendar2")
+	public ModelAndView claendar2(ModelAndView mv) {
+		mv.setViewName("a/fullcalendar2");
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="selectCalendar/{startStr}")
+	public AjaxResponse15 selectCalendar(@PathVariable("startStr") String startStr, HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse15 response = new AjaxResponse15();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startStr", startStr);
+		List<CalendarVo> list = calenService.selectCalendar(map);
+		System.out.println(list);
+		response.setSelectCalendar(list);
+		
+		return response;
+	}
+	
 
+	
+	
+	
 }

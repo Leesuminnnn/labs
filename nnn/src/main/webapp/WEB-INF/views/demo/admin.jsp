@@ -23,7 +23,7 @@
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
 				<div class="nav__brand" style="">
-					<a href="${pageContext.request.contextPath}/demo/admin" class="nav__logo" >관리자페이지</a>
+					<a href="${pageContext.request.contextPath}/demo/admin" class="nav__logo" >코어솔루션병원</a>
 				<%-- 
 					<a href="${pageContext.request.contextPath}/e/admin" class="nav__logo" >효사랑</a>
 					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a> --%>
@@ -42,7 +42,7 @@
 				 -->
 				<div class="nav__list">
 					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="userall" data-content="all">
-						<span class="nav_name">코어솔루션병원 직원명부 Total</span>
+						<span class="nav_name">직원DB 설정</span>
 					</a>
 					<%-- 
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user1" data-content="content1">
@@ -59,7 +59,7 @@
 					</a> --%>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="perall" data-content="all">
-						<span class="nav_name">코어솔루션병원 평가진행률 Total</span>
+						<span class="nav_name">인사평가 관리</span>
 					</a><!-- 
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="per1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
@@ -98,7 +98,7 @@
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 		<table style="">
 			<tr>
-				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호초기화</td>
+				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호 설정 여부</td><td>비밀번호초기화</td>
 			</tr>
 		
 			<c:forEach items="${users }" var="u">
@@ -109,12 +109,18 @@
 						<td>${u.hspt_subname }</td>
 						<td>${u.id }</td>
 						<td>${u.hspt_position }</td>
+						
 						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
 							<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
     						${targetfirstName }ㅇㅇ
 							
 						</td>
-						
+						<td>
+							<c:choose>
+								<c:when test="${empty u.pwd }">미설정</c:when>
+								<c:otherwise>설정완료</c:otherwise>
+							</c:choose>
+						</td>
 						<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" style="cursor:pointer;"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
 					</tr>
 				</c:if>
@@ -194,6 +200,8 @@ function userall(contentId) {
 	 				maintd6.textContent = "직책";
 	 				var maintd7 = document.createElement("TD");
 	 				maintd7.textContent = "이름";
+	 				var maintd8 = document.createElement("TD");
+	 				maintd8.textContent = "비밀번호 설정 여부";
 	 				var maintd9 = document.createElement("TD");
 	 				maintd9.textContent = "비밀번호초기화";
 	 				
@@ -204,6 +212,7 @@ function userall(contentId) {
 	 				maintr.appendChild(maintd4);
 	 				maintr.appendChild(maintd6);
 	 				maintr.appendChild(maintd7);
+	 				maintr.appendChild(maintd8);
 	 				maintr.appendChild(maintd9);
 	 				
 	 				listall.forEach(function (list) {
@@ -236,6 +245,13 @@ function userall(contentId) {
 		 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 		 					tdname.setAttribute("onclick","location.href='" + url + "'");
 		 					tdname.setAttribute("style", "cursor:pointer;");
+		 					var tdpwd = document.createElement("TD");
+		 					if(!list.pwd){
+		 						tdpwd.textContent = "미설정";
+		 					}else{
+		 						tdpwd.textContent = "설정완료";
+		 					}
+		 					
 		 					
 		 					var tdpwdselect = document.createElement("TD");
 		 					tdpwdselect.setAttribute("data-name", name);
@@ -254,6 +270,7 @@ function userall(contentId) {
 		 					tr.appendChild(tdid);
 		 					tr.appendChild(tdpo);
 		 					tr.appendChild(tdname);
+		 					tr.appendChild(tdpwd);
 							tr.appendChild(tdpwdselect);
 	 					}	
  					});

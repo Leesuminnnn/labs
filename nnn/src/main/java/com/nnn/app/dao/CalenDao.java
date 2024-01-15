@@ -34,6 +34,9 @@ public class CalenDao {
 		return sqlSession.selectList(MAPPER+".calenList");
 	}
 
+	public List<CalendarVo> calenList2() {
+		return sqlSession.selectList(MAPPER+".calendarTime");
+	}
 
 	public int caleninput(Map<String, Object> map) {
 		System.out.println("---------------------dao");
@@ -58,4 +61,10 @@ public class CalenDao {
 		return sqlSession.delete(MAPPER+".calendelete", map);
 		
 	}
+
+	public List<CalendarVo> selectCalendar(Map<String, Object> map) {
+		return sqlSession.selectList(MAPPER+".selectCalendar", map);
+	}
+
+
 }

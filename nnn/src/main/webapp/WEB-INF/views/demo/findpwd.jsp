@@ -35,10 +35,7 @@
 	<div class="notice" >
 		<p style="font-size: 18px;"><b>문의사항</b></p>
 		<div style="color:blue;">
-		<p>코어솔루션 유지명 팀장 063-250-4503
-		<p>코어솔루션 이수민 사원 063-250-4505
-		<p>비상연락처 (유지명) 010-9257-8497
-		<p style="font-size:12px;">※ 문자로 내용(소속,부서,사원명 포함) 남겨주시면 확인 후 바로 조치하도록 하겠습니다.
+		<p>코어솔루션 063-250-4503
 		</div>
 	</div>
 	<div class="footer">

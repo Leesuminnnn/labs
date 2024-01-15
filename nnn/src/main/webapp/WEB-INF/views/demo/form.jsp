@@ -174,12 +174,12 @@ td {
 <img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 		</div>
 	</div>
-	
+	<input type="hidden" name="score" value="" id="score">
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 var form = document.getElementById("frm");
-
+var scoreInput = document.getElementById("score");
 //문제유형
 var ev = "${ev}";
 console.log(ev);
@@ -299,8 +299,9 @@ $("#end").click(function() {
 			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
 			return false;
 		}else {
-			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAA+"점입니다.\n평가완료 후 재평가(수정)이 안됩니다. \n평가완료를 하시겠습니까?")){
-				form.action = "${pageContext.request.contextPath}/e/formAction/${info.idx}/${target.idx}/${team}";
+			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAA+"점입니다.\n평가완료를 하시겠습니까?")){
+				score.value = sumAA;
+				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
 				form.submit();
 				// 뒤로가기 버튼 비활성화
 				window.history.pushState(null, null, window.location.href);
@@ -318,7 +319,8 @@ $("#end").click(function() {
 			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
 			return false;
 		} else {
-			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료 후 재평가(수정)이 안됩니다. \n평가완료를 하시겠습니까?")){
+			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료를 하시겠습니까?")){
+				score.value = sumAB;
 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
 				form.submit();
 				// 뒤로가기 버튼 비활성화
