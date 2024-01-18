@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<!-- 
 <svg role="presentation" class="icon--arrow" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 	<path d="M24 17H15L19.6957 23L24 17Z" fill="#767676" />
 </svg>
@@ -24,6 +24,8 @@
 	    <path d="M21 11H7.414l4.293-4.293-1.414-1.414L3.586 12l6.707 6.707 1.414-1.414L7.414 13H21v-2z"/>
 	</svg>
 </div>
+ -->
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>

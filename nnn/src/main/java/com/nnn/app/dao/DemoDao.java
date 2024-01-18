@@ -265,6 +265,13 @@ public class DemoDao {
 		return sqlSession1.update(MAPPER+".scoreUpdate", map);
 //		return sqlSession3.update(MAPPER+".scoreUpdate", map);
 	}
+
+	public List<EvaluationVo> evlist() {
+		return sqlSession1.selectList(MAPPER+".evlist");
+//		return sqlSession3.selectList(MAPPER+".evlist");
+	}
+		
+		
 	
 	
 	

@@ -251,4 +251,8 @@ public class DemoService {
 	public int scoreUpdate(Map<String, Object> map) {
 		return demoDao.scoreUpdate(map);
 	}
+
+	public List<EvaluationVo> evlist() {
+		return demoDao.evlist();
+	}
 }

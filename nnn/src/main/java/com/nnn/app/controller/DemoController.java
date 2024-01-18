@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nnn.app.service.DemoService;
 import com.nnn.app.vo.AjaxResponse15;
 import com.nnn.app.vo.AjaxResponse16;
+import com.nnn.app.vo.AjaxResponse18;
 import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
@@ -140,11 +141,12 @@ public class DemoController {
 					demoService.loginlog(map);
 					// 세션 저장
 					session.setAttribute("loginmember", vo.getId());
-					if(info2.getHspt_name().equals("코어솔루션")) {
-						return "redirect:/demo/admin";
-					}else {
-						return "redirect:/demo/Info/"+idx;
-					}
+//					if(info2.getHspt_name().equals("코어솔루션")) {
+//						return "redirect:/mediplat/Main/"+idx;
+//					}else {
+//						return "redirect:/mediplat/Main/"+idx;
+//					}
+					return "redirect:/mediplat/Main/"+idx;
 					
 				}
 			}
@@ -1045,7 +1047,7 @@ public class DemoController {
 		
 		return response;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="per3")
 	public AjaxResponse16 per3(HttpSession session, HttpServletRequest request) throws Exception {
@@ -1065,5 +1067,21 @@ public class DemoController {
 		
 		return response;
 	}
+
+	@ResponseBody
+	@RequestMapping(value="evSetting")
+	public AjaxResponse18 evSetting(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse18 response = new AjaxResponse18();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<EvaluationVo> list = new ArrayList<EvaluationVo>();
+		list = demoService.evlist();
+		response.setList(list);
+		
+		return response;
+	}
+	
+	
 	
 }

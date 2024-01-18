@@ -74,9 +74,18 @@
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;가족사랑요양병원 평가진행률</span>
 					</a> -->
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
-					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="setting" data-content="">
+					<!-- <a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="setting" data-content="">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname" style="font-size: 18px;">&nbsp;설정관리</span>
+					</a> -->
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="evSetting" data-content="all">
+						<span class="nav_name">문제은행 관리</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="evCreate" data-content="all">
+						<span class="nav_name">문제유형생성</span>
+					</a>
+					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="evSelect" data-content="all">
+						<span class="nav_name">생성된 유형 보기</span>
 					</a>
 				</div>
             </div>
@@ -96,6 +105,7 @@
 			style="width : calc(99vw - (var(--nav--width) + 9.25rem)); height : 100%; margin-left: calc(var(--nav--width) + 9.25rem);">
 		<!-- 내용을 이곳에 추가 -->
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
+		<!-- 
 		<table style="">
 			<tr>
 				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호 설정 여부</td><td>비밀번호초기화</td>
@@ -126,6 +136,109 @@
 				</c:if>
 			</c:forEach>
 		</table>
+		 -->
+		<div style="padding:10px;">
+			<div style=""><span>◈ 인사평가에 사용할  문제의 카테고리를 선택해 주세요.</span></div>
+			<div style="">
+				<ul style="display: flex; flex-wrap: wrap;">
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>근무태도</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>목표관리</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>업무처리</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>업무실적</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>소통 및 화합</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>리더쉽</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>조직관리</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>섬김</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>키움</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>배움</span></label></li>
+					<li style="margin-right: 17px;"><label><input type="checkbox"><span>나눔</span></label></li>
+				</ul>
+			</div>
+		</div>
+		<div style="border-bottom:1px solid #000;"></div>
+		<div style="padding: 10px;">
+			<div style="margin-bottom: 20px;">
+				<span>문제수 선택</span><input type="number" /><span>선택된 문제 수</span><input type="number" value=""/><button>랜덤 생성</button>
+			</div>
+			<div>
+				<span>◈ 인사평가에 사용할 문제를 선택하여 문제 유형을 만들어 주세요.</span>
+			</div>
+			<div style="display: flex;">
+				<div style="width: 13px;margin-right: 10px;"></div>
+				<div style="width: 100px; text-align: center;">카테고리</div>
+				<div>문제</div>
+			</div>
+			<div id="ev">
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>항상 근면하고 성실한 근무자세로 업무에 임한다.</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>방문객 및 직원들에게 언행이 예의 바르다.</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>환자와 보호자에게 경어를 사용하면 공손히 대하는가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>병원내 직원들과 존칭을 쓰며 협력하는가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>어르신에게 우호적이며 친절한가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>보호자, 외부인 및 직원에게 환한 미소와 함께 친절한가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>주어진 업무는 끝까지 하며 책임회피는 하지 않는가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>업무에 몰입도가 높으며 성실한 자세로 임하는가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">근무태도</div>
+					<div>자신의 이해관계와 감정에 사로잡여있지 않고 직업의식이 투철한가?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">목표관리</div>
+					<div>부서의 가치에 적합한 목표설정과 업무방향을 제시하고, 성과창출을 이끌어 갑니까?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">목표관리</div>
+					<div>부서원들에게 목표달성의 동기를 부여하여 각자의 성과를 높일 수 있도록 지원합니까?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">목표관리</div>
+					<div>하루 일과 중에 처리해야 할 업무를 근무시간내에 처리합니까?</div>
+				</div>
+				<div style="display: flex;">
+					<div style="margin-right: 10px;"><input type="checkbox" /></div>
+					<div style="width: 100px; text-align: center;">목표관리</div>
+					<div>업무 시간 중에 지시받은 일을 확실하게 이해하고 정확하게 실천합니까?</div>
+				</div>
+				<div style="display: flex;">
+				
+				</div>
+			</div>
+		</div>
 	</main>
 
 </section>
@@ -1724,6 +1837,9 @@ const menuScripts = [
 	{ id: 'per3', contentId: 'content3', script: per3 },
 	{ id: 'perall', contentId: 'all', script: perall },
 	{ id: 'setting', contentId: 'all', script: setting },
+	{ id: 'evSetting', contentId: 'all', script: evSetting },
+	{ id: 'evCreate', contentId: 'all', script: evCreate },
+	{ id: 'evSelect', contentId: 'all', script: evSelect },
 ];
 function activateMenu(menuIndex) {
 
@@ -2324,19 +2440,69 @@ function modify(){
 		}
 	});
 }
-// 부서설정 부서생성
-function create_sub(){
+// 문제은행 관리
+function evSetting(){
+	
+	$.ajax({
+		url: '${pageContext.request.contextPath}/demo/evSetting',
+		type: 'GET',
+		dataType: 'JSON',
+		success: function(response) {
+			console.log(response);
+			if(response.result === "Y") {
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+				
+				var div = document.createElement("div");
+				div.setAttribute("style","");
+				var title = document.createElement("div");
+				title.setAttribute("style","")
+				var content = document.createElement("div");
+				content.setAttribute("style","")
+				mainContent.appendChild(div);
+				div.appendChild(title);
+				div.appendChild(content);
+			}
+		},
+		error: function(error) {
+			console.error('Error fetching data: ',error);
+		}
+	});
+}
+
+// 문제유형생성
+function evCreate(){
+	$.ajax({
+		url: '${pageContext.request.contextPath}/demo/evCreate',
+		type: '',
+		dataType: '',
+		success: function(res) {
+			if(res.result === "Y") {
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+			}
+		},
+		error: function(error) {
+			console.error('Error fetching data: ',error);
+		}
+	});
 	
 }
 
-// 직원별 변수 설정 저장
-function btn_submit(){
-	
-}
 
-
-// 효사랑전주요양병원
-function unq1(){
+// 생성된 유형 보기
+function evSelect(){
+	$.ajax({
+		url: '${pageContext.request.contextPath}/demo/evSelect',
+		type: '',
+		dataType: '',
+		success: function(res) {
+			if(res.result === "Y") {
+				mainContent.innerHTML = ''; // 기존 내용을 지우고
+			}
+		},
+		error: function(error) {
+			console.error('Error fetching data: ',error);
+		}
+	});
 	
 }
 

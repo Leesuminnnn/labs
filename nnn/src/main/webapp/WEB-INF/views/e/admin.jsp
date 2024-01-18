@@ -94,6 +94,7 @@
 			style="width : calc(99vw - (var(--nav--width) + 9.25rem)); height : 100%; margin-left: calc(var(--nav--width) + 9.25rem);">
 		<!-- 내용을 이곳에 추가 -->
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
+		<!--  -->
 		<table style="">
 			<tr>
 				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>핸드폰번호</td><td>비밀번호초기화</td>
@@ -122,6 +123,7 @@
 				</c:if>
 			</c:forEach>
 		</table>
+		
 	</main>
 
 </section>

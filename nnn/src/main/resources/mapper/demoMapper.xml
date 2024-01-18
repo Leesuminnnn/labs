@@ -3024,6 +3024,10 @@
 		update demo_answer set del_yn = 'Y' where u2 = #{u2} and t1 = #{t1} and team = #{team} and ev = #{ev} and del_yn = 'N'
 	</update>
 	
+	<!-- 문제은행 디비  -->
+	<select id="evlist" resultType="evaluation">	
+		select * from evaluation
+	</select>
 	
 	
 	

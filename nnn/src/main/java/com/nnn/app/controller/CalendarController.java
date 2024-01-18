@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nnn.app.service.CalenService;
 import com.nnn.app.service.MemberService;
 import com.nnn.app.vo.AjaxResponse15;
+import com.nnn.app.vo.AjaxResponse17;
 import com.nnn.app.vo.CalendarVo;
 
 @Controller
@@ -223,6 +224,13 @@ public class CalendarController {
 		return mv;
 	}
 	
+	@RequestMapping("/calendar3")
+	public ModelAndView claendar3(ModelAndView mv) {
+		mv.setViewName("a/fullcalendar");
+		
+		return mv;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="selectCalendar/{startStr}")
 	public AjaxResponse15 selectCalendar(@PathVariable("startStr") String startStr, HttpSession session, HttpServletRequest request) throws Exception {
@@ -237,8 +245,31 @@ public class CalendarController {
 		return response;
 	}
 	
+	@RequestMapping(value="amb")
+	public ModelAndView amb(ModelAndView mv) {
+		
+		
+		
+		mv.setViewName("a/amb");
+		return mv;
+	}
 
+	@RequestMapping(value="amb2")
+	public ModelAndView amb2(ModelAndView mv) {
+		
+		mv.setViewName("a/amb2");
+		return mv;
+	}
 	
+	@RequestMapping(value="")
+	@ResponseBody
+	public AjaxResponse17 ambList(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse17 response = new AjaxResponse17();
+		response.setResult("Y");
+		
+		
+		return response;
+	}
 	
 	
 }

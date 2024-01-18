@@ -462,6 +462,7 @@ var calendarData = <%= calendarListJson %>;
 	  slotMinTime: '09:00',
       slotMaxTime: '19:00',
       initialDate: todayStr,
+      initialView: 'timeGridDay',
       navLinks: true, // can click day/week names to navigate views
       fixedWeekCount: false,		// 31일 이후 다음주 까지 보이는 현상 제거
       selectable: true,
