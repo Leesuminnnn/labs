@@ -22,6 +22,7 @@ import com.nnn.app.service.CalenService;
 import com.nnn.app.service.MemberService;
 import com.nnn.app.vo.AjaxResponse15;
 import com.nnn.app.vo.AjaxResponse17;
+import com.nnn.app.vo.AjaxResponse19;
 import com.nnn.app.vo.CalendarVo;
 
 @Controller
@@ -80,9 +81,7 @@ public class CalendarController {
 //		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
 		System.out.println("input ajax");
 		System.out.println("Received Request Body: " + CalendarVo);
-		System.out.println(CalendarVo.getTitle());
-		System.out.println(CalendarVo.getStart());
-		System.out.println(CalendarVo.getEnd());
+		System.out.println(CalendarVo.getAmb());
 		System.out.println(CalendarVo.getWriter());
 		System.out.println(CalendarVo.getContent());
 		System.out.println(CalendarVo.getRun());
@@ -99,11 +98,8 @@ public class CalendarController {
 		
 //		String[] testprepare = request.getParameterValues("prepare");
 //		System.out.println("testprepare =    "+testprepare);
-		String eventName = (String) CalendarVo.getTitle();
-		String startDateString = (String) CalendarVo.getStart();
-		String endDateString = (String) CalendarVo.getEnd();
+		String eventName = (String) CalendarVo.getAmb();
 		String writer = (String) CalendarVo.getWriter();
-		boolean allday = (boolean) CalendarVo.isAllday();
 		String content = (String) CalendarVo.getContent();
 		String run = (String) CalendarVo.getRun();
 		String agency = (String) CalendarVo.getAgency();
@@ -121,13 +117,9 @@ public class CalendarController {
 				
 		
 		
-		System.out.println(allday);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("title", eventName);
-		map.put("start", startDateString);
-		map.put("end", endDateString);
-		map.put("allday", allday);
 		map.put("writer", writer);
 		map.put("content", content);
 		map.put("run", run);
@@ -255,10 +247,57 @@ public class CalendarController {
 	}
 
 	@RequestMapping(value="amb2")
-	public ModelAndView amb2(ModelAndView mv) {
+	public ModelAndView amb2(ModelAndView mv, HttpSession session) {
+		session.getAttribute("loginMember");
+		List<CalendarVo> calendar = calenService.calenList();
 		
+		
+		mv.addObject("calendar",calendar);
 		mv.setViewName("a/amb2");
 		return mv;
+	}
+	
+	@RequestMapping(value="insert")
+	@ResponseBody
+	public String calendarInsert(@RequestBody CalendarVo vo) {
+		String response = "";
+		Map<String, Object> map = new HashMap<String, Object>();
+		String agency = vo.getAgency();			// 호성전주병원
+		String content = vo.getContent();			// 
+		String enddate = vo.getEnddate();			// 2024-1-29
+		String endtime = vo.getEndtime();			// 
+		String patientName = vo.getPatientName();		// 
+		String patientNumber = vo.getPatientNumber();	// 
+		String patientRoom = vo.getPatientRoom();		// 
+		String prepare = vo.getPrepare();			// 산소, 석션
+		String run = vo.getRun();				// 외진
+		String startdate = vo.getStartdate();		// 2024-1-29
+		String starttime = vo.getStarttime();		// 
+		String sub = vo.getSub();				// 
+		String writer = vo.getWriter();			// 
+		String amb = vo.getAmb();				// 
+		
+		map.put("agency", agency);
+		map.put("content", content);
+		map.put("enddate", enddate);
+		map.put("endtime", endtime);
+		map.put("patientName", patientName);
+		map.put("patientNumber", patientNumber);
+		map.put("patientRoom", patientRoom );
+		map.put("prepare", prepare);
+		map.put("run", run);
+		map.put("startdate", startdate);
+		map.put("starttime", starttime);
+		map.put("sub", sub);
+		map.put("writer", writer);
+		map.put("amb", amb);
+		
+		int flag = 0;
+		flag = calenService.caleninput(map);
+		
+		
+		
+		return response;
 	}
 	
 	@RequestMapping(value="")

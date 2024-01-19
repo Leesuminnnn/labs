@@ -235,7 +235,9 @@
 					<div>업무 시간 중에 지시받은 일을 확실하게 이해하고 정확하게 실천합니까?</div>
 				</div>
 				<div style="display: flex;">
-				
+					<div>
+						<button>문제유형만들기</button>
+					</div>
 				</div>
 			</div>
 		</div>

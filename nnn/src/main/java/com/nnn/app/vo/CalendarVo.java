@@ -15,24 +15,14 @@ import lombok.ToString;
 @ToString
 public class CalendarVo {
 	private int id;
-	private String groupId;
-	private String title;
+	private String amb;
 	private String writer;
+	private String sub;
 	private String content;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
-	private String start;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
-	private String end;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+9")
 	private Date regdate;
-    private boolean allday;
-	private String textColor;
-	private String backgroundColor;
-	private String borderColor;
 	//운행구분
 	private String run;
 	//기관

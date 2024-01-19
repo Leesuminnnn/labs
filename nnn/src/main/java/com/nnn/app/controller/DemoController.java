@@ -386,7 +386,7 @@ public class DemoController {
 	}
 	@ResponseBody
 	@RequestMapping(value="PwdActAjax/{id}")
-	public AjaxResponse8 pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, HttpServletRequest request, Model md) throws NoSuchAlgorithmException {
+	public AjaxResponse8 pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, Model md) throws NoSuchAlgorithmException {
 		AjaxResponse8 response = new AjaxResponse8();
 		response.setResult("N");
 		// 암호화
