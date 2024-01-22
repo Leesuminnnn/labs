@@ -1,0 +1,141 @@
+@charset "UTF-8";
+td {
+	border:1px solid #cccccc;
+	padding: 15px;
+	text-align: center;
+}
+.main {
+	background-color: #f7f7f7;
+}
+.logo {
+		background-color: #1b304a;
+	}
+.info{
+	background-color : #2f425a;
+	color: #fff;
+	height: 145px;
+	padding: 28px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+.info div {
+}
+.info_name {
+	font-size: 30px;
+	margin-bottom: 7px;
+}
+.info_id {
+	font-size: 20px;
+}
+.info_hs {
+	color: #c7c7c7;
+	margin-bottom: 4px;
+}
+.info_date {
+	color: #c7c7c7;
+}
+.target {
+	padding: 20px;
+}
+.target_box table {
+	border:1px solid #d7d7d7; 
+	width: 100%;
+	background-color: #ffffff;
+	color: #222222;
+}
+.target_text {
+	background-color: #efefef;
+	padding-left: 20px;
+	height: 60px;
+}
+.target_text img{
+	width: 20px;
+	margin-right: 5px;
+}
+.target_text span{
+	font-size: 16px;
+}
+.target_box_header {
+	background-color: #1b304a;
+	border: 1px solid #1b304a;
+	color: #fff;
+}
+.target_box_1 {
+	background-color: #f2f2f2;
+}
+.target_box_1 td {
+	width: 25%;
+}
+.target_box_2 {
+	background-color: #fff;
+}
+.area {
+	padding: 20px;
+	background-color: #fff;
+	border-top: 2px solid #1b304a;
+	margin: 0 20px;
+	text-align: center;
+}
+.area_header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #c1c1c1;
+	margin-bottom: 20px;
+	color: #003981;
+	font-size: 20px;
+	padding-left: 5px;
+	
+}
+.text-color-blue {
+	color: #092e5c;
+}
+.check_img {
+	width: 60px;
+}
+@font-face {
+	font-family: "yeonsung";
+	src: url("../fonts/ttf/BMYEONSUNG_ttf.ttf");
+}
+.bg_img {
+	font-family: "yeonsung";
+	background: url(../icon/ev/msg_img.png) no-repeat center /800px;
+	height: 566px;
+	width: 800px;
+	padding: 40px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 20px;
+}
+.bg_img p {
+	margin-bottom: 8px;
+}
+.end_area {
+	margin-top: 15px;
+}
+
+.end {
+	background-color: #f89d00;
+	color: #fff;
+	border: 1px solid #f89d00;
+	padding: 10px 50px;
+	border-radius: 5px;
+	cursor: pointer;
+	height: 50px;
+}
+.footer {
+	width: 80vw;
+	margin: 0 auto;
+}
+.nav > div {
+	font-size: 2.5rem;
+	cursor: pointer;
+}
+.nav {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+

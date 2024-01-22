@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+.label {display: inline-block; position: relative; margin-right: 60px;}
+.alignBox {display: inline-flex; align-items: center; cursor: pointer;}
+.inputTxt {display: inline-block; margin: 0 5px;}
+
+.radio {position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 0; height: 0;}
+.radioimg {width: 30px; height: 30px; background: url('../icon/ev/checkbox_off.png') no-repeat center /20px;}
+
+.radio:checked+.radioimg {background: url('../icon/ev/checkbox_on.png') no-repeat center /20px;}
+/* 
+.radio:disabled+.radioimg {background: url(./img/radio03.png) no-repeat center /30px;}
+
+.radio:checked:disabled+.radioimg {background: url(./img/radio04.png) no-repeat center /30px;}
+	 */
+
+
+td {
+	border:1px solid #cccccc;
+	padding: 15px;
+	text-align: center;
+}
+.main {
+	background-color: #f7f7f7;
+}
+.logo {
+		background-color: #1b304a;
+	}
+.info{
+	background-color : #2f425a;
+	color: #fff;
+	height: 145px;
+	padding: 28px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+.info div {
+}
+.info_name {
+	font-size: 30px;
+	margin-bottom: 7px;
+}
+.info_id {
+	font-size: 20px;
+}
+.info_hs {
+	color: #c7c7c7;
+	margin-bottom: 4px;
+}
+.info_date {
+	color: #c7c7c7;
+}
+.target {
+	padding: 20px;
+}
+.target_box table {
+	border:1px solid #d7d7d7; 
+	width: 100%;
+	background-color: #ffffff;
+	color: #222222;
+}
+.target_text {
+	background-color: #efefef;
+	padding-left: 20px;
+	height: 60px;
+}
+.target_text img{
+	width: 20px;
+	margin-right: 5px;
+}
+.target_text span{
+	font-size: 16px;
+}
+.target_box_header {
+	background-color: #1b304a;
+	border: 1px solid #1b304a;
+	color: #fff;
+}
+.target_box_1 {
+	background-color: #f2f2f2;
+}
+.target_box_1 td {
+	width: 25%;
+}
+.target_box_2 {
+	background-color: #fff;
+}
+.area {
+	padding: 20px;
+	background-color: #fff;
+	border-top: 2px solid #1b304a;
+	margin: 0 20px;
+}
+.area_header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #c1c1c1;
+	margin-bottom: 20px;
+	color: #003981;
+	font-size: 20px;
+	padding-left: 5px;
+	
+}
+.end_area {
+	margin-top: 15px;
+}
+.end {
+	background-color: #f89d00;
+	color: #fff;
+	border: 1px solid #f89d00;
+	padding: 10px 50px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.answer {
+	margin-bottom: 20px;
+}
+.footer {
+	width: 80vw;
+	margin: 0 auto;
+}
+.nav > div {
+	font-size: 2.5rem;
+	cursor: pointer;
+}
+.nav {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}

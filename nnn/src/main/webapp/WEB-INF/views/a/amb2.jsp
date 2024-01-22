@@ -443,7 +443,7 @@ String sessionNm = (String)(session.getAttribute("name"));
 					<td>${c.patientNumber }</td>
 					<td>${c.content }</td>
 					<td>${c.writer }</td>
-					<td></td>
+					<td>${c.sub }</td>
 				</tr>
 			</c:forEach>
 				

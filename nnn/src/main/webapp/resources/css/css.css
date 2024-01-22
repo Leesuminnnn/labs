@@ -32,6 +32,11 @@ a{
 	color: #000;
 }
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+table {
+	border-collapse: collapse;
+		
+}
+
 body {
 	font-family: 'NanumSquare', sans-serif;
 }
