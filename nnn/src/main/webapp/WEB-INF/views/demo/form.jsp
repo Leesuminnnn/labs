@@ -29,7 +29,6 @@
 				<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
 			</a>
 		</div>
-		
 	</div>
 	<div class="section">
 		<div class="container">
@@ -302,15 +301,15 @@
 				<div class="bold area_header"></div>
 				<c:forEach items="${evf}" var="ev">
 					<c:if test="${ev.d3 eq '주관식' }">
-					<table style="width: 100%;">
-						<tr style="background-color: #1b304a; color: #fff;">
-							<td><p class="question bold">${ev.d1}</p></td>
-						</tr>
-						<tr>
-							<td style="background-color: #fafafa; padding: 0; height: 125px;">
-							<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
-						</tr>
-					</table>
+						<table style="width: 100%;">
+							<tr style="background-color: #1b304a; color: #fff;">
+								<td><p class="question bold">${ev.d1}</p></td>
+							</tr>
+							<tr>
+								<td style="background-color: #fafafa; padding: 0; height: 125px;">
+								<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
+							</tr>
+						</table>
 					</c:if><%-- 
 					<c:if test="${ev.d3 eq '주관식' }"><p class="question bold">${ev.d1}</p><br>
 						<textarea style="width: 99%; height: 90px; padding:5px; resize: none;" id="f${ev.idx }" name="f${ev.idx }" ></textarea>
@@ -466,6 +465,7 @@ $("#end").click(function() {
 		}else {
 			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAA+"점입니다.\n평가완료를 하시겠습니까?")){
 				score.value = sumAA;
+				console.log(score);
 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
 				form.submit();
 				// 뒤로가기 버튼 비활성화
@@ -486,6 +486,7 @@ $("#end").click(function() {
 		} else {
 			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료를 하시겠습니까?")){
 				score.value = sumAB;
+				console.log(score);
 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
 				form.submit();
 				// 뒤로가기 버튼 비활성화

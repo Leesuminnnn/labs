@@ -25,6 +25,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.nnn.app.service.DemoService;
 import com.nnn.app.vo.AjaxResponse15;
 import com.nnn.app.vo.AjaxResponse16;
@@ -295,7 +296,13 @@ public class DemoController {
         List<ScoreVo> score = new ArrayList<ScoreVo>();
         score = demoService.scoreSelect(map);
         mv.addObject("score", score);
-        
+        System.out.println(score);
+        if(score.isEmpty() ) {
+        	System.out.println("값이없음");
+        	int scoreempty = 0;
+        	mv.addObject("scoreempty",scoreempty);
+        	System.out.println(scoreempty);
+        }
 //		// 부서장 쿼리 출력
 //		List<TestusersVo> list2 = new ArrayList<TestusersVo>();
 //		list2 = testService.BTlist(map);

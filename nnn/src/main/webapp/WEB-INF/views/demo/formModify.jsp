@@ -9,76 +9,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css">
 <title>근무평가</title>
 <style>
-td {
-	border: 1px solid #000;
-	text-align: center;
-	padding : 15px;
-}
 </style>
 </head>
 <body>
 
 <form id="frm" onsubmit="return false;">
-	<div class="header">
-		<div class="logo" style="margin : 20px auto 20px auto; text-align: center;">
-			<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
-			<a style="position: absolute; right: 0;" href="${pageContext.request.contextPath}/demo/Logout">로그아웃</a>
+	<div class="logo" style="position: relative;">
+		<div style="align-items: center; display: flex; height: 62px;">
+			<img style="position: relative; left: 50%; transform: translate(-50%);" 
+			src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
+		</div>
+		<div>
+			<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
+				<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
+			</a>
 		</div>
 	</div>
 	<div class="section">
 		<div class="container">
-		<!-- 
-			<div class="progress">
-				<progress id="progress" value="0" min="0" max="100"></progress>
+			<div class="content">
+			
 			</div>
-			 -->
 			<div class="info">
-				<p style="margin-bottom: 10px;">▣ 평가자 및 평가대상자 정보를 확인해주세요.</p>
-				<div class="infobox">
-					<table style="border:1px solid #000; border-collapse: collapse;">
-						<tr>
-							<td style="background-color: #08254c; color: #fff;" colspan="4">평가자</td>
-						</tr>
-						<tr>
-							<td>부서명</td><td>사원번호</td><td>직급</td><td>사원명</td>
-						</tr>
-						<tr>
-							<td>${info.hspt_subname }</td>
-							<td>${info.id }</td>
-							<td>${info.hspt_position }</td>
-							<td>
-							<c:set var="firstName" value="${fn:substring(info.name, 0, 1)}" />
-    						${firstName }ㅇㅇ</td>
-						</tr>
-					</table>
-					<div>==========></div>
-					<table style="border:1px solid #000; border-collapse: collapse;">
-						<tr>
-							<td style="background-color: #08254c; color: #fff;" colspan="4">평가대상자</td>
-						</tr>
-						<tr>
-							<td>부서명</td><td>사원번호</td><td>직급</td><td>사원명</td>
-						</tr>
-						<tr>
-							<td>${target.hspt_subname }</td>
-							<td>${target.id }</td>
-							<td>${target.hspt_position }</td>
-							<td>
-							<c:set var="targetfirstName" value="${fn:substring(target.name, 0, 1)}" />
-    						${targetfirstName }ㅇㅇ</td>
-						</tr>
-					</table>
+					<div>
+						<div class="info_name">
+							<span class="normal">
+								<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
+								${infofirstName}ㅇㅇ
+							</span>
+							<span class="light info_id">(사원번호 : ${info.id })</span>
+						</div>
+						<div class="info_hs light">
+							<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
+						</div>
+						<div class="info_date light" >
+							<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div style="border-bottom:3px double #000; margin-top: 15px; margin-bottom: 15px;"></div>
-
+				<div class="target_text flex">
+					<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
+					<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+				</div>
+				<div class="target">
+					<div class="target_box">
+						<table style="width: 100%; height: 180px;">
+							<tr class="target_box_header">
+								<td colspan="4">평가대상자</td>
+							</tr>
+							<tr class="target_box_1">
+								<td>부서명</td><td>사원번호</td><td>직급</td><td>성명</td>
+							</tr>
+							<tr class="target_box_2">
+								<td>${target.hspt_subname }</td><td>${target.id }</td><td>${target.hspt_position }</td>
+								<td>
+								<c:set var="targetfirstName" value="${fn:substring(target.name, 0, 1)}" />
+		    						${targetfirstName }ㅇㅇ
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
 			<div class="scrollbase">
 			<div class="area">
-				<b>[ 섬김 ]</b><br><br>
-				
+				<div class="bold area_header">섬김</div>
 				<c:set var="index" value="1"/>
 				<c:set var="a" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
@@ -91,39 +89,78 @@ td {
 											
 											    <c:choose>
 											        <c:when test="${t.index eq '1' and ev.idx eq 1 }">
-											       
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+											       		<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '2' and ev.idx eq 2}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 												</c:choose>
 											</c:forEach>	
@@ -138,124 +175,264 @@ td {
 											    <c:choose>
 											        <c:when test="${t.index eq '1' and ev.idx eq 12 }">
 											       
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '2' and ev.idx eq 13}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '3' and ev.idx eq 14}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '4' and ev.idx eq 15}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '5' and ev.idx eq 16}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    
 								                    <c:when test="${t.index eq '6' and ev.idx eq 17}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '7' and ev.idx eq 18}">
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 												</c:choose>
 											</c:forEach>
@@ -265,7 +442,7 @@ td {
 							</c:if>
 						<c:set var="a" value="${a +1 }"/>
 					</c:forEach>
-				<b>[ 배움 ]</b><br><br>
+				<div class="bold area_header">배움</div>
 				<c:set var="b" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '배움' }"><p class="question">${status.count}. ${ev.d1}</p><br>
@@ -276,38 +453,78 @@ td {
 										<c:forEach items="${resultList}" var="t">
 										    <c:choose>
 										        <c:when test="${t.index eq '3' and ev.idx eq 3 }">
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+							                        <label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 							                    <c:when test="${t.index eq '4' and ev.idx eq 4 }">
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+							                        <label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 											</c:choose>
 										</c:forEach>
@@ -317,76 +534,154 @@ td {
 									<!-- 부서원 1 ~ 21 문제 -->
 										<p class="answer">
 											<c:forEach items="${resultList}" var="t">
-											
 											    <c:choose>
 											        <c:when test="${t.index eq '8' and ev.idx eq 19 }">
-											       
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+											       		<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '9' and ev.idx eq 20}">
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '10' and ev.idx eq 21}">
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '11' and ev.idx eq 22}">
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 												</c:choose>
 											</c:forEach>
@@ -396,7 +691,7 @@ td {
 						</c:if>
 						<c:set var="b" value="${b +1 }"/>
 					</c:forEach>
-				<b>[ 키움 ]</b><br><br>
+				<div class="bold area_header">키움</div>
 				
 				<c:set var="c" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
@@ -407,38 +702,78 @@ td {
 										<c:forEach items="${resultList}" var="t">
 										    <c:choose>
 										        <c:when test="${t.index eq '5' and ev.idx eq 5 }">
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+										        	<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 							                    <c:when test="${t.index eq '6' and ev.idx eq 6 }">
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+							                        <label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 											</c:choose>
 										</c:forEach>
@@ -451,90 +786,189 @@ td {
 											
 											    <c:choose>
 											        <c:when test="${t.index eq '12' and ev.idx eq 23 }">
-											       
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+											       		<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '13' and ev.idx eq 24}">
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '14' and ev.idx eq 25}">
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '15' and ev.idx eq 26}">
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}"value="우수"  <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '16' and ev.idx eq 27}">
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 												</c:choose>
 											</c:forEach>
@@ -554,39 +988,79 @@ td {
 										<c:forEach items="${resultList}" var="t">
 										    <c:choose>
 										        <c:when test="${t.index eq '7' and ev.idx eq 7 }">
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+										        	<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 							                    <c:when test="${t.index eq '8' and ev.idx eq 8 }">
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
-							                    </c:when>
+							                    	<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
+								                </c:when>
 											</c:choose>
 										</c:forEach>
 									</p><br><br>
@@ -598,39 +1072,78 @@ td {
 											
 											    <c:choose>
 											        <c:when test="${t.index eq '17' and ev.idx eq 28 }">
-											       
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+											        	<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 								                    </c:when>
 								                    <c:when test="${t.index eq '18' and ev.idx eq 29}">
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+								                    	<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="d${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 								                    </c:when>
 												</c:choose>
 											</c:forEach>
@@ -640,7 +1153,7 @@ td {
 						</c:if>
 						<c:set var="d" value="${d +1 }"/>
 					</c:forEach>
-				<b>[ 목표관리 ]</b><br><br>
+				<div class="bold area_header">목표관리</div>
 				<c:set var="e" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
 						<c:if test="${ev.d3 eq '목표관리' }"><p class="question">${status.count}. ${ev.d1}</p><br>
@@ -650,38 +1163,78 @@ td {
 										<c:forEach items="${resultList}" var="t">
 										    <c:choose>
 										        <c:when test="${t.index eq '9' and ev.idx eq 9 }">
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+										        	<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 							                    <c:when test="${t.index eq '10' and ev.idx eq 10 }">
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-							                        </label>
-							                        <label>
-							                            <input type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-							                        </label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">우수</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">보통</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">미흡</span>
+														</span>
+													</label>
+													<label class="label">
+														<span class="alignBox">
+															<input class="radio" type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+											                <span class="radioimg"></span>
+											                <span class="inputTxt">매우미흡</span>
+														</span>
+													</label>
 							                    </c:when>
 											</c:choose>
 										</c:forEach>
@@ -694,39 +1247,78 @@ td {
 											
 											    <c:choose>
 											        <c:when test="${t.index eq '19' and ev.idx eq 30 }">
-											       
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
-								                    </c:when>
-								                    <c:when test="${t.index eq '20' and ev.idx eq 31}">
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>매우우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>우수
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>보통
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>미흡
-								                        </label>
-								                        <label>
-								                            <input type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>매우미흡
-								                        </label>
+											        	<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
+									                    </c:when>
+									                    <c:when test="${t.index eq '20' and ev.idx eq 31}">
+									                        <label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="매우우수" <c:if test="${t.var eq '매우우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="우수" <c:if test="${t.var eq '우수' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">우수</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="보통" <c:if test="${t.var eq '보통' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">보통</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="미흡" <c:if test="${t.var eq '미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">미흡</span>
+															</span>
+														</label>
+														<label class="label">
+															<span class="alignBox">
+																<input class="radio" type="radio" name="e${ev.idx}" value="매우미흡" <c:if test="${t.var eq '매우미흡' }">checked</c:if>/>
+												                <span class="radioimg"></span>
+												                <span class="inputTxt">매우미흡</span>
+															</span>
+														</label>
 								                    </c:when>
 												</c:choose>
 											</c:forEach>
@@ -738,16 +1330,30 @@ td {
 					</c:forEach>
 				<b>[ 종합평가 ]</b><br><br>
 					<c:forEach items="${evf}" var="ev">
-						<c:if test="${ev.d3 eq '주관식' }"><p class="question">${ev.d1}</p><br>
+						<c:if test="${ev.d3 eq '주관식' }">
 						<c:forEach items="${resultList}" var="t">
 							<c:choose>
 						        <c:when test="${t.index eq '11' and ev.idx eq 11 }">
-							        <textarea style="width: 99%; height: 90px; padding:5px;" id="f${ev.idx }" name="f${ev.idx }">${t.var }</textarea>
-									<br><br>
+						        	<table style="width: 100%;">
+										<tr style="background-color: #1b304a; color: #fff;">
+											<td><p class="question bold">${ev.d1}</p></td>
+										</tr>
+										<tr>
+											<td style="background-color: #fafafa; padding: 0; height: 125px;">
+											<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
+										</tr>
+									</table>
 								</c:when>
 								<c:when test="${t.index eq '21' and ev.idx eq 32 }">
-							        <textarea style="width: 99%; height: 90px; padding:5px;" id="f${ev.idx }" name="f${ev.idx }">${t.var }</textarea>
-									<br><br>
+									<table style="width: 100%;">
+										<tr style="background-color: #1b304a; color: #fff;">
+											<td><p class="question bold">${ev.d1}</p></td>
+										</tr>
+										<tr>
+											<td style="background-color: #fafafa; padding: 0; height: 125px;">
+											<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
+										</tr>
+									</table>
 								</c:when>
 							</c:choose>
 						</c:forEach>
@@ -755,12 +1361,12 @@ td {
 						</c:if>
 					</c:forEach>
 			</div>
-			<div class="end-area">
-				<!--  -->
-					<button class="end" id="end">
-						평가완료
-					</button>
-				</div>
+			<div class="end_area flex flex-center">
+			<!--  -->
+				<button class="end" id="end">
+					평가완료
+				</button>
+			</div>
 		</div>
 
 		
@@ -774,10 +1380,43 @@ td {
 	</div>
 	<input type="hidden" name="score" value="" id="score">
 </form>
+
+<div class="modal normal">
+	<div class="modal_body">
+		<div>
+			<div class="menu_msg">text</div>
+			<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
+			확인
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal2 normal">
+	<div class="modal_body2">
+		<div>
+			<div class="menu_msg2">text</div>
+			<div class="modal_footer2">
+				<div style="top: 40%" class="btn modal_btn2" id="modal_insert">
+					확인
+				</div>
+				<div style="top: 40%" class="btn pink_btn2" onclick="closePopup2()">
+					취소
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 var form = document.getElementById("frm");
 var scoreInput = document.getElementById("score");
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const modal2 = document.querySelector('.modal2');
+const msg = document.querySelector('.menu_msg');
+const msg2 = document.querySelector('.menu_msg2');
+const modal_submit = document.getElementById("modal_insert");
 //문제유형
 var ev = "${ev}";
 console.log(ev);
@@ -894,19 +1533,32 @@ $("#end").click(function() {
 			console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);
 			
 			
-			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			//alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+
+			modal.classList.toggle('show');
+		 	msg.style.top = '34%';
+			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
+			if (modal.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
 			return false;
 		}else {
-			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAA+"점입니다.\n평가완료를 하시겠습니까?")){
-				score.value = sumAA;
+			modal2.classList.toggle('show');
+		 	msg2.style.top = '34%';
+			msg2.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAA+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
+			if (modal2.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
+
+			modal_submit.addEventListener("click", function() {
+				if (modal2.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
+				score.value = sumAB;
 				form.action = "${pageContext.request.contextPath}/demo/formUpdate/${info.idx}/${target.idx}/${team}";
 				form.submit();
-				// 뒤로가기 버튼 비활성화
-				window.history.pushState(null, null, window.location.href);
-				window.onpopstate = function(event) {
-				    window.history.pushState(null, null, window.location.href);
-				};
-			}
+				
+			});
 		}
 	}else {
 		if(!a12 || !a13 || !a14 || !a15 || !a16 || !a17 || !a18 || 
@@ -914,19 +1566,42 @@ $("#end").click(function() {
 				!c23 || !c24 || !c25 || !c26 || !c27 ||
 				!d28 || !d29|| !e30|| !e31 ||				
 				$.trim(f32) === ''){
-			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+//			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			modal.classList.toggle('show');
+		 	msg.style.top = '34%';
+			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
+			if (modal.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
+			
 			return false;
 		} else {
-			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료를 하시겠습니까?")){
+// 			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료를 하시겠습니까?")){
+// 				score.value = sumAB;
+// 				form.action = "${pageContext.request.contextPath}/demo/formUpdate/${info.idx}/${target.idx}/${team}";
+// 				form.submit();
+// 				// 뒤로가기 버튼 비활성화
+// 				window.history.pushState(null, null, window.location.href);
+// 				window.onpopstate = function(event) {
+// 				    window.history.pushState(null, null, window.location.href);
+// 				};
+// 			}
+			modal2.classList.toggle('show');
+		 	msg2.style.top = '34%';
+			msg2.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAB+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
+			if (modal2.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
+
+			modal_submit.addEventListener("click", function() {
+				if (modal2.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
 				score.value = sumAB;
 				form.action = "${pageContext.request.contextPath}/demo/formUpdate/${info.idx}/${target.idx}/${team}";
 				form.submit();
-				// 뒤로가기 버튼 비활성화
-				window.history.pushState(null, null, window.location.href);
-				window.onpopstate = function(event) {
-				    window.history.pushState(null, null, window.location.href);
-				};
-			}
+				
+			});
 		}
 	}
 	
@@ -934,8 +1609,18 @@ $("#end").click(function() {
 });
 
 
-
-
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+function closePopup2(){
+	modal2.classList.toggle('show');
+	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
 /* 
 $(document).ready(function(){ 
     window.onbeforeunload = function(){

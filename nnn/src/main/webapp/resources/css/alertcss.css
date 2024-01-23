@@ -45,6 +45,20 @@
 	}
 .enroll_box p{padding-bottom: 56px;}
 .gray_btn {width: 90px;background: #ffffff;color: #999999;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;}
+.modal_btn {
+	width: 156px;
+	background: #143257;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+	font-size: 19px;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 .pink_btn {
 	width: 136px;
 	background: #32B0CA;
@@ -73,8 +87,8 @@ cs_btn {
 	display: none;
 	background-color: rgba(51, 51, 51, 0.7);
 	/* 애니메이션 효과 */
-	/* transform: translateY(100%); */
-	/* transition: transform 1s ease-in-out; */
+	transform: translateY(100%);
+	transition: transform 1s ease-in-out;
 }
 .modal2 {
 	position: fixed;
@@ -86,8 +100,8 @@ cs_btn {
 	display: none;
 	background-color: rgba(51, 51, 51, 0.7);
 	/* 애니메이션 효과 */
-	/* transform: translateY(100%); */
-	/* transition: transform 1s ease-in-out; */
+	transform: translateY(100%);
+	transition: transform 2s ease-in-out;
 }
 .modal.show {
 	display: block;
@@ -154,7 +168,7 @@ cs_btn {
 	left: 50%;
 
 	width: 680px;
-	height: 252px;
+	height: 290px;
 
 	text-align: center;
 
@@ -172,6 +186,36 @@ cs_btn {
     left: 12%;
     transform: translate(-50%, -50%);
     justify-content: space-evenly;
+}
+.modal_footer2 {
+	position: relative;
+	top: 40%;
+	display: flex;
+	justify-content: space-around;
+	transform: translate(-50%, -50%);
+	left: 50%;
+}
+.modal_btn2 {
+	width: 156px;
+	background: #143257;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+	font-size: 19px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.pink_btn2 {
+	width: 146px;
+	background: #F89D00;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+	font-size: 19px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
 }
 @media all and (max-width: 768px){
 	/* 브라우저 창 width가 768px보다 작아지는 순간부터 적용
