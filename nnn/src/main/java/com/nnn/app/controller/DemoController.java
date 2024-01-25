@@ -166,7 +166,7 @@ public class DemoController {
 	
 	@RequestMapping(value="Info/{idx}")
 	public ModelAndView info(UsersVo vo, ModelAndView mv, HttpSession session, @PathVariable("idx") Integer idx, HttpServletRequest request) {
-		session.getAttribute("loginMember");
+		session.getAttribute("loginmember");
 		
 		System.out.println("#########################1");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -297,12 +297,18 @@ public class DemoController {
         score = demoService.scoreSelect(map);
         mv.addObject("score", score);
         System.out.println(score);
+        int scoreempty = 0;
         if(score.isEmpty() ) {
         	System.out.println("값이없음");
-        	int scoreempty = 0;
+        	scoreempty = 0;
         	mv.addObject("scoreempty",scoreempty);
-        	System.out.println(scoreempty);
+        	System.out.println("scoreempty "+scoreempty);
+        }else {
+        	scoreempty = 1;
+        	mv.addObject("scoreempty",scoreempty);
+        	System.out.println("scoreempty "+scoreempty);
         }
+        
 //		// 부서장 쿼리 출력
 //		List<TestusersVo> list2 = new ArrayList<TestusersVo>();
 //		list2 = testService.BTlist(map);
@@ -430,7 +436,7 @@ public class DemoController {
 	public ModelAndView form(ModelAndView mv, HttpSession session, 
 			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
 			@PathVariable("team") String team) {
-		session.getAttribute("loginMember");
+		session.getAttribute("loginmember");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		mv.addObject("info", demoService.info(idx));
@@ -545,7 +551,7 @@ public class DemoController {
 			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
 			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32, @RequestParam(name="score", required = false) int score
 			) throws Exception {
-		session.getAttribute("loginMember");
+		session.getAttribute("loginmember");
 		md.addAttribute("info", demoService.info(infoidx));
 		md.addAttribute("target", demoService.info(targetidx));
 		md.addAttribute("team", team);
@@ -688,7 +694,7 @@ public class DemoController {
 	@RequestMapping(value="FormEnd/{idx}/{idx2}")
 	public ModelAndView formend( @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, HttpSession session, ModelAndView mv) throws Exception {
 		
-		session.getAttribute("loginMember");
+		session.getAttribute("loginmember");
 		mv.addObject("info", demoService.info(infoidx));
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println( demoService.info(infoidx));
@@ -716,7 +722,7 @@ public class DemoController {
 			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
 			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32, @RequestParam(name="score", required = false) int score
 			) throws Exception {
-		session.getAttribute("loginMember");
+		session.getAttribute("loginmember");
 		md.addAttribute("info", demoService.info(infoidx));
 		md.addAttribute("target", demoService.info(targetidx));
 		md.addAttribute("team", team);

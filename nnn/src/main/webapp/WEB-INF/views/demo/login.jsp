@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testlogincss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -17,7 +17,83 @@
 <body>
 <form action="${pageContext.request.contextPath}/demo/loginAction" method="post">
 	<section>
+	<div class="login-bg">
+		<div class="main">
+			
+			<div class="login-header">
+				<span class="header-text bold">코어솔루션 인사평가 시스템</span>
+			</div>
+			
+			<div class="login-area">
+				<div class="login-content">
+					<div class="container">
+						<div class="content" style="">
+							<div class="">
+								<span>Login</span>
+							</div>
+							<div class="id-area">
+								<input class="input-text" style="padding-left: 23px;" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
+							</div>
+							<div class="pwd-area" style="">
+								<input class="input-text" style="padding-left: 23px;" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
+							</div>
+							<div class="" style="text-align: left; margin-bottom: 12px; margin-bottom: 20px;">
+								<span style="color: #ffa200; font-size: 8pt; font-weight: bold;">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
+							</div>
+							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 3px;">
+								<input type="radio" name="radio" id="chk_name" checked />
+								<label style="cursor:pointer;" for="chk_name"><span>사번 / 이름 <b style="color: #0e366c">(비밀번호 설정 전)</b></span></label>
+							</div>
+							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px;">
+								<input type="radio" name="radio" id="chk_no" />
+								<span>
+								<label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: #0e366c">(비밀번호 설정 후)</b>
+								</label>
+								</span>
+							</div>
+							<div style="text-align: left; margin-bottom: 3px;">
+								<span style="color: #444444; font-size: 10pt; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기</span>
+							</div>
+							<div>
+								<button style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer;">로그인</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="notice-content">
+					<div class="container">
+						<div class="content content2">
+							<div class="">
+								<span>Notice</span>
+							</div>
+							<div class="notice-bg">
+								<div class="notice-header bold">
+									<span>직원 평가완료 후 재평가(수정)이 안되오니 신중하게 평가해 주시기 바랍니다</span>
+								</div>
+								<div class="notice-text normal">
+									<table style="margin-top: 13px; width: 100%;">
+										<c:forEach items="${notice}" var="n">
+											<tr <c:if test="${n.idx eq '1' }">colspan="2"</c:if> style="height: 25px; <c:if test="${n.idx eq '1' }">color:red; font-size:15px; font-weight: bolder;</c:if>">
+												<td style="<c:if test="${n.idx eq 6 }">align-items: start; display: flex;</c:if>">${n.d2 }</td>
+												<td>${n.d3 }</td>
+											</tr>
+										</c:forEach>
+									</table>
+								</div>
+							</div>
+							<div class="notice-btn">
+								<div class="manual" id="manual" style="">근무평가 시스템 메뉴얼 보기</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 	
+	
+	<!-- 
 	<div class="login">
 		<h2>코어솔루션 인사평가 시스템</h2>
 		<ul>
@@ -25,11 +101,18 @@
 			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
 			<li style="color: red; font-size:12px;"><b>※ 개인 비밀번호를 설정 하신 후 로그인시 아래의 사번/비밀번호 체크후 사번과 비밀번호를 입력부탁드립니다.</b></li>
 			<li style="display: flex; flex-wrap: wrap;">
-				<input type="radio" name="radio" id="chk_name" checked><label style="cursor:pointer;" for="chk_name">사번/이름<b style="color: red">(비밀번호 설정 전)&nbsp;&nbsp;</b></label>
-				<input type="radio" name="radio" id="chk_no" ><label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: red">(비밀번호 설정 후)</b></label>
+				<input type="radio" name="radio" id="chk_name" checked>
+				<label style="cursor:pointer;" for="chk_name">사번/이름
+					<b style="color: red">(비밀번호 설정 전)&nbsp;&nbsp;</b>
+				</label>
+				<input type="radio" name="radio" id="chk_no" >
+				<label style="cursor:pointer;" for="chk_no">사번/비밀번호
+					<b style="color: red">(비밀번호 설정 후)</b>
+				</label>
 			</li>
 			<li><button>로그인</button></li>
-			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'"><p style="cursor:pointer; color: #000099; "><b style="border-bottom: 1px solid;">비밀번호를 잊으셨나요?</b></p></li>			
+			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">
+			<p style="cursor:pointer; color: #000099; "><b style="border-bottom: 1px solid;">비밀번호를 잊으셨나요?</b></p></li>			
 		</ul>
 		<div style="display: none;">
 			<ul>
@@ -62,9 +145,17 @@
 		<div class="nav">
 			<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 		</div>
-	</div>
+	</div> 
+	
+	
+	
+	
+	
+	<!--  -->
 	</section>
-		
+	<footer class="footer">
+	
+	</footer>
 </form>
 </body>
 <script>

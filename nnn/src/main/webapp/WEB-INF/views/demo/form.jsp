@@ -19,60 +19,78 @@
 <div class="main normal">
 
 <form id="frm" onsubmit="return false;">
-	<div class="logo" style="position: relative;">
-		<div style="align-items: center; display: flex; height: 62px;">
-			<img style="position: relative; left: 50%; transform: translate(-50%);" 
-			src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
+	<div class="wrapper">
+		<c:if test="${sessionScope.loginmember eq 12365478}">
+			<div style="position: absolute; left: 10px; top: 15px;z-index: 1;">
+				<a href="${pageContext.request.contextPath}/demo/admin">
+					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
+				</a>
+			</div>
+		</c:if>
+		<div class="logo" style="position: relative;">
+			<div style="align-items: center; display: flex; height: 62px;">
+				<img style="position: relative; left: 50%; transform: translate(-50%);" 
+				src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
+			</div>
+			<div>
+				<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
+					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
+				</a>
+			</div>
 		</div>
-		<div>
-			<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
-				<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
-			</a>
+		<div class="info">
+			<div>
+				<div class="info_area">
+					<div class="info_name">
+						<span class="normal">
+							<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
+							${infofirstName}ㅇㅇ
+						</span>
+						<span class="light info_id">(사원번호 : ${info.id })</span>
+					</div>
+					<div class="info_hs light">
+						<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
+					</div>
+					<div class="info_date light" >
+						<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="target_info">
+			<div class="target_text flex">
+				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
+				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+			</div>
+		</div>
+		<div class="target_area">
+			<div class="target">
+				<div class="target_box">
+					<table style="">
+						<tr class="target_box_header">
+							<td colspan="4">평가대상자</td>
+						</tr>
+						<tr class="target_box_1">
+							<td>부서명</td><td>사원번호</td><td>직급</td><td>성명</td>
+						</tr>
+						<tr class="target_box_2">
+							<td>${target.hspt_subname }</td><td>${target.id }</td><td>${target.hspt_position }</td>
+							<td>
+							<c:set var="targetfirstName" value="${fn:substring(target.name, 0, 1)}" />
+	    						${targetfirstName }ㅇㅇ
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="section">
-		<div class="container">
-			<div class="content">
-				<div class="info">
-					<div>
-						<div class="info_name">
-							<span class="normal">
-								<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
-								${infofirstName}ㅇㅇ
-							</span>
-							<span class="light info_id">(사원번호 : ${info.id })</span>
-						</div>
-						<div class="info_hs light">
-							<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
-						</div>
-						<div class="info_date light" >
-							<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
-						</div>
-					</div>
-				</div>
-				<div class="target_text flex">
-					<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-					<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
-				</div>
-				<div class="target">
-					<div class="target_box">
-						<table style="width: 100%; height: 180px;">
-							<tr class="target_box_header">
-								<td colspan="4">평가대상자</td>
-							</tr>
-							<tr class="target_box_1">
-								<td>부서명</td><td>사원번호</td><td>직급</td><td>성명</td>
-							</tr>
-							<tr class="target_box_2">
-								<td>${target.hspt_subname }</td><td>${target.id }</td><td>${target.hspt_position }</td>
-								<td>
-								<c:set var="targetfirstName" value="${fn:substring(target.name, 0, 1)}" />
-		    						${targetfirstName }ㅇㅇ
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
+	
+		<div class="section">
+			<div class="container">
+				<div class="content">
 			<div class="scrollbase">
 			<div class="area">
 				<div class="bold area_header">섬김</div>

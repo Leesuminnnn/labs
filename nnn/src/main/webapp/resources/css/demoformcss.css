@@ -23,6 +23,9 @@ td {
 .main {
 	background-color: #f7f7f7;
 }
+.section {
+	padding-top: 467px;
+}
 .logo {
 		background-color: #1b304a;
 	}
@@ -31,11 +34,12 @@ td {
 	color: #fff;
 	height: 145px;
 	padding: 28px;
+}
+.info > div > div{
+    margin: 0 20% 0 20%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-}
-.info div {
 }
 .info_name {
 	font-size: 30px;
@@ -51,19 +55,12 @@ td {
 .info_date {
 	color: #c7c7c7;
 }
-.target {
-	padding: 20px;
-}
-.target_box table {
-	border:1px solid #d7d7d7; 
-	width: 100%;
-	background-color: #ffffff;
-	color: #222222;
+.target_info {
+	background-color: #efefef;
 }
 .target_text {
-	background-color: #efefef;
-	padding-left: 20px;
 	height: 60px;
+	margin: 0 20% 0 20%;
 }
 .target_text img{
 	width: 20px;
@@ -71,6 +68,23 @@ td {
 }
 .target_text span{
 	font-size: 16px;
+}
+.target {
+	background-color: #f7f7f7;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	border-bottom: 2px solid #1b304a;
+	margin: 0 20%;
+}
+.target_box {
+	
+}
+.target_box table {
+	border:1px solid #d7d7d7; 
+	width: 100%;
+	background-color: #ffffff;
+	color: #222222;
+	height: 157px;
 }
 .target_box_header {
 	background-color: #1b304a;
@@ -89,8 +103,7 @@ td {
 .area {
 	padding: 20px;
 	background-color: #fff;
-	border-top: 2px solid #1b304a;
-	margin: 0 20px;
+	margin: 0 20%;
 }
 .area_header {
 	padding-top: 10px;
@@ -128,4 +141,11 @@ td {
 	display: flex;
 	justify-content: center;
 	padding: 20px;
+}
+
+.wrapper {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
 }

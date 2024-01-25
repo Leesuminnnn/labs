@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+section {
+	background-color: rgb(224, 224, 224);
+	width: 100vw;
+	height: calc(100vh - 220px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login-bg {
+	/* height: calc(100vh - 220px); */
+	background: url(../icon/ev/login_bg2.png) no-repeat center /954px;
+	padding: 37px 0 37px 0;
+}
+.main {
+	height: 634px;
+	width: 954px;
+	padding: 0px 83px 120px 83px;
+}
+.line {
+	border-left: 1px solid #d8d8d8;
+    height: 330px;
+}
+.login-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 98px;
+}
+.header-text {
+	font-size: 20pt;
+	color: #f5f5f5;
+}
+.login-area {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 415px;
+	padding: 20px 0 20px 0;
+}
+.login-content {
+	border-right: 1px solid #d8d8d8;
+	height: 100%;
+	width: 50%;
+}
+.container {
+	height: 100%;
+}
+.content {
+	height: 100%;
+	padding: 0 33px 0;
+}
+.container > div > div:first-child {
+	margin-bottom: 24px;
+    text-align: center;
+}
+.container > div > div:first-child > span {
+	color: #1b2e46;
+    font-size: 20pt;
+    font-weight: 600;
+}
+.id-area {
+	margin-bottom: 7px;
+}
+.pwd-area {
+	margin-bottom: 8px;
+}
+.input-text {
+	width: 100%; height: 50px; border-radius: 7px; background-color: #e8e8e8; border: none;
+}
+.notice-content {
+	height: 100%;
+	width: 50%;
+}
+.notice-bg {
+	background: url(../icon/ev/memo.png) no-repeat center /343px;
+	height: 80%;
+	display: flex;
+	position: relative;
+	top: -35px;
+	padding: 60px 35px 28px 31px;
+	flex-wrap: nowrap;
+	flex-direction: column;
+}
+.notice-header {
+	width: 100%;
+	height: 45px;
+	color: #ffa200;
+	font-size: 10pt;
+}
+.notice-text {
+	width: 100%;
+	color: #222222;
+	font-size: 9pt;
+	display: flex;
+    flex-wrap: wrap;
+}
+.notice-text > div {
+	display: flex;
+	margin-bottom: 5px;
+}
+.content2 {
+	padding: 0px 15px 0;
+}
+}
+.container {
+	text-align: center;
+}
+.footer {
+	height: 220px;
+	background-color: #2d2d2d;
+}
+.notice-btn {
+	position: relative;
+    top: -35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.manual {
+	background-color: #b6b6b6;
+    border: 1px solid #b6b6b6;
+    border-radius: 7px;
+    height: 50px;
+    width: calc(100% - 20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f5f5f5;
+    cursor:pointer;
+}

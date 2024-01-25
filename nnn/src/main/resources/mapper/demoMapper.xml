@@ -2916,8 +2916,7 @@
 	
 	<!-- 리스트에서 평가 완료 확인 -->
 	<select id="whetherselect" resultType="map" parameterType="map">
-		select * from demo_whether where d1 = #{idx} and del_yn = 'N'
-		
+		select * from demo_users u join demo_whether w on u.idx = w.d1 where w.d1 = #{idx} and w.del_yn = 'N'
 	</select>
 	
 	<select id="phOne" resultType="int" parameterType="map">
