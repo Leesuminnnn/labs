@@ -7,26 +7,121 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css"><%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
+.logo {
+	background-color: #1b304a;
+}
+.active {
 
+}
+td {
+	border: 1px solid #d7d7d7;
+	height: 45px;
+	text-align: center;
+}
+.wrapper {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
+.scroll-container {
+	padding: 10px; 
+}
+.scrolltable {
+	width: 100%;
+	border: 1px solid #cccccc;
+	color: #222222;
+}
+thead{
+	position: sticky;
+	top: 72px;
+}
+thead tr td{
+	position: sticky;
+	top: 72px;
+}
+thead tr:first-child {
+	background: #425c7b;
+	color: #fff;
+}
+thead tr:nth-child(2) {
+	background:#586f8b;
+	color: #fff;
+}
+thead tr:last-child {
+	background:#d9e9e9;
+	font-weight: 700;
+}
+td:nth-child(4) {
+border-right: 1px solid #cccccc;
+}
+.nav__link {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	padding-left: 25px;
+	border-left: 4px solid #2f425a;
+	cursor:pointer;
+}
+.active {
+	border-left: 4px solid #00bec2;
+}
 </style>
 </head>
 <body>
 <form id="frm">
-<section>
+<div class="wrapper">
+	<div class="logo" style="position: relative;">
+		<c:if test="${sessionScope.loginmember eq 12365478}">
+			<div style="position: absolute; left: 10px; top: 15px; z-index: 1;">
+				<a href="${pageContext.request.contextPath}/demo/admin">
+					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
+				</a>
+			</div>
+		</c:if>
+		<div style="align-items: center; display: flex; height: 62px;">
+			<img style="position: relative; left: 50%; transform: translate(-50%);" 
+			src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
+		</div>
+		<div>
+			<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
+				<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
+			</a>
+		</div>
+	</div>
+</div>
+
+
+<section style="display: flex; margin-top: 62px;"> 
+	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
+		<div class="nav__link active" style="">
+			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png">
+			<span>직원DB설정</span>
+		</div>
+		<div class="nav__link" data-menu="perall" data-content="all"  style="">
+			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
+			<span>인사평가 관리</span>
+		</div>
+		<div class="nav__link" style="">
+			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
+			<span>설정</span>
+		</div>
+	</div>
+<%--
 <div style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px; padding-left: 33px;
     transition: .5s; z-index: 101; position: fixed; width: calc(var(--nav--width) + 9.25rem); top: 0; left: 0; height: 80px;">
 		<div style="display: flex; justify-content: space-between;">
 			<div style="width: 100%;">
 				<div class="nav__brand" style="">
 					<a href="${pageContext.request.contextPath}/demo/admin" class="nav__logo" >코어솔루션병원</a>
-				<%-- 
+				
 					<a href="${pageContext.request.contextPath}/e/admin" class="nav__logo" >효사랑</a>
-					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a> --%>
+					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a>
 				</div>
 			</div>
 		</div>
@@ -44,7 +139,7 @@
 					<a href="#" class="nav__link active" style="margin-bottom: 0;" data-menu="userall" data-content="all">
 						<span class="nav_name">직원DB 설정</span>
 					</a>
-					<%-- 
+					
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user1" data-content="content1">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;효사랑전주요양병원 직원명부 ${p1}/${h1}</span>
@@ -56,7 +151,7 @@
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="user3" data-content="content3">
 						<ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
 						<span class="nav_subname">&nbsp;가족사랑요양병원 직원명부 ${p3}/${h3}</span>
-					</a> --%>
+					</a>
 					<div style="border-top:1px solid #fff; margin-bottom: 16px; margin-top: 16px;"></div>
 					<a href="#" class="nav__link" style="margin-bottom: 0;" data-menu="perall" data-content="all">
 						<span class="nav_name">인사평가 관리</span>
@@ -95,48 +190,51 @@
 	 width: calc(var(--nav--width) + 9.25rem); background-color: #08254c; z-index: 100;
 	display: flex; justify-content: space-evenly; left: 0; align-items: center; border-radius: 0;">
 		<div style="display: flex; justify-content: center; flex-wrap: wrap;">
-			<%-- <div style="display: flex; justify-content: center;">
+			<div style="display: flex; justify-content: center;">
 			<input type="text" id="str"><button value="찾기" onclick="findStr()" style="background:url(<%=request.getContextPath() %>/resources/icon/search.png) no-repeat center; background-size: contain"></button>
-			</div> --%>
+			</div>
 			<img style="width: 90%;" src="<%=request.getContextPath() %>/resources/img/core_logo.png">
 		</div>
-	</div>
+	</div> --%>
 	<main id="main-content" 
-			style="width : calc(99vw - (var(--nav--width) + 9.25rem)); height : 100%; margin-left: calc(var(--nav--width) + 9.25rem);">
+			style="width: 100%; background: #f7f7f7; margin-left: 240px;">
 		<!-- 내용을 이곳에 추가 -->
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
-		<!-- 
-		<table style="">
-			<tr>
-				<td>idx</td><td>병원명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호 설정 여부</td><td>비밀번호초기화</td>
-			</tr>
-		
-			<c:forEach items="${users }" var="u">
-				<c:if test="${u.id ne 12365478 }">
-					<tr style="<c:if test="${empty u.pwd }">background: #eaeaea;</c:if>">
-						<td>${u.idx }</td>
-						<td>${u.hspt_name }</td>
-						<td>${u.hspt_subname }</td>
-						<td>${u.id }</td>
-						<td>${u.hspt_position }</td>
-						
-						<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
-							<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
-    						${targetfirstName }ㅇㅇ
+		<div class="scroll-container">
+			<table style="width: 100%; border: 1px solid #cccccc;">
+				
+				<tr style="background: #425c7b; color: #fff;">
+					<td>기관명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호 설정 여부</td><td>비밀번호초기화</td>
+				</tr>
+			
+				<c:forEach items="${users }" var="u">
+					<c:if test="${u.id ne 12365478 }">
+						<tr style="<c:if test="${empty u.pwd }">background: #eaeaea;</c:if>">
 							
-						</td>
-						<td>
-							<c:choose>
-								<c:when test="${empty u.pwd }">미설정</c:when>
-								<c:otherwise>설정완료</c:otherwise>
-							</c:choose>
-						</td>
-						<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" style="cursor:pointer;"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</table>
-		 -->
+							<td>${u.hspt_name }</td>
+							<td>${u.hspt_subname }</td>
+							<td>${u.id }</td>
+							<td>${u.hspt_position }</td>
+							
+							<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
+								<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
+	    						${targetfirstName }ㅇㅇ
+								
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${empty u.pwd }">미설정</c:when>
+									<c:otherwise>설정완료</c:otherwise>
+								</c:choose>
+							</td>
+							<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" style="cursor:pointer;"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+		</div>
+		
+		<!-- 
 		<div style="padding:10px;">
 			<div style=""><span>◈ 인사평가에 사용할  문제의 카테고리를 선택해 주세요.</span></div>
 			<div style="">
@@ -154,7 +252,8 @@
 					<li style="margin-right: 17px;"><label><input type="checkbox"><span>나눔</span></label></li>
 				</ul>
 			</div>
-		</div>
+		</div> -->
+		<!-- 
 		<div style="border-bottom:1px solid #000;"></div>
 		<div style="padding: 10px;">
 			<div style="margin-bottom: 20px;">
@@ -241,6 +340,7 @@
 				</div>
 			</div>
 		</div>
+		-->
 	</main>
 
 </section>
@@ -894,42 +994,38 @@ function perall(contentId) {
 	 				var maintd1 = document.createElement("TD");
 	 				maintd1.textContent = "평가자정보";
 	 				maintd1.setAttribute("colspan","4");
+	 				maintd1.setAttribute("style","border-right: 1px solid #cccccc;");
 	 				var maintd2 = document.createElement("TD");
 	 				maintd2.textContent = "평가대상자수";
 	 				maintd2.setAttribute("rowspan","2");
-	 				maintd2.setAttribute("style","width: 140px;");
 	 				var maintd3 = document.createElement("TD");
 	 				maintd3.textContent = "평가결과수";
 	 				maintd3.setAttribute("rowspan","2");
-	 				maintd3.setAttribute("style","width: 120px;");
 	 				var maintd4 = document.createElement("TD");
 	 				maintd4.textContent = "진행율";
 	 				maintd4.setAttribute("rowspan","2");
 	 				var maintd7 = document.createElement("TD");
 	 				maintd7.textContent = "평가자 마이페이지";
-	 				maintd7.setAttribute("style","width: 187px;");
 	 				maintd7.setAttribute("rowspan","2");
 	 				
 	 				var maintr2 = document.createElement("TR");
 
 					var maintd9 = document.createElement("TD");
 					maintd9.textContent = "기관명";
-	 				maintd9.setAttribute("style","width: 210px;");
 					var maintd10 = document.createElement("TD");
 					maintd10.textContent = "부서명";
-					maintd10.setAttribute("style","width: 150px;");
 					var maintd11 = document.createElement("TD");
 					maintd11.textContent = "직급/직책";
-					maintd11.setAttribute("style","width: 195px;");
 					var maintd12 = document.createElement("TD");
 					maintd12.textContent = "사원명";
+	 				maintd12.setAttribute("style","border-right: 1px solid #cccccc;");
 					
 					var maintr3 = document.createElement("TR");
-					maintr3.setAttribute("style","width: 195px; background:#00A8E4;");
 					var maintd13 = document.createElement("TD");
 					maintd13.setAttribute("colspan","4");
 					maintd13.textContent = "전 직원 정보";
-					
+	 				maintd13.setAttribute("style","border-right: 1px solid #cccccc;");
+	 				
 					var maintd14 = document.createElement("TD");	// 대상자수
 					maintd14.textContent = targetsum;
 					
@@ -1007,22 +1103,18 @@ function perall(contentId) {
 		 					
 		 					var tdhname = document.createElement("TD");
 		 					tdhname.textContent = hname;
-		 					tdhname.setAttribute("style","width: 210px;");
 		 					var tdsname = document.createElement("TD");
 		 					tdsname.textContent = subname;
-		 					tdsname.setAttribute("style","width: 150px;");
 		 					var tdpo = document.createElement("TD");
 		 					tdpo.textContent = position;
-		 					tdpo.setAttribute("style","width: 195px;");
 		 					var tdname = document.createElement("TD");
 		 					tdname.textContent = modifiedName;
+			 				tdname.setAttribute("style","border-right: 1px solid #cccccc;");
 		 					
 		 					var tdtarget = document.createElement("TD");
-		 					tdtarget.setAttribute("style","width: 140px;");
 		 					tdtarget.textContent = tgt;
 		 					
 		 					var tdanswer = document.createElement("TD");
-		 					tdanswer.setAttribute("style","width: 120px;");
 		 					tdanswer.textContent = answercnt;
 		 					
 		 					var tdpersent = document.createElement("TD");
@@ -1032,7 +1124,7 @@ function perall(contentId) {
 		 					if (tdanswer.innerText === tdtarget.innerText) {
 		 						tdpersent.setAttribute("style", "background:#32b0ca;");
 							} else if (tdanswer.innerText == 0) {
-								tdpersent.setAttribute("style", "background: red; color: #fff");
+								tdpersent.setAttribute("style", "background: ; color: #ff0000; font-weight: 600;");
 							}else if (Number(tdtarget.innerText) < Number(tdanswer.innerText)){
 								tr.setAttribute("style", "background: #E6B8AF;")
 							}

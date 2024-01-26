@@ -38,21 +38,21 @@
 								<input class="input-text" style="padding-left: 23px;" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
 							</div>
 							<div class="" style="text-align: left; margin-bottom: 12px; margin-bottom: 20px;">
-								<span style="color: #ffa200; font-size: 8pt; font-weight: bold;">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
+								<span class="bold" style="color: #ffa200; font-size: 8pt;">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
 							</div>
 							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 3px;">
 								<input type="radio" name="radio" id="chk_name" checked />
-								<label style="cursor:pointer;" for="chk_name"><span>사번 / 이름 <b style="color: #0e366c">(비밀번호 설정 전)</b></span></label>
+								<label style="cursor:pointer;" for="chk_name"><span class="normal">사번 / 이름 <b style="color: #0e366c">(비밀번호 설정 전)</b></span></label>
 							</div>
 							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px;">
 								<input type="radio" name="radio" id="chk_no" />
 								<span>
-								<label style="cursor:pointer;" for="chk_no">사번/비밀번호<b style="color: #0e366c">(비밀번호 설정 후)</b>
+								<label style="cursor:pointer;" for="chk_no"><span class="normal">사번/비밀번호<b style="color: #0e366c">(비밀번호 설정 후)</b></span>
 								</label>
 								</span>
 							</div>
 							<div style="text-align: left; margin-bottom: 3px;">
-								<span style="color: #444444; font-size: 10pt; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기</span>
+								<span class="normal" style="color: #444444; font-size: 10pt; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기</span>
 							</div>
 							<div>
 								<button style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer;">로그인</button>
@@ -73,19 +73,24 @@
 								<div class="notice-text normal">
 									<table style="margin-top: 13px; width: 100%;">
 										<c:forEach items="${notice}" var="n">
-											<tr <c:if test="${n.idx eq '1' }">colspan="2"</c:if> style="height: 25px; <c:if test="${n.idx eq '1' }">color:red; font-size:15px; font-weight: bolder;</c:if>">
-												<td style="<c:if test="${n.idx eq 6 }">align-items: start; display: flex;</c:if>">${n.d2 }</td>
-												<td>${n.d3 }</td>
+											<tr <c:if test="${n.idx eq '1' }">colspan="2"</c:if> style="height: 22px; <c:if test="${n.idx eq '1' }">color:red; font-size:15px; font-weight: bolder;</c:if>">
+												<td style="<c:if test="${n.idx eq 6 }">align-items: start; display: flex;</c:if>width: 135px;">${n.d2 }</td>
+												<td><span>${n.d3 }</span></td>
 											</tr>
 										</c:forEach>
 									</table>
 								</div>
 							</div>
 							<div class="notice-btn">
-								<div class="manual" id="manual" style="">근무평가 시스템 메뉴얼 보기</div>
+								<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="logo-area">
+				<div class="flex flex-center">
+					<img style="width: 137px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 				</div>
 			</div>
 		</div>
@@ -154,7 +159,26 @@
 	<!--  -->
 	</section>
 	<footer class="footer">
-	
+		<div class="flex flex-between"style="width: 886px; margin: 0 auto; height: 100%; ">
+			<div>
+				<div style="display: flex; flex-direction: column; flex-wrap: nowrap; height: 78px;">
+					<div style="margin-bottom: 17px;">
+						<img style="width: 137px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+					</div>
+					<div class="liight" style="display: flex; flex-direction: column; flex-wrap: wrap; color: #d6d6d6; font-size: 9pt;">
+						<span style=" margin-bottom: 2px;">서울사무소 : 서울특별시 마포구 마포대로 15 현대빌딩 710호</span>
+						<span>본사연구소 : 전북특별자치도 전주시 완산구 용머리로 80 3F</span>
+					</div>
+				</div>
+				
+			</div>
+			<div class="normal" style="text-align: center; padding: 15px; border: 1px dashed #b4b4b4; height: 78px;">
+				<div style="display: flex; flex-wrap: wrap; flex-direction: column;">
+					<span style="font-size: 9pt; color: #f5a418;">문의사항은 코어솔루션으로 연락주시기 바랍니다.</span>
+					<span style="font-size: 16pt; color: #e7e7e7;">1522-4030 / 063-250-4503</span>
+				</div>
+			</div>
+		</div>
 	</footer>
 </form>
 </body>
