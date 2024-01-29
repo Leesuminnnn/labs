@@ -98,7 +98,7 @@ public class DemoController {
 		}else {
 			//아이디 혹은 비밀번호가 일치하지 않는 경우
 			if(loginMember == 0) {
-				request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.\\n아이디 혹은 비밀번호를 확인해 주세요");
+				request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.</p><p>아이디 혹은 비밀번호를 확인해 주세요");
 				request.setAttribute("url", "demo/Login");
 				System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
 				return "alert5";
@@ -112,7 +112,7 @@ public class DemoController {
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
 				if(info2.getPwd() == null) {
 					session.setAttribute("loginmember", vo.getId());
-					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
+					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다");
 					request.setAttribute("url", "demo/Pwd/"+idx);
 					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
 					return "alert5";
@@ -182,7 +182,9 @@ public class DemoController {
 		String hsptsubname = demoService.info(idx).getHspt_subname();
 		String po = demoService.info(idx).getHspt_position();
 		String id = demoService.info(idx).getId();
-		
+		List<TargetVo> target = demoService.target(map);
+		System.out.println("평가 대상자: "+target);
+		mv.addObject("targetid",target);
 		map.put("id", id);
 		System.out.println("############################1.5");
 
@@ -537,7 +539,7 @@ public class DemoController {
 	
 	// 평가 후 Db저장
 	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
-	public String fromAction(CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
+	public String fromAction(ModelAndView mv, CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
 			HttpServletRequest request, HttpServletResponse response, Model md,
 			@RequestParam(name="a1", required = false) String a1, @RequestParam(name="a2", required = false) String a2, @RequestParam(name="b3", required = false) String b3, 
 			@RequestParam(name="b4", required = false) String b4, @RequestParam(name="c5", required = false) String c5, @RequestParam(name="c6", required = false) String c6, 
@@ -670,6 +672,8 @@ public class DemoController {
 			if(flag == 1) {
 				request.setAttribute("msg", "평가가 완료되었습니다.");
 				request.setAttribute("url", "demo/FormEnd/"+infoidx+"/"+targetidx);
+				request.setAttribute("infoidx",infoidx);
+				request.setAttribute("targetidx",targetidx);
 				// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
 				// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
 				// 검색 후 기록이 없으면 insert, 
@@ -812,7 +816,7 @@ public class DemoController {
 		int flag = demoService.forminsert(map);
 		 ///db 전송 이후 
 		if(flag == 1) {
-			request.setAttribute("msg", "평가가 완료되었습니다.");
+			request.setAttribute("msg", "수정이 완료되었습니다.");
 			request.setAttribute("url", "demo/FormEnd/"+infoidx+"/"+targetidx);
 			// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
 			// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
@@ -860,18 +864,19 @@ public class DemoController {
 	
 	@RequestMapping(value="pwdreset/{id}")
 	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-		
+		System.out.println("비밀번호 초기화.... 대상 : "+id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		int flag = demoService.pwdreset(map);
 		
 		if(flag == 1) {
-			request.setAttribute("msg", "초기화 완료");
+			request.setAttribute("msg", "초기화가 완료되었습니다.");
 			request.setAttribute("url", "demo/admin");
-			return "alert";
+			return "alert5";
 		}else {
 			request.setAttribute("msg", "오류발생");
-			return "alert";
+			request.setAttribute("url", "demo/admin");
+			return "alert5";
 		}
 	}
 

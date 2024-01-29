@@ -9,4 +9,5 @@ public class TargetVo {
 	
 	private String id;
 	private String target;
+	private String target_id;
 }

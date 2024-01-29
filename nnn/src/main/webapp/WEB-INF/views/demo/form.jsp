@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
 <title>근무평가</title>
@@ -91,258 +92,258 @@
 		<div class="section">
 			<div class="container">
 				<div class="content">
-			<div class="scrollbase">
-			<div class="area">
-				<div class="bold area_header">섬김</div>
-				<c:set var="index" value="1"/>
-				<c:set var="a" value="1"/>
-				<c:forEach items="${evf}" var="ev" varStatus="status">
-					<c:if test="${ev.d3 eq '섬김' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
-						
-						<div class="answer">
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="a${ev.idx}" value="매우우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="a${ev.idx}" value="우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="a${ev.idx}" value="보통"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">보통</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="a${ev.idx}" value="미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">미흡</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우미흡</span>
-								</span>
-							</label>
-						</div>
-					</c:if>
-					<c:set var="a" value="${a +1 }"/>
-				</c:forEach>
-				<div class="bold area_header">배움</div>
-				<c:set var="b" value="1"/>
-				<c:forEach items="${evf}" var="ev" varStatus="status">
-					<c:if test="${ev.d3 eq '배움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
-						<div class="answer">
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="b${ev.idx}" value="매우우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="b${ev.idx}" value="우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="b${ev.idx}" value="보통"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">보통</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="b${ev.idx}" value="미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">미흡</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우미흡</span>
-								</span>
-							</label>
-						</div>
-					</c:if>
-					<c:set var="b" value="${b +1 }"/>
-				</c:forEach>
-				<div class="bold area_header">키움</div>
-				
-				<c:set var="c" value="1"/>
-				<c:forEach items="${evf}" var="ev" varStatus="status">
-					<c:if test="${ev.d3 eq '키움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
-						<div class="answer">
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="c${ev.idx}" value="매우우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="c${ev.idx}" value="우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="c${ev.idx}" value="보통"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">보통</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="c${ev.idx}" value="미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">미흡</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우미흡</span>
-								</span>
-							</label>
-						</div>
-					</c:if>
-					<c:set var="c" value="${c +1 }"/>
-				</c:forEach>
-				<div class="bold area_header">나눔</div>
-				<c:set var="d" value="1"/>
-				<c:forEach items="${evf}" var="ev" varStatus="status">
-					<c:if test="${ev.d3 eq '나눔' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
-						<div class="answer">
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="d${ev.idx}" value="매우우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="d${ev.idx}" value="우수"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">우수</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="d${ev.idx}" value="보통"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">보통</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="d${ev.idx}" value="미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">미흡</span>
-								</span>
-							</label>
-							<label class="label">
-								<span class="alignBox">
-									<input class="radio" type="radio" name="d${ev.idx}" value="매우미흡"/>
-					                <span class="radioimg"></span>
-					                <span class="inputTxt">매우미흡</span>
-								</span>
-							</label>
-						</div>
-					</c:if>
-					<c:set var="d" value="${d +1 }"/>
-				</c:forEach>
-				<div class="bold area_header">목표관리</div>
-				<c:set var="e" value="1"/>
-				<c:forEach items="${evf}" var="ev" varStatus="status">
-					<c:if test="${ev.d3 eq '목표관리' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
-						<div class="answer">
-								<label class="label">
-									<span class="alignBox">
-										<input class="radio" type="radio" name="e${ev.idx}" value="매우우수"/>
-						                <span class="radioimg"></span>
-						                <span class="inputTxt">매우우수</span>
-									</span>
-								</label>
-								<label class="label">
-									<span class="alignBox">
-										<input class="radio" type="radio" name="e${ev.idx}" value="우수"/>
-						                <span class="radioimg"></span>
-						                <span class="inputTxt">우수</span>
-									</span>
-								</label>
-								<label class="label">
-									<span class="alignBox">
-										<input class="radio" type="radio" name="e${ev.idx}" value="보통"/>
-						                <span class="radioimg"></span>
-						                <span class="inputTxt">보통</span>
-									</span>
-								</label>
-								<label class="label">
-									<span class="alignBox">
-										<input class="radio" type="radio" name="e${ev.idx}" value="미흡"/>
-						                <span class="radioimg"></span>
-						                <span class="inputTxt">미흡</span>
-									</span>
-								</label>
-								<label class="label">
-									<span class="alignBox">
-										<input class="radio" type="radio" name="e${ev.idx}" value="매우미흡"/>
-						                <span class="radioimg"></span>
-						                <span class="inputTxt">매우미흡</span>
-									</span>
-								</label>
+					<div class="scrollbase">
+						<div class="area">
+							<div class="bold area_header">섬김</div>
+							<c:set var="index" value="1"/>
+							<c:set var="a" value="1"/>
+							<c:forEach items="${evf}" var="ev" varStatus="status">
+								<c:if test="${ev.d3 eq '섬김' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+									
+									<div class="answer">
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="a${ev.idx}" value="매우우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="a${ev.idx}" value="우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="a${ev.idx}" value="보통"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">보통</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="a${ev.idx}" value="미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">미흡</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="a${ev.idx}" value="매우미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우미흡</span>
+											</span>
+										</label>
+									</div>
+								</c:if>
+								<c:set var="a" value="${a +1 }"/>
+							</c:forEach>
+							<div class="bold area_header">배움</div>
+							<c:set var="b" value="1"/>
+							<c:forEach items="${evf}" var="ev" varStatus="status">
+								<c:if test="${ev.d3 eq '배움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+									<div class="answer">
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="b${ev.idx}" value="매우우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="b${ev.idx}" value="우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="b${ev.idx}" value="보통"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">보통</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="b${ev.idx}" value="미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">미흡</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="b${ev.idx}" value="매우미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우미흡</span>
+											</span>
+										</label>
+									</div>
+								</c:if>
+								<c:set var="b" value="${b +1 }"/>
+							</c:forEach>
+							<div class="bold area_header">키움</div>
+							
+							<c:set var="c" value="1"/>
+							<c:forEach items="${evf}" var="ev" varStatus="status">
+								<c:if test="${ev.d3 eq '키움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+									<div class="answer">
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="c${ev.idx}" value="매우우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="c${ev.idx}" value="우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="c${ev.idx}" value="보통"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">보통</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="c${ev.idx}" value="미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">미흡</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="c${ev.idx}" value="매우미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우미흡</span>
+											</span>
+										</label>
+									</div>
+								</c:if>
+								<c:set var="c" value="${c +1 }"/>
+							</c:forEach>
+							<div class="bold area_header">나눔</div>
+							<c:set var="d" value="1"/>
+							<c:forEach items="${evf}" var="ev" varStatus="status">
+								<c:if test="${ev.d3 eq '나눔' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+									<div class="answer">
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="d${ev.idx}" value="매우우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="d${ev.idx}" value="우수"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">우수</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="d${ev.idx}" value="보통"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">보통</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="d${ev.idx}" value="미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">미흡</span>
+											</span>
+										</label>
+										<label class="label">
+											<span class="alignBox">
+												<input class="radio" type="radio" name="d${ev.idx}" value="매우미흡"/>
+								                <span class="radioimg"></span>
+								                <span class="inputTxt">매우미흡</span>
+											</span>
+										</label>
+									</div>
+								</c:if>
+								<c:set var="d" value="${d +1 }"/>
+							</c:forEach>
+							<div class="bold area_header">목표관리</div>
+							<c:set var="e" value="1"/>
+							<c:forEach items="${evf}" var="ev" varStatus="status">
+								<c:if test="${ev.d3 eq '목표관리' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+									<div class="answer">
+											<label class="label">
+												<span class="alignBox">
+													<input class="radio" type="radio" name="e${ev.idx}" value="매우우수"/>
+									                <span class="radioimg"></span>
+									                <span class="inputTxt">매우우수</span>
+												</span>
+											</label>
+											<label class="label">
+												<span class="alignBox">
+													<input class="radio" type="radio" name="e${ev.idx}" value="우수"/>
+									                <span class="radioimg"></span>
+									                <span class="inputTxt">우수</span>
+												</span>
+											</label>
+											<label class="label">
+												<span class="alignBox">
+													<input class="radio" type="radio" name="e${ev.idx}" value="보통"/>
+									                <span class="radioimg"></span>
+									                <span class="inputTxt">보통</span>
+												</span>
+											</label>
+											<label class="label">
+												<span class="alignBox">
+													<input class="radio" type="radio" name="e${ev.idx}" value="미흡"/>
+									                <span class="radioimg"></span>
+									                <span class="inputTxt">미흡</span>
+												</span>
+											</label>
+											<label class="label">
+												<span class="alignBox">
+													<input class="radio" type="radio" name="e${ev.idx}" value="매우미흡"/>
+									                <span class="radioimg"></span>
+									                <span class="inputTxt">매우미흡</span>
+												</span>
+											</label>
+										</div>
+									</c:if>
+								<c:set var="e" value="${e +1 }"/>
+							</c:forEach>
+							<div class="bold area_header"></div>
+							<c:forEach items="${evf}" var="ev">
+								<c:if test="${ev.d3 eq '주관식' }">
+									<table style="width: 100%;">
+										<tr style="background-color: #1b304a; color: #fff;">
+											<td><p class="question bold">${ev.d1}</p></td>
+										</tr>
+										<tr>
+											<td style="background-color: #fafafa; padding: 0; height: 125px;">
+											<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
+										</tr>
+									</table>
+								</c:if><%-- 
+								<c:if test="${ev.d3 eq '주관식' }"><p class="question bold">${ev.d1}</p><br>
+									<textarea style="width: 99%; height: 90px; padding:5px; resize: none;" id="f${ev.idx }" name="f${ev.idx }" ></textarea>
+									<br><br>
+								</c:if> --%>
+								
+							</c:forEach>
+							<div class="end_area flex flex-center">
+							<!--  -->
+								<button class="end" id="end">
+									평가완료
+								</button>
 							</div>
-						</c:if>
-					<c:set var="e" value="${e +1 }"/>
-				</c:forEach>
-				<div class="bold area_header"></div>
-				<c:forEach items="${evf}" var="ev">
-					<c:if test="${ev.d3 eq '주관식' }">
-						<table style="width: 100%;">
-							<tr style="background-color: #1b304a; color: #fff;">
-								<td><p class="question bold">${ev.d1}</p></td>
-							</tr>
-							<tr>
-								<td style="background-color: #fafafa; padding: 0; height: 125px;">
-								<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
-							</tr>
-						</table>
-					</c:if><%-- 
-					<c:if test="${ev.d3 eq '주관식' }"><p class="question bold">${ev.d1}</p><br>
-						<textarea style="width: 99%; height: 90px; padding:5px; resize: none;" id="f${ev.idx }" name="f${ev.idx }" ></textarea>
-						<br><br>
-					</c:if> --%>
-					
-				</c:forEach>
-				<div class="end_area flex flex-center">
-				<!--  -->
-					<button class="end" id="end">
-						평가완료
-					</button>
+						</div>
 				</div>
-			</div>
-		</div>
 
 		
 		</div>
@@ -357,11 +358,43 @@
 	</div>
 	<input type="hidden" name="score" value="" id="score">
 </form>
+<div class="modal normal">
+	<div class="modal_body">
+		<div>
+			<div class="menu_msg">text</div>
+			<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
+			확인
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal2 normal">
+	<div class="modal_body2">
+		<div>
+			<div class="menu_msg2">text</div>
+			<div class="modal_footer2">
+				<div style="top: 40%" class="btn modal_btn2" id="modal_insert">
+					확인
+				</div>
+				<div style="top: 40%" class="btn pink_btn2" onclick="closePopup2()">
+					취소
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 var form = document.getElementById("frm");
 var scoreInput = document.getElementById("score");
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const modal2 = document.querySelector('.modal2');
+const msg = document.querySelector('.menu_msg');
+const msg2 = document.querySelector('.menu_msg2');
+const modal_submit = document.getElementById("modal_insert");
 //문제유형
 var ev = "${ev}";
 console.log(ev);
@@ -478,20 +511,29 @@ $("#end").click(function() {
 			console.log(d7);console.log(d8);console.log(e9);console.log(e10);console.log(f11);
 			
 			
-			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			//alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			modal.classList.toggle('show');
+		 	msg.style.top = '34%';
+			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
+			if (modal.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
 			return false;
 		}else {
-			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAA+"점입니다.\n평가완료를 하시겠습니까?")){
+			modal2.classList.toggle('show');
+				msg2.style.top = '34%';
+			msg2.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAA+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
+			if (modal2.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
+			modal_submit.addEventListener("click", function() {
+				if (modal2.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
 				score.value = sumAA;
-				console.log(score);
 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
 				form.submit();
-				// 뒤로가기 버튼 비활성화
-				window.history.pushState(null, null, window.location.href);
-				window.onpopstate = function(event) {
-				    window.history.pushState(null, null, window.location.href);
-				};
-			}
+			});
 		}
 	}else {
 		if(!a12 || !a13 || !a14 || !a15 || !a16 || !a17 || !a18 || 
@@ -499,26 +541,59 @@ $("#end").click(function() {
 				!c23 || !c24 || !c25 || !c26 || !c27 ||
 				!d28 || !d29|| !e30|| !e31 ||				
 				$.trim(f32) === ''){
-			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+// 			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
+			modal.classList.toggle('show');
+		 	msg.style.top = '34%';
+			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
+			if (modal.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
 			return false;
 		} else {
-			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료를 하시겠습니까?")){
+// 			if(window.confirm("${targetfirstName }ㅇㅇ 님의 평가 예상점수는 "+sumAB+"점입니다.\n평가완료를 하시겠습니까?")){
+// 				
+// 				// 뒤로가기 버튼 비활성화
+// 				window.history.pushState(null, null, window.location.href);
+// 				window.onpopstate = function(event) {
+// 				    window.history.pushState(null, null, window.location.href);
+// 				};
+// 			}
+			modal2.classList.toggle('show');
+		 	msg2.style.top = '34%';
+			msg2.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAB+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
+			if (modal2.classList.contains('show')) {
+				body.style.overflow = 'hidden';
+			}
+			
+			modal_submit.addEventListener("click", function() {
+				if (modal2.classList.contains('show')) {
+					body.style.overflow = 'hidden';
+				}
+
 				score.value = sumAB;
-				console.log(score);
 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
 				form.submit();
-				// 뒤로가기 버튼 비활성화
-				window.history.pushState(null, null, window.location.href);
-				window.onpopstate = function(event) {
-				    window.history.pushState(null, null, window.location.href);
-				};
-			}
+			});
+			
+
 		}
 	}
 	
 	
 });
 
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+function closePopup2(){
+	modal2.classList.toggle('show');
+	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
 
 
 

@@ -7,21 +7,63 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css"><%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
+.bg-425c7b {
+	background: #425c7b;
+	color: #fff;
+}
+.bg-586f8b {
+	background: #586f8b;
+	color: #fff;
+}
+.bg-d9e9e9 {
+	background: #d9e9e9;
+}/* 
+.tr-bottom::before {
+	content: "";
+	position: absolute;
+	top: 1px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-bottom: 1px solid #cccccc;
+} */
+main {
+	width: 100%;
+	background: #f7f7f7;
+	margin-left: 240px;
+}
 .logo {
 	background-color: #1b304a;
 }
-.active {
-
+.pd {
+	border-top: 11px solid #f7f7f7;
+	position: fixed;
+	top: 62px;
+	width: 100%;
+	z-index: 999;
 }
-td {
-	border: 1px solid #d7d7d7;
+td, th {/* 
+	border: 1px solid #d7d7d7; */
 	height: 45px;
-	text-align: center;
+	text-align: center;/*
+	border-right: 1px solid #d7d7d7; 
+	border-bottom: 1px solid #d7d7d7; */
+	font-size: 12pt;
+}
+tbody td {
+	border: 1px solid #d7d7d7;
+	background: #fff;
+}
+.lasttd {/* 
+	border-right:1px solid #d7d7d7;
+	border-bottom:1px solid #d7d7d7; */
 }
 .wrapper {
 	position: fixed;
@@ -37,28 +79,69 @@ td {
 	border: 1px solid #cccccc;
 	color: #222222;
 }
-thead{
-	position: sticky;
-	top: 72px;
+.sticky-top {
+	position: -webkit-sticky;
+    position: sticky;
+    top: 72px;
+    z-index: 2; /* 높은 z-index 값을 설정 */
 }
-thead tr td{
-	position: sticky;
-	top: 72px;
+.sticky-top::before {
+	content: "";
+	position: absolute;
+	top: 1px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-bottom: 1px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
 }
-thead tr:first-child {
-	background: #425c7b;
+.sticky-middle {
+	position: -webkit-sticky;
+    position: sticky;
+    top: 117px;
+    z-index: 2;
+}
+.sticky-middle::before {
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-top: 1px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+}
+.sticky-bottom {
+	position: -webkit-sticky;
+    position: sticky;
+    top: 162px;
+    z-index: 2;
+    color: #222222;
+}
+.sticky-bottom::before {
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-top: 2px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+	border-bottom: 1px solid #cccccc;
+}
+tbody th, tbody td {
+    position: relative; /* 상대 위치 설정 */
+    z-index: 1; /* 낮은 z-index 값을 설정 */
+}
+tbody td::before {
+    border-right: 1px solid #d7d7d7;
+	border-bottom: 1px solid #d7d7d7;
+}
+.scrolltable > thead{
 	color: #fff;
-}
-thead tr:nth-child(2) {
-	background:#586f8b;
-	color: #fff;
-}
-thead tr:last-child {
-	background:#d9e9e9;
-	font-weight: 700;
-}
-td:nth-child(4) {
-border-right: 1px solid #cccccc;
 }
 .nav__link {
 	display: flex;
@@ -71,6 +154,22 @@ border-right: 1px solid #cccccc;
 .active {
 	border-left: 4px solid #00bec2;
 }
+.bg-gray {
+	background: #eaeaea;
+}
+.infotable {
+	width: 100%;
+	border: 1px solid #cccccc;
+}
+.infotable > thead > tr > th {
+	background: #425c7b;
+	color: #fff;
+	border: 1px solid #d7d7d7;
+}
+.pointer {
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -99,7 +198,7 @@ border-right: 1px solid #cccccc;
 
 <section style="display: flex; margin-top: 62px;"> 
 	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
-		<div class="nav__link active" style="">
+		<div class="nav__link active" data-menu="userall" data-content="all">
 			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png">
 			<span>직원DB설정</span>
 		</div>
@@ -196,27 +295,33 @@ border-right: 1px solid #cccccc;
 			<img style="width: 90%;" src="<%=request.getContextPath() %>/resources/img/core_logo.png">
 		</div>
 	</div> --%>
-	<main id="main-content" 
-			style="width: 100%; background: #f7f7f7; margin-left: 240px;">
+	<main id="main-content" >
 		<!-- 내용을 이곳에 추가 -->
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
+		<div class="pd"></div>
 		<div class="scroll-container">
-			<table style="width: 100%; border: 1px solid #cccccc;">
-				
-				<tr style="background: #425c7b; color: #fff;">
-					<td>기관명</td><td>부서명</td><td>사번</td><td>직책</td><td>이름</td><td>비밀번호 설정 여부</td><td>비밀번호초기화</td>
-				</tr>
-			
+			<table class="infotable">
+				<thead>
+					<tr>
+						<th class="sticky-top">기관명</th>
+						<th class="sticky-top">부서명</th>
+						<th class="sticky-top">사번</th>
+						<th class="sticky-top">직책</th>
+						<th class="sticky-top">이름</th>
+						<th class="sticky-top">비밀번호 설정 여부</th>
+						<th class="sticky-top">비밀번호초기화</th>
+					</tr>
+				</thead>
 				<c:forEach items="${users }" var="u">
 					<c:if test="${u.id ne 12365478 }">
-						<tr style="<c:if test="${empty u.pwd }">background: #eaeaea;</c:if>">
+						<tr class="<c:if test="${empty u.pwd }">bg-gray </c:if>">
 							
 							<td>${u.hspt_name }</td>
 							<td>${u.hspt_subname }</td>
 							<td>${u.id }</td>
 							<td>${u.hspt_position }</td>
 							
-							<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
+							<td class="pointer" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
 								<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
 	    						${targetfirstName }ㅇㅇ
 								
@@ -227,7 +332,7 @@ border-right: 1px solid #cccccc;
 									<c:otherwise>설정완료</c:otherwise>
 								</c:choose>
 							</td>
-							<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" style="cursor:pointer;"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
+							<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" class="pointer"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -348,8 +453,58 @@ border-right: 1px solid #cccccc;
 	<div style="position: fixed; right: 10px; bottom: 10px; border: 1px solid; padding: 10px; border-radius: 100px; cursor:pointer;" onclick="javascript:window.scrollTo(0,0);">Top</div>
 </nav>
 </form>
+<div class="modal normal">
+	<div class="modal_body">
+		<div>
+			<div class="menu_msg">text</div>
+			<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
+			확인
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal3 normal">
+	<div class="modal_body3">
+		<div>
+			<div class="menu_msg3">text</div>
+			<div class="modal_footer3">
+				<div style="top: 40%" class="btn modal_btn2" onclick="modal_insert()">
+					확인
+				</div>
+				<div style="top: 40%" class="btn pink_btn2" onclick="closePopup3()">
+					취소
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="modal4 normal">
+	<div class="modal_body4">
+		<div>
+			<div class="menu_msg4">text</div>
+			<div class="modal_footer4">
+				<div style="top: 40%" class="btn modal_btn2" onclick="pwd_reset()">
+					확인
+				</div>
+				<div style="top: 40%" class="btn pink_btn2" onclick="closePopup4()">
+					취소
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
 </body>
 <script>
+
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const msg = document.querySelector('.menu_msg');
+const modal3 = document.querySelector('.modal3');
+const msg3 = document.querySelector('.menu_msg3');
+const modal4 = document.querySelector('.modal4');
+const msg4 = document.querySelector('.menu_msg4');
 
 const menuLinks = document.querySelectorAll('.nav__link'); // 메뉴 링크 요소들
 
@@ -400,27 +555,45 @@ function userall(contentId) {
 	 				var ph = response.userphList;
 	 				
 	 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+					var bgdv = document.createElement("div");
+					bgdv.setAttribute("class","pd");
+
+					mainContent.appendChild(bgdv);
+	 				var tbdv = document.createElement("div");
+	 				tbdv.setAttribute("class","scroll-container");
 	 				var tb = document.createElement("TABLE");
-	 				mainContent.appendChild(tb);
-	 				var maintr = document.createElement("TR");
-	 				var maintd1 = document.createElement("TD");
-	 				maintd1.textContent = "idx";
-	 				var maintd2 = document.createElement("TD");
-	 				maintd2.textContent = "병원명";
-	 				var maintd3 = document.createElement("TD");
-	 				maintd3.textContent = "부서명";
-	 				var maintd4 = document.createElement("TD");
-	 				maintd4.textContent = "사번";
-	 				var maintd6 = document.createElement("TD");
-	 				maintd6.textContent = "직책";
-	 				var maintd7 = document.createElement("TD");
-	 				maintd7.textContent = "이름";
-	 				var maintd8 = document.createElement("TD");
-	 				maintd8.textContent = "비밀번호 설정 여부";
-	 				var maintd9 = document.createElement("TD");
-	 				maintd9.textContent = "비밀번호초기화";
+	 				tb.setAttribute("class","infotable")
+	 				mainContent.appendChild(tbdv)
+	 				tbdv.appendChild(tb);
+	 				var thead = document.createElement("THEAD");
 	 				
-	 				tb.appendChild(maintr);
+	 				var maintr = document.createElement("TR");
+	 				var maintd1 = document.createElement("TH");
+	 				maintd1.textContent = "기관명";
+	 				maintd1.setAttribute("class","sticky-top");
+	 				var maintd2 = document.createElement("TH");
+	 				maintd2.textContent = "부서명";
+	 				maintd2.setAttribute("class","sticky-top");
+	 				var maintd3 = document.createElement("TH");
+	 				maintd3.textContent = "사번";
+	 				maintd3.setAttribute("class","sticky-top");
+	 				var maintd4 = document.createElement("TH");
+	 				maintd4.textContent = "직책";
+	 				maintd4.setAttribute("class","sticky-top");
+	 				var maintd6 = document.createElement("TH");
+	 				maintd6.textContent = "이름";
+	 				maintd6.setAttribute("class","sticky-top");
+	 				var maintd7 = document.createElement("TH");
+	 				maintd7.textContent = "비밀번호 설정 여부";
+	 				maintd7.setAttribute("class","sticky-top");
+	 				var maintd8 = document.createElement("TH");
+	 				maintd8.textContent = "비밀번호초기화";
+	 				maintd8.setAttribute("class","sticky-top");
+
+	 				var tbody = document.createElement("TBODY");
+	 				
+	 				tb.appendChild(thead);
+	 				thead.appendChild(maintr);
 	 				maintr.appendChild(maintd1);
 	 				maintr.appendChild(maintd2);
 	 				maintr.appendChild(maintd3);
@@ -428,12 +601,11 @@ function userall(contentId) {
 	 				maintr.appendChild(maintd6);
 	 				maintr.appendChild(maintd7);
 	 				maintr.appendChild(maintd8);
-	 				maintr.appendChild(maintd9);
-	 				
+					tb.appendChild(tbody);
 	 				listall.forEach(function (list) {
 	 					if(list.id != 12365478){
-	 						
-	 						var idx = list.idx;
+
+							var idx = list.idx;
 		 					var hname = list.hspt_name;
 		 					var sname = list.hspt_subname;
 		 					var id = list.id;
@@ -445,8 +617,6 @@ function userall(contentId) {
 		 					if(!list.pwd){
 		 						tr.setAttribute("style", "background: #eaeaea;")
 		 					}
-		 					var tdidx = document.createElement("TD");
-		 					tdidx.textContent = idx;
 		 					var tdhname = document.createElement("TD");
 		 					tdhname.textContent = hname;
 		 					var tdsname = document.createElement("TD");
@@ -478,8 +648,7 @@ function userall(contentId) {
 		 					}
 		 					//
 		 					
-		 					tb.appendChild(tr);
-		 					tr.appendChild(tdidx);
+		 					tbody.appendChild(tr);
 		 					tr.appendChild(tdhname);
 		 					tr.appendChild(tdsname);
 		 					tr.appendChild(tdid);
@@ -983,6 +1152,8 @@ function perall(contentId) {
 	 				var answersum = response.answersum;
 	 				
 	 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+	 				var bgdv = document.createElement("div");
+	 				bgdv.setAttribute("class","pd");
 	 				var dv = document.createElement("div");
 	 				dv.setAttribute("class","scroll-container");
 	 				var tb = document.createElement("TABLE");
@@ -991,57 +1162,71 @@ function perall(contentId) {
 	 				var thead = document.createElement("THEAD");
 	 				
 	 				var maintr1 = document.createElement("TR");
-	 				var maintd1 = document.createElement("TD");
+	 				var maintd1 = document.createElement("TH");
 	 				maintd1.textContent = "평가자정보";
-	 				maintd1.setAttribute("colspan","4");
-	 				maintd1.setAttribute("style","border-right: 1px solid #cccccc;");
-	 				var maintd2 = document.createElement("TD");
+	 				maintd1.setAttribute("colspan","4"); 
+	 				maintd1.setAttribute("class","bg-425c7b sticky-top");
+	 				var maintd2 = document.createElement("TH");
 	 				maintd2.textContent = "평가대상자수";
 	 				maintd2.setAttribute("rowspan","2");
-	 				var maintd3 = document.createElement("TD");
+	 				maintd2.setAttribute("class","bg-425c7b sticky-top");
+	 				var maintd3 = document.createElement("TH");
 	 				maintd3.textContent = "평가결과수";
 	 				maintd3.setAttribute("rowspan","2");
-	 				var maintd4 = document.createElement("TD");
+	 				maintd3.setAttribute("class","bg-425c7b sticky-top");
+	 				var maintd4 = document.createElement("TH");
 	 				maintd4.textContent = "진행율";
 	 				maintd4.setAttribute("rowspan","2");
-	 				var maintd7 = document.createElement("TD");
+	 				maintd4.setAttribute("class","bg-425c7b sticky-top");
+	 				var maintd7 = document.createElement("TH");
 	 				maintd7.textContent = "평가자 마이페이지";
 	 				maintd7.setAttribute("rowspan","2");
+	 				maintd7.setAttribute("class","bg-425c7b sticky-top");
+	 				
 	 				
 	 				var maintr2 = document.createElement("TR");
 
-					var maintd9 = document.createElement("TD");
+					var maintd9 = document.createElement("TH");
 					maintd9.textContent = "기관명";
-					var maintd10 = document.createElement("TD");
+					maintd9.setAttribute("class","bg-586f8b sticky-middle");
+					var maintd10 = document.createElement("TH");
 					maintd10.textContent = "부서명";
-					var maintd11 = document.createElement("TD");
+					maintd10.setAttribute("class","bg-586f8b sticky-middle");
+					var maintd11 = document.createElement("TH");
 					maintd11.textContent = "직급/직책";
-					var maintd12 = document.createElement("TD");
+					maintd11.setAttribute("class","bg-586f8b sticky-middle");
+					var maintd12 = document.createElement("TH");
 					maintd12.textContent = "사원명";
-	 				maintd12.setAttribute("style","border-right: 1px solid #cccccc;");
-					
+					maintd12.setAttribute("class","lasttd bg-586f8b sticky-middle");
+					maintd12.setAttribute("style","")
 					var maintr3 = document.createElement("TR");
-					var maintd13 = document.createElement("TD");
+					maintr3.setAttribute("class","tr-bottom");
+					var maintd13 = document.createElement("TH");
 					maintd13.setAttribute("colspan","4");
 					maintd13.textContent = "전 직원 정보";
-	 				maintd13.setAttribute("style","border-right: 1px solid #cccccc;");
+					maintd13.setAttribute("class","bg-d9e9e9 sticky-bottom");
 	 				
-					var maintd14 = document.createElement("TD");	// 대상자수
+					var maintd14 = document.createElement("TH");	// 대상자수
 					maintd14.textContent = targetsum;
+					maintd14.setAttribute("class","bg-d9e9e9 sticky-bottom");
 					
-					var maintd15 = document.createElement("TD");	// 평가 결과수
+					var maintd15 = document.createElement("TH");	// 평가 결과수
 					maintd15.textContent = answersum;
+					maintd15.setAttribute("class","bg-d9e9e9 sticky-bottom");
 					
-					var maintd16 = document.createElement("TD");
+					var maintd16 = document.createElement("TH");
 					var percentageall =  (answersum / targetsum) * 100;
 					
 					maintd16.textContent = isFinite(percentageall) ? percentageall.toFixed(2) + "%" : "N/A";
+					maintd16.setAttribute("class","bg-d9e9e9 sticky-bottom");
 					
-					var maintd17 = document.createElement("TD");
+					var maintd17 = document.createElement("TH");
 					maintd17.textContent = "-"
+					maintd17.setAttribute("class","bg-d9e9e9 sticky-bottom");
+					
 	 				var tbody = document.createElement("TBODY");
 					
-					
+					mainContent.appendChild(bgdv);
 	 				mainContent.appendChild(dv);
 	 				dv.appendChild(tb);
 	 				tb.appendChild(thead);
@@ -1109,7 +1294,6 @@ function perall(contentId) {
 		 					tdpo.textContent = position;
 		 					var tdname = document.createElement("TD");
 		 					tdname.textContent = modifiedName;
-			 				tdname.setAttribute("style","border-right: 1px solid #cccccc;");
 		 					
 		 					var tdtarget = document.createElement("TD");
 		 					tdtarget.textContent = tgt;
@@ -1200,6 +1384,7 @@ function per1() {
  				var maintd7 = document.createElement("TD");
  				maintd7.textContent = "평가자 마이페이지";
  				maintd7.setAttribute("style","width: 187px;");
+ 				maintd7.setAttribute("class","lasttd");
  				maintd7.setAttribute("rowspan","2");
  				
  				var maintr2 = document.createElement("TR");
@@ -1234,6 +1419,7 @@ function per1() {
 				
 				var maintd17 = document.createElement("TD");
 				maintd17.textContent = "-"
+				maintd17.setAttribute("class","lasttd");
 				
  				var tbody = document.createElement("TBODY");
 				
@@ -1881,14 +2067,24 @@ function setting() {
 	});
 }
 
-
+var targetId = "";
+console.log("대상 아이디 초기화 : "+ targetId);
+var frm = $("#frm");
 //비밀번호 초기화
 function pwdreset(element){
-	var frm = $("#frm");
 	var name = element.getAttribute('data-name');
 	var id = element.getAttribute('data-id');
-	console.log(name);
-	console.log(id);
+	targetId = id;
+	console.log(name.substring(0,1));
+	console.log(targetId);
+	
+	modal3.classList.toggle('show');
+ 	msg3.style.top = '34%';
+	msg3.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>'+name.substring(0,1)+'ㅇㅇ 님의 비밀번호를 초기화 하시겠습니까?</p>'
+	if (modal3.classList.contains('show')) {
+		body.style.overflow = 'hidden';
+	}
+	/* 
 	alert("[" + name + "]님의 비밀번호를 초기화 합니다.");
 	
 	prmpwd = window.prompt('비밀번호를 입력해주세요');
@@ -1896,30 +2092,42 @@ function pwdreset(element){
 		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
 		
 		frm.attr("action","${pageContext.request.contextPath}/demo/pwdreset/"+id).submit();
-		/* $.ajax({
-			url: '${pageContext.request.contextPath}/e/pwdreset/'+id,
-			type: 'post',
-			dataType: 'json',
-			success: function(response){
-				if(response.result === "Y"){
-					
-					location.reload();
-				}
-			},
-			error: function(error) {
-				console.error('Error fetching data:', error);
-			}
-			
-		});
-		 */
+		
 		 
 		 
 	}else {
 		alert('인증 실패');
-	}
+	} */
 	
 }
+function modal_insert(){
+	closePopup3();
+	
+	// confirm창 띄우기
+	msg4.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>비밀번호를 입력해 주세요.</p><p><input type="password" value="" name="pwd_reset_input" id="pwd_reset_input"></p>';
 
+	openModal4();
+}
+function pwd_reset() {
+// 	var pwd_reset_input = document.getElementById("#pwd_reset_input");
+	console.log($("#pwd_reset_input").val());
+	console.log(targetId);
+	if ($("#pwd_reset_input").val() === '123qwe') {
+		frm.attr("action","${pageContext.request.contextPath}/demo/pwdreset/"+targetId).submit();
+	} 
+	else {
+		//인증실패
+	}
+	closePopup4();
+	
+	modal.classList.toggle('show');
+ 	msg.style.top = '34%';
+	msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>초기화가 완료되었습니다.</p>'
+
+	closePopup();
+	
+	
+}
 
 const menuScripts = [
 	{ id: 'userall', contentId: 'all', script: userall },
@@ -2599,9 +2807,32 @@ function evSelect(){
 	});
 	
 }
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+function closePopup3(){
+	modal3.classList.toggle('show');
+	if (!modal3.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
 
+function closePopup4(){
+	modal4.classList.toggle('show');
+	if (!modal4.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
 
-
+function openModal4() {
+	modal4.classList.toggle('show');
+	if (modal4.classList.contains('show')) {
+		body.style.overflow = 'hidden';
+	}
+}
 
 
 
