@@ -300,6 +300,14 @@ cs_btn {
 .modal_body4 > div {
 	width: 400px;
 }
+.modal_body4 input[type=password] {
+	padding-left: 23px;
+	height: 40px;
+	border-radius: 7px;
+	background: #e8e8e8;
+	border: none;
+	margin-top: 10px;
+}
 .munu_btn {
 	display: flex;
     position: relative;

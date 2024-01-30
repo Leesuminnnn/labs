@@ -16,19 +16,30 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css">
 
 <style>
-
+	.wrapper {/* 
+		position: fixed;
+		top: 0; */
+		width: 100%;
+		z-index: 100;
+	}
 	.main {
 		background-color: #f7f7f7;
 	}
 
 	.logo {
 		background-color: #1b304a;
+		position: fixed;
+		width: 100%;
+		z-index: 1001;
 	}
 	.info{
 		background-color : #2f425a;
 		color: #fff;
 		height: 145px;
 		padding: 28px;
+		position: absolute;
+		width: 100%;
+		top: 62px;
 	}
 	.info > div {
 	    margin: 0 20% 0 20%;
@@ -75,11 +86,21 @@
 	}
 	.target_info {
 		background-color: #efefef;
+		position: absolute;
+		top: 207px;
+		width: 100%;
+		z-index: 1000;
+	}
+	.fixed {
+		position: fixed;
+		top: 62px;
 	}
 	.target_text {
 		padding-left: 20px;
+		padding-right: 20px;
 		height: 60px;
 		margin: 0 20% 0 20%;
+		justify-content: space-between;
 	}
 	.target_text img{
 		width: 20px;
@@ -90,6 +111,7 @@
 	}
 	.target_header {
 		padding-top: 35px;
+		align-items: flex-end;
 	}
 	.target_header img{
 		width: 20px;
@@ -100,15 +122,13 @@
 	} 
 	.target_area {
 		padding-top: 267px;
+		display: flex;
+		justify-content: center;
 	}
 	.target_container {
 		margin: 0 20% 0 20%;
-	}
-	.wrapper {
-		position: fixed;
-		top: 0;
+		background: #fbfbfb;
 		width: 100%;
-		z-index: 100;
 	}
 </style>
 </head>
@@ -116,7 +136,7 @@
 <div class="main normal">
 <form action="${pageContext.request.contextPath}/demo/Form" method="post">
 <div class="wrapper">
-	<div class="logo" style="position: relative;">
+	<div class="logo" style="">
 		<c:if test="${sessionScope.loginmember eq 12365478}">
 			<div style="position: absolute; left: 10px; top: 15px; z-index: 1;">
 				<a href="${pageContext.request.contextPath}/demo/admin">
@@ -136,7 +156,7 @@
 		
 	</div>
 	<div class="info">
-		<div>
+		<div class="info-container">
 			<div class="info_name">
 				<span class="normal">
 					<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
@@ -152,10 +172,19 @@
 			</div>
 		</div>
 	</div>
-	<div class="target_info">
+	<div class="target_info" id="targetInfo">
 		<div class="target_text flex">
-			<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-			<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+			<div style="display: flex;">
+				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
+				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+			</div>
+			<div class="" style="width: 420px; text-align: right;">
+				<a href="#title1"><span style="display:<c:if test="${(info.hspt_subcode eq 'A00' and info.hspt_Z eq 'F' and info.hspt_V eq 'F') or (info.hspt_V eq 'F' and info.hspt_B eq 'T') or (info.hspt_V eq 'F' and info.hspt_B eq 'F' and info.hspt_Z eq 'F')}">none</c:if>;">진료부</span></a>
+				<a href="#title2"><span style="margin-left: 50px; display:<c:if test="${info.hspt_J eq 'F'}"> none</c:if>;">경혁팀</span></a>
+				<a href="#title3"><span style="margin-left: 50px; display:<c:if test="${info.hspt_subcode eq 'A00' or info.hspt_subcode eq 'A01' or (info.hspt_B eq 'T' and info.hspt_S eq 'F') or (info.hspt_B eq 'T' and info.hspt_S eq 'T') or (info.hspt_V eq 'T' and info.hspt_X eq 'T')}">none</c:if>;">부서장</span></a>
+				<a href="#title4"><span style="margin-left: 50px; display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T') or (info.hspt_subcode eq 'M00' and info.hspt_B eq 'F')}">none</c:if>;">부서원</span></a>
+			</div>
+			
 		</div>
 	</div>
 </div>
@@ -175,7 +204,7 @@
 	 -->
 	<div class="flex target_header">
 		<img style="" src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold">진료부 평가</span>
+		<span class="bold" id="title1">진료부 평가</span>
 	</div>
 	
 	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
@@ -359,7 +388,7 @@
 	>
 	<div class="flex target_header">
 		<img src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold">경혁팀 평가</span>
+		<span class="bold" id="title2">경혁팀 평가</span>
 	</div>
 	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
 	<div class="targetB_area">
@@ -453,7 +482,7 @@
 	
 	<div class="flex target_header">
 		<img src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold">부서장 평가</span>
+		<span class="bold" id="title3">부서장 평가</span>
 	</div>
 	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
 	<div class="targetC_area">
@@ -779,10 +808,10 @@
 	
 	</div>
 	<!-- 부서원 -->
-	<div class="target_section" style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T')}">none</c:if>;">
+	<div class="target_section" style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T') or (info.hspt_subcode eq 'M00' and info.hspt_B eq 'F')}">none</c:if>;">
 	<div class="flex target_header">
 		<img src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold">부서원 평가</span>
+		<span class="bold" id="title4">부서원 평가</span>
 	</div>
 	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
 	<div class="targetD_area">
@@ -1497,6 +1526,29 @@ function formmodify(element) {
 }
 
 
+document.addEventListener("DOMContentLoaded", function () {
+	var targetInfo = document.getElementById("targetInfo");
+	var initialOffset = 207;
+	var fixedOffset = 62;
+	var isFixed = false;
+	
+	function updateScroll() {
+		var scrollY = window.scrollY || window.pageYOffset;
+		
+		if (scrollY >= initialOffset && !isFixed) {
+			targetInfo.classList.add("fixed");
+			isFixed = true;
+		} else if (scrollY < initialOffset && isFixed) {
+			targetInfo.classList.remove("fixed");
+			isFixed = false;
+		}
+	
+		requestAnimationFrame(updateScroll);
+	}
+	
+	// Initial call to start the animation loop
+	updateScroll();
+});
 // $(function(element){
 // 	var targetidx = element.getAttribute("data-t-idx-3");
 	

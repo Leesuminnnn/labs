@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240130">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -42,12 +42,12 @@
 							</div>
 							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 3px;">
 								<input type="radio" name="radio" id="chk_name" checked />
-								<label style="cursor:pointer;" for="chk_name"><span class="normal">사번 / 이름 <b style="color: #0e366c">(비밀번호 설정 전)</b></span></label>
+								<label style="cursor:pointer;" for="chk_name"><span class="normal">사번/이름 <span style="color: #0e366c">(비밀번호 설정 전)</span></span></label>
 							</div>
 							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px;">
 								<input type="radio" name="radio" id="chk_no" />
 								<span>
-								<label style="cursor:pointer;" for="chk_no"><span class="normal">사번/비밀번호<b style="color: #0e366c">(비밀번호 설정 후)</b></span>
+								<label style="cursor:pointer;" for="chk_no"><span class="normal">사번/비밀번호 <span style="color: #0e366c">(비밀번호 설정 후)</span></span>
 								</label>
 								</span>
 							</div>
@@ -165,17 +165,17 @@
 					<div style="margin-bottom: 17px;">
 						<img style="width: 137px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 					</div>
-					<div class="liight" style="display: flex; flex-direction: column; flex-wrap: wrap; color: #d6d6d6; font-size: 9pt;">
+					<div class="light" style="display: flex; flex-direction: column; flex-wrap: wrap; color: #d6d6d6; font-size: 9pt;">
 						<span style=" margin-bottom: 2px;">서울사무소 : 서울특별시 마포구 마포대로 15 현대빌딩 710호</span>
 						<span>본사연구소 : 전북특별자치도 전주시 완산구 용머리로 80 3F</span>
 					</div>
 				</div>
 				
 			</div>
-			<div class="normal" style="text-align: center; padding: 15px; border: 1px dashed #b4b4b4; height: 78px;">
+			<div class="normal" style="text-align: center; padding: 15px 15px 13px 15px; border: 1px dashed #b4b4b4; height: 89px; display: flex; flex-direction: column; justify-content: center; width: 316px;">
 				<div style="display: flex; flex-wrap: wrap; flex-direction: column;">
-					<span style="font-size: 9pt; color: #f5a418;">문의사항은 코어솔루션으로 연락주시기 바랍니다.</span>
-					<span style="font-size: 16pt; color: #e7e7e7;">1522-4030 / 063-250-4503</span>
+					<span style="font-size: 9pt; color: #f5a418; display: flex; justify-content: space-evenly;">문의사항은 코어솔루션으로 연락주시기 바랍니다.</span>
+					<span style="font-size: 16pt; color: #e7e7e7; display: flex; justify-content: center; flex-wrap: wrap; align-items: center;">1522-4030 / 063-250-4503</span>
 				</div>
 			</div>
 		</div>
@@ -187,8 +187,8 @@ var namechk = $('#chk_name').prop("checked");
 var nochk = $('#chk_no').prop("checked");
 
 
-console.log(namechk);
-console.log(nochk);
+// console.log(namechk);
+// console.log(nochk);
 var dbpwdok = "${dbpwdOk}"; 
 $(document).ready(function () {
 	
@@ -207,7 +207,7 @@ $(document).ready(function () {
 		console.log("2");
 	});
 	
-	console.log(dbpwdok);
+// 	console.log(dbpwdok);
 });
 
 $("#manual").click(function(){

@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 section {
-	background-color: rgb(224, 224, 224);
+	background : #fbfbfb;
 	width: 100vw;
-	height: calc(100vh - 170px);
+	height: calc(100vh - 140px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -108,12 +108,12 @@ section {
 	text-align: center;
 }
 .footer {
-	height: 170px;
+	height: 140px;
 	background-color: #2d2d2d;
 }
 .notice-btn {
 	position: relative;
-    top: -35px;
+    top: -34px;
     display: flex;
     align-items: center;
     justify-content: center;

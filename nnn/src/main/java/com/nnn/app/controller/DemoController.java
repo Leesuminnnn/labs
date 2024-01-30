@@ -112,15 +112,15 @@ public class DemoController {
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
 				if(info2.getPwd() == null) {
 					session.setAttribute("loginmember", vo.getId());
-					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다");
+					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.");
 					request.setAttribute("url", "demo/Pwd/"+idx);
-					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
+					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다.");
 					return "alert5";
 				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
 				}else if(info2.getPwd() != null && name != null){
 					String dbpwdOk = "true"; 
 					md.addAttribute("dbpwdOk", dbpwdOk);
-					request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
+					request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요.");
 					request.setAttribute("url", "demo/Login");
 					return "alert5";
 				}else {
@@ -390,7 +390,7 @@ public class DemoController {
 		
 		if(flag >= 1) {
 			System.out.println(flag);
-			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다. \\n사번/비밀번호로 체크 후 로그인해주세요");
+			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요");
 			request.setAttribute("url", "demo/Info/"+idx);
 			return "alert5";
 		} else {

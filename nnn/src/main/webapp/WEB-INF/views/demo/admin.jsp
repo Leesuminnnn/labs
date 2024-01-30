@@ -8,8 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css"><%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240130"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
+<meta name="viewport" content="width=device-width, initial-scale=1" >
 <title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
@@ -2114,17 +2115,22 @@ function pwd_reset() {
 	console.log(targetId);
 	if ($("#pwd_reset_input").val() === '123qwe') {
 		frm.attr("action","${pageContext.request.contextPath}/demo/pwdreset/"+targetId).submit();
+		closePopup4();
+		
+		modal.classList.toggle('show');
+	 	msg.style.top = '34%';
+		msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>초기화가 완료되었습니다.</p>'
+
+		closePopup();
 	} 
 	else {
-		//인증실패
-	}
-	closePopup4();
-	
-	modal.classList.toggle('show');
- 	msg.style.top = '34%';
-	msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>초기화가 완료되었습니다.</p>'
+		closePopup4();
+		modal.classList.toggle('show');
+	 	msg.style.top = '34%';
+		msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호가 일치하지 않습니다.</p>'
 
-	closePopup();
+	}
+	
 	
 	
 }

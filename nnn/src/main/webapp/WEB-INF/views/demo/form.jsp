@@ -9,8 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css"><%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240130">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240130"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
 <title>근무평가</title>
 <style>
@@ -21,14 +21,15 @@
 
 <form id="frm" onsubmit="return false;">
 	<div class="wrapper">
-		<c:if test="${sessionScope.loginmember eq 12365478}">
-			<div style="position: absolute; left: 10px; top: 15px;z-index: 1;">
-				<a href="${pageContext.request.contextPath}/demo/admin">
-					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
-				</a>
-			</div>
-		</c:if>
-		<div class="logo" style="position: relative;">
+		
+		<div class="logo" style="">
+			<c:if test="${sessionScope.loginmember eq 12365478}">
+				<div style="position: absolute; left: 10px; top: 15px;z-index: 1;">
+					<a href="${pageContext.request.contextPath}/demo/admin">
+						<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
+					</a>
+				</div>
+			</c:if>
 			<div style="align-items: center; display: flex; height: 62px;">
 				<img style="position: relative; left: 50%; transform: translate(-50%);" 
 				src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
@@ -60,7 +61,7 @@
 			</div>
 			
 		</div>
-		<div class="target_info">
+		<div class="target_info" id="targetInfo">
 			<div class="target_text flex">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
 				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
@@ -595,7 +596,29 @@ function closePopup2(){
 	}
 }
 
-
+document.addEventListener("DOMContentLoaded", function () {
+	var targetInfo = document.getElementById("targetInfo");
+	var initialOffset = 207;
+	var fixedOffset = 62;
+	var isFixed = false;
+	
+	function updateScroll() {
+		var scrollY = window.scrollY || window.pageYOffset;
+		
+		if (scrollY >= initialOffset && !isFixed) {
+			targetInfo.classList.add("fixed");
+			isFixed = true;
+		} else if (scrollY < initialOffset && isFixed) {
+			targetInfo.classList.remove("fixed");
+			isFixed = false;
+		}
+	
+		requestAnimationFrame(updateScroll);
+	}
+	
+	// Initial call to start the animation loop
+	updateScroll();
+});
 
 /* 
 $(document).ready(function(){ 
