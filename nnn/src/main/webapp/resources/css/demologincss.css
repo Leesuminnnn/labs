@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+:root, html {
+	font-size: 10px;
+	--footer--width: 947px;
+}
 section {
 	background : #fbfbfb;
 	width: 100vw;
@@ -8,15 +11,14 @@ section {
 	justify-content: center;
 	align-items: center;
 }
-.login-bg {/* 
-	height: calc(100vh - 170px); */
-	background: url(../icon/ev/login_bg2.png) no-repeat center /954px;
-	padding: 50px 0 0 0;
+.login-bg {
+	background: url(../icon/ev/login_bg2.png) no-repeat center /100%;/* 
+	padding: 50px 0 0 0; */
 }
 .main {   
-	height: 665px;
-	width: 886px;
-	padding: 0px 50px 50px 50px;
+	height: 768px;
+    width: 1024px;
+    padding: 52px 90px 52px 90px;
 }
 .line {
 	border-left: 1px solid #d8d8d8;
@@ -26,18 +28,22 @@ section {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 98px;
+	height: 106px;
 }
 .header-text {
-	font-size: 20pt;
+	font-size: 2.7rem;
 	color: #f5f5f5;
+	font-weight: 600;
+	letter-spacing: -1px;
+    position: relative;
+    top: 13px;
 }
 .login-area {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 415px;
-	padding: 20px 0 20px 0;
+    justify-content: center;
+    align-items: center;
+    height: 446px;
+    padding: 45px 0 30px 0;
 }
 .login-content {
 	border-right: 1px solid #d8d8d8;
@@ -48,8 +54,12 @@ section {
 	height: 100%;
 }
 .content {
-	height: 100%;
-	padding: 0 33px 0;
+    height: 100%;
+    padding: 0px 41px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .container > div > div:first-child {
 	margin-bottom: 24px;
@@ -67,34 +77,36 @@ section {
 	margin-bottom: 8px;
 }
 .input-text {
-	width: 100%; height: 50px; border-radius: 7px; background-color: #e8e8e8; border: none;
+	width: 100%;
+	height: 50px;
+	border-radius: 7px;
+	background-color: #e8e8e8;
+	border: none;
+	font-size: 1.3rem;
+    color: #929191;
 }
 .notice-content {
 	height: 100%;
 	width: 50%;
 }
 .notice-bg {
-	background: url(../icon/ev/memo.png) no-repeat center /343px;
-	height: 80%;
-	display: flex;
-	position: relative;
-	top: -35px;
-	padding: 60px 35px 28px 31px;
-	flex-wrap: nowrap;
-	flex-direction: column;
+	background: url(../icon/ev/memo.png) no-repeat center /338px;
+	padding: 47px 35px 20px 35px;
 }
 .notice-header {
 	width: 100%;
-	height: 45px;
+	height: 38px;
 	color: #ffa200;
-	font-size: 10pt;
+	font-size: 1.2rem;
+    letter-spacing: -1.6px;
 }
 .notice-text {
 	width: 100%;
-	color: #222222;
-	font-size: 9pt;
+	color: #222222; 
+	font-size: 1rem;	
 	display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .notice-text > div {
 	display: flex;
@@ -107,13 +119,7 @@ section {
 .container {
 	text-align: center;
 }
-.footer {
-	height: 140px;
-	background-color: #2d2d2d;
-}
 .notice-btn {
-	position: relative;
-    top: -34px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,13 +129,14 @@ section {
     border: 1px solid #6c6c6c;
     border-radius: 7px;
     height: 50px;
-    width: calc(100% - 20px);
+    width: calc(100% - 70px);
     display: flex;
     justify-content: center;
     align-items: center;
     color: #f5f5f5;
     cursor:pointer;
+    font-size: 1.4rem;
 }
 .logo-area {
-	padding-top: 69px;
+	margin-top: 74px;
 }

@@ -1,4 +1,9 @@
 @charset "UTF-8";
+:root, html {
+	font-size: 10px;
+	--footer--width: 861px;
+}
+
 table{
 	border:1px solid #d7d7d7; 
 	width: 100%;
@@ -7,8 +12,18 @@ table{
 }
 td {
 	border:1px solid #cccccc;
-	padding: 15px;
-	text-align: center;
+	padding: 5px;
+    text-align: center;
+    font-size: 1.6rem;
+}
+.footer > div {
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    width: auto;
+    margin: 0 20%;
 }
 
 .td1{

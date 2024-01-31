@@ -13,15 +13,11 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css"> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240131">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240131">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=240131">
 
 <style>
-	.wrapper {/* 
-		position: fixed;
-		top: 0; */
-		width: 100%;
-		z-index: 100;
-	}
 	.main {
 		background-color: #f7f7f7;
 	}
@@ -48,18 +44,21 @@
 		flex-direction: column;
 	}
 	.info_name {
-		font-size: 30px;
+		font-size: 3rem;
 		margin-bottom: 7px;
 	}
 	.info_id {
-		font-size: 20px;
+		font-size: 2rem;
+		
 	}
 	.info_hs {
 		color: #c7c7c7;
 		margin-bottom: 4px;
+		font-size: 1.6rem;
 	}
 	.info_date {
 		color: #c7c7c7;
+		font-size: 1.6rem;
 	}
 	.target-text {
 		background-color: #efefef;
@@ -73,13 +72,14 @@
 	.targettb_A tr:first-child td, .targettb_B tr:first-child td,
 	.targettb_C tr:first-child td, .targettb_D tr:first-child td {
 		border: 1px solid #1b304a;
+		padding: 15px 10px 15px 10px;
 	}
 	.form_go > div > div{
 		cursor:pointer;
 		padding: 7px;
 		margin: 5px;
 		border: 1px solid #f89d00;
-		border-radius: 5px;
+		border-radius: 3px;
 	}
 	.target_section {
 		padding: 20px;
@@ -89,7 +89,7 @@
 		position: absolute;
 		top: 207px;
 		width: 100%;
-		z-index: 1000;
+		z-index: 99;
 	}
 	.fixed {
 		position: fixed;
@@ -135,26 +135,7 @@
 <body>
 <div class="main normal">
 <form action="${pageContext.request.contextPath}/demo/Form" method="post">
-<div class="wrapper">
-	<div class="logo" style="">
-		<c:if test="${sessionScope.loginmember eq 12365478}">
-			<div style="position: absolute; left: 10px; top: 15px; z-index: 1;">
-				<a href="${pageContext.request.contextPath}/demo/admin">
-					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
-				</a>
-			</div>
-		</c:if>
-		<div style="align-items: center; display: flex; height: 62px;">
-			<img style="position: relative; left: 50%; transform: translate(-50%);" 
-			src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
-		</div>
-		<div>
-			<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
-				<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
-			</a>
-		</div>
-		
-	</div>
+	<jsp:include page="../demo/header.jsp"></jsp:include>
 	<div class="info">
 		<div class="info-container">
 			<div class="info_name">
@@ -187,8 +168,6 @@
 			
 		</div>
 	</div>
-</div>
-
 
 <script>
 </script>
@@ -251,7 +230,7 @@
 						</td>
 						<td>
 							<c:forEach items="${score }" var="s">
-								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 							</c:forEach>
 						</td>
 						<td class="form_go" >
@@ -322,7 +301,7 @@
 						</td>
 						<td>
 							<c:forEach items="${score }" var="s">
-								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 							</c:forEach>
 						</td>
 						<td class="form_go" >
@@ -425,7 +404,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -521,7 +500,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -596,7 +575,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -671,7 +650,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -746,7 +725,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -852,7 +831,7 @@
 				</td>
 				<td>
 					<c:forEach items="${score }" var="s">
-						<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }</c:if>
+						<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 					</c:forEach>
 				</td>
 				<td class="form_go" >
@@ -927,7 +906,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -1003,7 +982,7 @@
 			</td>
 			<td>
 				<c:forEach items="${score }" var="s">
-					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
 			</td>
 			<td class="form_go" >
@@ -1078,7 +1057,7 @@
 						</td>
 						<td>
 							<c:forEach items="${score }" var="s">
-								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 							</c:forEach>
 						</td>
 						<td class="form_go" >
@@ -1152,7 +1131,7 @@
 		</td>
 		<td>
 			<c:forEach items="${score }" var="s">
-				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 			</c:forEach>
 		</td>
 		<td class="form_go" >
@@ -1226,7 +1205,7 @@
 		</td>
 		<td>
 			<c:forEach items="${score }" var="s">
-				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 			</c:forEach>
 		</td>
 		<td class="form_go" >
@@ -1301,7 +1280,7 @@
 		</td>
 		<td>
 			<c:forEach items="${score }" var="s">
-				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 			</c:forEach>
 		</td>
 		<td class="form_go" >
@@ -1375,7 +1354,7 @@
 		</td>
 		<td>
 			<c:forEach items="${score }" var="s">
-				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 } 점</c:if>
+				<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 			</c:forEach>
 		</td>
 		<td class="form_go" >
@@ -1437,13 +1416,8 @@
 	</div>	
 	
 </div>
+<jsp:include page="../demo/footer.jsp"></jsp:include>
 
-
-<!-- 
-<div style="border-bottom: 3px solid #000; margin: 10px 0 10px 0;"></div> -->
-<div style="text-align: center;">
-<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
-</div>
 </form>
 </div>
 <div class="modal normal">

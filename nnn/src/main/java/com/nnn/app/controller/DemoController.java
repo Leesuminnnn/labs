@@ -62,6 +62,7 @@ public class DemoController {
 		List<NoticeVo> list = demoService.noticeSelect(map);
 		
 		mv.addObject("notice", list);
+		System.out.println(list);
 		
 		mv.setViewName("demo/login");
 		return mv;

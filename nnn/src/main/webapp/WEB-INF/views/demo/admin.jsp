@@ -8,7 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240130"><%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240131">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240131">
+<%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <title>관리자 페이지</title>
@@ -40,9 +42,6 @@ main {
 	background: #f7f7f7;
 	margin-left: 240px;
 }
-.logo {
-	background-color: #1b304a;
-}
 .pd {
 	border-top: 11px solid #f7f7f7;
 	position: fixed;
@@ -66,18 +65,13 @@ tbody td {
 	border-right:1px solid #d7d7d7;
 	border-bottom:1px solid #d7d7d7; */
 }
-.wrapper {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 100;
-}
+
 .scroll-container {
 	padding: 10px; 
 }
 .scrolltable {
 	width: 100%;
-	border: 1px solid #cccccc;
+	border: 2px solid #cccccc;
 	color: #222222;
 }
 .sticky-top {
@@ -97,6 +91,12 @@ tbody td {
 	border-bottom: 1px solid #d7d7d7;
     border-right: 1px solid #d7d7d7;
 }
+.sticky-top:nth-child(1)::before {
+	border-right: 1px solid #cccccc;	
+}
+.sticky-top:nth-child(2)::before {
+	border-left: 1px solid #cccccc;	
+}
 .sticky-middle {
 	position: -webkit-sticky;
     position: sticky;
@@ -113,6 +113,9 @@ tbody td {
 	z-index: -1;
 	border-top: 1px solid #d7d7d7;
     border-right: 1px solid #d7d7d7;
+}
+.sticky-middle:nth-child(4)::before {
+	border-right: 1px solid #cccccc;
 }
 .sticky-bottom {
 	position: -webkit-sticky;
@@ -131,7 +134,10 @@ tbody td {
 	z-index: -1;
 	border-top: 2px solid #d7d7d7;
     border-right: 1px solid #d7d7d7;
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 2px solid #cccccc;
+}
+.sticky-bottom:nth-child(2)::before {
+	border-left: 1px solid #cccccc;
 }
 tbody th, tbody td {
     position: relative; /* 상대 위치 설정 */
@@ -143,6 +149,9 @@ tbody td::before {
 }
 .scrolltable > thead{
 	color: #fff;
+}
+.scrolltable td:nth-child(4) {
+	border-right: 2px solid #ccc;
 }
 .nav__link {
 	display: flex;
@@ -160,42 +169,26 @@ tbody td::before {
 }
 .infotable {
 	width: 100%;
-	border: 1px solid #cccccc;
+	border: 2px solid #cccccc;
 }
 .infotable > thead > tr > th {
 	background: #425c7b;
 	color: #fff;
 	border: 1px solid #d7d7d7;
+	border-bottom: 2px solid #ccc;
 }
 .pointer {
 	cursor: pointer;
 }
-
+.info-sticky-top::before {
+	content: "";
+	border-bottom: 2px solid #ccc;
+}
 </style>
 </head>
 <body>
 <form id="frm">
-<div class="wrapper">
-	<div class="logo" style="position: relative;">
-		<c:if test="${sessionScope.loginmember eq 12365478}">
-			<div style="position: absolute; left: 10px; top: 15px; z-index: 1;">
-				<a href="${pageContext.request.contextPath}/demo/admin">
-					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
-				</a>
-			</div>
-		</c:if>
-		<div style="align-items: center; display: flex; height: 62px;">
-			<img style="position: relative; left: 50%; transform: translate(-50%);" 
-			src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
-		</div>
-		<div>
-			<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
-				<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
-			</a>
-		</div>
-	</div>
-</div>
-
+<jsp:include page="../demo/header.jsp"></jsp:include>
 
 <section style="display: flex; margin-top: 62px;"> 
 	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
@@ -304,13 +297,13 @@ tbody td::before {
 			<table class="infotable">
 				<thead>
 					<tr>
-						<th class="sticky-top">기관명</th>
-						<th class="sticky-top">부서명</th>
-						<th class="sticky-top">사번</th>
-						<th class="sticky-top">직책</th>
-						<th class="sticky-top">이름</th>
-						<th class="sticky-top">비밀번호 설정 여부</th>
-						<th class="sticky-top">비밀번호초기화</th>
+						<th class="sticky-top info-sticky-top">기관명</th>
+						<th class="sticky-top info-sticky-top">부서명</th>
+						<th class="sticky-top info-sticky-top">사번</th>
+						<th class="sticky-top info-sticky-top">직책</th>
+						<th class="sticky-top info-sticky-top">이름</th>
+						<th class="sticky-top info-sticky-top">비밀번호 설정 여부</th>
+						<th class="sticky-top info-sticky-top">비밀번호초기화</th>
 					</tr>
 				</thead>
 				<c:forEach items="${users }" var="u">
@@ -450,6 +443,8 @@ tbody td::before {
 	</main>
 
 </section>
+
+
 <nav>
 	<div style="position: fixed; right: 10px; bottom: 10px; border: 1px solid; padding: 10px; border-radius: 100px; cursor:pointer;" onclick="javascript:window.scrollTo(0,0);">Top</div>
 </nav>
@@ -571,25 +566,25 @@ function userall(contentId) {
 	 				var maintr = document.createElement("TR");
 	 				var maintd1 = document.createElement("TH");
 	 				maintd1.textContent = "기관명";
-	 				maintd1.setAttribute("class","sticky-top");
+	 				maintd1.setAttribute("class","sticky-top info-sticky-top");
 	 				var maintd2 = document.createElement("TH");
 	 				maintd2.textContent = "부서명";
-	 				maintd2.setAttribute("class","sticky-top");
+	 				maintd2.setAttribute("class","sticky-top info-sticky-top");
 	 				var maintd3 = document.createElement("TH");
 	 				maintd3.textContent = "사번";
-	 				maintd3.setAttribute("class","sticky-top");
+	 				maintd3.setAttribute("class","sticky-top info-sticky-top");
 	 				var maintd4 = document.createElement("TH");
 	 				maintd4.textContent = "직책";
-	 				maintd4.setAttribute("class","sticky-top");
+	 				maintd4.setAttribute("class","sticky-top info-sticky-top");
 	 				var maintd6 = document.createElement("TH");
 	 				maintd6.textContent = "이름";
-	 				maintd6.setAttribute("class","sticky-top");
+	 				maintd6.setAttribute("class","sticky-top info-sticky-top");
 	 				var maintd7 = document.createElement("TH");
 	 				maintd7.textContent = "비밀번호 설정 여부";
-	 				maintd7.setAttribute("class","sticky-top");
+	 				maintd7.setAttribute("class","sticky-top info-sticky-top");
 	 				var maintd8 = document.createElement("TH");
 	 				maintd8.textContent = "비밀번호초기화";
-	 				maintd8.setAttribute("class","sticky-top");
+	 				maintd8.setAttribute("class","sticky-top info-sticky-top");
 
 	 				var tbody = document.createElement("TBODY");
 	 				
@@ -2159,16 +2154,16 @@ function activateMenu(menuIndex) {
 	const menuId = menuLinks[menuIndex].getAttribute('data-menu');
 	const contentId = menuLinks[menuIndex].getAttribute('data-content');
 	const menuScript = menuScripts.find(item => item.id === menuId);
-	console.log("console.log(menuScript);" + menuScript);
+// 	console.log("console.log(menuScript);" + menuScript);
 	if (menuScript) {
         menuScript.script(contentId);
         
      // 추가 작업 함수가 정의되어 있으면 실행
         if (menuScript.additionalAction) {
-        	console.log("Additional action exists:", menuScript.additionalAction);
+//         	console.log("Additional action exists:", menuScript.additionalAction);
             menuScript.additionalAction();
         }else {
-            console.log("No additional action defined.");
+//             console.log("No additional action defined.");
         }
     }
 }
