@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240131">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240131">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1" >
@@ -163,6 +163,8 @@ tbody td::before {
 }
 .active {
 	border-left: 4px solid #00bec2;
+	background: #293a4f;
+	color: #fff;
 }
 .bg-gray {
 	background: #eaeaea;
@@ -193,15 +195,15 @@ tbody td::before {
 <section style="display: flex; margin-top: 62px;"> 
 	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
 		<div class="nav__link active" data-menu="userall" data-content="all">
-			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png">
+			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png">
 			<span>직원DB설정</span>
 		</div>
 		<div class="nav__link" data-menu="perall" data-content="all"  style="">
-			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
+			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
 			<span>인사평가 관리</span>
 		</div>
-		<div class="nav__link" style="">
-			<img style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
+		<div class="nav__link" data-menu="setting" data-content="all" >
+			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
 			<span>설정</span>
 		</div>
 	</div>
@@ -444,10 +446,10 @@ tbody td::before {
 
 </section>
 
-
+<!-- 
 <nav>
 	<div style="position: fixed; right: 10px; bottom: 10px; border: 1px solid; padding: 10px; border-radius: 100px; cursor:pointer;" onclick="javascript:window.scrollTo(0,0);">Top</div>
-</nav>
+</nav> -->
 </form>
 <div class="modal normal">
 	<div class="modal_body">
@@ -2076,7 +2078,7 @@ function pwdreset(element){
 	
 	modal3.classList.toggle('show');
  	msg3.style.top = '34%';
-	msg3.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>'+name.substring(0,1)+'ㅇㅇ 님의 비밀번호를 초기화 하시겠습니까?</p>'
+	msg3.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:18px;"></p><p>'+name.substring(0,1)+'ㅇㅇ 님의 비밀번호를 초기화 하시겠습니까?</p>'
 	if (modal3.classList.contains('show')) {
 		body.style.overflow = 'hidden';
 	}
@@ -2154,10 +2156,34 @@ function activateMenu(menuIndex) {
 	const menuId = menuLinks[menuIndex].getAttribute('data-menu');
 	const contentId = menuLinks[menuIndex].getAttribute('data-content');
 	const menuScript = menuScripts.find(item => item.id === menuId);
-// 	console.log("console.log(menuScript);" + menuScript);
+// 	console.log(menuIndex);
 	if (menuScript) {
         menuScript.script(contentId);
-        
+	// Check if the 'icon-image' class exists in the menuLink
+	const iconImage1 = menuLinks[0].querySelector('.icon-image');
+	const iconImage2 = menuLinks[1].querySelector('.icon-image');
+	const iconImage3 = menuLinks[2].querySelector('.icon-image');
+	if (iconImage1) {
+		// Set the image source based on the 'active' class
+		if(menuIndex == 0){
+			console.log('123');
+			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png";
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png";
+			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
+		}else if (menuIndex == 1){
+			console.log('456');
+			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_on.png";
+			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
+		}else if (menuIndex == 2) {
+			console.log('789');
+			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png";
+			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png"
+		}
+	}
+
+
      // 추가 작업 함수가 정의되어 있으면 실행
         if (menuScript.additionalAction) {
 //         	console.log("Additional action exists:", menuScript.additionalAction);

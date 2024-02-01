@@ -9,8 +9,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240131">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240131">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240201F">
 <title>근무평가</title>
 <style>
 </style>
@@ -18,25 +20,8 @@
 <body>
 <div class="main normal">
 <form id="frm" onsubmit="return false;">
-	<div class="wrapper">
-		<c:if test="${sessionScope.loginmember eq 12365478}">
-			<div style="position: absolute; left: 10px; top: 15px;z-index: 1;">
-				<a href="${pageContext.request.contextPath}/demo/admin">
-					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
-				</a>
-			</div>
-		</c:if>
-		<div class="logo" style="position: relative;">
-			<div style="align-items: center; display: flex; height: 62px;">
-				<img style="position: relative; left: 50%; transform: translate(-50%);" 
-				src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
-			</div>
-			<div>
-				<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
-					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
-				</a>
-			</div>
-		</div>
+	<jsp:include page="../demo/header.jsp"></jsp:include>
+	
 		<div class="info">
 			<div>
 				<div class="info_area">
@@ -57,7 +42,7 @@
 				
 			</div>
 		</div>
-		<div class="target_info">
+		<div class="target_info" id="targetInfo">
 			<div class="target_text flex">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
 				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
@@ -66,7 +51,7 @@
 		<div class="target_area">
 			<div class="target">
 				<div class="target_box">
-					<table style="width: 100%; height: 180px;">
+					<table style="width: 100%; height: 157px;">
 						<tr class="target_box_header">
 							<td colspan="4">평가대상자</td>
 						</tr>
@@ -84,7 +69,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 	<div class="section">
 		<div class="container">
 			<div class="content">
@@ -94,7 +79,7 @@
 				<c:set var="index" value="1"/>
 				<c:set var="a" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '섬김' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+						<c:if test="${ev.d3 eq '섬김' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
 							<c:choose>
 								<c:when test="${es eq 'AA'}">
 									<!-- 부서장 1 ~ 11 문제 -->
@@ -459,7 +444,7 @@
 				<div class="bold area_header">배움</div>
 				<c:set var="b" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '배움' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+						<c:if test="${ev.d3 eq '배움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
 							<c:choose>
 								<c:when test="${es eq 'AA'}">
 									<!-- 부서장 1 ~ 11 문제 -->
@@ -709,7 +694,7 @@
 				
 				<c:set var="c" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '키움' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+						<c:if test="${ev.d3 eq '키움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
 							<c:choose>
 								<c:when test="${es eq 'AA'}">
 									<p class="answer">
@@ -992,10 +977,10 @@
 						</c:if>
 						<c:set var="c" value="${c +1 }"/>
 					</c:forEach>
-				<b>[ 나눔 ]</b><br><br>
+				<div class="bold area_header">나눔</div>
 				<c:set var="d" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '나눔' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+						<c:if test="${ev.d3 eq '나눔' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
 							<c:choose>
 								<c:when test="${es eq 'AA'}">
 									<p class="answer">
@@ -1170,7 +1155,7 @@
 				<div class="bold area_header">목표관리</div>
 				<c:set var="e" value="1"/>
 					<c:forEach items="${evf}" var="ev" varStatus="status">
-						<c:if test="${ev.d3 eq '목표관리' }"><p class="question">${status.count}. ${ev.d1}</p><br>
+						<c:if test="${ev.d3 eq '목표관리' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
 							<c:choose>
 								<c:when test="${es eq 'AA'}">
 									<p class="answer">
@@ -1342,7 +1327,7 @@
 						</c:if>
 						<c:set var="e" value="${e +1 }"/>
 					</c:forEach>
-				<b>[ 종합평가 ]</b><br><br>
+				<div class="bold area_header"></div>
 					<c:forEach items="${evf}" var="ev">
 						<c:if test="${ev.d3 eq '주관식' }">
 						<c:forEach items="${resultList}" var="t">
@@ -1354,7 +1339,7 @@
 										</tr>
 										<tr>
 											<td style="background-color: #fafafa; padding: 0; height: 125px;">
-											<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
+											<textarea style="width: 100%; height: 125px; padding: 14px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 1.6rem;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
 										</tr>
 									</table>
 								</c:when>
@@ -1365,7 +1350,7 @@
 										</tr>
 										<tr>
 											<td style="background-color: #fafafa; padding: 0; height: 125px;">
-											<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
+											<textarea style="width: 100%; height: 125px; padding: 14px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 1.6rem;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
 										</tr>
 									</table>
 								</c:when>
@@ -1390,11 +1375,7 @@
 		</div>
 	</div>
 	
-	<div class="footer">
-		<div class="nav">
-			<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
-		</div>
-	</div>
+	<jsp:include page="../demo/footer.jsp"></jsp:include>
 	<input type="hidden" name="score" value="" id="score">
 </form>
 
@@ -1638,6 +1619,31 @@ function closePopup2(){
 		body.style.overflow = 'auto';
 	}
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+	var targetInfo = document.getElementById("targetInfo");
+	var initialOffset = 207;
+	var fixedOffset = 62;
+	var isFixed = false;
+	
+	function updateScroll() {
+		var scrollY = window.scrollY || window.pageYOffset;
+		
+		if (scrollY >= initialOffset && !isFixed) {
+			targetInfo.classList.add("fixed");
+			isFixed = true;
+		} else if (scrollY < initialOffset && isFixed) {
+			targetInfo.classList.remove("fixed");
+			isFixed = false;
+		}
+	
+		requestAnimationFrame(updateScroll);
+	}
+	
+	// Initial call to start the animation loop
+	updateScroll();
+});
+
 /* 
 $(document).ready(function(){ 
     window.onbeforeunload = function(){

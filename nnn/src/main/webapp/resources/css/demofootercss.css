@@ -18,14 +18,14 @@
 	margin-bottom: 17px;
 }
 .footer-logo > img {
-	width: 137px;
+	width: 200px;
 }
 .footer-tel {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	color: #d6d6d6;
-	font-size: 0.975rem;
+	font-size: 1rem;
 }
 .footer-tel .first-span {
 	margin-bottom: 2px;

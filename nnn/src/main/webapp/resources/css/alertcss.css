@@ -237,24 +237,23 @@ cs_btn {
 	background: #ffffff;
 	box-sizing: border-box;
 	position: absolute;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	-moz-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
 	display: none;
 	z-index: 9999;
 	
 	display: flex;
     justify-content: center;
 	position: absolute;
-	top: 45%;
+	top: 35%;
 	left: 50%;
 
 	width: 680px;
-	height: 252px;
+	height: 300px;
 
 	text-align: center;
 
@@ -262,15 +261,11 @@ cs_btn {
 	border-radius: 20px;
 	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 	/* 애니메이션 효과 */
-	transform: translateY(0);
 	transform: translate(-50%, -50%); 
 }
 .modal_body4 {
 	background: #ffffff;
 	box-sizing: border-box;
-	position: absolute;
-	top: 50%;
-	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	-moz-transform: translate(-50%, -50%);
@@ -282,19 +277,17 @@ cs_btn {
 	display: flex;
     justify-content: center;
 	position: absolute;
-	top: 45%;
+	top: 35%;
 	left: 50%;
 
 	width: 680px;
-	height: 290px;
+	height: 300px;
 
 	text-align: center;
 
 	background-color: rgb(255, 255, 255);
-	border-radius: 20px;
+	border-radius: 18px;
 	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-	/* 애니메이션 효과 */
-	transform: translateY(0);
 	transform: translate(-50%, -50%); 
 }
 .modal_body4 > div {
@@ -328,7 +321,7 @@ cs_btn {
 	position: relative;
 	top: 40%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	transform: translate(-50%, -50%);
 	left: 50%;
 }
@@ -341,22 +334,22 @@ cs_btn {
 	left: 50%;
 }
 .modal_btn2 {
-	width: 156px;
+	width: 137px;
 	background: #143257;
 	color: #fff;
-	height: 50px;
-	line-height: 50px;
+	height: 40px;
+	line-height: 40px;
 	font-size: 19px;
 	border: none;
 	cursor: pointer;
 	border-radius: 5px;
 }
 .pink_btn2 {
-	width: 146px;
-	background: #F89D00;
+	width: 137px;
+	background: #6c6c6c;
 	color: #fff;
-	height: 50px;
-	line-height: 50px;
+	height: 40px;
+	line-height: 40px;
 	font-size: 19px;
 	border: none;
 	cursor: pointer;

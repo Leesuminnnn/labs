@@ -9,8 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240131">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240131">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -26,7 +27,7 @@
 			</div>
 			
 			<div class="login-area">
-				<div class="login-content">
+				<div class="login-content" style="position: relative; top: -11px;">
 					<div class="container" style="position: relative; top: 3px;">
 						<div class="content" style="">
 							<div class="">
@@ -41,27 +42,36 @@
 							<div class="" style="text-align: left; margin-bottom: 12px; margin-bottom: 20px;">
 								<span class="bold" style="color: #ffa200; font-size: 1.3rem; letter-spacing: -1.2px;">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
 							</div>
-							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 3px;">
-								<input type="radio" name="radio" id="chk_name" checked />
-								<label style="cursor:pointer; font-size: 1.4rem;" for="chk_name"><span class="normal">사번/이름 <span style="color: #0e366c;">(비밀번호 설정 전)</span></span></label>
-							</div>
-							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px;">
-								<input type="radio" name="radio" id="chk_no" />
-								<span>
-								<label style="cursor:pointer; font-size: 1.4rem;" for="chk_no"><span class="normal">사번/비밀번호 <span style="color: #0e366c;">(비밀번호 설정 후)</span></span>
+							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 3px; font-size: 1.2rem; margin-bottom: 5px;">
+								<label class="label">
+									<span class="alignBox">
+										<input class="radio" type="radio" id="chk_name" name="radio" checked />
+										<span class="radioimg"></span>
+										<span class="inputTxt normal">사번 / 이름 <span style="color: #0e366c;">(비밀번호 설정 전)</span></span>
+									</span>
 								</label>
-								</span>
+								<label class="label">
+									<span class="alignBox">
+										<input type="radio" class="radio" id="chk_no" name="radio" />
+										<span class="radioimg"></span>
+										<span class="inputTxt normal">사번 / 비밀번호 <span style="color: #0e366c;">(비밀번호 설정 후)</span></span>
+									</span>
+								</label>
 							</div>
+							<!-- <div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px; font-size: 1.4rem;">
+								
+							</div> -->
 							<div style="text-align: left; margin-bottom: 3px;">
 								<span class="normal" style="color: #444444; font-size: 1.2rem; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기</span>
 							</div>
-							<div>
-								<button style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer; font-size: 1.4rem;">로그인</button>
+							<div style="position: relative; bottom: -7px;">
+								<button type="button" id="loginbtn" style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer; font-size: 1.4rem;">로그인</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="notice-content">
+				<div style="border-right: 1px solid #d8d8d8; height: 100%;"></div>
+				<div class="notice-content" style="position: relative; top: -7px;">
 					<div class="container">
 						<div class="content content2">
 							<div class="" style="margin-bottom: -10px;">
@@ -175,14 +185,43 @@
 	<!--  -->
 	</section>
 	<jsp:include page="../demo/footer.jsp"></jsp:include>
-	
+	<div class="modal normal">
+		<div class="modal_body">
+			<div>
+				<div class="menu_msg">text</div>
+				<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
+				확인
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal3 normal">
+		<div class="modal_body3">
+			<div>
+				<div class="menu_msg3">text</div>
+				<div class="modal_footer3">
+					<div style="top: 40%" class="btn modal_btn2" onclick="modal_insert()">
+						확인
+					</div>
+					<div style="top: 40%" class="btn pink_btn2" onclick="closePopup3()">
+						취소
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 </form>
 </body>
 <script>
 var namechk = $('#chk_name').prop("checked");
 var nochk = $('#chk_no').prop("checked");
 
-
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const msg = document.querySelector('.menu_msg');
+const modal3 = document.querySelector('.modal3');
+const msg3 = document.querySelector('.menu_msg3');
 // console.log(namechk);
 // console.log(nochk);
 var dbpwdok = "${dbpwdOk}"; 
@@ -211,6 +250,75 @@ $("#manual").click(function(){
 	window.open(url);
 })
 
+$("#loginbtn").click(function (){
+	var InputId = $("#id").val();
+	var InputPwd = $("#pwd").val();
+	var InputName = $("#name").val();
+	var link = "${pageContext.request.contextPath}/demo/Info/${info.idx}"
+	console.log("pwd : "+InputPwd);
+	console.log("name : "+InputName);
+	$.ajax({
+		type : 'post',
+		url : '${pageContext.request.contextPath}/demo/loginAction',
+		datatype : 'json',
+		data : {
+			"id" : InputId,
+			"pwd" : InputPwd,
+			"name" : InputName,
+		},
+		success : function(response) {
+			var res = response.result;
+			
+			if (res === "0") {
+				modal.classList.toggle('show');
+			 	msg.style.top = '34%';
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>2023년도 직원근무평가 대상직원이 아닙니다.</p>'
+
+				console.log(0);
+			} else if (res === "1") {
+				modal.classList.toggle('show');
+			 	msg.style.top = '34%';
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>사번/비밀번호로 체크 후 로그인 해주세요.</p><p>아이디 혹은 비밀번호를 확인해 주세요.</p>'
+
+				
+				console.log(1);
+			} else if (res === "2") {
+				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어 있지 않는 경우
+				modal.classList.toggle('show');
+			 	msg.style.top = '34%';
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>'
+
+				console.log(2);
+			} else if (res === "3") {
+				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
+				modal.classList.toggle('show');
+			 	msg.style.top = '34%';
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요.</p>'
+
+				console.log(3);
+			} else if (res === "4") {
+				var idx = response.idx;
+				location.href = "${pageContext.request.contextPath}/mediplat/Main/"+idx;
+				
+			}
+			
+		},
+	});
+	
+});
+
+function closePopup(){
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+function closePopup2(){
+	modal2.classList.toggle('show');
+	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
 
 </script>
 </html>

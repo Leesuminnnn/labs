@@ -5,7 +5,7 @@
 		<div class="footer-left">
 			<div>
 				<div class="footer-logo">
-					<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+					<img src="${pageContext.request.contextPath}/resources/img/core_logo_w.png">
 				</div>
 				<div class="footer-tel light">
 					<span class="first-span">서울사무소 : 서울특별시 마포구 마포대로 15 현대빌딩 710호</span>

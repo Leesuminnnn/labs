@@ -9,8 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240131">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240131"><%-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240201F">
+<%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
 <title>근무평가</title>
 <style>
@@ -18,28 +21,8 @@
 </head>
 <body class="">
 <div class="main normal">
-
 <form id="frm" onsubmit="return false;">
-	<div class="wrapper">
-		
-		<div class="logo" style="">
-			<c:if test="${sessionScope.loginmember eq 12365478}">
-				<div style="position: absolute; left: 10px; top: 15px;z-index: 1;">
-					<a href="${pageContext.request.contextPath}/demo/admin">
-						<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/home_y.png">
-					</a>
-				</div>
-			</c:if>
-			<div style="align-items: center; display: flex; height: 62px;">
-				<img style="position: relative; left: 50%; transform: translate(-50%);" 
-				src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
-			</div>
-			<div>
-				<a style="position: absolute; right: 10px; top: 10px;" href="${pageContext.request.contextPath}/demo/Logout">
-					<img style="width: 30px;" src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
-				</a>
-			</div>
-		</div>
+	<jsp:include page="../demo/header.jsp"></jsp:include>
 		<div class="info">
 			<div>
 				<div class="info_area">
@@ -88,7 +71,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	
 		<div class="section">
 			<div class="container">
@@ -327,7 +309,7 @@
 										</tr>
 										<tr>
 											<td style="background-color: #fafafa; padding: 0; height: 125px;">
-											<textarea style="width: 100%; height: 125px; padding: 5px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 22px;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
+											<textarea style="width: 100%; height: 125px; padding: 14px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 1.6rem;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
 										</tr>
 									</table>
 								</c:if><%-- 
@@ -352,11 +334,7 @@
 			
 	</div>
 	
-	<div class="footer">
-		<div class="nav">
-			<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
-		</div>
-	</div>
+	<jsp:include page="../demo/footer.jsp"></jsp:include>
 	<input type="hidden" name="score" value="" id="score">
 </form>
 <div class="modal normal">
