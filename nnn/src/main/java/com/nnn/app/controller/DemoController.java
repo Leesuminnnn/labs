@@ -103,10 +103,62 @@ public class DemoController {
 			request.setAttribute("url", "demo/Login");
 			return response;
 		}else {
+			System.out.println(Dbcheck);
+			System.out.println("DB에 id 있음");
 			if(vo.getPwd() == null) {
-				System.out.println("비밀번호 X");
+				// 이름으로 로그인
+				System.out.println("이름으로 로그인");
+				if (loginMember == 1) {
+					// 이름으로 로그인 성공
+					UsersVo info2 = demoService.info2(vo);
+					String UserPwd = info2.getPwd();
+					System.out.println(info2);
+					if (UserPwd == null) {
+						// DB에 비밀번호 없음
+						int idx = info2.getIdx();
+						response.setIdx(idx);
+						response.setResult("5");
+						return response;
+						
+					} else {
+						// DB에 비밀번호 있음
+						response.setResult("2");
+						return response;
+					}
+				} else {
+					// 정보 일치 X
+					response.setResult("3");
+					return response;
+				}
 			}else if (vo.getName() == null) {
-				System.out.println("이름 X");
+				// 비밀번호로 로그인
+				System.out.println("비밀번호로 로그인");
+				if(loginMember == 1) {
+					// 로그인 성공
+					UsersVo info2 = demoService.info2(vo);
+					int idx = info2.getIdx();
+					response.setResult("4");
+					response.setIdx(idx);
+					//로그인 기록 저장
+					map.put("id", vo.getId());
+					map.put("name", info2.getName());
+					md.addAttribute("info", demoService.info(idx));
+					// 로그인 한 유저 ip를 DB에 저장
+					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+					String ip = req.getHeader("X-FORWARDED-FOR");
+					if (ip == null) {
+						ip = req.getRemoteAddr();
+					}
+					map.put("ip", ip);
+					demoService.loginlog(map);
+					// 세션 저장
+					session.setAttribute("loginmember", vo.getId());
+					return response;
+				} else {
+					// 비밀번호 불일치
+					response.setResult("1");
+					return response;
+				}
 			}
 			/*
 			//아이디 혹은 비밀번호가 일치하지 않는 경우
@@ -458,11 +510,12 @@ public class DemoController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("ph", ph);
-		
+		System.out.println(id);
+		System.out.println(ph);
 //		List<UsersVo> list = evaluationService.users1(map);
 		
 		int phOne = demoService.phOne(map);
-		
+		System.out.println(phOne);
 		if(phOne == 1) {
 			response.setResult("Y");
 		}else {

@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+:root, html {
+	font-size: 10px;
+	--footer--width: 861px;
+}
+body {
+	background: #fcfcfc;
+    width: 100vw;
+    height: 100vh;
+}
+section {
+    background: #fcfcfc;
+	width: 700px;
+	height: 463px;
+	border: 1px solid #dfdfdf;
+	margin: 0 auto;
+	position: absolute;
+	top: 44%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.login {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.login > div > span {
+	font-size: 2.6rem;
+    color: #333333;
+    position: relative;
+    top: -10px;
+}
+ul {
+	margin-top: 35px;
+}
+li {
+	margin-bottom: 8px;
+}
+#result2 {
+	margin-bottom: 8px;
+}
+li:last-child {
+	margin-bottom: 0;
+}
+input[type=text], input[type=password] {
+	padding-left: 32px;
+	outline : none;
+}
+
+input[type=text], input[type=password], button {
+    background: #efefef;
+    border: 1px solid #efefef;
+    width: 600px;
+    height: 60px;
+    font-size: 2rem;
+    color: #333333;
+	line-height: 60px;
+}
+button {
+	background: #1b304a;
+	color: #fff;
+	letter-spacing: -1px;
+}
+#findBtn {
+	margin-top: 40px;
+}
+.footer {
+	width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 160px;
+    
+}
+
+.line {
+	width: 100%;
+    background: #1b304a;
+    height: 9px;
+    position: relative;
+    top: -52px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

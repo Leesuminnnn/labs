@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240202">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240202">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240202">
 <title>로그인</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
 <body>
@@ -34,10 +34,10 @@
 								<span>Login</span>
 							</div>
 							<div class="id-area">
-								<input class="input-text" style="padding-left: 23px;" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
+								<input class="input-text id" style="padding-left: 23px;" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
 							</div>
 							<div class="pwd-area" style="">
-								<input class="input-text" style="padding-left: 23px;" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
+								<input class="input-text name" style="padding-left: 23px;" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
 							</div>
 							<div class="" style="text-align: left; margin-bottom: 12px; margin-bottom: 20px;">
 								<span class="bold" style="color: #ffa200; font-size: 1.3rem; letter-spacing: -1.2px;">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
@@ -216,12 +216,12 @@
 <script>
 var namechk = $('#chk_name').prop("checked");
 var nochk = $('#chk_no').prop("checked");
-
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const msg = document.querySelector('.menu_msg');
 const modal3 = document.querySelector('.modal3');
 const msg3 = document.querySelector('.menu_msg3');
+var idx = "";
 // console.log(namechk);
 // console.log(nochk);
 var dbpwdok = "${dbpwdOk}"; 
@@ -231,14 +231,16 @@ $(document).ready(function () {
 		$('#pwd').attr("placeholder", "이름");
 		$('#pwd').attr("type", "text");
 		$('#pwd').attr("title", "이름입력");
-		$('#pwd').attr("name", "name")
+		$('#pwd').attr("name", "name");
+		$('#pwd').attr("class", "input-text name");
 		console.log("1");
 	});
 	$('#chk_no').click(function () {
 		$('#pwd').attr("placeholder", "비밀번호");
 		$('#pwd').attr("type", "password");
 		$('#pwd').attr("title", "비밀번호입력");
-		$('#pwd').attr("name", "pwd")
+		$('#pwd').attr("name", "pwd");
+		$('#pwd').attr("class", "input-text pwd");
 		console.log("2");
 	});
 	
@@ -251,9 +253,9 @@ $("#manual").click(function(){
 })
 
 $("#loginbtn").click(function (){
-	var InputId = $("#id").val();
-	var InputPwd = $("#pwd").val();
-	var InputName = $("#name").val();
+	var InputId = $(".id").val();
+	var InputPwd = $(".pwd").val();
+	var InputName = $(".name").val();
 	var link = "${pageContext.request.contextPath}/demo/Info/${info.idx}"
 	console.log("pwd : "+InputPwd);
 	console.log("name : "+InputName);
@@ -270,35 +272,47 @@ $("#loginbtn").click(function (){
 			var res = response.result;
 			
 			if (res === "0") {
+				// DB에 정보 없음
 				modal.classList.toggle('show');
 			 	msg.style.top = '34%';
 				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>2023년도 직원근무평가 대상직원이 아닙니다.</p>'
 
 				console.log(0);
 			} else if (res === "1") {
+				// 비밀번호 불일치
 				modal.classList.toggle('show');
 			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>사번/비밀번호로 체크 후 로그인 해주세요.</p><p>아이디 혹은 비밀번호를 확인해 주세요.</p>'
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호가 일치하지 않습니다.</p>'
 
 				
 				console.log(1);
-			} else if (res === "2") {
+			} else if (res === "5") {
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어 있지 않는 경우
+				idx = response.idx;
 				modal.classList.toggle('show');
 			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>'
-
-				console.log(2);
-			} else if (res === "3") {
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>';
+				$(".btn").attr("onclick", "pwdlink()");
+				console.log(5);
+			} else if (res === "2") {
 				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
 				modal.classList.toggle('show');
 			 	msg.style.top = '34%';
 				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요.</p>'
 
-				console.log(3);
+				console.log(2);
 			} else if (res === "4") {
-				var idx = response.idx;
+				// 로그인 성공
+				idx = response.idx;
 				location.href = "${pageContext.request.contextPath}/mediplat/Main/"+idx;
+				console.log(4);
+			} else if (res === "3") {
+				// 이름이 일치하지 않는 경우
+				modal.classList.toggle('show');
+			 	msg.style.top = '34%';
+				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>이름이 일치하지 않습니다.</p>'
+
+				console.log(3);
 				
 			}
 			
@@ -318,6 +332,10 @@ function closePopup2(){
 	if (!modal2.classList.contains('show')) {
 		body.style.overflow = 'auto';
 	}
+}
+function pwdlink() {
+	var link = "${pageContext.request.contextPath}/demo/Pwd/"+idx;
+	location.href = link;
 }
 
 </script>

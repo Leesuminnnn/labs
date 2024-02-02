@@ -8,6 +8,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class AjaxResponse5 {
 
 	private String result;

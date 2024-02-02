@@ -148,25 +148,29 @@ cs_btn {
 .modal.show {
 	display: block;
 	transform: translateY(0);
-	transition: transform 1s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	z-index: 9999;
 }
 .modal2.show {
 	display: block;
 	transform: translateY(0);
-	transition: transform 1s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	z-index: 9999;
 }
 .modal3.show {
 	display: block;
 	transform: translateY(0);
-	transition: transform 1s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	z-index: 9999;
 }
 .modal4.show {
 	display: block;
 	transform: translateY(0);
-	transition: transform 1s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	z-index: 9999;
 }
 .modal_body {
