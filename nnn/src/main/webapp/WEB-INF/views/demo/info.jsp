@@ -15,126 +15,19 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240101">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=240201">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=2402051">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/infomediacss.css?ver=240205">
 
 <style>
-	.main {
-		background-color: #f7f7f7;
-	}
-
-	.logo {
-		background-color: #1b304a;
-		position: fixed;
-		width: 100%;
-		z-index: 1001;
-	}
-	.info{
-		background-color : #2f425a;
-		color: #fff;
-		height: 145px;
-		padding: 28px;
-		position: absolute;
-		width: 100%;
-		top: 62px;
-	}
-	.info > div {
-	    margin: 0 20% 0 20%;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
-	}
-	.info_name {
-		font-size: 3rem;
-		margin-bottom: 7px;
-	}
-	.info_id {
-		font-size: 2rem;
-		
-	}
-	.info_hs {
-		color: #c7c7c7;
-		margin-bottom: 4px;
-		font-size: 1.6rem;
-	}
-	.info_date {
-		color: #c7c7c7;
-		font-size: 1.6rem;
-	}
-	.target-text {
-		background-color: #efefef;
-	}
-	.targettb_A tr:first-child, .targettb_B tr:first-child,
-	.targettb_C tr:first-child, .targettb_D tr:first-child{
-		background-color: #1b304a;
-		border: 1px solid #1b304a;
-		color: #fff;
-	}
-	.targettb_A tr:first-child td, .targettb_B tr:first-child td,
-	.targettb_C tr:first-child td, .targettb_D tr:first-child td {
-		border: 1px solid #1b304a;
-		padding: 15px 10px 15px 10px;
-	}
-	.form_go > div > div{
-		cursor:pointer;
-		padding: 7px;
-		margin: 5px;
-		border: 1px solid #f89d00;
-		border-radius: 3px;
-	}
-	.target_section {
-		padding: 20px;
-	}
-	.target_info {
-		background-color: #efefef;
-		position: absolute;
-		top: 207px;
-		width: 100%;
-		z-index: 99;
-	}
-	.fixed {
-		position: fixed;
-		top: 62px;
-	}
-	.target_text {
-		padding-left: 20px;
-		padding-right: 20px;
-		height: 60px;
-		margin: 0 20% 0 20%;
-		justify-content: space-between;
-	}
-	.target_text img{
-		width: 20px;
-		margin-right: 5px;
-	}
-	.target_text span{
-		font-size: 16px;
-	}
-	.target_header {
-		padding-top: 35px;
-		align-items: flex-end;
-	}
-	.target_header img{
-		width: 20px;
-		margin-right: 5px;
-	}
-	.target_header span {
-		font-size: 16px;
-	} 
-	.target_area {
-		padding-top: 267px;
-		display: flex;
-		justify-content: center;
-	}
-	.target_container {
-		margin: 0 20% 0 20%;
-		background: #fbfbfb;
-		width: 100%;
-	}
+	
 </style>
 </head>
 <body>
 <div class="main normal">
 <form action="${pageContext.request.contextPath}/demo/Form" method="post">
+	<div id="header">
+	
+	</div>
 	<jsp:include page="../demo/header.jsp"></jsp:include>
 	<div class="info">
 		<div class="info-container">
@@ -148,22 +41,22 @@
 			<div class="info_hs light">
 				<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
 			</div>
-			<div class="info_date light" >
+			<div class="info_date light">
 				<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
 			</div>
 		</div>
 	</div>
 	<div class="target_info" id="targetInfo">
 		<div class="target_text flex">
-			<div style="display: flex;">
+			<div class="notice">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+				<span class="bold">평가대상자를 확인 후 평가를 진행해주세요!</span>
 			</div>
-			<div class="" style="width: 420px; text-align: right;">
-				<a href="#title1"><span style="display:<c:if test="${(info.hspt_subcode eq 'A00' and info.hspt_Z eq 'F' and info.hspt_V eq 'F') or (info.hspt_V eq 'F' and info.hspt_B eq 'T') or (info.hspt_V eq 'F' and info.hspt_B eq 'F' and info.hspt_Z eq 'F')}">none</c:if>;">진료부</span></a>
-				<a href="#title2"><span style="margin-left: 50px; display:<c:if test="${info.hspt_J eq 'F'}"> none</c:if>;">경혁팀</span></a>
-				<a href="#title3"><span style="margin-left: 50px; display:<c:if test="${info.hspt_subcode eq 'A00' or info.hspt_subcode eq 'A01' or (info.hspt_B eq 'T' and info.hspt_S eq 'F') or (info.hspt_B eq 'T' and info.hspt_S eq 'T') or (info.hspt_V eq 'T' and info.hspt_X eq 'T')}">none</c:if>;">부서장</span></a>
-				<a href="#title4"><span style="margin-left: 50px; display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T') or (info.hspt_subcode eq 'M00' and info.hspt_B eq 'F')}">none</c:if>;">부서원</span></a>
+			<div class="quick">
+				<a href="#title1" ><span class="nav-btn" style="display:<c:if test="${(info.hspt_subcode eq 'A00' and info.hspt_Z eq 'F' and info.hspt_V eq 'F') or (info.hspt_V eq 'F' and info.hspt_B eq 'T') or (info.hspt_V eq 'F' and info.hspt_B eq 'F' and info.hspt_Z eq 'F')}">none</c:if>;">진료부</span></a>
+				<a href="#title2" ><span class="nav-btn" style="display:<c:if test="${info.hspt_J eq 'F'}"> none</c:if>;">경혁팀</span></a>
+				<a href="#title3"><span class="nav-btn" style="display:<c:if test="${info.hspt_subcode eq 'A00' or info.hspt_subcode eq 'A01' or (info.hspt_B eq 'T' and info.hspt_S eq 'F') or (info.hspt_B eq 'T' and info.hspt_S eq 'T') or (info.hspt_V eq 'T' and info.hspt_X eq 'T')}">none</c:if>;">부서장</span></a>
+				<a href="#title4"><span class="nav-btn" style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T') or (info.hspt_subcode eq 'M00' and info.hspt_B eq 'F')}">none</c:if>;">부서원</span></a>
 			</div>
 			
 		</div>
@@ -176,19 +69,19 @@
 	
 	<div class="target_container">
 	
-	<div class="target_section" style="display:<c:if test="${(info.hspt_subcode eq 'A00' and info.hspt_Z eq 'F' and info.hspt_V eq 'F') or (info.hspt_V eq 'F' and info.hspt_B eq 'T') or (info.hspt_V eq 'F' and info.hspt_B eq 'F' and info.hspt_Z eq 'F')}">none</c:if>;">
+	<div class="target_section" id="sc1" style="display:<c:if test="${(info.hspt_subcode eq 'A00' and info.hspt_Z eq 'F' and info.hspt_V eq 'F') or (info.hspt_V eq 'F' and info.hspt_B eq 'T') or (info.hspt_V eq 'F' and info.hspt_B eq 'F' and info.hspt_Z eq 'F')}">none</c:if>;">
 	<!-- 진료부만 해당될 경우 진료팀장이 아닐경우, 경혁팀일 경우
 	
 	
 	 -->
-	<div class="flex target_header">
+	<div class="flex target_header" id="title1">
 		<img style="" src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold" id="title1">진료부 평가</span>
+		<span class="bold">진료부 평가</span>
 	</div>
 	
-	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
+	<div class="line2"></div>
 	<div class="targetA_area">
-	<table class="targettb_A"style="">
+	<table class="targettb_A">
 		<tr>
 			<td class="td1">순번</td><td class="td2">부서명</td><td class="td3">사원번호</td><td class="td6">직급</td><td class="td4">성명</td><td class="td7">평가진행률</td><td class="td8">평가점수</td><td class="td5" style="">평가 및 수정</td>
 		</tr>
@@ -217,7 +110,7 @@
 							<c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 						
-						<td style="color: #003981; font-weight: bold;">
+						<td class="score-text">
 						<c:forEach items="${endlist}" var="e" >
 							<!-- 평가받은사람과 리스트사람이 같고, 평가자와 로그인한사람이 같으면  -->
 								<c:choose>
@@ -236,7 +129,7 @@
 						<td class="form_go" >
 							<div>
 							<!--  -->
-								<c:set var="asd1" value="" />
+								<c:set var="asd1"/>
 								<c:choose>
 									<c:when test="${scoreempty eq 0}">
 									<!-- 스코어 값이 없을 때 -->
@@ -262,12 +155,12 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${asd1 eq true }">
-										<div style="color: #f89d00;" onclick="formmodify(this)"
+										<div class="modify-btn" onclick="formmodify(this)"
 										data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 										data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 									</c:when>
 									<c:otherwise>
-										<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+										<div class="form-btn" onclick="formgo(this)"
 										data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 										data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 									</c:otherwise>
@@ -290,7 +183,7 @@
 						<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 						
-						<td style="color: #003981; font-weight: bold;">
+						<td class="score-text" >
 							<c:forEach items="${endlist}" var="e">
 								<c:choose>
 									<c:when test="${t.idx eq e.d2 and e.team eq 'A'}">
@@ -333,12 +226,12 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${asd1 eq true }">
-										<div style="color: #f89d00;" onclick="formmodify(this)"
+										<div class="modify-btn" onclick="formmodify(this)"
 										data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "A"}'>${e.d3 }</c:if>"
 										data-ev-2="A" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 									</c:when>
 									<c:otherwise>
-										<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+										<div class="form-btn" onclick="formgo(this)"
 										data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "A"}'>${e.d3 }</c:if>"
 										data-ev="A" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 									</c:otherwise>
@@ -360,16 +253,16 @@
 	</div>
 	
 	<!-- 경혁팀 -->
-	<div class="target_section" 
+	<div class="target_section" id="sc2"
 	<c:choose>
 	<c:when test="${info.hspt_J eq 'F'}"> style="display: none;"</c:when>
 	</c:choose>
 	>
 	<div class="flex target_header">
 		<img src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold" id="title2">경혁팀 평가</span>
+		<span class="bold" >경혁팀 평가</span>
 	</div>
-	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
+	<div class="line2"></div>
 	<div class="targetB_area">
 	<c:set var="index1" value="1" />
 	<table class="targettb_B">
@@ -393,7 +286,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-text">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'B'}">
@@ -435,12 +328,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${asd2 eq true }">
-							<div style="color: #f89d00;" onclick="formmodify(this)"
+							<div class="modify-btn" onclick="formmodify(this)"
 							data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "B"}'>${e.d3 }</c:if>"
 							data-ev-2="B" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 						</c:when>
 						<c:otherwise>
-							<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+							<div class="form-btn" onclick="formgo(this)"
 							data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "B"}'>${e.d3 }</c:if>"
 							data-ev="B" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 						</c:otherwise>
@@ -457,13 +350,13 @@
 	
 	</div>
 	<!-- 부서장 -->
-	<div class="target_section" style="display:<c:if test="${info.hspt_subcode eq 'A00' or info.hspt_subcode eq 'A01' or (info.hspt_B eq 'T' and info.hspt_S eq 'F') or (info.hspt_B eq 'T' and info.hspt_S eq 'T') or (info.hspt_V eq 'T' and info.hspt_X eq 'T')}">none</c:if>;">
+	<div class="target_section" id="sc3" style="display:<c:if test="${info.hspt_subcode eq 'A00' or info.hspt_subcode eq 'A01' or (info.hspt_B eq 'T' and info.hspt_S eq 'F') or (info.hspt_B eq 'T' and info.hspt_S eq 'T') or (info.hspt_V eq 'T' and info.hspt_X eq 'T')}">none</c:if>;">
 	
 	<div class="flex target_header">
 		<img src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold" id="title3">부서장 평가</span>
+		<span class="bold">부서장 평가</span>
 	</div>
-	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
+	<div class="line2"></div>
 	<div class="targetC_area">
 	<table class="targettb_C">
 		<tr>
@@ -489,7 +382,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-btn">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
@@ -532,12 +425,12 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${asd3 eq true }">
-						<div style="color: #f89d00;" onclick="formmodify(this)"
+						<div class="modify-btn" onclick="formmodify(this)"
 						data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 						data-ev-2="C" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 					</c:when>
 					<c:otherwise>
-						<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+						<div class="form-btn" onclick="formgo(this)"
 						data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 						data-ev="C" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 					</c:otherwise>
@@ -564,7 +457,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-text">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
@@ -607,12 +500,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${asd3 eq true }">
-							<div style="color: #f89d00;" onclick="formmodify(this)"
+							<div class="modify-btn" onclick="formmodify(this)"
 							data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 							data-ev-2="C" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 						</c:when>
 						<c:otherwise>
-							<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+							<div class="form-btn" onclick="formgo(this)"
 							data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 							data-ev="C" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 						</c:otherwise>
@@ -639,7 +532,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-text">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
@@ -682,12 +575,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${asd3 eq true }">
-							<div style="color: #f89d00;" onclick="formmodify(this)"
+							<div class="modify-btn" onclick="formmodify(this)"
 							data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 							data-ev-2="C" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 						</c:when>
 						<c:otherwise>
-							<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+							<div class="form-btn" onclick="formgo(this)"
 							data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 							data-ev="C" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 						</c:otherwise>
@@ -714,7 +607,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-text">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'C'}">
@@ -757,12 +650,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${asd3 eq true }">
-							<div style="color: #f89d00;" onclick="formmodify(this)"
+							<div class="modify-btn" onclick="formmodify(this)"
 							data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 							data-ev-2="C" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 						</c:when>
 						<c:otherwise>
-							<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+							<div class="form-btn" onclick="formgo(this)"
 							data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "C"}'>${e.d3 }</c:if>"
 							data-ev="C" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 						</c:otherwise>
@@ -787,12 +680,12 @@
 	
 	</div>
 	<!-- 부서원 -->
-	<div class="target_section" style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T') or (info.hspt_subcode eq 'M00' and info.hspt_B eq 'F')}">none</c:if>;">
+	<div class="target_section" id="sc4" style="display:<c:if test="${info.hspt_subcode eq 'A00'or info.hspt_subcode eq 'A01' or (info.hspt_X eq 'T' and info.hspt_K eq 'F') or (info.hspt_S eq 'F' and info.hspt_V eq 'F' and info.hspt_X eq 'T') or (info.hspt_subcode eq 'M00' and info.hspt_B eq 'F')}">none</c:if>;">
 	<div class="flex target_header">
 		<img src="${pageContext.request.contextPath}/resources/icon/ev/ev.png">
-		<span class="bold" id="title4">부서원 평가</span>
+		<span class="bold" >부서원 평가</span>
 	</div>
-	<div style="border-bottom: 2px solid #1b304a; margin: 10px 0 10px 0;"></div>
+	<div class="line2"></div>
 	<div class="targetD_area">
 	<table class="targettb_D" style="">
 		<tr>
@@ -820,7 +713,7 @@
 				<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 				
-				<td style="color: #003981; font-weight: bold;">
+				<td class="score-text">
 					<c:forEach items="${endlist}" var="e">
 						<c:choose>
 							<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -863,12 +756,12 @@
 						</c:choose>
 						<c:choose>
 							<c:when test="${asd4 eq true }">
-								<div style="color: #f89d00;" onclick="formmodify(this)"
+								<div class="modify-btn"  onclick="formmodify(this)"
 								data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 								data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 							</c:when>
 							<c:otherwise>
-								<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+								<div class="form-btn" onclick="formgo(this)"
 								data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 								data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 							</c:otherwise>
@@ -895,7 +788,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-text">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -938,12 +831,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${asd4 eq true }">
-							<div style="color: #f89d00;" onclick="formmodify(this)"
+							<div class="modify-btn" onclick="formmodify(this)"
 							data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 							data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 						</c:when>
 						<c:otherwise>
-							<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+							<div class="form-btn" onclick="formgo(this)"
 							data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 							data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 						</c:otherwise>
@@ -971,7 +864,7 @@
 			<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 			
-			<td style="color: #003981; font-weight: bold;">
+			<td class="score-text">
 				<c:forEach items="${endlist}" var="e">
 					<c:choose>
 						<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1004,7 +897,7 @@
 									<c:set var="asd4" value="true" />
 								</c:when>
 							</c:choose>
-						</c:forEach>
+						</c:forEach> 
 							<c:if test="${a eq 2}">
 								<!-- 평가를 안했을 때 -->
 								<c:set var="asd4" value="false" />
@@ -1013,12 +906,12 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${asd4 eq true }">
-						<div style="color: #f89d00;" onclick="formmodify(this)"
+						<div class="modify-btn" onclick="formmodify(this)"
 						data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 					</c:when>
 					<c:otherwise>
-						<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+						<div class="form-btn" onclick="formgo(this)"
 						data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 					</c:otherwise>
@@ -1046,7 +939,7 @@
 						<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 						
-						<td style="color: #003981; font-weight: bold;">
+						<td class="score-text">
 							<c:forEach items="${endlist}" var="e">
 								<c:choose>
 									<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1089,12 +982,12 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${asd4 eq true }">
-										<div style="color: #f89d00;" onclick="formmodify(this)"
+										<div class="modify-btn" onclick="formmodify(this)"
 										data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 										data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 									</c:when>
 									<c:otherwise>
-										<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+										<div class="form-btn" onclick="formgo(this)"
 										data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 										data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 									</c:otherwise>
@@ -1120,7 +1013,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td style="color: #003981; font-weight: bold;">
+		<td class="score-text">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1163,12 +1056,12 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${asd4 eq true }">
-						<div style="color: #f89d00;" onclick="formmodify(this)"
+						<div class="modify-btn" onclick="formmodify(this)"
 						data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 					</c:when>
 					<c:otherwise>
-						<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+						<div class="form-btn" onclick="formgo(this)"
 						data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 					</c:otherwise>
@@ -1194,7 +1087,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td style="color: #003981; font-weight: bold;">
+		<td class="line2">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1237,12 +1130,12 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${asd4 eq true }">
-						<div style="color: #f89d00;" onclick="formmodify(this)"
+						<div class="modify-btn" onclick="formmodify(this)"
 						data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 					</c:when>
 					<c:otherwise>
-						<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+						<div class="form-btn" onclick="formgo(this)"
 						data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 					</c:otherwise>
@@ -1269,7 +1162,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td style="color: #003981; font-weight: bold;">
+		<td class="line2">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1312,12 +1205,12 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${asd4 eq true }">
-						<div style="color: #f89d00;" onclick="formmodify(this)"
+						<div class="modify-btn" onclick="formmodify(this)"
 						data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 					</c:when>
 					<c:otherwise>
-						<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+						<div class="form-btn" onclick="formgo(this)"
 						data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 					</c:otherwise>
@@ -1343,7 +1236,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td style="color: #003981; font-weight: bold;">
+		<td class="line2">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1386,12 +1279,12 @@
 				</c:choose>
 				<c:choose>
 					<c:when test="${asd4 eq true }">
-						<div style="color: #f89d00;" onclick="formmodify(this)"
+						<div class="modify-btn" onclick="formmodify(this)"
 						data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정하기</div>
 					</c:when>
 					<c:otherwise>
-						<div style="color: #fff; background-color:#f89d00;" onclick="formgo(this)"
+						<div class="form-btn" onclick="formgo(this)"
 						data-d3="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
 						data-ev="D" data-t-idx="${t.idx}" data-e-idx="${e.d2}">평가하기</div>
 					</c:otherwise>
@@ -1499,7 +1392,6 @@ function formmodify(element) {
 	
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
 	var targetInfo = document.getElementById("targetInfo");
 	var initialOffset = 207;
@@ -1523,11 +1415,135 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Initial call to start the animation loop
 	updateScroll();
 });
-// $(function(element){
-// 	var targetidx = element.getAttribute("data-t-idx-3");
+
+// $(document).ready(function () {
+// 	var quickList = $('quick').find('a');
 	
-	
+// 	function onScroll() {
+// 		$(window).scroll(function (event) {
+			
+// 			if (scrollPos > $('.anchor_div1').offset().top - 267 ) {
+// 				quick.removeClass('active');
+// 				quick.eq(0).addClass('active');
+// 			}
+// 		});
+// 	}
 // });
 
+
 </script>
+<script>
+$(document).ready(function () {
+	function isInView(element) {
+		var windowHeight = $(window).height();
+		var elementTop = element.offset().top;
+		var elementBottom = elementTop + element.outerHeight();
+		var scrollPos = $(document).scrollTop();
+	    var headerHeight = $('#header').outerHeight();
+	    var targetInfoHeight = $('.target_info').outerHeight();
+	    var additionalMargin = 60; // 추가적인 여백
+		console.log(elementTop - headerHeight - targetInfoHeight - additionalMargin);
+		console.log(scrollPos + windowHeight && elementBottom - headerHeight + targetInfoHeight);
+	 // 헤더와 target_info의 영역과 추가 여백만큼 아래로 내려와야 활성화
+	    return (elementTop - headerHeight - targetInfoHeight - additionalMargin <= scrollPos + windowHeight && elementBottom - headerHeight - targetInfoHeight >= scrollPos);
+}
+
+	// 퀵메뉴 ON
+	var quickList = $('.quick a').find('span');
+	console.log(quickList);
+	
+	function onScroll() {
+		$(window).scroll(function (event) {
+	        var headerHeight = $('#header').outerHeight();
+	        var targetInfoHeight = $('.target_info').outerHeight();
+			var scrollPos = $(document).scrollTop();
+			
+// 			HOME, 공연안내, 핫플레이스, 메뉴&상품 각각의 구간에 도달하면 동작하는 조건문
+// 			현재 스크롤 위치 > 진료부 영역의 상단부분의 위치 - 헤더 영역 - 공지사항영역 이면 진료부 활성화
+// 			현재 스크롤 위치 <= 경혁팀 영역의 상단부분의 위치 - 헤더 영역 - 공지사항 영역 이면 진료부 활성화
+
+// 			if (scrollPos > $('#sc1').offset().top - headerHeight - targetInfoHeight
+// 					&& scrollPos <= $('#sc2').offset().top - headerHeight - targetInfoHeight) {
+// 				quickList.removeClass('active');
+// 				quickList.eq(0).addClass('active');
+// 			} else if (scrollPos > $('#sc2').offset().top - headerHeight - targetInfoHeight
+// 					&& scrollPos <= $('#sc3').offset().top - headerHeight - targetInfoHeight) {
+// 				quickList.removeClass('active');
+// 				quickList.eq(1).addClass('active');
+// 			} else if (scrollPos > $('#sc3').offset().top - headerHeight - targetInfoHeight
+// 					&& scrollPos <= $('#sc4').offset().top - headerHeight - targetInfoHeight) {
+// 				quickList.removeClass('active');
+// 				quickList.eq(2).addClass('active');
+// 			} else if (scrollPos > $('#sc4').offset().top - headerHeight - targetInfoHeight) {
+// 				quickList.removeClass('active');
+// 				quickList.eq(3).addClass('active');
+// 			}
+			if (isInView($('#sc1'))) {
+				console.log("진료부");
+				quickList.removeClass('active');
+				quickList.eq(0).addClass('active');
+			} else if (isInView($('#sc2'))) {
+				console.log("경혁");
+				quickList.removeClass('active');
+				quickList.eq(1).addClass('active');
+			} else if (isInView($('#sc3'))) {
+				console.log("부서장");
+				quickList.removeClass('active');
+				quickList.eq(2).addClass('active');
+			} else if (isInView($('#sc4'))) {
+				console.log("부서원");
+				quickList.removeClass('active');
+				quickList.eq(3).addClass('active');
+			}
+		});
+	}
+
+	// 스크롤 이동
+	function smoothScroll() {
+		var arr = [];
+		arr.push($('#sc1'), $('#sc2'), $('#sc3'), $('#sc4'));
+		var quickLinks = $('.quick a');
+		
+		quickLinks.on('click', function (e) {
+			e.preventDefault();
+			var targetIndex = $(this).index();
+			
+			$('html, body').stop().animate({
+			    scrollTop: arr[targetIndex].offset().top - 122
+			}, 500);
+			
+			// 클릭 이벤트에서 스크롤이 끝난 후에 active 클래스를 추가
+			$(document).one('scroll', function () {
+				quickList.removeClass('active');
+				quickList.eq(targetIndex).addClass('active');
+			});
+		});
+	}
+	
+	
+	/* function smoothScroll() {
+		var arr = [];
+		arr.push($('#sc1'), $('#sc2'), $('#sc3'), $('#sc4'));
+		$('.quick a').on('click', function (e) {
+			e.preventDefault();
+	
+			$('html, body').stop().animate({
+				scrollTop: arr[$(this).index()].offset().top - 122
+			}, 500);
+	
+// 			스크롤이벤트에서 on 클래스를 붙이기 때문에 타이밍을 준다.
+// 			setTimeout(function () {
+// 				quickList.removeClass('active');
+// 				quickList.eq($(this).index()).addClass('active');
+// 			}, 10);
+	
+	
+		});
+	} */
+	
+	onScroll();
+	smoothScroll();
+});
+</script>
+
 </html>

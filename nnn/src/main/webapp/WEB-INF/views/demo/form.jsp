@@ -510,8 +510,70 @@ $("#end").click(function() {
 					body.style.overflow = 'hidden';
 				}
 				score.value = sumAA;
-				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
-				form.submit();
+// 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
+// 				form.submit();
+
+				$.ajax({
+					url: '${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}',
+					type: 'post',
+					dataType: 'json',
+					data: {
+						"a1"  : g1,
+						"a2"  : g2,
+						"b3"  : g3,
+						"b4"  : g4,
+						"c5"  : g5,
+						"c6"  : g6,
+						"d7"  : g7,
+						"d8"  : g8,
+						"e9"  : g9,
+						"e10" : g10,
+						"f11" : f11,
+						"score" : sumAA
+					},
+					success : function (response) {
+						res = response.result;
+						if(res == "1") {
+							// 이미 평가가 완료된 대상
+							modal2.classList.toggle('show');
+							modal.classList.toggle('show');
+						 	msg.style.top = '34%';
+							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>이미 평가가 완료된 대상입니다.</p><p>마이페이지로 돌아갑니다.</p>'
+							if (modal.classList.contains('show')) {
+								body.style.overflow = 'hidden';
+							}
+							$(".btn").attr("onclick", "link()");
+						} else if (res == "2") {
+							// 평가 완료
+							modal2.classList.toggle('show');
+							modal.classList.toggle('show');
+						 	msg.style.top = '34%';
+							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가가 완료되었습니다.</p>'
+							if (modal.classList.contains('show')) {
+								body.style.overflow = 'hidden';
+							}
+							$(".btn").attr("onclick", "endlink()");
+						} else if (res == "3") {
+							// 오류 발생
+							modal2.classList.toggle('show');
+							modal.classList.toggle('show');
+						 	msg.style.top = '34%';
+							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 완료 중 오류가 발생하였습니다.</p><p>마이페이지로 돌아갑니다.</p>'
+							if (modal.classList.contains('show')) {
+								body.style.overflow = 'hidden';
+							}
+							$(".btn").attr("onclick", "link()");
+						}
+					},
+					error : function(error) {
+						console.error('Error fetching data :' ,error);
+						modal2.classList.toggle('show');
+						modal.classList.toggle('show');
+					 	msg.style.top = '34%';
+						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 완료 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
+
+					}
+				});
 			});
 		}
 	}else {
@@ -550,8 +612,80 @@ $("#end").click(function() {
 				}
 
 				score.value = sumAB;
-				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
-				form.submit();
+// 				form.action = "${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}";
+// 				form.submit();
+
+				$.ajax({
+					url: '${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}/${team}',
+					type: 'post',
+					dataType: 'json',
+					data: {
+						"a12"  : k1,
+						"a13"  : k2,
+						"a14"  : k3,
+						"a15"  : k4,
+						"a16"  : k5,
+						"a17"  : k6,
+						"a18"  : k7,
+						"b19"  : k8,
+						"b20"  : k9,
+						"b21"  : k10,
+						"b22"  : k11,
+						"c23"  : k12,
+						"c24"  : k13,
+						"c25"  : k14,
+						"c26"  : k15,
+						"c27"  : k16,
+						"d28"  : k17,
+						"d29"  : k18,
+						"e30"  : k19,
+						"e31"  : k20,
+						"f32"  : f32,
+						"score" : sumAB
+					},
+					success : function (response) {
+						res = response.result;
+						if(res == "1") {
+							// 이미 평가가 완료된 대상
+							modal2.classList.toggle('show');
+							modal.classList.toggle('show');
+						 	msg.style.top = '34%';
+							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>이미 평가가 완료된 대상입니다.</p><p>마이페이지로 돌아갑니다.</p>'
+							if (modal.classList.contains('show')) {
+								body.style.overflow = 'hidden';
+							}
+							$(".btn").attr("onclick", "link()");
+						} else if (res == "2") {
+							// 평가 완료
+							modal2.classList.toggle('show');
+							modal.classList.toggle('show');
+						 	msg.style.top = '34%';
+							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가가 완료되었습니다.</p>'
+							if (modal.classList.contains('show')) {
+								body.style.overflow = 'hidden';
+							}
+							$(".btn").attr("onclick", "endlink()");
+						} else if (res == "3") {
+							// 오류 발생
+							modal2.classList.toggle('show');
+							modal.classList.toggle('show');
+						 	msg.style.top = '34%';
+							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 완료 중 오류가 발생하였습니다.</p><p>마이페이지로 돌아갑니다.</p>'
+							if (modal.classList.contains('show')) {
+								body.style.overflow = 'hidden';
+							}
+							$(".btn").attr("onclick", "link()");
+						}
+					},
+					error : function(error) {
+						console.error('Error fetching data :' ,error);
+						modal2.classList.toggle('show');
+						modal.classList.toggle('show');
+					 	msg.style.top = '34%';
+						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 완료 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
+
+					}
+				});
 			});
 			
 
@@ -598,6 +732,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	updateScroll();
 });
 
+function link() {
+	var link = "${pageContext.request.contextPath}/demo/Info/${info.idx}";
+	location.href = link;
+}
+function endlink() {
+	var link = "${pageContext.request.contextPath}/demo/FormEnd/${info.idx}/${target.idx}";
+	location.href = link;
+}
 /* 
 $(document).ready(function(){ 
     window.onbeforeunload = function(){

@@ -47,14 +47,14 @@
 									<span class="alignBox">
 										<input class="radio" type="radio" id="chk_name" name="radio" checked />
 										<span class="radioimg"></span>
-										<span class="inputTxt normal">사번 / 이름 <span style="color: #0e366c;">(비밀번호 설정 전)</span></span>
+										<span class="inputTxt normal">사번 / 이름 <span class="bold" style="color: #0e366c;">(비밀번호 설정 전)</span></span>
 									</span>
 								</label>
 								<label class="label">
 									<span class="alignBox">
 										<input type="radio" class="radio" id="chk_no" name="radio" />
 										<span class="radioimg"></span>
-										<span class="inputTxt normal">사번 / 비밀번호 <span style="color: #0e366c;">(비밀번호 설정 후)</span></span>
+										<span class="inputTxt normal">사번 / 비밀번호 <span class="bold" style="color: #0e366c;">(비밀번호 설정 후)</span></span>
 									</span>
 								</label>
 							</div>
@@ -62,10 +62,10 @@
 								
 							</div> -->
 							<div style="text-align: left; margin-bottom: 3px;">
-								<span class="normal" style="color: #444444; font-size: 1.2rem; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기</span>
+								<span class="bold" style="color: #0e366c; font-size: 1.2rem; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기 ></span>
 							</div>
 							<div style="position: relative; bottom: -7px;">
-								<button type="button" id="loginbtn" style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer; font-size: 1.4rem;">로그인</button>
+								<button type="button" id="loginbtn" style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer; font-size: 1.6rem; font-weight: 500;">로그인</button>
 							</div>
 						</div>
 					</div>
@@ -317,6 +317,13 @@ $("#loginbtn").click(function (){
 			}
 			
 		},
+		error : function(error) {
+			console.error('Error fetching data :' ,error);
+			modal.classList.toggle('show');
+		 	msg.style.top = '34%';
+			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>로그인 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
+
+		}
 	});
 	
 });

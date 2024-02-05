@@ -75,7 +75,41 @@ $(document).ready(function () {
 
 			return false;
 		}else{
-			frm.submit();
+// 			frm.submit();
+			// Ajax 전송
+			$.ajax({
+				type: 'post',
+				url: '${pageContext.request.contextPath}/demo/pwdAction/${info.idx}',
+				datatype: 'json',
+				data: {
+					"pwd": pwd
+				},
+				success : function (response) {
+					var res = response.result;
+					
+					if (res === "N") {
+						// 전송실패
+						modal.classList.toggle('show');
+					 	msg.style.top = '34%';
+						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
+
+					} else if (res === "Y") {
+						// 성공
+						modal.classList.toggle('show');
+					 	msg.style.top = '34%';
+						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요.</p>';
+						$(".btn").attr("onclick", "link()");
+					}
+				},
+				error : function (error) {
+					console.log('Error fetching data : ', error);
+					modal.classList.toggle('show');
+				 	msg.style.top = '34%';
+					msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
+
+				}
+			});
+			
 		}
 	});
 	
@@ -88,6 +122,10 @@ function closePopup(){
 	}
 }
 
+function link() {
+	var link = "${pageContext.request.contextPath}/demo/Login";
+	location.href = link;
+}
 
 
 </script>

@@ -525,6 +525,49 @@ public class DemoController {
 		return response;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="pwdAction/{idx}")
+	public AjaxResponse8 pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, Model md) throws NoSuchAlgorithmException {
+		AjaxResponse8 response = new AjaxResponse8();
+		response.setResult("N");
+		session.getAttribute("loginMember");
+		
+		md.addAttribute("info", demoService.info(idx));
+		// 암호화
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+		//비밀번호
+        String password = vo.getPwd();
+        //aes128으로 암호화된 비밀번호
+        String cryptogram = aes128.encrypt(password);
+        
+        System.out.println(cryptogram);
+		//담은 변수를 DB에 넘겨준다.
+		vo.setPwd(cryptogram);
+		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("pwd", cryptogram);
+		map.put("pwd", vo.getPwd());
+		map.put("idx", vo.getIdx());
+		
+		int flag = demoService.pwdinsert(map);
+		
+		if(flag >= 1) {
+			System.out.println(flag);
+			request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요");
+			request.setAttribute("url", "demo/Info/"+idx);
+			response.setResult("Y");
+			return response;
+		} else {
+			request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
+			request.setAttribute("url", "demo/Pwd/"+idx);
+			response.setResult("N");
+			return response;
+		}
+	}
+	
+	/*
 	@RequestMapping(value="pwdAction/{idx}")
 	public String pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, HttpServletResponse response, Model md) throws NoSuchAlgorithmException {
 		session.getAttribute("loginMember");
@@ -560,6 +603,7 @@ public class DemoController {
 			return "alert5";
 		}
 	}
+	*/
 	@ResponseBody
 	@RequestMapping(value="PwdActAjax/{id}")
 	public AjaxResponse8 pwdActAjax(UsersVo vo, HttpSession session, @PathVariable("id") String id, Model md) throws NoSuchAlgorithmException {
@@ -699,6 +743,171 @@ public class DemoController {
 	}
 	
 	// 평가 후 Db저장
+	@ResponseBody
+	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
+	public AjaxResponse8 fromAction(ModelAndView mv, CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
+			HttpServletRequest request, Model md,
+			@RequestParam(name="a1", required = false) String a1, @RequestParam(name="a2", required = false) String a2, @RequestParam(name="b3", required = false) String b3, 
+			@RequestParam(name="b4", required = false) String b4, @RequestParam(name="c5", required = false) String c5, @RequestParam(name="c6", required = false) String c6, 
+			@RequestParam(name="d7", required = false) String d7, @RequestParam(name="d8", required = false) String d8, @RequestParam(name="e9", required = false) String e9, 
+			@RequestParam(name="e10", required = false) String e10, @RequestParam(name="f11", required = false) String f11, @RequestParam(name="a12", required = false) String a12, 
+			@RequestParam(name="a13", required = false) String a13, @RequestParam(name="a14", required = false) String a14, @RequestParam(name="a15", required = false) String a15, 
+			@RequestParam(name="a16", required = false) String a16, @RequestParam(name="a17", required = false) String a17, @RequestParam(name="a18", required = false) String a18, 
+			@RequestParam(name="b19", required = false) String b19, @RequestParam(name="b20", required = false) String b20, @RequestParam(name="b21", required = false) String b21, 
+			@RequestParam(name="b22", required = false) String b22, @RequestParam(name="c23", required = false) String c23, @RequestParam(name="c24", required = false) String c24, 
+			@RequestParam(name="c25", required = false) String c25, @RequestParam(name="c26", required = false) String c26, @RequestParam(name="c27", required = false) String c27, 
+			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
+			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32, @RequestParam(name="score", required = false) int score
+			) throws Exception {
+		AjaxResponse8 response = new AjaxResponse8();
+		response.setResult("0");
+		session.getAttribute("loginmember");
+		md.addAttribute("info", demoService.info(infoidx));
+		md.addAttribute("target", demoService.info(targetidx));
+		md.addAttribute("team", team);
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		Map<String, Object> map3 = new HashMap<String, Object>();
+		
+		String u1 = demoService.info(infoidx).getHspt_name();		// 기관명
+		String u2 = demoService.info(infoidx).getId();				// 평가자 사번
+		String t1 = demoService.info(targetidx).getId();			// 평가대상자 사번
+		System.out.println(score);
+
+		map3.put("col1", u2);
+		map3.put("col2", t1);
+		// 평가 시작하면 whether 테이블에 평가자와 평가 대상자 , 진행 여부 insert
+		map2.put("d1", infoidx);
+		map2.put("d2", targetidx);
+		System.out.println(a1);
+		System.out.println(a2);
+		System.out.println(b3);
+		System.out.println(b4);
+		System.out.println(c5);
+		System.out.println(c6);
+		System.out.println(d7);
+		System.out.println(d8);
+		System.out.println(e9);
+		System.out.println(e10);
+		System.out.println(f11);
+		System.out.println(a12);
+		System.out.println(a13);
+		System.out.println(a14);
+		System.out.println(a15);
+		System.out.println(a16);
+		System.out.println(a17);
+		System.out.println(a18);
+		System.out.println(b19);
+		System.out.println(b20);
+		System.out.println(b21);
+		System.out.println(b22);
+		System.out.println(c23);
+		System.out.println(c24);
+		System.out.println(c25);
+		System.out.println(c26);
+		System.out.println(c27);
+		System.out.println(d28);
+		System.out.println(d29);
+		System.out.println(e30);
+		System.out.println(e31);
+		System.out.println(f32);
+		
+		System.out.println(score);
+		
+		map.put("u1", u1);
+		map.put("u2", u2);
+		map.put("t1", t1);
+		map.put("team", team);
+		map2.put("team",team);
+		map3.put("score", score);
+		// 진료부, 경혁팀, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+			String ev = "AA";
+			System.out.println("ev : " + ev);
+			String d1 = a1+","+a2+","+b3+","+b4+","+c5+","+c6+","+d7+","+d8+","+e9+","+e10+","+f11;
+			System.out.println(d1);
+			map.put("ev", ev);
+			map2.put("ev", ev);
+			map.put("d1", d1);
+		}
+		// 부서원 영역
+		else if (team.equals("D")) {
+			String ev = "AB";
+			System.out.println("ev : " + ev);
+			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+c23+","+c24+
+					","+c25+","+c26+","+c27+","+d28+","+d29+","+e30+","+e31+","+f32;
+			map.put("d1", d1);
+			map2.put("ev", ev);
+			map.put("ev", ev);
+		}
+		
+		List<CAnswerVo> list = new ArrayList<CAnswerVo>();
+		
+		// 나중에 암호화 해야함
+		
+//		// 암호화
+//		SHA256 sha256 = new SHA256();
+//		//비밀번호
+//        String password = vo.getPwd();
+//        //SHA256으로 암호화된 비밀번호
+//        String cryptogram = sha256.encrypt(password);
+//        
+//        System.out.prIntegerln(cryptogram);
+//		//담은 변수를 DB에 넘겨준다.
+//		vo.setPwd(cryptogram);
+//		System.out.println("암호화된 페스워드 : "+cryptogram);
+		
+		
+		
+		
+		System.out.println("###########################################################");
+		System.out.println();
+		System.out.println(infoidx);
+		System.out.println(targetidx);
+		System.out.println("###########################################################");
+		
+		// DB 전송 전 중복 체크
+		
+		int selectflag = demoService.formcheck(map2);
+		System.out.println(selectflag);
+		if (selectflag == 1) {
+			request.setAttribute("msg", "이미 평가가 완료된 대상입니다.");
+			request.setAttribute("url", "demo/Info/"+infoidx);
+			response.setResult("1");
+			return response;
+		}else {
+			int flag = demoService.forminsert(map);
+			 ///db 전송 이후 
+			if(flag == 1) {
+				request.setAttribute("msg", "평가가 완료되었습니다.");
+				request.setAttribute("url", "demo/FormEnd/"+infoidx+"/"+targetidx);
+				request.setAttribute("infoidx",infoidx);
+				request.setAttribute("targetidx",targetidx);
+				// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
+				// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
+				// 검색 후 기록이 없으면 insert, 
+				int flag2 = demoService.whether(map2);
+				int flag3 = demoService.scoreInsert(map3);
+				// 평가 진행후 
+				System.out.println("평가 진행 여부 table insert  :  "+flag2);
+				System.out.println("점수 : "+ flag3);
+				response.setResult("2");
+				return response;
+			} else {
+
+				request.setAttribute("msg", "오류발생");
+				request.setAttribute("url", "demo/Info/"+infoidx);
+				response.setResult("3");
+				return response;
+			}
+		}
+		
+		
+		
+	}
+	
+	
+	/*
 	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")
 	public String fromAction(ModelAndView mv, CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
 			HttpServletRequest request, HttpServletResponse response, Model md,
@@ -855,6 +1064,8 @@ public class DemoController {
 		
 		
 	}
+	*/
+	
 	
 	@RequestMapping(value="FormEnd/{idx}/{idx2}")
 	public ModelAndView formend( @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, HttpSession session, ModelAndView mv) throws Exception {
@@ -872,6 +1083,139 @@ public class DemoController {
 	}
 	
 	// 수정 완료 후 DB 저장
+	@ResponseBody
+	@RequestMapping(value="formUpdate/{idx}/{idx2}/{team}")
+	public AjaxResponse8 fromUpdate(CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
+			HttpServletRequest request, Model md,
+			@RequestParam(name="a1", required = false) String a1, @RequestParam(name="a2", required = false) String a2, @RequestParam(name="b3", required = false) String b3, 
+			@RequestParam(name="b4", required = false) String b4, @RequestParam(name="c5", required = false) String c5, @RequestParam(name="c6", required = false) String c6, 
+			@RequestParam(name="d7", required = false) String d7, @RequestParam(name="d8", required = false) String d8, @RequestParam(name="e9", required = false) String e9, 
+			@RequestParam(name="e10", required = false) String e10, @RequestParam(name="f11", required = false) String f11, @RequestParam(name="a12", required = false) String a12, 
+			@RequestParam(name="a13", required = false) String a13, @RequestParam(name="a14", required = false) String a14, @RequestParam(name="a15", required = false) String a15, 
+			@RequestParam(name="a16", required = false) String a16, @RequestParam(name="a17", required = false) String a17, @RequestParam(name="a18", required = false) String a18, 
+			@RequestParam(name="b19", required = false) String b19, @RequestParam(name="b20", required = false) String b20, @RequestParam(name="b21", required = false) String b21, 
+			@RequestParam(name="b22", required = false) String b22, @RequestParam(name="c23", required = false) String c23, @RequestParam(name="c24", required = false) String c24, 
+			@RequestParam(name="c25", required = false) String c25, @RequestParam(name="c26", required = false) String c26, @RequestParam(name="c27", required = false) String c27, 
+			@RequestParam(name="d28", required = false) String d28, @RequestParam(name="d29", required = false) String d29, @RequestParam(name="e30", required = false) String e30, 
+			@RequestParam(name="e31", required = false) String e31, @RequestParam(name="f32", required = false) String f32, @RequestParam(name="score", required = false) int score
+			) throws Exception {
+		AjaxResponse8 response = new AjaxResponse8();
+		response.setResult("N");
+		session.getAttribute("loginmember");
+		md.addAttribute("info", demoService.info(infoidx));
+		md.addAttribute("target", demoService.info(targetidx));
+		md.addAttribute("team", team);
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		Map<String, Object> map3 = new HashMap<String, Object>();
+		
+		
+		System.out.println(a1);
+		System.out.println(a2);
+		System.out.println(b3);
+		System.out.println(b4);
+		System.out.println(c5);
+		System.out.println(c6);
+		System.out.println(d7);
+		System.out.println(d8);
+		System.out.println(e9);
+		System.out.println(e10);
+		System.out.println(f11);
+		System.out.println(a12);
+		System.out.println(a13);
+		System.out.println(a14);
+		System.out.println(a15);
+		System.out.println(a16);
+		System.out.println(a17);
+		System.out.println(a18);
+		System.out.println(b19);
+		System.out.println(b20);
+		System.out.println(b21);
+		System.out.println(b22);
+		System.out.println(c23);
+		System.out.println(c24);
+		System.out.println(c25);
+		System.out.println(c26);
+		System.out.println(c27);
+		System.out.println(d28);
+		System.out.println(d29);
+		System.out.println(e30);
+		System.out.println(e31);
+		System.out.println(f32);
+		
+		System.out.println(score);
+		String u1 = demoService.info(infoidx).getHspt_name();		// 기관명
+		String u2 = demoService.info(infoidx).getId();				// 평가자 사번
+		String t1 = demoService.info(targetidx).getId();			// 평가대상자 사번
+
+		map3.put("col1", u2);
+		map3.put("col2", t1);
+		// 평가 시작하면 whether 테이블에 평가자와 평가 대상자 , 진행 여부 insert
+		map2.put("d1", infoidx);
+		map2.put("d2", targetidx);
+		map.put("u1", u1);
+		map.put("u2", u2);
+		map.put("t1", t1);
+		map.put("team", team);
+		map2.put("team",team);
+		map3.put("score", score);
+		// 진료부, 경혁팀, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+			String ev = "AA";
+			System.out.println("ev : " + ev);
+			String d1 = a1+","+a2+","+b3+","+b4+","+c5+","+c6+","+d7+","+d8+","+e9+","+e10+","+f11;
+			System.out.println(d1);
+			map.put("ev", ev);
+			map2.put("ev", ev);
+			map.put("d1", d1);
+		}
+		// 부서원 영역
+		else if (team.equals("D")) {
+			String ev = "AB";
+			System.out.println("ev : " + ev);
+			String d1 = a12+","+a13+","+a14+","+a15+","+a16+","+a17+","+a18+","+b19+","+b20+","+b21+","+b22+","+c23+","+c24+
+					","+c25+","+c26+","+c27+","+d28+","+d29+","+e30+","+e31+","+f32;
+			map.put("d1", d1);
+			map2.put("ev", ev);
+			map.put("ev", ev);
+		}
+		
+		List<CAnswerVo> list = new ArrayList<CAnswerVo>();
+		// whether update
+		int flag4 = demoService.whetherUpdate(map2);
+		// answer upate
+		int flag1 = demoService.formUpdate(map);
+		// score update
+		int flag3 = demoService.scoreUpdate(map3);
+		// answer insert
+		int flag = demoService.forminsert(map);
+		 ///db 전송 이후 
+		if(flag == 1) {
+			request.setAttribute("msg", "수정이 완료되었습니다.");
+			request.setAttribute("url", "demo/FormEnd/"+infoidx+"/"+targetidx);
+			// view 단에서 미평가, 평가 진행중, 평가 완료 에 따라 값을 다르게 주면 각각 다른 메세지를 띄워줄 수 있음
+			// 먼저 평가페이지에 들어온 기록이 있는지 (테이블에 평가자와 평가 대상자가 있는지 검색)
+			// 검색 후 기록이 없으면 insert, 
+			int flag2 = demoService.whether(map2);
+			int flag5 = demoService.scoreInsert(map3);
+			// 평가 진행후 
+			System.out.println("평가 진행 여부 table insert  :  "+flag2);
+			System.out.println("점수 : "+ flag3);
+			response.setResult("Y");
+			return response;
+		} else {
+
+			request.setAttribute("msg", "오류발생");
+			request.setAttribute("url", "demo/Info/"+infoidx);
+			response.setResult("N");
+			return response;
+		}
+		
+		
+		
+		
+	}
+	/*
 	@RequestMapping(value="formUpdate/{idx}/{idx2}/{team}")
 	public String fromUpdate(CAnswerVo vo, HttpSession session, @PathVariable(name="idx") int infoidx, @PathVariable(name="idx2") int targetidx, @PathVariable("team") String team,
 			HttpServletRequest request, HttpServletResponse response, Model md,
@@ -999,6 +1343,7 @@ public class DemoController {
 		
 		
 	}
+	*/
 	@RequestMapping(value="admin")
 	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
