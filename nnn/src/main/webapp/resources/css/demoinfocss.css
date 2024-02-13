@@ -1,7 +1,7 @@
 @charset "UTF-8";
 :root, html {
 	font-size: 10px;
-	--footer--width: 861px;
+	--footer--width: 100%;
 }
 
 
@@ -18,14 +18,14 @@ td {
     text-align: center;
     font-size: 1.6rem;
 }
-.footer > div {
+.pc{
 	display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     align-content: space-between;
     width: auto;
-    margin: 0 20%;
+    padding: 0 20%;
 }
 
 .td1{
@@ -156,7 +156,7 @@ td {
 	margin-right: 5px;
 }
 .target_header span {
-	font-size: 16px;
+	font-size: 1.6rem;
 } 
 .target_area {
 	padding-top: 267px;

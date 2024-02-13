@@ -57,18 +57,18 @@ td {
 	width: 100%;
 	top: 62px;
 }
-.info > div > div{
+.info_area{
     margin: 0 20% 0 20%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 }
 .info_name { 
-	font-size: 30px;
+	font-size: 3rem;
 	margin-bottom: 7px;
 }
 .info_id {
-	font-size: 20px;
+	font-size: 2rem;
 }
 .info_hs {
 	color: #c7c7c7;
@@ -99,7 +99,7 @@ td {
 	margin-right: 5px;
 }
 .target_text span{
-	font-size: 16px;
+	font-size: 1.6rem;
 }
 .target {
 	background-color: #f7f7f7;
@@ -173,6 +173,28 @@ td {
 .answer {
 	margin-bottom: 50px;
 	padding-left: 25px;
+}
+.text-area-table {
+	width: 100%;
+}
+.text-area-tr1 {
+	background-color: #1b304a;
+	color: #fff;
+}
+.text-area-tr2 > td {
+	background-color: #fafafa;
+	padding: 0;
+	height: 125px;
+}
+.text-area-tr2 textarea {
+	width: 100%;
+	height: 125px;
+	padding: 14px;
+	resize: none;
+	border: none;
+	background-color: #fafafa;
+	outline: none;
+	font-size: 1.6rem;
 }
 .nav > div {
 	font-size: 2.5rem;

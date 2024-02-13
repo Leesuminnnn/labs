@@ -7,11 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" >
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240202">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240202">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240202">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240213_01">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240213_01">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240213_01">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/loginmediacss.css?ver=240213_01">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -19,170 +20,200 @@
 <body>
 <form action="${pageContext.request.contextPath}/demo/loginAction" method="post">
 	<section>
-	<div class="login-bg">
-		<div class="main">
-			
-			<div class="login-header">
-				<span class="header-text">코어솔루션 인사평가 시스템</span>
-			</div>
-			
-			<div class="login-area">
-				<div class="login-content" style="position: relative; top: -11px;">
-					<div class="container" style="position: relative; top: 3px;">
-						<div class="content" style="">
-							<div class="">
-								<span>Login</span>
-							</div>
-							<div class="id-area">
-								<input class="input-text id" style="padding-left: 23px;" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
-							</div>
-							<div class="pwd-area" style="">
-								<input class="input-text name" style="padding-left: 23px;" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
-							</div>
-							<div class="" style="text-align: left; margin-bottom: 12px; margin-bottom: 20px;">
-								<span class="bold" style="color: #ffa200; font-size: 1.3rem; letter-spacing: -1.2px;">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
-							</div>
-							<div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 3px; font-size: 1.2rem; margin-bottom: 5px;">
-								<label class="label">
-									<span class="alignBox">
-										<input class="radio" type="radio" id="chk_name" name="radio" checked />
-										<span class="radioimg"></span>
-										<span class="inputTxt normal">사번 / 이름 <span class="bold" style="color: #0e366c;">(비밀번호 설정 전)</span></span>
-									</span>
-								</label>
-								<label class="label">
-									<span class="alignBox">
-										<input type="radio" class="radio" id="chk_no" name="radio" />
-										<span class="radioimg"></span>
-										<span class="inputTxt normal">사번 / 비밀번호 <span class="bold" style="color: #0e366c;">(비밀번호 설정 후)</span></span>
-									</span>
-								</label>
-							</div>
-							<!-- <div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px; font-size: 1.4rem;">
-								
-							</div> -->
-							<div style="text-align: left; margin-bottom: 3px;">
-								<span class="bold" style="color: #0e366c; font-size: 1.2rem; cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기 ></span>
-							</div>
-							<div style="position: relative; bottom: -7px;">
-								<button type="button" id="loginbtn" style="height: 50px; display: flex; justify-content: center; align-items: center; background-color: #f5a418; border-radius: 7px; color: #f5f5f5; width: 100%; border:none; cursor:pointer; font-size: 1.6rem; font-weight: 500;">로그인</button>
-							</div>
-						</div>
-					</div>
+		<%-- <div class="login-bg">
+			<div class="main">
+				
+				<div class="login-header">
+					<span class="header-text">코어솔루션 인사평가 시스템</span>
 				</div>
-				<div style="border-right: 1px solid #d8d8d8; height: 100%;"></div>
-				<div class="notice-content" style="position: relative; top: -7px;">
-					<div class="container">
-						<div class="content content2">
-							<div class="" style="margin-bottom: -10px;">
-								<span>Notice</span>
-							</div>
-							<div class="notice-bg">
-								<div style="height: 100%; padding: 20px 20px 0px 20px;">
-									<div class="notice-header bold">
-										<span>직원 평가완료 후 재평가(수정)이 안되오니 신중하게 평가해 주시기 바랍니다</span>
-									</div>
-									<div class="notice-text normal" style="font-size:1rem;">
-										<div style="margin-top: 8px; width: 100%; height: 146px; overflow: auto;">
-											<div>
-												<c:forEach items="${notice }" var="n">
-												<div style="display: flex;margin-bottom: 7px; margin-left: 7px;">
-													<div style="width: 143px; display: flex; align-items: center;"><c:if test="${not empty n.d2}"><img style="margin-right: 5px;" src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png"></c:if> <span>${n.d2 }</span></div>
-													<div><span style="letter-spacing: -0.5px;">${n.d3 }</span></div>
-												</div>
-												</c:forEach>
-											</div>
-										</div><%-- 
-										<table style="margin-top: 13px; width: 100%;">
-											<tbody style="">
-												<c:forEach items="${notice}" var="n">
-													<tr <c:if test="${n.idx eq '1' }">colspan="2"</c:if> style="height: 22px; <c:if test="${n.idx eq 1 }">color:red; font-size:15px; font-weight: bolder;</c:if>">
-														<td style="width: 135px; display: flex; align-items: center;"><c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png"></c:if> <span>${n.d2 }</span></td>
-														<td><span>${n.d3 }</span></td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table> --%>
-									</div>
+				
+				<div class="login-area">
+					<div class="login-content">
+						<div class="container">
+							<div class="content">
+								<div class="login-header-top">
+									<span>Login</span>
 								</div>
-								
+								<div class="id-area">
+									<input class="input-text id" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
+								</div>
+								<div class="pwd-area">
+									<input class="input-text name" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
+								</div>
+								<div class="login-text">
+									<span class="bold" style="">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
+								</div>
+								<div class="chk-area" style="">
+									<label class="label">
+										<span class="alignBox">
+											<input class="radio" type="radio" id="chk_name" name="radio" checked />
+											<span class="radioimg"></span>
+											<span class="inputTxt normal">사번 / 이름 <span class="bold">(비밀번호 설정 전)</span></span>
+										</span>
+									</label>
+									<label class="label">
+										<span class="alignBox">
+											<input type="radio" class="radio" id="chk_no" name="radio" />
+											<span class="radioimg"></span>
+											<span class="inputTxt normal">사번 / 비밀번호 <span class="bold">(비밀번호 설정 후)</span></span>
+										</span>
+									</label>
+								</div>
+								<!-- <div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px; font-size: 1.4rem;">
+									
+								</div> -->
+								<div class="pw-find">
+									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기 ></span>
+								</div>
+								<div class="login-btn">
+									<button type="button" id="loginbtn" style="">로그인</button>
+								</div>
 							</div>
-							<div class="notice-btn">
-								<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
+						</div>
+					</div>
+					<div class="center-line"></div>
+					<div class="notice-content">
+						<div class="container">
+							<div class="content content2">
+								<div class="notice-header-top">
+									<span>Notice</span>
+								</div>
+								<div class="notice-bg">
+									<div style="">
+										<div class="notice-header bold">
+											<span>직원 평가완료 후 재평가(수정)이 안되오니 신중하게 평가해 주시기 바랍니다</span>
+										</div>
+										<div class="notice-text normal">
+											<div>
+												<div>
+													<c:forEach items="${notice }" var="n">
+													<div class="notice-inner">
+														<div class="inner-text">
+															<c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png"></c:if>
+															<span>${n.d2 }</span>
+														</div>
+														<div><span class="inner-span">${n.d3 }</span></div>
+													</div>
+													</c:forEach>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="notice-btn">
+									<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="logo-area">
+					<div class="flex flex-center">
+						<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+					</div>
+				</div>
 			</div>
-			<div class="logo-area">
-				<div class="flex flex-center">
-					<img style="width: 137px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+			
+		</div> --%>
+		<div class="text-wrap">
+			<div class="text-img" style="color: #222222;">
+				<img class="pc-img" src="${pageContext.request.contextPath}/resources/icon/ev/login_bg2.png">
+				<img class="mob-img" src="${pageContext.request.contextPath}/resources/icon/ev/login_bg_m_3.png">
+			</div>
+			<div class="main">
+				
+				<div class="login-header">
+					<span class="header-text">코어솔루션 인사평가 시스템</span>
+				</div>
+				<div class="login-area">
+					<div class="login-content">
+						<div class="container">
+							<div class="content">
+								<div class="login-header-top">
+									<span>Login</span>
+								</div>
+								<div class="id-area">
+									<input class="input-text id" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
+								</div>
+								<div class="pwd-area">
+									<input class="input-text name" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
+								</div>
+								<div class="login-text">
+									<span class="bold" style="">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
+								</div>
+								<div class="chk-area" style="">
+									<label class="label label-name">
+										<span class="alignBox">
+											<input class="radio" type="radio" id="chk_name" name="radio" checked />
+											<span class="radioimg"></span>
+											<span class="inputTxt normal">사번 / 이름 <span class="bold">(비밀번호 설정 전)</span></span>
+										</span>
+									</label>
+									<label class="label label-pwd">
+										<span class="alignBox">
+											<input type="radio" class="radio" id="chk_no" name="radio" />
+											<span class="radioimg"></span>
+											<span class="inputTxt normal">사번 / 비밀번호 <span class="bold">(비밀번호 설정 후)</span></span>
+										</span>
+									</label>
+								</div>
+								<!-- <div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px; font-size: 1.4rem;">
+									
+								</div> -->
+								<div class="pw-find">
+									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기 ></span>
+								</div>
+								<div class="login-btn">
+									<button type="button" id="loginbtn" style="">로그인</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="center-line"></div>
+					<div class="notice-content">
+						<div class="container">
+							<div class="content content2">
+								<div class="notice-header-top">
+									<span>Notice</span>
+								</div>
+								<div class="notice-bg">
+									<img src="${pageContext.request.contextPath}/resources/icon/ev/memo.png">
+								</div>
+									<div class="notice-main">
+										<div class="notice-header bold">
+											<span>직원 평가완료 후 재평가(수정)이 안되오니 신중하게 평가해 주시기 바랍니다</span>
+										</div>
+										<div class="notice-text normal">
+											<div>
+												<div>
+													<c:forEach items="${notice }" var="n">
+													<div class="notice-inner">
+														<div class="inner-text">
+															<c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png"></c:if>
+															<span>${n.d2 }</span>
+														</div>
+														<div><span class="inner-span">${n.d3 }</span></div>
+													</div>
+													</c:forEach>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								
+								<div class="notice-btn">
+									<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="logo-area">
+					<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
 				</div>
 			</div>
 		</div>
-		
-	</div>
-	
-	
-	<!-- 
-	<div class="login">
-		<h2>코어솔루션 인사평가 시스템</h2>
-		<ul>
-			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
-			<li><input type="text" name="name" id="pwd" placeholder="이름" title="이름입력"></li>
-			<li style="color: red; font-size:12px;"><b>※ 개인 비밀번호를 설정 하신 후 로그인시 아래의 사번/비밀번호 체크후 사번과 비밀번호를 입력부탁드립니다.</b></li>
-			<li style="display: flex; flex-wrap: wrap;">
-				<input type="radio" name="radio" id="chk_name" checked>
-				<label style="cursor:pointer;" for="chk_name">사번/이름
-					<b style="color: red">(비밀번호 설정 전)&nbsp;&nbsp;</b>
-				</label>
-				<input type="radio" name="radio" id="chk_no" >
-				<label style="cursor:pointer;" for="chk_no">사번/비밀번호
-					<b style="color: red">(비밀번호 설정 후)</b>
-				</label>
-			</li>
-			<li><button>로그인</button></li>
-			<li style="text-align: center;" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">
-			<p style="cursor:pointer; color: #000099; "><b style="border-bottom: 1px solid;">비밀번호를 잊으셨나요?</b></p></li>			
-		</ul>
-		<div style="display: none;">
-			<ul>
-				<li>회원가입</li>
-			</ul>
-		</div>
-	</div>
-	<div class="notice" style="">
-		<p style="font-size: 18px;"><b>공지사항</b><p>
-		<div class="area">
-			<table style="width:100%; font-weight: bold">
-			<c:forEach items="${notice}" var="n">
-				<tr>
-					<td <c:if test="${n.idx eq '1' }">colspan="2"</c:if>  style="<c:if test="${n.idx eq '1' }">color:red; font-size:15px; font-weight: bolder;</c:if>">
-						${n.d2 }
-					</td>
-					<td style="<c:if test="${n.idx eq '4'}">color:red;</c:if>">
-						${n.d3 }
-					</td>
-				</tr>
-			</c:forEach>
-			</table>
-		</div>
-		<div id="manual">근무평가 시스템 메뉴얼 보기</div>
-		<p style="font-size: 18px;"><b>문의사항</b></p>
-		<div style="color:blue;">
-		<p>코어솔루션 063-250-4503</div>
-	</div>
-	<div class="footer">
-		<div class="nav">
-			<img style="height: 35px;" src="${pageContext.request.contextPath}/resources/img/core_logo.png">
-		</div>
-	</div> 
-	
-	
-	
-	
-	
-	<!--  -->
 	</section>
 	<jsp:include page="../demo/footer.jsp"></jsp:include>
 	<div class="modal normal">
@@ -304,7 +335,12 @@ $("#loginbtn").click(function (){
 			} else if (res === "4") {
 				// 로그인 성공
 				idx = response.idx;
-				location.href = "${pageContext.request.contextPath}/mediplat/Main/"+idx;
+				if (idx == 635) {
+					location.href = "${pageContext.request.contextPath}/demo/admin";
+				} else {
+					location.href = "${pageContext.request.contextPath}/demo/Info/"+idx;
+				}
+				
 				console.log(4);
 			} else if (res === "3") {
 				// 이름이 일치하지 않는 경우

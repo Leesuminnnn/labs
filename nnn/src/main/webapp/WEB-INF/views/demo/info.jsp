@@ -13,10 +13,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css"> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240101">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=2402051">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/infomediacss.css?ver=240205">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0213">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0213">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=0213">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/infomediacss.css?ver=0213">
 
 <style>
 	
@@ -1087,7 +1087,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td class="line2">
+		<td class="score-text">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1162,7 +1162,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td class="line2">
+		<td class="score-text">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">
@@ -1236,7 +1236,7 @@
 		<td><c:set var="targetfirstName" value="${fn:substring(t.name, 0, 1)}" />
 						${targetfirstName}ㅇㅇ</td>
 		
-		<td class="line2">
+		<td class="score-text">
 			<c:forEach items="${endlist}" var="e">
 				<c:choose>
 					<c:when test="${t.idx eq e.d2 and e.team eq 'D'}">

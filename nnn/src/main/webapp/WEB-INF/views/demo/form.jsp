@@ -12,7 +12,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201F">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240205_01">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=240205_02">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
 <title>근무평가</title>
@@ -47,7 +48,7 @@
 		<div class="target_info" id="targetInfo">
 			<div class="target_text flex">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+				<span class="bold">평가대상자를 확인 후 평가를 진행해주세요!</span>
 			</div>
 		</div>
 		<div class="target_area">
@@ -303,13 +304,13 @@
 							<div class="bold area_header"></div>
 							<c:forEach items="${evf}" var="ev">
 								<c:if test="${ev.d3 eq '주관식' }">
-									<table style="width: 100%;">
-										<tr style="background-color: #1b304a; color: #fff;">
+									<table class="text-area-table">
+										<tr class="text-area-tr1">
 											<td><p class="question bold">${ev.d1}</p></td>
 										</tr>
-										<tr>
-											<td style="background-color: #fafafa; padding: 0; height: 125px;">
-											<textarea style="width: 100%; height: 125px; padding: 14px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 1.6rem;" id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
+										<tr class="text-area-tr2">
+											<td>
+											<textarea id="f${ev.idx }" name="f${ev.idx }" ></textarea></td>
 										</tr>
 									</table>
 								</c:if><%-- 

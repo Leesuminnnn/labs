@@ -306,6 +306,7 @@ tbody td::before {
 						<th class="sticky-top info-sticky-top">이름</th>
 						<th class="sticky-top info-sticky-top">비밀번호 설정 여부</th>
 						<th class="sticky-top info-sticky-top">비밀번호초기화</th>
+						<th class="sticky-top info-sticky-top">평가자 마이페이지</th>
 					</tr>
 				</thead>
 				<c:forEach items="${users }" var="u">
@@ -317,7 +318,7 @@ tbody td::before {
 							<td>${u.id }</td>
 							<td>${u.hspt_position }</td>
 							
-							<td class="pointer" onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">
+							<td>
 								<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
 	    						${targetfirstName }ㅇㅇ
 								
@@ -329,6 +330,7 @@ tbody td::before {
 								</c:choose>
 							</td>
 							<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" class="pointer"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
+							<td class="pointer"  onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">링크</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -587,6 +589,8 @@ function userall(contentId) {
 	 				var maintd8 = document.createElement("TH");
 	 				maintd8.textContent = "비밀번호초기화";
 	 				maintd8.setAttribute("class","sticky-top info-sticky-top");
+	 				var maintd9 = document.createElement("TH");
+	 				maintd9.textContent = "평가자 마이페이지";
 
 	 				var tbody = document.createElement("TBODY");
 	 				
@@ -599,6 +603,7 @@ function userall(contentId) {
 	 				maintr.appendChild(maintd6);
 	 				maintr.appendChild(maintd7);
 	 				maintr.appendChild(maintd8);
+	 				maintr.appendChild(maintd9);
 					tb.appendChild(tbody);
 	 				listall.forEach(function (list) {
 	 					if(list.id != 12365478){
@@ -644,7 +649,11 @@ function userall(contentId) {
 		 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
 		 						tdpwdselect.setAttribute("style", "cursor:pointer;");
 		 					}
+		 					var tdlink = document.createElement("TD");
+		 					tdlink.setAttribute("onclick", "location.href='" + url + "'");
+		 					tdlink.textContent = "링크";
 		 					//
+		 					
 		 					
 		 					tbody.appendChild(tr);
 		 					tr.appendChild(tdhname);
@@ -654,6 +663,7 @@ function userall(contentId) {
 		 					tr.appendChild(tdname);
 		 					tr.appendChild(tdpwd);
 							tr.appendChild(tdpwdselect);
+							tr.appendChild(tdlink);
 	 					}	
  					});
         	 }

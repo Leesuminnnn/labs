@@ -9,9 +9,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240202A">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=240202">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240202A">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0213">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=0213">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0213">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0213">
 <title>비밀번호 변경</title><!-- 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -19,23 +20,29 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/demo/findpwdAction" method="post">
+	<div class="wrap">
 	<section id="section">
 	
 	<div class="login">
 		<div class="line" id="line"></div>
-		<div>
-			<span class="bold" id="head">비밀번호 변경</span>
+		<div class="main">
+			<div class="login-head">
+				<span class="bold" id="head">비밀번호 변경</span>
+			</div>
+			<ul id="ul" class="normal">
+				<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
+				<li id="result2"><input type="text" name="ph" id="ph" placeholder="휴대폰번호" title="휴대폰번호입력"></li>
+				<li id="findBtn"><button class="bold" type="button" id="find">정보확인</button></li>
+				<li ><div id="resultDiv""><span id="result"></span></div></li>
+			</ul>
 		</div>
-		<ul id="ul" class="normal">
-			<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
-			<li id="result2"><input type="text" name="ph" id="ph" placeholder="휴대폰번호" title="휴대폰번호입력"></li>
-			<li id="findBtn"><button class="bold" type="button" id="find">정보확인</button></li>
-			<li ><div id="resultDiv" style="height: 44px; width: 600px;"><span style="font-size: 1.8rem;" id="result"></span></div></li>
-		</ul>
+		
 		
 	</div>
 	
 	</section>
+	
+	</div>
 	<jsp:include page="../demo/footer.jsp"></jsp:include>
 	<div class="modal normal">
 		<div class="modal_body">
