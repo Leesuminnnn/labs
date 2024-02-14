@@ -64,6 +64,7 @@ input[type=text], input[type=password], button {
 button {
 	background: #1b304a;
 	color: #fff;
+	cursor: pointer;
 }
 
 .footer {

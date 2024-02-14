@@ -8,10 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformendcss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformendcss.css?ver=0214">
 <title>평가완료</title>
 <style>
 </style>
@@ -23,28 +23,34 @@
 	<jsp:include page="../demo/header.jsp"></jsp:include>
 		<div class="info">
 			<div>
-				<div class="info_name">
-					<span class="normal">
-						<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
-						${infofirstName}ㅇㅇ
-					</span>
-					<span class="light info_id">(사원번호 : ${info.id })</span>
+				<div class="info_area">
+					<div class="info_name">
+						<span class="normal">
+							<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
+							${infofirstName}ㅇㅇ
+						</span>
+						<span class="light info_id">(사원번호 : ${info.id })</span>
+					</div>
+					<div class="info_hs light">
+						<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
+					</div>
+					<div class="info_date light" >
+						<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
+					</div>
 				</div>
-				<div class="info_hs light">
-					<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
-				</div>
-				<div class="info_date light" >
-					<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
-				</div>
+				
 			</div>
 		</div>
 		<div class="target_info" id="targetInfo">
 			<div class="target_text flex">
-				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-				<span class="bold" style="font-size: 16px;">모든 평가가 완료되지 않으신 직원은 버튼을 클릭하여 평가를 계속 진행해 주시기 바랍니다.</span>
+				<div class="flex">
+					<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
+					<span class="bold " style="font-size: 1rem;">모든 평가가 완료되지 않으신 직원은 버튼을 클릭하여 평가를 계속 진행해 주시기 바랍니다.</span>
+				</div>
+				<button class="end" type="button" onclick="back()">돌아가기</button>
 			</div>
 		</div>
-		<div class="target_area">
+		<%-- <div class="target_area">
 			<div class="target">
 				<div class="target_box">
 					<table style="">
@@ -65,7 +71,7 @@
 				</div>
 			</div>
 			
-		</div>
+		</div> --%>
 	<div class="section">
 		<div class="container">
 			<div class="content">
@@ -130,7 +136,7 @@
 							<span style="background-color: #ffecc0;">모든 평가가 완료되지 않으신 직원은 아래 "평가대상자 목록 돌아가기" 버튼을 클릭하여, 평가를 계속 진행해주시기 바랍니다.</span> -->
 							<br><br><br>
 							<!-- <div onclick="back()" style="border: 1px solid #000; padding: 15px; background-color: #D9EAD3;"></div> -->
-							<button class="end" type="button" onclick="back()">평가대상자 목록 돌아가기</button>
+							
 						</div>
 				</div>
 				</div>

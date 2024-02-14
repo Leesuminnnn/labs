@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240205_01">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=240205_02">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0214">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
 <title>근무평가</title>
@@ -306,7 +306,7 @@
 								<c:if test="${ev.d3 eq '주관식' }">
 									<table class="text-area-table">
 										<tr class="text-area-tr1">
-											<td><p class="question bold">${ev.d1}</p></td>
+											<td><p class="question question-text bold">${ev.d1}</p></td>
 										</tr>
 										<tr class="text-area-tr2">
 											<td>

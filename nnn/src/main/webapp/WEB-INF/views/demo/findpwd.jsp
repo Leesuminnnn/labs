@@ -16,7 +16,11 @@
 <title>비밀번호 변경</title><!-- 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
+<style>
+.modal_body {
+	height: 277px;
+}
+</style>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/demo/findpwdAction" method="post">

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.modal .btn{cursor: pointer;border: 1px solid #999999;text-align: center;border-radius: 5px;outline: none;font-weight: 500;}
+.modal .btn{cursor: pointer;text-align: center;border-radius: 5px;outline: none;font-weight: 500;}
 .dimLayer{display: block;width: 100%;background-color: rgba(0, 0, 0, 0.3);position: fixed;left: 0;top: 0px;margin: 0;padding: 0;z-index: 9998;}
 /* 
 .modal{
@@ -62,11 +62,11 @@
 .enroll_box p{padding-bottom: 56px;}
 .gray_btn {width: 90px;background: #ffffff;color: #999999;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;}
 .modal_btn {
-	width: 156px;
+	width: 205px;
 	background: #143257;
 	color: #fff;
-	height: 50px;
-	line-height: 50px;
+	height: 46px;
+	line-height: 46px;
 	font-size: 19px;
 	border: none;
 	cursor: pointer;
@@ -76,11 +76,11 @@
 	transform: translate(-50%, -50%);
 }
 .pink_btn {
-	width: 136px;
+	width: 205px;
 	background: #32B0CA;
 	color: #fff;
-	height: 50px;
-	line-height: 50px;
+	height: 46px;
+	line-height: 46px;
 	transition: 0.5s;
 	font-size: 23px;
 	border: none;

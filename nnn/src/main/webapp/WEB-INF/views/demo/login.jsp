@@ -219,8 +219,9 @@
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
 				<div class="menu_msg">text</div>
-				<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
+				<div style="top: 50%" class="btn modal_btn" onclick="closePopup()">
 				확인
 				</div>
 			</div>
@@ -229,12 +230,13 @@
 	<div class="modal3 normal">
 		<div class="modal_body3">
 			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
 				<div class="menu_msg3">text</div>
 				<div class="modal_footer3">
-					<div style="top: 40%" class="btn modal_btn2" onclick="modal_insert()">
+					<div style="top: 50%" class="btn modal_btn2" onclick="modal_insert()">
 						확인
 					</div>
-					<div style="top: 40%" class="btn pink_btn2" onclick="closePopup3()">
+					<div style="top: 50%" class="btn pink_btn2" onclick="closePopup3()">
 						취소
 					</div>
 				</div>
@@ -250,6 +252,8 @@ var nochk = $('#chk_no').prop("checked");
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const msg = document.querySelector('.menu_msg');
+const icon = document.querySelector('.menu_icon');
+const btn = document.querySelector('.btn');
 const modal3 = document.querySelector('.modal3');
 const msg3 = document.querySelector('.menu_msg3');
 var idx = "";
@@ -305,15 +309,19 @@ $("#loginbtn").click(function (){
 			if (res === "0") {
 				// DB에 정보 없음
 				modal.classList.toggle('show');
-			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>2023년도 직원근무평가 대상직원이 아닙니다.</p>'
+				icon.style.top = '20%';
+			 	msg.style.top = '33%';
+			 	btn.style.top = '50%';
+				msg.innerHTML = '<p>2023년도 직원근무평가 대상직원이 아닙니다.</p>'
 
 				console.log(0);
 			} else if (res === "1") {
 				// 비밀번호 불일치
 				modal.classList.toggle('show');
-			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호가 일치하지 않습니다.</p>'
+				icon.style.top = '20%';
+			 	msg.style.top = '33%';
+			 	btn.style.top = '50%';
+				msg.innerHTML = '<p>비밀번호가 일치하지 않습니다.</p>'
 
 				
 				console.log(1);
@@ -321,15 +329,17 @@ $("#loginbtn").click(function (){
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어 있지 않는 경우
 				idx = response.idx;
 				modal.classList.toggle('show');
-			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>';
+			 	msg.style.top = '30%';
+				msg.innerHTML = '<p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>';
 				$(".btn").attr("onclick", "pwdlink()");
 				console.log(5);
 			} else if (res === "2") {
 				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
 				modal.classList.toggle('show');
+				icon.style.top = '20%';
 			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요.</p>'
+			 	btn.style.top = '41%';
+				msg.innerHTML = '<p>현재 비밀번호가 설정되어 있습니다.</p><p>비밀번호로 로그인을 해주세요.</p>'
 
 				console.log(2);
 			} else if (res === "4") {
@@ -345,8 +355,10 @@ $("#loginbtn").click(function (){
 			} else if (res === "3") {
 				// 이름이 일치하지 않는 경우
 				modal.classList.toggle('show');
-			 	msg.style.top = '34%';
-				msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>이름이 일치하지 않습니다.</p>'
+				icon.style.top = '20%';
+			 	msg.style.top = '33%';
+			 	btn.style.top = '50%';
+				msg.innerHTML = '<p>이름이 일치하지 않습니다.</p>'
 
 				console.log(3);
 				
@@ -356,8 +368,8 @@ $("#loginbtn").click(function (){
 		error : function(error) {
 			console.error('Error fetching data :' ,error);
 			modal.classList.toggle('show');
-		 	msg.style.top = '34%';
-			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>로그인 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
+		 	msg.style.top = '30%';
+			msg.innerHTML = '<p>로그인 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
 
 		}
 	});

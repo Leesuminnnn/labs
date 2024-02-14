@@ -265,5 +265,8 @@
 	.text-wrap {
 		height: 100%;
 	}
+	.notice-text > div {
+		line-height: 12px;
+	}
 
 }

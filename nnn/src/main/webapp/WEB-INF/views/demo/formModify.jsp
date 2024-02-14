@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240201F">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0214">
 <title>근무평가</title>
 <style>
 </style>
@@ -45,13 +46,13 @@
 		<div class="target_info" id="targetInfo">
 			<div class="target_text flex">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-				<span class="bold" style="font-size: 16px;">평가대상자를 확인 후 평가를 진행해주세요!</span>
+				<span class="bold">평가대상자를 확인 후 평가를 진행해주세요!</span>
 			</div>
 		</div>
 		<div class="target_area">
 			<div class="target">
 				<div class="target_box">
-					<table style="width: 100%; height: 157px;">
+					<table>
 						<tr class="target_box_header">
 							<td colspan="4">평가대상자</td>
 						</tr>
@@ -1335,7 +1336,7 @@
 						        <c:when test="${t.index eq '11' and ev.idx eq 11 }">
 						        	<table style="width: 100%;">
 										<tr style="background-color: #1b304a; color: #fff;">
-											<td><p class="question bold">${ev.d1}</p></td>
+											<td><p class="question question-text bold">${ev.d1}</p></td>
 										</tr>
 										<tr>
 											<td style="background-color: #fafafa; padding: 0; height: 125px;">
@@ -1346,7 +1347,7 @@
 								<c:when test="${t.index eq '21' and ev.idx eq 32 }">
 									<table style="width: 100%;">
 										<tr style="background-color: #1b304a; color: #fff;">
-											<td><p class="question bold">${ev.d1}</p></td>
+											<td><p class="question question-text bold">${ev.d1}</p></td>
 										</tr>
 										<tr>
 											<td style="background-color: #fafafa; padding: 0; height: 125px;">

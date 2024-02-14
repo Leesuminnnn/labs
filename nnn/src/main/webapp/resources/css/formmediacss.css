@@ -9,6 +9,7 @@
 	}
 	.area {
 		margin: 0 15%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 15%;
@@ -25,6 +26,7 @@
 	}
 	.area {
 		margin: 0 15%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 15%;
@@ -40,6 +42,7 @@
 	}
 	.area {
 		margin: 0 15%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 15%;
@@ -55,6 +58,7 @@
 	}
 	.area {
 		margin: 0 10%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 10%;
@@ -70,6 +74,7 @@
 	}
 	.area {
 		margin: 0 5%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 5%;
@@ -85,6 +90,7 @@
 	}
 	.area {
 		margin: 0 5%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 5%;
@@ -100,6 +106,7 @@
 	}
 	.area {
 		margin: 0 5%;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 5%;
@@ -112,7 +119,10 @@
 	    font-size: 6px;
 	}
 	.section {
-		padding-top: 440px;
+		padding-top: 408px;
+	}
+	.target_area {
+	    top: 241px;
 	}
 	.target_text {
 		margin: 0 20px;
@@ -123,6 +133,7 @@
 	}
 	.area {
 		margin: 0 20px;
+		margin-bottom: 20px;
 	}
 	.target {
 		margin: 0 20px;
@@ -138,6 +149,47 @@
 	.fixed {
 		position: fixed;
 		top: 62px;
+	}
+	.target_box table {
+	    height: 127px;
+	}
+	.label {
+	    margin-right: 6px;
+	}
+	.radioimg {
+	    width: 10px;
+	    height: 10px;
+	    background: url(../icon/ev/checkbox_off.png) no-repeat center /10px;
+	}
+	.radio:checked+.radioimg {
+	    background: url(../icon/ev/checkbox_on.png) no-repeat center /10px;
+	}
+	.text-area-tr2 > td {
+	    height: 65px;
+	}
+	.text-area-tr2 textarea {
+	    height: 65px;
+	}
+	.footer > div {
+	    margin: 0 auto;
+	}
+	.inputTxt {
+	    margin: 0px 2px;
+	}
+	.modal_body {
+		width: 90%;
+	}
+	.menu_msg2 {
+	    font-size: 2.6rem;
+	}
+	.question-text {
+		padding-left: 0;
+	}
+	.end {
+		width: 141px;
+	}
+	.modal_body {
+		width: 90%;
 	}
 }
 
