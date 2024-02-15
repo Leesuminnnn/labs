@@ -494,6 +494,12 @@
 	.alignBox > .inputTxt > .bold {
 	    color: #0e366c;
 	}
+	.modal_body {
+		width: 90%;
+	}
+	.modal_body2 {
+		width: 90%;
+	}
 }
 
 

@@ -201,11 +201,11 @@
 }
 	@media all and (max-width: 460px) {
 	:root, html {
-	    font-size: 8px;
+	    font-size: 10px;
 	}
 	
 	td {
-	    font-size: 1.4rem;
+	    font-size: 1.12rem;
 	}
 	.td1 {
 		width: 8%;
@@ -230,6 +230,18 @@
 	}
 	.td5 {
 		width: 16%;
+	}
+	.info_name {
+		font-size: 2.4rem;
+	}
+	.info_id {
+		font-size: 1.6rem;
+	}
+	.info_hs, .info_date {
+		font-size: 1.28rem;
+	}
+	.target_header span {
+		font-size: 1.28rem;
 	}
 	.target_info {
 		height: 100px;
@@ -260,9 +272,14 @@
 	}
 	.target_section {
 	    padding: 20px 5px 20px 5px;
-	}
+	}/* 
 	.notice span {
-		line-height: 3.2rem;
+		line-height: 2.56rem;
+		font-size: 1.28rem
+	} */
+	.target_text span {
+		line-height: 2.56rem;
+		font-size: 1.28rem
 	}
 	.quick {
 		width: 100%;
@@ -274,9 +291,6 @@
 	.footer {
 		height: 300px;
 	}
-	.footer-tel {
-		padding-left: 20px;
-	}
 	.line2 {
 		margin: 5px 0 10px 0;
 	}
@@ -285,5 +299,14 @@
 	}
 	.pc {
 		display: none;
+	}
+	.footer {
+		height: 300px;
+	}
+	.footer > div {
+	    padding: 0;
+	}
+	.footer-tel {
+		padding-left: 0;
 	}
 }

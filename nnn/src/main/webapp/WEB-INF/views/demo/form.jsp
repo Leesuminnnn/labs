@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0215">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
 <title>근무평가</title>

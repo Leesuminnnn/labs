@@ -1334,24 +1334,24 @@
 						<c:forEach items="${resultList}" var="t">
 							<c:choose>
 						        <c:when test="${t.index eq '11' and ev.idx eq 11 }">
-						        	<table style="width: 100%;">
-										<tr style="background-color: #1b304a; color: #fff;">
+						        	<table class="text-area-table">
+										<tr class="text-area-tr1">
 											<td><p class="question question-text bold">${ev.d1}</p></td>
 										</tr>
-										<tr>
-											<td style="background-color: #fafafa; padding: 0; height: 125px;">
-											<textarea style="width: 100%; height: 125px; padding: 14px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 1.6rem;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
+										<tr class="text-area-tr2">
+											<td>
+											<textarea id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
 										</tr>
 									</table>
 								</c:when>
 								<c:when test="${t.index eq '21' and ev.idx eq 32 }">
-									<table style="width: 100%;">
-										<tr style="background-color: #1b304a; color: #fff;">
+									<table class="text-area-table">
+										<tr class="text-area-tr1">
 											<td><p class="question question-text bold">${ev.d1}</p></td>
 										</tr>
-										<tr>
-											<td style="background-color: #fafafa; padding: 0; height: 125px;">
-											<textarea style="width: 100%; height: 125px; padding: 14px; resize: none; border: none; background-color: #fafafa; outline: none; font-size: 1.6rem;" id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
+										<tr class="text-area-tr2">
+											<td>
+											<textarea id="f${ev.idx }" name="f${ev.idx }" >${t.var }</textarea></td>
 										</tr>
 									</table>
 								</c:when>

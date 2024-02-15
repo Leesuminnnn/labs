@@ -1,0 +1,61 @@
+@charset "UTF-8";
+:root, html {
+	--footer--width: 100vw;
+}
+.footer > div {
+    	padding: 0 20%;
+	}
+@media all and (max-width: 1180px){
+	
+	.footer > div {
+    	padding: 0 10%;
+	}
+}
+@media all and (max-width: 767px){
+	body {
+		background: #fcfcfc;
+	    width: 100vw;
+	    height: 100vh;
+	}
+	section {
+		position: inherit;
+		transform: unset;
+		padding: 20px;
+	    width: 100%;
+	    height: 100vh;
+	    border: none;
+	}
+	.login {
+	    border: 1px solid #dfdfdf;
+	}
+	.line {
+	    width: 100%;
+	    background: #1b304a;
+	    height: 9px;
+	    position: relative;
+	    top: -134px;
+	}
+	ul {
+		width: 100%;
+    	padding: 0 15px;
+	}
+	input[type=text], input[type=password], button {
+	    width: 100%;
+	    font-size: 1.6rem;
+	    
+	}
+	button {
+		font-size: 1.8rem;
+	}
+	.footer {
+		height: 251px;
+		position: inherit;
+	}
+	.footer > div {
+    	padding: 0;
+	}
+	.modal_body {
+		width: 90%;
+	}
+}
+

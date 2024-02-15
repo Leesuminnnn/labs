@@ -7,10 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240202A">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdcss.css?ver=240202A">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240202">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdcss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0215">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0215">
 <title>비밀번호 변경</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -35,8 +37,9 @@
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
 				<div class="menu_msg">text</div>
-				<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
+				<div style="top: 45%" class="btn modal_btn" onclick="closePopup()">
 				확인
 				</div>
 			</div>
@@ -49,6 +52,8 @@
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const msg = document.querySelector('.menu_msg');
+const icon = document.querySelector('.menu_icon');
+const btn = document.querySelector('.btn');
 
 console.log("세션아이디 ${sessionScope.loginmember}");
 console.log("model아이디 ${info.id}");
@@ -64,14 +69,16 @@ $(document).ready(function () {
 		console.log(pwd2);
 		if(pwd == "" || pwd2 == ""){
 			modal.classList.toggle('show');
+			icon.style.top = '20%';
 		 	msg.style.top = '34%';
-			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호를 입력해주세요.</p>'
+			msg.innerHTML = '<p>비밀번호를 입력해주세요.</p>'
 
 			return false;
 		}else if(pwd != pwd2){
 			modal.classList.toggle('show');
+			icon.style.top = '20%';
 		 	msg.style.top = '34%';
-			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호가 일치하지 않습니다.</p>'
+			msg.innerHTML = '<p>비밀번호가 일치하지 않습니다.</p>'
 
 			return false;
 		}else{
@@ -90,22 +97,28 @@ $(document).ready(function () {
 					if (res === "N") {
 						// 전송실패
 						modal.classList.toggle('show');
-					 	msg.style.top = '34%';
-						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
+						icon.style.top = '15%';
+					 	msg.style.top = '30%';
+					 	btn.style.top = '40%';
+						msg.innerHTML = '<p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
 
 					} else if (res === "Y") {
 						// 성공
 						modal.classList.toggle('show');
-					 	msg.style.top = '34%';
-						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요.</p>';
+						icon.style.top = '15%';
+					 	msg.style.top = '30%';
+					 	btn.style.top = '40%';
+						msg.innerHTML = '<p>비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요.</p>';
 						$(".btn").attr("onclick", "link()");
 					}
 				},
 				error : function (error) {
 					console.log('Error fetching data : ', error);
 					modal.classList.toggle('show');
-				 	msg.style.top = '34%';
-					msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
+					icon.style.top = '15%';
+				 	msg.style.top = '30%';
+				 	btn.style.top = '40%';
+					msg.innerHTML = '<p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
 
 				}
 			});

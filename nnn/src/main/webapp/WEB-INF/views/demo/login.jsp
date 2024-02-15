@@ -329,7 +329,9 @@ $("#loginbtn").click(function (){
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어 있지 않는 경우
 				idx = response.idx;
 				modal.classList.toggle('show');
-			 	msg.style.top = '30%';
+				icon.style.top = '20%';
+			 	msg.style.top = '34%';
+			 	btn.style.top = '41%';
 				msg.innerHTML = '<p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>';
 				$(".btn").attr("onclick", "pwdlink()");
 				console.log(5);
