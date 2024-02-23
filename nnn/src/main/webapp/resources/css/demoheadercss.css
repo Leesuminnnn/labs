@@ -13,12 +13,12 @@
 }
 .home-icon {
 	position: absolute;
-	left: 10px;
-	top: 15px;
+	left: 15px;
+	top: 20px;
 	z-index: 1;
 }
 .home-icon > a > img {
-	width: 30px;
+	width: 25px;
 }
 .logo-img {
 	align-items: center;
@@ -26,13 +26,16 @@
 	height: 62px;
 }
 .logo-img > img {
-	position: relative; left: 50%; transform: translate(-50%); height: 30px;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+	height: 30px;
 }
 .logout-img > a{
 	position: absolute;
-	right: 10px;
-	top: 16px;
+	right: 15px;
+	top: 18px;
 }
 .logout-img > a > img {
-	height: 30px;
+	height: 25px;
 }

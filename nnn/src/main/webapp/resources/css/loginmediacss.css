@@ -218,11 +218,6 @@
 
 }*/
 
-
-.modal_body {
-	height: 290px;
-	width: 500px;
-}
 /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/ 
 @media all and (max-width: 767px) {
 	:root, html {
@@ -319,7 +314,7 @@
 	    border-radius: 7px;
 	    background-color: #e8e8e8;
 	    border: none;
-	    font-size: 1rem;
+	    font-size: 1.2rem;
 	    color: #929191;
 	    padding-left: 23px;
 	}
@@ -331,7 +326,7 @@
 	    margin-bottom: 10px;
 	}
 	.login-text > .bold {
-		font-size: 1rem;
+		font-size: 1.2rem;
     letter-spacing: 0px;
 	}
 	.chk-area {
@@ -394,6 +389,7 @@
 		width: 100%;
 		padding: 0;
 	    height: 100%;
+	    background: #fff;
 	}
 	.notice-bg > img {
 		width: 100%;
@@ -401,25 +397,27 @@
 		height: 100%;
 	}
 	.notice-main {
-		position: relative;
-	    width: calc(100% - 54px);
+	    position: relative;
+	    width: calc(100% - 18px);
 	    top: -162px;
-	    left: 28px;
+	    left: 10px;
 	    letter-spacing: -1px;
+	    padding: 0;
 	}
 	.notice-header {
-		font-size: 0.9rem; 
+		font-size: 1.1rem; 
 		margin-bottom: 17px;
 	   color: #ffa200;
 	    height: auto;
 	    letter-spacing: -0.3px;
 	}
 	.notice-text {
-		font-size: 0.8rem;
+		font-size: 1.05rem;
 	}
 	.notice-text > div {
 		display: flex;
 	    margin: 0px;
+        height: 130px;
 	}
 	.notice-text > div > div {
 		width: 100%;
@@ -428,7 +426,7 @@
 		width: 45%;
 	    display: flex;
 	    align-items: center;
-	    letter-spacing: -0.5px;
+	    letter-spacing: -1.5px;
 	    color: #222222;
 	}
 	.inner-text img {
@@ -441,7 +439,7 @@
 		margin-bottom: 2px;
 	}
 	.inner-span {
-		letter-spacing: 0;
+		letter-spacing: -1px;
 	    margin-left: 15px;
 	}
 	.notice-btn {
@@ -449,7 +447,7 @@
 	    align-items: center;
 	    justify-content: center;
 	    position: relative;
-	    top: -116px;
+	    top: -145px;
 	}
 	.manual {
 		background-color: #6c6c6c;
@@ -493,12 +491,6 @@
 	}
 	.alignBox > .inputTxt > .bold {
 	    color: #0e366c;
-	}
-	.modal_body {
-		width: 90%;
-	}
-	.modal_body2 {
-		width: 90%;
 	}
 }
 

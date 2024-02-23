@@ -2955,7 +2955,7 @@
 	<!--  평가 완료 표시  -->
 	<insert id="whether" parameterType="cwhether">
 		insert into demo_whether (d1, d2, d3, ev, team)
-		values (#{d1}, #{d2}, "평가완료", #{ev}, #{team})
+		values (#{d1}, #{d2}, "평가 완료", #{ev}, #{team})
 	</insert>
 	<select id="users" resultType="map" parameterType="map">
 		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,

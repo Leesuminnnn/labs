@@ -9,18 +9,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0213">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0213">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0213">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=0213">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdfindmediacss.css?ver=0213">
-<title>비밀번호 변경</title><!-- 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdfindmediacss.css?ver=0222">
+<title>비밀번호 찾기 페이지</title><!-- 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-.modal_body {
-	height: 277px;
-}
+
 </style>
 </head>
 <body>
@@ -32,13 +30,13 @@
 		<div class="line" id="line"></div>
 		<div class="main">
 			<div class="login-head">
-				<span class="bold" id="head">비밀번호 변경</span>
+				<span class="bold" id="head">비밀번호 찾기</span>
 			</div>
 			<ul id="ul" class="normal">
-				<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력"></li>
+				<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력" autofocus="autofocus"></li>
 				<li id="result2"><input type="text" name="ph" id="ph" placeholder="휴대폰번호" title="휴대폰번호입력"></li>
 				<li id="findBtn"><button class="bold" type="button" id="find">정보확인</button></li>
-				<li ><div id="resultDiv""><span id="result"></span></div></li>
+				<li ><div id="resultDiv"><span id="result"></span></div></li>
 			</ul>
 		</div>
 		
@@ -49,13 +47,61 @@
 	
 	</div>
 	<jsp:include page="../demo/footer.jsp"></jsp:include>
+	
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>
-				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 				<div class="menu_msg">text</div>
-				<div style="top: 45%" class="btn modal_btn" onclick="closePopup()">
-				확인
+				<div class="modal_footer">
+					<div class="btn modal_btn" onclick="closePopup()">
+						확인
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal2 normal">
+		<div class="modal_body2">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg2">text</div>
+				<div class="modal_footer2">
+					<div class="btn modal_btn2" onclick="closePopup2()">
+						확인
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal3 normal">
+		<div class="modal_body3">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg3">text</div>
+				<div class="modal_footer3">
+					<div class="btn modal_btn2" onclick="modal_insert()">
+						확인
+					</div>
+					<div class="btn pink_btn2" onclick="closePopup3()">
+						취소
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal4 normal">
+		<div class="modal_body4">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg4">text</div>
+				<div class="modal_footer4">
+					<div class="btn modal_btn2" onclick="modal_insert()">
+						확인
+					</div>
+					<div class="btn pink_btn2" onclick="closePopup4()">
+						취소
+					</div>
 				</div>
 			</div>
 		</div>
@@ -90,8 +136,25 @@ $(document).ready(function () {
 		});
 		$("#result").html('');
 	});
-	
-	var $div = $('<li><input type="password" placeholder="비밀번호" name="pwd" id="pwd"/></li><li><input type="password" placeholder="비밀번호확인" name="pwd2" id="pwd2"/></li><li id="pwdActBtn"><button class="bold" type="button" id="pwdAct">비밀번호 변경</button></li>');
+	$('#id').keydown(function () {
+		$(this).css({
+			color: '#333333'
+		});
+		$("#ph").css({
+			color: '#333333'
+		});
+		$("#result").html('');
+	});
+	$('#ph').keydown(function () {
+		$(this).css({
+			color: '#333333'
+		});
+		$("#id").css({
+			color: '#333333'
+		});
+		$("#result").html('');
+	});
+	var $div = $('<li><input type="password" placeholder="비밀번호" name="pwd" id="pwd"/></li><li><input type="password" placeholder="비밀번호확인" name="pwd2" id="pwd2"/></li><li id="pwdActBtn"><button class="bold" type="button" id="pwdAct">비밀번호 설정</button></li>');
 	var div = document.createElement('div');
 	var $div2 = $('<div calss="result2"></div>');
 	var div2 = document.createElement('div');
@@ -165,13 +228,28 @@ $(document).ready(function () {
 						height: '600px',
 						top : '42%'
 					});
-					$("#line").css({
-						top : '-35px'
-					});
+					// 디바이스 너비에 따라 css 다르게
+					if (screen.width > 767) {
+						console.log("너비 767이상");
+						$("#line").css({
+							top : '-40px'
+						});
+					}else {
+						$("#line").css({
+							top : '14px'
+						});
+					}
+					
 					$("#head").css({
 						top : '-6px'
 					});
-					$("#resultDiv").html('새로운 비밀번호를 입력 후 비밀번호를 변경하세요.');
+					$("#head").html("비밀번호 설정");
+					
+					$("#resultDiv").css({
+						marginBottom: '0'
+					});
+					$("#resultDiv").html('새로운 비밀번호를 설정해주세요.');
+					$div.find('#pwd').focus();
 				} else {
 					$("#result").css({
 						color : '#f30000'
@@ -189,6 +267,15 @@ $(document).ready(function () {
 			}
 		});
 	});
+	
+	// 엔터키로 비밀번호 변경
+	$div.find('#pwd2').on('keypress', function (e) {
+		if (e.keyCode === 13) {
+			console.log("12312");
+			$div.find("#pwdAct").click();
+		}
+	});
+	
 	$div.find("#pwdAct").click(function() {
 
 		var id = $("#id").val();
@@ -261,7 +348,7 @@ $(document).ready(function () {
 					icon.style.top = '15%';
 				 	msg.style.top = '30%';
 				 	btn.style.top = '40%';
-					msg.innerHTML = '<p>비밀번호를 변경했습니다.</p><p>변경된 비밀번호로 로그인 해주세요.</p>'
+					msg.innerHTML = '<p>비밀번호 설정이 완료되었습니다.</p><p>설정한 비밀번호로 로그인 해주세요.</p>'
 					$(".btn").attr("onclick", "pwdlink()");
 					
 				} else {
@@ -269,7 +356,7 @@ $(document).ready(function () {
 					icon.style.top = '15%';
 				 	msg.style.top = '30%';
 				 	btn.style.top = '40%';
-					msg.innerHTML = '<p>비밀번호 변경 중 오류가 발생했습니다.</p><p>관리자에게 문의하세요.</p>'
+					msg.innerHTML = '<p>비밀번호 설정 중 오류가 발생했습니다.</p><p>관리자에게 문의하세요.</p>'
 					$(".btn").attr("onclick", "pwdlink()");
 					
 				}
@@ -292,6 +379,10 @@ function closePopup(){
 function pwdlink() {
 	location.href = link;
 }
-
+$('#ph').on('keypress', function (e) {
+	if (e.keyCode === 13) {
+		$('#find').click();
+	}
+});
 </script>
 </html>

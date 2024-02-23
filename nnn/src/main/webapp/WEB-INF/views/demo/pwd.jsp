@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0215">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdcss.css?ver=0215">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0215">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0215">
-<title>비밀번호 변경</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0222">
+<title>비밀번호 설정페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>
@@ -22,25 +22,73 @@
 	<section>
 	<div class="login">
 		<div class="line"></div>
-		<span class="bold">비밀번호 변경</span>
+		<span class="bold">비밀번호 설정</span>
 		<ul class="normal">
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번" readonly="readonly" value="${info.id }"></li>
 			<li><input type="text" name="name" id="name" placeholder="이름" title="이름" readonly="readonly" value="${info.name }"></li>
-			<li><input type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호"></li>
+			<li><input type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호" autofocus="autofocus"></li>
 			<li><input type="password" name="pwd2" id="pwd2" placeholder="비밀번호확인" title="비밀번호확인"></li>
-			<li><button class="bold" type="button" id="btn" value="">비밀번호 변경</button></li>			
+			<li><button class="bold" type="button" id="btn" value="">비밀번호 설정</button></li>			
 		</ul>
 	</div>
 		
 	</section>
 	<jsp:include page="../demo/footer.jsp"></jsp:include>
+	
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>
-				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 				<div class="menu_msg">text</div>
-				<div style="top: 45%" class="btn modal_btn" onclick="closePopup()">
-				확인
+				<div class="modal_footer">
+					<div class="btn modal_btn" onclick="closePopup()">
+						확인
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal2 normal">
+		<div class="modal_body2">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg2">text</div>
+				<div class="modal_footer2">
+					<div class="btn modal_btn2" onclick="closePopup2()">
+						확인
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal3 normal">
+		<div class="modal_body3">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg3">text</div>
+				<div class="modal_footer3">
+					<div class="btn modal_btn2" onclick="modal_insert()">
+						확인
+					</div>
+					<div class="btn pink_btn2" onclick="closePopup3()">
+						취소
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal4 normal">
+		<div class="modal_body4">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg4">text</div>
+				<div class="modal_footer4">
+					<div class="btn modal_btn2" onclick="modal_insert()">
+						확인
+					</div>
+					<div class="btn pink_btn2" onclick="closePopup4()">
+						취소
+					</div>
 				</div>
 			</div>
 		</div>
@@ -53,7 +101,7 @@ const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const msg = document.querySelector('.menu_msg');
 const icon = document.querySelector('.menu_icon');
-const btn = document.querySelector('.btn');
+const btn1 = document.querySelector('.btn');
 
 console.log("세션아이디 ${sessionScope.loginmember}");
 console.log("model아이디 ${info.id}");
@@ -99,7 +147,7 @@ $(document).ready(function () {
 						modal.classList.toggle('show');
 						icon.style.top = '15%';
 					 	msg.style.top = '30%';
-					 	btn.style.top = '40%';
+					 	btn1.style.top = '40%';
 						msg.innerHTML = '<p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
 
 					} else if (res === "Y") {
@@ -107,8 +155,8 @@ $(document).ready(function () {
 						modal.classList.toggle('show');
 						icon.style.top = '15%';
 					 	msg.style.top = '30%';
-					 	btn.style.top = '40%';
-						msg.innerHTML = '<p>비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요.</p>';
+					 	btn1.style.top = '40%';
+						msg.innerHTML = '<p>비밀번호 설정이 완료되었습니다.</p><p>설정한 비밀번호로 로그인 해주세요.</p>';
 						$(".btn").attr("onclick", "link()");
 					}
 				},
@@ -117,7 +165,7 @@ $(document).ready(function () {
 					modal.classList.toggle('show');
 					icon.style.top = '15%';
 				 	msg.style.top = '30%';
-				 	btn.style.top = '40%';
+				 	btn1.style.top = '40%';
 					msg.innerHTML = '<p>비밀번호 변경 처리 중 오류가 발생했습니다.</p><p>다시 시도해주세요.</p>';
 
 				}
@@ -136,7 +184,7 @@ function closePopup(){
 }
 
 function link() {
-	var link = "${pageContext.request.contextPath}/demo/Login";
+	var link = "${pageContext.request.contextPath}/demo/Login?chk_no=checked";
 	location.href = link;
 }
 

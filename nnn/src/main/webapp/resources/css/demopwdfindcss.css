@@ -2,10 +2,25 @@
 
 :root, html {
 	font-size: 10px;
-	--footer--width: 861px;
+	--footer--width: 100%;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #333333;
+    -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #333333;
+    -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
 }
 body {
-	background: #fcfcfc;
+	background: #f7f7f7;
     width: 100vw;
     height: 100vh;
 }
@@ -61,7 +76,7 @@ input[type=text], input[type=password], button {
     border: 1px solid #efefef;
     width: 600px;
     height: 60px;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #333333;
 	line-height: 60px;
 }
@@ -69,6 +84,8 @@ button {
 	background: #1b304a;
 	color: #fff;
 	letter-spacing: -1px;
+	font-size: 1.75rem;
+	cursor: pointer;
 }
 #findBtn {
 	margin-top: 40px;
@@ -85,21 +102,22 @@ button {
     background: #1b304a;
     height: 9px;
     position: relative;
-    top: -52px;
-}
-#resultDiv {
-	height: 44px;
-	width: 600px;
+    top: -62px;
 }
 #result {
 	font-size: 1.8rem;
 }
-@media all and (max-width: 767px) {
-	
-	
+
+#resultDiv {
+	width: 100%;
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: rgb(255, 162, 0);
+	margin-top: 32px;
+	margin-bottom: -15px;
+	letter-spacing: -1px;
+	height: 24px;
 }
-
-
 
 
 

@@ -8,10 +8,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0214">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformendcss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformendcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formendmediacss.css?ver=0222">
 <title>평가완료</title>
 <style>
 </style>
@@ -43,11 +45,16 @@
 		</div>
 		<div class="target_info" id="targetInfo">
 			<div class="target_text flex">
-				<div class="flex">
-					<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
-					<span class="bold " style="font-size: 1rem;">모든 평가가 완료되지 않으신 직원은 버튼을 클릭하여 평가를 계속 진행해 주시기 바랍니다.</span>
+				<div class="flex notice-area flex-between">
+					<div class="flex">
+						<img src="${pageContext.request.contextPath}/resources/icon/ev/ok.png">
+						<span class="bold ">모든 평가가 완료되지 않으신 직원은 버튼을 클릭하여 평가를 계속 진행해 주시기 바랍니다.</span>
+					</div>
+					<div>
+						<button class="end" type="button" onclick="back()">평가 계속하기</button>
+					</div>
 				</div>
-				<button class="end" type="button" onclick="back()">돌아가기</button>
+				
 			</div>
 		</div>
 		<%-- <div class="target_area">
@@ -78,7 +85,7 @@
 				<div class="area" style="padding: 0;">
 					<div style="padding: 20px;">
 						<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-							<div style="margin-top: 45px; margin-bottom: 10px; color: #333333; font-size: 1.6rem;">
+							<div style="margin-top: 45px; margin-bottom: 10px; color: #333333; font-size: 2.43rem;">
 							<div style="margin-bottom: 20px;">
 								<img class="check_img" src="${pageContext.request.contextPath}/resources/icon/ev/den.png">
 							</div>

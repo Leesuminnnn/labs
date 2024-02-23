@@ -111,7 +111,9 @@
 	.target {
 		margin: 0 5%;
 	}
-		
+	.form_go {
+	    padding: 5px 10px;
+	}
 }
 
 @media all and (max-width: 460px) {
@@ -119,39 +121,72 @@
 	    font-size: 6px;
 	}
 	.section {
-		padding-top: 408px;
+		padding-top: 426px;
 	}
-	.target_area {
-	    top: 241px;
+	.container {
+		padding: 0 6px;
 	}
 	.target_text {
-		margin: 0 20px;
+		margin: 0 6px;
 	}
 	.info_area {
-		margin: 0 20px;
-		top: 242px;
+		margin: 0;
 	}
 	.area {
-		margin: 0 20px;
+		margin: 0;
 		margin-bottom: 20px;
+		padding: 6px 6px 50px 6px;
+	}
+	.form_go {
+	    padding: 5px 10px;
 	}
 	.target {
-		margin: 0 20px;
-	}
-	.target_info {
-		top: 182px;
-		z-index: 99;
+		margin: 0 6px;
+	    padding: 6px 0;
 	}
 	.info {
-		padding: 20px;
-		height: 120px;
+		padding: 30px 14px;
+	}
+	.info_name {
+		font-size: 4rem;
+	}
+	.info_id {
+		font-size: 2.66rem;
+	}
+	.info_hs, .info_date {
+		font-size: 2.13rem;
+	}
+	.target_text span {
+		font-size: 2.13rem;
+	}
+	.target_area {
+		font-size: 2.13rem;
 	}
 	.fixed {
 		position: fixed;
 		top: 62px;
+    	border-bottom: 1px solid #dddddd;
 	}
 	.target_box table {
-	    height: 127px;
+		height: 145px;
+	}
+	.target_box td {
+	    padding: 5px;
+	}
+	.area_header {
+		font-size: 2.23rem;
+	}
+	.question {
+	    font-size: 2.33rem;
+	    padding-left: 10px;
+	}
+	.answer {
+		padding-left: 15px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.inputTxt {
+	    font-size: 2.33rem;
 	}
 	.label {
 	    margin-right: 6px;
@@ -186,7 +221,8 @@
 		padding-left: 0;
 	}
 	.end {
-		width: 141px;
+		width: 100%;
+		font-size: 2.13rem;
 	}
 	.modal_body {
 		width: 90%;

@@ -27,42 +27,20 @@
 	z-index: 9999;
 	}
 	 */
-.menu_msg{
-	font-size: 21px;
-	font-weight: 500;
-	position: relative;
-    transform: translate(-50%, -50%);
-    top: 40%;
-    left: 50%;
+.menu_icon {
+	width: 46px;
+	padding-top: 55px; 
 }
-.menu_msg2{
-	font-size: 21px;
+.menu_msg, .menu_msg2, .menu_msg3, .menu_msg4{
+	font-size: 20px;
 	font-weight: 500;
-	position: relative;
-    transform: translate(-50%, -50%);
-    top: 40%;
-    left: 50%;
-}
-.menu_msg3{
-	font-size: 21px;
-	font-weight: 500;
-	position: relative;
-    transform: translate(-50%, -50%);
-    top: 40%;
-    left: 50%;
-}
-.menu_msg4{
-	font-size: 21px;
-	font-weight: 500;
-	position: relative;
-    transform: translate(-50%, -50%);
-    top: 34%;
-    left: 50%;
+	padding-top: 15px;
+	padding-bottom: 30px;
 }
 .enroll_box p{padding-bottom: 56px;}
 .gray_btn {width: 90px;background: #ffffff;color: #999999;height: 36px;line-height: 36px;transition: 0.5s;font-size: 17px;}
 .modal_btn {
-	width: 205px;
+	width: 170px;
 	background: #143257;
 	color: #fff;
 	height: 46px;
@@ -70,10 +48,6 @@
 	font-size: 19px;
 	border: none;
 	cursor: pointer;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 .pink_btn {
 	width: 205px;
@@ -85,10 +59,6 @@
 	font-size: 23px;
 	border: none;
 	cursor: pointer;
-    position: relative;
-    top: 62%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 cs_btn {
 	background: #E06666;
@@ -187,14 +157,13 @@ cs_btn {
 	display: none;
 	z-index: 9999;
 	
+	padding: 0px 100px;
+	
 	display: flex;
     justify-content: center;
 	position: absolute;
 	top: 45%;
 	left: 50%;
-
-	width: 680px;
-	height: 252px;
 
 	text-align: center;
 
@@ -219,14 +188,13 @@ cs_btn {
 	display: none;
 	z-index: 9999;
 	
+	padding: 0px 100px;
+	
 	display: flex;
     justify-content: center;
 	position: absolute;
 	top: 45%;
 	left: 50%;
-
-	width: 680px;
-	height: 290px;
 
 	text-align: center;
 
@@ -250,14 +218,13 @@ cs_btn {
 	display: none;
 	z-index: 9999;
 	
+	padding: 0px 100px;
+	
 	display: flex;
     justify-content: center;
 	position: absolute;
-	top: 35%;
+	top: 45%;
 	left: 50%;
-
-	width: 680px;
-	height: 300px;
 
 	text-align: center;
 
@@ -278,14 +245,13 @@ cs_btn {
 	display: none;
 	z-index: 9999;
 	
+	padding: 0px 100px;
+	
 	display: flex;
     justify-content: center;
 	position: absolute;
-	top: 35%;
+	top: 45%;
 	left: 50%;
-
-	width: 680px;
-	height: 300px;
 
 	text-align: center;
 
@@ -298,62 +264,53 @@ cs_btn {
 	width: 400px;
 }
 .modal_body4 input[type=password] {
-	padding-left: 23px;
-	height: 40px;
-	border-radius: 7px;
-	background: #e8e8e8;
-	border: none;
-	margin-top: 10px;
+    height: 40px;
+    border-radius: 7px;
+    background: #efefef;
+    border: none;
+    font-size: 0.8rem;
+    width: 370px;
+    text-align: center;
 }
 .munu_btn {
 	display: flex;
-    position: relative;
-    top: 70%;
-    left: 12%;
-    transform: translate(-50%, -50%);
     justify-content: space-evenly;
 }
+.modal_footer, .modal_footer2, .modal_footer3, .modal_footer4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+}
 .modal_footer2 {
-	position: relative;
-	top: 40%;
 	display: flex;
 	justify-content: space-around;
-	transform: translate(-50%, -50%);
-	left: 50%;
 }
 .modal_footer3 {
-	position: relative;
-	top: 40%;
 	display: flex;
 	justify-content: space-evenly;
-	transform: translate(-50%, -50%);
-	left: 50%;
 }
 .modal_footer4 {
-	position: relative;
-	top: 35%;
 	display: flex;
 	justify-content: space-around;
-	transform: translate(-50%, -50%);
-	left: 50%;
 }
 .modal_btn2 {
-	width: 137px;
+	width: 170px;
 	background: #143257;
 	color: #fff;
-	height: 40px;
-	line-height: 40px;
+	height: 46px;
+	line-height: 46px;
 	font-size: 19px;
 	border: none;
 	cursor: pointer;
 	border-radius: 5px;
 }
 .pink_btn2 {
-	width: 137px;
+	width: 170px;
 	background: #6c6c6c;
 	color: #fff;
-	height: 40px;
-	line-height: 40px;
+	height: 46px;
+	line-height: 46px;
 	font-size: 19px;
 	border: none;
 	cursor: pointer;
@@ -364,5 +321,11 @@ cs_btn {
 	모바일 */
 	.menu_msg {
 		font-size: 19px;
+	}
+	.pink_btn2 {
+	    width: 120px;
+	}
+	.modal_btn2 {
+	    width: 120px;
 	}
 }

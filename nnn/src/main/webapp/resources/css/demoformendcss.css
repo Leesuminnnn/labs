@@ -30,6 +30,10 @@ td {
     top: 62px;
     width: 100%;
 }
+.info_area {
+	margin: 0 20%;
+	
+}
 .info_name {
 	font-size: 3rem;
 	margin-bottom: 7px;
@@ -50,7 +54,11 @@ td {
 	position: absolute;
     width: 100%;
     top: 288px;
-    font-size: 1.4rem
+    font-size: 1.4rem;
+    margin: 0 15%;
+}
+.notice-area {
+	width: 100%;
 }
 .target {
 	background-color: #f7f7f7;
@@ -84,11 +92,10 @@ td {
 	width: 20px;
 	margin-right: 5px;
 }
-.target_text span{
-	font-size: 16px;
+.target_text span {
+    font-size: 1.6rem;
 }
 .section {
-	margin: 0 20% 0 20%;
 	padding-top: 267px;
 }
 .content {
@@ -114,6 +121,7 @@ td {
 	background-color: #fff;
 	text-align: center;
 	border-top: 2px solid #1b304a;
+	margin: 0 20%;
 }
 .area_header {
 	padding-top: 10px;
@@ -135,15 +143,15 @@ td {
 	font-family: "yeonsung";
 	src: url("../fonts/ttf/BMYEONSUNG_ttf.ttf");
 }
-.text-wrap {
-	font-family: "yeonsung";
-	width: 79%;
-	margin: 10px auto;
-	position: relative;
-	font-size: 1.6rem;
-	color: #222222;
-}
 
+.text-wrap {
+    font-family: "yeonsung";
+    width: 100%;
+    margin: 10px auto;
+    position: relative;
+    font-size: 2rem;
+    color: #222222;
+}
 .text-wrap img {
 	width: 100%;
 	vertical-align: middle;
@@ -162,6 +170,8 @@ td {
 }
 .end_area {
 	margin-top: 15px;
+	width: 100%;
+	justify-content: space-between;
 }
 
 .end {
@@ -171,7 +181,7 @@ td {
 	border-radius: 5px;
 	cursor: pointer;
 	height: 40px;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     width: 150px;
 }
 .nav > div {
@@ -195,90 +205,7 @@ td {
 .fixed {
     position: fixed;
     top: 62px;
+    border-bottom: 1px solid #dddddd;
 }
 
-@media all and (max-width: 460px) {
-	:root, html {
-	    font-size: 6px;
-	}
-	.section {
-		padding-top: 242px;
-		margin: 0;
-	}
-	.target_area {
-	    top: 241px;
-	}
-	.target_text {
-		margin: 0 20px;
-	}
-	.target_text span {
-		font-size: 1.4rem;
-	    letter-spacing: -1.4px;
-	}
-	.info_area {
-		margin: 0 20px;
-		top: 242px;
-	}
-	.area {
-		margin: 0 20px;
-		margin-bottom: 20px;
-	}
-	.target {
-		margin: 0 20px;
-	}
-	.target_info {
-		top: 182px;
-		z-index: 99;
-	}
-	.info {
-		padding: 20px;
-		height: 120px;
-	}
-	.fixed {
-		position: fixed;
-		top: 62px;
-	}
-	.target_box table {
-	    height: 127px;
-	}
-	.label {
-	    margin-right: 6px;
-	}
-	.radioimg {
-	    width: 10px;
-	    height: 10px;
-	    background: url(../icon/ev/checkbox_off.png) no-repeat center /10px;
-	}
-	.radio:checked+.radioimg {
-	    background: url(../icon/ev/checkbox_on.png) no-repeat center /10px;
-	}
-	.text-area-tr2 > td {
-	    height: 65px;
-	}
-	.text-area-tr2 textarea {
-	    height: 65px;
-	}
-	.footer > div {
-	    margin: 0 auto;
-	}
-	.inputTxt {
-	    margin: 0px 2px;
-	}
-	.modal_body {
-		width: 90%;
-	}
-	.menu_msg2 {
-	    font-size: 2.6rem;
-	}
-	.question-text {
-		padding-left: 0;
-	}
-	.end {
-		width: 70px;
-		height: 30px;
-	}
-	.modal_body {
-		width: 90%;
-	}
-}
 

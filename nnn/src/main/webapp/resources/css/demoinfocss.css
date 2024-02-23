@@ -76,6 +76,7 @@ td {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
+	padding: 0 15px;
 }
 .info_name {
 	font-size: 3rem;
@@ -108,12 +109,16 @@ td {
 	border: 1px solid #1b304a;
 	padding: 15px 10px 15px 10px;
 }
+.form_go {
+	padding: 5px 10px;
+}
 .form_go > div > div{
 	cursor:pointer;
 	padding: 7px;
 	margin: 5px;
 	border: 1px solid #f89d00;
 	border-radius: 3px;
+    word-spacing: -5px
 }
 .target_section {
 	padding: 20px;
@@ -128,6 +133,7 @@ td {
 .fixed {
 	position: fixed;
 	top: 62px;
+    border-bottom: 1px solid #dddddd;
 }
 .target_text {
 	padding-left: 20px;
@@ -167,16 +173,17 @@ td {
 	margin: 0 20% 0 20%;
 	background: #fbfbfb;
 	width: 100%;
-	padding-bottom: 100px;
+    padding: 0 20px 100px;
 }
 
 
 .nav-btn {
-	border: 1pt solid #555555;
-	color: #555555;
+	border: 1pt solid #777777;
+	color: #777777;
 	padding: 5px 20px 5px 20px;
 	border-radius: 5px;
 	background: #f2f2f2;
+	cursor: pointer;
 }
  
 .active {
@@ -185,7 +192,9 @@ td {
 	padding: 5px 20px 5px 20px;
 	border-radius: 5px;
 	background: #f2f2f2;
-	font-weight: 600;
+	font-weight: 600;/* 
+	transform: rotate(108deg);
+    box-shadow: 1px 8px 8px rgba(48, 48, 48, 0.17); */
 }
 
 .quick {
@@ -212,6 +221,7 @@ td {
 .score-text {
 	color: #003981;
 	font-weight: bold;
+    word-spacing: -5px;
 }
 
 .modify-btn {

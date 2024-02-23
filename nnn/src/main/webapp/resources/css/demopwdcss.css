@@ -4,8 +4,23 @@
 	font-size: 10px;
 	--footer--width: 861px;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #333333;
+    -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+	-webkit-text-fill-color: #333333;
+    -webkit-box-shadow: 0 0 0px 1000px #efefef inset;
+}
 body {
-	background: #fcfcfc;
+	background: #f7f7f7;
     width: 100vw;
     height: 100vh;
 }
@@ -58,7 +73,7 @@ input[type=text], input[type=password], button {
     border: 1px solid #efefef;
     width: 600px;
     height: 68px;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #333333;
 }
 button {

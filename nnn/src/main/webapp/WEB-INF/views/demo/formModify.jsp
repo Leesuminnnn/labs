@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=240201F">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0214">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0222">
 <title>근무평가</title>
 <style>
 </style>
@@ -1379,13 +1379,15 @@
 	<jsp:include page="../demo/footer.jsp"></jsp:include>
 	<input type="hidden" name="score" value="" id="score">
 </form>
-
 <div class="modal normal">
 	<div class="modal_body">
 		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 			<div class="menu_msg">text</div>
-			<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
-			확인
+			<div class="modal_footer">
+				<div class="btn modal_btn" onclick="closePopup()">
+					확인
+				</div>
 			</div>
 		</div>
 	</div>
@@ -1393,16 +1395,45 @@
 <div class="modal2 normal">
 	<div class="modal_body2">
 		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 			<div class="menu_msg2">text</div>
 			<div class="modal_footer2">
-				<div style="top: 40%" class="btn modal_btn2" id="modal_insert">
+				<div class="btn modal_btn2" onclick="closePopup2()">
 					확인
 				</div>
-				<div style="top: 40%" class="btn pink_btn2" onclick="closePopup2()">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal3 normal">
+	<div class="modal_body3">
+		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+			<div class="menu_msg3">text</div>
+			<div class="modal_footer3">
+				<div class="btn modal_btn2" id="modal_insert" onclick="modal_insert()">
+					확인
+				</div>
+				<div class="btn pink_btn2" onclick="closePopup3()">
 					취소
 				</div>
 			</div>
-			
+		</div>
+	</div>
+</div>
+<div class="modal4 normal">
+	<div class="modal_body4">
+		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+			<div class="menu_msg4">text</div>
+			<div class="modal_footer4">
+				<div class="btn modal_btn2" onclick="modal_insert()">
+					확인
+				</div>
+				<div class="btn pink_btn2" onclick="closePopup4()">
+					취소
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -1413,8 +1444,12 @@ var scoreInput = document.getElementById("score");
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const modal2 = document.querySelector('.modal2');
+const modal3 = document.querySelector('.modal3');
+const modal4 = document.querySelector('.modal4');
 const msg = document.querySelector('.menu_msg');
 const msg2 = document.querySelector('.menu_msg2');
+const msg3 = document.querySelector('.menu_msg3');
+const msg4 = document.querySelector('.menu_msg4');
 const modal_submit = document.getElementById("modal_insert");
 //문제유형
 var ev = "${ev}";
@@ -1536,21 +1571,21 @@ $("#end").click(function() {
 
 			modal.classList.toggle('show');
 		 	msg.style.top = '34%';
-			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
+			msg.innerHTML = '<p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
 			if (modal.classList.contains('show')) {
 				body.style.overflow = 'hidden';
 			}
 			return false;
 		}else {
-			modal2.classList.toggle('show');
-		 	msg2.style.top = '34%';
-			msg2.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAA+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
-			if (modal2.classList.contains('show')) {
+			modal3.classList.toggle('show');
+		 	msg3.style.top = '34%';
+			msg3.innerHTML = '<p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAA+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
+			if (modal3.classList.contains('show')) {
 				body.style.overflow = 'hidden';
 			}
 
 			modal_submit.addEventListener("click", function() {
-				if (modal2.classList.contains('show')) {
+				if (modal3.classList.contains('show')) {
 					body.style.overflow = 'hidden';
 				}
 				score.value = sumAA;
@@ -1578,21 +1613,19 @@ $("#end").click(function() {
 						res = response.result;
 						if(res == "Y") {
 							// 평가 완료
+							modal3.classList.toggle('show');
 							modal2.classList.toggle('show');
-							modal.classList.toggle('show');
-						 	msg.style.top = '34%';
-							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>수정이 완료되었습니다.</p>';
-							if (modal.classList.contains('show')) {
+							msg2.innerHTML = '<p>수정이 완료되었습니다.</p>';
+							if (modal2.classList.contains('show')) {
 								body.style.overflow = 'hidden';
 							}
 							$(".btn").attr("onclick", "endlink()");
 						} else if (res == "N") {
 							// 평가 오류
+							modal3.classList.toggle('show');
 							modal2.classList.toggle('show');
-							modal.classList.toggle('show');
-						 	msg.style.top = '34%';
-							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
-							if (modal.classList.contains('show')) {
+							msg2.innerHTML = '<p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
+							if (modal2.classList.contains('show')) {
 								body.style.overflow = 'hidden';
 							}
 							$(".btn").attr("onclick", "endlink()");
@@ -1600,10 +1633,9 @@ $("#end").click(function() {
 					},
 					error : function(error) {
 						console.error('Error fetching data :' ,error);
+						modal3.classList.toggle('show');
 						modal2.classList.toggle('show');
-						modal.classList.toggle('show');
-					 	msg.style.top = '34%';
-						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
+						msg2.innerHTML = '<p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
 
 						$(".btn").attr("onclick", "endlink()");
 					}
@@ -1617,10 +1649,9 @@ $("#end").click(function() {
 				!d28 || !d29|| !e30|| !e31 ||				
 				$.trim(f32) === ''){
 //			alert("현재 답변하지 않은 평가가 있습니다. \n확인해주세요.");
-			modal.classList.toggle('show');
-		 	msg.style.top = '34%';
-			msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
-			if (modal.classList.contains('show')) {
+			modal2.classList.toggle('show');
+			msg2.innerHTML = '<p>현재 답변하지 않은 평가가 있습니다.</p><p>확인해주세요.</p>'
+			if (modal2.classList.contains('show')) {
 				body.style.overflow = 'hidden';
 			}
 			
@@ -1636,15 +1667,14 @@ $("#end").click(function() {
 // 				    window.history.pushState(null, null, window.location.href);
 // 				};
 // 			}
-			modal2.classList.toggle('show');
-		 	msg2.style.top = '34%';
-			msg2.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAB+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
-			if (modal2.classList.contains('show')) {
+			modal3.classList.toggle('show');
+			msg3.innerHTML = '<p>${targetfirstName }ㅇㅇ 님의 평가 예상점수는 '+sumAB+'점입니다.</p><p>평가완료를 하시겠습니까?</p>'
+			if (modal3.classList.contains('show')) {
 				body.style.overflow = 'hidden';
 			}
 
 			modal_submit.addEventListener("click", function() {
-				if (modal2.classList.contains('show')) {
+				if (modal3.classList.contains('show')) {
 					body.style.overflow = 'hidden';
 				}
 				score.value = sumAB;
@@ -1682,21 +1712,19 @@ $("#end").click(function() {
 						res = response.result;
 						if(res == "Y") {
 							// 평가 완료
+							modal3.classList.toggle('show');
 							modal2.classList.toggle('show');
-							modal.classList.toggle('show');
-						 	msg.style.top = '34%';
-							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>수정이 완료되었습니다.</p>';
-							if (modal.classList.contains('show')) {
+							msg2.innerHTML = '<p>수정이 완료되었습니다.</p>';
+							if (modal2.classList.contains('show')) {
 								body.style.overflow = 'hidden';
 							}
 							$(".btn").attr("onclick", "endlink()");
 						} else if (res == "N") {
 							// 평가 오류
+							modal3.classList.toggle('show');
 							modal2.classList.toggle('show');
-							modal.classList.toggle('show');
-						 	msg.style.top = '34%';
-							msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
-							if (modal.classList.contains('show')) {
+							msg2.innerHTML = '<p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
+							if (modal2.classList.contains('show')) {
 								body.style.overflow = 'hidden';
 							}
 							$(".btn").attr("onclick", "endlink()");
@@ -1704,10 +1732,9 @@ $("#end").click(function() {
 					},
 					error : function(error) {
 						console.error('Error fetching data :' ,error);
+						modal3.classList.toggle('show');
 						modal2.classList.toggle('show');
-						modal.classList.toggle('show');
-					 	msg.style.top = '34%';
-						msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
+						msg2.innerHTML = '<p>평가 수정 중 오류가 발생하였습니다.</p><p>다시 시도해주세요.</p>';
 
 						$(".btn").attr("onclick", "endlink()");
 					}
@@ -1729,6 +1756,18 @@ function closePopup(){
 function closePopup2(){
 	modal2.classList.toggle('show');
 	if (!modal2.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+function closePopup3(){
+	modal3.classList.toggle('show');
+	if (!modal3.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+}
+function closePopup4(){
+	modal4.classList.toggle('show');
+	if (!modal4.classList.contains('show')) {
 		body.style.overflow = 'auto';
 	}
 }

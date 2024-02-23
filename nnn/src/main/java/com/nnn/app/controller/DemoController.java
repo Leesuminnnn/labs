@@ -1367,10 +1367,28 @@ public class DemoController {
 		mv.setViewName("demo/admin");
 		return mv;
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="pwdreset/{id}")
+	public AjaxResponse6 demopwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+		System.out.println("비밀번호 초기화.... 대상 : "+id);
+		AjaxResponse6 response = new AjaxResponse6();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		int flag = demoService.pwdreset(map);
+		
+		if(flag == 1) {
+			response.setResult("Y");
+			return response;
+		}else {
+			response.setResult("N");
+			return response;
+		}
+	}
+	/*
 	@RequestMapping(value="pwdreset/{id}")
 	public String pwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
 		System.out.println("비밀번호 초기화.... 대상 : "+id);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		int flag = demoService.pwdreset(map);
@@ -1385,7 +1403,7 @@ public class DemoController {
 			return "alert5";
 		}
 	}
-
+*/
 	@ResponseBody
 	@RequestMapping(value="pwdreset1/{id}")
 	public AjaxResponse6 pwdreset1(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {

@@ -3,22 +3,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<% pageContext.setAttribute("replaceChar","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=240213_01">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=240213_01">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240213_01">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/loginmediacss.css?ver=240213_01">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/loginmediacss.css?ver=0222">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/demo/loginAction" method="post">
+<form action="${pageContext.request.contextPath}/demo/loginAction" method="post" id="login_form">
 	<section>
 		<%-- <div class="login-bg">
 			<div class="main">
@@ -117,7 +118,7 @@
 			
 		</div> --%>
 		<div class="text-wrap">
-			<div class="text-img" style="color: #222222;">
+			<div class="text-img">
 				<img class="pc-img" src="${pageContext.request.contextPath}/resources/icon/ev/login_bg2.png">
 				<img class="mob-img" src="${pageContext.request.contextPath}/resources/icon/ev/login_bg_m_3.png">
 			</div>
@@ -134,7 +135,7 @@
 									<span>Login</span>
 								</div>
 								<div class="id-area">
-									<input class="input-text id" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
+									<input class="input-text id" type="text" name="id" id="id" placeholder="사번" title="사번입력" autofocus="autofocus">
 								</div>
 								<div class="pwd-area">
 									<input class="input-text name" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
@@ -182,26 +183,26 @@
 								</div>
 									<div class="notice-main">
 										<div class="notice-header bold">
-											<span>직원 평가완료 후 재평가(수정)이 안되오니 신중하게 평가해 주시기 바랍니다</span>
+											<span>인사평가 일정을 확인해 주시기바랍니다.</span>
 										</div>
 										<div class="notice-text normal">
 											<div>
 												<div>
 													<c:forEach items="${notice }" var="n">
 													<div class="notice-inner">
-														<div class="inner-text">
-															<c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png"></c:if>
-															<span>${n.d2 }</span>
+														<div class="inner-text" style='display:<c:if test="${empty n.d3 }">block; width:100%; align-items: center;</c:if>'>
+															<c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png" style='<c:if test="${not empty n.d3 }">line-heigh: 12px; margin: 0 9px 0 4px;</c:if>'></c:if>
+															<span >${n.d2}</span>
 														</div>
-														<div><span class="inner-span">${n.d3 }</span></div>
+														<c:if test="${not empty n.d3 }">
+															<div style="white-space:pre;"><span class="inner-span" style='<c:if test="${not empty n.d3}">margin:0</c:if>'>${n.d3 }</span></div>
+														</c:if>
 													</div>
 													</c:forEach>
 												</div>
 											</div>
 										</div>
 									</div>
-									
-								
 								<div class="notice-btn">
 									<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
 								</div>
@@ -219,10 +220,25 @@
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>
-				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 				<div class="menu_msg">text</div>
-				<div style="top: 50%" class="btn modal_btn" onclick="closePopup()">
-				확인
+				<div class="modal_footer">
+					<div class="btn modal_btn" onclick="closePopup()">
+						확인
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal2 normal">
+		<div class="modal_body2">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg2">text</div>
+				<div class="modal_footer2">
+					<div class="btn modal_btn2" onclick="closePopup2()">
+						확인
+					</div>
 				</div>
 			</div>
 		</div>
@@ -230,23 +246,56 @@
 	<div class="modal3 normal">
 		<div class="modal_body3">
 			<div>
-				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; position: relative; top: 10%;">
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 				<div class="menu_msg3">text</div>
 				<div class="modal_footer3">
-					<div style="top: 50%" class="btn modal_btn2" onclick="modal_insert()">
+					<div class="btn modal_btn2" onclick="modal_insert()">
 						확인
 					</div>
-					<div style="top: 50%" class="btn pink_btn2" onclick="closePopup3()">
+					<div class="btn pink_btn2" onclick="closePopup3()">
 						취소
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>
+	<div class="modal4 normal">
+		<div class="modal_body4">
+			<div>
+				<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
+				<div class="menu_msg4">text</div>
+				<div class="modal_footer4">
+					<div class="btn modal_btn2" onclick="modal_insert()">
+						확인
+					</div>
+					<div class="btn pink_btn2" onclick="closePopup4()">
+						취소
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 </form>
 </body>
 <script>
+let query = window.location.search;
+console.log(query);
+let param = new URLSearchParams(query);
+console.log(param);
+console.log(param.get('chk_no'));
+if (param.get('chk_no') === 'checked') {
+
+	$('#chk_no').prop('checked', true);
+	$('#pwd').attr("placeholder", "비밀번호");
+	$('#pwd').attr("type", "password");
+	$('#pwd').attr("title", "비밀번호입력");
+	$('#pwd').attr("name", "pwd");
+	$('#pwd').attr("class", "input-text pwd");
+};
+
+
 var namechk = $('#chk_name').prop("checked");
 var nochk = $('#chk_no').prop("checked");
 const body = document.querySelector('body');
@@ -309,38 +358,26 @@ $("#loginbtn").click(function (){
 			if (res === "0") {
 				// DB에 정보 없음
 				modal.classList.toggle('show');
-				icon.style.top = '20%';
-			 	msg.style.top = '33%';
-			 	btn.style.top = '50%';
 				msg.innerHTML = '<p>2023년도 직원근무평가 대상직원이 아닙니다.</p>'
 
 				console.log(0);
 			} else if (res === "1") {
 				// 비밀번호 불일치
 				modal.classList.toggle('show');
-				icon.style.top = '20%';
-			 	msg.style.top = '33%';
-			 	btn.style.top = '50%';
 				msg.innerHTML = '<p>비밀번호가 일치하지 않습니다.</p>'
-
-				
+				$(".pwd").val("");
+				$(".btn").attr("onclick", "reset()");
 				console.log(1);
 			} else if (res === "5") {
 				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어 있지 않는 경우
 				idx = response.idx;
 				modal.classList.toggle('show');
-				icon.style.top = '20%';
-			 	msg.style.top = '34%';
-			 	btn.style.top = '41%';
 				msg.innerHTML = '<p>현재 비밀번호가 설정되어 있지 않습니다.</p><p>비밀번호 설정 페이지로 이동합니다.</p>';
 				$(".btn").attr("onclick", "pwdlink()");
 				console.log(5);
 			} else if (res === "2") {
 				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
 				modal.classList.toggle('show');
-				icon.style.top = '20%';
-			 	msg.style.top = '34%';
-			 	btn.style.top = '41%';
 				msg.innerHTML = '<p>현재 비밀번호가 설정되어 있습니다.</p><p>비밀번호로 로그인을 해주세요.</p>'
 
 				console.log(2);
@@ -394,6 +431,19 @@ function pwdlink() {
 	var link = "${pageContext.request.contextPath}/demo/Pwd/"+idx;
 	location.href = link;
 }
+function reset() {
+	modal.classList.toggle('show');
+	if (!modal.classList.contains('show')) {
+		body.style.overflow = 'auto';
+	}
+	$("#pwd").focus();
+}
+// 엔터키로 로그인 구현
+$('#pwd').on('keypress', function (e) {
+	if (e.keyCode === 13) {
+		$('#loginbtn').click();
+	}
+});
 
 </script>
 </html>

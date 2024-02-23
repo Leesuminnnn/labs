@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=240201">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=240201">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0222">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1" >
@@ -165,6 +165,8 @@ tbody td::before {
 	border-left: 4px solid #00bec2;
 	background: #293a4f;
 	color: #fff;
+	padding-left: 30px;
+	
 }
 .bg-gray {
 	background: #eaeaea;
@@ -185,6 +187,37 @@ tbody td::before {
 .info-sticky-top::before {
 	content: "";
 	border-bottom: 2px solid #ccc;
+}
+.link-btn {
+	cursor: pointer;
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.btn-css {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ddd;
+	height: 90%;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+	-webkit-transition: all 0.15s ease-in-out;
+	-moz-transition: all 0.15s ease-in-out;
+	-ms-transition: all 0.15s ease-in-out;
+	-o-transition: all 0.15s ease-in-out;
+	transition: all 0.15s ease-in-out;
+	background: #fafafa;
+}
+.btn-css:hover {
+	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	-ms-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	-o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
 }
 </style>
 </head>
@@ -329,8 +362,8 @@ tbody td::before {
 									<c:otherwise>설정완료</c:otherwise>
 								</c:choose>
 							</td>
-							<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" class="pointer"</c:if>><c:if test="${not empty u.pwd }">초기화</c:if></td>
-							<td class="pointer"  onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'">링크</td>
+							<td data-name="${u.name}" data-id="${u.id}" <c:if test="${not empty u.pwd}">onclick="pwdreset(this)" class="pointer"</c:if>><c:if test="${not empty u.pwd }"><div class="link-btn"><div class="btn-css">초기화</div></div></c:if></td>
+							<td class="pointer"  onclick="location.href='${pageContext.request.contextPath}/demo/Info/${u.idx}'"><div class="link-btn"><div class="btn-css">바로가기</div></div></td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -456,9 +489,12 @@ tbody td::before {
 <div class="modal normal">
 	<div class="modal_body">
 		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 			<div class="menu_msg">text</div>
-			<div style="top: 40%" class="btn modal_btn" onclick="closePopup()">
-			확인
+			<div class="modal_footer">
+				<div class="btn modal_btn" onclick="closePopup()">
+					확인
+				</div>
 			</div>
 		</div>
 	</div>
@@ -466,6 +502,7 @@ tbody td::before {
 <div class="modal3 normal">
 	<div class="modal_body3">
 		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 			<div class="menu_msg3">text</div>
 			<div class="modal_footer3">
 				<div style="top: 40%" class="btn modal_btn2" onclick="modal_insert()">
@@ -482,6 +519,7 @@ tbody td::before {
 <div class="modal4 normal">
 	<div class="modal_body4">
 		<div>
+			<img class="menu_icon" src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png">
 			<div class="menu_msg4">text</div>
 			<div class="modal_footer4">
 				<div style="top: 40%" class="btn modal_btn2" onclick="pwd_reset()">
@@ -495,6 +533,7 @@ tbody td::before {
 		</div>
 	</div>
 </div>
+
 </body>
 <script>
 
@@ -642,16 +681,22 @@ function userall(contentId) {
 		 					
 		 					
 		 					var tdpwdselect = document.createElement("TD");
+		 					var LinkSpan1 = document.createElement("div");
+		 					tdpwdselect.appendChild(LinkSpan1);
+		 					LinkSpan1.setAttribute("class","link-btn")
 		 					tdpwdselect.setAttribute("data-name", name);
 		 					tdpwdselect.setAttribute("data-id", id);
 		 					if(list.pwd){
-		 						tdpwdselect.textContent = '초기화';
+		 						LinkSpan1.textContent = '초기화';
 		 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
 		 						tdpwdselect.setAttribute("style", "cursor:pointer;");
 		 					}
 		 					var tdlink = document.createElement("TD");
+		 					var LinkSpan2 = document.createElement("div");
+		 					tdlink.appendChild(LinkSpan2);
+		 					LinkSpan2.setAttribute("class", "link-btn");
 		 					tdlink.setAttribute("onclick", "location.href='" + url + "'");
-		 					tdlink.textContent = "링크";
+		 					LinkSpan2.textContent = "바로가기";
 		 					//
 		 					
 		 					
@@ -2088,31 +2133,18 @@ function pwdreset(element){
 	
 	modal3.classList.toggle('show');
  	msg3.style.top = '34%';
-	msg3.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:18px;"></p><p>'+name.substring(0,1)+'ㅇㅇ 님의 비밀번호를 초기화 하시겠습니까?</p>'
+	msg3.innerHTML = '<p>'+name.substring(0,1)+'ㅇㅇ 님의 비밀번호를 초기화 하시겠습니까?</p>'
 	if (modal3.classList.contains('show')) {
 		body.style.overflow = 'hidden';
 	}
-	/* 
-	alert("[" + name + "]님의 비밀번호를 초기화 합니다.");
-	
-	prmpwd = window.prompt('비밀번호를 입력해주세요');
-	if(prmpwd == '123qwe' || prmpwd == '123ㅂㅈㄷ'){
-		alert('인증 성공 \n비밀번호 초기화를 진행합니다.');
-		
-		frm.attr("action","${pageContext.request.contextPath}/demo/pwdreset/"+id).submit();
-		
-		 
-		 
-	}else {
-		alert('인증 실패');
-	} */
 	
 }
 function modal_insert(){
 	closePopup3();
 	
 	// confirm창 띄우기
-	msg4.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px; margin-bottom:10px;"></p><p>비밀번호를 입력해 주세요.</p><p><input type="password" value="" name="pwd_reset_input" id="pwd_reset_input"></p>';
+ 	msg4.style.top = '34%';
+	msg4.innerHTML = '<p><input type="password" value="" name="pwd_reset_input" id="pwd_reset_input" placeholder="관리자 비밀번호를 입력해주세요." autofocus="autofocus"></p>';
 
 	openModal4();
 }
@@ -2121,25 +2153,57 @@ function pwd_reset() {
 	console.log($("#pwd_reset_input").val());
 	console.log(targetId);
 	if ($("#pwd_reset_input").val() === '123qwe') {
-		frm.attr("action","${pageContext.request.contextPath}/demo/pwdreset/"+targetId).submit();
-		closePopup4();
-		
-		modal.classList.toggle('show');
-	 	msg.style.top = '34%';
-		msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>초기화가 완료되었습니다.</p>'
-
-		closePopup();
+		// 관리자 비밀번호가 일치 시
+		$.ajax({
+			type: 'post',
+			url: '${pageContext.request.contextPath}/demo/pwdreset/'+targetId,
+			datatype: 'json',
+			data: {
+				id: targetId,
+			},
+			success: function(response) {
+				var res = response.result;
+				
+				if (res === "Y") {
+					closePopup4();
+					modal.classList.toggle('show');
+				 	msg.style.top = '34%';
+					msg.innerHTML = '<p>초기화가 완료되었습니다.</p>';
+					$('.btn1').attr("onclick", "reload()");
+				}
+				else {
+					closePopup4();
+					modal.classList.toggle('show');
+				 	msg.style.top = '34%';
+					msg.innerHTML = '<p>데이터 오류입니다.</p>';
+					$('.btn1').attr("onclick", "reload()");
+				}
+			},
+			error: function(error) {
+				console.error('Error fetching data: ',error);
+			}
+		});
+// 		closePopup();
 	} 
 	else {
+		// 관리자 비밀번호가 일치하지 않을 때
 		closePopup4();
 		modal.classList.toggle('show');
 	 	msg.style.top = '34%';
-		msg.innerHTML = '<p><img src="${pageContext.request.contextPath}/resources/icon/ev/alert_img.png" style="width: 46px;"></p><p>비밀번호가 일치하지 않습니다.</p>'
-
+		msg.innerHTML = '<p>비밀번호가 일치하지 않습니다.</p>';
+		$('.btn1').attr("onclick", "reload()");
 	}
 	
 	
 	
+}
+
+function reload() {
+	location.reload();
+}
+// 특정 영역만 리로드?
+function targetreload() {
+	targetId.load(window.location.href + targetId);
 }
 
 const menuScripts = [
@@ -2176,17 +2240,14 @@ function activateMenu(menuIndex) {
 	if (iconImage1) {
 		// Set the image source based on the 'active' class
 		if(menuIndex == 0){
-			console.log('123');
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png";
 			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png";
 			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
 		}else if (menuIndex == 1){
-			console.log('456');
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
 			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_on.png";
 			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
 		}else if (menuIndex == 2) {
-			console.log('789');
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
 			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png";
 			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png"
