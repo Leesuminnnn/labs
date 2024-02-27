@@ -1,5 +1,17 @@
 @charset "UTF-8";
-
+.target_text {
+		margin: 0 15%;
+	}
+	.info_area {
+		margin: 0 15%;
+	}
+	.area {
+		margin: 0 15%;
+		margin-bottom: 20px;
+	}
+	.target {
+		margin: 0 15%;
+	}
 @media all and (max-width: 1670px){
 	.target_text {
 		margin: 0 15%;

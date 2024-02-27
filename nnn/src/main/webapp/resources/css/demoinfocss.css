@@ -3,7 +3,9 @@
 	font-size: 10px;
 	--footer--width: 100%;
 }
-
+body, .target_area {
+	min-height: 100vh;
+}
 
 
 table{

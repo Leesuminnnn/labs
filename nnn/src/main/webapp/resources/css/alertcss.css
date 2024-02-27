@@ -328,4 +328,33 @@ cs_btn {
 	.modal_btn2 {
 	    width: 120px;
 	}
+	.menu_msg2 {
+		font-size: 19px;
+	}
+	.menu_msg3 {
+		font-size: 19px;
+	}
+	.menu_msg4 {
+		font-size: 19px;
+	}
+	.modal_body {
+		padding: 0px 50px;
+	}
+	.modal_body2 {
+		padding: 0px 50px;
+	}
+	.modal_body3 {
+		padding: 0px 50px;
+	}
+	.modal_body4 {
+		padding: 0px 50px;
+	}
+	.btn {
+		margin: 0 5px;
+	}
+	
+	
+	
+	
+	
 }

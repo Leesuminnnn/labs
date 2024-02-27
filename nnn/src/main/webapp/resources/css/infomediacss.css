@@ -11,7 +11,7 @@
 		margin: 0 15%;
 	}
 	.target_container {
-		margin: 0 15%;
+		margin: 0 15% 20px;
 	}
 	.footer > div {
 		padding: 0 15%;
@@ -29,7 +29,7 @@
 		margin: 0 15% 0 15%;
 	}
 	.target_container {
-		margin: 0 15% 0 15%;
+		margin: 0 15% 20px 15%;
 	}
 	.footer > div {
 		padding: 0 15%;
@@ -47,7 +47,7 @@
 		margin: 0 10% 0 10%;
 	}
 	.target_container {
-		margin: 0 10% 0 10%;
+		margin: 0 10% 20px 10%;
 	}
 	.footer > div {
 		padding: 0 10%;
@@ -323,13 +323,16 @@
 		align-items: center;
 		padding: 0 20px;
 		background: #efefef;
+		border-bottom: 1px solid #ededed;
+	    box-shadow: 0 0 1px rgba(0,0,0,0.8);
+    	z-index: 1;
 	}
 	.info-container {
 		margin: 0;
 		padding: 0;
 	}
 	.target_container {
-		margin: 0 5px;
+		margin: 0 5px 5px;
 		padding: 0 0 20px 0;
 	}
 	.target_area {
@@ -371,6 +374,9 @@
 	}
 	.line2 {
 		margin: 5px 0 10px 0;
+	}
+	.score-text {
+		word-spacing: 0;
 	}
 	.targettb_A tr:first-child td, .targettb_B tr:first-child td, .targettb_C tr:first-child td, .targettb_D tr:first-child td {
 		padding: 5px;

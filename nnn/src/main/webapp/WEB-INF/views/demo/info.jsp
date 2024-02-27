@@ -13,16 +13,16 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css"> --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/infomediacss.css?ver=0222.02">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/infomediacss.css?ver=0226.01">
 
 <style>
 	
 </style>
 </head>
-<body>
+<body id="body">
 <div class="main normal">
 <form action="${pageContext.request.contextPath}/demo/Form" method="post">
 	<div id="header">
@@ -2080,27 +2080,27 @@ if (screen.width < 767) {
 			// 부서장 안보임 경혁팀 부서원 보임
 			console.log("경혁팀X 부서장의 경우");
 			$(".nav-2").css({
-			    width : 'calc((100vw - 40px) / 2)'
+			    width : 'calc((100vw - 48px) / 2)'
 			});
 			$(".nav-4").css({
-				width : 'calc((100vw - 40px) / 2)'
+				width : 'calc((100vw - 48px) / 2)'
 			});
 		}
 		else if ($(".nav-2").css("display") == "none" && $(".nav-3").css("display") != "none" && $(".nav-4").css("display") != "none") {
 			// 경혁팀 안보임 부서장 부서원 보임
 			console.log("부서원");
 			$(".nav-3").css({
-			    width : 'calc((100vw - 40px) / 2)'
+			    width : 'calc((100vw - 48px) / 2)'
 			});
 			$(".nav-4").css({
-				width : 'calc((100vw - 40px) / 2)'
+				width : 'calc((100vw - 48px) / 2)'
 			});
 		}else {
 			// 진료부, 경혁팀, 부서장 안보임
 			console.log("진료부, 경혁팀, 부서장 안보임 부서원만 보임");
 			// 보이지 않게 설정
 			$(".target_area").css({
-				paddingTop: '257px'
+				paddingTop: '257px',
 			});
 			$(".target_info").css({
 				height: '50px'
@@ -2108,6 +2108,9 @@ if (screen.width < 767) {
 			$(".quick").css({
 				display: 'none'
 			});
+			$(".notice").css({
+				height: '100%'
+			})
 		}
 	}
 // 	else if ($(".nav-2").css("display") == "none") {
@@ -2119,38 +2122,38 @@ if (screen.width < 767) {
 			// 부서원이 안보일때
 			console.log("진료팀장");
 			$(".nav-1").css({
-			    width : 'calc((100vw - 40px) / 2)'
+			    width : 'calc((100vw - 48px) / 2)'
 			});
 			$(".nav-2").css({
-				width : 'calc((100vw - 40px) / 2)'
+				width : 'calc((100vw - 48px) / 2)'
 			});
 			
 		} else {
 			console.log("부서장만 안보임");
 			$(".nav-1").css({
-			    width : 'calc((100vw - 40px) / 3)'
+			    width : 'calc((100vw - 48px) / 3)'
 			});
 			$(".nav-2").css({
-				width : 'calc((100vw - 40px) / 3)'
+				width : 'calc((100vw - 48px) / 3)'
 			});
 			$(".nav-4").css({
-				width : 'calc((100vw - 40px) / 3)'
+				width : 'calc((100vw - 48px) / 3)'
 			});
 		}
 	}
 	else {
 		console.log("다보임");
 		$(".nav-1").css({
-		    width : 'calc((100vw - 40px) / 4)'
+		    width : 'calc((100vw - 56px) / 4)'
 		});
 		$(".nav-2").css({
-			width : 'calc((100vw - 40px) / 4)'
+			width : 'calc((100vw - 56px) / 4)'
 		});
 		$(".nav-3").css({
-			width : 'calc((100vw - 40px) / 4)'
+			width : 'calc((100vw - 56px) / 4)'
 		});
 		$(".nav-4").css({
-			width : 'calc((100vw - 40px) / 4)'
+			width : 'calc((100vw - 56px) / 4)'
 		});
 	}
 	

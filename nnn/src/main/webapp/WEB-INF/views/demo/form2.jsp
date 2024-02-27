@@ -14,9 +14,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoform2css.css?ver=0227">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
-<title>근무평가</title>
+<title>근무평가2</title>
 <style>
 </style>
 </head>
@@ -84,7 +85,7 @@
 							<c:forEach items="${evf}" var="ev" varStatus="status">
 							<c:if test="${ev.d3 eq '섬김' }">
 							<div>
-							<p class="question bold">${status.count}. ${ev.d1}</p><br>
+								<p class="question bold">${status.count}. ${ev.d1}</p>
 									
 							
 									<div class="answer">
@@ -134,7 +135,7 @@
 							<div class="bold area_header">배움</div>
 							<c:set var="b" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '배움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+								<c:if test="${ev.d3 eq '배움' }"><p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
@@ -179,7 +180,7 @@
 							
 							<c:set var="c" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '키움' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+								<c:if test="${ev.d3 eq '키움' }"><p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
@@ -223,7 +224,7 @@
 							<div class="bold area_header">나눔</div>
 							<c:set var="d" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '나눔' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+								<c:if test="${ev.d3 eq '나눔' }"><p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
@@ -267,7 +268,7 @@
 							<div class="bold area_header">목표관리</div>
 							<c:set var="e" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '목표관리' }"><p class="question bold">${status.count}. ${ev.d1}</p><br>
+								<c:if test="${ev.d3 eq '목표관리' }"><p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 											<label class="label">
 												<span class="alignBox">
@@ -321,9 +322,9 @@
 										</tr>
 									</table>
 								</c:if><%-- 
-								<c:if test="${ev.d3 eq '주관식' }"><p class="question bold">${ev.d1}</p><br>
+								<c:if test="${ev.d3 eq '주관식' }"><p class="question bold">${ev.d1}</p>
 									<textarea style="width: 99%; height: 90px; padding:5px; resize: none;" id="f${ev.idx }" name="f${ev.idx }" ></textarea>
-									<br><br>
+									
 								</c:if> --%>
 								
 							</c:forEach>

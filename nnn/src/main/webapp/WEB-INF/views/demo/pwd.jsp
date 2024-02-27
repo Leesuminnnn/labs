@@ -9,20 +9,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdcss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdcss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0226">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mobileheadercss.css?ver=0227">
 <title>비밀번호 설정페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>
 <body>
 <form id="frm" action="${pageContext.request.contextPath}/demo/pwdAction/${info.idx}" method="post">
+	<jsp:include page="../demo/header2.jsp"></jsp:include>
 	<section>
 	<div class="login">
 		<div class="line"></div>
-		<span class="bold">비밀번호 설정</span>
+		<div class="login-head">
+			<div class="head-img-area" onclick="homego()">
+				<img src="${pageContext.request.contextPath}/resources/icon/arrow2.png">
+			</div>
+			<div class="head-span-area">
+				<span class="bold">비밀번호 설정</span>
+			</div>
+		</div>
+		
 		<ul class="normal">
 			<li><input type="text" name="id" id="id" placeholder="사번" title="사번" readonly="readonly" value="${info.id }"></li>
 			<li><input type="text" name="name" id="name" placeholder="이름" title="이름" readonly="readonly" value="${info.name }"></li>
@@ -188,6 +198,9 @@ function link() {
 	location.href = link;
 }
 
+function homego() {
+	location.href='${pageContext.request.contextPath}/demo/Login';
+}
 
 </script>
 </html>

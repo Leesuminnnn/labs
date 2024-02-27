@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+@media (max-width: 460px) {
+	.answer {
+	    padding-left: 15px;
+	    display: flex;
+	    justify-content: space-between;
+		margin-bottom: 0;
+		
+	}
+
+}

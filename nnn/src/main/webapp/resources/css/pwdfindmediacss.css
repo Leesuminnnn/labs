@@ -48,7 +48,7 @@
 	}
 	.wrap {
 	    margin: 0 auto;
-	    padding: 20px;
+	    padding: 82px 20px 20px;
 	    position: inherit;
 	    transform: unset;
 	    width: 100%;
@@ -84,6 +84,22 @@
 		position: inherit;
 		height: 251px;
 	}
+	.login-head {
+		display: flex;
+		align-items: center;
+	}
+	.head-img-area {
+		cursor:pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.head-img-area > img{
+		width: 13px;
+	}
+	.head-span-area {
+		width: 100%;
+	}
 	.line {
 	    top: 14px;
 	    position: absolute;
@@ -92,6 +108,9 @@
 	}
 	.modal_body {
 		width: 90%;
+	}
+	.head-img-area {
+		display: none;
 	}
 	
 }

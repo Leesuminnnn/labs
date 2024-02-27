@@ -9,11 +9,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdfindmediacss.css?ver=0222">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdfindmediacss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mobileheadercss.css?ver=022701">
 <title>비밀번호 찾기 페이지</title><!-- 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -23,6 +24,7 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/demo/findpwdAction" method="post">
+	<jsp:include page="../demo/header2.jsp"></jsp:include>
 	<div class="wrap">
 	<section id="section">
 	
@@ -30,7 +32,12 @@
 		<div class="line" id="line"></div>
 		<div class="main">
 			<div class="login-head">
-				<span class="bold" id="head">비밀번호 찾기</span>
+				<div class="head-img-area" onclick="homego()">
+					<img src="${pageContext.request.contextPath}/resources/icon/arrow2.png">
+				</div>
+				<div class="head-span-area">
+					<span class="bold" id="head">비밀번호 찾기</span>
+				</div>
 			</div>
 			<ul id="ul" class="normal">
 				<li><input type="text" name="id" id="id" placeholder="사번" title="사번입력" autofocus="autofocus"></li>
@@ -225,7 +232,6 @@ $(document).ready(function () {
 					});
 					$("#ul").append($div);
 					$("#section").css({
-						height: '600px',
 						top : '42%'
 					});
 					// 디바이스 너비에 따라 css 다르게
@@ -384,5 +390,8 @@ $('#ph').on('keypress', function (e) {
 		$('#find').click();
 	}
 });
+function homego() {
+	location.href='${pageContext.request.contextPath}/demo/Login';
+}
 </script>
 </html>

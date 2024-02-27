@@ -675,6 +675,42 @@ public class DemoController {
 		mv.setViewName("demo/form");
 		return mv;
 	}
+	@RequestMapping(value="Form2/{idx}/{idx2}/{team}")
+	public ModelAndView form2(ModelAndView mv, HttpSession session, 
+			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
+			@PathVariable("team") String team) {
+		session.getAttribute("loginmember");
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		mv.addObject("info", demoService.info(idx));
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println( demoService.info(idx));
+		System.out.println( demoService.info(idx2));
+		System.out.println(team);
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		mv.addObject("target", demoService.info(idx2));
+		// 진료부, 경혁팀, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+			String ev = "AA";
+			System.out.println("ev : " + ev);
+			map.put("d2",ev);
+			mv.addObject("ev", team);
+		}
+		// 부서원 영역
+		else if (team.equals("D")) {
+			String ev = "AB";
+			System.out.println("ev : " + ev);
+			mv.addObject("ev", team);
+			map.put("d2",ev);
+		}
+		List<EvaluationVo> list1 = new ArrayList<EvaluationVo>();
+		list1 = demoService.evlist(map);
+		
+		
+		mv.addObject("evf", list1);
+		mv.setViewName("demo/form2");
+		return mv;
+	}
 	// 결과 저장 후 수정하기
 	@RequestMapping(value="FormModify/{idx}/{idx2}/{team}")
 	public ModelAndView formModify(ModelAndView mv, HttpSession session, 
