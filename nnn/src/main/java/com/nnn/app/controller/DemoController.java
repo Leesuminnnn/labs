@@ -672,7 +672,7 @@ public class DemoController {
 		
 		
 		mv.addObject("evf", list1);
-		mv.setViewName("demo/form");
+		mv.setViewName("demo/form2");
 		return mv;
 	}
 	@RequestMapping(value="Form2/{idx}/{idx2}/{team}")
@@ -774,10 +774,74 @@ public class DemoController {
 		mv.addObject("resultList", resultList);
 		mv.addObject("evf", list1);
 		mv.addObject("answer", demoService.answerSelect(map));
-		mv.setViewName("demo/formModify");
+		mv.setViewName("demo/formModify2");
 		return mv;
 	}
-	
+	@RequestMapping(value="FormModify2/{idx}/{idx2}/{team}")
+	public ModelAndView formModify2(ModelAndView mv, HttpSession session, 
+			HttpServletRequest request, @PathVariable("idx") int idx, @PathVariable("idx2") int idx2, 
+			@PathVariable("team") String team) {
+		session.getAttribute("loginMember");
+		Map<String, Object> map = new HashMap<String, Object>();
+		mv.addObject("info", demoService.info(idx));
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println( demoService.info(idx));
+		System.out.println( demoService.info(idx2));
+		System.out.println(team);
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		mv.addObject("target", demoService.info(idx2));
+		String u2 = demoService.info(idx).getId();
+		String t1 = demoService.info(idx2).getId();
+		map.put("u2", u2);
+		map.put("t1", t1);
+		// 진료부, 경혁팀, 부서장 영역
+		if(team.equals("A") || team.equals("B") || team.equals("C")) {
+			String ev = "AA";
+			System.out.println("ev : " + ev);
+			map.put("d2",ev);
+			mv.addObject("ev", team);
+			mv.addObject("es", ev);
+		}
+		// 부서원 영역
+		else if (team.equals("D")) {
+			String ev = "AB";
+			System.out.println("ev : " + ev);
+			mv.addObject("ev", team);
+			map.put("d2",ev);
+			mv.addObject("es", ev);
+		}
+		List<EvaluationVo> list1 = new ArrayList<EvaluationVo>();
+		list1 = demoService.evlist(map);
+		String dd = demoService.answerSelect(map).getD1();
+
+		// 콤마를 기준으로 문자열을 분할하여 ArrayList에 저장
+        List<String> tokensList = new ArrayList<>(Arrays.asList(dd.split(",")));
+
+        // 결과를 저장할 리스트 초기화
+        List<Map<String, String>> resultList = new ArrayList<>();
+
+        // tokensList를 순회하며 딕셔너리 형태로 변환
+        for (int i = 0; i < tokensList.size(); i++) {
+            String variableName = "var";  // 변수 이름 동적 생성
+            String value = tokensList.get(i);  // 현재 인덱스의 값을 가져옴
+            int index = i + 1;
+            // 딕셔너리에 변수와 값을 추가
+            Map<String, String> map2 = new HashMap<>();
+            map2.put(variableName, value);
+            map2.put("index", String.valueOf(index));  // index를 문자열로 변환하여 추가
+            System.out.println(value);
+            // 결과 리스트에 딕셔너리 추가
+            resultList.add(map2);
+        }
+
+        // 결과 출력
+        System.out.println(resultList);
+		mv.addObject("resultList", resultList);
+		mv.addObject("evf", list1);
+		mv.addObject("answer", demoService.answerSelect(map));
+		mv.setViewName("demo/formModify2");
+		return mv;
+	}
 	// 평가 후 Db저장
 	@ResponseBody
 	@RequestMapping(value="formAction/{idx}/{idx2}/{team}")

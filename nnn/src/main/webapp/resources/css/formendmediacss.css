@@ -46,10 +46,7 @@
 	.notice-area > .flex {
 	    background-color: #efefef;
 	    height: 60px;
-	    padding: 5px 6px 0;
-	}
-	.notice-area > div > span {
-		margin-bottom: 10px;
+	    padding: 0 6px 0;
 	}
 	
 	.check_img {

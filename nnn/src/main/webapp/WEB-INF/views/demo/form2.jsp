@@ -79,19 +79,20 @@
 				<div class="content">
 					<div class="scrollbase">
 						<div class="area">
-							<div class="bold area_header">섬김</div>
+						<div class="area-content">
+						<div class="bold area_header">섬김</div>
 							<c:set var="index" value="1"/>
 							<c:set var="a" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
 							<c:if test="${ev.d3 eq '섬김' }">
-							<div>
+							<div class="question-area a${ev.idx}">
 								<p class="question bold">${status.count}. ${ev.d1}</p>
 									
 							
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
-												<input class="radio" type="radio" name="a${ev.idx}" value="매우우수"/>
+												<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" />
 								                <span class="radioimg"></span>
 								                <span class="inputTxt">매우우수</span>
 											</span>
@@ -125,17 +126,23 @@
 											</span>
 										</label>
 									</div>
-									
-							</div>
+									<div class="q-1">
+										<div class="q-2"></div>
+									</div>
+								</div>
 								</c:if>
 								
 								<c:set var="a" value="${a +1 }"/>
 								
 							</c:forEach>
+						</div>
+							<div class="area-content">
 							<div class="bold area_header">배움</div>
 							<c:set var="b" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '배움' }"><p class="question bold">${status.count}. ${ev.d1}</p>
+								<c:if test="${ev.d3 eq '배움' }">
+								<div class="question-area b${ev.idx}">
+								<p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
@@ -173,14 +180,23 @@
 											</span>
 										</label>
 									</div>
+									<div class="q-1">
+										<div class="q-2"></div>
+									</div>
+									</div>
+									
 								</c:if>
 								<c:set var="b" value="${b +1 }"/>
 							</c:forEach>
+							</div>
+							<div class="area-content">
 							<div class="bold area_header">키움</div>
 							
 							<c:set var="c" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '키움' }"><p class="question bold">${status.count}. ${ev.d1}</p>
+								<c:if test="${ev.d3 eq '키움' }">
+								<div class="question-area c${ev.idx}">
+								<p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
@@ -218,13 +234,21 @@
 											</span>
 										</label>
 									</div>
+									<div class="q-1">
+										<div class="q-2"></div>
+									</div>
+									</div>
 								</c:if>
 								<c:set var="c" value="${c +1 }"/>
 							</c:forEach>
+							</div>
+							<div class="area-content">
 							<div class="bold area_header">나눔</div>
 							<c:set var="d" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '나눔' }"><p class="question bold">${status.count}. ${ev.d1}</p>
+								<c:if test="${ev.d3 eq '나눔' }">
+								<div class="question-area d${ev.idx}">
+								<p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
@@ -262,13 +286,21 @@
 											</span>
 										</label>
 									</div>
+									<div class="q-1">
+										<div class="q-2"></div>
+									</div>
+									</div>
 								</c:if>
 								<c:set var="d" value="${d +1 }"/>
 							</c:forEach>
+							</div>
+							<div class="area-content">
 							<div class="bold area_header">목표관리</div>
 							<c:set var="e" value="1"/>
 							<c:forEach items="${evf}" var="ev" varStatus="status">
-								<c:if test="${ev.d3 eq '목표관리' }"><p class="question bold">${status.count}. ${ev.d1}</p>
+								<c:if test="${ev.d3 eq '목표관리' }">
+								<div class="question-area e${ev.idx}">
+								<p class="question bold">${status.count}. ${ev.d1}</p>
 									<div class="answer">
 											<label class="label">
 												<span class="alignBox">
@@ -306,10 +338,16 @@
 												</span>
 											</label>
 										</div>
+										<div class="q-1">
+											<div class="q-2"></div>
+										</div>
+										</div>
 									</c:if>
 								<c:set var="e" value="${e +1 }"/>
 							</c:forEach>
-							<div class="bold area_header"></div>
+							</div>
+							<div class="area-content">
+							<div class="bold area_header text-target"></div>
 							<c:forEach items="${evf}" var="ev">
 								<c:if test="${ev.d3 eq '주관식' }">
 									<table class="text-area-table">
@@ -334,6 +372,9 @@
 									평가완료
 								</button>
 							</div>
+							</div>
+							
+							
 						</div>
 				</div>
 
@@ -875,6 +916,46 @@ function endlink() {
 	var link = "${pageContext.request.contextPath}/demo/FormEnd/${info.idx}/${target.idx}";
 	location.href = link;
 }
+$(document).ready(function(){
+    // A, B, C 는 10문제
+    if(ev == 'A' || ev == 'B' || ev == 'C'){
+    	console.log("as");
+		$(".a2").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".b4").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".c6").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".d8").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".e10").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+	
+	} else {
+		console.log("dd");
+		$(".a18").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".b22").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".c27").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".d29").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+		$(".e31").find(".q-1").find(".q-2").css({
+			display: 'none'
+		});
+    }
+    
+});
 
 </script>	
 </body>
