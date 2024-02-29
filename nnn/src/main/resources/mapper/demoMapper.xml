@@ -46,7 +46,7 @@
 	SELECT idx, id, pwd, name, reg_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
 	hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
     FROM demo_users u
-    where
+    where u.end_date is null and
     <choose>
    	<!-- 진료부 -->
    	<!-- 진료팀장 -->
@@ -2960,7 +2960,7 @@
 	<select id="users" resultType="map" parameterType="map">
 		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
 		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from demo_users 
+		from demo_users where end_date is null
 	</select>
 	
 	<select id="ph" resultType="map" parameterType="map">
@@ -2986,7 +2986,7 @@
 	</select>
 	
 	<select id="answerselect" parameterType="map" resultType="map">
-		select idx, u1, u2, t1, team, d1, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from demo_answer
+		select idx, u1, u2, t1, team, d1, del_yn, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') from demo_answer where del_yn = 'N'
 	</select>
 	
 	<select id="targetsum" parameterType="map" resultType="int">
