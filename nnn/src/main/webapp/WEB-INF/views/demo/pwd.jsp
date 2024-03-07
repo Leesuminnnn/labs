@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0226">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0226">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mobileheadercss.css?ver=0227">
-<title>비밀번호 설정페이지</title>
+<title>코어솔루션 인사평가 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>

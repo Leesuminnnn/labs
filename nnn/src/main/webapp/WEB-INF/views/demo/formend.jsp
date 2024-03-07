@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformendcss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formendmediacss.css?ver=0227">
-<title>평가완료</title>
+<title>코어솔루션 인사평가 시스템</title>
 <style>
 </style>
 </head>
@@ -90,6 +90,7 @@
 								<img class="check_img" src="${pageContext.request.contextPath}/resources/icon/ev/den.png">
 							</div>
 							<p style="margin-bottom: 10px;">
+								<c:set var="targetfirstName" value="${fn:substring(target.name, 0, 1)}" />
 								<span class="bold text-color-blue">${targetfirstName }ㅇㅇ</span> 님의 평가가 완료 되었습니다.
 							</p>
 							<p>2023년도 직원평가에 응답해주셔서 감사합니다.</p><br>

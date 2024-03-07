@@ -13,7 +13,7 @@
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1" >
-<title>코어솔루션 인사평가 시스템</title>
+<title>코어솔루션 전자문서 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 .bg-425c7b {

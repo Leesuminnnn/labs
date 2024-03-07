@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testlogin2css.css">
-<title>로그인</title>
+<title>코어솔루션 인사평가 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>

@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoform2css.css?ver=0227">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testformcss.css"> --%>
-<title>근무평가2</title>
+<title>코어솔루션 인사평가 시스템</title>
 <style>
 </style>
 </head>
@@ -92,7 +92,7 @@
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
-												<input class="radio" type="radio" name="a${ev.idx}" value="매우우수" checked/>
+												<input class="radio" type="radio" name="a${ev.idx}" value="매우우수"/>
 								                <span class="radioimg"></span>
 								                <span class="inputTxt">매우우수</span>
 											</span>
@@ -146,7 +146,7 @@
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
-												<input class="radio" type="radio" name="b${ev.idx}" value="매우우수" checked/>
+												<input class="radio" type="radio" name="b${ev.idx}" value="매우우수"/>
 								                <span class="radioimg"></span>
 								                <span class="inputTxt">매우우수</span>
 											</span>
@@ -200,7 +200,7 @@
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
-												<input class="radio" type="radio" name="c${ev.idx}" value="매우우수" checked/>
+												<input class="radio" type="radio" name="c${ev.idx}" value="매우우수"/>
 								                <span class="radioimg"></span>
 								                <span class="inputTxt">매우우수</span>
 											</span>
@@ -252,7 +252,7 @@
 									<div class="answer">
 										<label class="label">
 											<span class="alignBox">
-												<input class="radio" type="radio" name="d${ev.idx}" value="매우우수" checked/>
+												<input class="radio" type="radio" name="d${ev.idx}" value="매우우수"/>
 								                <span class="radioimg"></span>
 								                <span class="inputTxt">매우우수</span>
 											</span>
@@ -304,7 +304,7 @@
 									<div class="answer">
 											<label class="label">
 												<span class="alignBox">
-													<input class="radio" type="radio" name="e${ev.idx}" value="매우우수" checked/>
+													<input class="radio" type="radio" name="e${ev.idx}" value="매우우수"/>
 									                <span class="radioimg"></span>
 									                <span class="inputTxt">매우우수</span>
 												</span>

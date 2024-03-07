@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
-<title>마이페이지</title>
+<title>코어솔루션 인사평가 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css"><%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testinfocss.css"> --%>
@@ -295,7 +295,7 @@
 					</c:choose>
 				</c:forEach>
 			</td>
-			<td>
+			<td>	
 				<c:forEach items="${score }" var="s">
 					<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
 				</c:forEach>
@@ -879,8 +879,9 @@
 				</c:forEach>
 			</td>
 			<td class="form_go" >
+				<div>
 				<!--  -->
-				<c:set var="asd3" value="" />
+				<c:set var="asd4" value="" />
 				<c:choose>
 					<c:when test="${scoreempty eq 0}">
 					<!-- 스코어 값이 없을 때 -->
@@ -917,6 +918,7 @@
 					</c:otherwise>
 				</c:choose>
 				<!--  -->
+				</div>
 			</td>
 		</tr>
 		<c:set var="index3" value="${index3 + 1}" />
@@ -949,8 +951,16 @@
 							</c:forEach>
 						</td>
 						<td>
-							<c:forEach items="${score }" var="s">
-								<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">${s.col3 }점</c:if>
+							<c:forEach items="${endlist}" var="e">
+								<c:forEach items="${score }" var="s">
+									<c:if test="${info.id eq s.col1 and t.id eq s.col2 }">
+										<c:choose>
+											<c:when test='${t.idx eq e.d2 and e.team eq "D" and e.ev eq "AB"}'>
+												${s.col3 }점
+											</c:when>
+										</c:choose>
+									</c:if>
+								</c:forEach>
 							</c:forEach>
 						</td>
 						<td class="form_go" >
@@ -967,7 +977,7 @@
 										<c:set var="a" value="1"/>
 										<c:forEach items="${endlist}" var="e">
 											<c:choose>
-												<c:when test="${e.d2 eq t.idx}">
+												<c:when test='${e.d2 eq t.idx and e.ev eq "AB"}'>
 													<c:set var="a" value="1"/>
 													<!-- 여기는 평가를 했을때 -->
 													<c:set var="asd4" value="true" />
@@ -983,7 +993,7 @@
 								<c:choose>
 									<c:when test="${asd4 eq true }">
 										<div class="modify-btn" onclick="formmodify(this)"
-										data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D"}'>${e.d3 }</c:if>"
+										data-d3-2="<c:if test='${t.idx eq e.d2 and e.team eq "D" }'>${e.d3 }</c:if>"
 										data-ev-2="D" data-t-idx-2="${t.idx}" data-e-idx-2="${e.d2}">수정 하기</div>
 									</c:when>
 									<c:otherwise>
@@ -1267,6 +1277,7 @@
 								<c:when test="${e.d2 eq t.idx}">
 									<c:set var="a" value="1"/>
 									<!-- 여기는 평가를 했을때 -->
+									
 									<c:set var="asd4" value="true" />
 								</c:when>
 							</c:choose>

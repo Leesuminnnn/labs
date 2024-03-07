@@ -15,9 +15,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demopwdfindcss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdfindmediacss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mobileheadercss.css?ver=022701">
-<title>비밀번호 찾기 페이지</title><!-- 
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<title>코어솔루션 인사평가 시스템</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 
 </style>

@@ -6,7 +6,7 @@ function goBack() {
 }
 </script>
 <div class="header4">
-	<div class="img_box2" onclick="location.href='${pageContext.request.contextPath}/c/CounselList.do'">
+	<div class="img_box2" onclick="location.href='${pageContext.request.contextPath}/c/CounselList2.do'">
 		<img src="${pageContext.request.contextPath}/resources/icon/arrow2.png">
 	</div>
 	<div class="con2">

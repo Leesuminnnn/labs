@@ -1039,8 +1039,8 @@ $(document).ready(function() {
 	<div style="display: flex; justify-content: space-between; margin-left: 33px;">
 	    <div style="display: flex;">
 	    	<input style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
-	    	 height: 70px; width: 200px; border-radius: 5px; font-size: 18pt; margin-right: 22px; cursor:pointer;" id="btn_save" 
-	    	 class="btn_save" type="submit" value="임시저장" onclick="javascript:alert('임시저장 완료'); window.close();">
+	    	 height: 70px; width: 200px; border-radius: 5px; font-size: 18pt; margin-right: 22px; cursor:pointer; border:none;" id="btn_save" 
+	    	 class="btn_save" type="button" value="임시저장" >
 	    	
 	    	 <!-- 
 	        <div style="display: flex; justify-content: center; align-items: center; background-color: #03a9d0; color: #ffffff; 
@@ -1087,5 +1087,13 @@ function toggleCheckbox() {
 		
 	}
 }
+$("#btn_save").click(function () {
+	console.log("클릭");
+	var frm = $("#frm");
+	var confirmation = confirm("임시저장을 하시겠습니까?");
+	if (confirmation) {
+		frm.submit();
+	}
+});
 </script>
 </html>

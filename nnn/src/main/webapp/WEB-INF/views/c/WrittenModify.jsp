@@ -538,24 +538,35 @@ border: 1px solid #c7c7c7;" >
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <script>
+function Mobile(){
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+	
+if (Mobile()){// 모바일일 경우
+	console.log("모바일");
+} else {// 모바일 외
+	console.log("PC");
+}
 // 첫번째 서명 모달
 const body = document.querySelector('body');
 const modal1 = document.querySelector('.modal1');
 const btnOpenPopup1 = document.querySelector('#end1');
 
-btnOpenPopup1.addEventListener('touchstart', () => {
-	
-	modal1.classList.toggle('show');
-
-	if (modal1.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
-});
 btnOpenPopup1.addEventListener('click', () => {
+	if (Mobile()){// 모바일일 경우
+		console.log("모바일");
+		modal1.classList.toggle('show');
+
+		if (modal1.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+	} else {// 모바일 외
+		console.log("PC");
+		alert('모바일로 접속해주세요.');
+	}
 	
-	alert('모바일로 접속해주세요.')
 });
-modal1.addEventListener('touchstart', (event) => {
+modal1.addEventListener('click', (event) => {
 	
 	
 	if (event.target === modal1) {
@@ -600,19 +611,21 @@ function closePopup1(){
 const modal2 = document.querySelector('.modal2');
 const btnOpenPopup2 = document.querySelector('#end2');
 
-btnOpenPopup2.addEventListener('touchstart', () => {
-	
-	modal2.classList.toggle('show');
-
-	if (modal2.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
-});
 btnOpenPopup2.addEventListener('click', () => {
+	if (Mobile()){// 모바일일 경우
+		console.log("모바일");
+		modal2.classList.toggle('show');
+
+		if (modal2.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+	} else {// 모바일 외
+		console.log("PC");
+		alert('모바일로 접속해주세요.');
+	}
 	
-	alert('모바일로 접속해주세요.')
 });
-modal2.addEventListener('touchstart', (event) => {
+modal2.addEventListener('click', (event) => {
 	
 	
 	if (event.target === modal2) {
@@ -658,21 +671,23 @@ function closePopup2(){
 const modal = document.querySelector('.modal');
 const btnOpenPopup = document.querySelector('#end');
 
-btnOpenPopup.addEventListener('touchstart', () => {
-	
-	modal.classList.toggle('show');
-
-	if (modal.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
-});
-
 btnOpenPopup.addEventListener('click', () => {
 	
-	alert('모바일로 접속해주세요.')
+	if (Mobile()){// 모바일일 경우
+		console.log("모바일");
+		modal.classList.toggle('show');
+
+		if (modal.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+	} else {// 모바일 외
+		console.log("PC");
+		alert('모바일로 접속해주세요.');
+	}
+	
 });
 
-modal.addEventListener('touchstart', (event) => {
+modal.addEventListener('click', (event) => {
 	
 	
 	if (event.target === modal) {
@@ -1164,9 +1179,10 @@ $(document).ready(function() {
 <footer class="normal" style="width: 1087px; margin: 0 auto; padding-top: 20px;">
 	<div style="display: flex; justify-content: space-between; margin-left: 33px;">
 	    <div style="display: flex;">
-	    	<input style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
-	    	 height: 70px; width: 200px; border-radius: 5px; font-size: 18pt; margin-right: 22px" id="btn_save" 
-	    	 class="btn_save" type="submit" value="임시저장" onclick="alert('임시저장 완료');">
+	    	<div style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
+	    	 height: 70px; width: 200px; border-radius: 5px; font-size: 18pt; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
+	    	 class="btn_save" >임시저장
+	    	 </div>
 	    	 <!-- 
 	    	 <input style="display: flex; justify-content: center; align-items: center; background-color: #03a9d0; color: #ffffff; 
 	        border-radius: 5px; height: 70px; width: 200px; font-size: 18pt;" id="btn_download" class="btn_download"type="submit" value="등록"/>
@@ -1214,5 +1230,13 @@ function toggleCheckbox() {
 		$("#cs_data_26").prop("checked", false);
 	}
 }
+$("#btn_save").click(function () {
+	console.log("클릭");
+	var frm = $("#frm");
+	var confirmation = confirm("임시저장을 하시겠습니까?");
+	if (confirmation) {
+		frm.submit();
+	}
+});
 </script>
 </html>

@@ -10,11 +10,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demologincss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0222">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/loginmediacss.css?ver=0222">
-<title>코어솔루션 인사평가 시스템</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/demofootercss.css?ver=0307">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/demologincss.css?ver=0307">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/alertcss.css?ver=0307">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/loginmediacss.css?ver=0307">
+<title>코어솔루션 전자문서 시스템</title>
 <link rel="shortcut icon" href="favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icon_ios.png">
 <link rel="icon" sizes="192x192" href="icon_android.png">
@@ -23,7 +23,7 @@
 
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/demo/loginAction" method="post" id="login_form">
+<form action="${pageContext.request.contextPath}/hwt/loginAction" method="post" id="login_form">
 	<section>
 		<%-- <div class="login-bg">
 			<div class="main">
@@ -129,7 +129,7 @@
 			<div class="main">
 				
 				<div class="login-header">
-					<span class="header-text">코어솔루션 인사평가 시스템</span>
+					<span class="header-text">코어솔루션 전자문서 시스템</span>
 				</div>
 				<div class="login-area">
 					<div class="login-content">
@@ -167,7 +167,7 @@
 									
 								</div> -->
 								<div class="pw-find">
-									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기 ></span>
+									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/hwt/Findpwd'">비밀번호 찾기 ></span>
 								</div>
 								<div class="login-btn">
 									<button type="button" id="loginbtn" style="">로그인</button>
@@ -344,12 +344,12 @@ $("#loginbtn").click(function (){
 	var InputId = $(".id").val();
 	var InputPwd = $(".pwd").val();
 	var InputName = $(".name").val();
-	var link = "${pageContext.request.contextPath}/demo/Info/${info.idx}"
+	var link = "${pageContext.request.contextPath}/hwt/CounselList"
 	console.log("pwd : "+InputPwd);
 	console.log("name : "+InputName);
 	$.ajax({
 		type : 'post',
-		url : '${pageContext.request.contextPath}/demo/loginAction',
+		url : '${pageContext.request.contextPath}/hwt/loginAction',
 		datatype : 'json',
 		data : {
 			"id" : InputId,
@@ -362,7 +362,7 @@ $("#loginbtn").click(function (){
 			if (res === "0") {
 				// DB에 정보 없음
 				modal.classList.toggle('show');
-				msg.innerHTML = '<p>2023년도 직원근무평가 대상직원이 아닙니다.</p>'
+				msg.innerHTML = '<p>사번과 비밀번호를 확인해주세요.</p>'
 
 				console.log(0);
 			} else if (res === "1") {
@@ -389,9 +389,9 @@ $("#loginbtn").click(function (){
 				// 로그인 성공
 				idx = response.idx;
 				if (idx == 635) {
-					location.href = "${pageContext.request.contextPath}/demo/admin";
+					location.href = "${pageContext.request.contextPath}/hwt/admin";
 				} else {
-					location.href = "${pageContext.request.contextPath}/demo/Info/"+idx;
+					location.href = "${pageContext.request.contextPath}/hwt/CounselList";
 				}
 				
 				console.log(4);
@@ -432,7 +432,7 @@ function closePopup2(){
 	}
 }
 function pwdlink() {
-	var link = "${pageContext.request.contextPath}/demo/Pwd/"+idx;
+	var link = "${pageContext.request.contextPath}/hwt/Pwd/"+idx;
 	location.href = link;
 }
 function reset() {

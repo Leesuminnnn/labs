@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demofootercss.css?ver=0222">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoformcss.css?ver=0222">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/formmediacss.css?ver=0222">
-<title>근무평가</title>
+<title>코어솔루션 인사평가 시스템</title>
 <style>
 </style>
 </head>

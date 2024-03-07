@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "hwt">
+
+
+	<select id="noticeselect" resultType="map" parameterType="map">
+		select * from demo_notice where d1 = 1
+	</select>
+	
+	<select id="info" resultType="users" parameterType="int">
+		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
+		from demo_users where idx=#{idx}
+	</select>
+	
+	<select id="info2" resultType="users" parameterType="users">
+		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
+		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
+		from demo_users where id=#{id}
+	</select>
+	
+	<select id="dbcheck" parameterType="users" resultType="int">
+		select count(*) from demo_users where id = #{id}
+	</select>
+	
+	<select id="login" parameterType="users" resultType="int">
+		select count(*) from
+		demo_users
+		where id = #{id} and 
+		<choose>
+			<when test="name == null">
+			pwd = #{pwd}
+			</when>
+			<when test="pwd == null">
+			name = #{name}
+			</when>
+		</choose>
+	</select>
+		
+	<!-- 로그인 기록 저장 -->
+	<insert id="loginlog" parameterType="loginlog">
+		insert into demo_loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
+	</insert>
+
+
+	<select id="cslist" resultType="writtenVo">
+		select 
+		cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,
+		cs_data_09, cs_data_10, cs_data_11, cs_data_12, cs_data_13, cs_data_14, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19,
+		 cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30,
+		  DATE_FORMAT(cs_data_31, '%Y.%m.%d') AS cs_data_31, cs_data_32
+		 from csworktools.cs_data 
+		<!-- 최근 일주일 데이터 -->
+		WHERE YEARWEEK(cs_data_31) = YEARWEEK(NOW()) 
+		
+		order by cs_idx desc
+		
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="cslistsearchCnt" resultType="int">
+		select count(*) from csworktools.cs_data 
+		
+		
+		
+	</select>
+	
+	
+	<select id="cslistsearch" resultType="writtenVo" parameterType="writtenVo">
+		select 	
+		cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,
+		cs_data_09, cs_data_10, cs_data_11, cs_data_12, cs_data_13, cs_data_14, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19,
+		cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30, 
+		DATE_FORMAT(cs_data_31, '%Y.%m.%d') AS cs_data_31, cs_data_32
+		
+		from csworktools.cs_data 
+		
+		
+		order by cs_idx desc
+	</select>
+	
+	<insert id="insert" parameterType="writtenVo">
+		insert into csworktools.cs_data (cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,
+		cs_data_09, cs_data_10, cs_data_11, cs_data_12, cs_data_13, cs_data_14, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19,
+		 cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30,
+		 cs_data_32
+		) values(#{cs_data_01}, #{cs_data_02}, #{cs_data_03}, #{cs_data_04}, #{cs_data_05}, #{cs_data_06}, #{cs_data_07}, #{cs_data_08}, 
+		#{cs_data_09}, #{cs_data_10}, #{cs_data_11}, #{cs_data_12}, #{cs_data_13}, #{cs_data_14}, #{cs_data_15}, #{cs_data_16}, #{cs_data_17}, 
+		#{cs_data_18}, #{cs_data_19}, #{cs_data_20}, #{cs_data_21}, #{cs_data_22}, #{cs_data_23}, #{cs_data_24}, #{cs_data_25}, #{cs_data_26}, 
+		#{cs_data_27}, #{cs_data_28}, #{cs_data_29}, 1, 1)
+	</insert>
+	
+	<select id="selectone" resultType="writtenVo">
+		select * from csworktools.cs_data where cs_idx = #{cs_idx}
+	</select>
+	
+	<select id="Cnt" resultType="int">
+		select count(*) from csworktools.cs_data WHERE YEARWEEK(cs_data_31) = YEARWEEK(NOW())
+	</select>
+	
+	<update id="update">
+	update csworktools.cs_data set cs_data_30 = 2, cs_data_31 = now() where cs_idx = #{cs_idx}
+	</update>
+	
+	<update id="modify">
+		update csworktools.cs_data set 
+		cs_data_01 = #{cs_data_01}, cs_data_02 = #{cs_data_02}, cs_data_03 = #{cs_data_03}, cs_data_04 = #{cs_data_04}, 
+		cs_data_05 = #{cs_data_05}, cs_data_06 = #{cs_data_06}, cs_data_07 = #{cs_data_07}, cs_data_08 = #{cs_data_08},
+		cs_data_09 = #{cs_data_09}, cs_data_10 = #{cs_data_10}, cs_data_11 = #{cs_data_11}, cs_data_12 = #{cs_data_12}, cs_data_13 = #{cs_data_13}, 
+		cs_data_14 = #{cs_data_14},	cs_data_15 = #{cs_data_15}, cs_data_16 = #{cs_data_16}, cs_data_17 = #{cs_data_17}, cs_data_18 = #{cs_data_18}, 
+		cs_data_19 = #{cs_data_19}, cs_data_20 = #{cs_data_20}, cs_data_21 = #{cs_data_21}, cs_data_22 = #{cs_data_22}, cs_data_23 = #{cs_data_23}, 
+		cs_data_24 = #{cs_data_24},	cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
+		cs_data_29 = #{cs_data_29}, cs_data_30 = 1 where cs_idx = #{cs_idx}
+	</update>
+	
+	
+</mapper>

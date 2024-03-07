@@ -18,8 +18,9 @@
 </script>
 </head>
 <body>
+<%-- 
 <img src="${pageContext.request.contextPath}/resources/icon/arrow2.png" style="position: absolute; top: 10px; left: 10px;">
 <img src="data:image/png;base64,${imageData}" alt="image">
-
+ --%>
 </body>
 </html>

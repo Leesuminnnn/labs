@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/CounselListcss.css?after">
-<title>List</title>
+<title>전자문서 검색</title>
 
 <style>
 .white-link {
@@ -111,7 +111,7 @@
 									<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/c/WrittenModify.do/${list.cs_idx}'">서명</div>
 								</c:when>
 								<c:otherwise>
-									<div class="sb flex flex-center" style="cursor: pointer; margin-right: 5px;" onclick="location.href='${pageContext.request.contextPath}/c/WrittenView.do/${list.cs_idx}'">보기</div>
+									<div class="sb flex flex-center" style="cursor: pointer; margin-right: 5px;" onclick="window.open('${pageContext.request.contextPath}/c/WrittenView.do/${list.cs_idx}')">보기</div>
 									<div class="sb flex flex-center" style="cursor: pointer; margin-left: 5px;">
 									<a download="${list.cs_idx}" href="${pageContext.request.contextPath}/c/WrittenView.do/${list.cs_idx}" >
 									<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 50px; vertical-align: middle;">
