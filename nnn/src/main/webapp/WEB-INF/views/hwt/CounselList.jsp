@@ -14,6 +14,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/CounselListcss.css?0307">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/demoheadercss.css?after">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>전자문서 검색</title>
 
 <style>

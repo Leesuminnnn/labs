@@ -10,6 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testlogin.css?ver4">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>테스트로그인페이지</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>

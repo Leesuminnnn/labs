@@ -55,6 +55,9 @@
 		<typeAlias alias="medi" type="com.nnn.app.vo.Mediplat"/>
 		<typeAlias alias="medimenu" type="com.nnn.app.vo.MediplatMenu"/>
 		
+		<!-- 전자문서 -->
+		<typeAlias alias="access" type="com.nnn.app.vo.Access"/>
+		
 	</typeAliases>  
 
 </configuration>  

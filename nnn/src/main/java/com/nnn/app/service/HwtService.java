@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.nnn.app.dao.HwtDao;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WrittenVo;
 
@@ -90,5 +91,82 @@ public class HwtService {
 
 	public void modify(WrittenVo vo) {
 		hwtDao.modify(vo);
+	}
+	public List<UsersVo> users(Map<String, Object> map) {
+		return hwtDao.users(map);
+	}
+
+	public List<UsersVo> users1(Map<String, Object> map) {
+		return 
+				hwtDao.users1(map);
+	}
+	public List<UsersVo> users1pwd(Map<String, Object> map) {
+		return hwtDao.users1pwd(map);
+	}
+	
+	public List<UsersVo> users2(Map<String, Object> map) {
+		return hwtDao.users2(map);
+	}
+	
+	public List<UsersVo> users2pwd(Map<String, Object> map) {
+		return hwtDao.users2pwd(map);
+	}
+	
+	public List<UsersVo> users3(Map<String, Object> map) {
+		return hwtDao.users3(map);
+	}
+	
+	public List<UsersVo> users3pwd(Map<String, Object> map) {
+		return hwtDao.users3pwd(map);
+	}
+
+	public List<UserPh> ph(Map<String, Object> map) {
+		return hwtDao.ph(map);
+	}
+
+	public int hsptselect1(Map<String, Object> map) {
+		return hwtDao.hsptselect1(map);
+	}
+
+	public int hsptselect2(Map<String, Object> map) {
+		return hwtDao.hsptselect2(map);
+	}
+
+	public int hsptselect3(Map<String, Object> map) {
+		return hwtDao.hsptselect3(map);
+	}
+
+	public int hsptpwdselect1(Map<String, Object> map) {
+		return hwtDao.hsptselectpwd1(map);
+	}
+	public int hsptpwdselect2(Map<String, Object> map) {
+		return hwtDao.hsptselectpwd2(map);
+	}
+	public int hsptpwdselect3(Map<String, Object> map) {
+		return hwtDao.hsptselectpwd3(map);
+	}
+
+	public int pwdreset(Map<String, Object> map) {
+		int flag = 0;
+		flag = hwtDao.pwdreset(map);
+		return flag;
+	}
+	public int pwdreset1(Map<String, Object> map) {
+		int flag = 0;
+		flag = hwtDao.pwdreset1(map);
+		return flag;
+	}
+	public int pwdreset2(Map<String, Object> map) {
+		int flag = 0;
+		flag = hwtDao.pwdreset2(map);
+		return flag;
+	}
+	public int pwdreset3(Map<String, Object> map) {
+		int flag = 0;
+		flag = hwtDao.pwdreset3(map);
+		return flag;
+	}
+	public List<UsersVo> setting(Map<String, Object> map) {
+		return hwtDao.setting(map);
 	}
 }

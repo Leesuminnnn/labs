@@ -27,12 +27,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.HwtService;
 import com.nnn.app.service.ImageService;
+import com.nnn.app.vo.AjaxResponse20;
+import com.nnn.app.vo.AjaxResponse4;
 import com.nnn.app.vo.AjaxResponse6;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.ImageEntity;
 import com.nnn.app.vo.LoginAjaxResponse;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.Paging;
+import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WrittenVo;
 
@@ -79,10 +82,10 @@ public class HwtController {
         String cryptogram = aes128.encrypt(password); 
 //        System.out.println(cryptogram);
         // 암호화된 비밀번호로 DB와 일치하는지 체크
-        if(vo.getPwd() != null) {
-     		vo.setPwd(cryptogram);
-     		System.out.println(vo.getPwd());
-        }
+//        if(vo.getPwd() != null) {
+//     		vo.setPwd(cryptogram);
+//     		System.out.println(vo.getPwd());
+//        }
  		//비밀번호 일치 여부
 		System.out.println("#########################################");
 		int loginMember = hwtService.login(vo);
@@ -166,6 +169,24 @@ public class HwtController {
 		return mav;
 
 	}
+
+	@ResponseBody
+	@RequestMapping(value="usersAll")
+	public AjaxResponse4 usersall(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse4 response = new AjaxResponse4();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UsersVo> list = hwtService.users(map);
+		request.setAttribute("users", list);
+		response.setUsersall(list);
+
+		List<UserPh> ph = hwtService.ph(map);
+		request.setAttribute("ph", ph);
+		response.setUserphList(ph);
+		
+		return response;
+	}
+	
 	@RequestMapping(value = "/WrittenView/{cs_idx}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
 	@ResponseBody
 	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response, ImageEntity image) throws IOException {
@@ -1442,46 +1463,58 @@ public class HwtController {
 		return "redirect:/hwt/CounselList2";
 	}
 	
-//
-//	@RequestMapping(value="admin")
-//	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		Map<String, Object> map2 = new HashMap<String, Object>();
-//		List<UsersVo> list = demoService.users(map);
-//		
-//		
-//		int hspt1 = demoService.hsptselect1(map);
-//
-//		int hsptpwdselect1 = demoService.hsptpwdselect1(map);
-//		
-//		mv.addObject("users", list);
-//		request.setAttribute("users", list);
-//		
-//		
-//		mv.addObject("h1", hspt1);
-//		mv.addObject("p1", hsptpwdselect1);
-//		request.setAttribute("h1", hspt1);
-//		request.setAttribute("p1", hsptpwdselect1);
-//		
-//		mv.setViewName("demo/admin");
-//		return mv;
-//	}
-//	@ResponseBody
-//	@RequestMapping(value="pwdreset/{id}")
-//	public AjaxResponse6 demopwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
-//		System.out.println("비밀번호 초기화.... 대상 : "+id);
-//		AjaxResponse6 response = new AjaxResponse6();
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("id", id);
-//		int flag = demoService.pwdreset(map);
-//		
-//		if(flag == 1) {
-//			response.setResult("Y");
-//			return response;
-//		}else {
-//			response.setResult("N");
-//			return response;
-//		}
-//	}
 
+	@RequestMapping(value="admin")
+	public ModelAndView admin(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		List<UsersVo> list = hwtService.users(map);
+		
+		
+		int hspt1 = hwtService.hsptselect1(map);
+
+		int hsptpwdselect1 = hwtService.hsptpwdselect1(map);
+		
+		mv.addObject("users", list);
+		request.setAttribute("users", list);
+		
+		
+		mv.addObject("h1", hspt1);
+		mv.addObject("p1", hsptpwdselect1);
+		request.setAttribute("h1", hspt1);
+		request.setAttribute("p1", hsptpwdselect1);
+		
+		mv.setViewName("hwt/admin");
+		return mv;
+	}
+	@ResponseBody
+	@RequestMapping(value="pwdreset/{id}")
+	public AjaxResponse6 demopwdreset(HttpSession session, HttpServletRequest request, @PathVariable(name="id") int id) throws Exception {
+		System.out.println("비밀번호 초기화.... 대상 : "+id);
+		AjaxResponse6 response = new AjaxResponse6();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		int flag = hwtService.pwdreset(map);
+		
+		if(flag == 1) {
+			response.setResult("Y");
+			return response;
+		}else {
+			response.setResult("N");
+			return response;
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value="setting")
+	public AjaxResponse20 setting(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse20 response = new AjaxResponse20();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<UsersVo> list = hwtService.setting(map);
+		response.setUsers(list);
+		
+		return response;
+	}
 }

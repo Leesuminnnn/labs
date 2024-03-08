@@ -10,6 +10,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0227">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <%-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1" >
@@ -219,25 +222,55 @@ tbody td::before {
 	-o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
 }
+
+.setting-area {
+	height: 100%;
+	padding: 5px;
+}
+.setting-zone {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.setting-left {
+	height: 100%;
+    background: #fff;
+    width: 45%;
+    border: 1px solid #eaeaea;
+}
+.setting-center {
+	height: 100%;
+	width: 10%;
+}
+.setting-right {
+    height: 100%;
+    background: #fff;
+    width: 45%;
+    border: 1px solid #eaeaea;
+}
+section {
+	height: calc(100vh - 62px);
+}
 </style>
 </head>
 <body>
 <form id="frm">
-<jsp:include page="../demo/header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 
 <section style="display: flex; margin-top: 62px;"> 
 	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
 		<div class="nav__link active" data-menu="userall" data-content="all">
 			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png">
 			<span>직원DB설정</span>
-		</div>
+		</div><%-- 
 		<div class="nav__link" data-menu="perall" data-content="all"  style="">
 			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
 			<span>인사평가 관리</span>
-		</div>
+		</div> --%>
 		<div class="nav__link" data-menu="setting" data-content="all" >
 			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
-			<span>설정</span>
+			<span>접근권한관리</span>
 		</div>
 	</div>
 <%--
@@ -352,8 +385,7 @@ tbody td::before {
 							<td>${u.hspt_position }</td>
 							
 							<td>
-								<c:set var="targetfirstName" value="${fn:substring(u.name, 0, 1)}" />
-	    						${targetfirstName }ㅇㅇ
+								${u.name }
 								
 							</td>
 							<td>
@@ -585,7 +617,7 @@ function userall(contentId) {
 	if (contentId === 'all') {
 	      
 	      $.ajax({
-	         url: '${pageContext.request.contextPath}/demo/usersAll',
+	         url: '${pageContext.request.contextPath}/hwt/usersAll',
 	         type: 'GET',
 	         dataType: 'json',
 	         success: function(response) {
@@ -654,7 +686,7 @@ function userall(contentId) {
 		 					var id = list.id;
 		 					var position = list.hspt_position;
 		 					var name = list.name;
-		 					var modifiedName = name.charAt(0) + "ㅇㅇ";
+// 		 					var modifiedName = name.charAt(0) + "ㅇㅇ";
 		 					
 		 					var tr = document.createElement("TR");
 		 					if(!list.pwd){
@@ -669,7 +701,7 @@ function userall(contentId) {
 		 					var tdpo = document.createElement("TD");
 		 					tdpo.textContent = position;
 		 					var tdname = document.createElement("TD");
-		 					tdname.textContent = modifiedName;
+		 					tdname.textContent = name;
 		 					var url = "<%=request.getContextPath() %>/demo/Info/"+idx;
 		 					tdname.setAttribute("onclick","location.href='" + url + "'");
 		 					tdname.setAttribute("style", "cursor:pointer;");
@@ -2005,7 +2037,7 @@ function per3() {
 // 설정관리
 function setting() {
 	$.ajax({
-		url: '${pageContext.request.contextPath}/demo/setting',
+		url: '${pageContext.request.contextPath}/hwt/setting',
 		type: 'GET',
 		dataType: 'json',
 		success: function(res) {
@@ -2019,111 +2051,27 @@ function setting() {
 //  				console.log(user);
 //  				console.log(userop);
  				const dv = document.createElement("div");
- 				dv.setAttribute("style","font-size: 14px; margin: 10px; display: flex; justify-content: center; flex-direction: column;");
+ 				dv.setAttribute('class', 'setting-area');
  				mainContent.appendChild(dv);
-				
- 				const dv2 = document.createElement("div");
- 				dv2.setAttribute("style","margin: 15px 0 15px 20px; display: flex; justify-content: flex-start;");
- 				dv2.setAttribute("id", "nav");
- 				dv.appendChild(dv2);
  				
- 				const dv3 = document.createElement("div");
- 				dv3.textContent = " 직원명부 ";
- 				dv3.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv3.setAttribute("class", "set_menu select");
- 				dv3.setAttribute("onclick","set1();");
- 				dv3.setAttribute("id","set_menu1");
- 				const dv4 = document.createElement("div");
- 				dv4.textContent = " 직원별 변수 설정 ";
- 				dv4.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv4.setAttribute("class", "set_menu");
- 				dv4.setAttribute("onclick","set2();");
- 				dv4.setAttribute("id","set_menu2");
- 				const dv5 = document.createElement("div");
- 				dv5.textContent = " 부서 설정 ";
- 				dv5.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv5.setAttribute("class", "set_menu");
- 				dv5.setAttribute("onclick","set3();");
- 				dv5.setAttribute("id","set_menu3");
-				dv2.appendChild(dv3);
- 				dv2.appendChild(dv4);
- 				dv2.appendChild(dv5);
+ 				const dv02 = document.createElement("div");
+ 				dv02.setAttribute('class','setting-zone');
  				
- 				const maindiv = document.createElement("div");
- 				maindiv.setAttribute("id","maindiv");
- 				const tb = document.createElement("TABLE");
- 				tb.setAttribute("class","st_tb");
- 				dv.appendChild(maindiv);
- 				maindiv.appendChild(tb);
-				
-
-				const thead = document.createElement("THEAD");
-				const tr1 = document.createElement("TR");
-				const td1 = document.createElement("TD");
- 				td1.textContent = "기관명";
- 				const td2 = document.createElement("TD");
- 				td2.textContent = "소속기관명";
- 				const td3 = document.createElement("TD");
- 				td3.textContent = "부서명";
- 				const td4 = document.createElement("TD");
- 				td4.textContent = "사원번호";
- 				const td5 = document.createElement("TD");
- 				td5.textContent = "직급/직책";
- 				const td6 = document.createElement("TD");
- 				td6.textContent = "사원명";
- 				const td7 = document.createElement("TD");
- 				td7.textContent = "입사일자";
- 				const td8 = document.createElement("TD");
- 				td8.textContent = "퇴사일자";
- 				const td9 = document.createElement("TD");
- 				td9.textContent = "연락처";
+ 				const dv03 = document.createElement("div");
+ 				dv03.setAttribute('class', 'setting-left');
  				
- 				tb.appendChild(thead);
- 				thead.appendChild(tr1);
- 				tr1.appendChild(td1);
- 				tr1.appendChild(td2);
- 				tr1.appendChild(td3);
- 				tr1.appendChild(td4);
- 				tr1.appendChild(td5);
- 				tr1.appendChild(td6);
- 				tr1.appendChild(td7);
- 				tr1.appendChild(td8);
- 				tr1.appendChild(td9);
+ 				const dv04 = document.createElement("div");
+ 				dv04.setAttribute('class', 'setting-right');
+ 				
+ 				const dv05 = document.createElement("div");
+ 				dv05.setAttribute('class', 'setting-center');
+ 				
+ 				dv.appendChild(dv02);
+ 				dv02.appendChild(dv03);
+ 				dv02.appendChild(dv05);
+ 				dv02.appendChild(dv04);
+ 				
 				
- 				$.each (user, function (index, u) {
- 					const tr = document.createElement("TR");
- 					
- 					const td1 = document.createElement("TD");
-					td1.textContent = u.c_name;
-					const td2 = document.createElement("TD");
-	 				td2.textContent = u.c_name2;
-	 				const td3 = document.createElement("TD");
-	 				td3.textContent = u.subname;
-	 				const td4 = document.createElement("TD");
-	 				td4.textContent = u.id;
-	 				const td5 = document.createElement("TD");
-	 				td5.textContent = u.position;
-	 				const td6 = document.createElement("TD");
-	 				td6.textContent = u.name;
-	 				const td7 = document.createElement("TD");
-	 				td7.textContent = u.reg_date[0]+"년 "+u.reg_date[1]+"월 "+u.reg_date[2]+"일";
-	 				const td8 = document.createElement("TD");
-	 				td8.textContent = u.end_date;
-	 				const td9 = document.createElement("TD");
-	 				td9.textContent = u.phone;
-	 				tr.appendChild(td1);
-					tr.appendChild(td2);
-					tr.appendChild(td3);
-					tr.appendChild(td4);
-					tr.appendChild(td5);
-					tr.appendChild(td6);
-					tr.appendChild(td7);
-					tr.appendChild(td8);
-					tr.appendChild(td9);
-					
-					tb.appendChild(tr);
-					
- 				});
  				
 			}
 		},
@@ -2229,9 +2177,6 @@ const menuScripts = [
 	{ id: 'per3', contentId: 'content3', script: per3 },
 	{ id: 'perall', contentId: 'all', script: perall },
 	{ id: 'setting', contentId: 'all', script: setting },
-	{ id: 'evSetting', contentId: 'all', script: evSetting },
-	{ id: 'evCreate', contentId: 'all', script: evCreate },
-	{ id: 'evSelect', contentId: 'all', script: evSelect },
 ];
 function activateMenu(menuIndex) {
 
@@ -2249,21 +2194,14 @@ function activateMenu(menuIndex) {
 	// Check if the 'icon-image' class exists in the menuLink
 	const iconImage1 = menuLinks[0].querySelector('.icon-image');
 	const iconImage2 = menuLinks[1].querySelector('.icon-image');
-	const iconImage3 = menuLinks[2].querySelector('.icon-image');
 	if (iconImage1) {
 		// Set the image source based on the 'active' class
 		if(menuIndex == 0){
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png";
-			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png";
-			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
 		}else if (menuIndex == 1){
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
-			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_on.png";
-			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
-		}else if (menuIndex == 2) {
-			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
-			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png";
-			iconImage3.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png"
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png";
 		}
 	}
 
@@ -2300,624 +2238,10 @@ function findStr() {
     }
 }
 
-function set1(){
-	setting();
-}
-
-function set2(){
-	var maindiv = document.getElementById("maindiv");
-	var dv3 = document.querySelector("#set_menu1");
-	var dv4 = document.querySelector("#set_menu2");
-	var dv5 = document.querySelector("#set_menu3");
-	dv3.classList.remove('select');
-	dv5.classList.remove('select');
-	dv4.classList.add('select');
-	
-	const nav = document.getElementById("nav");
-	$.ajax({
-		url: '${pageContext.request.contextPath}/demo/setting',
-		type: 'GET',
-		dataType: 'json',
-		success: function (res) {
-			if(res.result === "Y") {
-				maindiv.innerHTML = "";
-				const user = res.user;
-				// 중복을 제거하고 배열로
-				const uniqueValues = Array.from(new Set(user.map(u => u.c_name)));
-// 				console.log(uniqueValues);
-				const divContainer = document.createElement('div');
-				divContainer.setAttribute("style", "display: flex; justify-content: flex-start; margin-bottom: 10px;")
-				// 배열의 각 요소를 <div>로 묶음
-				let indexOf = 1;
-				uniqueValues.forEach(value => {
-				    const div = document.createElement('div');
-				    div.textContent = value;
-				    div.setAttribute("style", "margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
-				    // 배열에 id부여
-				    div.setAttribute("id", "unq"+indexOf);
-				    div.setAttribute("onclick", "unq"+indexOf+"()");
-				    divContainer.appendChild(div);
-				    indexOf += 1;
-				});
-				
-				maindiv.appendChild(divContainer);
-				nav.innerHTML = "";
-				
-				const dv3 = document.createElement("div");
- 				dv3.textContent = " 직원명부 ";
- 				dv3.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv3.setAttribute("class", "set_menu");
- 				dv3.setAttribute("onclick","set1();");
- 				dv3.setAttribute("id","set_menu1");
- 				const dv4 = document.createElement("div");
- 				dv4.textContent = " 직원별 변수 설정 ";
- 				dv4.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv4.setAttribute("class", "set_menu select");
- 				dv4.setAttribute("onclick","set2();");
- 				dv4.setAttribute("id","set_menu2");
- 				const dv5 = document.createElement("div");
- 				dv5.textContent = " 부서 설정 ";
- 				dv5.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv5.setAttribute("class", "set_menu");
- 				dv5.setAttribute("onclick","set3();");
- 				dv5.setAttribute("id","set_menu3");
-				nav.appendChild(dv3);
- 				nav.appendChild(dv4);
- 				nav.appendChild(dv5);
-				
-				const btn = document.createElement('div');
-				btn.setAttribute("style", "border: 1px solid #ddd; border-radius: 25px; background: #eaeaea; padding: 15px; cursor: pointer;");
-				btn.setAttribute("onclick", "modify();");
-				btn.textContent = "수정";
-				nav.appendChild(btn);
-				const tb = document.createElement("TABLE");
- 				tb.setAttribute("class","st_tb");
- 				maindiv.appendChild(tb);
-				
- 				const thead = document.createElement("THEAD");
-				const tr1 = document.createElement("TR");
-				const td1 = document.createElement("TD");
- 				td1.textContent = "기관명";
- 				const td2 = document.createElement("TD");
- 				td2.textContent = "소속기관명";
- 				const td3 = document.createElement("TD");
- 				td3.textContent = "부서명";
- 				const td4 = document.createElement("TD");
- 				td4.textContent = "사원번호";
- 				const td5 = document.createElement("TD");
- 				td5.textContent = "직급/직책";
- 				const td6 = document.createElement("TD");
- 				td6.textContent = "사원명";
- 				const td7 = document.createElement("TD");
- 				td7.textContent = "경혁팀장여부";
- 				const td8 = document.createElement("TD");
- 				td8.textContent = "경혁팀여부";
- 				const td9 = document.createElement("TD");
- 				td9.textContent = "부서장여부";
- 				const td10 = document.createElement("TD");
- 				td10.textContent = "1인부서여부";
- 				const td11 = document.createElement("TD");
- 				td11.textContent = "진료팀장여부";
- 				const td12 = document.createElement("TD");
- 				td12.textContent = "진료부여부";
- 				const td13 = document.createElement("TD");
- 				td13.textContent = "평가제외여부";
- 				
- 				tb.appendChild(thead);
- 				thead.appendChild(tr1);
- 				tr1.appendChild(td1);
- 				tr1.appendChild(td2);
- 				tr1.appendChild(td3);
- 				tr1.appendChild(td4);
- 				tr1.appendChild(td5);
- 				tr1.appendChild(td6);
- 				tr1.appendChild(td7);
- 				tr1.appendChild(td8);
- 				tr1.appendChild(td9);
- 				tr1.appendChild(td10);
- 				tr1.appendChild(td11);
- 				tr1.appendChild(td12);
- 				tr1.appendChild(td13);
- 				
- 				$.each (user, function (index, u) {
- 					const tr = document.createElement("TR");
- 					
- 					const td1 = document.createElement("TD");
-					td1.textContent = u.c_name;
-					const td2 = document.createElement("TD");
-	 				td2.textContent = u.c_name2;
-	 				const td3 = document.createElement("TD");
-	 				td3.textContent = u.subname;
-	 				const td4 = document.createElement("TD");
-	 				td4.textContent = u.id;
-	 				const td5 = document.createElement("TD");
-	 				td5.textContent = u.position;
-	 				const td6 = document.createElement("TD");
-	 				td6.textContent = u.name;
-	 				const td7 = document.createElement("TD");
-	 				const input7 = document.createElement("input");
-	 				input7.setAttribute("type", "checkbox");
-	 				input7.setAttribute("disabled", "disabled");
-	 				if(u.k == 'T'){
-	 					input7.setAttribute("checked", "checked");
-	 				}
-	 				td7.appendChild(input7);
-	 				const td8 = document.createElement("TD");
-	 				const input8 = document.createElement("input");
-	 				input8.setAttribute("type", "checkbox");
-	 				input8.setAttribute("disabled", "disabled");
-	 				if(u.v == 'T'){
-	 					input8.setAttribute("checked", "checked");
-	 				}
-	 				td8.appendChild(input8);
-	 				const td9 = document.createElement("TD");
-	 				const input9 = document.createElement("input");
-	 				input9.setAttribute("type", "checkbox");
-	 				input9.setAttribute("disabled", "disabled");
-	 				if(u.b == 'T'){
-	 					input9.setAttribute("checked", "checked");
-	 				}
-	 				td9.appendChild(input9);
-	 				const td10 = document.createElement("TD");
-	 				const input10 = document.createElement("input");
-	 				input10.setAttribute("type", "checkbox");
-	 				input10.setAttribute("disabled", "disabled");
-	 				if(u.x == 'T'){
-	 					input10.setAttribute("checked", "checked");
-	 				}
-	 				td10.appendChild(input10);
-	 				const td11 = document.createElement("TD");
-	 				const input11 = document.createElement("input");
-	 				input11.setAttribute("type", "checkbox");
-	 				input11.setAttribute("disabled", "disabled");
-	 				if(u.z == 'T'){
-	 					input11.setAttribute("checked", "checked");
-	 				}
-	 				td11.appendChild(input11);
-	 				const td12 = document.createElement("TD");
-	 				const input12 = document.createElement("input");
-	 				input12.setAttribute("type", "checkbox");
-	 				input12.setAttribute("disabled", "disabled");
-	 				if(u.a == 'T'){
-	 					input12.setAttribute("checked", "checked");
-	 				}
-	 				td12.appendChild(input12);
-	 				const td13 = document.createElement("TD");
-	 				const input13 = document.createElement("input");
-	 				input13.setAttribute("type", "checkbox");
-	 				input13.setAttribute("disabled", "disabled");
-	 				if(u.del_yn == 'Y'){
-	 					input13.setAttribute("checked", "checked");
-	 				}
-	 				td13.appendChild(input13);
-	 				
-	 				tr.appendChild(td1);
-					tr.appendChild(td2);
-					tr.appendChild(td3);
-					tr.appendChild(td4);
-					tr.appendChild(td5);
-					tr.appendChild(td6);
-	 				tr.appendChild(td7);
-	 				tr.appendChild(td8);
-	 				tr.appendChild(td9);
-	 				tr.appendChild(td10);
-	 				tr.appendChild(td11);
-	 				tr.appendChild(td12);
-	 				tr.appendChild(td13);
-					
-					tb.appendChild(tr);
-					
- 				});
-			}
-		},
-		error: function (error) {
-			console.error('Error fetching data:', error);
-		}
-	});
-	
-}
-
-function set3(){
-	var maindiv = document.getElementById("maindiv");
-	var dv3 = document.querySelector("#set_menu1");
-	var dv4 = document.querySelector("#set_menu2");
-	var dv5 = document.querySelector("#set_menu3");
-	dv3.classList.remove('select');
-	dv5.classList.add('select');
-	dv4.classList.remove('select');
-	const nav = document.getElementById("nav");
-	$.ajax({
-		url: '${pageContext.request.contextPath}/e/setting',
-		type: 'GET',
-		dataType: 'json',
-		success: function (res) {
-			if(res.result === "Y") {
-				
-				maindiv.innerHTML = "";
-				const sub = res.sub;
-
-				nav.innerHTML = "";
-
-				const dv3 = document.createElement("div");
- 				dv3.textContent = " 직원명부 ";
- 				dv3.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv3.setAttribute("class", "set_menu");
- 				dv3.setAttribute("onclick","set1();");
- 				dv3.setAttribute("id","set_menu1");
- 				const dv4 = document.createElement("div");
- 				dv4.textContent = " 직원별 변수 설정 ";
- 				dv4.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv4.setAttribute("class", "set_menu");
- 				dv4.setAttribute("onclick","set2();");
- 				dv4.setAttribute("id","set_menu2");
- 				const dv5 = document.createElement("div");
- 				dv5.textContent = " 부서 설정 ";
- 				dv5.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				dv5.setAttribute("class", "set_menu select");
- 				dv5.setAttribute("onclick","set3();");
- 				dv5.setAttribute("id","set_menu3");
- 				const dv6 = document.createElement("div");
- 				dv6.textContent = " + 생성하기 ";
- 				dv6.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
-				dv6.setAttribute("onclick", "create_sub();");
-				dv6.setAttribute("id", "createsub");
- 				nav.appendChild(dv3);
- 				nav.appendChild(dv4);
- 				nav.appendChild(dv5);
- 				nav.appendChild(dv6);
- 				
- 				const tb = document.createElement("TABLE");
- 				maindiv.appendChild(tb);
- 				const thead = document.createElement("THEAD");
- 				const tr1 = document.createElement("TR");
-				const td1 = document.createElement("TD");
- 				td1.textContent = "부서명";
- 				const td2 = document.createElement("TD");
- 				td2.textContent = "부서코드명";
-
- 				tb.appendChild(thead);
- 				thead.appendChild(tr1);
- 				tr1.appendChild(td1);
- 				tr1.appendChild(td2);
- 				$.each (sub, function (index, s) {
- 					const tr = document.createElement("TR");
- 					const td1 = document.createElement("TD");
-					td1.textContent = s.subname;
-					const td2 = document.createElement("TD");
-	 				td2.textContent = s.subcode;
-
-					tb.appendChild(tr);
-	 				tr.appendChild(td1);
-					tr.appendChild(td2);
- 				});
-				
-			}
-		},
-		error: function (error) {
-			console.error('Error fetching data:', error);
-		}
-	});
-}
 
 let index = 1;
 
-function add(){
-	var maindiv = document.getElementById("maindiv");
-	
-	$.ajax({
-		url: '${pageContext.request.contextPath}/e/add',
-		type: 'GET',
-		dataType: 'json',
-		success: function(res) {
-			if(res.result === 'Y'){
-				const div = document.createElement('div');
-				const div2 = document.createElement('div');
-				const input = document.createElement('input');
-				
-				input.setAttribute("id", "col"+index);
-				maindiv.appendChild(div);
-				div.appendChild(div2);
-				div2.appendChild(input);
-				index += 1;
-				console.log(index);
-			}
-		},
-		error: function (error) {
-			console.error('Error fetching data:', error);
-		}
-	});
-}
 
-
-
-function addcol() {
-	var maindiv = document.getElementById("maindiv");
-	$.ajax({
-		url: '${pageContext.request.contextPath}/e/addcol',
-		type: 'GET',
-		dataType: 'json',
-		success: function(res) {
-			if(res.result === 'Y') {
-				
-			}
-		},
-		error: function (error) {
-			console.error('Error fetching data:', error);
-		}
-	});
-}
-
-function modify(){
-	var maindiv = document.getElementById("maindiv");
-	var dv3 = document.querySelector("#set_menu1");
-	var dv4 = document.querySelector("#set_menu2");
-	var dv5 = document.querySelector("#set_menu3");
-	dv3.classList.remove('select');
-	dv5.classList.remove('select');
-	dv4.classList.add('select');
-	
-	const nav = document.getElementById("nav");
-	$.ajax({
-		url: '${pageContext.request.contextPath}/e/setting',
-		type: 'GET',
-		dataType: 'json',
-		success: function (res) {
-			if(res.result === "Y") {
-				maindiv.innerHTML = "";
-				
-				const user = res.user;
-				// 중복을 제거하고 배열로
-				const uniqueValues = Array.from(new Set(user.map(u => u.c_name)));
-// 				console.log(uniqueValues);
-				const divContainer = document.createElement('div');
-				divContainer.setAttribute("style", "display: flex; justify-content: flex-start; margin-bottom: 10px;")
-				// 배열의 각 요소를 <div>로 묶음
-				let indexOf = 1;
-				uniqueValues.forEach(value => {
-				    const div = document.createElement('div');
-				    div.textContent = value;
-				    div.setAttribute("style", "margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
-				    // 배열에 id부여
-				    div.setAttribute("id", "unq"+indexOf);
-				    div.setAttribute("onclick", "unq"+indexOf+"()");
-				    divContainer.appendChild(div);
-				    indexOf += 1;
-				});
-				
-				maindiv.appendChild(divContainer);
-				nav.innerHTML = "";
-				
- 				const div3 = document.createElement("div");
- 				div3.textContent = " 직원명부 ";
- 				div3.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				div3.setAttribute("class", "set_menu");
- 				div3.setAttribute("onclick","set1();");
- 				div3.setAttribute("id","set_menu1");
- 				const div4 = document.createElement("div");
- 				div4.textContent = " 직원별 변수 설정 ";
- 				div4.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				div4.setAttribute("class", "set_menu select");
- 				div4.setAttribute("onclick","set2();");
- 				div4.setAttribute("id","set_menu2");
- 				const div5 = document.createElement("div");
- 				div5.textContent = " 부서 설정 ";
- 				div5.setAttribute("style","margin-right: 15px; padding: 15px; border: 1px solid #dddddd; background: #eaeaea; border-radius: 25px; cursor: pointer;");
- 				div5.setAttribute("class", "set_menu");
- 				div5.setAttribute("onclick","set3();");
- 				div5.setAttribute("id","set_menu3");
-				nav.appendChild(div3);
- 				nav.appendChild(div4);
- 				nav.appendChild(div5);
- 				
-				const btn = document.createElement('div');
-				btn.setAttribute("style", "border: 1px solid #ddd; border-radius: 25px; background: #eaeaea; padding: 15px; cursor: pointer;");
-				btn.setAttribute("onclick", "btn_submit();");
-				btn.setAttribute("class", "select");
-				btn.textContent = "저장";
-				nav.appendChild(btn);
-				const tb = document.createElement("TABLE");
- 				tb.setAttribute("class","st_tb");
- 				maindiv.appendChild(tb);
-				
- 				const thead = document.createElement("THEAD");
-				const tr1 = document.createElement("TR");
-				const td1 = document.createElement("TD");
- 				td1.textContent = "기관명";
- 				const td2 = document.createElement("TD");
- 				td2.textContent = "소속기관명";
- 				const td3 = document.createElement("TD");
- 				td3.textContent = "부서명";
- 				const td4 = document.createElement("TD");
- 				td4.textContent = "사원번호";
- 				const td5 = document.createElement("TD");
- 				td5.textContent = "직급/직책";
- 				const td6 = document.createElement("TD");
- 				td6.textContent = "사원명";
- 				const td7 = document.createElement("TD");
- 				td7.textContent = "경혁팀장여부";
- 				const td8 = document.createElement("TD");
- 				td8.textContent = "경혁팀여부";
- 				const td9 = document.createElement("TD");
- 				td9.textContent = "부서장여부";
- 				const td10 = document.createElement("TD");
- 				td10.textContent = "1인부서여부";
- 				const td11 = document.createElement("TD");
- 				td11.textContent = "진료팀장여부";
- 				const td12 = document.createElement("TD");
- 				td12.textContent = "진료부여부";
- 				const td13 = document.createElement("TD");
- 				td13.textContent = "평가제외여부";
- 				
- 				tb.appendChild(thead);
- 				thead.appendChild(tr1);
- 				tr1.appendChild(td1);
- 				tr1.appendChild(td2);
- 				tr1.appendChild(td3);
- 				tr1.appendChild(td4);
- 				tr1.appendChild(td5);
- 				tr1.appendChild(td6);
- 				tr1.appendChild(td7);
- 				tr1.appendChild(td8);
- 				tr1.appendChild(td9);
- 				tr1.appendChild(td10);
- 				tr1.appendChild(td11);
- 				tr1.appendChild(td12);
- 				tr1.appendChild(td13);
- 				
- 				$.each (user, function (index, u) {
- 					const tr = document.createElement("TR");
- 					
- 					const td1 = document.createElement("TD");
-					td1.textContent = u.c_name;
-					const td2 = document.createElement("TD");
-	 				td2.textContent = u.c_name2;
-	 				const td3 = document.createElement("TD");
-	 				td3.textContent = u.subname;
-	 				const td4 = document.createElement("TD");
-	 				td4.textContent = u.id;
-	 				const td5 = document.createElement("TD");
-	 				td5.textContent = u.position;
-	 				const td6 = document.createElement("TD");
-	 				td6.textContent = u.name;
-	 				const td7 = document.createElement("TD");
-	 				const input7 = document.createElement("input");
-	 				input7.setAttribute("type", "checkbox");
-	 				if(u.k == 'T'){
-	 					input7.setAttribute("checked", "checked");
-	 				}
-	 				td7.appendChild(input7);
-	 				const td8 = document.createElement("TD");
-	 				const input8 = document.createElement("input");
-	 				input8.setAttribute("type", "checkbox");
-	 				if(u.v == 'T'){
-	 					input8.setAttribute("checked", "checked");
-	 				}
-	 				td8.appendChild(input8);
-	 				const td9 = document.createElement("TD");
-	 				const input9 = document.createElement("input");
-	 				input9.setAttribute("type", "checkbox");
-	 				if(u.b == 'T'){
-	 					input9.setAttribute("checked", "checked");
-	 				}
-	 				td9.appendChild(input9);
-	 				const td10 = document.createElement("TD");
-	 				const input10 = document.createElement("input");
-	 				input10.setAttribute("type", "checkbox");
-	 				if(u.x == 'T'){
-	 					input10.setAttribute("checked", "checked");
-	 				}
-	 				td10.appendChild(input10);
-	 				const td11 = document.createElement("TD");
-	 				const input11 = document.createElement("input");
-	 				input11.setAttribute("type", "checkbox");
-	 				if(u.z == 'T'){
-	 					input11.setAttribute("checked", "checked");
-	 				}
-	 				td11.appendChild(input11);
-	 				const td12 = document.createElement("TD");
-	 				const input12 = document.createElement("input");
-	 				input12.setAttribute("type", "checkbox");
-	 				if(u.a == 'T'){
-	 					input12.setAttribute("checked", "checked");
-	 				}
-	 				td12.appendChild(input12);
-	 				const td13 = document.createElement("TD");
-	 				const input13 = document.createElement("input");
-	 				input13.setAttribute("type", "checkbox");
-	 				if(u.del_yn == 'Y'){
-	 					input13.setAttribute("checked", "checked");
-	 				}
-	 				td13.appendChild(input13);
-	 				
-	 				tr.appendChild(td1);
-					tr.appendChild(td2);
-					tr.appendChild(td3);
-					tr.appendChild(td4);
-					tr.appendChild(td5);
-					tr.appendChild(td6);
-	 				tr.appendChild(td7);
-	 				tr.appendChild(td8);
-	 				tr.appendChild(td9);
-	 				tr.appendChild(td10);
-	 				tr.appendChild(td11);
-	 				tr.appendChild(td12);
-	 				tr.appendChild(td13);
-					
-					tb.appendChild(tr);
-					
- 				});
-			}
-		},
-		error: function (error) {
-			console.error('Error fetching data:', error);
-		}
-	});
-}
-// 문제은행 관리
-function evSetting(){
-	
-	$.ajax({
-		url: '${pageContext.request.contextPath}/demo/evSetting',
-		type: 'GET',
-		dataType: 'JSON',
-		success: function(response) {
-			console.log(response);
-			if(response.result === "Y") {
-				mainContent.innerHTML = ''; // 기존 내용을 지우고
-				
-				var div = document.createElement("div");
-				div.setAttribute("style","");
-				var title = document.createElement("div");
-				title.setAttribute("style","")
-				var content = document.createElement("div");
-				content.setAttribute("style","")
-				mainContent.appendChild(div);
-				div.appendChild(title);
-				div.appendChild(content);
-			}
-		},
-		error: function(error) {
-			console.error('Error fetching data: ',error);
-		}
-	});
-}
-
-// 문제유형생성
-function evCreate(){
-	$.ajax({
-		url: '${pageContext.request.contextPath}/demo/evCreate',
-		type: '',
-		dataType: '',
-		success: function(res) {
-			if(res.result === "Y") {
-				mainContent.innerHTML = ''; // 기존 내용을 지우고
-			}
-		},
-		error: function(error) {
-			console.error('Error fetching data: ',error);
-		}
-	});
-	
-}
-
-
-// 생성된 유형 보기
-function evSelect(){
-	$.ajax({
-		url: '${pageContext.request.contextPath}/demo/evSelect',
-		type: '',
-		dataType: '',
-		success: function(res) {
-			if(res.result === "Y") {
-				mainContent.innerHTML = ''; // 기존 내용을 지우고
-			}
-		},
-		error: function(error) {
-			console.error('Error fetching data: ',error);
-		}
-	});
-	
-}
 function closePopup(){
 	modal.classList.toggle('show');
 	if (!modal.classList.contains('show')) {

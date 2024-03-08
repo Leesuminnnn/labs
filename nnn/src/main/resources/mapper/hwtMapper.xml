@@ -6,28 +6,28 @@
 
 
 	<select id="noticeselect" resultType="map" parameterType="map">
-		select * from demo_notice where d1 = 1
+		select * from notice where d1 = 1
 	</select>
 	
 	<select id="info" resultType="users" parameterType="int">
 		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
 		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from demo_users where idx=#{idx}
+		from users__ where idx=#{idx}
 	</select>
 	
 	<select id="info2" resultType="users" parameterType="users">
 		select idx, id, pwd, name, reg_date, end_date, hspt_name, hspt_subcode, hspt_subname, hspt_position, hspt_V, 
 		hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
-		from demo_users where id=#{id}
+		from users__ where id=#{id}
 	</select>
 	
 	<select id="dbcheck" parameterType="users" resultType="int">
-		select count(*) from demo_users where id = #{id}
+		select count(*) from users__ where id = #{id}
 	</select>
 	
 	<select id="login" parameterType="users" resultType="int">
 		select count(*) from
-		demo_users
+		users__
 		where id = #{id} and 
 		<choose>
 			<when test="name == null">
@@ -41,10 +41,49 @@
 		
 	<!-- 로그인 기록 저장 -->
 	<insert id="loginlog" parameterType="loginlog">
-		insert into demo_loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
+		insert into loginlog (id, d1, ip) values (#{id}, #{name}, #{ip})
 	</insert>
 
+	<select id="phOne" resultType="int" parameterType="map">
+		select count(*) from user__phone where id = #{id} and number = #{ph}
+	</select>
+	
+	<update id="pwdinsert" parameterType="users">
+		update users__ set pwd = #{pwd} where idx = #{idx}
+	</update>
+	
+	<update id="pwdajax" parameterType="map">
+		update users__ set pwd = #{pwd} where id = #{id}
+	</update>
 
+	<select id="users" resultType="map" parameterType="map">
+		select idx, hspt_name, hspt_subcode, hspt_subname, id, pwd, hspt_position, name,
+		hspt_V, hspt_K, hspt_B, hspt_X, hspt_Z, hspt_S, hspt_T, hspt_J, user_code
+		from users__ where end_date is null
+	</select>
+	
+	<select id="ph" resultType="map" parameterType="map">
+		select * from user__phone
+	</select>
+	
+	<!-- 비밀번호 설정한 직원 명부 -->
+	<select id="hsptselect1" parameterType="map" resultType="int">
+		select count(*) from users__
+	</select>
+	
+	<select id="hsptpwdselect1" parameterType="map" resultType="int">
+		select count(*) from users__ where pwd is NOT NULL;
+	</select>
+	
+	<!-- 비밀번호 초기화 -->
+	<update id="pwdreset" parameterType="map">
+		update users__ set pwd = null where id = #{id}
+	</update>
+	
+	<select id="setting" parameterType="map" resultType="map">
+		select * from users__
+	</select>
+	
 	<select id="cslist" resultType="writtenVo">
 		select 
 		cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,

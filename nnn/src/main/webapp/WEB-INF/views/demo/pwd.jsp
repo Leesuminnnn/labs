@@ -14,6 +14,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0226">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwdmediacss.css?ver=0226">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mobileheadercss.css?ver=0227">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>코어솔루션 인사평가 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 

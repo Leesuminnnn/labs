@@ -17,6 +17,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0226">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoinfocss.css?ver=0226">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/infomediacss.css?ver=0226.01">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 
 <style>
 	

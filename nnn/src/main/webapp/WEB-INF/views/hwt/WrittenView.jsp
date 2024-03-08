@@ -11,6 +11,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="user-scalable=no">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>WrittenView</title>
 <script>
 

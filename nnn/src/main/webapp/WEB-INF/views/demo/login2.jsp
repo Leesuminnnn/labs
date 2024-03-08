@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/testlogin2css.css">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>코어솔루션 인사평가 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 

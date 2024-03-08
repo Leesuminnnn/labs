@@ -3,6 +3,7 @@ package com.nnn.app.dao;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,61 +11,55 @@ import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Repository
 public class HwtDao {
-	
-	//1 : hwtools, 2 : counselman
-//	@Resource(name="sqlSession2")
-//	private SqlSession sqlSession2;
-//	@Resource(name="sqlSession1")
-//	private SqlSession sqlSession1;
+
+	//1 : csworktools.cafe24.com, 2 : counselman 3: 서버 이관(csworktools2) hwtools.kr 4: root (인터넷 연결 X)
+	@Resource(name="sqlSession1")
+	private SqlSession sqlSession1;
+	@Resource(name="sqlSession3")
+	private SqlSession sqlSession3;
 	
 	public static final String MAPPER = "hwt";
-	private SqlSession sqlSession2;
-	private SqlSession sqlSession1;
-	@Autowired
-	public HwtDao(SqlSession sqlSession2, SqlSession sqlSession1) {
-		this.sqlSession2 = sqlSession2;
-		this.sqlSession1 = sqlSession1;
-	}
 
 	public List<NoticeVo> noticeSelect(Map<String, Object> map) {
-		return sqlSession1.selectList(MAPPER+".noticeselect", map);
-//		return sqlSession3.selectList(MAPPER+".noticeselect", map);
+//		return sqlSession1.selectList(MAPPER+".noticeselect", map);
+		return sqlSession3.selectList(MAPPER+".noticeselect", map);
 //		return sqlSession4.selectList(MAPPER+".noticeselect", map);
 	}
 	
 
 	public UsersVo info2(UsersVo vo) {
-		return sqlSession1.selectOne(MAPPER+".info2", vo);
-//		return sqlSession3.selectOne(MAPPER+".info2", vo);
+//		return sqlSession1.selectOne(MAPPER+".info2", vo);
+		return sqlSession3.selectOne(MAPPER+".info2", vo);
 //		return sqlSession4.selectOne(MAPPER+".info2", vo);
 	}
 
 	public int login(UsersVo vo) {
-		return sqlSession1.selectOne(MAPPER+".login", vo);
-//		return sqlSession3.selectOne(MAPPER+".login", vo);
+//		return sqlSession1.selectOne(MAPPER+".login", vo);
+		return sqlSession3.selectOne(MAPPER+".login", vo);
 //		return sqlSession4.selectOne(MAPPER+".login", vo);
 	}
 
 	public int dbcheck(UsersVo vo) {
-		return sqlSession1.selectOne(MAPPER+".dbcheck", vo);
-//		return sqlSession3.selectOne(MAPPER+".dbcheck", vo);
+//		return sqlSession1.selectOne(MAPPER+".dbcheck", vo);
+		return sqlSession3.selectOne(MAPPER+".dbcheck", vo);
 //		return sqlSession4.selectOne(MAPPER+".dbcheck", vo);
 	}
 
 	public UsersVo info(int idx) {
-		return sqlSession1.selectOne(MAPPER+".info", idx);
-//		return sqlSession3.selectOne(MAPPER+".info", idx);
+//		return sqlSession1.selectOne(MAPPER+".info", idx);
+		return sqlSession3.selectOne(MAPPER+".info", idx);
 //		return sqlSession4.selectOne(MAPPER+".info", idx);
 	}
 
 	public int loginlog(Map<String, Object> map) {
-		return sqlSession1.insert(MAPPER+".loginlog", map);
-//		return sqlSession3.insert(MAPPER+".loginlog", map);
+//		return sqlSession1.insert(MAPPER+".loginlog", map);
+		return sqlSession3.insert(MAPPER+".loginlog", map);
 //		return sqlSession4.insert(MAPPER+".loginlog", map);
 	}
 //	public List<WrittenVo> list(WrittenVo writtenVo) {
@@ -80,7 +75,104 @@ public class HwtDao {
 	public List<WrittenVo> listsearch2(Criteria cri) {
 		return sqlSession1.selectList(MAPPER+".cslist", cri);
 	}
+
+	public List<UsersVo> users(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users", map);
+		return sqlSession3.selectList(MAPPER+".users", map);
+//		return sqlSession4.selectList(MAPPER+".users", map);
+	}
+
+	public List<UsersVo> users1(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users1", map);
+		return sqlSession3.selectList(MAPPER+".users1", map);
+//		return sqlSession4.selectList(MAPPER+".users1", map);
+	}
+	public List<UsersVo> users1pwd(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users1", map);
+		return sqlSession3.selectList(MAPPER+".users1", map);
+//		return sqlSession4.selectList(MAPPER+".users1", map);
+	}
 	
+	public List<UsersVo> users2(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users2", map);
+		return sqlSession3.selectList(MAPPER+".users2", map);
+//		return sqlSession4.selectList(MAPPER+".users2", map);
+	}
+	public List<UsersVo> users2pwd(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users2", map);
+		return sqlSession3.selectList(MAPPER+".users2", map);
+//		return sqlSession4.selectList(MAPPER+".users2", map);
+	}
+	
+	public List<UsersVo> users3(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users3", map);
+		return sqlSession3.selectList(MAPPER+".users3", map);
+//		return sqlSession4.selectList(MAPPER+".users3", map);
+	}
+	public List<UsersVo> users3pwd(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".users3", map);
+		return sqlSession3.selectList(MAPPER+".users3", map);
+//		return sqlSession4.selectList(MAPPER+".users3", map);
+	}
+
+	public List<UserPh> ph(Map<String, Object> map) {
+//		return sqlSession1.selectList(MAPPER+".ph", map);
+		return sqlSession3.selectList(MAPPER+".ph", map);
+//		return sqlSession4.selectList(MAPPER+".ph", map);
+	}
+	
+	public int hsptselect1(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".hsptselect1", map);
+		return sqlSession3.selectOne(MAPPER+".hsptselect1", map);
+//		return sqlSession4.selectOne(MAPPER+".hsptselect1", map);
+	}
+	public int hsptselect2(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".hsptselect2", map);
+		return sqlSession3.selectOne(MAPPER+".hsptselect2", map);
+//		return sqlSession4.selectOne(MAPPER+".hsptselect2", map);
+	}
+	public int hsptselect3(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".hsptselect3", map);
+		return sqlSession3.selectOne(MAPPER+".hsptselect3", map);
+//		return sqlSession4.selectOne(MAPPER+".hsptselect3", map);
+	}
+
+	public int hsptselectpwd1(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".hsptpwdselect1", map);
+		return sqlSession3.selectOne(MAPPER+".hsptpwdselect1", map);
+//		return sqlSession4.selectOne(MAPPER+".hsptpwdselect1", map);
+	}
+	public int hsptselectpwd2(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".hsptpwdselect2", map);
+		return sqlSession3.selectOne(MAPPER+".hsptpwdselect2", map);
+//		return sqlSession4.selectOne(MAPPER+".hsptpwdselect2", map);
+	}
+	public int hsptselectpwd3(Map<String, Object> map) {
+//		return sqlSession1.selectOne(MAPPER+".hsptpwdselect3", map);
+		return sqlSession3.selectOne(MAPPER+".hsptpwdselect3", map);
+//		return sqlSession4.selectOne(MAPPER+".hsptpwdselect3", map);
+	}
+
+	public int pwdreset(Map<String, Object> map) {
+//		return  sqlSession1.update(MAPPER+".pwdreset", map);
+		return  sqlSession3.update(MAPPER+".pwdreset", map);
+//		return  sqlSession4.update(MAPPER+".pwdreset", map);
+	}
+	public int pwdreset1(Map<String, Object> map) {
+//		return  sqlSession1.update(MAPPER+".pwdreset1", map);
+		return  sqlSession3.update(MAPPER+".pwdreset1", map);
+//		return  sqlSession4.update(MAPPER+".pwdreset1", map);
+	}
+	public int pwdreset2(Map<String, Object> map) {
+//		return  sqlSession1.update(MAPPER+".pwdreset2", map);
+		return  sqlSession3.update(MAPPER+".pwdreset2", map);
+//		return  sqlSession4.update(MAPPER+".pwdreset2", map);
+	}
+	public int pwdreset3(Map<String, Object> map) {
+//		return  sqlSession1.update(MAPPER+".pwdreset3", map);
+		return  sqlSession3.update(MAPPER+".pwdreset3", map);
+//		return  sqlSession4.update(MAPPER+".pwdreset3", map);
+	}
 //	public WrittenVo selectone(WrittenVo vo) {
 //		return sqlSession1.selectOne(MAPPER+".selectone",vo);
 //	}
@@ -107,5 +199,9 @@ public class HwtDao {
 
 	public void modify(WrittenVo vo) {
 		sqlSession1.update(MAPPER+".modify",vo);		
+	}
+
+	public List<UsersVo> setting(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".setting", map);
 	}
 }
