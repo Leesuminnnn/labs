@@ -13,5 +13,6 @@ public class AjaxResponse20 {
 
 	private String result;
 	private List<UsersVo> users;
+	private List<UsersVo> accessAll;
 	private List<Access> access;
 }

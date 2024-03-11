@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/admin_css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0227">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0227">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
@@ -19,239 +20,7 @@
 <title>코어솔루션 전자문서 시스템</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
-.bg-425c7b {
-	background: #425c7b;
-	color: #fff;
-}
-.bg-586f8b {
-	background: #586f8b;
-	color: #fff;
-}
-.bg-d9e9e9 {
-	background: #d9e9e9;
-}/* 
-.tr-bottom::before {
-	content: "";
-	position: absolute;
-	top: 1px;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	border-bottom: 1px solid #cccccc;
-} */
-main {
-	width: 100%;
-	background: #f7f7f7;
-	margin-left: 240px;
-}
-.pd {
-	border-top: 11px solid #f7f7f7;
-	position: fixed;
-	top: 62px;
-	width: 100%;
-	z-index: 999;
-}
-td, th {/* 
-	border: 1px solid #d7d7d7; */
-	height: 45px;
-	text-align: center;/*
-	border-right: 1px solid #d7d7d7; 
-	border-bottom: 1px solid #d7d7d7; */
-	font-size: 12pt;
-}
-tbody td {
-	border: 1px solid #d7d7d7;
-	background: #fff;
-}
-.lasttd {/* 
-	border-right:1px solid #d7d7d7;
-	border-bottom:1px solid #d7d7d7; */
-}
 
-.scroll-container {
-	padding: 10px; 
-}
-.scrolltable {
-	width: 100%;
-	border: 2px solid #cccccc;
-	color: #222222;
-}
-.sticky-top {
-	position: -webkit-sticky;
-    position: sticky;
-    top: 72px;
-    z-index: 2; /* 높은 z-index 값을 설정 */
-}
-.sticky-top::before {
-	content: "";
-	position: absolute;
-	top: 1px;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	border-bottom: 1px solid #d7d7d7;
-    border-right: 1px solid #d7d7d7;
-}
-.sticky-top:nth-child(1)::before {
-	border-right: 1px solid #cccccc;	
-}
-.sticky-top:nth-child(2)::before {
-	border-left: 1px solid #cccccc;	
-}
-.sticky-middle {
-	position: -webkit-sticky;
-    position: sticky;
-    top: 117px;
-    z-index: 2;
-}
-.sticky-middle::before {
-	content: "";
-	position: absolute;
-	top: -1px;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	border-top: 1px solid #d7d7d7;
-    border-right: 1px solid #d7d7d7;
-}
-.sticky-middle:nth-child(4)::before {
-	border-right: 1px solid #cccccc;
-}
-.sticky-bottom {
-	position: -webkit-sticky;
-    position: sticky;
-    top: 162px;
-    z-index: 2;
-    color: #222222;
-}
-.sticky-bottom::before {
-	content: "";
-	position: absolute;
-	top: 0px;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
-	border-top: 2px solid #d7d7d7;
-    border-right: 1px solid #d7d7d7;
-	border-bottom: 2px solid #cccccc;
-}
-.sticky-bottom:nth-child(2)::before {
-	border-left: 1px solid #cccccc;
-}
-tbody th, tbody td {
-    position: relative; /* 상대 위치 설정 */
-    z-index: 1; /* 낮은 z-index 값을 설정 */
-}
-tbody td::before {
-    border-right: 1px solid #d7d7d7;
-	border-bottom: 1px solid #d7d7d7;
-}
-.scrolltable > thead{
-	color: #fff;
-}
-.scrolltable td:nth-child(4) {
-	border-right: 2px solid #ccc;
-}
-.nav__link {
-	display: flex;
-	align-items: center;
-	height: 64px;
-	padding-left: 25px;
-	border-left: 4px solid #2f425a;
-	cursor:pointer;
-}
-.active {
-	border-left: 4px solid #00bec2;
-	background: #293a4f;
-	color: #fff;
-	padding-left: 30px;
-	
-}
-.bg-gray {
-	background: #eaeaea;
-}
-.infotable {
-	width: 100%;
-	border: 2px solid #cccccc;
-}
-.infotable > thead > tr > th {
-	background: #425c7b;
-	color: #fff;
-	border: 1px solid #d7d7d7;
-	border-bottom: 2px solid #ccc;
-}
-.pointer {
-	cursor: pointer;
-}
-.info-sticky-top::before {
-	content: "";
-	border-bottom: 2px solid #ccc;
-}
-.link-btn {
-	cursor: pointer;
-	width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-.btn-css {
-	width: 90%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid #ddd;
-	height: 90%;
-	border-radius: 5px;
-	box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-	-webkit-transition: all 0.15s ease-in-out;
-	-moz-transition: all 0.15s ease-in-out;
-	-ms-transition: all 0.15s ease-in-out;
-	-o-transition: all 0.15s ease-in-out;
-	transition: all 0.15s ease-in-out;
-	background: #fafafa;
-}
-.btn-css:hover {
-	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
-	-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
-	-ms-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
-	-o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
-}
-
-.setting-area {
-	height: 100%;
-	padding: 5px;
-}
-.setting-zone {
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-.setting-left {
-	height: 100%;
-    background: #fff;
-    width: 45%;
-    border: 1px solid #eaeaea;
-}
-.setting-center {
-	height: 100%;
-	width: 10%;
-}
-.setting-right {
-    height: 100%;
-    background: #fff;
-    width: 45%;
-    border: 1px solid #eaeaea;
-}
-section {
-	height: calc(100vh - 62px);
-}
 </style>
 </head>
 <body>
@@ -262,7 +31,7 @@ section {
 	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
 		<div class="nav__link active" data-menu="userall" data-content="all">
 			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png">
-			<span>직원DB설정</span>
+			<span class="nav_name">직원DB설정</span>
 		</div><%-- 
 		<div class="nav__link" data-menu="perall" data-content="all"  style="">
 			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
@@ -270,7 +39,13 @@ section {
 		</div> --%>
 		<div class="nav__link" data-menu="setting" data-content="all" >
 			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
-			<span>접근권한관리</span>
+			<span class="nav_name">접근권한관리</span>
+		</div>
+		<div class="nav__link sub__link" data-menu="setting__insert" data-content="all" >
+			<span class="nav_subname">+ 추가</span>
+		</div>
+		<div class="nav__link sub__link" data-menu="setting__delete" data-content="all" >
+			<span class="nav_subname">- 삭제</span>
 		</div>
 	</div>
 <%--
@@ -2044,12 +1819,9 @@ function setting() {
 			if(res.result === "Y"){
  				
  				mainContent.innerHTML = ''; // 기존 내용을 지우고
- 				const sub = res.sub;
+ 				const accessAll = res.accessAll;
  				const user = res.user;
- 				const userop = res.userop;
-//  				console.log(sub);
-//  				console.log(user);
-//  				console.log(userop);
+ 				
  				const dv = document.createElement("div");
  				dv.setAttribute('class', 'setting-area');
  				mainContent.appendChild(dv);
@@ -2059,6 +1831,12 @@ function setting() {
  				
  				const dv03 = document.createElement("div");
  				dv03.setAttribute('class', 'setting-left');
+ 				accessAll.forEach(function (list) {
+ 					const dv06 = document.createElement("div");
+ 					dv03.appendChild(dv06);
+ 					dv06.textContent = list.name;
+ 				});
+ 				
  				
  				const dv04 = document.createElement("div");
  				dv04.setAttribute('class', 'setting-right');
@@ -2081,6 +1859,117 @@ function setting() {
 	});
 }
 
+function setting__insert() {
+	$.ajax({
+		url: '${pageContext.request.contextPath}/hwt/setting__insert',
+		type: 'GET',
+		dataType: 'json',
+		success: function(res) {
+			if(res.result === "Y"){
+ 				
+ 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+ 				const accessAll = res.accessAll;
+ 				const user = res.user;
+ 				
+ 				const dv = document.createElement("div");
+ 				dv.setAttribute('class', 'setting-area');
+ 				mainContent.appendChild(dv);
+ 				
+ 				const dv02 = document.createElement("div");
+ 				dv02.setAttribute('class','setting-zone');
+ 				
+ 				const dv03 = document.createElement("div");
+ 				dv03.setAttribute('class', 'search-area');
+ 				
+ 				const dv07 = document.createElement("div");
+ 				dv07.setAttribute('class', 'search-zone');
+ 				
+ 				const text_input = document.createElement("input");
+ 				text_input.setAttribute('class', 'search-text');
+ 				text_input.setAttribute('type', 'text');
+ 				
+ 				const search_btn = document.createElement("div");
+ 				search_btn.setAttribute('class', 'search_btn');
+ 				search_btn.setAttribute('id', 'search_btn');
+ 				search_btn.textContent = '검색';
+ 				
+ 				/* 
+ 				accessAll.forEach(function (list) {
+ 					const dv06 = document.createElement("div");
+ 					dv03.appendChild(dv06);
+ 					dv06.textContent = list.name;
+ 				});
+ 				 */
+ 				
+ 				const dv04 = document.createElement("div");
+ 				dv04.setAttribute('class', 'setting-right');
+ 				
+ 				const dv05 = document.createElement("div");
+ 				dv05.setAttribute('class', 'setting-center');
+ 				
+ 				
+ 				dv.appendChild(dv02);
+ 				dv02.appendChild(dv03);
+ 				dv03.appendChild(dv07);
+ 				dv07.appendChild(text_input);
+ 				dv07.appendChild(search_btn);
+				
+ 				
+			}
+		},
+		error: function(error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+}
+function setting__delete() {
+	$.ajax({
+		url: '${pageContext.request.contextPath}/hwt/setting__delete',
+		type: 'GET',
+		dataType: 'json',
+		success: function(res) {
+			if(res.result === "Y"){
+ 				
+ 				mainContent.innerHTML = ''; // 기존 내용을 지우고
+ 				const accessAll = res.accessAll;
+ 				const user = res.user;
+ 				
+ 				const dv = document.createElement("div");
+ 				dv.setAttribute('class', 'setting-area');
+ 				mainContent.appendChild(dv);
+ 				
+ 				const dv02 = document.createElement("div");
+ 				dv02.setAttribute('class','setting-zone');
+ 				
+ 				const dv03 = document.createElement("div");
+ 				dv03.setAttribute('class', 'setting-left');
+ 				accessAll.forEach(function (list) {
+ 					const dv06 = document.createElement("div");
+ 					dv03.appendChild(dv06);
+ 					dv06.textContent = list.name;
+ 				});
+ 				
+ 				
+ 				const dv04 = document.createElement("div");
+ 				dv04.setAttribute('class', 'setting-right');
+ 				
+ 				const dv05 = document.createElement("div");
+ 				dv05.setAttribute('class', 'setting-center');
+ 				
+ 				dv.appendChild(dv02);
+ 				dv02.appendChild(dv03);
+ 				dv02.appendChild(dv05);
+ 				dv02.appendChild(dv04);
+ 				
+				
+ 				
+			}
+		},
+		error: function(error) {
+			console.error('Error fetching data:', error);
+		}
+	});
+}
 var targetId = "";
 console.log("대상 아이디 초기화 : "+ targetId);
 var frm = $("#frm");
@@ -2177,6 +2066,8 @@ const menuScripts = [
 	{ id: 'per3', contentId: 'content3', script: per3 },
 	{ id: 'perall', contentId: 'all', script: perall },
 	{ id: 'setting', contentId: 'all', script: setting },
+	{ id: 'setting__insert', contentId: 'all', script: setting__insert },
+	{ id: 'setting__delete', contentId: 'all', script: setting__delete },
 ];
 function activateMenu(menuIndex) {
 
@@ -2200,6 +2091,12 @@ function activateMenu(menuIndex) {
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png";
 			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_off.png";
 		}else if (menuIndex == 1){
+			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png";
+		}else if (menuIndex == 2){
+			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
+			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png";
+		}else if (menuIndex == 3){
 			iconImage1.src = "${pageContext.request.contextPath}/resources/icon/ev/member_icon_off.png";
 			iconImage2.src = "${pageContext.request.contextPath}/resources/icon/ev/setting_on.png";
 		}

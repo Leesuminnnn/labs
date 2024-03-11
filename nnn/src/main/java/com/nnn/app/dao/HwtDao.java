@@ -204,4 +204,9 @@ public class HwtDao {
 	public List<UsersVo> setting(Map<String, Object> map) {
 		return sqlSession3.selectList(MAPPER+".setting", map);
 	}
+
+
+	public List<UsersVo> accessAll(Map<String, Object> map) {
+		return sqlSession3.selectList(MAPPER+".accessAll", map);
+	}
 }

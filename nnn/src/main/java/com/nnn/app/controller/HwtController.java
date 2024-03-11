@@ -1513,7 +1513,39 @@ public class HwtController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<UsersVo> list = hwtService.setting(map);
+		List<UsersVo> listall = hwtService.accessAll(map);
 		response.setUsers(list);
+		response.setAccessAll(listall);
+		
+		return response;
+	}
+	@ResponseBody
+	@RequestMapping(value="setting__insert")
+	public AjaxResponse20 setting__insert(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse20 response = new AjaxResponse20();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<UsersVo> list = hwtService.setting(map);
+		List<UsersVo> listall = hwtService.accessAll(map);
+		response.setUsers(list);
+		response.setAccessAll(listall);
+		
+		return response;
+	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="setting__delete")
+	public AjaxResponse20 setting__delete(HttpSession session, HttpServletRequest request) throws Exception {
+		AjaxResponse20 response = new AjaxResponse20();
+		response.setResult("Y");		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<UsersVo> list = hwtService.setting(map);
+		List<UsersVo> listall = hwtService.accessAll(map);
+		response.setUsers(list);
+		response.setAccessAll(listall);
 		
 		return response;
 	}

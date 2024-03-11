@@ -84,6 +84,10 @@
 		select * from users__
 	</select>
 	
+	<select id="accessAll" parameterType="map" resultType="map">
+		select * from users__ u join access a on u.id = a.col1
+	</select>
+	
 	<select id="cslist" resultType="writtenVo">
 		select 
 		cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,

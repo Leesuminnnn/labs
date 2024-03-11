@@ -169,4 +169,8 @@ public class HwtService {
 	public List<UsersVo> setting(Map<String, Object> map) {
 		return hwtDao.setting(map);
 	}
+
+	public List<UsersVo> accessAll(Map<String, Object> map) {
+		return hwtDao.accessAll(map);
+	}
 }
