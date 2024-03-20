@@ -126,7 +126,7 @@
 </head>
 <body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
-<form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/c/WrittenAction.do">
+<form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenAction.do">
 <section style="background-repeat: no-repeat;
 	background-position: center 0;
 	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');

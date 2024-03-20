@@ -969,6 +969,7 @@ a {
 			div2.style.top = '39%';
 			div2.style.left = '55%';
 			div2.style.transform = "translate(-50%, -50%)";
+			div2.style.display = 'none';
 			iframe.style.height = 'calc(100vh - 50px)';
 			iframe.style.width = '65vw';
 			iframe.allowfullscreen = true;
@@ -999,6 +1000,7 @@ a {
 			div2.style.top = '32%';
 			div2.style.left = '53%';
 			div2.style.transform = "translate(-50%, -50%)";
+			div2.style.display = 'none';
 			iframe.style.height = 'calc(100vh - 50px)';
 			iframe.style.width = '65vw';
 			iframe.allowfullscreen = true;

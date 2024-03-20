@@ -217,26 +217,26 @@ tbody td::before {
 	padding: 5px;
 }
 .setting-zone {
-    height: 100%;
+	height: 100%;
     display: flex;
+    align-content: center;
     flex-wrap: wrap;
     flex-direction: row;
+    align-items: center;
 }
-.setting-left {
-	height: 100%;
+.setting-left, .setting-right  {
+	height: 10%;
     background: #fff;
     width: 45%;
     border: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }
 .setting-center {
-	height: 100%;
 	width: 10%;
-}
-.setting-right {
-    height: 100%;
-    background: #fff;
-    width: 45%;
-    border: 1px solid #eaeaea;
+	
 }
 section {
 	height: calc(100vh - 62px);
@@ -291,4 +291,46 @@ section {
 .nav_subname {
 	font-size: 1.4rem;
 }
+.setting-area {
+	height: calc(100% - 10px);
+	display: flex;
+}
+.setting-select-zone, .setting-insert-zone {
+	display: flex;
+	font-size: 1.6rem;
+	width: 50%;
+    height: 100%;
+    background: #fff;
+	margin: 5px;
+}
+.search-zone {
+	display: flex;
+}
+.search_btn {
+	border: 1px solid #000;
+}
+.hspt-area {
+	padding: 5px;
+}
+.hspt-area div {
+	cursor: pointer;
+	padding: 5px;
+}
+.user-sub-area {
+	padding: 5px;
+	overflow-y: auto;
+}
+.user-sub-area div {
+	cursor: pointer;
+	padding: 5px;
+}
+.user-area {
+	padding: 5px;
+	overflow-y: auto;
+}
+.user-area div {
+	cursor: pointer;
+	padding: 5px;
+}
+
 

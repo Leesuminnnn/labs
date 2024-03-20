@@ -125,7 +125,7 @@
 </head>
 <body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
-<form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/c/WrittenModifyAction.do">
+<form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
 <section style="background-repeat: no-repeat;
 	background-position: center 0;
 	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
@@ -1163,7 +1163,7 @@ $(document).ready(function() {
 					     },
 					     success: function() {
 					       alert("이미지가 성공적으로 등록되었습니다.");
-					       window.location.href = "${pageContext.request.contextPath}/c/CounselList.do"
+					       window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do"
 					     },
 					     error: function() {
 					       alert("이미지 등록에 실패했습니다.");
@@ -1237,7 +1237,7 @@ function toggleCheckbox() {
 $("#btn_save").click(function () {
 	console.log("클릭");
 	var frm = $("#frm");
-	var confirmation = confirm("임시저장을 하시겠습니까?");
+	var confirmation = confirm("서명 정보는 저장이 되지 않습니다. \n임시저장을 하시겠습니까?");
 	if (confirmation) {
 		frm.submit();
 	}

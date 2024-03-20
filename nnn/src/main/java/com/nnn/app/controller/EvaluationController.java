@@ -35,6 +35,7 @@ import com.nnn.app.vo.AjaxResponse6;
 import com.nnn.app.vo.AjaxResponse9;
 import com.nnn.app.vo.AnswerVo;
 import com.nnn.app.vo.EvaluationVo;
+import com.nnn.app.vo.LoginAjaxResponse;
 import com.nnn.app.vo.LoginlogVo;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.SubVo;
@@ -81,9 +82,11 @@ public class EvaluationController {
 		mv.setViewName("e/prevlogin");
 		return mv;
 	}
-	
+	@ResponseBody
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
-	public String loginaction(UsersVo vo, HttpSession session, Model md, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public LoginAjaxResponse loginaction(UsersVo vo, HttpSession session, Model md, HttpServletRequest request) throws Exception {
+		LoginAjaxResponse response = new LoginAjaxResponse();
+		response.setResult("0");
 		// 비밀번호 복호화
 //		SHA256 sha256 = new SHA256();
 //		String password = vo.getPwd();
@@ -116,69 +119,71 @@ public class EvaluationController {
 		int Dbcheck = evaluationService.dbcheck(vo);
 		if (Dbcheck == 0) {
 			System.out.println(Dbcheck);
+			response.setResult("0");
 			System.out.println("Db에 id 없음");
 			request.setAttribute("msg", "2023년도 직원근무평가 대상직원이 아닙니다.");
 			request.setAttribute("url", "e/Login");
-			return "alert5";
+			return response;
 		}else {
-
-			//아이디 혹은 비밀번호가 일치하지 않는 경우
-			if(loginMember == 0) {
-				request.setAttribute("msg", "사번/비밀번호로 체크 후 로그인해주세요.\\n아이디 혹은 비밀번호를 확인해 주세요");
-				request.setAttribute("url", "e/Login");
-				System.out.println("아이디 혹은 비밀번호를 확인해 주세요");
-				return "alert5";
-			}
-			// 정보가 있을 경우 
-			else if(loginMember == 1) {
-				UsersVo info2 = evaluationService.info2(vo);
-				int idx = info2.getIdx();
-				System.out.println("info : "+info2);
-				System.out.println("info2.idx : "+info2.getIdx());
-				// 아이디와 이름으로 로그인 성공 후 비밀번호가 설정되어있지 않는 경우 
-				if(info2.getPwd() == null) {
-					session.setAttribute("loginmember", vo.getId());
-					request.setAttribute("msg", "현재 비밀번호가 설정되어 있지 않습니다. \\n비밀번호 설정 페이지로 이동합니다");
-					request.setAttribute("url", "e/Pwd/"+idx);
-					System.out.println( "현재 비밀번호가 설정되어 있지 않습니다. 비밀번호 설정 페이지로 이동합니다");
-					return "alert5";
-				// DB에 비밀번호가 있는데 이름으로 로그인 한 경우
-				}else if(info2.getPwd() != null && name != null){
-					String dbpwdOk = "true"; 
-					md.addAttribute("dbpwdOk", dbpwdOk);
-					request.setAttribute("msg", "현재 비밀번호가 설정되어 있습니다. 비밀번호로 로그인을 해주세요");
-					request.setAttribute("url", "e/Login");
-					return "alert5";
-				}else {
-					System.out.println("#########################################");
-					System.out.println("로그인 성공");
+			System.out.println(Dbcheck);
+			System.out.println("DB에 id 있음");
+			if(vo.getPwd() == null) {
+				// 이름으로 로그인
+				System.out.println("이름으로 로그인");
+				if (loginMember == 1) {
+					// 이름으로 로그인 성공
+					UsersVo info2 = evaluationService.info2(vo);
+					String UserPwd = info2.getPwd();
+					System.out.println(info2);
+					if (UserPwd == null) {
+						// DB에 비밀번호 없음
+						int idx = info2.getIdx();
+						response.setIdx(idx);
+						response.setResult("5");
+						return response;
+						
+					} else {
+						// DB에 비밀번호 있음
+						response.setResult("2");
+						return response;
+					}
+				} else {
+					// 정보 일치 X
+					response.setResult("3");
+					return response;
+				}
+			}else if (vo.getName() == null) {
+				// 비밀번호로 로그인
+				System.out.println("비밀번호로 로그인");
+				if(loginMember == 1) {
+					// 로그인 성공
+					UsersVo info2 = evaluationService.info2(vo);
+					int idx = info2.getIdx();
+					response.setResult("4");
+					response.setIdx(idx);
 					//로그인 기록 저장
 					map.put("id", vo.getId());
 					map.put("name", info2.getName());
-					System.out.println("#########################################");
 					md.addAttribute("info", evaluationService.info(idx));
-					// 로그인 한 유저 ip 알아내기
+					// 로그인 한 유저 ip를 DB에 저장
 					HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 					String ip = req.getHeader("X-FORWARDED-FOR");
 					if (ip == null) {
 						ip = req.getRemoteAddr();
 					}
 					map.put("ip", ip);
-					System.out.println(ip);
 					evaluationService.loginlog(map);
 					// 세션 저장
 					session.setAttribute("loginmember", vo.getId());
-					if(info2.getHspt_name().equals("코어솔루션")) {
-						return "redirect:/e/admin";
-					}else {
-						return "redirect:/e/Info/"+idx;
-					}
-					
+					return response;
+				} else {
+					// 비밀번호 불일치
+					response.setResult("1");
+					return response;
 				}
-				
 			}
 		}
-		return "";
+		return response;
 	}
 	
 	@RequestMapping("Logout")

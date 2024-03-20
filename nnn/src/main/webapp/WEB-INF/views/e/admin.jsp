@@ -9,27 +9,239 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css">
-<title>관리자 페이지</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/alertcss.css?ver=0227">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0227">
+<title>코어솔루션 인사평가 시스템</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style>
 
+.bg-425c7b {
+	background: #425c7b;
+	color: #fff;
+}
+.bg-586f8b {
+	background: #586f8b;
+	color: #fff;
+}
+.bg-d9e9e9 {
+	background: #d9e9e9;
+}/* 
+.tr-bottom::before {
+	content: "";
+	position: absolute;
+	top: 1px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-bottom: 1px solid #cccccc;
+} */
+main {
+	width: 100%;
+	background: #f7f7f7;
+	margin-left: 240px;
+}
+.pd {
+	border-top: 11px solid #f7f7f7;
+	position: fixed;
+	top: 62px;
+	width: 100%;
+	z-index: 999;
+}
+td, th {/* 
+	border: 1px solid #d7d7d7; */
+	height: 45px;
+	text-align: center;/*
+	border-right: 1px solid #d7d7d7; 
+	border-bottom: 1px solid #d7d7d7; */
+	font-size: 12pt;
+}
+tbody td {
+	border: 1px solid #d7d7d7;
+	background: #fff;
+}
+.lasttd {/* 
+	border-right:1px solid #d7d7d7;
+	border-bottom:1px solid #d7d7d7; */
+}
+
+.scroll-container {
+	padding: 10px; 
+}
+.scrolltable {
+	width: 100%;
+	border: 2px solid #cccccc;
+	color: #222222;
+}
+.sticky-top {
+	position: -webkit-sticky;
+    position: sticky;
+    top: 72px;
+    z-index: 2; /* 높은 z-index 값을 설정 */
+}
+.sticky-top::before {
+	content: "";
+	position: absolute;
+	top: 1px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-bottom: 1px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+}
+.sticky-top:nth-child(1)::before {
+	border-right: 1px solid #cccccc;	
+}
+.sticky-top:nth-child(2)::before {
+	border-left: 1px solid #cccccc;	
+}
+.sticky-middle {
+	position: -webkit-sticky;
+    position: sticky;
+    top: 117px;
+    z-index: 2;
+}
+.sticky-middle::before {
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-top: 1px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+}
+.sticky-middle:nth-child(4)::before {
+	border-right: 1px solid #cccccc;
+}
+.sticky-bottom {
+	position: -webkit-sticky;
+    position: sticky;
+    top: 162px;
+    z-index: 2;
+    color: #222222;
+}
+.sticky-bottom::before {
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	border-top: 2px solid #d7d7d7;
+    border-right: 1px solid #d7d7d7;
+	border-bottom: 2px solid #cccccc;
+}
+.sticky-bottom:nth-child(2)::before {
+	border-left: 1px solid #cccccc;
+}
+tbody th, tbody td {
+    position: relative; /* 상대 위치 설정 */
+    z-index: 1; /* 낮은 z-index 값을 설정 */
+}
+tbody td::before {
+    border-right: 1px solid #d7d7d7;
+	border-bottom: 1px solid #d7d7d7;
+}
+.scrolltable > thead{
+	color: #fff;
+}
+.scrolltable td:nth-child(4) {
+	border-right: 2px solid #ccc;
+}
+.nav__link {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	padding-left: 25px;
+	border-left: 4px solid #2f425a;
+	cursor:pointer;
+}
+.active {
+	border-left: 4px solid #00bec2;
+	background: #293a4f;
+	color: #fff;
+	padding-left: 30px;
+	
+}
+.bg-gray {
+	background: #eaeaea;
+}
+.infotable {
+	width: 100%;
+	border: 2px solid #cccccc;
+}
+.infotable > thead > tr > th {
+	background: #425c7b;
+	color: #fff;
+	border: 1px solid #d7d7d7;
+	border-bottom: 2px solid #ccc;
+}
+.pointer {
+	cursor: pointer;
+}
+.info-sticky-top::before {
+	content: "";
+	border-bottom: 2px solid #ccc;
+}
+.link-btn {
+	cursor: pointer;
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.btn-css {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ddd;
+	height: 90%;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+	-webkit-transition: all 0.15s ease-in-out;
+	-moz-transition: all 0.15s ease-in-out;
+	-ms-transition: all 0.15s ease-in-out;
+	-o-transition: all 0.15s ease-in-out;
+	transition: all 0.15s ease-in-out;
+	background: #fafafa;
+}
+.btn-css:hover {
+	-webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	-moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	-ms-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	-o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
+}
+section {
+	display: flex;
+	margin-top: 62px;
+}
+.nav__section {
+	width: 240px;
+	background: #2f425a;
+	color: #c3c3c3;
+	position: fixed; 
+	height: 100%;
+}
+.nav__link > img{
+	margin-right: 10px;
+}
 </style>
 </head>
 <body>
 <form id="frm">
+<jsp:include page="../demo/header.jsp"></jsp:include>
 <section>
-<div style="background-color: var(--bg-color); color: var(--white-color); padding: 1.5rem 1.5rem 10px; padding-left: 33px;
-    transition: .5s; z-index: 101; position: fixed; width: calc(var(--nav--width) + 9.25rem); top: 0; left: 0; height: 80px;">
-		<div style="display: flex; justify-content: space-between;">
-			<div style="width: 100%;">
-				<div class="nav__brand" style="">
-					<a href="${pageContext.request.contextPath}/e/admin" class="nav__logo" >효사랑</a>
-					<a href="${pageContext.request.contextPath}/d/admin" class="nav__logo" >계열사</a>
-				</div>
-			</div>
-		</div>
-	</div>
-<div class="l-navbar expander" id="navbar">
+<div class="nav__section" id="navbar">
 		<nav class="nav" style="">
 			<div style="width: 100%;">
 			<!-- 
@@ -80,16 +292,7 @@
             </div>
         </nav>
     </div>
-	<div class="nav__link2" style="margin: 0; position: fixed; bottom: 0;
-	 width: calc(var(--nav--width) + 9.25rem); background-color: #08254c; z-index: 100;
-	display: flex; justify-content: space-evenly; left: 0; align-items: center; border-radius: 0;">
-		<div style="display: flex; justify-content: center; flex-wrap: wrap;">
-			<%-- <div style="display: flex; justify-content: center;">
-			<input type="text" id="str"><button value="찾기" onclick="findStr()" style="background:url(<%=request.getContextPath() %>/resources/icon/search.png) no-repeat center; background-size: contain"></button>
-			</div> --%>
-			<img style="width: 90%;" src="<%=request.getContextPath() %>/resources/img/core_logo.png">
-		</div>
-	</div>
+	
 	<main id="main-content" 
 			style="width : calc(99vw - (var(--nav--width) + 9.25rem)); height : 100%; margin-left: calc(var(--nav--width) + 9.25rem);">
 		<!-- 내용을 이곳에 추가 -->

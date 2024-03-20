@@ -222,24 +222,35 @@ tbody td::before {
 	-o-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.19), 0 2px 3px rgba(0, 0, 0, 0.23);
 }
+section {
+	display: flex;
+	margin-top: 62px;
+}
+.nav__section {
+    width: 240px;
+    background: #2f425a;
+    color: #c3c3c3;
+    position: fixed;
+    height: 100%;
+}
 </style>
 </head>
 <body>
 <form id="frm">
 <jsp:include page="../demo/header.jsp"></jsp:include>
 
-<section style="display: flex; margin-top: 62px;"> 
-	<div style=" width: 240px; background: #2f425a; color:#c3c3c3; position: fixed; height: 100%">
+<section style=""> 
+	<div class="nav__section" style=" ">
 		<div class="nav__link active" data-menu="userall" data-content="all">
-			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/ev/member_icon_on.png">
 			<span>직원DB설정</span>
 		</div>
 		<div class="nav__link" data-menu="perall" data-content="all"  style="">
-			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/ev/ev_icon_off.png">
 			<span>인사평가 관리</span>
 		</div>
 		<div class="nav__link" data-menu="setting" data-content="all" >
-			<img class="icon-image" style="margin-right: 10px;" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/ev/setting_off.png">
 			<span>설정</span>
 		</div>
 	</div>
@@ -825,7 +836,7 @@ function user1(contentId) {
 		 						tdpwdselect.setAttribute("onclick", "pwdreset(this)");
 		 						tdpwdselect.setAttribute("style", "cursor:pointer;");
 		 					}
-		 					//
+		 					
 		 					
 		 					tb.appendChild(tr);
 		 					tr.appendChild(tdidx);

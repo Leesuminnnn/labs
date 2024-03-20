@@ -8,7 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
-<title>메인페이지</title>
+<title>MediPlat</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
+<link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
 * {
@@ -25,7 +28,7 @@
 	display:flex;
 	align-items: center;
 	justify-content: center; 
-	font-size: 22px;
+	font-size: 18px;
 	cursor: pointer;
 }
 .menu_content {
@@ -38,7 +41,7 @@
 	justify-content: center;
 	align-items: center; 
 	width: 100%;
-	font-size: 17px;
+	font-size: 12px;
 	cursor: pointer;
 }
 </style>
@@ -178,18 +181,22 @@ function menu_go(element) {
 
 		location.href = link;
 	}
-	else if (menu_id ==422){
+	else if (menu_id ==423){
 		link = "${pageContext.request.contextPath}/a/Calendar.do";
 		
 		location.href = link;
 	}
-	else if(menu_id == 730) {
+	else if(menu_id == 731) {
 		if(name == '관리자'){
 			link = "${pageContext.request.contextPath}/demo/admin";
 		}
 		else {
 			link = "${pageContext.request.contextPath}/demo/Info/"+idx;
 		}
+		location.href = link;
+	}
+	else if (menu_id == 213) {
+		link = "${pageContext.request.contextPath}/hwt/CounselList.do";
 		location.href = link;
 	}
 }

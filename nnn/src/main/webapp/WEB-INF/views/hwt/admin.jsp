@@ -1831,23 +1831,25 @@ function setting() {
  				
  				const dv03 = document.createElement("div");
  				dv03.setAttribute('class', 'setting-left');
- 				accessAll.forEach(function (list) {
- 					const dv06 = document.createElement("div");
- 					dv03.appendChild(dv06);
- 					dv06.textContent = list.name;
- 				});
- 				
+ 				dv03.setAttribute('data-menu', 'setting__insert');
+ 				const left_span = document.createElement("span");
+ 				left_span.textContent = '+ 권한추가';
  				
  				const dv04 = document.createElement("div");
  				dv04.setAttribute('class', 'setting-right');
+ 				dv04.setAttribute('data-menu', 'setting__delete');
+ 				const right_span = document.createElement("span");
+ 				right_span.textContent = '- 권한삭제'
  				
  				const dv05 = document.createElement("div");
  				dv05.setAttribute('class', 'setting-center');
  				
  				dv.appendChild(dv02);
  				dv02.appendChild(dv03);
+ 				dv03.appendChild(left_span);
  				dv02.appendChild(dv05);
  				dv02.appendChild(dv04);
+ 				dv04.appendChild(right_span);
  				
 				
  				
@@ -1866,55 +1868,250 @@ function setting__insert() {
 		dataType: 'json',
 		success: function(res) {
 			if(res.result === "Y"){
- 				
- 				mainContent.innerHTML = ''; // 기존 내용을 지우고
- 				const accessAll = res.accessAll;
- 				const user = res.user;
- 				
- 				const dv = document.createElement("div");
- 				dv.setAttribute('class', 'setting-area');
- 				mainContent.appendChild(dv);
- 				
- 				const dv02 = document.createElement("div");
- 				dv02.setAttribute('class','setting-zone');
- 				
- 				const dv03 = document.createElement("div");
- 				dv03.setAttribute('class', 'search-area');
- 				
- 				const dv07 = document.createElement("div");
- 				dv07.setAttribute('class', 'search-zone');
- 				
- 				const text_input = document.createElement("input");
- 				text_input.setAttribute('class', 'search-text');
- 				text_input.setAttribute('type', 'text');
- 				
- 				const search_btn = document.createElement("div");
- 				search_btn.setAttribute('class', 'search_btn');
- 				search_btn.setAttribute('id', 'search_btn');
- 				search_btn.textContent = '검색';
- 				
- 				/* 
- 				accessAll.forEach(function (list) {
- 					const dv06 = document.createElement("div");
- 					dv03.appendChild(dv06);
- 					dv06.textContent = list.name;
- 				});
- 				 */
- 				
- 				const dv04 = document.createElement("div");
- 				dv04.setAttribute('class', 'setting-right');
- 				
- 				const dv05 = document.createElement("div");
- 				dv05.setAttribute('class', 'setting-center');
- 				
- 				
- 				dv.appendChild(dv02);
- 				dv02.appendChild(dv03);
- 				dv03.appendChild(dv07);
- 				dv07.appendChild(text_input);
- 				dv07.appendChild(search_btn);
+ 				 
+				// Clear existing content
+				mainContent.innerHTML = '';
 				
- 				
+				const dv = document.createElement("div");
+				dv.setAttribute('class', 'setting-area');
+				mainContent.appendChild(dv);
+				
+				const dv02 = document.createElement("div");
+				dv02.setAttribute('class', 'setting-select-zone');
+				dv.appendChild(dv02);
+				
+				const dv03 = document.createElement("div");
+				dv03.setAttribute('class', 'setting-insert-zone');
+				dv.appendChild(dv03);
+				
+				const hsptArea = document.createElement("div");
+				hsptArea.setAttribute('class', 'hspt-area');
+				dv02.appendChild(hsptArea);
+				
+				const userSubArea = document.createElement('div');
+				userSubArea.setAttribute('class', 'user-sub-area');
+				userSubArea.setAttribute('id', 'peopleDisplay');
+				dv02.appendChild(userSubArea);
+				
+				const userArea = document.createElement("div");
+				userArea.setAttribute("class", "user-area");
+				userArea.setAttribute('id', 'userDisplay');
+				dv02.appendChild(userArea);
+				
+				const uniqueHospitals = new Set();
+				res.accessAll.forEach(function(item) {
+				    uniqueHospitals.add(item.hspt_name);
+				});
+				
+				// 선택 상태를 저장할 객체
+				let selectedState = {
+				    departments: new Set(),
+				    employees: new Set()
+				};
+				
+				uniqueHospitals.forEach(function(hsptname) {
+				    const hsptDiv = document.createElement("div");
+				    hsptDiv.textContent = hsptname;
+				    hsptArea.appendChild(hsptDiv);
+				
+				    hsptDiv.addEventListener('click', function() {
+				        userSubArea.innerHTML = '';
+				        userArea.innerHTML = '';
+				
+				        const subDepartments = new Set();
+				        
+				        res.accessAll.forEach(function(item) {
+				            if(item.hspt_name === hsptname) subDepartments.add(item.hspt_subname);
+				        });
+				
+				        subDepartments.forEach(function(subname) {
+				            const subDivWrapper = document.createElement("div");
+				            const subDivCheckbox = document.createElement("input");
+				            subDivCheckbox.type = 'checkbox';
+				            subDivCheckbox.className = 'sub-dept-checkbox';
+				            subDivCheckbox.dataset.subname = subname;
+				
+				            const subDivText = document.createElement("span");
+				            subDivText.textContent = subname;
+				            subDivText.style.cursor = "pointer";
+				
+				            subDivCheckbox.addEventListener('change', function() {
+				                // 여기서 `this`는 이벤트가 발생한 `subDivCheckbox` 요소를 가리킵니다.
+				                handleDepartmentCheckboxChange(this, subname, selectedState, dv03, addToInsertZone, removeFromInsertZone);
+				            });
+				
+				            subDivText.addEventListener('click', function() {
+				            	displayPeopleInSubdepartment(subname, subDivCheckbox, selectedState);
+				            });
+				
+				            subDivWrapper.appendChild(subDivCheckbox);
+				            subDivWrapper.appendChild(subDivText);
+				            userSubArea.appendChild(subDivWrapper);
+				        });
+				     // 체크박스 상태 복원
+				        document.querySelectorAll('.sub-dept-checkbox').forEach(checkbox => {
+				            if (selectedState.departments.has(checkbox.dataset.subname)) {
+				                checkbox.checked = true;
+				            }
+				        });
+
+				        document.querySelectorAll('.person-checkbox').forEach(checkbox => {
+				            if (selectedState.employees.has(checkbox.dataset.name)) {
+				                checkbox.checked = true;
+				            }
+				        });
+				    });
+				});
+				function addToInsertZone(itemName, itemType, dv03) { 
+					// Prevent duplicate entries
+				    if (!dv03.querySelector('[data-name="' + itemName + '"][data-type="' + itemType + '"]')) {
+				        const itemDiv = document.createElement("div");
+				        itemDiv.textContent = itemName + " (" + itemType + ")";
+				        itemDiv.dataset.type = itemType;
+				        itemDiv.dataset.name = itemName;
+				        dv03.appendChild(itemDiv);
+				    }
+			    }
+					
+				
+				function handleEmployeeCheckboxChange(checkbox, subname, selectedState, dv03, addToInsertZone, removeFromInsertZone) {
+				    const isChecked = checkbox.checked;
+				    const departmentCheckbox = document.querySelector(`.sub-dept-checkbox[data-subname="${subname}"]`);
+				    const employeeCheckboxes = document.querySelectorAll(`.person-checkbox[data-subname="${subname}"]`);
+
+				    if (isChecked) {
+				        selectedState.employees.add(checkbox.dataset.name);
+				    } else {
+				        selectedState.employees.delete(checkbox.dataset.name);
+				        removeFromInsertZone(checkbox.dataset.name, "person", dv03);
+				    }
+
+				    const allChecked = [...employeeCheckboxes].every(cb => cb.checked || selectedState.employees.has(cb.dataset.name));
+
+				    if (allChecked) {
+				        departmentCheckbox.checked = true;
+				        selectedState.departments.add(subname);
+
+				        // Remove individual employee entries if they were added before.
+				        employeeCheckboxes.forEach(cb => {
+				            removeFromInsertZone(cb.dataset.name, "person", dv03);
+				        });
+
+				        // Add the department entry.
+				        addToInsertZone(subname, 'department', dv03);
+				    } else {
+				        departmentCheckbox.checked = false;
+				        selectedState.departments.delete(subname);
+				        removeFromInsertZone(subname, 'department', dv03);
+
+				        // Add individual employees to dv03 if they are still selected.
+				        employeeCheckboxes.forEach(cb => {
+				            if (cb.checked || selectedState.employees.has(cb.dataset.name)) {
+				                addToInsertZone(cb.dataset.name, "person", dv03);
+				            }
+				        });
+				    }
+				}
+				// Assuming initial setup and element creation code remains the same.
+
+				function handleDepartmentCheckboxChange(checkbox, subname, selectedState, dv03, addToInsertZone, removeFromInsertZone) {
+					console.log("handleDepartmentCheckboxChange called", { checkbox, subname, selectedState });
+			    
+				    const isDepartmentChecked = checkbox.checked;
+				    const employeeCheckboxes = document.querySelectorAll(`.person-checkbox[data-subname="${subname}"]`);
+				    
+				    if (isDepartmentChecked) {
+				    	// 부서 체크 시, 부서를 selectedState에 추가하고, dv03에 부서를 추가
+				        selectedState.departments.add(subname);
+				        addToInsertZone(subname, 'department', dv03); // 부서 추가
+				        
+				     	// 해당 부서에 속한 모든 직원을 자동으로 선택하고, selectedState에 추가
+				        employeeCheckboxes.forEach(cb => {
+				            cb.checked = true;
+				            selectedState.employees.add(cb.dataset.name); // 직원 상태 업데이트
+
+				            // 개별 직원을 dv03에 추가하는 대신, 부서를 추가하는 방식으로 구현할 수 있습니다.
+				            // 여기서는 부서 단위로 추가하는 로직만 포함되어 있습니다.
+				        });
+				    } else {
+				        // 부서 체크 해제 시, 부서를 selectedState에서 제거하고, dv03에서 부서 제거
+				        selectedState.departments.delete(subname);
+				        removeFromInsertZone(subname, 'department', dv03); // 부서 제거
+				        
+				        // 해당 부서에 속한 모든 직원의 선택을 해제하고, selectedState에서 제거
+				        employeeCheckboxes.forEach(cb => {
+				            cb.checked = false;
+				            selectedState.employees.delete(cb.dataset.name); // 직원 상태 업데이트
+				            
+				            // 개별 직원을 dv03에서 제거하는 로직은 여기에 포함되지 않았습니다.
+				            // 필요한 경우, 여기서 개별 직원을 제거하는 로직을 추가할 수 있습니다.
+				        });
+				    }
+				 
+				}
+				function displayPeopleInSubdepartment(subname, departmentCheckbox, selectedState) {
+				    userArea.innerHTML = ''; // Clear the current list
+
+				    const isDepartmentChecked = departmentCheckbox.checked; // Check if the department is checked
+
+				    const peopleInSub = res.accessAll.filter(item => item.hspt_subname === subname);
+
+				    peopleInSub.forEach(person => {
+				        const personDivWrapper = document.createElement("div");
+				        const personDivCheckbox = document.createElement("input");
+				        personDivCheckbox.type = 'checkbox';
+				        personDivCheckbox.className = 'person-checkbox';
+				        personDivCheckbox.dataset.name = person.name;
+				        personDivCheckbox.dataset.subname = subname;
+
+				        // Set the checkbox state based on the department's checkbox state
+				        personDivCheckbox.checked = isDepartmentChecked;
+
+				        const personDivText = document.createElement("span");
+				        personDivText.textContent = person.name;
+
+				        personDivWrapper.appendChild(personDivCheckbox);
+				        personDivWrapper.appendChild(personDivText);
+				        userArea.appendChild(personDivWrapper);
+				    });
+				}
+				
+				
+				
+				function removeFromInsertZone(itemName, itemType) {
+				    console.log('Attempting to remove: ' + itemName + ' of type ' + itemType);
+				    // querySelectorAll을 사용하여 일치하는 모든 요소를 선택합니다.
+				    const items = dv03.querySelectorAll('[data-name="' + itemName + '"][data-type="' + itemType + '"]');
+				    console.log('Found items to remove:', items.length);
+				    items.forEach(function(item) {
+				        console.log('Removing item: ', item);
+				        item.parentNode.removeChild(item); // 각 항목을 부모 노드에서 제거합니다.
+				    });
+				}
+				function clearIndividualsFromInsertZone(subname) {
+				    const individuals = dv03.querySelectorAll('[data-type="person"]');
+				    individuals.forEach(ind => {
+				        if (ind.textContent.includes(subname)) {
+				            dv03.removeChild(ind);
+				        }
+				    });
+				}
+				function checkDepartmentState(subname, selectedState, addToInsertZone, removeFromInsertZone) {
+				    const allEmployeeCheckboxes = document.querySelectorAll(`.person-checkbox[data-subname="${subname}"]`);
+				    const departmentCheckbox = document.querySelector(`.sub-dept-checkbox[data-subname="${subname}"]`);
+				    
+				    const allChecked = Array.from(allEmployeeCheckboxes).every(cb => cb.checked);
+				    if (allChecked) {
+				        departmentCheckbox.checked = true;
+				        selectedState.departments.add(subname);
+				        addToInsertZone(subname, 'department');
+				    } else {
+				        departmentCheckbox.checked = false;
+				        selectedState.departments.delete(subname);
+				        removeFromInsertZone(subname, 'department');
+				    }
+				}
+			
 			}
 		},
 		error: function(error) {
@@ -1922,6 +2119,9 @@ function setting__insert() {
 		}
 	});
 }
+
+
+
 function setting__delete() {
 	$.ajax({
 		url: '${pageContext.request.contextPath}/hwt/setting__delete',
@@ -1943,11 +2143,6 @@ function setting__delete() {
  				
  				const dv03 = document.createElement("div");
  				dv03.setAttribute('class', 'setting-left');
- 				accessAll.forEach(function (list) {
- 					const dv06 = document.createElement("div");
- 					dv03.appendChild(dv06);
- 					dv06.textContent = list.name;
- 				});
  				
  				
  				const dv04 = document.createElement("div");
