@@ -25,7 +25,7 @@
 <div class="main normal">
 
 <form action="${pageContext.request.contextPath}/demo/formAction/${info.idx}/${target.idx}">
-	<jsp:include page="../demo/header.jsp"></jsp:include>
+	<jsp:include page="../mediplat/header.jsp"></jsp:include>	
 		<div class="info">
 			<div>
 				<div class="info_area">

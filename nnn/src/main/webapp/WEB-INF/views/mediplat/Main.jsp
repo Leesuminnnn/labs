@@ -9,55 +9,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <title>MediPlat</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mediplat_main.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/demoheadercss.css?ver=0226">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <style type="text/css">
-* {
-	box-sizing: border-box;
-}
-.main_content {
-	margin-top: 10px;
-	padding: 15px;
-	border: 1px solid #000;
-	margin-right: 10px;
-	width: 250px;
-	height: 73px;
-	text-align: center;
-	display:flex;
-	align-items: center;
-	justify-content: center; 
-	font-size: 18px;
-	cursor: pointer;
-}
-.menu_content {
-	margin-top: 10px;
-	padding: 15px;
-	border: 1px solid #000;
-	margin-right: 10px;
-	height: 73px;
-	display:flex;
-	justify-content: center;
-	align-items: center; 
-	width: 100%;
-	font-size: 12px;
-	cursor: pointer;
-}
 </style>
 </head>
 <body>
-<div class="logo_area" style="display: flex; justify-content: space-around;">
-	<div class="logo">코어솔루션 로고</div>
-	<div class="main_logo">메디플랫</div>
-	<div class="login">
-	기관명 : ${info.hspt_name}<br>
-	사번 : ${info.id }<br>
-	이름 : ${info.name }
-	<a href="${pageContext.request.contextPath}/demo/Logout">로그아웃</a></div>
-</div>
+	<jsp:include page="./header.jsp"></jsp:include>	
+	<div class="info">
+		<div class="info-container">
+			<div class="info_name">
+				<span class="normal">
+					<c:set var="infofirstName" value="${fn:substring(info.name, 0, 1)}" />
+					${infofirstName}ㅇㅇ
+				</span>
+				<span class="light info_id">(사원번호 : ${info.id })</span>
+			</div>
+			<div class="info_hs light">
+				<span>${info.hspt_name} / ${info.hspt_subname } / ${info.hspt_position }</span>
+			</div>
+			<div class="info_date light">
+				<span>입사일자 : <fmt:formatDate var="date" value="${info.reg_date }" pattern="yyyy. MM. dd" />${date}</span>
+			</div>
+		</div>
+	</div>
 <div class="main">
-	<div class="main_platform">
+	<div class="main_platform" style="font-size: 2rem; color: #0A4B73; font-weight: bold; padding: 10px;">
 		<div>MEDIPLAT</div>
 		<div>CORESOLUTION MEDICAL WORK PLATFORM</div>
 	</div>
@@ -71,7 +53,7 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div style="border-top: 1px solid #000; margin-top: 10px;"></div>
+			<div style="border-top: 1px solid #000;"></div>
 			<div style="display: flex;">
 				<div style="margin-right: 10px; width: 250px;text-align: center; display: flex; align-items: flex-start; justify-content: flex-start; flex-direction: column;">
 					<c:forEach items="${menu }" var="m">

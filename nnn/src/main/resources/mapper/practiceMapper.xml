@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "test">
+<mapper namespace = "practice">
 
 	<select id="cslist" resultType="testVo">
 		select 
@@ -2256,4 +2256,22 @@
 		insert into googleuser (googleId, email)
 		values (#{googleId}, #{email})
 	</insert>
+	
+	<!-- 테스트 관리자 -->
+	<select id="subop" parameterType="map" resultType="map">
+		select * from sub
+	</select>
+	
+	<select id="userall" parameterType="map" resultType="map">
+		select u.c_name, u.c_name2, u.subname, u.id, u.pwd, u.position, u.name, u.reg_date, u.end_date, u.phone,
+		o.k, o.v, o.b, o.x, o.z, o.a, o.del_yn from users u join useroption o on u.id = o.id
+	</select>
+	
+	<select id="userop" parameterType="map" resultType="map">
+		select * from useroption
+	</select>
+	<!--  변수 추가  -->
+	<select id="useropadd" parameterType="map" resultType="map">
+		ALTER TABLE useroption ADD COLUMN #{col} VARCHAR(10) NOT NULL DEFAULT 'F'
+	</select>
 </mapper>

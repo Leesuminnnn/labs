@@ -12,20 +12,23 @@ import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.EvaluationVo;
 import com.nnn.app.vo.GoogleuserVo;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.SubVo;
 import com.nnn.app.vo.TestVo;
 import com.nnn.app.vo.TestusersVo;
+import com.nnn.app.vo.UserVo;
+import com.nnn.app.vo.UseroptionVo;
 import com.nnn.app.vo.WhetherVo;
 import com.nnn.app.vo.WrittenVo;
 
 @Repository
-public class TestDao {
+public class PracticeDao {
 	//1 : csworktools.cafe24.com  , 2 : counselman
 	@Resource(name="sqlSession2")
 	private SqlSession sqlSession2;
 	@Resource(name="sqlSession1")
 	private SqlSession sqlSession1;
 	
-	public static final String MAPPER = "test";
+	public static final String MAPPER = "practice";
 
 //	@Autowired
 //	public CanvasDao(SqlSession sqlSession2) {
@@ -106,6 +109,21 @@ public class TestDao {
 
 	public int guserinsert(GoogleuserVo user) {
 		return sqlSession1.insert(MAPPER+".guserinsert", user);
+	}
+
+	public List<SubVo> subop(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".subop", map);
+//		return sqlSession3.selectList(MAPPER+".subop", map);
+	}
+
+	public List<UserVo> userall(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".userall", map);
+//		return sqlSession3.selectList(MAPPER+".userall", map);
+	}
+
+	public List<UseroptionVo> userop(Map<String, Object> map) {
+		return sqlSession1.selectList(MAPPER+".userop", map);
+//		return sqlSession3.selectList(MAPPER+".userop", map);
 	}
 
 	

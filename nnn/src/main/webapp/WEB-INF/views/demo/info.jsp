@@ -31,7 +31,7 @@
 	<div id="header">
 	
 	</div>
-	<jsp:include page="../demo/header.jsp"></jsp:include>
+	<jsp:include page="../mediplat/header.jsp"></jsp:include>	
 	<div class="info">
 		<div class="info-container">
 			<div class="info_name">

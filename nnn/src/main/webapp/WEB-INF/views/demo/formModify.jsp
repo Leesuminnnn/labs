@@ -24,7 +24,7 @@
 <body>
 <div class="main normal">
 <form id="frm" onsubmit="return false;">
-	<jsp:include page="../demo/header.jsp"></jsp:include>
+	<jsp:include page="../mediplat/header.jsp"></jsp:include>	
 	
 		<div class="info">
 			<div>
