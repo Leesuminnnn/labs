@@ -292,7 +292,7 @@ $("#loginbtn").click(function (){
 				// 로그인 성공
 				idx = response.idx;
 				if (idx == 635) {
-					location.href = "${pageContext.request.contextPath}/mediplat/admin";
+					location.href = "${pageContext.request.contextPath}/demo/admin";
 				} else {
 					location.href = "${pageContext.request.contextPath}/mediplat/Main/"+idx;
 				}

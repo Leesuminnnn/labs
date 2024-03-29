@@ -233,6 +233,9 @@ section {
     position: fixed;
     height: 100%;
 }
+.icon-image {
+	margin-right: 10px;
+}
 </style>
 </head>
 <body>

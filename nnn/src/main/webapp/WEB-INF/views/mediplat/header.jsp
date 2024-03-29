@@ -8,6 +8,7 @@
 			<div class="home-icon">
 				<a href="${pageContext.request.contextPath}/mediplat/Main/${info.idx}" style="font-size: 2rem; color: #fff;">
 					MEDIPLAT
+					${loginmember.idx }
 				</a>
 			</div>
 		<div class="logo-img">

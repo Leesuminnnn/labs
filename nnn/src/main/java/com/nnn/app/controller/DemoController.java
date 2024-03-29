@@ -438,7 +438,8 @@ public class DemoController {
 		list2 = demoService.whetherSelect(map);
 		System.out.println("평가 완료 리스트 출력 : "+list2);
 		mv.addObject("endlist", list2);
-		
+		// 세션 idx
+		mv.addObject("loginmember", session.getAttribute("loginmember"));
 		LocalDateTime now = LocalDateTime.now();
 		mv.addObject("now", now);
 		System.out.println(now);
