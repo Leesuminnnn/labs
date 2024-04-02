@@ -42,4 +42,14 @@ public class PracticeController {
 		mv.setViewName("practice/test");
 		return mv;
 	}
+	
+	@RequestMapping(value = "main")
+	public ModelAndView main (ModelAndView mv) {
+		
+		System.out.println("!");
+		mv.setViewName("practice/main");
+		
+		return mv;
+		
+	}
 }

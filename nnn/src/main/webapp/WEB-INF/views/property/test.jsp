@@ -4,32 +4,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta charset="UTF-8">
+<title>제목을입력하세요</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script type="text/javascript">
-
-</script>
 <style type="text/css">
 
 </style>
 </head>
-<body><%-- 
-	<c:forEach items="sub" var="s">
-		${s.subcode }
-	</c:forEach> --%>
-	<div>
-	test
-	<c:forEach items="${user }" var="u">
-		<c:if test="${u.c_name eq '효사랑전주요양병원' }">
-			${u.name }
-		</c:if>
-	</c:forEach>
-	</div>
-	
-	<%-- <c:forEach items="userop">
-	
-	</c:forEach> --%>
+<body>
+
 </body>
+<script>
+
+</script>
 </html>
