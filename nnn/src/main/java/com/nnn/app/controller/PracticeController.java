@@ -9,7 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nnn.app.service.PracticeService;
@@ -46,10 +49,28 @@ public class PracticeController {
 	@RequestMapping(value = "main")
 	public ModelAndView main (ModelAndView mv) {
 		
-		System.out.println("!");
+		System.out.println("main");
 		mv.setViewName("practice/main");
 		
 		return mv;
 		
 	}
+	@RequestMapping(value = "list")
+	public ModelAndView list (ModelAndView mv) {
+		
+		System.out.println("list");
+		mv.setViewName("practice/list");
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("/barcode")
+    @ResponseBody
+    public String handleBarcode(@RequestBody Map<String, Object> payload) {
+        String barcode = (String) payload.get("barcode");
+        // Process the barcode value, e.g., save it to the database
+        
+        return "{\"status\":\"success\"}";
+    }
 }

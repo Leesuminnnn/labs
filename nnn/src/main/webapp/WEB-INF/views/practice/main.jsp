@@ -21,7 +21,7 @@
 <script type="text/javascript">
 
 </script>
-<script src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
 <style type="text/css">
 	section {
 		padding-top: 62px;	
@@ -31,137 +31,46 @@
 <body>
 <jsp:include page="./header.jsp"></jsp:include>	
 <section>
-	<div class="wrap">
-		<div class="scan-area">
-			<div id="scanBtn">스캔</div>
-		</div>
-		<div class="search-area">
-			<div id="searchBtn">검색</div>
-		</div>
-	</div>
+	<div id="barcode-scanner"></div>
 </section>
 
 
 <script type="text/javascript">	
 
+//barcode-scanner.js
+document.addEventListener('DOMContentLoaded', function() {
+    Quagga.init({
+        inputStream : {
+            name : "Live",
+            type : "LiveStream",
+            target: document.querySelector('#barcode-scanner')
+        },
+        decoder : {
+            readers : ["code_128_reader"] // You can add more readers here
+        }
+    }, function(err) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        Quagga.start();
+    });
 
-
-	const codeReader = new ZXing.BrowserQRCodeReader();
-	const scanButton = document.getElementById('scanBtn');
-	const QRdel = document.getElementById('QRdel');
-	
-	
-	
-	scanButton.addEventListener('click', () => {
-		console.log("click");
-		navigator.mediaDevices.getUserMedia({ video:  { facingMode: { exact: "environment" } }} ).then((stream) => {
-			const video = document.createElement('video');
-			const img = document.createElement('img');
-			video.srcObject = stream;
-			// scan클래스를 지정하여 scan클래스에 video생성
-			//document.body.appendChild(video);
-			document.querySelector('.scan').appendChild(video);
-			// video태그에 class 추가
-			video.className += "QRscan";
-			
-			video.play();
-			video.muted = true;
-			video.playsinline = true;
-			// 오버레이(화면 어둡게) 시작
-			$(".overlay").show();
-			// QRdel icon 생성
-			$("#QRdel").show();
-			// QR 안내 text 생성
-			$("#QRtext").show();
-			// QR_scan_img 생성
-			$("#QR_scan_img").show();
-			// QR 안내 text2 생성
-			$("#QRtext2").show();
-			
-			
-			
-			// QRdel icon 클릭 시 QR스캔 중지
-			QRdel.addEventListener('click', () => {
-				// video 요소를 삭제합니다.
-				video.pause();
-				video.srcObject = null;
-				const videoParent = video.parentNode;
-				videoParent.removeChild(video);
-				// 스트림을 중지합니다.
-				stream.getTracks().forEach(track => track.stop());
-				// 오버레이(화면 어둡게) 제거
-				$(".overlay").hide();
-				// QRdel icon 제거
-				$("#QRdel").hide();
-				// QR 안내 text 제거
-				$("#QRtext").hide();
-				// QR_scan_img 제거
-				$("#QR_scan_img").hide();
-				// QR 안내 text2 제거
-				$("#QRtext2").hide();
-			});
-			
-			codeReader.decodeFromVideoDevice(undefined, video, (result) => {
-				if (result) {
-				
-				const urlParam = new URLSearchParams(result.text);
-				console.log(result.text);
-				const h_name_val = urlParam.get('h_name');
-				const h_no_val = urlParam.get('h_no');
-				const h_number_val = urlParam.get('h_number');
-				
-				console.log(h_name_val);
-				console.log(h_no_val);
-				console.log(h_number_val);
-				
-				h_name.value = h_name_val;
-				h_no.value = h_no_val;
-				h_number.value = h_number_val;
-				
-            	video.pause();
-            	video.srcObject = null;
-            	const videoParent = video.parentNode;
-            	videoParent.removeChild(video);
-            	
-            	// 스트림을 중지합니다.
-				stream.getTracks().forEach(track => track.stop());
-				// 오버레이(화면 어둡게) 제거
-				$(".overlay").hide();
-				// QRdel icon 제거
-				$("#QRdel").hide();
-				// QR 안내 text 제거
-				$("#QRtext").hide();
-				// QR_scan_img 제거
-				$("#QR_scan_img").hide();
-				// QR 안내 text2 제거
-				$("#QRtext2").hide();
-				}
-			}).catch((err) => {
-			console.error(err);
-			alert(err);
-			// video 요소를 삭제합니다.
-			video.pause();
-			video.srcObject = null;
-			const videoParent = video.parentNode;
-			videoParent.removeChild(video);
-			// 스트림을 중지합니다.
-			stream.getTracks().forEach(track => track.stop());
-			// 오버레이(화면 어둡게) 제거
-			$(".overlay").hide();
-			// QRdel icon 제거
-			$("#QRdel").hide();
-			// QR 안내 text 제거
-			$("#QRtext").hide();
-			// QR_scan_img 제거
-			$("#QR_scan_img").hide();
-			// QR 안내 text2 제거
-			$("#QRtext2").hide();
-			});
-		}).catch((err) => {
-		console.error(err);
-		alert(err);
-		});
-	});
+    Quagga.onDetected(function(result) {
+        let code = result.codeResult.code;
+        // Send the code to the server
+        fetch('/barcode', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ barcode: code }),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    });
+});
 </script>
 
 </body>
