@@ -65,6 +65,19 @@ public class DemoController {
 		mv.setViewName("demo/login");
 		return mv;
 	}
+	@RequestMapping(value="Login2")
+	public ModelAndView login2(ModelAndView mv, NoticeVo vo) throws Exception {
+		// 공지사항 영역 리스트로 출력
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<NoticeVo> list = demoService.noticeSelect(map);
+		
+		mv.addObject("notice", list);
+		System.out.println(list);
+		
+		mv.setViewName("demo/login2");
+		return mv;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public LoginAjaxResponse loginaction(UsersVo vo, HttpSession session, Model md, HttpServletRequest request) throws Exception {

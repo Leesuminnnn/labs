@@ -16,4 +16,6 @@ public class PropertyDao {
 	private SqlSession sqlSession1;
 	
 	public static final String MAPPER = "property";
+	
+	
 }
