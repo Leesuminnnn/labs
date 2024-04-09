@@ -27,6 +27,36 @@
 		<typeAlias alias="boardVo" type="com.nnn.app.vo.BoardVo"/>
 		<typeAlias alias="pointdetail" type="com.nnn.app.vo.Pointdetail"/>
 		<typeAlias alias="calen" type="com.nnn.app.vo.CalendarVo"/>
+		<typeAlias alias="testusers" type="com.nnn.app.vo.TestusersVo"/>
+		<typeAlias alias="evaluation" type="com.nnn.app.vo.EvaluationVo"/>
+		<typeAlias alias="answer" type="com.nnn.app.vo.AnswerVo"/>
+		<typeAlias alias="whether" type="com.nnn.app.vo.WhetherVo"/>
+		<typeAlias alias="notice" type="com.nnn.app.vo.NoticeVo"/>
+		<typeAlias alias="loginlog" type="com.nnn.app.vo.LoginlogVo"/>
+		<typeAlias alias="users" type="com.nnn.app.vo.UsersVo"/>
+		<typeAlias alias="ph" type="com.nnn.app.vo.UserPh"/>
+		<typeAlias alias="target" type="com.nnn.app.vo.TargetVo"/>
+		<typeAlias alias="guser" type="com.nnn.app.vo.GoogleuserVo"/>
+		
+		<!-- 계열사 -->
+		<typeAlias alias="cusers" type="com.nnn.app.vo.CoopusersVo"/>
+		<typeAlias alias="cwhether" type="com.nnn.app.vo.CWhetherVo"/>
+		<typeAlias alias="canswer" type="com.nnn.app.vo.CAnswerVo"/>
+		
+		<!-- 평가 후 점수 -->
+		<typeAlias alias="score" type="com.nnn.app.vo.ScoreVo"/>
+		
+		<!-- 설정관리? -->
+		<typeAlias alias="user" type="com.nnn.app.vo.UserVo"/>
+		<typeAlias alias="option" type="com.nnn.app.vo.UseroptionVo"/>
+		<typeAlias alias="sub" type="com.nnn.app.vo.SubVo"/>
+		
+		<!-- 메디플랫 -->
+		<typeAlias alias="medi" type="com.nnn.app.vo.Mediplat"/>
+		<typeAlias alias="medimenu" type="com.nnn.app.vo.MediplatMenu"/>
+		
+		<!-- 전자문서 -->
+		<typeAlias alias="access" type="com.nnn.app.vo.Access"/>
 		
 	</typeAliases>  
 
