@@ -58,6 +58,9 @@
 		<!-- 전자문서 -->
 		<typeAlias alias="access" type="com.nnn.app.vo.Access"/>
 		
+		<!-- 재물조사 -->
+		<typeAlias alias="property" type="com.nnn.app.vo.UserinformationVo"/>
+		
 	</typeAliases>  
 
 </configuration>  

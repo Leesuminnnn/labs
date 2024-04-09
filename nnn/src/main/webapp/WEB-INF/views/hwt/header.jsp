@@ -6,15 +6,15 @@
 <div class="wrapper">
 	<div class="logo">
 			<div class="home-icon">
-				<a href="${pageContext.request.contextPath}/mediplat/Main/${info.idx}" style="font-size: 2rem; color: #fff;">
+				<%-- <a href="${pageContext.request.contextPath}/mediplat/Main/${info.idx}" style="font-size: 2rem; color: #fff;">
 					MEDIPLAT
-				</a>
+				</a> --%>
 			</div>
 		<div class="logo-img">
 			<img src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
 		</div>
 		<div class="logout-img">
-			<a href="${pageContext.request.contextPath}/mediplat/Logout">
+			<a href="${pageContext.request.contextPath}/hwt/Logout">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
 			</a>
 		</div>
