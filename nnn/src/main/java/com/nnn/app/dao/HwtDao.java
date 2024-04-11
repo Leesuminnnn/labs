@@ -139,14 +139,14 @@ public class HwtDao {
 	}
 	public int hsptselect3(Map<String, Object> map) {
 //		return sqlSession1.selectOne(MAPPER+".hsptselect3", map);
-		return sqlSession3.selectOne(MAPPER+".hsptselect3", map);
-//		return sqlSession4.selectOne(MAPPER+".hsptselect3", map);
+//		return sqlSession3.selectOne(MAPPER+".hsptselect3", map);
+		return sqlSession4.selectOne(MAPPER+".hsptselect3", map);
 	}
 
 	public int hsptselectpwd1(Map<String, Object> map) {
 //		return sqlSession1.selectOne(MAPPER+".hsptpwdselect1", map);
-		return sqlSession3.selectOne(MAPPER+".hsptpwdselect1", map);
-//		return sqlSession4.selectOne(MAPPER+".hsptpwdselect1", map);
+//		return sqlSession3.selectOne(MAPPER+".hsptpwdselect1", map);
+		return sqlSession4.selectOne(MAPPER+".hsptpwdselect1", map);
 	}
 	public int hsptselectpwd2(Map<String, Object> map) {
 //		return sqlSession1.selectOne(MAPPER+".hsptpwdselect2", map);
