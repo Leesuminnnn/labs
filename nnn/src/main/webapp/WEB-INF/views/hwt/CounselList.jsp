@@ -19,78 +19,63 @@
 <link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>전자문서 검색</title>
 
-<style>
-.white-link {
-	color: #fff;
-}
-
-
-게시판 페이징 색상 파란색에서 회색으로 변경 -->.pagination>li>a, .pagination>li>span {
-	color: black !Important;
-}
-
-.page-link {
-	Color: #000;
-	background-color: #fff;
-	border: 1px solid #ccc;
-}
-
-.page-item.active .page-link {
-	z-index: 1;
-	Color: #555;
-	font-weight: bold;
-	/* background-color: #f1f1f1; */
-	border-color: #ccc;
-}
-
-.page-link:focus, .page-link:hover {
-	Color: #000;
-	background-color: #fafafa;
-	border-color: #ccc;
-}
-</style>
 </head>
 <body class="normal" style="font-size: 14pt; ">
 <%@ include file="header.jsp" %>
-<section class="normal">
-	<div class="container">
-	<form action="
-	<c:choose>
-		<c:when test="${keyword1 == '' and keyword2 == '' and keyword3 == ''}">
-		${pageContext.request.contextPath}/hwt/CounselList
-		</c:when>
-		<c:otherwise>
-		${pageContext.request.contextPath}/hwt/CounselListSearch
-		</c:otherwise>
-	</c:choose>
-	">
-	<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; font-size:20pt; color:#2f2f2f">
-		<div class="dv_tx" style="width:95px;">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
-		<div class="dv_tx" style="width:145px;">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
-		<div class="dv_tx" style="width:145px;">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
-		<input class="ip_sb" style="cursor: pointer;" type="submit" value="검색"/>&nbsp;
-		<a class="ip_sb" href="${pageContext.request.contextPath}/hwt/Written" style="cursor: pointer;     display: flex;
-    justify-content: center;
-    align-items: center;" >등록</a>
+
+
+<section style=""> 
+	<div class="nav__section" style=" ">
+		<div class="nav__link active" data-menu="userall" data-content="all">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_on.png">
+			<a class="" href="${pageContext.request.contextPath}/hwt/CounselList.do" style="color: #fff; font-size:18px;" ><span>목 록</span></a>
+		</div>
+		<div class="nav__link" data-menu="perall" data-content="all"  style="">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_off.png">
+			<a class="" href="${pageContext.request.contextPath}/hwt/Written.do" style="color: #c3c3c3; font-size:18px;" ><span>등 록</span></a>
+		</div>
 	</div>
-	<div style="border-bottom: 1px solid #ddd"></div>
-	<div id="list">
-	<table style=" width: 100%; text-align: center; font-size: 18pt; border-collapse: collapse;">
-		<tr class="" style="height: 70px; background-color: #425c7b; color:#ffffff;">
-			<td>작성일</td>
-			<td>차트번호</td>
-			<td>환자명</td>
-			<td>신청자</td>
-			<td>주보호자</td>
-			<td>부보호자</td>
-			<td>종류</td>
-			<td>상태</td>
-			<td></td>
-		</tr>
-		<c:choose>
+	<main id="main-content" >
+		<!-- 내용을 이곳에 추가 -->
+		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
+		<div class="pd"></div>
+		<div class="scroll-container">
+		<form action="
+			<c:choose>
+				<c:when test="${keyword1 == '' and keyword2 == '' and keyword3 == ''}">
+				${pageContext.request.contextPath}/hwt/CounselList
+				</c:when>
+				<c:otherwise>
+				${pageContext.request.contextPath}/hwt/CounselListSearch
+				</c:otherwise>
+			</c:choose>	
+		">
+		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #fff; color:#2f2f2f;">
+			<div class="dv_tx" style="">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
+			<div class="dv_tx" style="">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
+			<div class="dv_tx" style="">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
+			<input class="ip_sb" style="cursor: pointer;" type="submit" value="검색"/>&nbsp;
+			<a class="ip_sb ip_sb2" style="cursor: pointer; padding-top:10px;" href="${pageContext.request.contextPath}/hwt/Written.do">등록</a>
+		</div>
+		<div style="border-bottom: 1px solid #ddd"></div>
+			<table class="infotable">
+				<thead>
+					<tr>
+						<th class="sticky-top info-sticky-top">작성일</th>
+						<th class="sticky-top info-sticky-top">차트번호</th>
+						<th class="sticky-top info-sticky-top">환자명</th>
+						<th class="sticky-top info-sticky-top">신청자</th>
+						<th class="sticky-top info-sticky-top">주보호자</th>
+						<th class="sticky-top info-sticky-top">부보호자</th>
+						<th class="sticky-top info-sticky-top">종류</th>
+						<th class="sticky-top info-sticky-top">상태</th>
+						<th class="sticky-top info-sticky-top"></th>
+					</tr>
+				</thead>
+				<c:choose>
 			<c:when test="${keyword == 1}">
 				<c:forEach items="${cslist}" var="list">
-				<tr class="light list-tr" style="height: 78px; border-bottom: 1px solid #e9e9e9; color: #000000;">
+				<tr class="light list-tr" style="border-bottom: 1px solid #e9e9e9; color: #000000;">
 					<td>${list.cs_data_31}</td>
 					<td>${list.cs_data_02}</td>
 					<td>${list.cs_data_01}</td>
@@ -118,7 +103,7 @@
 									<div class="sb flex flex-center" style="cursor: pointer; margin-right: 5px;" onclick="window.open('${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}')">보기</div>
 									<div class="sb flex flex-center" style="cursor: pointer; margin-left: 5px;">
 									<a download="${list.cs_idx}" href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}" >
-									<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 50px; vertical-align: middle;">
+										<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 40px; vertical-align: middle;">
 									</a>
 									</div>
 								</c:otherwise>
@@ -163,11 +148,8 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		
-	</table>
-	
-	</div>
-	<c:if test="${keyword ==1 }">
+			</table>
+		<c:if test="${keyword ==1 }">
 	<div class="example" style="display: block; text-align: center;">
 			<nav aria-label="..." style="display: flex; height: 45px;
     justify-content: center;">
@@ -194,12 +176,12 @@
 						end="${pageMaker.endPage}">
 						<c:choose>
 							<c:when test="${num == pageMaker.cri.page}">
-								<li class="page-item active"><a class="page-link" style="padding: 5px;"
+								<li class="page-item active" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
 									href="${pageContext.request.contextPath}/hwt/CounselList?page=${num}&type=${type}&keyword1=${keyword1}">${num}</a>
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" style="padding: 5px;"
+								<li class="page-item" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
 									href="${pageContext.request.contextPath}/hwt/CounselList?page=${num}&type=${type}&keyword1=${keyword1}">${num}</a>
 								</li>
 							</c:otherwise>
@@ -208,7 +190,7 @@
 					<!-- 다음 페이지로 이동하기 -->
 					<c:choose>
 						<c:when test="${pageMaker.next == true}">
-							<li class="page-item"><a class="page-link" style="padding: 5px;"
+							<li class="page-item" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
 								href="${pageContext.request.contextPath}/hwt/CounselList?page=${pageMaker.endPage + 1}&type=${type}&keyword1=${keyword1}">Next</a>
 							</li>
 						</c:when>
@@ -217,7 +199,7 @@
 					<!-- 마지막페이지로 이동하기 -->
 					<c:choose>
 						<c:when test="${pageMaker.cri.page < pageMaker.endPage}">
-							<li class="page-item"><a class="page-link" style="padding: 5px;"
+							<li class="page-item" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
 								href="${pageContext.request.contextPath}/hwt/CounselList?page=${pageMaker.endPage}&perPageNum=${pageMaker.cri.perPageNum}&type=${type}&keyword1=${keyword1}">&raquo;</a>
 							</li>
 						</c:when>
@@ -230,26 +212,84 @@
 		</div>
 	
 	</c:if>
-	
 	</form>
 	</div>
+<<<<<<< HEAD
 </section>	
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+=======
+	</main>
+	
+</section>
+
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 <script>
+
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+const msg = document.querySelector('.menu_msg');
+const modal3 = document.querySelector('.modal3');
+const msg3 = document.querySelector('.menu_msg3');
+const modal4 = document.querySelector('.modal4');
+const msg4 = document.querySelector('.menu_msg4');
+
+const menuLinks = document.querySelectorAll('.nav__link'); // 메뉴 링크 요소들
+
+let currentMenuIndex = 0; // 현재 메뉴 인덱스
+
+let isScriptActive = true; // 스크립트의 활성화 상태를 나타내는 변수
+let lastMenuVisited = false; // 사용자가 마지막 메뉴를 방문했는지 여부를 나타내는 변수
+let inactiveTime = 0; // 페이지 비활성 시간을 나타내는 변수
+let timer = null; // 타이머 변수
+let lastMenuVisitTime = 0;
+
+/* 메뉴 활성화 및 해당 스크립트 실행 함수 */
+
+/* COLLAPSE MENU */
+
+
+// const linkCollapse = document.getElementsByClassName('collapse__link')
+// var i
+
+// for(i=0;i<linkCollapse.length;i++) {
+//     linkCollapse[i].addEventListener('click', function(){
+//         const collapseMenu = this.nextElementSibling
+//         collapseMenu.classList.toggle('showCollapse')
+
+//         const rotate = collapseMenu.previousElementSibling
+//         rotate.classList.toggle('rotate')
+//     });
+// }
+// const mainContent = document.getElementById('main-content');
+
+// menuLinks.forEach(link => {
+// 	link.addEventListener('click', function(event){
+// 		event.preventDefault();
+// 		currentMenuIndex = Array.from(menuLinks).indexOf(this);	// 클린된 메뉴의 인덱스를 업데이트
+// 		activateMenu(currentMenuIndex);
+		
+// 	});
+// });
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- <script>
 $(document).ready(function(){
 	var deviceWidth = $(window).width();
 	var deviceHeight = $(window).height();
 	var he = $('.container').height();
 	var he2 = $('section').height();
 	if (deviceWidth < 768) {
-	  $('.dv_tx').css('font-size', '14pt');
+	  $('.dv_tx').css('font-size', '10pt');
 	} else if (deviceWidth < 992) {
-	  $('.dv_tx').css('font-size', '16pt');
-	} else if (deviceWidth < 1200) {
-	  $('.dv_tx').css('font-size', '18pt');
+	  $('.dv_tx').css('font-size', '12pt');
+	} else if (deviceWidth < 1400) {
+	  $('.dv_tx').css('font-size', '13pt');
 	} else {
-	  $('.dv_tx').css('font-size', '20pt');
+	  $('.dv_tx').css('font-size', '16pt');
 	}
 	
 	if(he < 800){
@@ -263,7 +303,7 @@ $(document).ready(function(){
 	console.log(he);
 	console.log(he2);
 });
-</script>
+</script> -->
 <script>
 function keyword1text(){
 	let value = $('#keyword1').val();
@@ -278,4 +318,6 @@ function keyword3text(){
 	console.log(value);
 }
 </script>
+
+</body>
 </html>
