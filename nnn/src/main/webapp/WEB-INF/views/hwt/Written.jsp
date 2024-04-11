@@ -122,20 +122,61 @@
       line-height: 30px;
       margin-bottom: 5px;
   }
+  .nav__section {
+    width: 240px;
+    background: #2f425a;
+    color: #c3c3c3;
+    position: fixed;
+    height: 100%;
+    z-index: 999;
+}
+  .nav__link {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	padding-left: 25px;
+	border-left: 4px solid #2f425a;
+	cursor:pointer;
+}
+.active {
+    border-left: 4px solid #00bec2;
+    background: #293a4f;
+    color: #fff;
+}
+.icon-image {
+	margin-right: 10px;
+	width:18px;
+}
+
 </style>
 </head>
 <body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
+
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenAction.do">
+
+<div class="nav__section" style=" ">
+		<div class="nav__link" data-menu="userall" data-content="all">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_off.png">
+			<a class="" href="${pageContext.request.contextPath}/hwt/CounselList.do" style="color: #c3c3c3; font-size:18px;" ><span>목 록</span></a>
+		</div>
+		<div class="nav__link  active" data-menu="perall" data-content="all"  style="">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_on.png">
+			<a class="" href="${pageContext.request.contextPath}/hwt/Written.do" style="color: #fff; font-size:18px;" ><span>등 록</span></a>
+		</div>
+</div>
+
 <section style="background-repeat: no-repeat;
 	background-position: center 0;
 	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
 	background-size: 1246px;
 	min-width: 1280px;
-    margin: 0 auto; 
-	margin-bottom: 111px; margin-top: 62px; background-color: #f7f7f7;">
-<div id="capture_area" style="">
+	margin-bottom: 100px; margin-top: 62px; background-color: #f7f7f7;  margin-left:240px;">
+	
+	
+<div id="capture_area" class="capture_area" style="">
 <div>
+
 <input type="hidden" id="imgData" name="imgData">
 <h1 style="text-align: center; font-size: 30pt; padding-top: 70px;">입 원 서 약 서</h1>
 
@@ -1039,11 +1080,11 @@ $(document).ready(function() {
 </section>
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
 <div style=" border-top: 1px solid #ddd;"></div>
-<footer class="normal" style="width: 1087px; margin: 0 auto; padding-top: 20px;">
-	<div style="display: flex; justify-content: space-between; margin-left: 33px;">
-	    <div style="display: flex;">
-	    	<input style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
-	    	 height: 70px; width: 200px; border-radius: 5px; font-size: 18pt; margin-right: 22px; cursor:pointer; border:none;" id="btn_save" 
+<footer class="normal" style="width: 1380px; margin: 0 auto; padding-top: 20px;">
+	<div style="display: flex; justify-content: flex-end;">
+	    <div style="">
+	    	<input style="background-color: #7b7b7b; color: #ffffff;
+	    	 height: 43px; width: 120px; border-radius: 5px; font-size: 20px; cursor:pointer; border:none;" id="btn_save" 
 	    	 class="btn_save" type="button" value="임시저장" >
 	    	
 	    	 <!-- 

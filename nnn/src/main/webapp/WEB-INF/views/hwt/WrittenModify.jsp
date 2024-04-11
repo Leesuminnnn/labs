@@ -125,13 +125,27 @@
 </head>
 <body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
+
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
+
+<div class="nav__section" style=" ">
+		<div class="nav__link" data-menu="userall" data-content="all">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_off.png">
+			<a class="" href="${pageContext.request.contextPath}/hwt/CounselList.do" style="color: #c3c3c3; font-size:18px;" ><span>목 록</span></a>
+		</div>
+		<div class="nav__link  active" data-menu="perall" data-content="all"  style="">
+			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_on.png">
+			<a class="" href="${pageContext.request.contextPath}/hwt/Written.do" style="color: #fff; font-size:18px;" ><span>등 록</span></a>
+		</div>
+</div>
+
 <section style="background-repeat: no-repeat;
 	background-position: center 0;
 	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
 	background-size: 1246px;
 	min-width: 1280px;
     margin: 0 auto; margin-top: 62px; background-color: #f7f7f7;">
+    
 <div id="capture_area">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
@@ -1181,10 +1195,10 @@ $(document).ready(function() {
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
 <div style="border-top: 1px solid #ddd;"></div>
 <footer class="normal" style="width: 1087px; margin: 0 auto; padding-top: 20px;">
-	<div style="display: flex; justify-content: space-between; margin-left: 33px;">
+	<div style="display: flex; justify-content: center;">
 	    <div style="display: flex;">
 	    	<div style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
-	    	 height: 70px; width: 200px; border-radius: 5px; font-size: 18pt; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
+	    	 height: 50px; width: 150px; border-radius: 5px; font-size: 20px; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
 	    	 class="btn_save" >임시저장
 	    	 </div>
 	    	 <!-- 
@@ -1192,7 +1206,7 @@ $(document).ready(function() {
 	        border-radius: 5px; height: 70px; width: 200px; font-size: 18pt;" id="btn_download" class="btn_download"type="submit" value="등록"/>
 	         -->
 	        <div style="display: flex; justify-content: center; align-items: center; background-color: #03a9d0; color: #ffffff; 
-	        border-radius: 5px; height: 70px; width: 200px; font-size: 18pt;" id="btn_download" class="btn_download">등록</div>
+	        border-radius: 5px; height: 50px; width: 150px; font-size: 20px;" id="btn_download" class="btn_download">등록</div>
 	    </div>
 		<!-- 등록버튼	    
 		<div style="display: flex; justify-content: flex-end;">

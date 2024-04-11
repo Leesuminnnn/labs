@@ -5,11 +5,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="wrapper">
 	<div class="logo">
-			<div class="home-icon">
-				<%-- <a href="${pageContext.request.contextPath}/mediplat/Main/${info.idx}" style="font-size: 2rem; color: #fff;">
-					MEDIPLAT
-				</a> --%>
-			</div>
+		<c:choose>
+			<c:when test="${sessionScope.loginmember eq 12365478}">
+				<div class="home-icon">
+					<a href="${pageContext.request.contextPath}/hwt/CounselList">
+						<img src="${pageContext.request.contextPath}/resources/icon/home_y.png">
+					</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="home-icon">
+					<a href="${pageContext.request.contextPath}/hwt/CounselList">
+						<img src="${pageContext.request.contextPath}/resources/icon/home_y.png">
+					</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		<div class="logo-img">
 			<img src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
 		</div>
