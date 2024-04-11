@@ -42,6 +42,7 @@ CREATE TABLE `cs_data` (
 	`cs_data_29` VARCHAR(50) NULL DEFAULT NULL COMMENT '신청인 성명' COLLATE 'utf8_general_ci',
 	`cs_data_30` VARCHAR(20) NULL DEFAULT NULL COMMENT '임시저장=1/등록완료=2' COLLATE 'utf8_general_ci',
 	`cs_data_31` DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성일',
+	`cs_data_32` VARCHAR(10) NULL DEFAULT NULL COMMENT '입원서약서=1' COLLATE 'utf8_general_ci',
 	PRIMARY KEY (`cs_idx`) USING BTREE
 )
 COLLATE='utf8_general_ci'

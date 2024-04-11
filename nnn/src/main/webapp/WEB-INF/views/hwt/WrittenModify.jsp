@@ -539,7 +539,7 @@ border: 1px solid #c7c7c7;" >
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <script>
 function Mobile(){

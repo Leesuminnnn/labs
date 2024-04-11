@@ -55,10 +55,6 @@ public class HwtController {
 	public ModelAndView login(ModelAndView mv, NoticeVo vo) throws Exception {
 		// 공지사항 영역 리스트로 출력
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<NoticeVo> list = hwtService.noticeSelect(map);
-		
-		mv.addObject("notice", list);
-		System.out.println(list);
 		
 		mv.setViewName("hwt/login");
 		return mv;

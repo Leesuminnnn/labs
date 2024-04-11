@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_css.css"> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1" >
 <title>코어솔루션 전자문서 시스템</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 
 </style>

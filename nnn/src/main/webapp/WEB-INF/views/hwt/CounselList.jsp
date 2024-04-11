@@ -235,7 +235,7 @@
 	</div>
 </section>	
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	var deviceWidth = $(window).width();

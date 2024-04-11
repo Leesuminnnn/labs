@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>코어솔루션 전자문서 시스템</title>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 
 </head>
 <body>
@@ -122,13 +122,13 @@
 		</div> --%>
 		<div class="text-wrap">
 			<div class="text-img">
-				<img class="pc-img" src="${pageContext.request.contextPath}/resources/icon/ev/login_bg2.png">
+				<img class="pc-img" src="${pageContext.request.contextPath}/resources/icon/hwt/login_bg.png">
 				<img class="mob-img" src="${pageContext.request.contextPath}/resources/icon/ev/login_bg_m_3.png">
 			</div>
 			<div class="main">
 				
 				<div class="login-header">
-					<span class="header-text">코어솔루션 전자문서 시스템</span>
+					<span class="header-text">LOGIN</span>
 				</div>
 				<div class="login-area">
 					<div class="login-content">
@@ -143,30 +143,8 @@
 								<div class="pwd-area">
 									<input class="input-text pwd" type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호입력" value="">
 								</div>
-								<div class="login-text">
-									<span class="bold" style="">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
-								</div>
-								<div class="chk-area" style="">
-									<label class="label label-name">
-										<span class="alignBox">
-											<input class="radio" type="radio" id="chk_name" name="radio"  />
-											<span class="radioimg"></span>
-											<span class="inputTxt normal">사번 / 이름 <span class="bold">(비밀번호 설정 전)</span></span>
-										</span>
-									</label>
-									<label class="label label-pwd">
-										<span class="alignBox">
-											<input type="radio" class="radio" id="chk_no" name="radio" checked/>
-											<span class="radioimg"></span>
-											<span class="inputTxt normal">사번 / 비밀번호 <span class="bold">(비밀번호 설정 후)</span></span>
-										</span>
-									</label>
-								</div>
-								<!-- <div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px; font-size: 1.4rem;">
-									
-								</div> -->
 								<div class="pw-find">
-									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/hwt/Findpwd'">비밀번호 찾기 ></span>
+<%-- 									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/hwt/Findpwd'">비밀번호 찾기 ></span> --%>
 								</div>
 								<div class="login-btn">
 									<button type="button" id="loginbtn" style="">로그인</button>
@@ -174,44 +152,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="center-line"></div>
-					<div class="notice-content">
-						<div class="container">
-							<div class="content content2">
-								<div class="notice-header-top">
-									<span>Notice</span>
-								</div>
-								<div class="notice-bg">
-									<img src="${pageContext.request.contextPath}/resources/icon/ev/memo.png">
-								</div>
-									<div class="notice-main">
-										<div class="notice-header bold">
-											<span>인사평가 일정을 확인해 주시기바랍니다.</span>
-										</div>
-										<div class="notice-text normal">
-											<div>
-												<div>
-													<c:forEach items="${notice }" var="n">
-													<div class="notice-inner">
-														<div class="inner-text" style='display:<c:if test="${empty n.d3 }">block; width:100%; align-items: center;</c:if>'>
-															<c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png" style='<c:if test="${not empty n.d3 }">line-heigh: 12px; margin: 0 9px 0 4px;</c:if>'></c:if>
-															<span >${n.d2}</span>
-														</div>
-														<c:if test="${not empty n.d3 }">
-															<div style="white-space:pre;"><span class="inner-span" style='<c:if test="${not empty n.d3}">margin:0</c:if>'>${n.d3 }</span></div>
-														</c:if>
-													</div>
-													</c:forEach>
-												</div>
-											</div>
-										</div>
-									</div>
-								<div class="notice-btn">
-									<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 				<div class="logo-area">
 					<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
@@ -219,7 +160,6 @@
 			</div>
 		</div>
 	</section>
-	<jsp:include page="../demo/footer.jsp"></jsp:include>
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>
