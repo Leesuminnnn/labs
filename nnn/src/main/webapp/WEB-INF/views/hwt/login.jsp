@@ -135,7 +135,7 @@
 						<div class="container">
 							<div class="content">
 								<div class="login-header-top">
-									<span>Login</span>
+									<span> </span>
 								</div>
 								<div class="id-area">
 									<input class="input-text id" type="text" name="id" id="id" placeholder="사번" title="사번입력" autofocus="autofocus">
