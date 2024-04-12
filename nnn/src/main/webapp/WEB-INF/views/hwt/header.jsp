@@ -8,7 +8,7 @@
 		<c:choose>
 			<c:when test="${sessionScope.loginmember eq 12365478}">
 				<div class="home-icon">
-					<a href="${pageContext.request.contextPath}/hwt/CounselList">
+					<a href="${pageContext.request.contextPath}/hwt/CounselList.do">
 						<img src="${pageContext.request.contextPath}/resources/icon/home_y.png">
 					</a>
 				</div>
