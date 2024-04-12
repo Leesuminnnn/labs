@@ -29,8 +29,6 @@ public class DemoDao {
 	private SqlSession sqlSession1;
 	@Resource(name="sqlSession3")
 	private SqlSession sqlSession3;
-	@Resource(name="sqlSession4")
-	private SqlSession sqlSession4;
 	
 	public static final String MAPPER = "demo";
 

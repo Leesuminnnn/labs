@@ -30,6 +30,7 @@ hspt_X VARCHAR(30) NOT NULL COMMENT '1인부서 여부',
 hspt_Z VARCHAR(30) NOT NULL COMMENT '진료팀장 여부',
 hspt_S varchar(30) not null comment '(변수) 부서원평가 여부',
 hspt_T varchar(30) not null comment '(변수) 부서장대행 여부',
+hspt_J varchar(30) not null comment '(변수) 경혁팀 평가 여부',
 user_code VARCHAR(30) NOT NULL COMMENT '코드'
 );
 
