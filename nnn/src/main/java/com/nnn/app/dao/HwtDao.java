@@ -73,7 +73,7 @@ public class HwtDao {
 //		return sqlSession4.selectList(MAPPER+".cslist", cri);
 	}
 	public List<WrittenVo> listsearch(Criteria cri) {
-		return sqlSession1.selectList(MAPPER+".csClistsearch", cri);
+		return sqlSession1.selectList(MAPPER+".cslistsearch", cri);
 //		return sqlSession4.selectList(MAPPER+".cslistsearch", cri);
 	}
 	
