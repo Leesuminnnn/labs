@@ -23,7 +23,7 @@
 
 </style>
 </head>
-<body class="normal" style="font-size: 14pt; ">
+<body class="normal" style="font-size: 14pt; background:#f7f7f7;">
 <%@ include file="header.jsp" %>
 
 
@@ -53,7 +53,7 @@
 				</c:otherwise>
 			</c:choose>	
 		">
-		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #fff; color:#2f2f2f;">
+		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; color:#2f2f2f;">
 			<div class="dv_tx" style="">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
 			<div class="dv_tx" style="">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
 			<div class="dv_tx" style="">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
@@ -64,11 +64,11 @@
 			<table class="infotable">
 				  <colgroup>
                     <col width="10%">
+                    <col width="15%">
                     <col width="10%">
-                    <col width="11%">
-                    <col width="11%">
-                    <col width="11%">
-                    <col width="11%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
                     <col width="10%">
                     <col width="10%">
                     <col width="*">
@@ -83,7 +83,7 @@
 						<th class="sticky-top info-sticky-top">부보호자</th>
 						<th class="sticky-top info-sticky-top">종류</th>
 						<th class="sticky-top info-sticky-top">상태</th>
-						<th class="sticky-top info-sticky-top"></th>
+						<th class="sticky-top info-sticky-top">서명란</th>
 					</tr>
 				</thead>
 				<c:choose>
@@ -169,70 +169,7 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-			</table>
-		<c:if test="${keyword ==1 }">
-	<div class="example" style="display: block; text-align: center;">
-			<nav aria-label="..." style="display: flex; height: 45px;
-    justify-content: center;">
-
-				<ul class="pagination justify-content-center" style="display: flex; justify-content: center; align-items: center;"id="pageInfo">
-					<!-- 처음페이지로 이동하기 -->
-					<c:choose>
-						<c:when test="${pageMaker.cri.page != 1}">
-							<li class="page-item"><a class="page-link" style="padding: 5px;"
-								href="${pageContext.request.contextPath}/hwt/CounselList?page=${pageMaker.startPage - pageMaker.startPage}&perPageNum=${pageMaker.cri.perPageNum}&type=${type}&keyword1=${keyword1}">&laquo;</a>
-							</li>
-						</c:when>
-					</c:choose>
-					<!-- 이전페이지로 이동하기 -->
-					<c:choose>
-						<c:when test="${pageMaker.prev == true}">
-							<li class="page-item"><a class="page-link" style="padding: 5px;"
-								href="${pageContext.request.contextPath}/hwt/CounselList?page=${pageMaker.startPage - 1}&type=${type}&keyword1=${keyword1}">Previous</a>
-							</li>
-						</c:when>
-					</c:choose>
-					<!-- 리스트 페이징 -->
-					<c:forEach var="num" begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}">
-						<c:choose>
-							<c:when test="${num == pageMaker.cri.page}">
-								<li class="page-item active" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
-									href="${pageContext.request.contextPath}/hwt/CounselList?page=${num}&type=${type}&keyword1=${keyword1}">${num}</a>
-								</li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
-									href="${pageContext.request.contextPath}/hwt/CounselList?page=${num}&type=${type}&keyword1=${keyword1}">${num}</a>
-								</li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<!-- 다음 페이지로 이동하기 -->
-					<c:choose>
-						<c:when test="${pageMaker.next == true}">
-							<li class="page-item" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
-								href="${pageContext.request.contextPath}/hwt/CounselList?page=${pageMaker.endPage + 1}&type=${type}&keyword1=${keyword1}">Next</a>
-							</li>
-						</c:when>
-					</c:choose>
-
-					<!-- 마지막페이지로 이동하기 -->
-					<c:choose>
-						<c:when test="${pageMaker.cri.page < pageMaker.endPage}">
-							<li class="page-item" style="border-left: none; background: none;"><a class="page-link" style="padding: 5px;"
-								href="${pageContext.request.contextPath}/hwt/CounselList?page=${pageMaker.endPage}&perPageNum=${pageMaker.cri.perPageNum}&type=${type}&keyword1=${keyword1}">&raquo;</a>
-							</li>
-						</c:when>
-
-					</c:choose>
-				</ul>
-
-
-			</nav>
-		</div>
-	
-	</c:if>
+		</table>
 	</form>
 	</div>
 	</main>

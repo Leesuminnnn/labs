@@ -22,23 +22,24 @@
 } */
 main {
 	width: 100%;
-	background: #fff;
+	background: #f7f7f7;
 	margin-left: 240px;
 }
 .pd {
-	border-top: 11px solid #fff;
+	border-top: 11px solid #f7f7f7;
 	position: fixed;
 	top: 62px;
 	width: 100%;
 	z-index: 999;
 }
-td, th {/* 
+th {height: 45px; text-align: center; font-size: 12pt;}
+td {/* 
 	border: 1px solid #d7d7d7; */
-	height: 45px;
+	height: 70px;
 	text-align: center;/*
 	border-right: 1px solid #d7d7d7; 
 	border-bottom: 1px solid #d7d7d7; */
-	font-size: 12pt;
+	font-size: 16px;
 }
 tbody td {
 	border: 1px solid #d7d7d7;
@@ -239,15 +240,15 @@ section {
 
 .ip_tx {
   border: 1px Solid #eaeaea;
-  width: 200px;
+  width: 250px;
   height: 45px;
   margin-left: 10px;
-  margin-right: 55px;
+  margin-right: 80px;
   padding-left: 10px;
   border-radius:5px;
 }
 .ip_pn {
-  width: 190px;
+  width: 300px;
 }
 .ip_sb {
   border: 1px solid #7b7b7b;
@@ -274,15 +275,15 @@ section {
 
 .save {
   color: #ffffff;
-  width: 60px;
-  height: 35px;
+  width: 170px;
+  height: 45px;
   background-color: #ffa200;
   border-radius: 3px;
 }
 .sb {
   color: #ffffff;
-  width: 60px;
-  height: 35px;
+  width: 80px;
+  height: 45px;
   background-color: #2f425a;
   border-radius: 3px;
 }

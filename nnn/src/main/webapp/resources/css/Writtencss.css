@@ -179,6 +179,10 @@ input[type="radio"]:checked + label span {
 	padding: 30px;
 }
 
+.light_info{text-indent: 20px;}
+
+
+
 
 input[type=radio], input[type=checkbox] {
 	position: absolute;
@@ -222,6 +226,8 @@ input[type=checkbox]:checked + label:before {
     main{margin-left:0 !important;}
     section{margin-top: 62px; background-color: #fff; padding:0px; margin-left:0px !important;}
     .footer_save{display:flex; justify-content:center !important;}
+    .btn_save{width:200px !important; height:55px !important;}
+    .btn_download{width:200px !important; height:55px !important;}
 }
 
 

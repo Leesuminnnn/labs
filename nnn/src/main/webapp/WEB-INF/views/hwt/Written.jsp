@@ -178,36 +178,36 @@
 <div>
 
 <input type="hidden" id="imgData" name="imgData">
-<h1 style="text-align: center; font-size: 30pt; padding-top: 70px;">입 원 서 약 서</h1>
+<h1 style="text-align: center; font-size: 30pt; padding: 70px 0 20px 0;">입 원 서 약 서</h1>
 
-<div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px;">※ 환자의 인적사항</div>
+<div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
 <div style="text-align: center; margin-bottom: 20px;">
-<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;" >
+<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
-		<td class="normal" width="170px" height="56px">성명</td>
+		<td class="normal" width="170px" height="50px">성명</td>
 		<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input style= "margin-left: 33px;" type="text" name="cs_data_01" value="${param1}"></td>
-		<td class="normal" width="170px" height="56px">차트번호</td>
+		<input style= "margin-left: 20px;" type="text" name="cs_data_01" value="${param1}"></td>
+		<td class="normal" width="170px" height="50px">차트번호</td>
 		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" width="313px" style="text-align: left;">
-		<input style="margin-left: 33px;" name="cs_data_02" type="text" value="${param4}"></td>
+		<input style="margin-left: 20px;" name="cs_data_02" type="text" value="${param4}"></td>
 	</tr>
 	<tr>
-		<td class="normal" height="56px">입원병실</td>
+		<td class="normal" height="50px">입원병실</td>
 		<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left;">
-		<input style= "margin-left: 33px;" type="text" name="cs_data_03" value="${param5}"></td>
-		<td class="normal" height="56px">성별 </td>
+		<input style= "margin-left: 20px;" type="text" name="cs_data_03" value="${param5}"></td>
+		<td class="normal" height="50px">성별 </td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
 		<input type="radio" name="cs_data_04" value="남성" style="cursor: pointer;" id="genderM" <c:if test="${param2 eq '남성' }">checked</c:if>><label for="genderM" style="cursor: pointer;">남</label></td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
 		<input type="radio" name="cs_data_04" value="여성" id="genderF"<c:if test="${param2 eq '여성' }">checked</c:if>><label for="genderF" style="cursor: pointer;">여</label></td>
 	</tr>
 	<tr>
-		<td class="normal" height="56px">생년월일</td>
+		<td class="normal" height="50px">생년월일</td>
 		<td class="light" onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input style= "margin-left: 33px;" type="text" name="cs_data_05" value="${param3 }"></td>
-		<td class="normal" height="56px">전화</td>
+		<input style= "margin-left: 20px;" type="text" name="cs_data_05" value="${param3 }"></td>
+		<td class="normal" height="50px">전화</td>
 		<td style="text-align: left;" class="light" colspan="2" onclick="this.querySelector('input').focus();">
-		<input style="margin-left: 33px;" type="text" name="cs_data_06" value="${param6 }"></td>
+		<input style="margin-left: 20px;" type="text" name="cs_data_06" value="${param6 }"></td>
 	</tr>
 </table>
 </div>
@@ -215,25 +215,25 @@
 <span> 
 &nbsp;본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
 </span>
-<span class="" style="color:#f87b0c;">
+<span class="light_info" style="color:#f87b0c;">
 1. 입원 기간 중 예기치 않은 사고(골절, 타박상, 개방성 상처 등)나 응급상황 시 본원에서 치료할 수 없는 상태이거나 의료진 판단으로 응급처치 가능한 병원으로 전원을 요구할 수 있으며 또한 환자 및 보호자가 원할 경우  담당의사와 상의 후 타 병원으로 전원 할 수 있습니다.
 </span>
-<span class="" style="color:#f87b0c;">
+<span class="light_info" style="color:#f87b0c;">
 2. 노인은 골다공증, 피부의 약화로 쉽게 골절 또는 멍이 들 수 있으므로 의료기관의 정당한 진료지침이나 교육에 반하는 무단 외출・외박 등으로 인하여 발생하는 환자의 손해에 대한 책임은 원칙적으로 모두 환자에게 있습니다.
 </span>
-<span>
+<span class="light_info">
 3. 진료 상 발생하는 모든 문제에 대하여 분쟁이 생겼을 때에는 『의료사고 피해구제 및 의료분쟁 조정 등에 관한 법률』에 의한 한국 의료분쟁조정중재원에 그 조정을 신청할 수 있음에 동의합니다.
 </span>
-<span>
+<span class="light_info">
 4. 입원기간 동안 발생하는 진료비는 귀 의료기관에서 정하는 납부기한 내에 납부(연대보증인이 있는 경우에는 환자와 연대보증인이 연대하여 납부)하겠으며, 정당한 이유 없이 체납될 때에는 채권확보를 위한 법적조치에 이의가 없고, 만일 본건을 기초로 의료분쟁 등으로 소송을 제기할 경우 관할법원의 민사소송법에 따릅니다.
 </span>
-<span>
+<span class="light_info">
 5. 입원기간 중에 환자 및 보호자가 귀 의료기관의 비품이나 기물을 고의 또는 과실로 파괴, 망실, 훼손한 때에는 이를 변상(현물, 현금)합니다.
 </span>
-<span class="" style="color:#f87b0c;">
+<span class="light_info" style="color:#f87b0c;">
 6. 입원기간 중 환자 또는 보호자 등이 소지 중인 현금, 기타 귀중품 및 개인소지품(완전틀니, 부분틀니 포함, 안경, 보청기등)은 귀 의료기관이 지정한 보관 장소가 있는 경우에는 보관 장소에 보관하고, 보관 장소가 따로 없는 경우에는 귀 의료기관이 지정한 직원에게 보관을 의뢰합니다. 이를 이행치 아니하여 분실 및 훼손되어 발생한 손해에 대하여는 귀 의료기관은 책임이 없습니다.
 </span>
-<span>
+<span class="light_info">
 7. 개인정보 수집 및 활용 동의
 </span>
 <span>  본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.
@@ -245,38 +245,38 @@
 <span style="margin-bottom: 20px;">
  (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</span>
  
-<span class="bold" style="color:#303030; font-size: 16pt;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
+<span class="bold" style="color:#303030; font-size: 16pt; padding-top:15px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 
-<span>
+<span class="light_info">
 1. 주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.</span>
-<span>
+<span class="light_info">
 2. 주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
 </span>
 <span style="margin-bottom: 10px;">
 (보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
 </span>
-<span>
+<span class="light_info">
 3. 주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
 </span>
-<span>
-4. 입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b>법적 대리인</b>이 됩니다.
+<span class="light_info">
+4. 입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <br/><b>법적 대리인</b>이 됩니다.
 </span>
 </div>
 <br>
 
-<div style="text-align: center; margin-bottom: 27px;">
+<div style="text-align: center; margin-bottom: 20px;">
 <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
  border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px;">
-		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border: 1px solid #c7c7c7;">
+		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">
 		주<br>보<br>호<br>자</td>
 		<td class="normal" style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
-		<td style="width:350px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
+		<td style="width:300px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
 		<input class="light" name="cs_data_07" style="margin-left: 33px; width:250px;" value="${param4 }" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;" class="normal">(관계 :
 		<input class="light" name="cs_data_08" style="width : 175px;" type="text"/>)</td>
-		<td style="width: 100px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative;">
-		<div class="normal" style="display: inline-block; position: relative; z-index: 1;" id="end1">(서   명)</div>
+		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative;">
+		<div class="normal" style="display: inline-block; position: relative; z-index: 1;" id="end1">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
 		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
 		</td>
 	</tr>
@@ -294,7 +294,7 @@
 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;"/>
 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11"style="cursor: pointer;"> 비용안내</label></div>
 		 -->
-		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
 		  <input id="cs_data_11" id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
 		  <label for="cs_data_11" for="cs_data_11">비용안내</label>
 		</div>
@@ -309,18 +309,18 @@
 </table>
 </div>
 
-<div style="text-align: center; margin-bottom: 27px;">
+<div style="text-align: center; margin-bottom: 20px;">
 <table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
- border: 1px solid #c7c7c7;" >
+ border: 1px solid #c7c7c7; " >
 	<tr style="height: 56px;">
-		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center; border: 1px solid #c7c7c7;">부<br>보<br>호<br>자</td>
+		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">부<br>보<br>호<br>자</td>
 		<td style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
-		<td style="width: 350px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
+		<td style="width: 300px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;">(관계 :
 		<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)</td>
-		<td style="width: 100px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative;">
-		<div style="display: inline-block; position: relative; z-index: 1;" id="end2">(서   명)</div>
+		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative;">
+		<div style="display: inline-block; position: relative; z-index: 1;" id="end2">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
 		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
 		</td>
 	</tr>
@@ -339,7 +339,7 @@
 		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox"style="cursor: pointer;"/>
 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div>
 		 -->
-		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
 		  <input id="cs_data_16" id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
 		  <label for="cs_data_16" for="cs_data_16">비용안내</label>
 		</div>
@@ -348,12 +348,12 @@
 	</tr>
 </table>
 </div>
-<div style="text-align: center; margin-bottom: 27px;">
-<div style="margin-bottom: 27px;">
+<div style="text-align: center; margin-bottom: 20px;">
+<div style="margin-bottom: 20px;">
 <table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
 border: 1px solid #c7c7c7;" >
 	<tr style="background-color: #fafafa;">
-		<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 21px;">환자가 아닌 보호자의 동의사유</div></td>
+		<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
 	</tr>
 	<tr style="border-bottom: none; background-color: #ffffff;">
 		<td style="border-right: none; border-bottom: none; height: 56px; text-align: left; width:585px;">
@@ -362,7 +362,7 @@ border: 1px solid #c7c7c7;" >
 		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
 		 -->
 		<div class="checkbox-wrapper-13" style="">
-		  <input style="margin-left: 21px;" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
+		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
 		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
 		</div>
 		</td>
@@ -371,7 +371,7 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_18" value="환자위임" id="cs_data_18" type="checkbox" style="cursor: pointer;"/>
 		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
 		 -->
-		<div class="checkbox-wrapper-13" style="">
+		<div class="checkbox-wrapper-13" style="display:flex;">
 		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
 		  <label for="cs_data_18">환자위임</label>
 		</div>
@@ -383,7 +383,7 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_19" id="cs_data_19"value="응급 상황" type="checkbox" style="cursor: pointer;"/>
 		 응급 상황</label></div>
 		  -->
-		<div class="checkbox-wrapper-13" style="margin-right: 21px;">
+		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
 		  <input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황">
 		  <label for="cs_data_19">응급 상황</label>
 		</div>
@@ -396,7 +396,7 @@ border: 1px solid #c7c7c7;" >
 		<label for="cs_data_20" style="cursor: pointer;"><input style="margin-left:21px; cursor: pointer;" name="cs_data_20" id="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox"/>
 		 내용 설명 시 환자의 심신에 중대한 영향 우려</label>
 		  -->
-		<div class="checkbox-wrapper-13" style="margin-left:21px;">
+		<div class="checkbox-wrapper-13" style="">
 		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려">
 		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
 		</div>
@@ -406,7 +406,7 @@ border: 1px solid #c7c7c7;" >
 		<div style=""><label for="cs_data_21" style="cursor: pointer;">
 		<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;"/> 미성년자</label></div>
 		 -->
-		<div class="checkbox-wrapper-13" style="">
+		<div class="checkbox-wrapper-13" style="display:flex;">
 		  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
 		  <label for="cs_data_21">미성년자</label>
 		</div>
@@ -428,7 +428,7 @@ border: 1px solid #c7c7c7;" >
 		 상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
 		  -->
 		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
-		  <input style="font-size:14pt; margin-left: 21px;" id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실">
+		  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실">
 		  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
 		</div>
 		 
@@ -463,7 +463,7 @@ border: 1px solid #c7c7c7;" >
 		 -->
 		<div class="checkbox-wrapper-13" style="">
 		  <input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled">
-		  <label for="cs_data_26">2인실</label>
+		  <label for="cs_data_26" style="margin-right:8px;">2인실</label>
 		</div>
 		</div>
 		
@@ -484,12 +484,12 @@ border: 1px solid #c7c7c7;" >
 
 
 <div style="position: relative;">
-	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto;
+	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 0 0 125px;
 	display: flex; justify-content: flex-end; align-items: center;">
-		신청인  (  관계  : <input style="width:175px;" name="cs_data_28" type="text"/>) :
-		<input name="cs_data_29" style="width:100px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		신청인  (  관계  : <input style="width:110x;" name="cs_data_28" type="text"/>) :
+		<input name="cs_data_29" style="width:150px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 		<div style="display: inline-block; position: relative;" id="end">
-		( 서&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )</div	>
+		( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )</div	>
 	</div>
 </div>
 <br><br>
@@ -1080,7 +1080,7 @@ $(document).ready(function() {
 </section>
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
 <div style=" border-top: 1px solid #ddd;"></div>
-<footer class="normal" style="width: 1380px; margin: 0 auto; padding-top: 20px;">
+<footer class="normal" style="width: 1380px; margin: 0 auto; padding-top: 20px; padding-top: 28px; padding-bottom:10px">
 	<div class="footer_save" style="display: flex; justify-content: flex-end;">
 	    <div style="">
 	    	<input style="background-color: #7b7b7b; color: #ffffff;
