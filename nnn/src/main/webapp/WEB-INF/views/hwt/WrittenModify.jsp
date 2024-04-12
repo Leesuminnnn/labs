@@ -153,13 +153,13 @@
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
 
 <div class="nav__section" style=" ">
-		<div class="nav__link" data-menu="userall" data-content="all">
+		<div class="nav__link" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_off.png">
-			<a class="" href="${pageContext.request.contextPath}/hwt/CounselList.do" style="color: #c3c3c3; font-size:18px;" ><span>목 록</span></a>
+			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>목 록</span></a>
 		</div>
-		<div class="nav__link  active" data-menu="perall" data-content="all"  style="">
+		<div class="nav__link  active" data-menu="perall" data-content="all"  style="" onclick="location.href='${pageContext.request.contextPath}/hwt/Written.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_on.png">
-			<a class="" href="${pageContext.request.contextPath}/hwt/Written.do" style="color: #fff; font-size:18px;" ><span>등 록</span></a>
+			<a class="" style="color: #fff; font-size:18px;" ><span>등 록</span></a>
 		</div>
 </div>
 
