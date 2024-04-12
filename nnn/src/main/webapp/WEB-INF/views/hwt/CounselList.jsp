@@ -25,16 +25,18 @@
 
 
 <section style=""> 
-	<div class="nav__section" style=" ">
-		<div class="nav__link active" data-menu="userall" data-content="all">
+	<ul class="nav__section" style=" ">
+		<li class="nav__link active" data-menu="userall" data-content="all">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_on.png">
 			<a class="" href="${pageContext.request.contextPath}/hwt/CounselList.do" style="color: #fff; font-size:18px;" ><span>목 록</span></a>
-		</div>
-		<div class="nav__link" data-menu="perall" data-content="all"  style="">
-			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_off.png">
-			<a class="" href="${pageContext.request.contextPath}/hwt/Written.do" style="color: #c3c3c3; font-size:18px;" ><span>등 록</span></a>
-		</div>
-	</div>
+		</li>
+		<li class="nav__link" data-menu="perall" data-content="all" onclick="${pageContext.request.contextPath}/hwt/Written.do">
+		<a class="" href="${pageContext.request.contextPath}/hwt/Written.do" style="color: #c3c3c3; font-size:18px;" >
+				<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_off.png">
+				<span>등 록</span>
+		</a>
+		</li>
+	</ul>
 	<main id="main-content" >
 		<!-- 내용을 이곳에 추가 -->
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->

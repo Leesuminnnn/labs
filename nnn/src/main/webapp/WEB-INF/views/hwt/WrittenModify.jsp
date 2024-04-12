@@ -121,6 +121,30 @@
       line-height: 30px;
       margin-bottom: 5px;
   }
+   .nav__section {
+    width: 240px;
+    background: #2f425a;
+    color: #c3c3c3;
+    position: fixed;
+    height: 100%;
+    z-index: 999;
+}
+  .nav__link {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	padding-left: 25px;
+	border-left: 4px solid #2f425a;
+	cursor:pointer;
+}
+.active {
+    border-left: 4px solid #00bec2;
+    background: #293a4f;
+    color: #fff;
+}
+.icon-image {
+	margin-right: 10px;
+	width:18px;
 </style>
 </head>
 <body style="min-width: 1280px;">
@@ -144,9 +168,9 @@
 	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
 	background-size: 1246px;
 	min-width: 1280px;
-    margin: 0 auto; margin-top: 62px; background-color: #f7f7f7;">
+	margin-bottom: 100px; margin-top: 62px; background-color: #f7f7f7;  margin-left:240px;">
     
-<div id="capture_area">
+<div id="capture_area" class="capture_area" style="">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
 <h1 style="text-align: center; font-size: 30pt; padding-top: 70px;">입 원 서 약 서</h1>
@@ -1194,19 +1218,19 @@ $(document).ready(function() {
 
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
 <div style="border-top: 1px solid #ddd;"></div>
-<footer class="normal" style="width: 1087px; margin: 0 auto; padding-top: 20px;">
-	<div style="display: flex; justify-content: center;">
+<footer class="normal" style="width: 1380px; margin: 0 auto; padding-top: 20px;">
+	<div class="footer_save" style="display: flex; justify-content: flex-end;">
 	    <div style="display: flex;">
 	    	<div style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
-	    	 height: 50px; width: 150px; border-radius: 5px; font-size: 20px; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
+	    	 height: 43px; width: 120px; border-radius: 5px; font-size: 20px; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
 	    	 class="btn_save" >임시저장
 	    	 </div>
 	    	 <!-- 
 	    	 <input style="display: flex; justify-content: center; align-items: center; background-color: #03a9d0; color: #ffffff; 
 	        border-radius: 5px; height: 70px; width: 200px; font-size: 18pt;" id="btn_download" class="btn_download"type="submit" value="등록"/>
 	         -->
-	        <div style="display: flex; justify-content: center; align-items: center; background-color: #03a9d0; color: #ffffff; 
-	        border-radius: 5px; height: 50px; width: 150px; font-size: 20px;" id="btn_download" class="btn_download">등록</div>
+	        <div style="display: flex; justify-content: center; align-items: center; background-color: #1b304a; color: #ffffff; 
+	        border-radius: 5px; height: 43px; width: 120px; font-size: 20px;" id="btn_download" class="btn_download">등록</div>
 	    </div>
 		<!-- 등록버튼	    
 		<div style="display: flex; justify-content: flex-end;">

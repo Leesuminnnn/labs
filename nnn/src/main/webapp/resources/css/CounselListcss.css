@@ -297,7 +297,7 @@ section {
     .nav__section{display:none !important;}
     .ip_sb2{display:block;}
     main{margin-left:0 !important;}
-    section{margin-top: 62px; background-color: #fff; padding: 0px;}
+    section{margin-top: 62px; background-color: #fff; padding:0px;}
 }
 
 @media screen and (max-width: 1200px){
@@ -307,13 +307,20 @@ section {
 
 @media screen and (max-width: 1070px){
 	.dv_tx{font-size: 16px;}
-	.ip_tx{width:160px; height:40px; margin-right: 45px;}
+	.ip_tx{width:160px; height:40px; margin-right:45px;}
 	.ip_sb{height:40px; font-size:16px;}
-	.ip_sb2{height:40px; font-size:16px; padding-top: 9px;}
+	.ip_sb2{height:40px; font-size:16px;padding-top:9px !important;}
 }
 
 @media screen and (max-width: 1030px){
 	.ip_tx{margin-right: 35px;}
-	.ip_sb2{height:40px; font-size:16px;padding-top: 8px;}
+	.ip_sb2{height:40px; font-size:16px;padding-top:8px;}
 }
 
+@media screen and (max-width: 1000px){
+	.flex{height:65px;}
+	.ip_tx{width:120px; margin-right: 25px;}
+	.ip_sb{width:80px; height:40px; font-size:16px;}
+	.save {width:60px; height:35px !important;}
+	.sb{height:35px !important;}
+}

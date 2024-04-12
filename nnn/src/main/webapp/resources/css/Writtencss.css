@@ -217,6 +217,11 @@ input[type=checkbox]:checked + label:before {
 	
 }
 
-
+@media screen and (max-width: 1500px){
+    .nav__section{display:none !important;}
+    main{margin-left:0 !important;}
+    section{margin-top: 62px; background-color: #fff; padding:0px; margin-left:0px !important;}
+    .footer_save{display:flex; justify-content:center !important;}
+}
 
 

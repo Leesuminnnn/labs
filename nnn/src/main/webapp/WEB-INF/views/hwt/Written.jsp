@@ -1081,7 +1081,7 @@ $(document).ready(function() {
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
 <div style=" border-top: 1px solid #ddd;"></div>
 <footer class="normal" style="width: 1380px; margin: 0 auto; padding-top: 20px;">
-	<div style="display: flex; justify-content: flex-end;">
+	<div class="footer_save" style="display: flex; justify-content: flex-end;">
 	    <div style="">
 	    	<input style="background-color: #7b7b7b; color: #ffffff;
 	    	 height: 43px; width: 120px; border-radius: 5px; font-size: 20px; cursor:pointer; border:none;" id="btn_save" 
