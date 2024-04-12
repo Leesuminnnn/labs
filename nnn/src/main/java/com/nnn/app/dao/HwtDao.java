@@ -23,8 +23,8 @@ public class HwtDao {
 	private SqlSession sqlSession1;
 	@Resource(name="sqlSession3")
 	private SqlSession sqlSession3;
-	@Resource(name="sqlSession4")
-	private SqlSession sqlSession4;
+//	@Resource(name="sqlSession4")
+//	private SqlSession sqlSession4;
 	
 	
 	public static final String MAPPER = "hwt";
@@ -73,7 +73,7 @@ public class HwtDao {
 //		return sqlSession4.selectList(MAPPER+".cslist", cri);
 	}
 	public List<WrittenVo> listsearch(Criteria cri) {
-		return sqlSession1.selectList(MAPPER+".csClistsearch", cri);
+		return sqlSession1.selectList(MAPPER+".cslistsearch", cri);
 //		return sqlSession4.selectList(MAPPER+".cslistsearch", cri);
 	}
 	
