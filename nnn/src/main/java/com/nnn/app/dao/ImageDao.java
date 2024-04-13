@@ -19,6 +19,8 @@ public class ImageDao {
 	private SqlSession sqlSession2;
 	@Resource(name="sqlSession1")
 	private SqlSession sqlSession1;
+	@Resource(name="sqlSession4")
+	private SqlSession sqlSession4;
 	
 	public static final String MAPPER = "image";
 	
@@ -28,17 +30,21 @@ public class ImageDao {
 //	}
 	
 	public void save(ImageEntity imageEntity) {
-		sqlSession1.insert(MAPPER+".save", imageEntity);
+//		sqlSession1.insert(MAPPER+".save", imageEntity);
+		sqlSession4.insert(MAPPER+".save", imageEntity);
 	}
 	public ImageEntity selectimg(ImageEntity img) {
-		return sqlSession1.selectOne(MAPPER+".imgselect", img);
+//		return sqlSession1.selectOne(MAPPER+".imgselect", img);
+		return sqlSession4.selectOne(MAPPER+".imgselect", img);
 	}
 
 	public List<ImageEntity> imglist(ImageEntity img) {
-		return sqlSession1.selectList(MAPPER+ ".imglist",img);
+//		return sqlSession1.selectList(MAPPER+ ".imglist",img);
+		return sqlSession4.selectList(MAPPER+ ".imglist",img);
 	}
 
 	public ImageEntity getImageData(Map<String, Object> map) {
-		return sqlSession1.selectOne(MAPPER+".getImageData", map);
+//		return sqlSession1.selectOne(MAPPER+".getImageData", map);
+		return sqlSession4.selectOne(MAPPER+".getImageData", map);
 	}
 }

@@ -3,6 +3,7 @@ package com.nnn.app.dao;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +14,15 @@ import com.nnn.app.vo.WrittenVo;
 
 @Repository
 public class CanvasDao {
-	
+
 	//1 : hwtools, 2 : counselman
-//	@Resource(name="sqlSession2")
-//	private SqlSession sqlSession2;
-//	@Resource(name="sqlSession1")
-//	private SqlSession sqlSession1;
+	@Resource(name="sqlSession1")
+	private SqlSession sqlSession1;
+	@Resource(name="sqlSession4")
+	private SqlSession sqlSession4;
 	
 	public static final String MAPPER = "canvas";
-	private SqlSession sqlSession2;
-	private SqlSession sqlSession1;
-	@Autowired
-	public CanvasDao(SqlSession sqlSession2, SqlSession sqlSession1) {
-		this.sqlSession2 = sqlSession2;
-		this.sqlSession1 = sqlSession1;
-	}
-
+	
 //	public List<WrittenVo> list(WrittenVo writtenVo) {
 //		return sqlSession1.selectList(MAPPER+".cslist", writtenVo);
 //	}

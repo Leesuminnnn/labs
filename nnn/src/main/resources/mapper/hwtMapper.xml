@@ -157,6 +157,8 @@
 		cs_data_24 = #{cs_data_24},	cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
 		cs_data_29 = #{cs_data_29}, cs_data_30 = 1 where cs_idx = #{cs_idx}
 	</update>
-	
+	<insert id="save" parameterType="image">
+	insert into image(imageData, cs_idx) value(#{imageData}, #{cs_idx})
+	</insert>
 	
 </mapper>
