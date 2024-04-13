@@ -51,7 +51,7 @@
 =======
         <property name="url"  
 		value="jdbc:mysql://mediplat.net:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/>
-		<property name="username" value="cs"/>
+		<property name="username" value="root"/>
 		<property name="password" value="1234" />
 >>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 	</bean>   

@@ -580,7 +580,8 @@ border: 1px solid #c7c7c7;" >
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script> --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 <script>
 function Mobile(){
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
