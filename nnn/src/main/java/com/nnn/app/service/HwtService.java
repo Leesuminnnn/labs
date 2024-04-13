@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.HwtDao;
 import com.nnn.app.vo.Criteria;
+import com.nnn.app.vo.ImageEntity;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
@@ -172,5 +173,11 @@ public class HwtService {
 
 	public List<UsersVo> accessAll(Map<String, Object> map) {
 		return hwtDao.accessAll(map);
+	}
+
+	public void saveImage(ImageEntity image) {
+		
+		hwtDao.save(image);
+		
 	}
 }

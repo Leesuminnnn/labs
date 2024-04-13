@@ -6,21 +6,19 @@
 
 	
 	<insert id="save" parameterType="image">
-	insert into csworktools.image(imageData, cs_idx) value(#{imageData}, #{cs_idx})
+	insert into image(imageData, cs_idx) value(#{imageData}, #{cs_idx})
 	</insert>
 	
 	<select id="imgselect" parameterType="image" resultType="image">
-	select * from csworktools.image
+	select * from image
 	</select>
 	
 	<select id="getImageData" parameterType="image" resultType="image">
-	select imageData from csworktools.image where cs_idx = ${cs_idx}
+	select imageData from image where cs_idx = ${cs_idx}
 	</select>
 	
 	<select id="imglist" parameterType="image" resultType="image">
-	<!-- 
-	select * from csworktools.image
-	 -->
+	
 	select convert(imageData USING UTF8) as imageData from image
 	</select>
 </mapper>

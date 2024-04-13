@@ -11,7 +11,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ImageEntity {
+/*
 
+create Table image (
+idx int(11) not null auto_increment,
+imageData longblob null,
+regdate datetime default now(),
+cs_idx int(11) null
+);
+
+*/	
 	private int idx;
 	private int cs_idx;
 	@Lob
