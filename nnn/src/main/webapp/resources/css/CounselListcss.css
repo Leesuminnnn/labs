@@ -292,7 +292,6 @@ section {
 
 
 @media screen and (max-width: 1670px){
-	td{font-size:17px;}
 	.ip_tx{width:240px; margin-right:75px !important;}
     .dv_tx {font-size:18px;}
 	.save{height:45px !important; font-size:20px;}
@@ -438,6 +437,8 @@ section {
 
 @media screen and (max-width: 990px){
 	.dv_tx{font-size: 17px;}
+	.save{width:150px !important;}
+    .sb{width:70px !important;}
 }
 
 @media screen and (max-width: 980px){

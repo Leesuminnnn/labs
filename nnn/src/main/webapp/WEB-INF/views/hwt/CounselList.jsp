@@ -53,7 +53,7 @@
 				</c:otherwise>
 			</c:choose>	
 		">
-		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; color:#2f2f2f; padding: 0 20px;">
+		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; color:#2f2f2f; padding:13px 20px;;">
 			<div class="dv_tx" style="">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
 			<div class="dv_tx" style="">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
 			<div class="dv_tx" style="">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
@@ -63,13 +63,13 @@
 		<div style="border-bottom: 1px solid #ddd"></div>
 			<table class="infotable">
 				  <colgroup>
-                    <col width="10%">
                     <col width="12%">
-                    <col width="10%">
+                    <col width="12%">
+                    <col width="11%">
                     <col width="9%">
                     <col width="9%">
                     <col width="9%">
-                    <col width="10%">
+                    <col width="12%">
                     <col width="10%">
                     <col width="*">
                 </colgroup>
@@ -108,7 +108,7 @@
 						</c:choose>
 					</td>
 					<td>
-						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center; padding:0 20px;">
+						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center; padding:13px 20px;">
 							<c:choose>
 								<c:when test="${list.cs_data_30 == 1}">
 									<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenModify/${list.cs_idx}'">서명</div>
@@ -122,7 +122,7 @@
 									</div>
 								</c:otherwise>
 							</c:choose>
-							</div>
+						</div>
 					</td>
 				</tr>
 				<c:set value="1" var="keyword"/>
@@ -149,7 +149,7 @@
 						</c:choose>
 					</td>
 					<td>
-						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center;">
+						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center; padding:13px 20px;">
 						<c:choose>
 							<c:when test="${list.cs_data_30 == 1}">
 								<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenModify/${list.cs_idx}'">서명</div>
