@@ -155,11 +155,11 @@
 <div class="nav__section" style=" ">
 		<div class="nav__link" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_off.png">
-			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>목 록</span></a>
+			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>입&nbsp;원&nbsp;목&nbsp;록</span></a>
 		</div>
 		<div class="nav__link  active" data-menu="perall" data-content="all"  style="" onclick="location.href='${pageContext.request.contextPath}/hwt/Written.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_on.png">
-			<a class="" style="color: #fff; font-size:18px;" ><span>등 록</span></a>
+			<a class="" style="color: #fff; font-size:18px;" ><span>입&nbsp;원&nbsp;등&nbsp;록</span></a>
 		</div>
 </div>
 
@@ -358,7 +358,7 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_17" id="cs_data_17" style="margin-left: 21px;" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>/>
 		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
 		 --%>
-		<div class="checkbox-wrapper-13" style="">
+		<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
 		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
 		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
 		</div>
@@ -368,7 +368,7 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_18" id="cs_data_18" value="환자위임" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>/>
 		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
 		 --%>
-		<div class="checkbox-wrapper-13" style="display:flex;">
+		<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
 		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
 		  <label for="cs_data_18">환자위임</label>
 		</div>
@@ -488,7 +488,7 @@ border: 1px solid #c7c7c7;" >
 </div>
 
 <div style="position: relative;">
-	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 0 0 125px;;
+	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -1222,7 +1222,7 @@ $(document).ready(function() {
 	<div class="footer_save" style="display: flex; justify-content: flex-end;">
 	    <div style="display: flex;">
 	    	<div style="display: flex; justify-content: center; align-items: center; background-color: #7b7b7b; color: #ffffff;
-	    	 height: 43px; width: 120px; border-radius: 5px; font-size: 20px; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
+	    	 height: 50px; width: 150px; border-radius: 5px; font-size: 20px; margin-right: 22px; cursor: pointer; border:none;" id="btn_save" 
 	    	 class="btn_save" >임시저장
 	    	 </div>
 	    	 <!-- 
@@ -1230,7 +1230,7 @@ $(document).ready(function() {
 	        border-radius: 5px; height: 70px; width: 200px; font-size: 18pt;" id="btn_download" class="btn_download"type="submit" value="등록"/>
 	         -->
 	        <div style="display: flex; justify-content: center; align-items: center; background-color: #1b304a; color: #ffffff; 
-	        border-radius: 5px; height: 43px; width: 120px; font-size: 20px;" id="btn_download" class="btn_download">등록</div>
+	        border-radius: 5px; height: 50px; width: 150px; font-size: 20px;" id="btn_download" class="btn_download">등록</div>
 	    </div>
 		<!-- 등록버튼	    
 		<div style="display: flex; justify-content: flex-end;">

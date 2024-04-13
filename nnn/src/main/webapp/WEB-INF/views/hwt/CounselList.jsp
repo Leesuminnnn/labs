@@ -31,11 +31,11 @@
 	<div class="nav__section" style=" ">
 		<div class="nav__link active" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_on.png">
-			<a class="" style="color: #fff; font-size:18px;" ><span>목 록</span></a>
+			<a class="" style="color: #fff; font-size:18px;" ><span>입&nbsp;원&nbsp;목&nbsp;록</span></a>
 		</div>
 		<div class="nav__link" data-menu="perall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/Written.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_off.png">
-			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>등 록</span></a>
+			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>입&nbsp;원&nbsp;등&nbsp;록</span></a>
 		</div>
 	</div>
 	<main id="main-content" >
@@ -53,7 +53,7 @@
 				</c:otherwise>
 			</c:choose>	
 		">
-		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; color:#2f2f2f;">
+		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; color:#2f2f2f; padding: 0 20px;">
 			<div class="dv_tx" style="">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
 			<div class="dv_tx" style="">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
 			<div class="dv_tx" style="">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
@@ -108,7 +108,7 @@
 						</c:choose>
 					</td>
 					<td>
-						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center;">
+						<div style="display: flex; align-items: center; vertical-align: middle; justify-content: center; padding:0 20px;">
 							<c:choose>
 								<c:when test="${list.cs_data_30 == 1}">
 									<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenModify/${list.cs_idx}'">서명</div>
