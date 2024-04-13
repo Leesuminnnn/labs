@@ -43,10 +43,17 @@
 <!-- 	</bean>    -->
 	<bean id="dataSource4" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+<<<<<<< HEAD
+        <property name="url" 
+		value="jdbc:mysql://127.0.0.1:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/>
+		<property name="username" value="csdev"/>
+		<property name="password" value="csdev1234" />
+=======
         <property name="url"  
 		value="jdbc:mysql://mediplat.net:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/>
 		<property name="username" value="root"/>
 		<property name="password" value="1234" />
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 	</bean>   
 
 <!-- 	<bean id="dataSource4" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->

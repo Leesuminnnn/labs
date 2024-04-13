@@ -145,7 +145,7 @@ input[type="radio"]:checked + label span {
 	display: flex; 
 	justify-content: center; 
 	align-items: center; 
-	background-color: #03a9d0; 
+	background-color: #2f425a; 
 	color: #ffffff; 
 	height: 70px; 
 	width: 200px;
@@ -167,7 +167,7 @@ input[type="radio"]:checked + label span {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #f3b80b;
+	background-color: #ffa200;
 	color: #ffffff;
 	height: 70px; 
 	width: 200px;
@@ -219,8 +219,6 @@ input[type=checkbox]:checked + label:before {
 	
 }
 
-
-
 @media screen and (max-width: 1500px){
     .nav__section{display:none !important;}
     main{margin-left:0 !important;}
@@ -232,4 +230,13 @@ input[type=checkbox]:checked + label:before {
 
 }
 
+@media screen and (max-width: 990px){
+    .nav__section{display:none !important;}
+    main{margin-left:0 !important;}
+    section{margin-top: 62px; background-color: #fff; padding:0px; margin-left:0px !important;}
+    .footer_save{display:flex !important; justify-content:center !important;}
+    .btn_save{width:200px !important; height:75px !important;}
+    .btn_download{width:200px !important; height:75px !important;}
+    footer{width: 0px !important; margin: 0 auto; padding-top: 20px; padding-top: 28px; padding-bottom:10px;}
 
+}

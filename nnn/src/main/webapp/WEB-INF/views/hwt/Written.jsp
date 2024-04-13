@@ -322,7 +322,7 @@
 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;">(관계 :
 		<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)</td>
-		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative;">
+		<td style="width: 140px;">
 		<div style="display: inline-block; position: relative; z-index: 1;" id="end2">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
 		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
 		</td>
