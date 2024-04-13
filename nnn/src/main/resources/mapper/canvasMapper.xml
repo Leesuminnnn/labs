@@ -34,7 +34,7 @@
 		cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30, 
 		DATE_FORMAT(cs_data_31, '%Y.%m.%d') AS cs_data_31, cs_data_32
 		
-		from csworktools.cs_data 
+		from cs_data 
 		
 		
 		order by cs_idx desc
