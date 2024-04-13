@@ -155,11 +155,11 @@
 <div class="nav__section" style=" ">
 		<div class="nav__link" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_off.png">
-			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>입&nbsp;원&nbsp;목&nbsp;록</span></a>
+			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>서&nbsp;약&nbsp;서&nbsp;목&nbsp;록</span></a>
 		</div>
 		<div class="nav__link  active" data-menu="perall" data-content="all"  style="" onclick="location.href='${pageContext.request.contextPath}/hwt/Written.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_on.png">
-			<a class="" style="color: #fff; font-size:18px;" ><span>입&nbsp;원&nbsp;등&nbsp;록</span></a>
+			<a class="" style="color: #fff; font-size:18px;" ><span>서&nbsp;약&nbsp;서&nbsp;등&nbsp;록</span></a>
 		</div>
 </div>
 
@@ -277,8 +277,8 @@
 		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;" class="normal">(관계 :
 		<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)</td>
 		<td style="width: 140px;  position: relative; border-bottom: 1px solid #dadada;">
-		<div class="normal" style="display: inline-block; position: relative; z-index: 1;" id="end1">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
-		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1">&nbsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&nbsp;</div>
 		</td>
 	</tr>
 	<tr style="height: 56px;">
@@ -319,8 +319,8 @@
 		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;">(관계 :
 		<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)</td>
 		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;">
-		<div style="display: inline-block; position: relative; z-index: 1;" id="end2">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
-		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">&nbsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&nbsp;</div>
 		</td>
 	</tr>
 	
@@ -494,7 +494,7 @@ border: 1px solid #c7c7c7;" >
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative; marigin-right:30px;" id="end">
+		<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:-500;" id="end">
 		( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )</div	>
 	</div>
 </div>

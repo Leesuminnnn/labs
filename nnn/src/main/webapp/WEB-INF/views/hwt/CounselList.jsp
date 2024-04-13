@@ -31,11 +31,11 @@
 	<div class="nav__section" style=" ">
 		<div class="nav__link active" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_on.png">
-			<a class="" style="color: #fff; font-size:18px;" ><span>입&nbsp;원&nbsp;목&nbsp;록</span></a>
+			<a class="" style="color: #fff; font-size:18px;" ><span>서&nbsp;약&nbsp;서&nbsp;목&nbsp;록</span></a>
 		</div>
 		<div class="nav__link" data-menu="perall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/Written.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_off.png">
-			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>입&nbsp;원&nbsp;등&nbsp;록</span></a>
+			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>서&nbsp;약&nbsp;서&nbsp;등&nbsp;록</span></a>
 		</div>
 	</div>
 	<main id="main-content" >

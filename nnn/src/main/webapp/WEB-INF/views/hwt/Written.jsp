@@ -158,11 +158,11 @@
 <div class="nav__section" style=" ">
 		<div class="nav__link" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/list_off.png">
-			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>입&nbsp;원&nbsp;목&nbsp;록</span></a>
+			<a class="" style="color: #c3c3c3; font-size:18px;" ><span>서&nbsp;약&nbsp;서&nbsp;목&nbsp;록</span></a>
 		</div>
 		<div class="nav__link  active" data-menu="perall" data-content="all"  style="" onclick="location.href='${pageContext.request.contextPath}/hwt/Written.do'">
 			<img class="icon-image" src="${pageContext.request.contextPath}/resources/icon/sign_on.png">
-			<a class="" style="color: #fff; font-size:18px;" ><span>입&nbsp;원&nbsp;등&nbsp;록</span></a>
+			<a class="" style="color: #fff; font-size:18px;" ><span>서&nbsp;약&nbsp;서&nbsp;등&nbsp;록</span></a>
 		</div>
 </div>
 
@@ -278,9 +278,9 @@
 		<input class="light" name="cs_data_07" style="margin-left: 33px; width:250px;" value="${param4 }" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;" class="normal">(관계 :
 		<input class="light" name="cs_data_08" style="width : 175px;" type="text"/>)</td>
-		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative;">
-		<div class="normal" style="display: inline-block; position: relative; z-index: 1;" id="end1">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
-		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative; ">
+		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1">&nbsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&nbsp;</div>
 		</td>
 	</tr>
 	<tr style="height: 56px;">
@@ -322,9 +322,9 @@
 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text"/></td>
 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;">(관계 :
 		<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)</td>
-		<td style="width: 140px;">
-		<div style="display: inline-block; position: relative; z-index: 1;" id="end2">(서&nbsp;&nbsp;&nbsp;&nbsp;명)</div>
-		<img style="position: absolute; z-index: 0; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;">
+		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
 		</td>
 	</tr>
 	 
@@ -491,8 +491,8 @@ border: 1px solid #c7c7c7;" >
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px;" name="cs_data_28" type="text"/>) :
 		<input name="cs_data_29" style="width:150px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative;" id="end">
-		( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )</div	>
+		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:-500;" id="end">
+		&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</div	>
 	</div>
 </div>
 <br><br>
