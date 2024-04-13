@@ -168,7 +168,7 @@
 
 <section style="background-repeat: no-repeat;
     background-position: center 0;
-    background-image: url(/app/resources/img/background4.png);
+    background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
     background-size: 1246px;
     min-width: 1280px;
     margin-bottom: 100px;
@@ -181,7 +181,7 @@
 <div>
 
 <input type="hidden" id="imgData" name="imgData">
-<h1 style="text-align: center; font-size: 30pt; padding: 70px 0 20px 0;">입 원 서 약 서</h1>
+<h1 style="text-align: center; font-size: 30pt; padding: 70px 0 30px 0;">입 원 서 약 서</h1>
 
 <div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
 <div style="text-align: center; margin-bottom: 20px;">
@@ -215,11 +215,11 @@
 </table>
 </div>
 <div class="light" style="font-size:14pt; color:#222222; width:966px; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
-<span class="light_info"> 
+<span style="text-indent:15px;"> 
 본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
 </span>
-<ol class="light_info" start = "1" style="list-style-type:1 !important;">
-	<li style="color:#f87b0c;">
+<ol class="light_info_list">
+	<li class="light_info" style="color:#f87b0c;">
 	입원 기간 중 예기치 않은 사고(골절, 타박상, 개방성 상처 등)나 응급상황 시 본원에서 치료할 수 없는 상태이거나 의료진 판단으로 응급처치 가능한 병원으로 전원을 요구할 수 있으며 또한 환자 및 보호자가 원할 경우  담당의사와 상의 후 타 병원으로 전원 할 수 있습니다.
 	</li>
 	<li class="light_info" style="color:#f87b0c;">
@@ -240,33 +240,34 @@
 	<li class="light_info">
 	개인정보 수집 및 활용 동의
 	</li>
-		<li>  본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.</li>
-		<li> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</li>
-		<li style="margin-bottom: 10px;"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
+		<li style="line-height:29px;">본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.</li>
+		<li style=" line-height:29px;"> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</li>
+		<li style=" line-height:29px; margin-bottom: 10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
 		<li style="margin-bottom: 10px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
 		<li style="margin-bottom: 10px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
 		<li style="margin-bottom: 20px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
- </ol>
+</ol>
 <span class="bold" style="color:#303030; font-size: 16pt; padding-top:15px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
-
-<span class="light_info">
-1. 주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.</span>
-<span class="light_info">
-2. 주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
-</span>
-<span style="margin-bottom: 10px;">
-(보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
-</span>
-<span class="light_info">
-3. 주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
-</span>
-<span class="light_info">
-4. 입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <br/><b>법적 대리인</b>이 됩니다.
-</span>
+<ol class="light_info_list">
+	<li class="light_info">
+	주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.</li>
+	<li class="light_info">
+	주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
+	</li>
+	<li style="margin-bottom: 10px;">
+	(보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
+	</li>
+	<li class="light_info">
+	주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
+	</li>
+	<li class="light_info">
+	입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <br/><b>법적 대리인</b>이 됩니다.
+	</li>
+</ol>
 </div>
 <br>
 
-<div style="text-align: center; margin-bottom: 20px;">
+<div style="text-align: center; margin-bottom: 30px;">
 <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
  border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px;">
@@ -311,7 +312,7 @@
 </table>
 </div>
 
-<div style="text-align: center; margin-bottom: 20px;">
+<div style="text-align: center; margin-bottom: 30px;">
 <table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
  border: 1px solid #c7c7c7; " >
 	<tr style="height: 56px;">
@@ -350,8 +351,8 @@
 	</tr>
 </table>
 </div>
-<div style="text-align: center; margin-bottom: 20px;">
-<div style="margin-bottom: 20px;">
+<div style="text-align: center; margin-bottom: 30px;">
+<div style="margin-bottom: 30px;">
 <table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
 border: 1px solid #c7c7c7;" >
 	<tr style="background-color: #fafafa;">
@@ -419,7 +420,7 @@ border: 1px solid #c7c7c7;" >
 </table>
 </div>
 
-<div style="text-align: center; margin-bottom: 27px;">
+<div style="text-align: center; margin-bottom: 30px;">
 <table style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
  margin-right: auto; border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px; background-color: #fafafa;" class="normal">
@@ -1086,7 +1087,7 @@ $(document).ready(function() {
 	<div class="footer_save" style="display: flex; justify-content: flex-end;">
 	    <div style="">
 	    	<input style="background-color: #7b7b7b; color: #ffffff;
-	    	 height: 50px; width: 150px; border-radius: 5px; font-size: 20px; cursor:pointer; border:none;" id="btn_save" 
+	    	 height: 50px; width: 150px; border-radius: 5px; font-size: 24px; cursor:pointer; border:none;" id="btn_save" 
 	    	 class="btn_save" type="button" value="임시저장" >
 	    	
 	    	 <!-- 

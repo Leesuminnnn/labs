@@ -175,11 +175,9 @@ input[type="radio"]:checked + label span {
 	font-size: 18pt;
 }
 
-.capture_area{
-	padding: 30px;
-}
-
-.light_info{text-indent: 15px;}
+.capture_area{padding: 45px;}
+.light_info_list{padding:0 0 0 35px;}
+.light_info{list-style:decima; line-height:29px;}
 
 
 
@@ -228,8 +226,8 @@ input[type=checkbox]:checked + label:before {
     main{margin-left:0 !important;}
     section{margin-top: 62px; background-color: #fff; padding:0px; margin-left:0px !important;}
     .footer_save{display:flex !important; justify-content:center !important;}
-    .btn_save{width:200px !important; height:55px !important;}
-    .btn_download{width:200px !important; height:55px !important;}
+    .btn_save{width:200px !important; height:75px !important;}
+    .btn_download{width:200px !important; height:75px !important;}
     footer{width: 0px !important; margin: 0 auto; padding-top: 20px; padding-top: 28px; padding-bottom:10px;}
 
 }
