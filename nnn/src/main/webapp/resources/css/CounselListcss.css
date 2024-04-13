@@ -431,7 +431,7 @@ section {
 }
 
 @media screen and (max-width: 997px){
-	.ip_tx{width:135px; margin-right:22px !important;}
+	.ip_tx{width:135px; margin-right:17px !important;}
 	.ip_pn {width:160px;}
 }
 
