@@ -267,6 +267,60 @@
 </div>
 <br>
 
+
+<table class="table_type1">
+	<colgroup>
+		<col width="7%">
+		<col width="18%">
+		<col width="*">
+		<col width="30%">
+		<col width="15%">
+	</colgroup>
+	<tr>
+		<th class="normal table_C" rowspan="3" style="">
+			주<br>보<br>호<br>자
+		</th>
+		<th class="normal" style="">성 명</th> 
+		<th style="" onclick="this.querySelector('input').focus();">
+			<input class="light" name="cs_data_07" style=";" value="${param4 }" type="text"/>
+		</th>
+		<th onclick="this.querySelector('input').focus();" style="" class="normal">
+			(관계 :<input class="light" name="cs_data_08" style="" type="text"/>)
+		</th>
+		<th style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative; ">
+		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
+		</th>
+	</tr>
+	<tr>
+		<th class="normal">주 소</th>
+		<th colspan="4" onclick="this.querySelector('input').focus();">
+			<input class="light" name="cs_data_09" type="text"/>
+		</th>
+	</tr>
+	<tr>
+		<th class="normal">휴대폰 번호</th>
+		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_10" type="text" value="${param5}"/>
+		</th>
+		<th colspan="2" style="text-align: right;">
+			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
+				<input id="cs_data_11" id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
+				<label for="cs_data_11" for="cs_data_11">비용안내</label>
+			</div>
+		</th>
+	</tr>
+	
+	
+</table>
+
+
+
+
+
+
+
+
 <div style="text-align: center; margin-bottom: 30px;">
 <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
  border: 1px solid #c7c7c7 !important;" >
@@ -302,12 +356,6 @@
 		  <label for="cs_data_11" for="cs_data_11">비용안내</label>
 		</div>
 		</td>
-		
-		
-		
-		
-		
-		
 	</tr>
 </table>
 </div>
