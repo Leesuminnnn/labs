@@ -176,6 +176,8 @@
 <h1 style="text-align: center; font-size: 30pt; padding: 70px 0 30px 0;">입 원 서 약 서</h1>
 
 <div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
+
+
 <div style="text-align: center; margin-bottom: 20px;">
 <table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
@@ -253,7 +255,7 @@
 	주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
 		<p style="margin-bottom:0px;">
 		(보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
-		</p>>
+		</p>
 	</li>
 	<li class="light_info">
 	주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
@@ -265,87 +267,186 @@
 </div>
 <br>
 
-<div style="text-align: center; margin-bottom: 30px;">
-<table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;border: 1px solid #c7c7c7;
- " >
-	<tr style="height: 56px; ">
-		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border-right: 1px solid #c7c7c7; border-left: 1px solid #c7c7c7; border-top: 1px solid #c7c7c7; border-bottom: 1px silod #c7c7c7;  font-weight:400; font-size:20px;">
-		주<br>보<br>호<br>자</td>
-		<td class="normal" style=" position: relative; width: 170px; border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">성명</td> 
-		<td style="width:300px; text-align: left; border-bottom: 1px solid #dadada;" onclick="this.querySelector('input').focus();">
-		<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/></td>
-		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;" class="normal">(관계 :
-		<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)</td>
-		<td style="width: 140px;  position: relative; border-bottom: 1px solid #dadada;">
-		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
-		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
-		</td>
+
+<table class="table_type1">
+	<colgroup>
+		<col width="7%">
+		<col width="18%">
+		<col width="*">
+		<col width="30%">
+		<col width="15%">
+	</colgroup>
+	<tr>
+		<th class="normal table_CC" rowspan="3">
+		주<br>보<br>호<br>자
+		</th>
+		<th class="normal" style="">성명</th> 
+		<th style="" onclick="this.querySelector('input').focus();">
+			<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/>
+		</th>
+		<th onclick="this.querySelector('input').focus();" style="" class="normal">
+			(관계 :<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)
+		</th>
+		<th style="position: relative;">
+			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1">
+				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+			</div>
+		</th>
 	</tr>
-	<tr style="height: 56px;">
-		<td style="border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;" class="normal">주소</td>
-		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border-bottom: 1px solid #dadada;">
-		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_09 }" /></td>
+	<tr>
+		<th class="normal">주소</th>
+		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
+		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_09 }" /></th>
 	</tr>
-	<tr style="height: 56px;">
-		<td style="border-right: 1px solid #dadada;" class="normal">휴대폰번호</td>
-		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" /></td>
-		<td colspan="2" style="text-align: right;">
-		<%-- 
-		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11" style="cursor: pointer;"> 비용안내</label></div>
-		 --%>
-		<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:300;">
-		  <input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>>
-		  <label for="cs_data_11" class="normal">비용안내</label>
-		</div>
-		
-		
-		
-		</td>
+	<tr>
+		<th class="normal">휴대폰번호</th>
+		<th onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" />
+		</th>
+		<th colspan="2" style="text-align: right;">
+			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
+		 	 <input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>>	
+		  	<label for="cs_data_11" class="normal">비용안내</label>
+			</div>
+		</th>
 	</tr>
 </table>
-</div>
 
-<div style="text-align: center; margin-bottom: 30px;">
-<table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
- border: 1px solid #c7c7c7;" >
-	<tr style="height: 56px;">
-		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center;border-right: 1px solid #c7c7c7; border-left: 1px solid #c7c7c7; border-top: 1px solid #c7c7c7; border-bottom: 1px silod #c7c7c7;  font-weight:400; font-size:20px;">
-		부<br>보<br>호<br>자</td>
-		<td style=" position: relative; width: 170px; border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">성명</td> 
-		<td style="width: 300px; text-align: left; border-bottom: 1px solid #dadada; " onclick="this.querySelector('input').focus();">
-		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" /></td>
-		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;">(관계 :
-		<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)</td>
-		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;">
-		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
-		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
-		</td>
+<table class="table_type1">
+	<colgroup>
+		<col width="7%">
+		<col width="18%">
+		<col width="*">
+		<col width="30%">
+		<col width="15%">
+	</colgroup>
+	<tr>
+		<th class="normal table_CC" rowspan="3" style="">
+			부<br>보<br>호<br>자
+		</th>
+		<th class="normal">성명</th> 
+		<th style="text-align:" onclick="this.querySelector('input').focus();">
+			<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" />
+		</th>
+		<th class="normal" onclick="this.querySelector('input').focus();" style="">
+			(관계 :<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)
+		</th>
+		<th style="position: relative;">
+			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+				<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
+					<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+				</div>
+		</th>
 	</tr>
 	
 	<tr style="height: 56px;" class="normal">
-		<td style="border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">주 소 </td>
-		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border-bottom: 1px solid #dadada;">
-		<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_14 }" /></td>
+		<th class="normal">주 소 </th>
+		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_14 }" />
+		</th>
 	</tr>
-	<tr style="height: 56px;" class="normal">
-		<td style="border-right: 1px solid #dadada;">휴대폰 번호</td>
-		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;" value="${decryptedCs_data_15 }" /></td>
-		<td colspan="2" style="text-align: right; border-right: inherit;">
-		<%-- 
-		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div>
-		 --%>
-		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
-		  <input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>>
-		  <label for="cs_data_16">비용안내</label>
-		</div>
-		</td>
+	<tr>
+		<th class="normal">휴대폰 번호</th>
+		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;" value="${decryptedCs_data_15 }" />
+		</th>
+		<th colspan="2" style="text-align: right;">
+			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
+				<input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>>
+				<label for="cs_data_16">비용안내</label>
+			</div>
+		</th>
 	</tr>
 </table>
-</div>
+
+
+
+
+
+
+
+<!-- <div style="text-align: center; margin-bottom: 30px;"> -->
+<!-- <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;border: 1px solid #c7c7c7; -->
+<!--  " > -->
+<!-- 	<tr style="height: 56px; "> -->
+<!-- 		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border-right: 1px solid #c7c7c7; border-left: 1px solid #c7c7c7; border-top: 1px solid #c7c7c7; border-bottom: 1px silod #c7c7c7;  font-weight:400; font-size:20px;"> -->
+<!-- 		주<br>보<br>호<br>자</td> -->
+<!-- 		<td class="normal" style=" position: relative; width: 170px; border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">성명</td>  -->
+<!-- 		<td style="width:300px; text-align: left; border-bottom: 1px solid #dadada;" onclick="this.querySelector('input').focus();"> -->
+<%-- 		<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/></td> --%>
+<!-- 		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;" class="normal">(관계 : -->
+<%-- 		<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)</td> --%>
+<!-- 		<td style="width: 140px;  position: relative; border-bottom: 1px solid #dadada;"> -->
+<!-- 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt=""> -->
+<!-- 		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td style="border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;" class="normal">주소</td> -->
+<!-- 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border-bottom: 1px solid #dadada;"> -->
+<%-- 		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_09 }" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td style="border-right: 1px solid #dadada;" class="normal">휴대폰번호</td> -->
+<!-- 		<td onclick="this.querySelector('input').focus();" style="text-align: left;"> -->
+<%-- 		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" /></td> --%>
+<!-- 		<td colspan="2" style="text-align: right;"> -->
+<%-- 		<%--  --%>
+<%-- 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>/> --%>
+<%-- 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11" style="cursor: pointer;"> 비용안내</label></div> --%>
+<%-- 		 --%> 
+<!-- 		<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:300;"> -->
+<%-- 		  <input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>> --%>
+<!-- 		  <label for="cs_data_11" class="normal">비용안내</label> -->
+<!-- 		</div> -->
+		
+		
+		
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- </table> -->
+<!-- </div> -->
+
+<!-- <div style="text-align: center; margin-bottom: 30px;"> -->
+<!-- <table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;  -->
+<!--  border: 1px solid #c7c7c7;" > -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center;border-right: 1px solid #c7c7c7; border-left: 1px solid #c7c7c7; border-top: 1px solid #c7c7c7; border-bottom: 1px silod #c7c7c7;  font-weight:400; font-size:20px;"> -->
+<!-- 		부<br>보<br>호<br>자</td> -->
+<!-- 		<td style=" position: relative; width: 170px; border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">성명</td>  -->
+<!-- 		<td style="width: 300px; text-align: left; border-bottom: 1px solid #dadada; " onclick="this.querySelector('input').focus();"> -->
+<%-- 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" /></td> --%>
+<!-- 		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;">(관계 : -->
+<%-- 		<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)</td> --%>
+<!-- 		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;"> -->
+<!-- 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt=""> -->
+<!-- 		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+	
+<!-- 	<tr style="height: 56px;" class="normal"> -->
+<!-- 		<td style="border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">주 소 </td> -->
+<!-- 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border-bottom: 1px solid #dadada;"> -->
+<%-- 		<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_14 }" /></td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr style="height: 56px;" class="normal"> -->
+<!-- 		<td style="border-right: 1px solid #dadada;">휴대폰 번호</td> -->
+<!-- 		<td onclick="this.querySelector('input').focus();" style="text-align: left;"> -->
+<%-- 		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;" value="${decryptedCs_data_15 }" /></td> --%>
+<!-- 		<td colspan="2" style="text-align: right; border-right: inherit;"> -->
+<%-- 		<%--  --%>
+<%-- 		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>/> --%>
+<%-- 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div> --%>
+<%-- 		 --%> 
+<!-- 		<div class="checkbox-wrapper-13" style="margin-right: 28px;"> -->
+<%-- 		  <input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>> --%>
+<!-- 		  <label for="cs_data_16">비용안내</label> -->
+<!-- 		</div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- </table> -->
+<!-- </div> -->
 
 <div style="text-align: center; margin-bottom: 30px;">
 <div style="margin-bottom: 30px;">
@@ -494,8 +595,8 @@ border: 1px solid #c7c7c7;" >
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:-500;" id="end">
-		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
+		<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
+		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
 	</div>
 </div>
 <br><br>

@@ -281,27 +281,29 @@
 			주<br>보<br>호<br>자
 		</th>
 		<th class="normal" style="">성 명</th> 
-		<th style="" onclick="this.querySelector('input').focus();">
-			<input class="light" name="cs_data_07" style=";" value="${param4 }" type="text"/>
+		<th style="text-align: left;" onclick="this.querySelector('input').focus();">
+			<input class="light" name="cs_data_07" style="margin-left: 33px; width:200px;" value="${param4 }" type="text"/>
 		</th>
 		<th onclick="this.querySelector('input').focus();" style="" class="normal">
-			(관계 :<input class="light" name="cs_data_08" style="" type="text"/>)
+			(관계 :<input class="light" name="cs_data_08" style="width:175px;" type="text"/>)
 		</th>
 		<th style="position: relative;">
 			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
-			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
+				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1">
+				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+			</div>
 		</th>
 	</tr>
 	<tr>
 		<th class="normal">주 소</th>
-		<th colspan="4" onclick="this.querySelector('input').focus();">
-			<input class="light" name="cs_data_09" type="text"/>
+		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_09" type="text" style="margin-left: 33px; width:460px;"/>
 		</th>
 	</tr>
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_10" type="text" value="${param5}"/>
+			<input class="light" name="cs_data_10" type="text" value="${param5}" style="margin-left:33px; width:360px;"/>
 		</th>
 		<th colspan="2" style="text-align: right;">
 			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
@@ -312,91 +314,136 @@
 	</tr>
 </table>
 
-
-
-
-
-
-
-
-<div style="text-align: center; margin-bottom: 30px;">
-<table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
- border: 1px solid #c7c7c7 !important;" >
-	<tr style="height: 56px;">
-		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">
-		주<br>보<br>호<br>자</td>
-		<td class="normal" style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
-		<td style="width:300px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
-		<input class="light" name="cs_data_07" style="margin-left: 33px; width:250px;" value="${param4 }" type="text"/></td>
-		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;" class="normal">(관계 :
-		<input class="light" name="cs_data_08" style="width : 175px;" type="text"/>)</td>
-		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative; ">
-		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
-		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
-		</td>
-	</tr>
-	<tr style="height: 56px;">
-		<td style="border: 1px solid #dadada;" class="normal">주 소</td>
-		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border: 1px solid #dadada; border-right: inherit;">
-		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text"/></td>
-	</tr>
-	<tr style="height: 56px;">
-		<td style="border: 1px solid #dadada; border-left: inherit; border-bottom: inherit;" class="normal">휴대폰 번호</td>
-		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${param5}"/></td>
-		<td colspan="2" style="text-align: right;">
-		<!-- 
-		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;"/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11"style="cursor: pointer;"> 비용안내</label></div>
-		 -->
-		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
-		  <input id="cs_data_11" id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
-		  <label for="cs_data_11" for="cs_data_11">비용안내</label>
-		</div>
-		</td>
-	</tr>
-</table>
-</div>
-
-<div style="text-align: center; margin-bottom: 30px;">
-<table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
- border: 1px solid #c7c7c7 !important; " >
-	<tr style="height: 56px;">
-		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">부<br>보<br>호<br>자</td>
-		<td style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
-		<td style="width: 300px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();">
-		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text"/></td>
-		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;">(관계 :
-		<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)</td>
-		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;">
-		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
-		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
-		</td>
+<table class="table_type1">
+	<colgroup>
+		<col width="7%">
+		<col width="18%">
+		<col width="*">
+		<col width="30%">
+		<col width="15%">
+	</colgroup>
+	<tr>
+		<th class="normal table_C" rowspan="3" style="">
+			부<br>보<br>호<br>자
+		</th>
+		<th class="normal">성 명</th> 
+		<th style="text-align: left;" onclick="this.querySelector('input').focus();" >
+			<input class="light" name="cs_data_12" style="margin-left: 33px; width:200px;" type="text"/>
+		</th>
+		<th onclick="this.querySelector('input').focus();" style="" class="normal">
+			(관계 :<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)
+		</th>
+		<th style="position: relative;">
+			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
+				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
+		</th>
 	</tr>
 	 
-	<tr style="height: 56px;" class="normal">
-		<td style="border: 1px solid #dadada;">주 소 </td>
-		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border: 1px solid #dadada; border-right: inherit;">
-		<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text"/></td>
+	<tr>
+		<th class="normal">주 소 </th>
+		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text"/>
+		</th>
 	</tr>
-	<tr style="height: 56px;" class="normal">
-		<td style="border: 1px solid #dadada; border-left: inherit; border-bottom: inherit;">휴대폰 번호</td>
-		<td onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;"/></td>
-		<td colspan="2" style="text-align: right;">
-		<!-- 
-		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox"style="cursor: pointer;"/>
-		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div>
-		 -->
-		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
-		  <input id="cs_data_16" id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
-		  <label for="cs_data_16" for="cs_data_16">비용안내</label>
-		</div>
-		
-		</td>
+	<tr>
+		<th class="normal">휴대폰 번호</th>
+		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px; width:360px;"/>
+		</th>
+		<th colspan="2" style="text-align: right;">
+			<div class="checkbox-wrapper-13" style="margin-right: 33px; font-weight:400;">
+			  <input id="cs_data_16" id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
+			  <label for="cs_data_16" for="cs_data_16">비용안내</label>
+			</div>
+		</th>
 	</tr>
 </table>
-</div>
+
+
+<!-- 처음 주보호자 테이 -->
+<!-- <div style="text-align: center; margin-bottom: 30px;"> -->
+<!-- <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; -->
+<!--  border: 1px solid #c7c7c7 !important;" > -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;"> -->
+<!-- 		주<br>보<br>호<br>자</td> -->
+<!-- 		<td class="normal" style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td>  -->
+<!-- 		<td style="width:300px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();"> -->
+<%-- 		<input class="light" name="cs_data_07" style="margin-left: 33px; width:250px;" value="${param4 }" type="text"/></td> --%>
+<!-- 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;" class="normal">(관계 : -->
+<!-- 		<input class="light" name="cs_data_08" style="width : 175px;" type="text"/>)</td> -->
+<!-- 		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative; "> -->
+<!-- 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt=""> -->
+<!-- 		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td style="border: 1px solid #dadada;" class="normal">주 소</td> -->
+<!-- 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border: 1px solid #dadada; border-right: inherit;"> -->
+<!-- 		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text"/></td> -->
+<!-- 	</tr> -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td style="border: 1px solid #dadada; border-left: inherit; border-bottom: inherit;" class="normal">휴대폰 번호</td> -->
+<!-- 		<td onclick="this.querySelector('input').focus();" style="text-align: left;"> -->
+<%-- 		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${param5}"/></td> --%>
+<!-- 		<td colspan="2" style="text-align: right;"> -->
+<!-- 		<!--  -->
+<!-- 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;"/> -->
+<!-- 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11"style="cursor: pointer;"> 비용안내</label></div> -->
+<!-- 		 --> 
+<!-- 		<div class="checkbox-wrapper-13" style="margin-right: 28px;"> -->
+<!-- 		  <input id="cs_data_11" id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내"> -->
+<!-- 		  <label for="cs_data_11" for="cs_data_11">비용안내</label> -->
+<!-- 		</div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- </table> -->
+<!-- </div> -->
+
+
+<!-- <div style="text-align: center; margin-bottom: 30px;"> -->
+<!-- <table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; -->
+<!--  border: 1px solid #c7c7c7 !important; " > -->
+<!-- 	<tr style="height: 56px;"> -->
+<!-- 		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">부<br>보<br>호<br>자</td> -->
+<!-- 		<td style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td>  -->
+<!-- 		<td style="width: 300px; text-align: left; border: 1px solid #dadada; border-top: inherit;" onclick="this.querySelector('input').focus();"> -->
+<!-- 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text"/></td> -->
+<!-- 		<td onclick="this.querySelector('input').focus();" style="border: 1px solid #dadada; border-top: inherit;">(관계 : -->
+<!-- 		<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)</td> -->
+<!-- 		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;"> -->
+<!-- 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt=""> -->
+<!-- 		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div> -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+	 
+<!-- 	<tr style="height: 56px;" class="normal"> -->
+<!-- 		<td style="border: 1px solid #dadada;">주 소 </td> -->
+<!-- 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border: 1px solid #dadada; border-right: inherit;"> -->
+<!-- 		<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text"/></td> -->
+<!-- 	</tr> -->
+<!-- 	<tr style="height: 56px;" class="normal"> -->
+<!-- 		<td style="border: 1px solid #dadada; border-left: inherit; border-bottom: inherit;">휴대폰 번호</td> -->
+<!-- 		<td onclick="this.querySelector('input').focus();" style="text-align: left;"> -->
+<!-- 		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;"/></td> -->
+<!-- 		<td colspan="2" style="text-align: right;"> -->
+<!-- 		<!--  -->
+<!-- 		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox"style="cursor: pointer;"/> -->
+<!-- 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div> -->
+<!-- 		 --> 
+<!-- 		<div class="checkbox-wrapper-13" style="margin-right: 28px;"> -->
+<!-- 		  <input id="cs_data_16" id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내"> -->
+<!-- 		  <label for="cs_data_16" for="cs_data_16">비용안내</label> -->
+<!-- 		</div> -->
+		
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- </table> -->
+<!-- </div> -->
+
+
+
 <div style="text-align: center; margin-bottom: 30px;">
 <div style="margin-bottom: 30px;">
 <table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
@@ -537,8 +584,8 @@ border: 1px solid #c7c7c7;" >
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px;" name="cs_data_28" type="text"/>) :
 		<input name="cs_data_29" style="width:150px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:-500;" id="end">
-		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
+		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:500;" id="end">
+		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
 	</div>
 </div>
 <br><br>
