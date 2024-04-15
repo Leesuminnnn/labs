@@ -179,6 +179,14 @@ input[type="radio"]:checked + label span {
 .light_info_list{padding:0 0 0 35px;}
 .light_info{list-style:decima; line-height:29px;}
 
+/* 테이블 스타일 */
+.table_type1{border:solid 1px #dadada; width:966px; margin-left:auto; margin-right:auto;}
+.table_type1 tr th{height:55px; border:solid 1px #dadada;}
+.table_C{font-size:20px; font-weight:400; background:#fafafa;}
+
+
+
+
 
 
 
@@ -218,6 +226,13 @@ input[type=checkbox]:checked + label:before {
 	background: url('../icon/check box_b.png') no-repeat center #fff;
 	
 }
+
+
+
+
+
+
+
 
 @media screen and (max-width: 1500px){
     .nav__section{display:none !important;}

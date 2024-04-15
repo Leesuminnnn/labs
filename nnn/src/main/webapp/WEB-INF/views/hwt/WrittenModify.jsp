@@ -295,7 +295,7 @@
 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>/>
 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11" style="cursor: pointer;"> 비용안내</label></div>
 		 --%>
-		<div class="checkbox-wrapper-13" style="margin-right: 28px;">
+		<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:300;">
 		  <input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>>
 		  <label for="cs_data_11" class="normal">비용안내</label>
 		</div>
