@@ -253,9 +253,9 @@
 	주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.</li>
 	<li class="light_info">
 	주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
-	</li>
-	<li style="margin-bottom: 10px;">
-	(보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
+		<p style="margin-bottom:0px;">
+		(보증채무최고액:30,000,000원 보증기간:3년), 2개월 미납시 본원은 퇴원권유 할 수 있습니다.
+		</p>
 	</li>
 	<li class="light_info">
 	주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
@@ -280,7 +280,7 @@
 		<input class="light" name="cs_data_08" style="width : 175px;" type="text"/>)</td>
 		<td style="width: 140px; border: 1px solid #dadada; border-top: inherit; border-right: inherit; position: relative; ">
 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
-		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1">&nbsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&nbsp;</div>
+		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
 		</td>
 	</tr>
 	<tr style="height: 56px;">
@@ -492,7 +492,7 @@ border: 1px solid #c7c7c7;" >
 		신청인  (  관계  : <input style="width:110px;" name="cs_data_28" type="text"/>) :
 		<input name="cs_data_29" style="width:150px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:-500;" id="end">
-		&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</div	>
+		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: -1; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
 	</div>
 </div>
 <br><br>
