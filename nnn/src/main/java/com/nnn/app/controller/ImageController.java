@@ -1,5 +1,7 @@
 package com.nnn.app.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ public class ImageController {
 	
 	private ImageService imageService;
 	private CanvasService canvasService;
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	public ImageController(ImageService imageService, CanvasService canvasService) {
@@ -46,8 +49,10 @@ public class ImageController {
 			) {
 		ImageEntity imageEntity = new ImageEntity();
 		System.out.println("이미지 저장");
-		System.out.println("cs_idx : "+cs_idx);
-		System.out.println("cs_data_01 : "+cs_data_01);
+//		System.out.println("cs_idx : "+cs_idx);
+//		System.out.println("cs_data_01 : "+cs_data_01);
+		log.debug("debug log{}", cs_idx);
+		log.debug("debug log{}", cs_data_01);
 		// 암호화
 		// 256 오류로 인해서 128으로 변경
 		//AES256Util aes256 = new AES256Util();
@@ -105,27 +110,50 @@ public class ImageController {
 		vo.setCs_data_29(cipherText7);
 		
 		System.out.println("##################################################");
-		System.out.println(text1);
-		System.out.println(cipherText1);
-		System.out.println(aes128.decrypt(cipherText1));
-		System.out.println(text2);
-		System.out.println(cipherText2);
-		System.out.println(aes128.decrypt(cipherText2));
-		System.out.println(text3);
-		System.out.println(cipherText3);
-		System.out.println(aes128.decrypt(cipherText3));
-		System.out.println(text4);
-		System.out.println(cipherText4);
-		System.out.println(aes128.decrypt(cipherText4));
-		System.out.println(text5);
-		System.out.println(cipherText5);
-		System.out.println(aes128.decrypt(cipherText5));
-		System.out.println(text6);
-		System.out.println(cipherText6);
-		System.out.println(aes128.decrypt(cipherText6));
-		System.out.println(text7);
-		System.out.println(cipherText7);
-		System.out.println(aes128.decrypt(cipherText7));
+//		System.out.println(text1);
+//		System.out.println(cipherText1);
+//		System.out.println(aes128.decrypt(cipherText1));
+//		System.out.println(text2);
+//		System.out.println(cipherText2);
+//		System.out.println(aes128.decrypt(cipherText2));
+//		System.out.println(text3);
+//		System.out.println(cipherText3);
+//		System.out.println(aes128.decrypt(cipherText3));
+//		System.out.println(text4);
+//		System.out.println(cipherText4);
+//		System.out.println(aes128.decrypt(cipherText4));
+//		System.out.println(text5);
+//		System.out.println(cipherText5);
+//		System.out.println(aes128.decrypt(cipherText5));
+//		System.out.println(text6);
+//		System.out.println(cipherText6);
+//		System.out.println(aes128.decrypt(cipherText6));
+//		System.out.println(text7);
+//		System.out.println(cipherText7);
+//		System.out.println(aes128.decrypt(cipherText7));
+
+		log.debug("debug log{}", text1);
+		log.debug("debug log{}", cipherText1);
+		log.debug("debug log{}", aes128.decrypt(cipherText1));
+		log.debug("debug log{}", text2);
+		log.debug("debug log{}", cipherText2);
+		log.debug("debug log{}", aes128.decrypt(cipherText2));
+		log.debug("debug log{}", text3);
+		log.debug("debug log{}", cipherText3);
+		log.debug("debug log{}", aes128.decrypt(cipherText3));
+		log.debug("debug log{}", text4);
+		log.debug("debug log{}", cipherText4);
+		log.debug("debug log{}", aes128.decrypt(cipherText4));
+		log.debug("debug log{}", text5);
+		log.debug("debug log{}", cipherText5);
+		log.debug("debug log{}", aes128.decrypt(cipherText5));
+		log.debug("debug log{}", text6);
+		log.debug("debug log{}", cipherText6);
+		log.debug("debug log{}", aes128.decrypt(cipherText6));
+		log.debug("debug log{}", text7);
+		log.debug("debug log{}", cipherText7);
+		log.debug("debug log{}", aes128.decrypt(cipherText7));
+		
 		System.out.println("##################################################");
 		
 		imageEntity.setImageData(image);

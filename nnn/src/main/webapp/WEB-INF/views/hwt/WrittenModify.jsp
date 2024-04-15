@@ -1208,6 +1208,7 @@ $(document).ready(function() {
 					     },
 					     error: function() {
 					       alert("이미지 등록에 실패했습니다.");
+					       alert(error);
 					     }
 					   });
 					
