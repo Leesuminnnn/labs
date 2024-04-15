@@ -1124,48 +1124,48 @@ $(document).ready(function() {
 					// 이미지 url
 					var image = canvas.toDataURL("image/png");
 					image = image.replace("data:image/png;base64,", "");
-					console.log(image);
+// 					console.log(image);
 					
 					var cs_idx = ${cs_idx}
-					console.log(cs_idx);
+// 					console.log(cs_idx);
 					
 					var cs_data_01 = $('input[name=cs_data_01]').val();
-					console.log(cs_data_01);
+// 					console.log(cs_data_01);
 					var cs_data_02 = $('input[name=cs_data_02]').val();
-					console.log(cs_data_02);
+// 					console.log(cs_data_02);
 					var cs_data_03 = $('input[name=cs_data_03]').val();
-					console.log(cs_data_03);
+// 					console.log(cs_data_03);
 					var cs_data_04 = $('input[name=cs_data_04]').val();
-					console.log(cs_data_04);
+// 					console.log(cs_data_04);
 					var cs_data_05 = $('input[name=cs_data_05]').val();
-					console.log(cs_data_05);
+// 					console.log(cs_data_05);
 					var cs_data_06 = $('input[name=cs_data_06]').val();
-					console.log(cs_data_06);
+// 					console.log(cs_data_06);
 					var cs_data_07 = $('input[name=cs_data_07]').val();
-					console.log(cs_data_07);
+// 					console.log(cs_data_07);
 					var cs_data_08 = $('input[name=cs_data_08]').val();
-					console.log(cs_data_08);
+// 					console.log(cs_data_08);
 					var cs_data_09 = $('input[name=cs_data_09]').val();
-					console.log(cs_data_09);
+// 					console.log(cs_data_09);
 					var cs_data_10 = $('input[name=cs_data_10]').val();
-					console.log(cs_data_10);
+// 					console.log(cs_data_10);
 
 					var cs_data_12 = $('input[name=cs_data_12]').val();
-					console.log(cs_data_12);
+// 					console.log(cs_data_12);
 					var cs_data_13 = $('input[name=cs_data_13]').val();
-					console.log(cs_data_13);
+// 					console.log(cs_data_13);
 					var cs_data_14 = $('input[name=cs_data_14]').val();
-					console.log(cs_data_14);
+// 					console.log(cs_data_14);
 					var cs_data_15 = $('input[name=cs_data_15]').val();
-					console.log(cs_data_15);
+// 					console.log(cs_data_15);
 
 					
 					var cs_data_27 = $('input[name=cs_data_27]').val();
-					console.log(cs_data_27);
+// 					console.log(cs_data_27);
 					var cs_data_28 = $('input[name=cs_data_28]').val();
-					console.log(cs_data_28);
+// 					console.log(cs_data_28);
 					var cs_data_29 = $('input[name=cs_data_29]').val();
-					console.log(cs_data_29);
+// 					console.log(cs_data_29);
 					
 					$.ajax({
 					     url: "${pageContext.request.contextPath}/saveImage",
@@ -1217,6 +1217,15 @@ $(document).ready(function() {
 		});
 	});
 });
+function displayDebugInfo(message) {
+    var debugDiv = document.getElementById('debugDiv');
+    if (!debugDiv) {
+        debugDiv = document.createElement('div');
+        debugDiv.id = 'debugDiv';
+        document.body.appendChild(debugDiv);
+    }
+    debugDiv.innerHTML += message + '<br>';
+}
 </script>
 </section>
 
