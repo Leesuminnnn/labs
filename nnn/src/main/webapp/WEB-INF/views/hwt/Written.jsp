@@ -269,7 +269,7 @@
 
 <div style="text-align: center; margin-bottom: 30px;">
 <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
- border: 1px solid #c7c7c7;" >
+ border: 1px solid #c7c7c7 !important;" >
 	<tr style="height: 56px;">
 		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">
 		주<br>보<br>호<br>자</td>
