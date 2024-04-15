@@ -287,7 +287,7 @@
 		<th onclick="this.querySelector('input').focus();" style="" class="normal">
 			(관계 :<input class="light" name="cs_data_08" style="" type="text"/>)
 		</th>
-		<th>
+		<th style="position: relative;">
 			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
 			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
 		</th>
