@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,7 @@ public class HwtController {
 	
 	private HwtService hwtService;
 	private ImageService imageService;
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	public HwtController(HwtService hwtService, ImageService imageService) {
@@ -57,6 +60,7 @@ public class HwtController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		mv.setViewName("hwt/login");
+		
 		return mv;
 	}
 	@ResponseBody
