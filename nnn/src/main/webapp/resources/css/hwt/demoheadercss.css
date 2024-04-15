@@ -39,3 +39,9 @@
 .logout-img > a > img {
 	height: 25px;
 }
+.info-header {
+	position: absolute;
+    top: 22px;
+    right: 152px;
+    color: #fff;
+}

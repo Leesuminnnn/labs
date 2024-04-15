@@ -13,6 +13,7 @@ public class LoginAjaxResponse {
 
 	private String result;
 	private int idx;
+	private String subname;
 	
 	
 }

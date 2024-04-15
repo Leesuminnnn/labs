@@ -24,6 +24,11 @@
 		<div class="logo-img">
 			<img src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
 		</div>
+		<div class="info-header">
+			<span>
+				${info.hspt_subname } ${info.name}
+			</span>
+		</div>
 		<div class="logout-img">
 			<a href="${pageContext.request.contextPath}/hwt/Logout">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">

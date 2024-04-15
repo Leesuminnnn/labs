@@ -131,8 +131,10 @@ public class HwtController {
 					// 로그인 성공
 					UsersVo info2 = hwtService.info2(vo);
 					int idx = info2.getIdx();
+					String subname = info2.getHspt_subname();
 					response.setResult("4");
 					response.setIdx(idx);
+					response.setSubname(subname);
 					//로그인 기록 저장
 					map.put("id", vo.getId());
 					map.put("name", info2.getName());
@@ -147,6 +149,7 @@ public class HwtController {
 					hwtService.loginlog(map);
 					// 세션 저장
 					session.setAttribute("loginmember", vo.getId());
+					session.setAttribute("idx", idx);
 					return response;
 				} else {
 					// 비밀번호 불일치
@@ -250,7 +253,11 @@ public class HwtController {
 		mav.addObject("param4",param4);
 		mav.addObject("param5",param5);
 		mav.addObject("param6",param6);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		mav.setViewName("hwt/Written");
 		return mav;
 	}
@@ -271,7 +278,11 @@ public class HwtController {
 		mav.addObject("param4",param4);
 		mav.addObject("param5",param5);
 		mav.addObject("param6",param6);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		mav.setViewName("hwt/Written2");
 		return mav;
 	}
@@ -282,6 +293,12 @@ public class HwtController {
 		//AES256Util aes256 = new AES256Util();
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
+
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		
 		// view에서 받은 데이터를 담아서 넘겨준다.
 		String text1 = vo.getCs_data_01();
@@ -339,9 +356,13 @@ public class HwtController {
 	}
 	
 	@RequestMapping(value = "Written0")
-	public ModelAndView written1(ModelAndView mav) {
+	public ModelAndView written1(ModelAndView mav, HttpSession session) {
 		System.out.println("written oath 페이지");
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		mav.setViewName("hwt/Written");
 		return mav;
 	}
@@ -578,7 +599,7 @@ public class HwtController {
 	
 	
 	@RequestMapping(value="CounselList")
-	public ModelAndView List(ModelAndView mav, Criteria cri, WrittenVo vo) throws Exception {
+	public ModelAndView List(ModelAndView mav, Criteria cri, WrittenVo vo, HttpSession session) throws Exception {
 		System.out.println("cri = " + cri);
 		System.out.println("####################type1 : "+cri.getType1());
 		System.out.println("####################keyword1 : "+cri.getKeyword1());
@@ -586,7 +607,11 @@ public class HwtController {
 		System.out.println("####################keyword2 : "+cri.getKeyword2());
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
@@ -657,7 +682,7 @@ public class HwtController {
 		return mav;
 	}
 	@RequestMapping(value="CounselListSearch")
-	public ModelAndView ListSearch(ModelAndView mav, @RequestParam(value="keyword1", defaultValue="") String keyword1,
+	public ModelAndView ListSearch(ModelAndView mav, HttpSession session, @RequestParam(value="keyword1", defaultValue="") String keyword1,
 			@RequestParam(value="keyword2", defaultValue="") String keyword2,
 			@RequestParam(value="keyword3", defaultValue="") String keyword3,
 			@RequestParam(value="type1", defaultValue="") String type1,
@@ -672,7 +697,11 @@ public class HwtController {
 		System.out.println("####################keyword2 : "+cri.getKeyword2());
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
@@ -1032,7 +1061,11 @@ public class HwtController {
 			@PathVariable(name="cs_idx")Integer cs_idx ) throws Exception{
 		System.out.println("written oath 페이지");
 		System.out.println("cs_idx : "+cs_idx);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		System.out.println("########################");
 		System.out.println(hwtService.selectone(cs_idx));
 		System.out.println("########################");
@@ -1076,7 +1109,11 @@ public class HwtController {
 		//AES256Util aes256 = new AES256Util();
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		// view에서 받은 데이터를 담아서 넘겨준다.
 		String text1 = vo.getCs_data_01();
 		String text2 = vo.getCs_data_06();
@@ -1137,7 +1174,7 @@ public class HwtController {
 	
 	
 	@RequestMapping(value="CounselList2")
-	public ModelAndView List2(ModelAndView mav, Criteria cri, WrittenVo vo) throws Exception {
+	public ModelAndView List2(ModelAndView mav, HttpSession session, Criteria cri, WrittenVo vo) throws Exception {
 		System.out.println("cri = " + cri);
 		System.out.println("####################type1 : "+cri.getType1());
 		System.out.println("####################keyword1 : "+cri.getKeyword1());
@@ -1145,7 +1182,11 @@ public class HwtController {
 		System.out.println("####################keyword2 : "+cri.getKeyword2());
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
@@ -1216,7 +1257,7 @@ public class HwtController {
 		return mav;
 	}
 	@RequestMapping(value="CounselListSearch2")
-	public ModelAndView ListSearch2(ModelAndView mav, @RequestParam(value="keyword1", defaultValue="") String keyword1,
+	public ModelAndView ListSearch2(ModelAndView mav, HttpSession session, @RequestParam(value="keyword1", defaultValue="") String keyword1,
 			@RequestParam(value="keyword2", defaultValue="") String keyword2,
 			@RequestParam(value="keyword3", defaultValue="") String keyword3,
 			@RequestParam(value="type1", defaultValue="") String type1,
@@ -1231,7 +1272,11 @@ public class HwtController {
 		System.out.println("####################keyword2 : "+cri.getKeyword2());
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
@@ -1591,7 +1636,11 @@ public class HwtController {
 			@PathVariable(name="cs_idx")Integer cs_idx ) throws Exception{
 		System.out.println("written oath 페이지");
 		System.out.println("cs_idx : "+cs_idx);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		System.out.println("########################");
 		System.out.println(hwtService.selectone(cs_idx));
 		System.out.println("########################");
@@ -1635,7 +1684,11 @@ public class HwtController {
 		//AES256Util aes256 = new AES256Util();
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mav.addObject("info", hwtService.info(idx));
 		// view에서 받은 데이터를 담아서 넘겨준다.
 		String text1 = vo.getCs_data_01();
 		String text2 = vo.getCs_data_06();
@@ -1699,7 +1752,11 @@ public class HwtController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		List<UsersVo> list = hwtService.users(map);
-		
+		session.getAttribute("loginmember");
+		int idx = (int) session.getAttribute("idx");
+		System.out.println(session.getAttribute("loginmember"));
+		System.out.println(session.getAttribute("idx"));
+		mv.addObject("info", hwtService.info(idx));
 		
 		int hspt1 = hwtService.hsptselect1(map);
 
