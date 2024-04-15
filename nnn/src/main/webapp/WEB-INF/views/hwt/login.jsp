@@ -327,10 +327,18 @@ $("#loginbtn").click(function (){
 			} else if (res === "4") {
 				// 로그인 성공
 				idx = response.idx;
+				sub = response.subname;
 				if (idx == 635) {
 					location.href = "${pageContext.request.contextPath}/hwt/admin";
-				} else {
+				} else if (sub == '원무부' ) {
 					location.href = "${pageContext.request.contextPath}/hwt/CounselList";
+				} else if (sub == '원무과') {
+					location.href = "${pageContext.request.contextPath}/hwt/CounselList";
+				} else {
+					modal.classList.toggle('show');
+					msg.innerHTML = '<p>권한이 없습니다. 관리자에게 문의하세요.</p>'
+
+					console.log(2);
 				}
 				
 				console.log(4);

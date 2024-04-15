@@ -333,18 +333,27 @@
                     <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <version>2.5.1</version>-->
+<!--                <configuration>-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                    <compilerArgument>-Xlint:all</compilerArgument>-->
+<!--                    <showWarnings>true</showWarnings>-->
+<!--                    <showDeprecation>true</showDeprecation>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-compiler-plugin</artifactId>
+			    <version>3.8.1</version> <!-- Ensure using latest or a more recent version -->
+			    <configuration>
+			        <source>1.8</source> <!-- Use your target Java version -->
+			        <target>1.8</target>
+			    </configuration>
+			</plugin>
             <plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-war-plugin</artifactId>

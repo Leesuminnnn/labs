@@ -14,7 +14,7 @@ public class ImageEntity {
 /*
 
 create Table image (
-idx int(11) not null auto_increment,
+idx int(11) not null auto_increment primary key,
 imageData longblob null,
 regdate datetime default now(),
 cs_idx int(11) null
