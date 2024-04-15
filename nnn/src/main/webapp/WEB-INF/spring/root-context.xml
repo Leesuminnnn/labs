@@ -41,7 +41,6 @@
 <!-- 		<property name="username" value="csdev"/> -->
 <!-- 		<property name="password" value="csdev1234" /> -->
 <!-- 	</bean>    -->
-<<<<<<< HEAD
 
 	<bean id="dataSource4" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
@@ -51,23 +50,6 @@
 	   	<property name="password" value="cs12365478!@" />
     </bean>
 
-=======
-<!-- 	<bean id="dataSource4" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!--         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" /> -->
-<!--         <property name="url" -->
-<!-- 		value="jdbc:mysql://mediplat.net:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/> -->
-<!-- 		<property name="username" value="csdev"/> -->
-<!-- 		<property name="password" value="csdev1234" /> -->
-<!-- 	</bean>    -->
-
-	<bean id="dataSource4" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" 
-        value="jdbc:mysql://csworktools.cafe24.com:3306/csworktools?characterEncoding=UTF-8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Seoul&amp;"/>
-        <property name="username" value="csworktools"/>
-	   	<property name="password" value="cs12365478!@" />
-    </bean>
->>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 	
 	
 	<bean id="sqlSessionFactory1" class="org.mybatis.spring.SqlSessionFactoryBean">
