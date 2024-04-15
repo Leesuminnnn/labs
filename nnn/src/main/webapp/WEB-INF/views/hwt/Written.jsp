@@ -314,7 +314,7 @@
 
 <div style="text-align: center; margin-bottom: 30px;">
 <table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;
- border: 1px solid #c7c7c7; " >
+ border: 1px solid #c7c7c7 !important; " >
 	<tr style="height: 56px;">
 		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center; border: 1px solid #c7c7c7; font-weight:400; font-size:20px;">부<br>보<br>호<br>자</td>
 		<td style=" position: relative; width: 170px; border: 1px solid #dadada; border-top: inherit;">성 명</td> 
