@@ -1,9 +1,13 @@
 package com.nnn.app.controller;
 
+import java.util.Base64;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -163,6 +167,23 @@ public class ImageController {
 		canvasService.update(vo);
 		return "Image saved successfully!";
 	}
+	
+	@RequestMapping(value = "/saveImagetest", method = RequestMethod.POST)
+	@ResponseBody
+	public String saveImagetest(@RequestParam("image") byte[] image, WrittenVo vo, @RequestParam("cs_idx")Integer cs_idx
+			
+			) {
+		ImageEntity imageEntity = new ImageEntity();
+		System.out.println("이미지 저장");
+		log.debug("debug log{}", cs_idx);
+		
+		imageEntity.setImageData(image);
+		imageEntity.setCs_idx(cs_idx);
+		imageService.saveImage(imageEntity);
+		return "Image saved successfully!";
+	}
+	
+	
 	
 	
 }

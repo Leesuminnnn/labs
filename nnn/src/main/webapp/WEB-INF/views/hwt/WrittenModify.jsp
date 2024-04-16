@@ -12,7 +12,7 @@
 <meta name="viewport" content="user-scalable=yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css?0415">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hwt/demoheadercss.css?after">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
@@ -360,94 +360,6 @@
 	</tr>
 </table>
 
-
-
-
-
-
-
-<!-- <div style="text-align: center; margin-bottom: 30px;"> -->
-<!-- <table style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;border: 1px solid #c7c7c7; -->
-<!--  " > -->
-<!-- 	<tr style="height: 56px; "> -->
-<!-- 		<td class="normal" rowspan="3" style="width:65px; text-align: center; background-color:#fafafa; border-right: 1px solid #c7c7c7; border-left: 1px solid #c7c7c7; border-top: 1px solid #c7c7c7; border-bottom: 1px silod #c7c7c7;  font-weight:400; font-size:20px;"> -->
-<!-- 		주<br>보<br>호<br>자</td> -->
-<!-- 		<td class="normal" style=" position: relative; width: 170px; border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">성명</td>  -->
-<!-- 		<td style="width:300px; text-align: left; border-bottom: 1px solid #dadada;" onclick="this.querySelector('input').focus();"> -->
-<%-- 		<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/></td> --%>
-<!-- 		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;" class="normal">(관계 : -->
-<%-- 		<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)</td> --%>
-<!-- 		<td style="width: 140px;  position: relative; border-bottom: 1px solid #dadada;"> -->
-<!-- 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt=""> -->
-<!-- 		<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div> -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<!-- 	<tr style="height: 56px;"> -->
-<!-- 		<td style="border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;" class="normal">주소</td> -->
-<!-- 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border-bottom: 1px solid #dadada;"> -->
-<%-- 		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_09 }" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr style="height: 56px;"> -->
-<!-- 		<td style="border-right: 1px solid #dadada;" class="normal">휴대폰번호</td> -->
-<!-- 		<td onclick="this.querySelector('input').focus();" style="text-align: left;"> -->
-<%-- 		<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" /></td> --%>
-<!-- 		<td colspan="2" style="text-align: right;"> -->
-<%-- 		<%--  --%>
-<%-- 		<input name="cs_data_11" value="주보호자 비용안내" type="checkbox" id="cs_data_11" class="normal" style="cursor: pointer;" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>/> --%>
-<%-- 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_11" style="cursor: pointer;"> 비용안내</label></div> --%>
-<%-- 		 --%> 
-<!-- 		<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:300;"> -->
-<%-- 		  <input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>> --%>
-<!-- 		  <label for="cs_data_11" class="normal">비용안내</label> -->
-<!-- 		</div> -->
-		
-		
-		
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<!-- </table> -->
-<!-- </div> -->
-
-<!-- <div style="text-align: center; margin-bottom: 30px;"> -->
-<!-- <table class="normal" style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto;  -->
-<!--  border: 1px solid #c7c7c7;" > -->
-<!-- 	<tr style="height: 56px;"> -->
-<!-- 		<td rowspan="3" style="width:65px; background-color:#fafafa; text-align: center;border-right: 1px solid #c7c7c7; border-left: 1px solid #c7c7c7; border-top: 1px solid #c7c7c7; border-bottom: 1px silod #c7c7c7;  font-weight:400; font-size:20px;"> -->
-<!-- 		부<br>보<br>호<br>자</td> -->
-<!-- 		<td style=" position: relative; width: 170px; border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">성명</td>  -->
-<!-- 		<td style="width: 300px; text-align: left; border-bottom: 1px solid #dadada; " onclick="this.querySelector('input').focus();"> -->
-<%-- 		<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" /></td> --%>
-<!-- 		<td onclick="this.querySelector('input').focus();" style="border-bottom: 1px solid #dadada;">(관계 : -->
-<%-- 		<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)</td> --%>
-<!-- 		<td style="width: 140px; position: relative; border-bottom: 1px solid #dadada;"> -->
-<!-- 		<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt=""> -->
-<!-- 		<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2"><mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div> -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
-	
-<!-- 	<tr style="height: 56px;" class="normal"> -->
-<!-- 		<td style="border-right: 1px solid #dadada; border-bottom: 1px solid #dadada;">주 소 </td> -->
-<!-- 		<td colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left; border-bottom: 1px solid #dadada;"> -->
-<%-- 		<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_14 }" /></td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr style="height: 56px;" class="normal"> -->
-<!-- 		<td style="border-right: 1px solid #dadada;">휴대폰 번호</td> -->
-<!-- 		<td onclick="this.querySelector('input').focus();" style="text-align: left;"> -->
-<%-- 		<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;" value="${decryptedCs_data_15 }" /></td> --%>
-<!-- 		<td colspan="2" style="text-align: right; border-right: inherit;"> -->
-<%-- 		<%--  --%>
-<%-- 		<input name="cs_data_16" id="cs_data_16" value="부보호자 비용안내" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>/> --%>
-<%-- 		<div style="margin-right: 21px; display: inline-block;"><label for="cs_data_16" style="cursor: pointer;"> 비용안내</label></div> --%>
-<%-- 		 --%> 
-<!-- 		<div class="checkbox-wrapper-13" style="margin-right: 28px;"> -->
-<%-- 		  <input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>> --%>
-<!-- 		  <label for="cs_data_16">비용안내</label> -->
-<!-- 		</div> -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<!-- </table> -->
-<!-- </div> -->
-
 <div style="text-align: center; margin-bottom: 30px;">
 <div style="margin-bottom: 30px;">
 <table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
@@ -457,32 +369,18 @@ border: 1px solid #c7c7c7;" >
 	</tr>
 	<tr style="background-color: #ffffff;">
 		<td style="height: 56px; text-align: left; width:585px; border-bottom: none; border-right: none;">
-		<%-- 
-		<input name="cs_data_17" id="cs_data_17" style="margin-left: 21px;" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>/>
-		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
-		 --%>
 		<div class="checkbox-wrapper-13" style="margin-top:10px;">
 		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
 		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
 		</div>
 		</td>
 		<td style="text-align: center; border-left: none; border-right: none; border-bottom: none;">
-		<%-- 
-		<input name="cs_data_18" id="cs_data_18" value="환자위임" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>/>
-		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
-		 --%>
 		<div class="checkbox-wrapper-13" style="display:flex; margin-top:10px;">
 		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
 		  <label for="cs_data_18">환자위임</label>
 		</div>
 		</td>
 		<td style="text-align: right; border-left: none; border-bottom: none;">
-		<%-- 
-		<div style="margin-right: 21px;">
-		<label for="cs_data_19" style="cursor: pointer;">
-		<input name="cs_data_19" id="cs_data_19" value="응급 상황" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/> 응급 상황</label>
-		</div>
-		 --%>
 		<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
 		  <input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
 		  <label for="cs_data_19">응급 상황</label>
@@ -492,22 +390,12 @@ border: 1px solid #c7c7c7;" >
 	
 	<tr style="background-color: #ffffff;">
 		<td style="height: 56px; text-align: left; border-top: none; border-right: none;">
-		<%-- 
-		<label for="cs_data_20" style="cursor: pointer;">
-		<input style="margin-left:21px;" id="cs_data_20" name="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>/> 
-		내용 설명 시 환자의 심신에 중대한 영향 우려</label>
-		 --%>
 		<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
 		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
 		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
 		</div>
 		</td>
 		<td style=" border-left: none; border-right: none; border-top: none;">
-		<%-- 
-		<div style=""><label for="cs_data_21" style="cursor: pointer;">
-		<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_21 eq '미성년자' }">checked</c:if>/> 미성년자</label>
-		</div>
-		 --%>
 		<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
 		  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
 		  <label for="cs_data_21">미성년자</label>
@@ -524,11 +412,6 @@ border: 1px solid #c7c7c7;" >
  margin-right: auto; border: 1px solid #c7c7c7;" >
 	<tr style="height: 56px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 		<td colspan="3" style="text-align: left;">
-		<%-- 
-		<label for="cs_data_22" style="cursor: pointer;">
-		<input style="font-size:14pt; margin-left: 21px; cursor: pointer;"  name="cs_data_22" id="cs_data_22" value="상급병실" type="checkbox" onchange="toggleCheckbox()" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>/> 
-		상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
-		 --%>
 		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
 		  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
 		  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
@@ -541,31 +424,16 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
 		<td style="text-align: right; color:#222222;" class="light">
 		<div style="margin-right: 21px; display: flex; justify-content: right;">
-		<%-- 
-		<label for="cs_data_24" style="cursor: pointer;">
-		<input name="cs_data_24" id="cs_data_24" value="특실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
-		<c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /> 특실</label>&emsp;&emsp;
-		 --%>
 		<div class="checkbox-wrapper-13" style="">
 		  <input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
 		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
 		  <label for="cs_data_24">특실</label>&emsp;&emsp;
 		</div>
-		<%-- 
-		<label for="cs_data_25" style="cursor: pointer;">
-		<input name="cs_data_25" id="cs_data_25" value="1인실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
-		<c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 1인실</label>&emsp;&emsp;
-		 --%>
 		<div class="checkbox-wrapper-13" style="">
 		  <input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled"<c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
 		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
 		  <label for="cs_data_25">1인실</label>&emsp;&emsp;
 		</div>
-		<%-- 
-		<label for="cs_data_26" style="cursor: pointer;">
-		<input name="cs_data_26" id="cs_data_26" value="2인실" type="checkbox" style="cursor: pointer;" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
-		<c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 2인실</label>
-		 --%>
 		
 		
 		<div class="checkbox-wrapper-13" style="">
@@ -681,8 +549,9 @@ border: 1px solid #c7c7c7;" >
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script> --%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 <script>
 function Mobile(){
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1219,13 +1088,14 @@ $(document).ready(function() {
 				
 				
 				
-					var el = document.createElement("a")
-					el.href = canvas.toDataURL("image/png")
+// 					var el = document.createElement("a")
+// 					el.href = canvas.toDataURL("image/png")
 					
 					// 이미지 url
 					var image = canvas.toDataURL("image/png");
+					console.log(image);
 					image = image.replace("data:image/png;base64,", "");
-// 					console.log(image);
+					console.log(image);
 					
 					var cs_idx = ${cs_idx}
 // 					console.log(cs_idx);
@@ -1269,7 +1139,8 @@ $(document).ready(function() {
 // 					console.log(cs_data_29);
 					
 					$.ajax({
-					     url: "${pageContext.request.contextPath}/saveImage",
+					    url: "${pageContext.request.contextPath}/saveImage",
+// 					    url: "${pageContext.request.contextPath}/saveImagetest",
 					     method: "post",
 					     data: { image: image, 
 					    		cs_idx: cs_idx,
@@ -1313,20 +1184,14 @@ $(document).ready(function() {
 					     }
 					   });
 					
-					el.click()
+				}).catch(error => {
+				    console.error("Failed to capture the screenshot:", error);
+				   alert(error);
 				});
 		});
 	});
 });
-function displayDebugInfo(message) {
-    var debugDiv = document.getElementById('debugDiv');
-    if (!debugDiv) {
-        debugDiv = document.createElement('div');
-        debugDiv.id = 'debugDiv';
-        document.body.appendChild(debugDiv);
-    }
-    debugDiv.innerHTML += message + '<br>';
-}
+
 </script>
 </section>
 
