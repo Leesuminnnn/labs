@@ -335,8 +335,9 @@
 		</th>
 		<th style="position: relative;">
 			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
-				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
-				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark></div>
+			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
+				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+			</div>
 		</th>
 	</tr>
 	 

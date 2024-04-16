@@ -284,7 +284,7 @@
 		<th style="" onclick="this.querySelector('input').focus();">
 			<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/>
 		</th>
-		<th onclick="this.querySelector('input').focus();" style="" class="normal">
+		<th onclick="this.querySelector('input').focus();" style="border-right:hidden; border-left:hidden;" class="normal">
 			(관계 :<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)
 		</th>
 		<th style="position: relative;">
@@ -301,7 +301,7 @@
 	</tr>
 	<tr>
 		<th class="normal">휴대폰번호</th>
-		<th onclick="this.querySelector('input').focus();" style="text-align: left;">
+		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
 			<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" />
 		</th>
 		<th colspan="2" style="text-align: right;">
@@ -329,12 +329,12 @@
 		<th style="text-align:" onclick="this.querySelector('input').focus();">
 			<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" />
 		</th>
-		<th class="normal" onclick="this.querySelector('input').focus();" style="">
+		<th class="normal" onclick="this.querySelector('input').focus();" style="border-right:hidden; border-left:hidden; ">
 			(관계 :<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)
 		</th>
 		<th style="position: relative;">
 			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
-				<div style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
+				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
 					<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
 				</div>
 		</th>
