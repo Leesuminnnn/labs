@@ -340,7 +340,7 @@
 		</th>
 	</tr>
 	
-	<tr style="height: 56px;" class="normal">
+	<tr style="height: 45px;" class="normal">
 		<th class="normal">주 소 </th>
 		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
 			<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_14 }" />
