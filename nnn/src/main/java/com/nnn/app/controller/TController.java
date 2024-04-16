@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -59,6 +61,7 @@ import com.nnn.app.vo.GoogleOAuthRequest;
 import com.nnn.app.vo.GoogleOAuthResponse;
 import com.nnn.app.vo.GoogleuserVo;
 import com.nnn.app.vo.HelpVo;
+import com.nnn.app.vo.ImageEntity;
 import com.nnn.app.vo.NoticeVo;
 import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.Pointdetail;
@@ -117,6 +120,22 @@ public class TController {
 			this.evaluationService = evaluationService;
 		}
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
+	@RequestMapping(value = "/saveImagetest", method = RequestMethod.POST)
+	@ResponseBody
+	public String saveImagetest(@RequestParam("image") byte[] image, WrittenVo vo, @RequestParam("cs_idx")Integer cs_idx
+			
+			) {
+		ImageEntity imageEntity = new ImageEntity();
+		System.out.println("이미지 저장");
+		log.debug("debug log{}", cs_idx);
+		
+		imageEntity.setImageData(image);
+		imageEntity.setCs_idx(cs_idx);
+		imageService.saveImage(imageEntity);
+		return "Image saved successfully!";
+	}
 	@RequestMapping(value = "test.do")
 	public ModelAndView test(ModelAndView mav, HttpSession session, 
 			@RequestParam(name="param1", defaultValue = "")String param1, 
