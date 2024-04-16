@@ -165,7 +165,7 @@
 
 <section style="background-repeat: no-repeat;
 	background-position: center 0;
-	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
+	background-image: url('${pageContext.request.contextPath}/resources/img/background.png');
 	background-size: 1246px;
 	min-width: 1280px;
 	margin-bottom: 100px; margin-top: 62px; background-color: #f7f7f7;  margin-left:240px;">

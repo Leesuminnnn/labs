@@ -175,7 +175,7 @@ input[type="radio"]:checked + label span {
 	font-size: 18pt;
 }
 
-.capture_area{padding: 45px;}
+.capture_area{padding: 30px;}
 .light_info_list{padding:0 0 0 35px;}
 .light_info{list-style:decima; line-height:29px;}
 
