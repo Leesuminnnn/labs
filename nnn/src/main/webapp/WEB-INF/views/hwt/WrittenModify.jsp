@@ -118,7 +118,7 @@
     box-sizing: inherit;
   }
   span {
-      line-height: 30px;
+      line-height: 23px;
       margin-bottom: 5px;
   }
    .nav__section {
@@ -173,7 +173,7 @@
 <div id="capture_area" class="capture_area" style="">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
-<h1 style="text-align: center; font-size: 30pt; padding: 70px 0 30px 0;">입 원 서 약 서</h1>
+<h1 style="text-align: center; font-size: 30pt; padding: 60px 0 20px 0;">입 원 서 약 서</h1>
 
 <div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
 
@@ -181,18 +181,18 @@
 <div style="text-align: center; margin-bottom: 20px;">
 <table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
-		<td class="normal" width="170px" height="50px">성명</td>
+		<td class="normal" width="170px" height="45px">성명</td>
 		<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input style= "margin-left: 33px;" type="text" name="cs_data_01" value="${decryptedCs_data_01 }" /></td>
-		<td class="normal" width="170px" height="50px">차트번호</td>
+		<td class="normal" width="170px" height="45px">차트번호</td>
 		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" width="313px" style="text-align: left;">
 		<input style="margin-left: 33px;" name="cs_data_02" type="text" value="${vo.cs_data_02 }" /></td>
 	</tr>
 	<tr>
-		<td class="normal" height="50px">입원병실</td>
+		<td class="normal" height="45px">입원병실</td>
 		<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left;">
 		<input style= "margin-left: 33px;" type="text" name="cs_data_03" value="${vo.cs_data_03 }" /></td>
-		<td class="normal" height="50px">성별 </td>
+		<td class="normal" height="45px">성별 </td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
 		
 		<input type="radio" id="genderM" name="cs_data_04" value="남성" style="cursor: pointer;" <c:if test="${param2 eq '남성' or cs_data_04 eq '남성'}">checked</c:if>><label for="genderM" style="cursor: pointer;">남</label>
@@ -202,10 +202,10 @@
 		<input type="radio" id="genderF" name="cs_data_04" value="여성" style="cursor: pointer;" <c:if test="${param2 eq '여성' or cs_data_04 eq '여성'}">checked</c:if>><label for="genderF" style="cursor: pointer;">여</label></td>
 	</tr>
 	<tr>
-		<td class="normal" height="50px">생년월일</td>
+		<td class="normal" height="45px">생년월일</td>
 		<td class="light" onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input style= "margin-left: 33px;" type="text" name="cs_data_05" value="${vo.cs_data_05 }" /></td>
-		<td class="normal" height="50px">전화</td>
+		<td class="normal" height="45px">전화</td>
 		<td style="text-align: left;" class="light" colspan="2" onclick="this.querySelector('input').focus();">
 		<input style="margin-left: 33px;" type="text" name="cs_data_06" value="${decryptedCs_data_06 }"/></td>
 	</tr>
@@ -213,7 +213,7 @@
 </div>
 
 <div class="light" style="font-size:14pt; color:#222222; width:966px; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
-<span style="text-indent:15px;">  
+<span style="text-indent:15px; font-size:16px;">  
 본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
 </span>
 <ol class="light_info_list">
@@ -238,15 +238,15 @@
 	<li class="light_info">
 	개인정보 수집 및 활용 동의
 	</li>
-		<li style="line-height:29px;">본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.</li>
-		<li style=" line-height:29px;"> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</li>
-		<li style=" line-height:29px; margin-bottom: 10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
-		<li style="margin-bottom: 10px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
-		<li style="margin-bottom: 10px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
-		<li style="margin-bottom: 20px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
+		<li style="line-height:23px; font-size:16px;">본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, <br>동의를 하지 않더라도 진료에는 불이익이 없음.</li>
+		<li style="line-height:23px; font-size:16px;"> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</li>
+		<li style="line-height:23px; font-size:16px; margin-bottom: 6px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
+		<li style="margin-bottom: 6px; font-size:16px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
+		<li style="margin-bottom: 6px; font-size:16px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
+		<li style="margin-bottom: 13px; font-size:16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
  
-<span class="bold" style="color:#303030; font-size: 16pt; padding-top:15px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
+<span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 
 <ol class="light_info_list">
 	<li class="light_info">
@@ -361,14 +361,14 @@
 </table>
 
 <div style="text-align: center; margin-bottom: 30px;">
-<div style="margin-bottom: 30px;">
-<table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
+<div style="margin-bottom: 20px;">
+<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
 border: 1px solid #c7c7c7;" >
 	<tr style="background-color: #fafafa;">
-		<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
+		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
 	</tr>
 	<tr style="background-color: #ffffff;">
-		<td style="height: 56px; text-align: left; width:585px; border-bottom: none; border-right: none;">
+		<td style="height: 48px; text-align: left; width:585px; border-bottom: none; border-right: none;">
 		<div class="checkbox-wrapper-13" style="margin-top:10px;">
 		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
 		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
@@ -389,7 +389,7 @@ border: 1px solid #c7c7c7;" >
 	</tr>
 	
 	<tr style="background-color: #ffffff;">
-		<td style="height: 56px; text-align: left; border-top: none; border-right: none;">
+		<td style="height: 48px; text-align: left; border-top: none; border-right: none;">
 		<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
 		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
 		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
@@ -407,10 +407,10 @@ border: 1px solid #c7c7c7;" >
 </table>
 </div>
 
-<div style="text-align: center; margin-bottom: 30px;">
-<table style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
+<div style="text-align: center; margin-bottom: 25px;">
+<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
  margin-right: auto; border: 1px solid #c7c7c7;" >
-	<tr style="height: 56px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
+	<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 		<td colspan="3" style="text-align: left;">
 		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
 		  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
@@ -418,7 +418,7 @@ border: 1px solid #c7c7c7;" >
 		</div>
 		</td>
 	</tr>
-	<tr style="height: 56px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
+	<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
 		<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
 		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
 		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
@@ -444,11 +444,11 @@ border: 1px solid #c7c7c7;" >
 		</div>
 		</td>
 	</tr>
-	<tr style="height: 56px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
+	<tr style="height: 45px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
 		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
 		 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
 	</tr>
-	<tr style="height: 56px; background-color: #ffffff;">
+	<tr style="height: 50px; background-color: #ffffff;">
 		<td colspan="3" style="text-align: left;">
 		<div style="margin-left: 21px;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
 		</td>
