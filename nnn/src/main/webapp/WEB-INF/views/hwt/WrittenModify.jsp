@@ -145,9 +145,13 @@
 .icon-image {
 	margin-right: 10px;
 	width:18px;
+}
+.capture-araa > * {
+	width :100%;
+}
 </style>
 </head>
-<body style="min-width: 1280px;">
+<body style="">
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
@@ -170,7 +174,7 @@
 	min-width: 1280px;
 	margin-bottom: 100px; margin-top: 62px; background-color: #f7f7f7;  margin-left:240px;">
     
-<div id="capture_area" class="capture_area" style="">
+<div id="capture_area" class="capture_area" style="width: 210mm; height: 297mm; display: inline;">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
 <h1 style="text-align: center; font-size: 30pt; padding: 60px 0 20px 0;">입 원 서 약 서</h1>
@@ -1083,6 +1087,7 @@ $(document).ready(function() {
 		
 		$(".btn_download").click(function(e){
 			html2canvas(document.getElementById("capture_area")).then(function(canvas)
+			
 				{
 				
 				

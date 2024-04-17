@@ -148,9 +148,7 @@ public class HomeController {
 		
 		mv.addObject("notice", list);
 		
-		//15일 오후 퇴근 전에 바꾸기
-		mv.setViewName("e/login");
-//		mv.setViewName("e/prevlogin");
+		mv.setViewName("hwt/Login");
 		return mv;
 	}
 	public static void alertAndGo(HttpServletResponse response, String msg, String url) {
