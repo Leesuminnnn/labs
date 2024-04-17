@@ -151,7 +151,7 @@
 }
 </style>
 </head>
-<body style="">
+<body style="width: 210mm; height: 297mm">
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
@@ -171,19 +171,26 @@
 	background-position: center 0;
 	background-image: url('${pageContext.request.contextPath}/resources/img/background.png');
 	background-size: 1246px;
-	min-width: 1280px;
+	min-width: 210mm;
 	margin-bottom: 100px; margin-top: 62px; background-color: #f7f7f7;  margin-left:240px;">
     
-<div id="capture_area" class="capture_area" style="width: 210mm; height: 297mm; display: inline;">
+<div id="capture_area" class="capture_area" style="width: 210mm; height: 297mm;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    top: 2px;
+    transform: translate(17%, 48%);
+">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
 <h1 style="text-align: center; font-size: 30pt; padding: 60px 0 20px 0;">입 원 서 약 서</h1>
 
-<div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
+<div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 100%; padding-bottom:13px;">※ 환자의 인적사항</div>
 
 
 <div style="text-align: center; margin-bottom: 20px;">
-<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;" >
+<table border=1 style="border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
 		<td class="normal" width="170px" height="45px">성명</td>
 		<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
@@ -216,7 +223,7 @@
 </table>
 </div>
 
-<div class="light" style="font-size:14pt; color:#222222; width:966px; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
+<div class="light" style="font-size:14pt; color:#222222; width:100%; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
 <span style="text-indent:15px; font-size:16px;">  
 본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
 </span>
@@ -396,7 +403,7 @@
 
 <div style="text-align: center; margin-bottom: 30px;">
 <div style="margin-bottom: 20px;">
-<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
+<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; 
 border: 1px solid #c7c7c7;" >
 	<tr style="background-color: #fafafa;">
 		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
@@ -442,7 +449,7 @@ border: 1px solid #c7c7c7;" >
 </div>
 
 <div style="text-align: center; margin-bottom: 25px;">
-<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
+<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto;
  margin-right: auto; border: 1px solid #c7c7c7;" >
 	<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 		<td colspan="3" style="text-align: left;">
@@ -493,7 +500,7 @@ border: 1px solid #c7c7c7;" >
 </div>
 
 <div style="position: relative;">
-	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
+	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 100%; height: 42px; margin: 0 auto; padding-right:30px;
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
