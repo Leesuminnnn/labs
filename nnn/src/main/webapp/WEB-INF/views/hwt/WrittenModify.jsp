@@ -147,7 +147,7 @@
 	width:18px;
 </style>
 </head>
-<body style="min-width: 1280px;">
+<body>
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
