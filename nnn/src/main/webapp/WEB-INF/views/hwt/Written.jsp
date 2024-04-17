@@ -580,7 +580,7 @@ border: 1px solid #c7c7c7;" >
 </div>
 
 
-<div style="position: relative;">
+<div style="position: relative; ">
 	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px;" name="cs_data_28" type="text"/>) :

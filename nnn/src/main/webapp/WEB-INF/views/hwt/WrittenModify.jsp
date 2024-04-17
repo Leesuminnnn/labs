@@ -10,6 +10,7 @@
 <!-- Web App으로 선언하여 브라우저의 UI ( URL 바 ) 를 안 보이도록 할 수 있다. -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css?0415">
@@ -152,7 +153,7 @@
 </style>
 </head>
 <body>
-<body style="width: 210mm; height: 297mm">
+<body>
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
@@ -169,28 +170,25 @@
 </div>
 
 <section style="background-repeat: no-repeat;
-	background-position: center 0;
-	background-image: url('${pageContext.request.contextPath}/resources/img/background.png');
-	background-size: 1246px;
-	min-width: 210mm;
-	margin-bottom: 100px; margin-top: 62px; background-color: #f7f7f7;  margin-left:240px;">
-    
-<div id="capture_area" class="capture_area" style="width: 210mm; height: 297mm;
-    display: flex;
-    align-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    top: 2px;
-    transform: translate(17%, 48%);
-">
+    background-position: center 0;
+    background-image: url(/app/resources/img/background.png);
+    background-size: 250mm;
+    min-width: 210mm;
+    margin-bottom: 100px;
+    margin-top: 62px;
+    background-color: #f7f7f7;
+    margin-left: 240px;">
+
+<div class="area">
+<div id="capture_area" class="capture_area" style="width:210mm; height:297mm;">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
-<h1 style="text-align: center; font-size: 30pt; padding: 60px 0 20px 0;">입 원 서 약 서</h1>
+<h1 style="text-align: center; font-size: 30pt; padding: 30px 0 20px 0;">입 원 서 약 서</h1>
 
 <div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 100%; padding-bottom:13px;">※ 환자의 인적사항</div>
 
 
-<div style="text-align: center; margin-bottom: 20px;">
+<div style="text-align: center; margin-bottom: 20px; width:100%">
 <table border=1 style="border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
 		<td class="normal" width="170px" height="45px">성명</td>
@@ -301,9 +299,7 @@
 	</li>
 	<li class="light_info">
 		<i class="light_info_i">4.&nbsp;</i>
-		<font>
-		입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <br/><b style="display: contents;">법적 대리인</b>이 됩니다.
-		</font>
+		입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b style="display: contents;">법적 대리인</b>이 됩니다.
 	</li>
 </ol>
 </div>
@@ -327,7 +323,7 @@
 			<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/>
 		</th>
 		<th onclick="this.querySelector('input').focus();" style="border-right:hidden; border-left:hidden;" class="normal">
-			(관계 :<input class="light" name="cs_data_08" style="width : 175px;" type="text" value="${vo.cs_data_08 }" />)
+			(관계 :<input class="light" name="cs_data_08" style="width : 110px;" type="text" value="${vo.cs_data_08 }" />)
 		</th>
 		<th style="position: relative;">
 			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
@@ -343,10 +339,10 @@
 	</tr>
 	<tr>
 		<th class="normal">휴대폰번호</th>
-		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_10" type="text" style="margin-left: 33px;" value="${decryptedCs_data_10 }" />
+		<th onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_10" type="text" style="margin-left: 33px; width:250px;" value="${decryptedCs_data_10 }" />
 		</th>
-		<th colspan="2" style="text-align: right;">
+		<th colspan="2" style="text-align: right; border-left:hidden;">
 			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
 		 	 <input id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내" <c:if test="${vo.cs_data_11 eq '주보호자 비용안내'}">checked</c:if>>	
 		  	<label for="cs_data_11" class="normal">비용안내</label>
@@ -372,7 +368,7 @@
 			<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" />
 		</th>
 		<th class="normal" onclick="this.querySelector('input').focus();" style="border-right:hidden; border-left:hidden; ">
-			(관계 :<input class="light" name="cs_data_13" style="width:175px;" type="text" value="${vo.cs_data_13 }" />)
+			(관계 :<input class="light" name="cs_data_13" style="width:110px;" type="text" value="${vo.cs_data_13 }" />)
 		</th>
 		<th style="position: relative;">
 			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
@@ -390,10 +386,10 @@
 	</tr>
 	<tr>
 		<th class="normal">휴대폰 번호</th>
-		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px;" value="${decryptedCs_data_15 }" />
+		<th onclick="this.querySelector('input').focus();" style="text-align: left;">
+			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px; width:250px;" value="${decryptedCs_data_15 }" />
 		</th>
-		<th colspan="2" style="text-align: right;">
+		<th colspan="2" style="text-align: right; border-left:hidden;">
 			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
 				<input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>>
 				<label for="cs_data_16">비용안내</label>
@@ -410,7 +406,7 @@ border: 1px solid #c7c7c7;" >
 		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
 	</tr>
 	<tr style="background-color: #ffffff;">
-		<td style="height: 48px; text-align: left; width:585px; border-bottom: none; border-right: none;">
+		<td style="height: 48px; text-align: left; border-bottom: none; border-right: none;">
 		<div class="checkbox-wrapper-13" style="margin-top:10px;">
 		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
 		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
@@ -462,8 +458,8 @@ border: 1px solid #c7c7c7;" >
 	</tr>
 	<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
 		<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
-		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
-		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
+		<td style="text-align: center; width: 140px;" onclick="this.querySelector('input').focus();">
+		<input name="cs_data_23" style="width:60px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
 		<td style="text-align: right; color:#222222;" class="light">
 		<div style="margin-right: 21px; display: flex; justify-content: right;">
 		<div class="checkbox-wrapper-13" style="">
@@ -500,7 +496,7 @@ border: 1px solid #c7c7c7;" >
 </div>
 </div>
 
-<div style="position: relative;">
+<div style="position: relative; background: #fff;">
 	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 100%; height: 42px; margin: 0 auto; padding-right:30px;
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
@@ -510,6 +506,7 @@ border: 1px solid #c7c7c7;" >
 	</div>
 </div>
 <br><br>
+</div>
 </div>
 <br><br><br><br><br><br><br>
 
