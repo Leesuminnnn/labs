@@ -187,7 +187,7 @@ input[type="radio"]:checked + label span {
 /* 테이블 스타일 */
 .table_type1{border:solid 1px #dadada; width:966px; margin-left:auto; margin-right:auto; margin-bottom:30px; background: #fff;}
 .table_type1 tr th{height:56px; border:solid 1px #dadada;}
-.table_type2{border:solid 1px #dadada; width:100%; margin-left:auto; margin-right:auto; margin-bottom:20px; background: #fff;}
+.table_type2{border:solid 1px #dadada; width:100%; margin-left:auto; margin-right:auto; margin-bottom:10px; background: #fff;}
 .table_type2 tr th{height:45px; border:solid 1px #dadada;}
 .table_C{font-size:20px; font-weight:400; background:#fafafa;}
 .table_CC{font-size:19px; font-weight:400; background:#fafafa;}
