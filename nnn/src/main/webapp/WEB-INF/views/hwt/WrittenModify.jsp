@@ -175,7 +175,7 @@
 
 <section style="background-repeat: no-repeat;
     background-position: center 0;
-    background-image: url(/app/resources/img/background4.png);
+    background-image: url(${pageContext.request.contextPath}/resources/img/background4.png);
     background-size: 250mm;
     min-width: 210mm;
     margin-bottom: 134px;
