@@ -157,6 +157,7 @@
 <c:if test="${info.name eq null or info.name eq ''}">
 	<script>
 		alert("잘못된 접근입니다. ");
+		location.href = "${pageContext.request.contextPath}/hwt/Login";
 	</script>
 </c:if>
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">

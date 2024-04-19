@@ -613,10 +613,13 @@ public class HwtController {
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
@@ -703,10 +706,12 @@ public class HwtController {
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
