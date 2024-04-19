@@ -174,17 +174,10 @@
 
 <section style="background-repeat: no-repeat;
     background-position: center 0;
-<<<<<<< HEAD
-  	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
     background-size: 1246px 1870px;
     min-width: 1280px;
     margin-bottom: 100px;
-=======
     background-image: url(${pageContext.request.contextPath}/resources/img/background4.png);
-    background-size: 250mm;
-    min-width: 210mm;
-    margin-bottom: 134px;
->>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
     margin-top: 62px;
     background-color: #f7f7f7;
     margin-left: 240px;">
