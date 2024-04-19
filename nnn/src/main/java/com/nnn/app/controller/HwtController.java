@@ -291,7 +291,7 @@ public class HwtController {
 		return mav;
 	}
 	@RequestMapping(value = "WrittenAction")
-	public String writtenAction(ModelAndView mav, HttpSession session, WrittenVo vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView writtenAction(ModelAndView mav, HttpSession session, WrittenVo vo, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// 암호화
 		// 256 오류로 인해서 128으로 변경
 		//AES256Util aes256 = new AES256Util();
@@ -356,7 +356,8 @@ public class HwtController {
 		System.out.println("##################################################");
 		
 		hwtService.insert(vo);
-		return "redirect:/hwt/CounselList";
+		mav.setViewName("redirect:/hwt/CounselList");
+		return mav;
 	}
 	
 	@RequestMapping(value = "Written0")
@@ -489,7 +490,7 @@ public class HwtController {
 	// 이미지 저장
 	@RequestMapping(value = "saveImage", method = RequestMethod.POST)
 	@ResponseBody
-	public String saveImage(@RequestParam("image") byte[] image, WrittenVo vo, @RequestParam("cs_idx")Integer cs_idx,
+	public ModelAndView saveImage(@RequestParam("image") byte[] image, WrittenVo vo, @RequestParam("cs_idx")Integer cs_idx, ModelAndView mav,
 			@RequestParam("cs_data_01")String cs_data_01,@RequestParam("cs_data_02")String cs_data_02,
 			@RequestParam("cs_data_03")String cs_data_03,@RequestParam("cs_data_04")String cs_data_04,
 			@RequestParam("cs_data_05")String cs_data_05,@RequestParam("cs_data_06")String cs_data_06,
@@ -597,8 +598,8 @@ public class HwtController {
 		hwtService.saveImage(imageEntity);
 		hwtService.modify(vo);
 		hwtService.update(vo);
-		
-		return "Image saved successfully!";
+		mav.setViewName("Image saved successfully!");
+		return mav;
 	}
 	
 	
@@ -612,10 +613,13 @@ public class HwtController {
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
@@ -702,10 +706,12 @@ public class HwtController {
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";

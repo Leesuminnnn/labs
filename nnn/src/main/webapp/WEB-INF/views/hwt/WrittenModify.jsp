@@ -153,9 +153,13 @@
 </style>
 </head>
 <body>
-<body>
 <%@ include file="header.jsp" %>
-
+<c:if test="${info.name eq null or info.name eq ''}">
+	<script>
+		alert("잘못된 접근입니다. ");
+		location.href = "${pageContext.request.contextPath}/hwt/Login";
+	</script>
+</c:if>
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
 
 <div class="nav__section" style=" ">
@@ -171,16 +175,16 @@
 
 <section style="background-repeat: no-repeat;
     background-position: center 0;
-    background-image: url(/app/resources/img/background.png);
+    background-image: url(/app/resources/img/background4.png);
     background-size: 250mm;
     min-width: 210mm;
-    margin-bottom: 100px;
+    margin-bottom: 134px;
     margin-top: 62px;
     background-color: #f7f7f7;
     margin-left: 240px;">
 
 <div class="area">
-<div id="capture_area" class="capture_area" style="width:210mm; height:297mm;">
+<div id="capture_area" class="capture_area" style="width:210mm;">
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
 <h1 style="text-align: center; font-size: 30pt; padding: 30px 0 20px 0;">입 원 서 약 서</h1>
@@ -188,7 +192,7 @@
 <div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 100%; padding-bottom:13px;">※ 환자의 인적사항</div>
 
 
-<div style="text-align: center; margin-bottom: 20px; width:100%">
+<div style="text-align: center; margin-bottom: 10px; width:100%">
 <table border=1 style="border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
 		<td class="normal" width="170px" height="45px">성명</td>
@@ -235,7 +239,7 @@
 	</li>
 	<li class="light_info" style="color:#f87b0c;">
 		<i class="light_info_i">2.&nbsp;</i>
-		<font>
+		<font style="word-spacing: -1px;">
 		노인은 골다공증, 피부의 약화로 쉽게 골절 또는 멍이 들 수 있으므로 의료기관의 정당한 진료지침이나 교육에 반하는 무단 외출・외박 등으로 인하여 발생하는 환자의 손해에 대한 책임은 원칙적으로 모두 환자에게 있습니다.
 		</font>
 	</li>
@@ -276,7 +280,10 @@
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
 		<li style="margin-bottom: 13px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
- 
+
+</div>
+
+
 <span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 
 <ol class="light_info_list">
@@ -302,10 +309,6 @@
 		입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b style="display: contents;">법적 대리인</b>이 됩니다.
 	</li>
 </ol>
-</div>
-<br>
-
-
 <table class="table_type2">
 	<colgroup>
 		<col width="7%">
@@ -326,9 +329,9 @@
 			(관계 :<input class="light" name="cs_data_08" style="width : 110px;" type="text" value="${vo.cs_data_08 }" />)
 		</th>
 		<th style="position: relative;">
-			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
+			
 			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1">
-				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+				<mark>&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 0; width: 100px; top: -35px; right: 0px;" id="canvasImg1" src="" alt="">&nbsp;&nbsp;명)&emsp;</mark>
 			</div>
 		</th>
 	</tr>
@@ -371,9 +374,9 @@
 			(관계 :<input class="light" name="cs_data_13" style="width:110px;" type="text" value="${vo.cs_data_13 }" />)
 		</th>
 		<th style="position: relative;">
-			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+			
 				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
-					<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+					<mark>&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 1; width: 100px; top: -35px; right: 0px;" id="canvasImg2" src="" alt="">&nbsp;&nbsp;명)&emsp;</mark>
 				</div>
 		</th>
 	</tr>
@@ -399,9 +402,9 @@
 </table>
 
 <div style="text-align: center; margin-bottom: 30px;">
-<div style="margin-bottom: 20px;">
+<div style="margin-bottom: 10px;">
 <table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; 
-border: 1px solid #c7c7c7;" >
+border: 1px solid #dadada;" >
 	<tr style="background-color: #fafafa;">
 		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
 	</tr>
@@ -447,7 +450,7 @@ border: 1px solid #c7c7c7;" >
 
 <div style="text-align: center; margin-bottom: 25px;">
 <table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto;
- margin-right: auto; border: 1px solid #c7c7c7;" >
+ margin-right: auto; border: 1px solid #dadada;" >
 	<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 		<td colspan="3" style="text-align: left;">
 		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
@@ -502,11 +505,13 @@ border: 1px solid #c7c7c7;" >
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 		<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
-		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
+		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
 	</div>
 </div>
-<br><br>
+<br>
+
 </div>
+
 </div>
 <br><br><br><br><br><br><br>
 
@@ -1182,7 +1187,7 @@ $(document).ready(function() {
 					    url: "${pageContext.request.contextPath}/saveImage",
 // 					    url: "${pageContext.request.contextPath}/saveImagetest",
 					     method: "post",
-					     data: { image: image, 
+					     data: { image: image,
 					    		cs_idx: cs_idx,
 					    		cs_data_01: cs_data_01,
 					    		cs_data_02: cs_data_02,
