@@ -176,7 +176,7 @@ input[type="radio"]:checked + label span {
 }
 .area{display: ruby-text;}
 .capture_area{padding: 30px;}
-.area .capture_area{padding: 20px !important;}
+.area .capture_area{padding: 30px !important;}
 .light_info_list1{padding:0 0 0 35px;}
 .light_info_list{padding:0 0 0 24px;}
 .light_info1{list-style:decimal; line-height:29px; font-size:18px;}
