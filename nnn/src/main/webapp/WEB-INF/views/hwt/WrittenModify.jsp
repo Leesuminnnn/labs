@@ -10,7 +10,6 @@
 <!-- Web App으로 선언하여 브라우저의 UI ( URL 바 ) 를 안 보이도록 할 수 있다. -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="user-scalable=yes">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/css.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/Writtencss.css?0415">
@@ -152,7 +151,7 @@
 }
 </style>
 </head>
-<body>
+<body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
 <c:if test="${info.name eq null or info.name eq ''}">
 	<script>
@@ -175,25 +174,32 @@
 
 <section style="background-repeat: no-repeat;
     background-position: center 0;
+<<<<<<< HEAD
+  	background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
+    background-size: 1246px 1870px;
+    min-width: 1280px;
+    margin-bottom: 100px;
+=======
     background-image: url(${pageContext.request.contextPath}/resources/img/background4.png);
     background-size: 250mm;
     min-width: 210mm;
     margin-bottom: 134px;
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
     margin-top: 62px;
     background-color: #f7f7f7;
     margin-left: 240px;">
 
-<div class="area">
-<div id="capture_area" class="capture_area" style="width:210mm;">
+
+<div id="capture_area" class="capture_area">
+<div>
+
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
-<h1 style="text-align: center; font-size: 30pt; padding: 30px 0 20px 0;">입 원 서 약 서</h1>
+<h1 style="text-align: center; font-size: 30pt; padding: 40px 0 20px 0;">입 원 서 약 서</h1>
 
-<div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 100%; padding-bottom:13px;">※ 환자의 인적사항</div>
-
-
-<div style="text-align: center; margin-bottom: 10px; width:100%">
-<table border=1 style="border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; font-size:18px;" >
+<div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
+<div style="text-align: center; margin-bottom: 10px;">
+<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
 		<td class="normal" width="170px" height="45px">성명</td>
 		<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
@@ -208,9 +214,7 @@
 		<input style= "margin-left: 33px;" type="text" name="cs_data_03" value="${vo.cs_data_03 }" /></td>
 		<td class="normal" height="45px">성별 </td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
-		
 		<input type="radio" id="genderM" name="cs_data_04" value="남성" style="cursor: pointer;" <c:if test="${param2 eq '남성' or cs_data_04 eq '남성'}">checked</c:if>><label for="genderM" style="cursor: pointer;">남</label>
-		
 		</td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
 		<input type="radio" id="genderF" name="cs_data_04" value="여성" style="cursor: pointer;" <c:if test="${param2 eq '여성' or cs_data_04 eq '여성'}">checked</c:if>><label for="genderF" style="cursor: pointer;">여</label></td>
@@ -225,8 +229,7 @@
 	</tr>
 </table>
 </div>
-
-<div class="light" style="font-size:14pt; color:#222222; width:100%; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
+<div class="light" style="font-size:14pt; color:#222222; width:966px; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
 <span style="text-indent:15px; font-size:16px;">  
 본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
 </span>
@@ -280,12 +283,7 @@
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
 		<li style="margin-bottom: 13px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
-
-</div>
-
-
 <span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
-
 <ol class="light_info_list">
 	<li class="light_info">
 		<i class="light_info_i">1.&nbsp;</i>
@@ -309,6 +307,9 @@
 		입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b style="display: contents;">법적 대리인</b>이 됩니다.
 	</li>
 </ol>
+</div>
+<br>
+
 <table class="table_type2">
 	<colgroup>
 		<col width="7%">
@@ -319,9 +320,9 @@
 	</colgroup>
 	<tr>
 		<th class="normal table_CC" rowspan="3">
-		주<br>보<br>호<br>자
+			주<br>보<br>호<br>자
 		</th>
-		<th class="normal" style="">성명</th> 
+		<th class="normal" style="">성 명</th> 
 		<th style="" onclick="this.querySelector('input').focus();">
 			<input class="light" name="cs_data_07" style="margin-left: 33px; width: 250px;" value="${decryptedCs_data_07 }" type="text"/>
 		</th>
@@ -329,19 +330,18 @@
 			(관계 :<input class="light" name="cs_data_08" style="width : 110px;" type="text" value="${vo.cs_data_08 }" />)
 		</th>
 		<th style="position: relative;">
-			
 			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa; " id="end1">
 				<mark>&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 0; width: 100px; top: -35px; right: 0px;" id="canvasImg1" src="" alt="">&nbsp;&nbsp;명)&emsp;</mark>
 			</div>
 		</th>
 	</tr>
 	<tr>
-		<th class="normal">주소</th>
+		<th class="normal">주 소</th>
 		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
 		<input class="light" name="cs_data_09" style="margin-left: 33px; width:460px;" type="text" value="${vo.cs_data_09 }" /></th>
 	</tr>
 	<tr>
-		<th class="normal">휴대폰번호</th>
+		<th class="normal">휴대폰 번호</th>
 		<th onclick="this.querySelector('input').focus();" style="text-align: left;">
 			<input class="light" name="cs_data_10" type="text" style="margin-left: 33px; width:250px;" value="${decryptedCs_data_10 }" />
 		</th>
@@ -366,7 +366,7 @@
 		<th class="normal table_CC" rowspan="3" style="">
 			부<br>보<br>호<br>자
 		</th>
-		<th class="normal">성명</th> 
+		<th class="normal">성 명</th> 
 		<th style="text-align:" onclick="this.querySelector('input').focus();">
 			<input class="light" name="cs_data_12" style="margin-left: 33px; width:250px;" type="text" value="${decryptedCs_data_12 }" />
 		</th>
@@ -374,7 +374,6 @@
 			(관계 :<input class="light" name="cs_data_13" style="width:110px;" type="text" value="${vo.cs_data_13 }" />)
 		</th>
 		<th style="position: relative;">
-			
 				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
 					<mark>&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 1; width: 100px; top: -35px; right: 0px;" id="canvasImg2" src="" alt="">&nbsp;&nbsp;명)&emsp;</mark>
 				</div>
@@ -402,8 +401,8 @@
 </table>
 
 <div style="text-align: center; margin-bottom: 30px;">
-<div style="margin-bottom: 10px;">
-<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; 
+<div style="margin-bottom: 20px;">
+<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
 border: 1px solid #dadada;" >
 	<tr style="background-color: #fafafa;">
 		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
@@ -422,10 +421,10 @@ border: 1px solid #dadada;" >
 		</div>
 		</td>
 		<td style="text-align: right; border-left: none; border-bottom: none;">
-		<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
-		  <input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
-		  <label for="cs_data_19">응급 상황</label>
-		</div>
+			<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
+				<input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
+				<label for="cs_data_19">응급 상황</label>
+			</div>
 		</td>
 	</tr>
 	
@@ -449,7 +448,7 @@ border: 1px solid #dadada;" >
 </div>
 
 <div style="text-align: center; margin-bottom: 25px;">
-<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto;
+<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
  margin-right: auto; border: 1px solid #dadada;" >
 	<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 		<td colspan="3" style="text-align: left;">
@@ -461,8 +460,8 @@ border: 1px solid #dadada;" >
 	</tr>
 	<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
 		<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
-		<td style="text-align: center; width: 140px;" onclick="this.querySelector('input').focus();">
-		<input name="cs_data_23" style="width:60px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
+		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
+		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
 		<td style="text-align: right; color:#222222;" class="light">
 		<div style="margin-right: 21px; display: flex; justify-content: right;">
 		<div class="checkbox-wrapper-13" style="">
@@ -499,8 +498,8 @@ border: 1px solid #dadada;" >
 </div>
 </div>
 
-<div style="position: relative; background: #fff;">
-	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 100%; height: 42px; margin: 0 auto; padding-right:30px;
+<div style="position: relative;">
+	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
 	display: flex; justify-content: flex-end; align-items: center;">
 		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -508,12 +507,11 @@ border: 1px solid #dadada;" >
 		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
 	</div>
 </div>
-<br>
-
+<br><br>
 </div>
-
 </div>
 <br><br><br><br><br><br><br>
+
 
 <!-- 첫번째 서명 -->
 <div class="modal1 normal">

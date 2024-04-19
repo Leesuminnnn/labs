@@ -267,7 +267,6 @@
 </div>
 <br>
 
-
 <table class="table_type1">
 	<colgroup>
 		<col width="7%">
@@ -468,11 +467,10 @@ border: 1px solid #c7c7c7;" >
 		<input name="cs_data_18" value="환자위임" id="cs_data_18" type="checkbox" style="cursor: pointer;"/>
 		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
 		 -->
-		<div class="checkbox-wrapper-13" style="display:flex; margin-top: 10px;">
-		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
-		  <label for="cs_data_18">환자위임</label>
-		</div>
-		
+			<div class="checkbox-wrapper-13" style="display:flex; margin-top: 10px;">
+				<input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
+				<label for="cs_data_18">환자위임</label>
+			</div>
 		</td>
 		<td style="text-align: center; border-bottom: none; border-left: none; text-align: right;">
 		<!-- 
