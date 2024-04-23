@@ -92,6 +92,9 @@ section {
 								<div class="pwd-area">
 									<input class="input-text pwd" type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호입력" value="">
 								</div>
+								<div>
+									<button type="button" onclick="pwdlink()">비밀번호찾기</button>
+								</div>
 								<div class="login-btn">
 									<button type="button" id="loginbtn" style="">로그인</button>
 								</div>
@@ -226,6 +229,10 @@ $("#manual").click(function(){
 	window.open(url);
 })
 
+$("findpwd").click(function () {
+	location.href = "${pageContext.request.contextPath}/hwt/findpwd"
+})
+
 $("#loginbtn").click(function (){
 	var InputId = $(".id").val();
 	var InputPwd = $(".pwd").val();
@@ -326,7 +333,7 @@ function closePopup2(){
 	}
 }
 function pwdlink() {
-	var link = "${pageContext.request.contextPath}/hwt/Pwd/"+idx;
+	var link = "${pageContext.request.contextPath}/hwt/Findpwd";
 	location.href = link;
 }
 function reset() {

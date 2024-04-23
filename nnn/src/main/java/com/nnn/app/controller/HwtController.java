@@ -2,6 +2,7 @@ package com.nnn.app.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -31,7 +32,9 @@ import com.nnn.app.service.HwtService;
 import com.nnn.app.service.ImageService;
 import com.nnn.app.vo.AjaxResponse20;
 import com.nnn.app.vo.AjaxResponse4;
+import com.nnn.app.vo.AjaxResponse5;
 import com.nnn.app.vo.AjaxResponse6;
+import com.nnn.app.vo.AjaxResponse8;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.ImageEntity;
 import com.nnn.app.vo.LoginAjaxResponse;
@@ -63,6 +66,77 @@ public class HwtController {
 		
 		return mv;
 	}
+	@RequestMapping(value="Findpwd")
+	public ModelAndView findpwd(ModelAndView mv) {
+		mv.setViewName("hwt/findpwd");
+		return mv;
+	}
+	// 비밀번호 찾기 전 회원정보 일치하는지 ajax
+		@ResponseBody
+		@RequestMapping(value="FindpwdAjax")
+		public AjaxResponse5 per1(HttpSession session, HttpServletRequest request, @RequestParam("id")String id, @RequestParam("ph")String ph) throws Exception {
+			AjaxResponse5 response = new AjaxResponse5();
+			response.setResult("N");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("ph", ph);
+			System.out.println(id);
+			System.out.println(ph);
+//			List<UsersVo> list = evaluationService.users1(map);
+			
+			int phOne = hwtService.phOne(map);
+			System.out.println(phOne);
+			if(phOne == 1) {
+				response.setResult("Y");
+			}else {
+				response.setResult("N");
+			}
+			
+			return response;
+		}
+		
+		@ResponseBody
+		@RequestMapping(value="pwdAction/{idx}")
+		public AjaxResponse8 pwdAction(UsersVo vo, HttpSession session, @PathVariable("idx") int idx, HttpServletRequest request, Model md) throws NoSuchAlgorithmException {
+			AjaxResponse8 response = new AjaxResponse8();
+			response.setResult("N");
+			session.getAttribute("loginMember");
+			
+			md.addAttribute("info", hwtService.info(idx));
+			// 암호화
+			String key = "This is Key!!!!!";
+			AES128 aes128 = new AES128(key);
+			//비밀번호
+	        String password = vo.getPwd();
+	        //aes128으로 암호화된 비밀번호
+	        String cryptogram = aes128.encrypt(password);
+	        
+	        System.out.println(cryptogram);
+			//담은 변수를 DB에 넘겨준다.
+			vo.setPwd(cryptogram);
+			System.out.println("암호화된 페스워드 : "+cryptogram);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("pwd", cryptogram);
+			map.put("pwd", vo.getPwd());
+			map.put("idx", vo.getIdx());
+			
+			int flag = hwtService.pwdinsert(map);
+			
+			if(flag >= 1) {
+				System.out.println(flag);
+				request.setAttribute("msg", "비밀번호 변경이 완료되었습니다.</p><p>사번/비밀번호로 체크 후 로그인해주세요");
+				request.setAttribute("url", "hwt/Login");
+				response.setResult("Y");
+				return response;
+			} else {
+				request.setAttribute("msg", "비밀번호 변경중 오류가 발생했습니다. 다시 시도해 주세요.");
+				request.setAttribute("url", "hwt/Pwd/"+idx);
+				response.setResult("N");
+				return response;
+			}
+		}
+		
 	@ResponseBody
 	@RequestMapping(value="loginAction", method = RequestMethod.POST)
 	public LoginAjaxResponse loginaction(UsersVo vo, HttpSession session, Model md, HttpServletRequest request) throws Exception {

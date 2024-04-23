@@ -180,4 +180,19 @@ public class HwtService {
 		hwtDao.save(image);
 		
 	}
+
+	public int phOne(Map<String, Object> map) {
+		int flag = 0;
+		flag = hwtDao.phOne(map);
+		return flag;
+	}
+
+	public int pwdinsert(Map<String, Object> map) {
+		int flag = 0;
+		
+		flag = hwtDao.pwdinsert(map);
+		
+		return flag;
+	}
+
 }

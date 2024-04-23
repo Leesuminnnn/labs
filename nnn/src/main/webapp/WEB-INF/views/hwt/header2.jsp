@@ -6,7 +6,7 @@
 <div class="wrapper">
 	<div class="logo">
 		<div class="home-icon">
-			<a href="${pageContext.request.contextPath}/demo/Login">
+			<a href="${pageContext.request.contextPath}/hwt/Login">
 				<img src="${pageContext.request.contextPath}/resources/icon/arrow(L).png">
 			</a>
 		</div>
@@ -14,7 +14,7 @@
 			<img src="${pageContext.request.contextPath}/resources/icon/ev/core_logo2.png">
 		</div>
 		<div class="logout-img">
-			<a href="${pageContext.request.contextPath}/demo/Logout">
+			<a href="${pageContext.request.contextPath}/hwt/Logout">
 				<img src="${pageContext.request.contextPath}/resources/icon/ev/logout.png">
 			</a>
 		</div>

@@ -229,4 +229,12 @@ public class HwtDao {
 //		sqlSession1.insert(MAPPER+".save", imageEntity);
 		sqlSession4.insert(MAPPER+".save", imageEntity);
 	}
+
+	public int phOne(Map<String, Object> map) {
+		return sqlSession4.selectOne(MAPPER+".phOne", map);
+	}
+
+	public int pwdinsert(Map<String, Object> map) {
+		return sqlSession4.update(MAPPER+".pwdinsert", map);
+	}
 }
