@@ -19,67 +19,114 @@
 <link rel="icon" sizes="192x192" href="${pageContext.request.contextPath}/resources/favicon/favicon.ico">
 <title>코어솔루션 전자문서 시스템</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
-<style>
-section {
-	align-items:baseline;
-	padding:100px 50px;
-}
-.text-wrap {
-	position: relative;
-	display: flex;
-	padding-top: 100px;
-}
-.loginWrap {
-	background:linear-gradient(to right, rgba(26, 44, 66, 1) 0%, rgba(29, 57, 93, 1) 100%);
-	border-radius:30px;
-	box-shadow:2px 2px 20px rgba(0,0,0,0.1);
-	position:relative;
-}
-.loginWrap .loginBox {
-	padding:30px 0 50px 0;
-	margin-top:30px;
-}
-.logo-area{
-	position:absolute; 
-	display:block;
-}
-.login-area{
-	padding-top:0;
-}
-
-/* 모바일 */
-@media screen and (max-width: 780px){
-	.loginWrap{max-height: 580px;}
-	.content{padding: 0px 80px;}
-}
-@media screen and (max-width: 600px){
-	.content{padding: 0px 60px;}
-	.login-btn > button {width:100%; font-size: 1.8rem;}
-	.logo-area {bottom:18px !important;}
-	.input-text {height:60px; font-size:1.5rem;}
-}
-@media screen and (max-width: 525px){
-	.logo-area img {width: 120px;}
-}
-@media screen and (max-width: 450px){
-	.content{padding: 0px 45px;}
-	.logo-area {bottom:10px !important;}
-	.logo-area img {width: 110px;}
-}
-@media screen and (max-width: 390px){
-	.content{padding: 0px 30px;}
-}
-</style>
-
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/hwt/loginAction" method="post" id="login_form">
 	<section>
-		<div class="loginWrap">
-			<div class="login-header">
-				<h1 class="header-text">LOGIN</h1>
+		<%-- <div class="login-bg">
+			<div class="main">
+				
+				<div class="login-header">
+					<span class="header-text">코어솔루션 인사평가 시스템</span>
+				</div>
+				
+				<div class="login-area">
+					<div class="login-content">
+						<div class="container">
+							<div class="content">
+								<div class="login-header-top">
+									<span>Login</span>
+								</div>
+								<div class="id-area">
+									<input class="input-text id" type="text" name="id" id="id" placeholder="사번" title="사번입력" >
+								</div>
+								<div class="pwd-area">
+									<input class="input-text name" type="text" name="name" id="pwd" placeholder="이름" title="비밀번호입력">
+								</div>
+								<div class="login-text">
+									<span class="bold" style="">개인 비밀번호를 설정 하신 후 로그인 시 아래의 사번/비밀번호 체크 후 사번과 비밀번호를 입력부탁드립니다.</span>
+								</div>
+								<div class="chk-area" style="">
+									<label class="label">
+										<span class="alignBox">
+											<input class="radio" type="radio" id="chk_name" name="radio" checked />
+											<span class="radioimg"></span>
+											<span class="inputTxt normal">사번 / 이름 <span class="bold">(비밀번호 설정 전)</span></span>
+										</span>
+									</label>
+									<label class="label">
+										<span class="alignBox">
+											<input type="radio" class="radio" id="chk_no" name="radio" />
+											<span class="radioimg"></span>
+											<span class="inputTxt normal">사번 / 비밀번호 <span class="bold">(비밀번호 설정 후)</span></span>
+										</span>
+									</label>
+								</div>
+								<!-- <div style="text-align: left; font-size: 10pt; color: #000000; margin-bottom: 26px; font-size: 1.4rem;">
+									
+								</div> -->
+								<div class="pw-find">
+									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/demo/Findpwd'">비밀번호 찾기 ></span>
+								</div>
+								<div class="login-btn">
+									<button type="button" id="loginbtn" style="">로그인</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="center-line"></div>
+					<div class="notice-content">
+						<div class="container">
+							<div class="content content2">
+								<div class="notice-header-top">
+									<span>Notice</span>
+								</div>
+								<div class="notice-bg">
+									<div style="">
+										<div class="notice-header bold">
+											<span>직원 평가완료 후 재평가(수정)이 안되오니 신중하게 평가해 주시기 바랍니다</span>
+										</div>
+										<div class="notice-text normal">
+											<div>
+												<div>
+													<c:forEach items="${notice }" var="n">
+													<div class="notice-inner">
+														<div class="inner-text">
+															<c:if test="${not empty n.d2}"><img src="${pageContext.request.contextPath}/resources/icon/ev/dotted.png"></c:if>
+															<span>${n.d2 }</span>
+														</div>
+														<div><span class="inner-span">${n.d3 }</span></div>
+													</div>
+													</c:forEach>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="notice-btn">
+									<div class="manual" id="manual" style="">인사평가 시스템 메뉴얼 보기</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="logo-area">
+					<div class="flex flex-center">
+						<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+					</div>
+				</div>
 			</div>
-			<div class="loginBox">
+			
+		</div> --%>
+		<div class="text-wrap">
+			<div class="text-img">
+				<img class="pc-img" src="${pageContext.request.contextPath}/resources/icon/hwt/login_bg.png" style="max-width:100% !important; height:auto !important;">
+			</div>
+			<div class="main">
+				<div class="login-header">
+					<span class="header-text">LOGIN</span>
+				</div>
 				<div class="login-area">
 					<div class="login-content">
 						<div class="container">
@@ -90,21 +137,25 @@ section {
 								<div class="pwd-area">
 									<input class="input-text pwd" type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호입력" value="">
 								</div>
+<%-- 							<div class="pw-find">
+									<span class="bold" onclick="location.href='${pageContext.request.contextPath}/hwt/Findpwd'">비밀번호 찾기 ></span> 
+								</div>
+--%>
+								
 								<div class="login-btn">
 									<button type="button" id="loginbtn" style="">로그인</button>
 								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
-			</div>
-			<img src="${pageContext.request.contextPath}/resources/icon/hwt/login_bg_bottom.png" style="width:100%; border-radius: 0 0px 30px 30px; display:block;"/>
-			<div class="logo-area" style="bottom: 25px;left:50%;transform: translateX(-50%);">
-				<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+				<div class="logo-area">
+					<img src="${pageContext.request.contextPath}/resources/img/core_logo.png">
+				</div>
 			</div>
 		</div>
 	</section>
-	
 	<div class="modal normal">
 		<div class="modal_body">
 			<div>

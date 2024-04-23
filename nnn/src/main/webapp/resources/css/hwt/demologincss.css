@@ -290,12 +290,6 @@ body {
 @media all and (max-width: 1920px) {
 	:root, html {
 		font-size: 10px;
-		--footer--width: 947px;
-	}
-	
-	
-	body {
-		min-width: 1032px;
 	}
 	section {
 	    background: #fbfbfb;
@@ -312,7 +306,6 @@ body {
 		padding: 50px 0 0 0; */
 	}
 	.main {
-	   	width: 700px;
 	    position: absolute;
 	    display: flex;
 	    flex-wrap: wrap;
@@ -331,9 +324,8 @@ body {
 	.login-header {
 		display: flex;
 		justify-content: center;
-		align-items: center;
-		height: 106px;
 		width: 100%;
+		padding: 40px 0 20px 0;
 	}
 	.header-text {
 		font-size: 4rem;
@@ -341,10 +333,11 @@ body {
 		font-weight: 600;
 		letter-spacing: -1px;
 	    position: relative;
-	    top: 13px;
+	    top: 20px;
 	}
 	.login-area {
 		width: 100%;
+		padding-top: 77px;
 		display: flex;
 	    justify-content: center;
 	    align-items: center;
@@ -375,18 +368,18 @@ body {
 		
 	}
 	.id-area {
-		margin-bottom: 7px;
+		margin-bottom: 10px;
 	}
 	.pwd-area {
-		margin-bottom: 8px;
+		margin-bottom: 10px;
 	}
 	.input-text {
 		width: 100%;
-		height: 46px;
+		height: 50px;
 		border-radius: 7px;
 		background-color: #e8e8e8;
 		border: none;
-		font-size: 1.3rem;
+		font-size: 1.4rem;
 	    color: #929191;
 	}
 	.id, .name, .pwd{
@@ -439,7 +432,7 @@ body {
 	    width: 50%;
 	    border: none;
 	    cursor: pointer;
-	    font-size: 1.6rem;
+	    font-size: 1.8rem;
 	    font-weight: 500;
 	}
 	.center-line {
@@ -539,16 +532,14 @@ body {
 	.logo-area {
 		display: flex;
 	    justify-content: center;
-	    width: 100%;
+
 	    position: relative;
-		top: 177px;	
+
 	}
 	.logo-area img {
 		width: 137px;
 	}
 	.pc-img {
-		    width: 788px;
-	    height: 688px;
 	    position: relative;
 	    display: flex;
 	    justify-content: center;
@@ -568,3 +559,4 @@ body {
 	}
 
 }
+
