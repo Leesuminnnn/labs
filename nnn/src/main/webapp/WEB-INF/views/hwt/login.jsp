@@ -22,7 +22,7 @@
 <style>
 section {
 	padding:0px 45px;
-	overflow:hidden; 
+	overflow:hidden;  
 }
 .text-wrap {
 	position: relative;
