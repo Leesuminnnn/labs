@@ -607,17 +607,24 @@ const modal1 = document.querySelector('.modal1');
 const btnOpenPopup1 = document.querySelector('#end1');
 
 btnOpenPopup1.addEventListener('click', () => {
-	if (Mobile()){// 모바일일 경우
-		console.log("모바일");
-		modal1.classList.toggle('show');
+	
+	modal1.classList.toggle('show');
 
-		if (modal1.classList.contains('show')) {
-			body.style.overflow = 'hidden';
-		}
-	} else {// 모바일 외
-		console.log("PC");
-		alert('모바일로 접속해주세요.');
+	if (modal1.classList.contains('show')) {
+		body.style.overflow = 'hidden';
 	}
+	
+// 	if (Mobile()){// 모바일일 경우
+// 		console.log("모바일");
+// 		modal1.classList.toggle('show');
+
+// 		if (modal1.classList.contains('show')) {
+// 			body.style.overflow = 'hidden';
+// 		}
+// 	} else {// 모바일 외
+// 		console.log("PC");
+// 		alert('모바일로 접속해주세요.');
+// 	}
 	
 });
 modal1.addEventListener('click', (event) => {
@@ -666,17 +673,24 @@ const modal2 = document.querySelector('.modal2');
 const btnOpenPopup2 = document.querySelector('#end2');
 
 btnOpenPopup2.addEventListener('click', () => {
-	if (Mobile()){// 모바일일 경우
-		console.log("모바일");
-		modal2.classList.toggle('show');
+	
+	modal2.classList.toggle('show');
 
-		if (modal2.classList.contains('show')) {
-			body.style.overflow = 'hidden';
-		}
-	} else {// 모바일 외
-		console.log("PC");
-		alert('모바일로 접속해주세요.');
+	if (modal2.classList.contains('show')) {
+		body.style.overflow = 'hidden';
 	}
+	
+// 	if (Mobile()){// 모바일일 경우
+// 		console.log("모바일");
+// 		modal2.classList.toggle('show');
+
+// 		if (modal2.classList.contains('show')) {
+// 			body.style.overflow = 'hidden';
+// 		}
+// 	} else {// 모바일 외
+// 		console.log("PC");
+// 		alert('모바일로 접속해주세요.');
+// 	}
 	
 });
 modal2.addEventListener('click', (event) => {
@@ -727,17 +741,23 @@ const btnOpenPopup = document.querySelector('#end');
 
 btnOpenPopup.addEventListener('click', () => {
 	
-	if (Mobile()){// 모바일일 경우
-		console.log("모바일");
-		modal.classList.toggle('show');
+	modal.classList.toggle('show');
 
-		if (modal.classList.contains('show')) {
-			body.style.overflow = 'hidden';
-		}
-	} else {// 모바일 외
-		console.log("PC");
-		alert('모바일로 접속해주세요.');
+	if (modal.classList.contains('show')) {
+		body.style.overflow = 'hidden';
 	}
+	
+// 	if (Mobile()){// 모바일일 경우
+// 		console.log("모바일");
+// 		modal.classList.toggle('show');
+
+// 		if (modal.classList.contains('show')) {
+// 			body.style.overflow = 'hidden';
+// 		}
+// 	} else {// 모바일 외
+// 		console.log("PC");
+// 		alert('모바일로 접속해주세요.');
+// 	}
 	
 });
 
