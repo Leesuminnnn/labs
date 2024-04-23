@@ -46,6 +46,10 @@ section {
 .login-area{
 	padding-top:0;
 }
+.login-btn .pwd_find{
+	background:#dfdfdf;
+	color:#b4b4b4;
+}
 
 /* 모바일 출력 */
 @media screen and (max-width: 780px){
@@ -53,7 +57,8 @@ section {
 }
 @media screen and (max-width: 600px){
 	.content{padding: 0px 60px;}
-	.login-btn > button {width:100%;}
+	.login-btn {display: flex; flex-direction: column-reverse;}
+	.login-btn > button {width:100%; margin-bottom:10px;}
 	.logo-area {bottom:18px !important;}
 	.input-text {height:50px;}
 	.loginWrap .loginBox {padding: 0px 0 20px 0;}
@@ -92,10 +97,8 @@ section {
 								<div class="pwd-area">
 									<input class="input-text pwd" type="password" name="pwd" id="pwd" placeholder="비밀번호" title="비밀번호입력" value="">
 								</div>
-								<div>
-									<button type="button" onclick="pwdlink()">비밀번호찾기</button>
-								</div>
 								<div class="login-btn">
+									<button class="pwd_find" type="button" onclick="pwdlink()">비밀번호찾기</button>
 									<button type="button" id="loginbtn" style="">로그인</button>
 								</div>
 							</div>
