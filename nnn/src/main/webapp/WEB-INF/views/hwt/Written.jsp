@@ -675,6 +675,14 @@ border: 1px solid #c7c7c7;" >
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.min.js"></script>
 <script>
+var name = "${info.name}";
+console.log("세션아이디 ${sessionScope.loginmember}");
+console.log('${info.name}');
+
+if (!name || name.length ===0) {
+	alert("잘못된 접근입니다.");
+	location.href = "${pageContext.request.contextPath}/hwt/Login";
+}
 
 // 첫번째 서명 모달
 const body = document.querySelector('body');
@@ -1199,6 +1207,7 @@ $(document).ready(function() {
 </form>
 </body>
 <script>
+
 function toggleCheckbox() {
 	var checkbox22 = document.getElementsByName("cs_data_22")[0];
 	var checkbox23 = document.getElementsByName("cs_data_23")[0];
