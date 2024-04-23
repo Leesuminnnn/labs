@@ -258,10 +258,12 @@ public class HwtController {
 		mav.addObject("param5",param5);
 		mav.addObject("param6",param6);
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
 		mav.setViewName("hwt/Written");
 		return mav;
 	}
@@ -1072,10 +1074,13 @@ public class HwtController {
 		System.out.println("written oath 페이지");
 		System.out.println("cs_idx : "+cs_idx);
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		System.out.println("########################");
 		System.out.println(hwtService.selectone(cs_idx));
 		System.out.println("########################");
@@ -1120,10 +1125,13 @@ public class HwtController {
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		// view에서 받은 데이터를 담아서 넘겨준다.
 		String text1 = vo.getCs_data_01();
 		String text2 = vo.getCs_data_06();
@@ -1193,10 +1201,13 @@ public class HwtController {
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
@@ -1283,10 +1294,13 @@ public class HwtController {
 		System.out.println("####################type3 : "+cri.getType3());
 		System.out.println("####################keyword3 : "+cri.getKeyword3());
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
@@ -1647,10 +1661,13 @@ public class HwtController {
 		System.out.println("written oath 페이지");
 		System.out.println("cs_idx : "+cs_idx);
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		System.out.println("########################");
 		System.out.println(hwtService.selectone(cs_idx));
 		System.out.println("########################");
@@ -1695,10 +1712,13 @@ public class HwtController {
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+		
 		// view에서 받은 데이터를 담아서 넘겨준다.
 		String text1 = vo.getCs_data_01();
 		String text2 = vo.getCs_data_06();
@@ -1763,10 +1783,13 @@ public class HwtController {
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		List<UsersVo> list = hwtService.users(map);
 		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mv.addObject("info", hwtService.info(idx));
+		if(session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mv.addObject("info", hwtService.info(idx));
+		}
+		
 		
 		int hspt1 = hwtService.hsptselect1(map);
 

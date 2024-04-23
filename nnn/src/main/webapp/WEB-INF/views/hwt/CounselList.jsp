@@ -185,7 +185,14 @@ const modal3 = document.querySelector('.modal3');
 const msg3 = document.querySelector('.menu_msg3');
 const modal4 = document.querySelector('.modal4');
 const msg4 = document.querySelector('.menu_msg4');
+var name = "${info.name}";
+console.log("세션아이디 ${sessionScope.loginmember}");
+console.log('${info.name}');
 
+if (!name || name.length ===0) {
+	alert("잘못된 접근입니다.");
+	location.href = "${pageContext.request.contextPath}/hwt/Login";
+}
 const menuLinks = document.querySelectorAll('.nav__link'); // 메뉴 링크 요소들
 
 let currentMenuIndex = 0; // 현재 메뉴 인덱스

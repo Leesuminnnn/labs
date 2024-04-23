@@ -153,12 +153,7 @@
 </head>
 <body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
-<c:if test="${info.name eq null or info.name eq ''}">
-	<script>
-		alert("잘못된 접근입니다. ");
-		location.href = "${pageContext.request.contextPath}/hwt/Login";
-	</script>
-</c:if>
+
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
 
 <div class="nav__section" style=" ">
@@ -588,6 +583,15 @@ border: 1px solid #dadada;" >
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 <script>
+var name = "${info.name}";
+console.log("세션아이디 ${sessionScope.loginmember}");
+console.log('${info.name}');
+
+if (!name || name.length ===0) {
+	alert("잘못된 접근입니다.");
+	location.href = "${pageContext.request.contextPath}/hwt/Login";
+}
+
 function Mobile(){
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
