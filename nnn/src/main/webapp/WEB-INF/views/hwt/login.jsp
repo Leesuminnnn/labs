@@ -21,8 +21,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 section {
-	align-items:baseline;
-	padding:100px 45px;
+	padding:0px 45px;
 }
 .text-wrap {
 	position: relative;
@@ -47,18 +46,19 @@ section {
 	padding-top:0;
 }
 
-/* 모바일 */
+/* 모바일 출력 */
 @media screen and (max-width: 780px){
 	.loginWrap{max-height: 580px;}
 	.content{padding: 0px 80px;}
 }
 @media screen and (max-width: 600px){
 	.content{padding: 0px 60px;}
-	.login-btn > button {width:100%; font-size: 1.8rem;}
+	.login-btn > button {width:100%;}
 	.logo-area {bottom:18px !important;}
-	.input-text {height:50px; font-size:1.5rem;}
+	.input-text {height:50px;}
 	.loginWrap .loginBox {padding: 0px 0 20px 0;}
 	.login-header {padding: 12px 0 15px 0;}
+	.header-text {font-size:3.5rem;}
 }
 @media screen and (max-width: 525px){
 	.logo-area img {width: 120px;}
