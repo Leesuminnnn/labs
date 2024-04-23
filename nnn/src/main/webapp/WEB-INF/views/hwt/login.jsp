@@ -22,6 +22,7 @@
 <style>
 section {
 	padding:0px 45px;
+	overflow:hidden;  
 }
 .text-wrap {
 	position: relative;
@@ -48,7 +49,6 @@ section {
 
 /* 모바일 출력 */
 @media screen and (max-width: 780px){
-	.loginWrap{max-height: 580px;}
 	.content{padding: 0px 80px;}
 }
 @media screen and (max-width: 600px){
