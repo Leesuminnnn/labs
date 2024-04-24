@@ -57,8 +57,9 @@ section {
 }
 @media screen and (max-width: 600px){
 	.content{padding: 0px 60px;}
-	.login-btn {display: flex; flex-direction: column-reverse;}
-	.login-btn > button {width:100%; margin-bottom:10px;}
+	.login-btn {display: flex; flex-direction: column-reverse; align-items: center;}
+	.login-btn button {width:100%; margin-bottom:10px;}
+	.login-btn .pwd_find {width:30%; height:auto; margin-top:10px; background: none; color: #b4b4b4; font-size: 1.3rem; text-decoration: underline;}
 	.logo-area {bottom:18px !important;}
 	.input-text {height:50px;}
 	.loginWrap .loginBox {padding: 0px 0 20px 0;}
@@ -73,9 +74,16 @@ section {
 	.logo-area {bottom:10px !important;}
 	.logo-area img {width: 110px;}
 }
+@media screen and (max-width: 404px){
+	.login-btn .pwd_find {width:35%;}
+}
 @media screen and (max-width: 390px){
 	.content{padding: 0px 30px;}
 }
+@media screen and (max-width: 342px){
+	.login-btn .pwd_find {width:40%;}
+}
+
 </style>
 
 </head>
