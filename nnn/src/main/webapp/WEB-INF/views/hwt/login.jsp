@@ -47,8 +47,8 @@ section {
 	padding-top:0;
 }
 .login-btn .pwd_find{
-	background:#dfdfdf;
-	color:#b4b4b4;
+    background: #B4B4B8;
+    color: #EEEEEE;
 }
 
 /* 모바일 출력 */

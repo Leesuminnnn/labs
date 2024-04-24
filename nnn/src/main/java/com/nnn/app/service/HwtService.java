@@ -195,4 +195,11 @@ public class HwtService {
 		return flag;
 	}
 
+	public int pwdajax(Map<String, Object> map) {
+		
+		int flag = 0;
+		flag = hwtDao.pwdajax(map);
+		return flag;
+	}
+
 }

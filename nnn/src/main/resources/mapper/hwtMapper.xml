@@ -160,5 +160,4 @@
 	<insert id="save" parameterType="image">
 	insert into image(imageData, cs_idx) value(#{imageData}, #{cs_idx})
 	</insert>
-	
 </mapper>
