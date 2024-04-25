@@ -183,16 +183,7 @@
 		</div>
 </div>
 
-<section style="
-	margin-bottom: 100px;
-    margin-top: 62px;
-    background-color: #f7f7f7;
-    margin-left: 240px; 
-	display: flex;
-    justify-content: center;
-    padding: 50px 0 80px 0;
-    min-width: 1150px;
-    ">
+<section style="margin-bottom: 100px;margin-top: 62px;background-color: #f7f7f7;margin-left: 240px; display: flex;justify-content: center;padding: 50px 0 80px 0;min-width: 1150px;">
 
 
 <div class="area" style="background:#fff; height:auto; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
@@ -458,7 +449,7 @@
 			<h3 class="" style="font-size:1.3rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h3> 
 		</div>
 	</div>
-	
+
 	<div class="hos_info1">
 		<h2 class="hos_info_ho">효사랑가족요양병원 입원 안내</h2>
 		<div style="display:flex;">
@@ -637,12 +628,16 @@
 			<table class="info_important" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
 				<tr>
 					<td>
-					<i class="light_info_i">※ &nbsp;</i> 
-					<em style="font-style:normal;">본원 입원 중 타 의료기관 진료시 요양(의료)급여 의뢰서를 지참 하지 않은 경우 진료비는 전액 본인 부담 적용됩니다.</em></td>
+						<i class="light_info_i">※</i> 
+						<em style="font-style:normal;padding-left:5px;">
+						본원 입원 중 타 의료기관 진료시 요양(의료)급여 의뢰서를 지참 하지 않은 경우 진료비는 전액 본인 부담 적용됩니다.
+						</em>
+						
+					</td>
 					<td>
-						<div  class="checkbox-wrapper-13">
-						<input style="" type="checkbox" id="check10" name="check10" class="normal" value="확인">
-						<label for="check10">확인</label>
+						<div  class="checkbox-wrapper-13" style="display:flex;">
+							<input style="" type="checkbox" id="check10" name="check10" class="normal" value="확인">
+							<label for="check10">확인</label>
 						</div>
 					</td>
 				</tr>
@@ -652,9 +647,9 @@
 					<em style="font-style:normal;">증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의징역또는2천만원이하의벌금에처할수있다.</em>
 					</td>
 					<td>
-						<div  class="checkbox-wrapper-13">
-						<input type="checkbox" id="check11" name="check11" class="normal" value="확인">
-						<label for="check11">확인</label>
+						<div  class="checkbox-wrapper-13" >
+							<input type="checkbox" id="check11" name="check11" class="normal" value="확인">
+							<label for="check11">확인</label>
 						</div>
 					</td>
 				</tr>
@@ -789,7 +784,7 @@
 	</div>
 
 </div>
-<br><br><br><br><br><br><br>
+
 
 
 <!-- 첫번째 서명 -->
