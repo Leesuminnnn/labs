@@ -20,9 +20,11 @@
 <title>코어솔루션 전자문서 시스템</title>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
+body{
+	overflow:hidden;
+}
 section {
 	padding:0px 45px;
-	overflow:hidden;  
 }
 .text-wrap {
 	position: relative;

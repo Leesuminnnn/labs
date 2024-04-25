@@ -175,7 +175,7 @@ input[type="radio"]:checked + label span {
 	font-size: 18pt;
 }
 
-.capture_area{padding: 30px;}
+.capture_area{padding:30px 30px 0 30px;}
 .light_info_list1{padding:0 0 0 35px;}
 .light_info_list{padding:0 0 0 24px;}
 .light_info1{list-style:decimal; line-height:29px; font-size:18px;}
@@ -192,7 +192,7 @@ input[type="radio"]:checked + label span {
 .table_CC{font-size:19px; font-weight:400; background:#fafafa;}
 
 
-
+ 
 
 
 input[type=radio], input[type=checkbox] {
@@ -231,7 +231,9 @@ input[type=checkbox]:checked + label:before {
 	background: url('../icon/check box_b.png') no-repeat center #fff;
 	
 }
-
+.input_type input[type=checkbox] + label:before{
+	margin:0;
+}
 
 
 

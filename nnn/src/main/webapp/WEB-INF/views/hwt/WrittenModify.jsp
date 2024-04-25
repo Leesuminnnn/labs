@@ -153,9 +153,25 @@
 .capture-araa > * {
 	width :100%;
 }
+
+.cont_day{
+	padding: 50px;
+}
+.hos_info_ho{
+	font-size:1.9rem;
+	padding:40px 0 20px 0;
+}
+.info_important td{
+	text-align:left;
+	height:45px;
+	padding:0 20px;
+	font-weight:300;
+}
+
+
 </style>
 </head>
-<body style="min-width: 1280px;">
+<body style="">
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
@@ -171,23 +187,21 @@
 		</div>
 </div>
 
-<section style="background-repeat: no-repeat;
-    background-position: center 0;
-    background-size: 1246px 1870px;
-    min-width: 1280px;
-    margin-bottom: 100px;
-<%--     background-image: url(${pageContext.request.contextPath}/resources/img/background4.png); --%>
-
+<section style="
+	margin-bottom: 100px;
     margin-top: 62px;
     background-color: #f7f7f7;
-    margin-left: 240px;
-	display: flex;	
-	justify-content: center;
+    margin-left: 240px; 
+	display: flex;
+    justify-content: center;
+    padding: 50px 0 80px 0;
+    min-width: 1150px;
     ">
 
 
+<div class="area" style="background:#fff; height:auto; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
 <div id="capture_area" class="capture_area">
-<div>
+
 
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
@@ -397,116 +411,393 @@
 </table>
 
 <div style="text-align: center; margin-bottom: 30px;">
-<div style="margin-bottom: 20px;">
-<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
-border: 1px solid #dadada;" >
-	<tr style="background-color: #fafafa;">
-		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
-	</tr>
-	<tr style="background-color: #ffffff;">
-		<td style="height: 48px; text-align: left; border-bottom: none; border-right: none;">
-		<div class="checkbox-wrapper-13" style="margin-top:10px;">
-		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
-		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
+	<div style="margin-bottom: 20px;">
+		<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; border: 1px solid #dadada;" >
+			<tr style="background-color: #fafafa;">
+				<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
+			</tr>
+			<tr style="background-color: #ffffff;">
+				<td style="height: 48px; text-align: left; border-bottom: none; border-right: none;">
+				<div class="checkbox-wrapper-13" style="margin-top:10px;">
+				  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
+				  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
+				</div>
+				</td>
+				<td style="text-align: center; border-left: none; border-right: none; border-bottom: none;">
+				<div class="checkbox-wrapper-13" style="display:flex; margin-top:10px;">
+				  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
+				  <label for="cs_data_18">환자위임</label>
+				</div>
+				</td>
+				<td style="text-align: right; border-left: none; border-bottom: none;">
+					<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
+						<input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
+						<label for="cs_data_19">응급 상황</label>
+					</div>
+				</td>
+			</tr>
+			
+			<tr style="background-color: #ffffff;">
+				<td style="height: 48px; text-align: left; border-top: none; border-right: none;">
+				<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
+				  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
+				  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+				</div>
+				</td>
+				<td style=" border-left: none; border-right: none; border-top: none;">
+				<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
+				  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
+				  <label for="cs_data_21">미성년자</label>
+				</div>
+				</td>
+				<td style="text-align: center; border-left: none; border-top: none;">
+				</td>
+			</tr>
+		</table>
+		<div class="cont_day">
+			<p>20&nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;년
+			 	 &nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;월
+				 &nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;일
+			</p>
+			<h3 class="" style="font-size:1.3rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h3> 
 		</div>
-		</td>
-		<td style="text-align: center; border-left: none; border-right: none; border-bottom: none;">
-		<div class="checkbox-wrapper-13" style="display:flex; margin-top:10px;">
-		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
-		  <label for="cs_data_18">환자위임</label>
-		</div>
-		</td>
-		<td style="text-align: right; border-left: none; border-bottom: none;">
-			<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
-				<input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
-				<label for="cs_data_19">응급 상황</label>
-			</div>
-		</td>
-	</tr>
+	</div>
 	
-	<tr style="background-color: #ffffff;">
-		<td style="height: 48px; text-align: left; border-top: none; border-right: none;">
-		<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
-		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
-		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+	<div class="hos_info1">
+		<h2 class="hos_info_ho">효사랑가족요양병원 입원 안내</h2>
+		<div style="display:flex;">
+			<p style="font-size:1.1rem; font-weight: 700; padding: 0 0 10px 0;">
+				입원일 : 20&nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;.
+				&nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;.
+				&nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;.
+			</p>
 		</div>
-		</td>
-		<td style=" border-left: none; border-right: none; border-top: none;">
-		<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
-		  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
-		  <label for="cs_data_21">미성년자</label>
+		<div style="text-align: center; margin-bottom: 25px;">
+			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+				<tr>
+					<td class="normal" width="170px" height="45px">No.</td>
+					<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
+						<input style= "margin-left: 33px;" type="text" name="cs_data_01" value="" />
+					</td>
+					<td class="normal" width="150px" height="45px" rowspan="2">특이<br>사항</td>
+					<td onclick="this.querySelector('input').focus();" class="light" width="413px" style="text-align: left;" rowspan="2">
+						<textarea cols="20" rows="3" style="margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;" name="cs_data_02" type="text" value="textarea" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="normal" height="45px">이름</td>
+					<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left;">
+						<input style= "margin-left: 33px;" type="text" name="cs_data_03" value="" />
+					</td>
+					
+				</tr>
+			</table>
 		</div>
-		</td>
-		<td style="text-align: center; border-left: none; border-top: none;">
-		</td>
-	</tr>
-</table>
-</div>
-
-<div style="text-align: center; margin-bottom: 25px;">
-<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
- margin-right: auto; border: 1px solid #dadada;" >
-	<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
-		<td colspan="3" style="text-align: left;">
-		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
-		  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
-		  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+		<div style="text-align: center; margin-bottom: 25px;">
+			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+				<tr>
+					<td class="normal" width="170px" height="45px">구분</td>
+					<td class="light" width="313px">
+						<div style="display:flex; flex-wrap:wrap;">
+							<div class="checkbox-wrapper-13">
+								<input style= "" type="checkbox" id="insurance" name="insurance" value="보험" />
+								<label for="insurance">보험</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input style= "margin-left: 3" type="checkbox" id="salary" name="salary" value="급여" />
+								<label for="salary">급여</label>
+							</div>
+							<div class="checkbox-wrapper-13"> 
+								<input style= "" type="checkbox" id="self_insurance" name="self_insurance" value="자보" />
+								<label for="self_insurance">자보</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input style= "" type="checkbox" id="accident" name="accident" value="산재" />
+								<label for="accident">산재</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input style= "" type="checkbox" id="general" name="general" value="일반" />
+								<label for="general">일반</label>
+							</div>
+						</div>
+					</td>
+					<td rowspan="3" class="normal" width="150px" height="45px">입원실</td>
+					<td class="normal" width="135px">과</td>
+					<td class="normal" width="135px">병실</td>
+					<td class="normal" width="135px">인실</td>
+				</tr>
+				<tr>
+					<td class="normal" height="45px" rowspan="2">상병명</td>
+					<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left; height:45px;">
+						<input style= "margin-left: 33px;" type="text" name="" value="" />
+					</td>
+					<td rowspan="2" onclick="this.querySelector('input').focus();" class="light" style="text-align: left;" >
+						<input style= "margin-left: 33px; width:70px;" type="text" id="" name="" value="" >
+					</td>
+					<td rowspan="2" onclick="this.querySelector('input').focus();" class="light" style="text-align: left;" >
+						<input style= "margin-left: 33px; width:70px;" type="text" id="" name="" value="" >
+					</td>
+					<td rowspan="2" onclick="this.querySelector('input').focus();" class="light" style="text-align: left;" >
+						<input style= "margin-left: 33px; width:70px;" type="text" id="" name="" value="" >
+					</td>
+				</tr>
+				<tr>
+					<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left; height:45px;">
+						<input style= "margin-left: 33px;" type="text" name="" value=""/>
+					</td>
+				</tr>
+			</table>
 		</div>
-		</td>
-	</tr>
-	<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
-		<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
-		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
-		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
-		<td style="text-align: right; color:#222222;" class="light">
-		<div style="margin-right: 21px; display: flex; justify-content: right;">
-		<div class="checkbox-wrapper-13" style="">
-		  <input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
-		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
-		  <label for="cs_data_24">특실</label>&emsp;&emsp;
+		<div style="text-align: center; margin-bottom: 25px;">
+			<table class="info_important" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+				<tr style="background-color: #fafafa;">
+					<th style="height:45px;">입원 시 필요사항 설명 유무</th>
+					<th style="width:125px;">확인</th>
+				</tr>
+				<tr>
+					<td>1. 진료비관련한사항  ➡ ️<b>매월(4일~10일) 전월분정산</b></td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check1" name="check1" class="normal" value="">
+							<label for="check1"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>2. 앰뷸런스이용안내: 외진, 응급전원(주,야간) 사설이용</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check2" name="check2" class="normal" value="">
+							<label for="check2"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>3. 환자, 직원의권리와의무에대한안내</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check3" name="check3" class="normal" value="">
+							<label for="check3"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>4. 제증명은3일전신청하며환자이외에는발급제한안내</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check4" name="check4" class="normal" value="">
+							<label for="check4"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>5. 외출/ 외박/ 면회/음주안내/ 퇴원(3일전고지)</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check5" name="check5" class="normal" value="">
+							<label for="check5"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>6. 타병원진료(지참약, 검사)안내</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check6" name="check6" class="normal" value="">
+							<label for="check6"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>7. 낙상으로인한주의사항안내</td>
+					<td>
+						<div class="checkbox-wrapper-13 input_type" style="input[type=checkbox] + label:before=0;">
+							<input type="checkbox" id="check7" name="check7" class="normal" value="">
+							<label for="check7"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>8. 임종시안치에대한안내</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check8" name="check8" class="normal" value="">
+							<label for="check8"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>9. 응급전원및임종시정산에대한안내</td>
+					<td>
+						<div class="checkbox-wrapper-13">
+							<input type="checkbox" id="check9" name="check9" class="normal" value="">
+							<label for="check9"></label>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
-		<div class="checkbox-wrapper-13" style="">
-		  <input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled"<c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
-		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
-		  <label for="cs_data_25">1인실</label>&emsp;&emsp;
+		<div style="text-align: center; margin-bottom: 25px;">
+			<table class="info_important" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+				<tr>
+					<td>
+						<i class="light_info_i">※</i> 
+						<em style="font-style:normal;padding-left:5px;">
+						본원 입원 중 타 의료기관 진료시 요양(의료)급여 의뢰서를 지참 하지 않은 경우 진료비는 전액 본인 부담 적용됩니다.
+						</em>
+						
+					</td>
+					<td>
+						<div  class="checkbox-wrapper-13" style="display:flex;">
+							<input style="" type="checkbox" id="check10" name="check10" class="normal" value="확인">
+							<label for="check10">확인</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<i class="light_info_i">※ &nbsp;</i>
+					<em style="font-style:normal;">증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의징역또는2천만원이하의벌금에처할수있다.</em>
+					</td>
+					<td>
+						<div  class="checkbox-wrapper-13" >
+							<input type="checkbox" id="check11" name="check11" class="normal" value="확인">
+							<label for="check11">확인</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="hos_info2 light" style="width:966px;">
+		<h2 class="hos_info_ho ">본인부담액상한제 안내</h2>
+		<div class="light_info" style="font-size:16px; color:#222222; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
+			<span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 본인부담금 상한제 (적용기간 : 당해연도 1월1일~ 12월31일)</span>
+			<p class="">「국민건강보험법시행령 제19조 2항 및 4항 비용의 본인부담」 의거. 장기 및 중증질환자의 고액진료비 지출로 인한 가계의 경제적 부담을 경감하고 건강보험 본연의 보장성을 확보하고 가계안정을 도모하기 위한 제도.</p>
+			<p class=""><b>2020년1월1일부터본인부담상한제사전급여는요양병원이아닌, 환자에게직접지급하는 방식으로변경됩니다.</b>
+			건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 <b>최고상한액( 년기준 만원) 초과금액을 환자에게 직접 지급합니다.</b>
+			다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터3~5개월후직접지급하게됩니다.
+			</p>
+			<p class="">개인별 본인부담한액 기준보험표 결정(건강보험료정산) 전후로 나누어 <b>개인별 본인부담상한액 초과금액을 건강보험공단에서 환자에게 다음해 7~8월경 직접지급</b></p>
+			<p class="">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
+		</div>
+		<div style="text-align: center; margin-bottom: 25px;">
+			<table class="info_important2" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+				<tr style="background-color: #fafafa; height:45px;">
+					<td style="width:170px;">구분</td>
+					<td>실비 납부</td>
+					<td>기타 추가 납부</td>
+				</tr>
+				<tr style="height:45px;">
+					<td>비용</td>
+					<td>본인부담 발생 금액</td>
+					<td>
+						<div style="display: flex; justify-content: space-evenly;">
+							<div>
+							  <input type="checkbox" id="medicine" name="medicine" value="비급여 처치재료, 약제">
+							  <label for="medicine">비급여 처치재료, 약제</label>
+							</div>
+							<div>
+								<input type="checkbox" id="Nutrients" name="Nutrients" value="영양제">
+								<label for="Nutrients">영양제</label>
+							</div>
+							<div>
+								<input type="checkbox" id="transport" name="transport" value="이송료">
+								<label for="transport">이송료</label>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 		
+		<div class="light" style="text-align:left; padding: 0 24px 40px 0;">
+			<ol class="light_info_list">
+				<li class="light_info">
+					<i class="light_info_i">□</i>
+					<em style="font-style:normal; padding-left:5px;">요양병원의 정액수가는 환자분류군에 따라 본인부담금이 정해집니다.</em>
+				</li>
+				<li class="light_info">
+					<i class="light_info_i">□</i>
+					<em style="font-style:normal; padding-left:5px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 행위별수가의 적용으로 본인부담금이 인상될 수 있습니다.</em>
+				</li>
+				<li class="light_info">
+					<i class="light_info_i">□</i>
+					<em style="font-style:normal; padding-left:5px;">선택입원군으로평가된환자의경우본인부담금이40%부과됩니다.</em>
+				</li>
+				<li class="light_info">
+					<i class="light_info_i">□</i>
+					<em style="font-style:normal; padding-left:5px;">상급병실(특실. 1인실. 2인실)의이용시병실차액이발생할수있습니다.</em>
+				</li>
+			</ol>
+		</div>
 		
-		<div class="checkbox-wrapper-13" style="">
-		  <input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
-		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
-		  <label for="cs_data_26" style="margin-right:8px;">2인실</label>
+		<div style="text-align: center; margin-bottom: 25px;">
+		<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
+		 margin-right: auto; border: 1px solid #dadada;" >
+			<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
+				<td colspan="3" style="text-align: left;">
+				<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
+				  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
+				  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+				</div>
+				</td>
+			</tr>
+			<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
+				<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
+				<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
+				<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
+				<td style="text-align: right; color:#222222;" class="light">
+				<div style="margin-right: 21px; display: flex; justify-content: right;">
+				<div class="checkbox-wrapper-13" style="">
+				  <input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
+				  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+				  <label for="cs_data_24">특실</label>&emsp;&emsp;
+				</div>
+				<div class="checkbox-wrapper-13" style="">
+				  <input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled"<c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
+				  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+				  <label for="cs_data_25">1인실</label>&emsp;&emsp;
+				</div>
+				
+				
+				<div class="checkbox-wrapper-13" style="">
+				  <input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
+				  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+				  <label for="cs_data_26" style="margin-right:8px;">2인실</label>
+				</div>
+				</div>
+				</td>
+			</tr>
+			<tr style="height: 45px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
+				<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
+				 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
+			</tr>
+			<tr style="height: 50px; background-color: #ffffff;">
+				<td colspan="3" style="text-align: left;">
+				<div style="margin-left: 21px;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
+				</td>
+			</tr>
+		</table>
 		</div>
-		</div>
-		</td>
-	</tr>
-	<tr style="height: 45px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
-		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
-		 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
-	</tr>
-	<tr style="height: 50px; background-color: #ffffff;">
-		<td colspan="3" style="text-align: left;">
-		<div style="margin-left: 21px;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
-		</td>
-	</tr>
-</table>
-
-</div>
-</div>
-
-<div style="position: relative;">
-	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
-	display: flex; justify-content: flex-end; align-items: center;">
-		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
-		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
-		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
+	
 	</div>
 </div>
-<br><br>
+
+	<div style="position: relative;">
+		<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
+		display: flex; justify-content: flex-end; align-items: center;">
+			신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
+			<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
+			<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
+		</div>
+	</div>
+	<br><br>
+	</div>
+
 </div>
-</div>
-<br><br><br><br><br><br><br>
+
 
 
 <!-- 첫번째 서명 -->
@@ -585,12 +876,11 @@ border: 1px solid #dadada;" >
 	</div>
 </div>
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 <script>
 var name = "${info.name}";
 console.log("세션아이디 ${sessionScope.loginmember}");
@@ -1150,28 +1440,12 @@ $(document).ready(function() {
 	$(function(){
 		
 		$(".btn_download").click(function(e){
-// 			var width = 1024;	// 800 pixels
-			//var height = 1122.52;	// 600 pixels
-			html2canvas(document.getElementById("capture_area")).then(function(canvas) {
+			html2canvas(document.getElementById("capture_area")).then(function(canvas)
+			
+				{
 				
-// 				var doc = new jsPDF();
-// 		        var imgData = canvas.toDataURL('image/png');
-// 		        var imgProps= doc.getImageProperties(imgData);
-// 		        var width = doc.internal.pageSize.getWidth();
-// 		        var height = width * 1.414; // a4 기준 페이지 height
-// 		        var pdfHeight = (imgProps.height * width) / imgProps.width;
-// 		        var heightLeft = pdfHeight - height;
-// 		        var position = 0;
-		        
-// 		        doc.addImage(imgData, 'PNG', 0, position, width, pdfHeight);
-		        
-// 		        while (heightLeft > 0) {
-// 		            position = heightLeft - pdfHeight;
-// 		            doc.addPage();
-// 		            doc.addImage(imgData, 'PNG', 0, position, width, pdfHeight);
-// 		            heightLeft -= height;
-// 		        }
-// 		        doc.save();
+				
+				
 				
 // 					var el = document.createElement("a")
 // 					el.href = canvas.toDataURL("image/png")
@@ -1227,10 +1501,7 @@ $(document).ready(function() {
 					    url: "${pageContext.request.contextPath}/saveImage",
 // 					    url: "${pageContext.request.contextPath}/saveImagetest",
 					     method: "post",
-// 					     contentType: "application/json", // Ensure you're sending JSON
-					     data: { 
-						    	image: image,
-// 						    	image: pdfBase64,
+					     data: { image: image,
 					    		cs_idx: cs_idx,
 					    		cs_data_01: cs_data_01,
 					    		cs_data_02: cs_data_02,
@@ -1266,7 +1537,7 @@ $(document).ready(function() {
 					       alert("이미지가 성공적으로 등록되었습니다.");
 					       window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do"
 					     },
-					     error: function(xhr, status, error) {
+					     error: function() {
 					       alert("이미지 등록에 실패했습니다.");
 					       alert(error);
 					     }
