@@ -147,12 +147,10 @@
 	margin-right: 10px;
 	width:18px;
 }
-.cont_day{
-	padding: 50px;
-}
+
 </style>
 </head>
-<body style="">
+<body style="min-width: 1280px;">
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenAction.do">
@@ -168,21 +166,22 @@
 		</div>
 </div>
 
-<section style="
-	margin-bottom: 100px;
+<section style="background-repeat: no-repeat;
+    background-position: center 0;
+    background-image: url('${pageContext.request.contextPath}/resources/img/background4.png');
+    background-size: 1246px;
+    min-width: 1280px;
+    margin-bottom: 100px;
     margin-top: 62px;
     background-color: #f7f7f7;
-    margin-left: 240px; 
-	display: flex;
-    justify-content: center;
-    padding: 50px 0;
-    ">
+    margin-left: 240px; ">
 	
-<div class="area" style="background:#fff; height:auto; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
+	
 <div id="capture_area" class="capture_area" style="">
+<div>
 
 <input type="hidden" id="imgData" name="imgData">
-<h1 style="text-align: center; font-size: 30pt; padding: 40px 0 30px 0;">입 원 서 약 서</h1>
+<h1 style="text-align: center; font-size: 30pt; padding: 70px 0 30px 0;">입 원 서 약 서</h1>
 
 <div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
 <div style="text-align: center; margin-bottom: 20px;">
@@ -446,79 +445,72 @@
 
 
 <div style="text-align: center; margin-bottom: 30px;">
-	<div style="margin-bottom: 30px;">
-		<table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
-		border: 1px solid #c7c7c7;" >
-			<tr style="background-color: #fafafa;">
-				<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
-			</tr>
-			<tr style="border-bottom: none; background-color: #ffffff;">
-				<td style="border-right: none; border-bottom: none; height: 56px; text-align: left; width:585px;">
-				<!-- 
-				<input style="margin-left: 21px; cursor: pointer;" name="cs_data_17" id="cs_data_17" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox"/>
-				<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
-				 -->
-				<div class="checkbox-wrapper-13" style="margin-top: 10px;">
-				  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
-				  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
-				</div>
-				</td>
-				<td style="text-align: center; border-bottom: none; border-left:none; border-right: none;">
-				<!-- 
-				<input name="cs_data_18" value="환자위임" id="cs_data_18" type="checkbox" style="cursor: pointer;"/>
-				<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
-				 -->
-					<div class="checkbox-wrapper-13" style="display:flex; margin-top: 10px;">
-						<input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
-						<label for="cs_data_18">환자위임</label>
-					</div>
-				</td>
-				<td style="text-align: center; border-bottom: none; border-left: none; text-align: right;">
-				<!-- 
-				<div style="margin-right: 21px;"><label for="cs_data_19" style="cursor: pointer;">
-				<input name="cs_data_19" id="cs_data_19"value="응급 상황" type="checkbox" style="cursor: pointer;"/>
-				 응급 상황</label></div>
-				  -->
-				<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
-				  <input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황">
-				  <label for="cs_data_19">응급 상황</label>
-				</div>
-				 </td>
-			</tr>
-			
-			<tr style="background-color: #ffffff; border-top:none;">
-				<td style="border-right: none; border-top:none; height: 56px; text-align: left;">
-				<!-- 
-				<label for="cs_data_20" style="cursor: pointer;"><input style="margin-left:21px; cursor: pointer;" name="cs_data_20" id="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox"/>
-				 내용 설명 시 환자의 심신에 중대한 영향 우려</label>
-				  -->
-				<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
-				  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려">
-				  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
-				</div>
-				 </td>
-				<td style="border-right: none; border-top:none; border-left: none;">
-				 <!-- 
-				<div style=""><label for="cs_data_21" style="cursor: pointer;">
-				<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;"/> 미성년자</label></div>
-				 -->
-				<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
-				  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
-				  <label for="cs_data_21">미성년자</label>
-				</div>
-				</td>
-				<td style="border-left: none; border-top:none; text-align: center;">
-				</td>
-			</tr>
-		</table>
-		<div class="cont_day">
-			<p>20&nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;년
-			 	 &nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;월
-				 &nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;일
-			</p>
-			<h2 class="" style="font-size:1.5rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h2> 
+<div style="margin-bottom: 30px;">
+<table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
+border: 1px solid #c7c7c7;" >
+	<tr style="background-color: #fafafa;">
+		<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
+	</tr>
+	<tr style="border-bottom: none; background-color: #ffffff;">
+		<td style="border-right: none; border-bottom: none; height: 56px; text-align: left; width:585px;">
+		<!-- 
+		<input style="margin-left: 21px; cursor: pointer;" name="cs_data_17" id="cs_data_17" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox"/>
+		<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
+		 -->
+		<div class="checkbox-wrapper-13" style="margin-top: 10px;">
+		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가">
+		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
 		</div>
-	</div>
+		</td>
+		<td style="text-align: center; border-bottom: none; border-left:none; border-right: none;">
+		<!-- 
+		<input name="cs_data_18" value="환자위임" id="cs_data_18" type="checkbox" style="cursor: pointer;"/>
+		<label for="cs_data_18" style="cursor: pointer;"> 환자위임</label>
+		 -->
+			<div class="checkbox-wrapper-13" style="display:flex; margin-top: 10px;">
+				<input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임">
+				<label for="cs_data_18">환자위임</label>
+			</div>
+		</td>
+		<td style="text-align: center; border-bottom: none; border-left: none; text-align: right;">
+		<!-- 
+		<div style="margin-right: 21px;"><label for="cs_data_19" style="cursor: pointer;">
+		<input name="cs_data_19" id="cs_data_19"value="응급 상황" type="checkbox" style="cursor: pointer;"/>
+		 응급 상황</label></div>
+		  -->
+		<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
+		  <input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황">
+		  <label for="cs_data_19">응급 상황</label>
+		</div>
+		 </td>
+	</tr>
+	
+	<tr style="background-color: #ffffff; border-top:none;">
+		<td style="border-right: none; border-top:none; height: 56px; text-align: left;">
+		<!-- 
+		<label for="cs_data_20" style="cursor: pointer;"><input style="margin-left:21px; cursor: pointer;" name="cs_data_20" id="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox"/>
+		 내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		  -->
+		<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
+		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려">
+		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+		</div>
+		 </td>
+		<td style="border-right: none; border-top:none; border-left: none;">
+		 <!-- 
+		<div style=""><label for="cs_data_21" style="cursor: pointer;">
+		<input name="cs_data_21" id="cs_data_21" value="미성년자" type="checkbox" style="cursor: pointer;"/> 미성년자</label></div>
+		 -->
+		<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
+		  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
+		  <label for="cs_data_21">미성년자</label>
+		</div>
+		</td>
+		<td style="border-left: none; border-top:none; text-align: center;">
+		</td>
+	</tr>
+</table>
+</div>
 
 <div style="text-align: center; margin-bottom: 30px;">
 <table style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
