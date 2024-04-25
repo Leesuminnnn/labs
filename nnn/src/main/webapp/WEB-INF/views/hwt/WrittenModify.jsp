@@ -163,11 +163,12 @@
 }
 .info_important td{
 	text-align:left;
-	height:45px;
-	padding:0 20px;
+	height:50px;
+	padding: 15px 20px;
 	font-weight:300;
 }
-
+.area{margin-bottom:30px;}
+.hos_info_ho{text-align:center;}
 
 </style>
 </head>
@@ -187,7 +188,7 @@
 		</div>
 </div>
 
-<section style="margin-bottom: 100px;margin-top: 62px;background-color: #f7f7f7;margin-left: 240px; display: flex;justify-content: center;padding: 50px 0 80px 0;min-width: 1150px;">
+<section style="margin-bottom: 100px;margin-top: 62px;background-color: #f7f7f7;margin-left: 240px; display: flex; flex-wrap: wrap; justify-content: center;padding: 50px 0 80px 0;min-width: 1150px;">
 
 
 <div class="area" style="background:#fff; height:auto; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
@@ -284,6 +285,8 @@
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
 		<li style="margin-bottom: 13px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
+</div>
+
 <span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 <ol class="light_info_list">
 	<li class="light_info">
@@ -308,7 +311,6 @@
 		입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b style="display: contents;">법적 대리인</b>이 됩니다.
 	</li>
 </ol>
-</div>
 <br>
 
 <table class="table_type2">
@@ -393,6 +395,7 @@
 			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px; width:250px;" value="${decryptedCs_data_15 }" />
 		</th>
 		<th colspan="2" style="text-align: right; border-left:hidden;">
+
 			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
 				<input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>>
 				<label for="cs_data_16">비용안내</label>
@@ -453,9 +456,16 @@
 			<h3 class="" style="font-size:1.3rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h3> 
 		</div>
 	</div>
+</div>
+</div>
+</div>
 
+
+
+<div class="area" style="background:#fff; height:auto; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
+<div id="capture_area2" class="capture_area2">
 	<div class="hos_info1">
-		<h2 class="hos_info_ho">효사랑가족요양병원 입원 안내</h2>
+		<h2 class="hos_info_ho" style="text-align: center;">효사랑가족요양병원 입원 안내</h2>
 		<div style="display:flex;">
 			<p style="font-size:1.1rem; font-weight: 700; padding: 0 0 10px 0;">
 				입원일 : 20&nbsp;<input class="light" name="" style="width:40px;" type="text" value="" />&nbsp;.
@@ -466,30 +476,29 @@
 		<div style="text-align: center; margin-bottom: 25px;">
 			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
 				<tr>
-					<td class="normal" width="170px" height="45px">No.</td>
+					<td class="normal" width="170px" height="50px" style="background:#fafafa;">No.</td>
 					<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" name="cs_data_01" value="" />
 					</td>
-					<td class="normal" width="150px" height="45px" rowspan="2">특이<br>사항</td>
+					<td class="normal" width="150px" height="50px" rowspan="2" style="background:#fafafa;">특이<br>사항</td>
 					<td onclick="this.querySelector('input').focus();" class="light" width="413px" style="text-align: left;" rowspan="2">
-						<textarea cols="20" rows="3" style="margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;" name="cs_data_02" type="text" value="textarea" ></textarea>
+						<textarea cols="20" rows="3" style="margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;" name="cs_data_02" ></textarea>
 					</td>
 				</tr>
 				<tr>
-					<td class="normal" height="45px">이름</td>
+					<td class="normal" height="45px" style="background:#fafafa;">이름</td>
 					<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" name="cs_data_03" value="" />
 					</td>
-					
 				</tr>
 			</table>
 		</div>
 		<div style="text-align: center; margin-bottom: 25px;">
 			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
 				<tr>
-					<td class="normal" width="170px" height="45px">구분</td>
-					<td class="light" width="313px">
-						<div style="display:flex; flex-wrap:wrap;">
+					<td class="normal" width="195px" height="50px" style="background:#fafafa;">구분</td>
+					<td class="light" width="313px" colspan="3">
+						<div style="display:flex; flex-wrap:wrap; ">
 							<div class="checkbox-wrapper-13">
 								<input style= "" type="checkbox" id="insurance" name="insurance" value="보험" />
 								<label for="insurance">보험</label>
@@ -512,33 +521,38 @@
 							</div>
 						</div>
 					</td>
-					<td rowspan="3" class="normal" width="150px" height="45px">입원실</td>
-					<td class="normal" width="135px">과</td>
-					<td class="normal" width="135px">병실</td>
-					<td class="normal" width="135px">인실</td>
 				</tr>
 				<tr>
-					<td class="normal" height="45px" rowspan="2">상병명</td>
-					<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left; height:45px;">
-						<input style= "margin-left: 33px;" type="text" name="" value="" />
-					</td>
-					<td rowspan="2" onclick="this.querySelector('input').focus();" class="light" style="text-align: left;" >
-						<input style= "margin-left: 33px; width:70px;" type="text" id="" name="" value="" >
-					</td>
-					<td rowspan="2" onclick="this.querySelector('input').focus();" class="light" style="text-align: left;" >
-						<input style= "margin-left: 33px; width:70px;" type="text" id="" name="" value="" >
-					</td>
-					<td rowspan="2" onclick="this.querySelector('input').focus();" class="light" style="text-align: left;" >
-						<input style= "margin-left: 33px; width:70px;" type="text" id="" name="" value="" >
+					<td class="normal" height="45px" rowspan="2" style="background:#fafafa;">상병명</td>
+					<td onclick="" class="light" style="text-align: left; height:50px; " colspan="3">
+						<input style= "margin-left: 33px; width:300px;" type="text" name="" value="" />
 					</td>
 				</tr>
 				<tr>
-					<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left; height:45px;">
-						<input style= "margin-left: 33px;" type="text" name="" value=""/>
+					<td class="light" style="text-align: left; height:50px;" colspan="3">
+						<input style= "margin-left: 33px; width:300px;" type="text" name="" value=""/>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="3" class="normal" width="150px" style="background:#fafafa;">입원실</td>
+					<td class="normal" width="290px" height="50px">과</td>
+					<td class="normal" width="290px" height="50px">병실</td>
+					<td class="normal" width="290px" height="50px">인실</td>
+				</tr>
+				<tr>
+					<td rowspan="2"  class="light" style="text-align: left;" height="80px">
+						<input style= "margin-left: 45px; width:180px;" type="text" id="" name="" value="" >
+					</td>
+					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
+						<input style= "margin-left: 45px; width:180px;" type="text" id="" name="" value="" >
+					</td>
+					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
+						<input style= "margin-left: 45px; width:180px;" type="text" id="" name="" value="" >
 					</td>
 				</tr>
 			</table>
 		</div>
+		
 		<div style="text-align: center; margin-bottom: 25px;">
 			<table class="info_important" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
 				<tr style="background-color: #fafafa;">
@@ -546,9 +560,9 @@
 					<th style="width:125px;">확인</th>
 				</tr>
 				<tr>
-					<td>1. 진료비관련한사항  ➡ ️<b>매월(4일~10일) 전월분정산</b></td>
+					<td>1. 진료비관련한사항&nbsp; ➡ &nbsp;️<b>매월(4일~10일) 전월분정산</b></td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check1" name="check1" class="normal" value="">
 							<label for="check1"></label>
 						</div>
@@ -557,7 +571,7 @@
 				<tr>
 					<td>2. 앰뷸런스이용안내: 외진, 응급전원(주,야간) 사설이용</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check2" name="check2" class="normal" value="">
 							<label for="check2"></label>
 						</div>
@@ -566,7 +580,7 @@
 				<tr>
 					<td>3. 환자, 직원의권리와의무에대한안내</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check3" name="check3" class="normal" value="">
 							<label for="check3"></label>
 						</div>
@@ -575,7 +589,7 @@
 				<tr>
 					<td>4. 제증명은3일전신청하며환자이외에는발급제한안내</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check4" name="check4" class="normal" value="">
 							<label for="check4"></label>
 						</div>
@@ -584,7 +598,7 @@
 				<tr>
 					<td>5. 외출/ 외박/ 면회/음주안내/ 퇴원(3일전고지)</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check5" name="check5" class="normal" value="">
 							<label for="check5"></label>
 						</div>
@@ -593,7 +607,7 @@
 				<tr>
 					<td>6. 타병원진료(지참약, 검사)안내</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check6" name="check6" class="normal" value="">
 							<label for="check6"></label>
 						</div>
@@ -602,7 +616,7 @@
 				<tr>
 					<td>7. 낙상으로인한주의사항안내</td>
 					<td>
-						<div class="checkbox-wrapper-13 input_type" style="input[type=checkbox] + label:before=0;">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check7" name="check7" class="normal" value="">
 							<label for="check7"></label>
 						</div>
@@ -611,7 +625,7 @@
 				<tr>
 					<td>8. 임종시안치에대한안내</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check8" name="check8" class="normal" value="">
 							<label for="check8"></label>
 						</div>
@@ -620,7 +634,7 @@
 				<tr>
 					<td>9. 응급전원및임종시정산에대한안내</td>
 					<td>
-						<div class="checkbox-wrapper-13">
+						<div class="checkbox_check">
 							<input type="checkbox" id="check9" name="check9" class="normal" value="">
 							<label for="check9"></label>
 						</div>
@@ -629,40 +643,47 @@
 			</table>
 		</div>
 		<div style="text-align: center; margin-bottom: 25px;">
-			<table class="info_important" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+			<table class="info_important" border=1 style="table-layout:fixed;width: 100%;border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
 				<tr>
-					<td>
-						<i class="light_info_i">※</i> 
+					<td style="height:80px; line-height:25px;">
+						<i class="light_info_i">※</i>
 						<em style="font-style:normal;padding-left:5px;">
-						본원 입원 중 타 의료기관 진료시 요양(의료)급여 의뢰서를 지참 하지 않은 경우 진료비는 전액 본인 부담 적용됩니다.
+						본원 입원 중 <em style="text-decoration:underline; font-style:normal">타 의료기관 진료시 요양(의료)급여 의뢰서</em>를 지참 하지 않은 경우 진료비는 전액 본인 부담 <br>적용됩니다.
 						</em>
-						
+						<p style="font-style:normal; font-size:12px; text-align:right;">국민건강보험법시행규칙(시행일:2019.11.1.) 보건복지부령제637호</p>
 					</td>
-					<td>
-						<div  class="checkbox-wrapper-13" style="display:flex;">
-							<input style="" type="checkbox" id="check10" name="check10" class="normal" value="확인">
-							<label for="check10">확인</label>
+					<td width="126px">
+						<div  class="checkbox_check2">
+							<input type="checkbox" id="check10" name="check10" class="normal" value="확인">
+							<label for="check10" style="font-weight:400;" >확인</label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>
-					<i class="light_info_i">※ &nbsp;</i>
-					<em style="font-style:normal;">증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의징역또는2천만원이하의벌금에처할수있다.</em>
+					<td style="height:80px; line-height:25px;">
+						<i class="light_info_i">※</i>
+						<em style="font-style:normal;padding-left:5px;">증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의 징역 또는 2천만원 이하의 벌금에 처할<br>수 있다.</em>
 					</td>
-					<td>
-						<div  class="checkbox-wrapper-13" >
+					<td width="126px">
+						<div  class="checkbox_check2">
 							<input type="checkbox" id="check11" name="check11" class="normal" value="확인">
-							<label for="check11">확인</label>
+							<label for="check11" style="font-weight:400;">확인</label>
 						</div>
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
+	</div>
+</div>
+
+
+
+<div class="area" style="background:#fff; height:auto; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);">
+<div id="capture_area3" class="capture_area3">
 	<div class="hos_info2 light" style="width:966px;">
-		<h2 class="hos_info_ho ">본인부담액상한제 안내</h2>
-		<div class="light_info" style="font-size:16px; color:#222222; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
+		<h2 class="hos_info_ho">본인부담액상한제 안내</h2>
+		<div class="light_info" style="font-size:16px; color:#222222; padding-top: 10px; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
 			<span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 본인부담금 상한제 (적용기간 : 당해연도 1월1일~ 12월31일)</span>
 			<p class="">「국민건강보험법시행령 제19조 2항 및 4항 비용의 본인부담」 의거. 장기 및 중증질환자의 고액진료비 지출로 인한 가계의 경제적 부담을 경감하고 건강보험 본연의 보장성을 확보하고 가계안정을 도모하기 위한 제도.</p>
 			<p class=""><b>2020년1월1일부터본인부담상한제사전급여는요양병원이아닌, 환자에게직접지급하는 방식으로변경됩니다.</b>
@@ -670,16 +691,16 @@
 			다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터3~5개월후직접지급하게됩니다.
 			</p>
 			<p class="">개인별 본인부담한액 기준보험표 결정(건강보험료정산) 전후로 나누어 <b>개인별 본인부담상한액 초과금액을 건강보험공단에서 환자에게 다음해 7~8월경 직접지급</b></p>
-			<p class="">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
+			<p class="" style="padding-bottom: 5px;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
 		</div>
 		<div style="text-align: center; margin-bottom: 25px;">
 			<table class="info_important2" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
-				<tr style="background-color: #fafafa; height:45px;">
+				<tr style="background-color: #fafafa; height:50px;">
 					<td style="width:170px;">구분</td>
 					<td>실비 납부</td>
 					<td>기타 추가 납부</td>
 				</tr>
-				<tr style="height:45px;">
+				<tr style="height:50px;">
 					<td>비용</td>
 					<td>본인부담 발생 금액</td>
 					<td>
@@ -702,23 +723,19 @@
 			</table>
 		</div>
 		
-		<div class="light" style="text-align:left; padding: 0 24px 40px 0;">
+		<div class="light" style="text-align:left; padding: 0 24px 5px 0;">
 			<ol class="light_info_list">
-				<li class="light_info">
+				<li class="light_info light_info2">
 					<i class="light_info_i">□</i>
 					<em style="font-style:normal; padding-left:5px;">요양병원의 정액수가는 환자분류군에 따라 본인부담금이 정해집니다.</em>
 				</li>
-				<li class="light_info">
+				<li class="light_info light_info2">
 					<i class="light_info_i">□</i>
-					<em style="font-style:normal; padding-left:5px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 행위별수가의 적용으로 본인부담금이 인상될 수 있습니다.</em>
+					<em style="font-style:normal; padding-left:5px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 행위별수가의 <br>적용으로 본인부담금이 인상될 수 있습니다.</em>
 				</li>
-				<li class="light_info">
+				<li class="light_info light_info2">
 					<i class="light_info_i">□</i>
-					<em style="font-style:normal; padding-left:5px;">선택입원군으로평가된환자의경우본인부담금이40%부과됩니다.</em>
-				</li>
-				<li class="light_info">
-					<i class="light_info_i">□</i>
-					<em style="font-style:normal; padding-left:5px;">상급병실(특실. 1인실. 2인실)의이용시병실차액이발생할수있습니다.</em>
+					<em style="font-style:normal; padding-left:5px;">선택입원군으로 평가된 환자의 경우 <b class="b40">본인부담금이 40%</b> 부과됩니다.</em>
 				</li>
 			</ol>
 		</div>
@@ -726,7 +743,7 @@
 		<div style="text-align: center; margin-bottom: 25px;">
 		<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
 		 margin-right: auto; border: 1px solid #dadada;" >
-			<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
+			<tr style="height: 50px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
 				<td colspan="3" style="text-align: left;">
 				<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
 				  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
@@ -734,7 +751,7 @@
 				</div>
 				</td>
 			</tr>
-			<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
+			<tr style="height: 50px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
 				<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
 				<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
 				<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
@@ -760,7 +777,7 @@
 				</div>
 				</td>
 			</tr>
-			<tr style="height: 45px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
+			<tr style="height: 50px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
 				<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
 				 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
 			</tr>
@@ -773,11 +790,10 @@
 		</div>
 	
 	</div>
-</div>
 
 	<div style="position: relative;">
-		<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
-		display: flex; justify-content: flex-end; align-items: center;">
+		<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px; 
+		display: flex; justify-content: flex-end; align-items: center; padding-top: 50px;">
 			신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
 			<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 			<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
@@ -785,10 +801,9 @@
 		</div>
 	</div>
 	<br><br>
-	</div>
 
 </div>
-
+</div>
 
 
 <!-- 첫번째 서명 -->
