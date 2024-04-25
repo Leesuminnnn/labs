@@ -146,6 +146,10 @@
 	margin-right: 10px;
 	width:18px;
 }
+#capture_area {
+	width: 1024px;
+	background: #fff;
+}
 .capture-araa > * {
 	width :100%;
 }

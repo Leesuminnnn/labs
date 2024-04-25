@@ -1,13 +1,11 @@
 package com.nnn.app.controller;
 
-import java.util.Base64;
-import java.util.Map;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +22,10 @@ public class ImageController {
 	private ImageService imageService;
 	private CanvasService canvasService;
 	private final Logger log = LoggerFactory.getLogger(getClass());
+	
+	
+
+	
 	
 	@Autowired
 	public ImageController(ImageService imageService, CanvasService canvasService) {
@@ -168,22 +170,66 @@ public class ImageController {
 		return "Image saved successfully!";
 	}
 	
-	@RequestMapping(value = "/saveImagetest", method = RequestMethod.POST)
-	@ResponseBody
-	public String saveImagetest(@RequestParam("image") byte[] image, WrittenVo vo, @RequestParam("cs_idx")Integer cs_idx
-			
-			) {
-		ImageEntity imageEntity = new ImageEntity();
-		System.out.println("이미지 저장");
-		log.debug("debug log{}", cs_idx);
-		
-		imageEntity.setImageData(image);
-		imageEntity.setCs_idx(cs_idx);
-		imageService.saveImage(imageEntity);
-		return "Image saved successfully!";
+//	@RequestMapping(value = "/saveImagetest", method = RequestMethod.POST)
+//	public ResponseEntity<?> testsaveImage(@RequestBody ImageEntitytest imagedata) {
+//	    try {
+//	    	if (imagedata.getImageData() != null) {
+//	            // Assuming imageData is already a base64 string and needs to be converted to byte[]
+//	            byte[] imageBytes = Base64.decodeBase64(imagedata.getImageData());
+//	            imagedata.setImageData(imageBytes); // Set the decoded bytes directly
+//	            imageService.saveImage(imagedata);
+//	            return ResponseEntity.ok().build();
+//	        } else {
+//	            return ResponseEntity.badRequest().body("No image data provided");
+//	        }
+//	    } catch (Exception e) {
+//	        System.out.println("Error: " + e.getMessage());
+//	        e.printStackTrace();
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing image");
+//	    }
+//	}
+	
+	static class ImageEntitytest {
+
+	    private int idx;
+	    private int cs_idx;
+	    private String imageData;  // Now an instance variable
+	    private Date regdate;
+
+	    // Getter for imageData
+	    public String getImageData() {
+	        return imageData;
+	    }
+
+	    // Setter for imageData, necessary for JSON deserialization
+	    public void setImageData(String imageData) {
+	        this.imageData = imageData;
+	    }
+
+		public int getIdx() {
+			return idx;
+		}
+
+		public void setIdx(int idx) {
+			this.idx = idx;
+		}
+
+		public int getCs_idx() {
+			return cs_idx;
+		}
+
+		public void setCs_idx(int cs_idx) {
+			this.cs_idx = cs_idx;
+		}
+
+		public Date getRegdate() {
+			return regdate;
+		}
+
+		public void setRegdate(Date regdate) {
+			this.regdate = regdate;
+		}
+	    
 	}
-	
-	
-	
 	
 }
