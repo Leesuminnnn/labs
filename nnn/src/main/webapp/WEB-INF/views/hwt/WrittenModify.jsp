@@ -146,6 +146,10 @@
 	margin-right: 10px;
 	width:18px;
 }
+#capture_area {
+	width: 1024px;
+	background: #fff;
+}
 .capture-araa > * {
 	width :100%;
 }
@@ -172,10 +176,14 @@
     background-size: 1246px 1870px;
     min-width: 1280px;
     margin-bottom: 100px;
-    background-image: url(${pageContext.request.contextPath}/resources/img/background4.png);
+<%--     background-image: url(${pageContext.request.contextPath}/resources/img/background4.png); --%>
+
     margin-top: 62px;
     background-color: #f7f7f7;
-    margin-left: 240px;">
+    margin-left: 240px;
+	display: flex;	
+	justify-content: center;
+    ">
 
 
 <div id="capture_area" class="capture_area">
@@ -577,11 +585,12 @@ border: 1px solid #dadada;" >
 	</div>
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 var name = "${info.name}";
 console.log("세션아이디 ${sessionScope.loginmember}");
@@ -1141,12 +1150,28 @@ $(document).ready(function() {
 	$(function(){
 		
 		$(".btn_download").click(function(e){
-			html2canvas(document.getElementById("capture_area")).then(function(canvas)
-			
-				{
+// 			var width = 1024;	// 800 pixels
+			//var height = 1122.52;	// 600 pixels
+			html2canvas(document.getElementById("capture_area")).then(function(canvas) {
 				
-				
-				
+// 				var doc = new jsPDF();
+// 		        var imgData = canvas.toDataURL('image/png');
+// 		        var imgProps= doc.getImageProperties(imgData);
+// 		        var width = doc.internal.pageSize.getWidth();
+// 		        var height = width * 1.414; // a4 기준 페이지 height
+// 		        var pdfHeight = (imgProps.height * width) / imgProps.width;
+// 		        var heightLeft = pdfHeight - height;
+// 		        var position = 0;
+		        
+// 		        doc.addImage(imgData, 'PNG', 0, position, width, pdfHeight);
+		        
+// 		        while (heightLeft > 0) {
+// 		            position = heightLeft - pdfHeight;
+// 		            doc.addPage();
+// 		            doc.addImage(imgData, 'PNG', 0, position, width, pdfHeight);
+// 		            heightLeft -= height;
+// 		        }
+// 		        doc.save();
 				
 // 					var el = document.createElement("a")
 // 					el.href = canvas.toDataURL("image/png")
@@ -1202,7 +1227,10 @@ $(document).ready(function() {
 					    url: "${pageContext.request.contextPath}/saveImage",
 // 					    url: "${pageContext.request.contextPath}/saveImagetest",
 					     method: "post",
-					     data: { image: image,
+// 					     contentType: "application/json", // Ensure you're sending JSON
+					     data: { 
+						    	image: image,
+// 						    	image: pdfBase64,
 					    		cs_idx: cs_idx,
 					    		cs_data_01: cs_data_01,
 					    		cs_data_02: cs_data_02,
@@ -1238,7 +1266,7 @@ $(document).ready(function() {
 					       alert("이미지가 성공적으로 등록되었습니다.");
 					       window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do"
 					     },
-					     error: function() {
+					     error: function(xhr, status, error) {
 					       alert("이미지 등록에 실패했습니다.");
 					       alert(error);
 					     }
