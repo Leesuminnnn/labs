@@ -237,4 +237,9 @@ public class HwtDao {
 	public int pwdinsert(Map<String, Object> map) {
 		return sqlSession4.update(MAPPER+".pwdinsert", map);
 	}
+
+
+	public int pwdajax(Map<String, Object> map) {
+		return sqlSession4.update(MAPPER+".pwdajax", map);
+	}
 }
