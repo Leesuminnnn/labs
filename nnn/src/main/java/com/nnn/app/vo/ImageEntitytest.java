@@ -8,14 +8,14 @@ public class ImageEntitytest {
     private int idx;
     private int cs_idx;
     @Lob
-    private byte[] imageData;
+    private String imageData;
     private Date regdate;
 
-    public byte[] getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(byte[] imageData) {
+    public void setImageData(String imageData) {
         this.imageData = imageData;
     }
 
