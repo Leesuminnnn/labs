@@ -283,7 +283,7 @@
 	<li class="light_info" style="padding-top: 5px;">
 		<i class="light_info_i">1.&nbsp;</i>
 		<font>
-		주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold" style="display: contents;">일차적 연락대상</b>이며 타보호자는 <b style="display: contents;">상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.
+		주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 <br>관련된 사항에 대해 <b class="bold" style="display: contents;">일차적 연락대상</b>이며 타보호자는 <b style="display: contents;">상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.
 		</font>
 	</li>	
 	<li class="light_info">
@@ -717,7 +717,7 @@
 							</div>
 							<div class="checkbox-wrapper-13">
 								<input type="checkbox" id="nutrients" name="nutrients" value="영양제">
-								<label for="Nutrients">영양제</label>
+								<label for="nutrients">영양제</label>
 							</div>
 							<div class="checkbox-wrapper-13">
 								<input type="checkbox" id="transport" name="transport" value="이송료">
@@ -892,6 +892,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
 <script>
 var name = "${info.name}";
 console.log("세션아이디 ${sessionScope.loginmember}");
@@ -1630,4 +1631,10 @@ $("#btn_save").click(function () {
 	}
 });
 </script>
+
+
+
+
+
+
 </html>

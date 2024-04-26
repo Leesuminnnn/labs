@@ -602,7 +602,7 @@
 						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_department" name="hos_department" value="" >
 						<div style="display: flex; justify-content: center; width: 100%;">
 							<select id="hos_department" name="hos_department">
-								<option style="font-size: 16px;" value="선택하세요">선택하세요</option>
+								<option style="font-size: 16px;" value="선택하세요" disabled selected>선택하세요</option>
 								<option value="바나나">바나나</option>
 								<option value="사과">사과</option>
 								<option value="파인애플">파인애플</option>
@@ -614,7 +614,7 @@
 						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_ward" name="hos_ward" value="" >
 						<div style="display: flex; justify-content: center; width: 100%;">
 							<select id="hos_ward" name="hos_ward">
-								<option style="font-size: 16px;" value="선택하세요">선택하세요</option>
+								<option style="font-size: 16px;" value="선택하세요" disabled selected>선택하세요</option>
 								<option value="일반병실">일반병실</option>
 								<option value="2인실">일반병실</option>
 								<option value="4인실">일반병실</option>
@@ -802,7 +802,7 @@
 							</div>
 							<div class="checkbox-wrapper-13">
 								<input type="checkbox" id="nutrients" name="nutrients" value="영양제">
-								<label for="Nutrients">영양제</label>
+								<label for="nutrients">영양제</label>
 							</div>
 							<div class="checkbox-wrapper-13">
 								<input type="checkbox" id="transport" name="transport" value="이송료">
@@ -991,6 +991,8 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.min.js"></script>
+
+
 <script>
 var name = "${info.name}";
 console.log("세션아이디 ${sessionScope.loginmember}");
