@@ -1457,7 +1457,7 @@ $(document).ready(function() {
 				{
 				
 				
-				
+					
 				
 // 					var el = document.createElement("a")
 // 					el.href = canvas.toDataURL("image/png")
