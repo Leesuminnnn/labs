@@ -118,7 +118,7 @@
     box-sizing: inherit;
   }
   span {
-      line-height: 23px;
+      line-height: 24px;
       margin-bottom: 5px;
   }
    .nav__section {
@@ -157,18 +157,9 @@
 .cont_day{
 	padding: 50px;
 }
-.hos_info_ho{
-	font-size:1.9rem;
-	padding:40px 0 20px 0;
-}
-.info_important td{
-	text-align:left;
-	height:50px;
-	padding: 15px 20px;
-	font-weight:300;
-}
+
 .area{margin-bottom:30px;}
-.hos_info_ho{text-align:center;}
+
 
 </style>
 </head>
@@ -283,13 +274,13 @@
 		<li style="line-height:23px; font-size:16px; margin-bottom: 6px; padding: 0 0 0 16px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
-		<li style="margin-bottom: 13px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
+		<li style="margin-bottom: 20px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
 </div>
 
 <span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 <ol class="light_info_list">
-	<li class="light_info">
+	<li class="light_info" style="padding-top: 5px;">
 		<i class="light_info_i">1.&nbsp;</i>
 		<font>
 		주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold" style="display: contents;">일차적 연락대상</b>이며 타보호자는 <b style="display: contents;">상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.
@@ -493,12 +484,12 @@
 				</tr>
 			</table>
 		</div>
-		<div style="text-align: center; margin-bottom: 25px;">
-			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+		<div class="hos_info" style="">
+			<table border=1 style="">
 				<tr>
 					<td class="normal" width="195px" height="50px" style="background:#fafafa;">구분</td>
 					<td class="light" width="313px" colspan="3">
-						<div style="display:flex; flex-wrap:wrap; ">
+						<div class="checkbox_click"style=" ">
 							<div class="checkbox-wrapper-13">
 								<input style= "" type="checkbox" id="insurance" name="insurance" value="보험" />
 								<label for="insurance">보험</label>
@@ -553,8 +544,8 @@
 			</table>
 		</div>
 		
-		<div style="text-align: center; margin-bottom: 25px;">
-			<table class="info_important" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+		<div class="hos_info2" style="">
+			<table class="info_important" border=1 style="">
 				<tr style="background-color: #fafafa;">
 					<th style="height:45px;">입원 시 필요사항 설명 유무</th>
 					<th style="width:125px;">확인</th>
@@ -562,7 +553,7 @@
 				<tr>
 					<td>1. 진료비관련한사항&nbsp; ➡ &nbsp;️<b>매월(4일~10일) 전월분정산</b></td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check1" name="check1" class="normal" value="">
 							<label for="check1"></label>
 						</div>
@@ -571,7 +562,7 @@
 				<tr>
 					<td>2. 앰뷸런스이용안내: 외진, 응급전원(주,야간) 사설이용</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check2" name="check2" class="normal" value="">
 							<label for="check2"></label>
 						</div>
@@ -580,7 +571,7 @@
 				<tr>
 					<td>3. 환자, 직원의권리와의무에대한안내</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check3" name="check3" class="normal" value="">
 							<label for="check3"></label>
 						</div>
@@ -589,7 +580,7 @@
 				<tr>
 					<td>4. 제증명은3일전신청하며환자이외에는발급제한안내</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check4" name="check4" class="normal" value="">
 							<label for="check4"></label>
 						</div>
@@ -598,7 +589,7 @@
 				<tr>
 					<td>5. 외출/ 외박/ 면회/음주안내/ 퇴원(3일전고지)</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check5" name="check5" class="normal" value="">
 							<label for="check5"></label>
 						</div>
@@ -607,7 +598,7 @@
 				<tr>
 					<td>6. 타병원진료(지참약, 검사)안내</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check6" name="check6" class="normal" value="">
 							<label for="check6"></label>
 						</div>
@@ -616,7 +607,7 @@
 				<tr>
 					<td>7. 낙상으로인한주의사항안내</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check7" name="check7" class="normal" value="">
 							<label for="check7"></label>
 						</div>
@@ -625,7 +616,7 @@
 				<tr>
 					<td>8. 임종시안치에대한안내</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check8" name="check8" class="normal" value="">
 							<label for="check8"></label>
 						</div>
@@ -634,7 +625,7 @@
 				<tr>
 					<td>9. 응급전원및임종시정산에대한안내</td>
 					<td>
-						<div class="checkbox_check">
+						<div class="checkbox_check checkbox-wrapper-13">
 							<input type="checkbox" id="check9" name="check9" class="normal" value="">
 							<label for="check9"></label>
 						</div>
@@ -642,8 +633,8 @@
 				</tr>
 			</table>
 		</div>
-		<div style="text-align: center; margin-bottom: 25px;">
-			<table class="info_important" border=1 style="table-layout:fixed;width: 100%;border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+		<div class="hos_info3" style="">
+			<table class="info_important" border=1 style="">
 				<tr>
 					<td style="height:80px; line-height:25px;">
 						<i class="light_info_i">※</i>
@@ -683,19 +674,24 @@
 <div id="capture_area3" class="capture_area3">
 	<div class="hos_info2 light" style="width:966px;">
 		<h2 class="hos_info_ho">본인부담액상한제 안내</h2>
-		<div class="light_info" style="font-size:16px; color:#222222; padding-top: 10px; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
+		<div class="light_info" style="font-size:16px; word-spacing: 1px; color:#222222; padding-top: 10px; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
 			<span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 본인부담금 상한제 (적용기간 : 당해연도 1월1일~ 12월31일)</span>
-			<p class="">「국민건강보험법시행령 제19조 2항 및 4항 비용의 본인부담」 의거. 장기 및 중증질환자의 고액진료비 지출로 인한 가계의 경제적 부담을 경감하고 건강보험 본연의 보장성을 확보하고 가계안정을 도모하기 위한 제도.</p>
-			<p class=""><b>2020년1월1일부터본인부담상한제사전급여는요양병원이아닌, 환자에게직접지급하는 방식으로변경됩니다.</b>
-			건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 <b>최고상한액( 년기준 만원) 초과금액을 환자에게 직접 지급합니다.</b>
-			다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터3~5개월후직접지급하게됩니다.
+			<p class="">
+				「국민건강보험법시행령 제19조 2항 및 4항 비용의 본인부담」 의거. 장기 및 중증질환자의 고액진료비 지출로 인한 가계의 경제적 부담을 경감하고 건강보험 본연의 보장성을 확보하고 가계안정을 도모하기 위한 제도.
+			</p>
+			<p class="">
+				<b>2020년 1월 1일부터 본인부담상한제 사전급여는 요양병원이아닌, 환자에게 직접지급하는 방식으로 변경됩니다.</b>
+				건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 
+				<b>최고상한액 ( <input class="yesrs" type="text" id="years" name="years" value="" style="width:50px;"> 년 기준
+				<input class="yesrs" type="text" id="payment" name="payment" value="" style="width:50px;"> 만원) 초과금액을 환자에게 직접 지급합니다.</b>
+				다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터 3~5개월 후 직접 지급하게 됩니다.
 			</p>
 			<p class="">개인별 본인부담한액 기준보험표 결정(건강보험료정산) 전후로 나누어 <b>개인별 본인부담상한액 초과금액을 건강보험공단에서 환자에게 다음해 7~8월경 직접지급</b></p>
 			<p class="" style="padding-bottom: 5px;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
 		</div>
-		<div style="text-align: center; margin-bottom: 25px;">
-			<table class="info_important2" border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
-				<tr style="background-color: #fafafa; height:50px;">
+		<div class="hos_pay2" style="text-align: center; margin-bottom: 25px;">
+			<table class="info_important2" border=1 style="">
+				<tr class="normal"style="background-color: #fafafa; height:50px;">
 					<td style="width:170px;">구분</td>
 					<td>실비 납부</td>
 					<td>기타 추가 납부</td>
@@ -704,16 +700,16 @@
 					<td>비용</td>
 					<td>본인부담 발생 금액</td>
 					<td>
-						<div style="display: flex; justify-content: space-evenly;">
-							<div>
+						<div class="checkbox_pay">
+							<div class="checkbox-wrapper-13">
 							  <input type="checkbox" id="medicine" name="medicine" value="비급여 처치재료, 약제">
 							  <label for="medicine">비급여 처치재료, 약제</label>
 							</div>
-							<div>
+							<div class="checkbox-wrapper-13">
 								<input type="checkbox" id="Nutrients" name="Nutrients" value="영양제">
 								<label for="Nutrients">영양제</label>
 							</div>
-							<div>
+							<div class="checkbox-wrapper-13">
 								<input type="checkbox" id="transport" name="transport" value="이송료">
 								<label for="transport">이송료</label>
 							</div>
@@ -726,15 +722,15 @@
 		<div class="light" style="text-align:left; padding: 0 24px 5px 0;">
 			<ol class="light_info_list">
 				<li class="light_info light_info2">
-					<i class="light_info_i">□</i>
+					<i class="light_info_i">▣</i>
 					<em style="font-style:normal; padding-left:5px;">요양병원의 정액수가는 환자분류군에 따라 본인부담금이 정해집니다.</em>
 				</li>
 				<li class="light_info light_info2">
-					<i class="light_info_i">□</i>
+					<i class="light_info_i">▣</i>
 					<em style="font-style:normal; padding-left:5px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 행위별수가의 <br>적용으로 본인부담금이 인상될 수 있습니다.</em>
 				</li>
 				<li class="light_info light_info2">
-					<i class="light_info_i">□</i>
+					<i class="light_info_i">▣</i>
 					<em style="font-style:normal; padding-left:5px;">선택입원군으로 평가된 환자의 경우 <b class="b40">본인부담금이 40%</b> 부과됩니다.</em>
 				</li>
 			</ol>
