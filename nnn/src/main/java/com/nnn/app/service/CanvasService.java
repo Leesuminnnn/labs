@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.CanvasDao;
 import com.nnn.app.vo.Criteria;
+import com.nnn.app.vo.PDFRequest;
 import com.nnn.app.vo.WrittenVo;
 
 @Service
@@ -55,11 +56,11 @@ public class CanvasService {
 		return canvasDao.Cnt(cri);
 	}
 	
-	public void update(WrittenVo vo) {
+	public void update(PDFRequest vo) {
 		canvasDao.update(vo);
 	}
 
-	public void modify(WrittenVo vo) {
+	public void modify(PDFRequest vo) {
 		canvasDao.modify(vo);
 	}
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.Criteria;
+import com.nnn.app.vo.PDFRequest;
 import com.nnn.app.vo.WrittenVo;
 
 @Repository
@@ -64,12 +65,12 @@ public class CanvasDao {
 		return sqlSession4.selectOne(MAPPER+".Cnt",cri);
 	}
 	
-	public void update(WrittenVo vo) {
+	public void update(PDFRequest vo) {
 //		sqlSession1.update(MAPPER+".update",vo);
 		sqlSession4.update(MAPPER+".update",vo);
 	}
 
-	public void modify(WrittenVo vo) {
+	public void modify(PDFRequest vo) {
 //		sqlSession1.update(MAPPER+".modify",vo);	
 		sqlSession4.update(MAPPER+".modify",vo);		
 	}

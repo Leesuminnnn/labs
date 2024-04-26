@@ -5,8 +5,8 @@
 <mapper namespace = "image">
 
 	
-	<insert id="save" parameterType="image">
-	insert into image(imageData, cs_idx) value(#{imageData}, #{cs_idx})
+	<insert id="save" parameterType="pdf">
+	insert into image(imageData, cs_idx) value(#{pdfData}, #{cs_idx})
 	</insert>
 	
 	<select id="imgselect" parameterType="image" resultType="image">

@@ -880,7 +880,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
 <script>
 var name = "${info.name}";
 console.log("세션아이디 ${sessionScope.loginmember}");
@@ -1357,72 +1360,88 @@ $(document).ready(function() {
 	var cs_data_09 = $('input[name=cs_data_09]').val();
 	var cs_data_10 = $('input[name=cs_data_10]').val();
 	
-	if($('input[name=cs_data_11]').checked){
-		var cs_data_11 = $('input[name=cs_data_11]').val();
-	}else{
-		var cs_data_11 = '';
-	}
+// 	if($('input[name=cs_data_11]').checked){
+// 		var cs_data_11 = $('input[name=cs_data_11]').val();
+// 	}else{
+// 		var cs_data_11 = '';
+// 	}
+	var cs_data_11 = $('input[name=cs_data_11]').is(':checked') ? $('input[name=cs_data_11]').val() : '';
+	
 	
 	var cs_data_12 = $('input[name=cs_data_12]').val();
 	var cs_data_13 = $('input[name=cs_data_13]').val();
 	var cs_data_14 = $('input[name=cs_data_14]').val();
 	var cs_data_15 = $('input[name=cs_data_15]').val();
-	if($('input[name=cs_data_16]').checked){
-		var cs_data_16 = $('input[name=cs_data_16]').val();
-	}else{
-		var cs_data_16 = '';
-	}
+// 	if($('input[name=cs_data_16]').checked){
+// 		var cs_data_16 = $('input[name=cs_data_16]').val();
+// 	}else{
+// 		var cs_data_16 = '';
+// 	}
 	
-	if($('input[name=cs_data_17]').checked){
-		var cs_data_17 = $('input[name=cs_data_17]').val();
-	}else{
-		var cs_data_17 = '';
-	}
-	if($('input[name=cs_data_18]').checked){
-		var cs_data_18 = $('input[name=cs_data_18]').val();
-	}else{
-		var cs_data_18 = '';
-	}
-	if($('input[name=cs_data_19]').checked){
-		var cs_data_19 = $('input[name=cs_data_19]').val();
-	}else{
-		var cs_data_19 = '';
-	}
-	if($('input[name=cs_data_20]').checked){
-		var cs_data_20 = $('input[name=cs_data_20]').val();
-	}else{
-		var cs_data_20 = '';
-	}
-	if($('input[name=cs_data_21]').checked){
-		var cs_data_21 = $('input[name=cs_data_21]').val();
-	}else{
-		var cs_data_21 = '';
-	}
-	if($('input[name=cs_data_22]').checked){
-		var cs_data_22 = $('input[name=cs_data_22]').val();
-	}else{
-		var cs_data_22 = '';
-	}
-	if($('input[name=cs_data_23]').checked){
-		var cs_data_23 = $('input[name=cs_data_23]').val();
-	}else{
-		var cs_data_23 = '';
-	}
-	if($('input[name=cs_data_24]').checked){
-		var cs_data_24 = $('input[name=cs_data_24]').val();
-	}else{
-		var cs_data_24 = '';
-	}
-	if($('input[name=cs_data_25]').checked){
-		var cs_data_25 = $('input[name=cs_data_25]').val();
-	}else{
-		var cs_data_25 = '';
-	}
-	if($('input[name=cs_data_26]').checked){
-		var cs_data_26 = $('input[name=cs_data_26]').val();
-	}else{
-		var cs_data_26 ='';
-	}
+// 	if($('input[name=cs_data_17]').checked){
+// 		var cs_data_17 = $('input[name=cs_data_17]').val();
+// 	}else{
+// 		var cs_data_17 = '';
+// 	}
+// 	if($('input[name=cs_data_18]').checked){
+// 		var cs_data_18 = $('input[name=cs_data_18]').val();
+// 	}else{
+// 		var cs_data_18 = '';
+// 	}
+// 	if($('input[name=cs_data_19]').checked){
+// 		var cs_data_19 = $('input[name=cs_data_19]').val();
+// 	}else{
+// 		var cs_data_19 = '';
+// 	}
+// 	if($('input[name=cs_data_20]').checked){
+// 		var cs_data_20 = $('input[name=cs_data_20]').val();
+// 	}else{
+// 		var cs_data_20 = '';
+// 	}
+// 	if($('input[name=cs_data_21]').checked){
+// 		var cs_data_21 = $('input[name=cs_data_21]').val();
+// 	}else{
+// 		var cs_data_21 = '';
+// 	}
+// 	if($('input[name=cs_data_22]').checked){
+// 		var cs_data_22 = $('input[name=cs_data_22]').val();
+// 	}else{
+// 		var cs_data_22 = '';
+// 	}
+// 	if($('input[name=cs_data_23]').checked){
+// 		var cs_data_23 = $('input[name=cs_data_23]').val();
+// 	}else{
+// 		var cs_data_23 = '';
+// 	}
+// 	if($('input[name=cs_data_24]').checked){
+// 		var cs_data_24 = $('input[name=cs_data_24]').val();
+// 	}else{
+// 		var cs_data_24 = '';
+// 	}
+// 	if($('input[name=cs_data_25]').checked){
+// 		var cs_data_25 = $('input[name=cs_data_25]').val();
+// 	}else{
+// 		var cs_data_25 = '';
+// 	}
+// 	if($('input[name=cs_data_26]').checked){
+// 		var cs_data_26 = $('input[name=cs_data_26]').val();
+// 	}else{
+// 		var cs_data_26 ='';
+// 	}
+
+	var cs_data_16 = $('input[name=cs_data_16]').is(':checked') ? $('input[name=cs_data_16]').val() : '';
+	var cs_data_17 = $('input[name=cs_data_17]').is(':checked') ? $('input[name=cs_data_17]').val() : '';
+	var cs_data_18 = $('input[name=cs_data_18]').is(':checked') ? $('input[name=cs_data_18]').val() : '';
+	var cs_data_19 = $('input[name=cs_data_19]').is(':checked') ? $('input[name=cs_data_19]').val() : '';
+	var cs_data_20 = $('input[name=cs_data_20]').is(':checked') ? $('input[name=cs_data_20]').val() : '';
+	var cs_data_21 = $('input[name=cs_data_21]').is(':checked') ? $('input[name=cs_data_21]').val() : '';
+	var cs_data_22 = $('input[name=cs_data_22]').is(':checked') ? $('input[name=cs_data_22]').val() : '';
+	var cs_data_23 = $('input[name=cs_data_23]').is(':checked') ? $('input[name=cs_data_23]').val() : '';
+	var cs_data_24 = $('input[name=cs_data_24]').is(':checked') ? $('input[name=cs_data_24]').val() : '';
+	var cs_data_25 = $('input[name=cs_data_25]').is(':checked') ? $('input[name=cs_data_25]').val() : '';
+	var cs_data_26 = $('input[name=cs_data_26]').is(':checked') ? $('input[name=cs_data_26]').val() : '';
+	
+	
 	
 	var cs_data_27 = $('input[name=cs_data_27]').val();
 	var cs_data_28 = $('input[name=cs_data_28]').val();
@@ -1443,114 +1462,110 @@ $(document).ready(function() {
 			html2canvas(document.getElementById("capture_area")).then(function(canvas)
 			
 				{
-				
-				
-				
-				
-// 					var el = document.createElement("a")
-// 					el.href = canvas.toDataURL("image/png")
-					
 					// 이미지 url
-					var image = canvas.toDataURL("image/png");
-					console.log(image);
-					image = image.replace("data:image/png;base64,", "");
-					console.log(image);
-					
+// 					var image = canvas.toDataURL("image/png");
+// 					console.log(image);
+// 					image = image.replace("data:image/png;base64,", "");
+// 					console.log(image);
 					var cs_idx = ${cs_idx}
-// 					console.log(cs_idx);
+					    var cs_data_01 = $('input[name=cs_data_01]').val();
+						var cs_data_02 = $('input[name=cs_data_02]').val();
+						var cs_data_03 = $('input[name=cs_data_03]').val();
+						var cs_data_04 = $('input[name=cs_data_04]').val();
+						var cs_data_05 = $('input[name=cs_data_05]').val();
+						var cs_data_06 = $('input[name=cs_data_06]').val();
+						var cs_data_07 = $('input[name=cs_data_07]').val();
+						var cs_data_08 = $('input[name=cs_data_08]').val();
+						var cs_data_09 = $('input[name=cs_data_09]').val();
+						var cs_data_10 = $('input[name=cs_data_10]').val();
 					
-					var cs_data_01 = $('input[name=cs_data_01]').val();
-// 					console.log(cs_data_01);
-					var cs_data_02 = $('input[name=cs_data_02]').val();
-// 					console.log(cs_data_02);
-					var cs_data_03 = $('input[name=cs_data_03]').val();
-// 					console.log(cs_data_03);
-					var cs_data_04 = $('input[name=cs_data_04]').val();
-// 					console.log(cs_data_04);
-					var cs_data_05 = $('input[name=cs_data_05]').val();
-// 					console.log(cs_data_05);
-					var cs_data_06 = $('input[name=cs_data_06]').val();
-// 					console.log(cs_data_06);
-					var cs_data_07 = $('input[name=cs_data_07]').val();
-// 					console.log(cs_data_07);
-					var cs_data_08 = $('input[name=cs_data_08]').val();
-// 					console.log(cs_data_08);
-					var cs_data_09 = $('input[name=cs_data_09]').val();
-// 					console.log(cs_data_09);
-					var cs_data_10 = $('input[name=cs_data_10]').val();
-// 					console.log(cs_data_10);
-
-					var cs_data_12 = $('input[name=cs_data_12]').val();
-// 					console.log(cs_data_12);
-					var cs_data_13 = $('input[name=cs_data_13]').val();
-// 					console.log(cs_data_13);
-					var cs_data_14 = $('input[name=cs_data_14]').val();
-// 					console.log(cs_data_14);
-					var cs_data_15 = $('input[name=cs_data_15]').val();
-// 					console.log(cs_data_15);
-
+						var cs_data_12 = $('input[name=cs_data_12]').val();
+						var cs_data_13 = $('input[name=cs_data_13]').val();
+						var cs_data_14 = $('input[name=cs_data_14]').val();
+						var cs_data_15 = $('input[name=cs_data_15]').val();
 					
-					var cs_data_27 = $('input[name=cs_data_27]').val();
-// 					console.log(cs_data_27);
-					var cs_data_28 = $('input[name=cs_data_28]').val();
-// 					console.log(cs_data_28);
-					var cs_data_29 = $('input[name=cs_data_29]').val();
-// 					console.log(cs_data_29);
+						
+						var cs_data_27 = $('input[name=cs_data_27]').val();
+						var cs_data_28 = $('input[name=cs_data_28]').val();
+						var cs_data_29 = $('input[name=cs_data_29]').val();
+					    
 					
-					$.ajax({
-					    url: "${pageContext.request.contextPath}/saveImage",
-// 					    url: "${pageContext.request.contextPath}/saveImagetest",
-					     method: "post",
-					     data: { image: image,
-					    		cs_idx: cs_idx,
-					    		cs_data_01: cs_data_01,
-					    		cs_data_02: cs_data_02,
-					    		cs_data_03: cs_data_03,
-					    		cs_data_04: cs_data_04,
-					    		cs_data_05: cs_data_05,
-					    		cs_data_06: cs_data_06,
-					    		cs_data_07: cs_data_07,
-					    		cs_data_08: cs_data_08,
-					    		cs_data_09: cs_data_09,
-					    		cs_data_10: cs_data_10,
-					    		cs_data_11: cs_data_11,
-					    		cs_data_12: cs_data_12,
-					    		cs_data_13: cs_data_13,
-					    		cs_data_14: cs_data_14,
-					    		cs_data_15: cs_data_15,
-					    		cs_data_16: cs_data_16,
-					    		cs_data_17: cs_data_17,
-					    		cs_data_18: cs_data_18,
-					    		cs_data_19: cs_data_19,
-					    		cs_data_20: cs_data_20,
-					    		cs_data_21: cs_data_21,
-					    		cs_data_22: cs_data_22,
-					    		cs_data_23: cs_data_23,
-					    		cs_data_24: cs_data_24,
-					    		cs_data_25: cs_data_25,
-					    		cs_data_26: cs_data_26,
-					    		cs_data_27: cs_data_27,
-					    		cs_data_28: cs_data_28,
-					    		cs_data_29: cs_data_29
-					     },
-					     success: function() {
-					       alert("이미지가 성공적으로 등록되었습니다.");
-					       window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do"
-					     },
-					     error: function() {
-					       alert("이미지 등록에 실패했습니다.");
-					       alert(error);
-					     }
-					   });
+					//=============================================
+					// pdf test
+			        var imgData = canvas.toDataURL('image/png');
+			        const pdf = new window.jspdf.jsPDF();  // Ensure jsPDF is correctly referenced
+					pdf.addImage(imgData, 'PNG', 0, 0);
 					
-				}).catch(error => {
-				    console.error("Failed to capture the screenshot:", error);
-				   alert(error);
-				});
+					const pdfBase64 = pdf.output('datauristring').split(';base64,')[1]; // Extract base64 part from the data URI
+					sendPDFToServer(pdfBase64, cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05,
+								    cs_data_06, cs_data_07, cs_data_08, cs_data_09, cs_data_10, cs_data_11, cs_data_12,
+								    cs_data_13, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19, cs_data_20,
+								    cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27,
+								    cs_data_28, cs_data_29
+					);
 		});
 	});
-});
 
+
+		function sendPDFToServer(pdfBase64, cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05,
+			    cs_data_06, cs_data_07, cs_data_08, cs_data_09, cs_data_10, cs_data_11, cs_data_12,
+			    cs_data_13, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19, cs_data_20,
+			    cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27,
+			    cs_data_28, cs_data_29) {
+		    
+		 
+		    
+		    $.ajax({
+	            url: '${pageContext.request.contextPath}/save',  // Adjust this to your actual server endpoint
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify({ 
+	            	pdfData: pdfBase64,
+	            	cs_data_01: cs_data_01,
+            		cs_data_02: cs_data_02, 
+	            	cs_data_03: cs_data_03,
+            		cs_data_04: cs_data_04, 
+	            	cs_data_05: cs_data_05,
+            		cs_data_06: cs_data_06, 
+	            	cs_data_07: cs_data_07,
+            		cs_data_08: cs_data_08, 
+	            	cs_data_09: cs_data_09,
+            		cs_data_10: cs_data_10, 
+	            	cs_data_11: cs_data_11,
+            		cs_data_12: cs_data_12, 
+	            	cs_data_13: cs_data_13,
+            		cs_data_14: cs_data_14, 
+	            	cs_data_15: cs_data_15,
+            		cs_data_16: cs_data_16, 
+	            	cs_data_17: cs_data_17,
+            		cs_data_18: cs_data_18, 
+	            	cs_data_19: cs_data_19,
+            		cs_data_20: cs_data_20, 
+	            	cs_data_21: cs_data_21,
+            		cs_data_22: cs_data_22, 
+	            	cs_data_23: cs_data_23,
+            		cs_data_24: cs_data_24, 
+	            	cs_data_25: cs_data_25,
+            		cs_data_26: cs_data_26, 
+	            	cs_data_27: cs_data_27,
+            		cs_data_28: cs_data_28, 
+	            	cs_data_29: cs_data_29,
+	            	cs_idx: cs_idx
+	            }),
+	            success: function(response) {
+	                console.log('Server received PDF:', response);
+	                alert('PDF uploaded successfully!');
+	            },
+	            error: function(xhr, status, error) {
+	            	console.error('Error status:', status);
+	                console.error('Error thrown:', error);
+	                console.error('Full server response:', xhr.responseText);
+	                alert('Error uploading data: ' + xhr.responseText);
+	            }
+	        });
+		}
+	});
+});
 </script>
 </section>
 

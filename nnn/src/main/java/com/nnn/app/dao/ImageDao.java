@@ -6,10 +6,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.nnn.app.vo.ImageEntity;
+import com.nnn.app.vo.ImageEntitytest;
+import com.nnn.app.vo.PDFRequest;
 
 @Repository
 public class ImageDao {
@@ -29,7 +30,11 @@ public class ImageDao {
 //		this.sqlSession = sqlSession1;
 //	}
 	
-	public void save(ImageEntity imageEntity) {
+	public void save(PDFRequest pdfRequest) {
+//		sqlSession1.insert(MAPPER+".save", imageEntity);
+		sqlSession4.insert(MAPPER+".save", pdfRequest);
+	}
+	public void savetest(ImageEntitytest imageEntity) {
 //		sqlSession1.insert(MAPPER+".save", imageEntity);
 		sqlSession4.insert(MAPPER+".save", imageEntity);
 	}

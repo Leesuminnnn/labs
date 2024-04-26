@@ -293,41 +293,44 @@ public class HwtController {
 		
 		return response;
 	}
-	
-	@RequestMapping(value = "WrittenView/{cs_idx}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
-	@ResponseBody
-	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response, ImageEntity image) throws IOException {
-		System.out.println("WrittenView 페이지");
-
-		System.out.println("cs_idx : "+cs_idx);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("cs_idx", cs_idx);
-		ImageEntity img = imageService.getImageData(map);
-		// ImageEntity 객체에서 이미지 데이터를 바이트 배열 형태로 가져옵니다.
-		byte[] imageData = img.getImageData();
-		//가져온 이미지 데이터를 Base64 디코딩하여 바이트 배열 형태로 변환합니다.
-		byte[] decodedImageData = Base64.getDecoder().decode(imageData);
-		
-		// 이미지 출력
-		//response 객체의 setContentType() 메서드를 호출하여 이미지의 MIME 타입을 MediaType.IMAGE_PNG_VALUE로 설정합니다.
-	    response.setContentType(MediaType.IMAGE_PNG_VALUE);
-	    //response 객체의 getOutputStream() 메서드를 호출하여 출력 스트림을 가져옵니다.
-	    OutputStream outputStream = response.getOutputStream();
-	    //outputStream을 이용하여 이미지를 출력합니다.
-	    outputStream.write(decodedImageData);
-	    //outputStream 객체를 닫습니다.
-	    outputStream.flush();
-	    outputStream.close();
-	    //즉, 해당 메서드는 idx 값을 이용해 이미지 데이터를 조회하고, Base64 디코딩하여 이미지를 출력하는 역할을 합니다. 이 메서드를 호출하면 해당 idx 값을 가진 이미지가 화면에 출력됩니다.
+	@RequestMapping(value = "WrittenView/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+	public ModelAndView WrittenViewpage(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response, ModelAndView mav) {
+	    System.out.println("WrittenView 페이지 for PDF");
+	    System.out.println("cs_idx : " + cs_idx);
 	    
-	    System.out.println("--------------------------------------");
-		System.out.println(decodedImageData);
-		System.out.println("--------------------------------------");
-	 // Add an img tag with a back function
-	    String backUrl = "<a href='${pageContext.request.contextPath}/hwt/CounselList.do'><img src='${pageContext.request.contextPath}/resources/icon/arrow2.png' alt='Image' /></a>";
-
-	    // Print the backUrl
-	    System.out.println("backUrl: " + backUrl);
+	    mav.setViewName("hwt/WrittenView");
+	    
+	    return mav;
+	}
+	@RequestMapping(value = "WrittenViewimage/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+	@ResponseBody
+	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response) {
+	    System.out.println("WrittenView 페이지 for PDF");
+	    System.out.println("cs_idx : " + cs_idx);
+	    
+	    try {
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("cs_idx", cs_idx);
+	        ImageEntity img = imageService.getImageData(map);
+	        byte[] pdfData = img.getImageData();
+	        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+	        
+	        // try-with-resources 구문을 사용하여 OutputStream을 자동으로 닫습니다.
+	        try (OutputStream outputStream = response.getOutputStream()) {
+	            outputStream.write(pdfData);
+	            outputStream.flush();
+	        } catch (IOException e) {
+	            // IOException 처리
+	            e.printStackTrace();
+	        }
+	        
+	        System.out.println("--------------------------------------");
+	        System.out.println("PDF Data Length: " + (pdfData != null ? pdfData.length : "No Data"));
+	        System.out.println("--------------------------------------");
+	    } catch (Exception e) {
+	        // 다른 종류의 예외 처리
+	        e.printStackTrace();
+	    }
 	}
 	
 	
@@ -404,11 +407,11 @@ public class HwtController {
 		String key = "This is Key!!!!!";
 		AES128 aes128 = new AES128(key);
 
-		session.getAttribute("loginmember");
-		int idx = (int) session.getAttribute("idx");
-		System.out.println(session.getAttribute("loginmember"));
-		System.out.println(session.getAttribute("idx"));
-		mav.addObject("info", hwtService.info(idx));
+//		session.getAttribute("loginmember");
+//		int idx = (int) session.getAttribute("idx");
+//		System.out.println(session.getAttribute("loginmember"));
+//		System.out.println(session.getAttribute("idx"));
+//		mav.addObject("info", hwtService.info(idx));
 		
 		// view에서 받은 데이터를 담아서 넘겨준다.
 		String text1 = vo.getCs_data_01();

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.nnn.app.dao.ImageDao;
 import com.nnn.app.vo.ImageEntity;
+import com.nnn.app.vo.ImageEntitytest;
+import com.nnn.app.vo.PDFRequest;
 
 @Service
 public class ImageService {
@@ -19,9 +21,14 @@ public class ImageService {
 		this.imageDao = imageDao;
 	}
 	
-	public void saveImage(ImageEntity image) {
+	public void saveImage(PDFRequest pdfRequest) {
 		
-		imageDao.save(image);
+		imageDao.save(pdfRequest);
+		
+	}
+	public void saveImagetest(ImageEntitytest image) {
+		
+		imageDao.savetest(image);
 		
 	}
 	public ImageEntity selectimg(ImageEntity img) {
@@ -35,4 +42,5 @@ public class ImageService {
 	public ImageEntity getImageData(Map<String, Object> map) {
 		return imageDao.getImageData(map);
 	}
+
 }
