@@ -201,5 +201,7 @@ public class HwtService {
 		flag = hwtDao.pwdajax(map);
 		return flag;
 	}
-
+	public ImageEntity getImageData(Map<String, Object> map) {
+		return hwtDao.getImageData(map);
+	}
 }

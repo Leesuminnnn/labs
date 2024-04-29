@@ -31,7 +31,7 @@ public class ImageController {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	
-
+	
 	
 	
 	@Autowired
@@ -180,12 +180,12 @@ public class ImageController {
 	@ResponseBody
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public ResponseEntity<String> getJsPDFFile(@RequestBody PDFRequest pdfRequest) throws Exception {
-		System.out.println("Received PDF data, length: " + pdfRequest.getPdfData().length());
+//		System.out.println("Received PDF data, length: " + pdfRequest.getPdfData().length());
 		System.out.println("CS Index: " + pdfRequest.getCs_idx());
 		System.out.println("CS Data 01: " + pdfRequest.getCs_data_01());
 		String base64Pdf = pdfRequest.getPdfData();
         // Process the PDF data, e.g., save to a file or a database
-        System.out.println("Received PDF data, length: " + base64Pdf.length());
+//        System.out.println("Received PDF data, length: " + base64Pdf.length());
         
         // Optionally convert back to bytes if needed:
         // byte[] pdfBytes = Base64.getDecoder().decode(base64Pdf);
@@ -277,6 +277,8 @@ public class ImageController {
 		canvasService.modify(pdfRequest);
 		canvasService.update(pdfRequest);
 		
+		
+		System.out.println(imageService+"pdfRequest");
         return ResponseEntity.ok("PDF received successfully!");
 	}
 
@@ -287,7 +289,6 @@ public class ImageController {
 //        public String getPdfData() {
 //            return pdfData;
 //        }
-//
 //        public void setPdfData(String pdfData) {
 //            this.pdfData = pdfData;
 //        }

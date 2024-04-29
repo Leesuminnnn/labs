@@ -242,4 +242,9 @@ public class HwtDao {
 	public int pwdajax(Map<String, Object> map) {
 		return sqlSession4.update(MAPPER+".pwdajax", map);
 	}
+
+
+	public ImageEntity getImageData(Map<String, Object> map) {
+		return sqlSession4.selectOne(MAPPER+".getImageData", map);
+	}
 }

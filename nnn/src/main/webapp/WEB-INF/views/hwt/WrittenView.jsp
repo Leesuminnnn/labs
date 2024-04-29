@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +26,8 @@
 </head>
 <body>
 <canvas id="pdfViewer"></canvas>
+<img src="data:image/pdf;base64,${img}">
+
 <script>
 var url = '${pageContext.request.contextPath}/hwt/WrittenViewimage/${cs_idx}'; // 서버에서 PDF를 제공하는 URL
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
@@ -33,7 +37,7 @@ loadingTask.promise.then(function(pdf) {
 
     // 첫 번째 페이지 가져오기
     pdf.getPage(1).then(function(page) {
-        var scale = 1.5;
+        var scale = 2;
         var viewport = page.getViewport({scale: scale});
 
         // canvas 요소와 렌더링 컨텍스트 준비

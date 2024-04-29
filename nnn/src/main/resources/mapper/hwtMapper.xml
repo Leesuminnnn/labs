@@ -157,4 +157,8 @@
 		cs_data_24 = #{cs_data_24},	cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
 		cs_data_29 = #{cs_data_29}, cs_data_30 = 1 where cs_idx = #{cs_idx}
 	</update>
+	<select id="getImageData" parameterType="image" resultType="image">
+	select imageData from image where cs_idx = ${cs_idx}
+	</select>
+	
 </mapper>

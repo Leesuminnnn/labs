@@ -1460,23 +1460,11 @@ $(document).ready(function() {
 	var cs_data_29 = $('input[name=cs_data_29]').val();
 	
 	
-	
-		
-		
-	
-	
-	
-	
-	
+	//다운로드 버튼 클릭시 캡쳐한 내용 body에서 불러오기
 	$(function(){
 		
 		$(".btn_download").click(function(e){
-			html2canvas(document.getElementById("capture_area")).then(function(canvas)
-			
-				{
-				
-				
-					
+			html2canvas(document.getElementById("capture_area")).then(function(canvas){
 				
 // 					var el = document.createElement("a")
 // 					el.href = canvas.toDataURL("image/png")
@@ -1507,7 +1495,7 @@ $(document).ready(function() {
 						var cs_data_27 = $('input[name=cs_data_27]').val();
 						var cs_data_28 = $('input[name=cs_data_28]').val();
 						var cs_data_29 = $('input[name=cs_data_29]').val();
-					    
+					
 					
 					//=============================================
 					// pdf test

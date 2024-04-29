@@ -293,45 +293,63 @@ public class HwtController {
 		
 		return response;
 	}
+	
+	
+	
+	
+	// PDF변환
 	@RequestMapping(value = "WrittenView/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
 	public ModelAndView WrittenViewpage(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response, ModelAndView mav) {
 	    System.out.println("WrittenView 페이지 for PDF");
 	    System.out.println("cs_idx : " + cs_idx);
 	    
+	    Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cs_idx", cs_idx);
+		ImageEntity img = hwtService.getImageData(map);
+		// ImageEntity 객체에서 이미지 데이터를 바이트 배열 형태로 가져옵니다.
+		byte[] imageData = img.getImageData();
+		//가져온 이미지 데이터를 Base64 디코딩하여 바이트 배열 형태로 변환합니다.
+		byte[] decodedImageData = Base64.getDecoder().decode(imageData);
+		mav.addObject("img", decodedImageData);
 	    mav.setViewName("hwt/WrittenView");
 	    
+	    System.out.println("img" + img);
+	    System.out.println("setViewName");
 	    return mav;
 	}
-	@RequestMapping(value = "WrittenViewimage/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
-	@ResponseBody
-	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response) {
-	    System.out.println("WrittenView 페이지 for PDF");
-	    System.out.println("cs_idx : " + cs_idx);
-	    
-	    try {
-	        Map<String, Object> map = new HashMap<>();
-	        map.put("cs_idx", cs_idx);
-	        ImageEntity img = imageService.getImageData(map);
-	        byte[] pdfData = img.getImageData();
-	        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
-	        
-	        // try-with-resources 구문을 사용하여 OutputStream을 자동으로 닫습니다.
-	        try (OutputStream outputStream = response.getOutputStream()) {
-	            outputStream.write(pdfData);
-	            outputStream.flush();
-	        } catch (IOException e) {
-	            // IOException 처리
-	            e.printStackTrace();
-	        }
-	        
-	        System.out.println("--------------------------------------");
-	        System.out.println("PDF Data Length: " + (pdfData != null ? pdfData.length : "No Data"));
-	        System.out.println("--------------------------------------");
-	    } catch (Exception e) {
-	        // 다른 종류의 예외 처리
-	        e.printStackTrace();
-	    }
-	}
+	
+	
+	
+//	@RequestMapping(value = "WrittenViewimage/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+//	@ResponseBody
+//	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response) {
+//	    System.out.println("WrittenView 페이지 for PDF");
+//	    System.out.println("cs_idx : " + cs_idx);
+//	    
+//	    try {
+//	        Map<String, Object> map = new HashMap<>();
+//	        map.put("cs_idx", cs_idx);
+//	        ImageEntity img = imageService.getImageData(map);
+//	        byte[] pdfData = img.getImageData();
+//	        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+//	        
+//	        // try-with-resources 구문을 사용하여 OutputStream을 자동으로 닫습니다.
+//	        try (OutputStream outputStream = response.getOutputStream()) {
+//	            outputStream.write(pdfData);
+//	            outputStream.flush();
+//	        } catch (IOException e) {
+//	            // IOException 처리
+//	            e.printStackTrace();
+//	        }
+//	        
+//	        System.out.println("--------------------------------------");
+//	        System.out.println("PDF Data Length: " + (pdfData != null ? pdfData.length : "No Data"));
+//	        System.out.println("--------------------------------------");
+//	    } catch (Exception e) {
+//	        // 다른 종류의 예외 처리
+//	        e.printStackTrace();
+//	    }
+//	}
 	
 	
 	
