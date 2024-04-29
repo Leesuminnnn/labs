@@ -20,7 +20,11 @@ public class ImageService {
 	public ImageService(ImageDao imageDao) {
 		this.imageDao = imageDao;
 	}
-	
+	public void saveImage1(ImageEntity imageEntity) {
+		
+		imageDao.save1(imageEntity);
+		
+	}
 	public void saveImage(PDFRequest pdfRequest) {
 		
 		imageDao.save(pdfRequest);

@@ -29,7 +29,10 @@ public class ImageDao {
 //	public ImageDao(SqlSession sqlSession1) {
 //		this.sqlSession = sqlSession1;
 //	}
-	
+	public void save1(ImageEntity imageEntity) {
+//		sqlSession1.insert(MAPPER+".save", imageEntity);
+		sqlSession4.insert(MAPPER+".save1", imageEntity);
+	}
 	public void save(PDFRequest pdfRequest) {
 //		sqlSession1.insert(MAPPER+".save", imageEntity);
 		sqlSession4.insert(MAPPER+".save", pdfRequest);

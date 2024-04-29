@@ -74,4 +74,14 @@ public class CanvasDao {
 //		sqlSession1.update(MAPPER+".modify",vo);	
 		sqlSession4.update(MAPPER+".modify",vo);		
 	}
+	public void modify1(WrittenVo vo) {
+//		sqlSession1.update(MAPPER+".modify1",vo);	
+		sqlSession4.update(MAPPER+".modify1",vo);	
+		
+	}
+	public void update1(WrittenVo vo) {
+//		sqlSession1.update(MAPPER+".modify1",vo);	
+		sqlSession4.update(MAPPER+".modify1",vo);	
+		
+	}
 }

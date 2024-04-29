@@ -171,9 +171,9 @@ public class ImageController {
 		
 		imageEntity.setImageData(image);
 		imageEntity.setCs_idx(cs_idx);
-//		imageService.saveImage(imageEntity);
-//		canvasService.modify(vo);
-//		canvasService.update(vo);
+		imageService.saveImage1(imageEntity);
+		canvasService.modify1(vo);
+		canvasService.update1(vo);
 		return "Image saved successfully!";
 	}
 	

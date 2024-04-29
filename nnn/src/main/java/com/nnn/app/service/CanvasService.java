@@ -63,4 +63,14 @@ public class CanvasService {
 	public void modify(PDFRequest vo) {
 		canvasDao.modify(vo);
 	}
+
+	public void modify1(WrittenVo vo) {
+		canvasDao.modify1(vo);
+		
+	}
+
+	public void update1(WrittenVo vo) {
+		canvasDao.update1(vo);
+		
+	}
 }
