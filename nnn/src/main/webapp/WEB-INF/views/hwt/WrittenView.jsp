@@ -18,41 +18,44 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
 <script>
-
+<%-- 
+<img src="${pageContext.request.contextPath}/resources/icon/arrow2.png" style="position: absolute; top: 10px; left: 10px;">
+<img src="data:image/png;base64,${imageData}" alt="image">
+ --%>
 
 </script>
 </head>
 <body>
-<canvas id="pdfViewer"></canvas>
-<script>
-var url = '${pageContext.request.contextPath}/hwt/WrittenViewimage/${cs_idx}'; // 서버에서 PDF를 제공하는 URL
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js';
-var loadingTask = pdfjsLib.getDocument(url);
-loadingTask.promise.then(function(pdf) {
-    console.log('PDF 로드됨');
+<%-- <canvas id="pdfViewer"></canvas> --%>
+<!-- <script> -->
+<%-- // var url = '${pageContext.request.contextPath}/hwt/WrittenViewimage/${cs_idx}'; // 서버에서 PDF를 제공하는 URL --%>
+<!-- // pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js'; -->
+<!-- // var loadingTask = pdfjsLib.getDocument(url); -->
+<!-- // loadingTask.promise.then(function(pdf) { -->
+<!-- //     console.log('PDF 로드됨'); -->
 
-    // 첫 번째 페이지 가져오기
-    pdf.getPage(1).then(function(page) {
-        var scale = 1.5;
-        var viewport = page.getViewport({scale: scale});
+<!-- //     // 첫 번째 페이지 가져오기 -->
+<!-- //     pdf.getPage(1).then(function(page) { -->
+<!-- //         var scale = 1.5; -->
+<!-- //         var viewport = page.getViewport({scale: scale}); -->
 
-        // canvas 요소와 렌더링 컨텍스트 준비
-        var canvas = document.getElementById('pdfViewer');
-        var context = canvas.getContext('2d');
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+<!-- //         // canvas 요소와 렌더링 컨텍스트 준비 -->
+<!-- //         var canvas = document.getElementById('pdfViewer'); -->
+<!-- //         var context = canvas.getContext('2d'); -->
+<!-- //         canvas.height = viewport.height; -->
+<!-- //         canvas.width = viewport.width; -->
 
-        // 페이지 렌더링
-        var renderContext = {
-            canvasContext: context,
-            viewport: viewport
-        };
-        page.render(renderContext);
-    });
-}, function(reason) {
-    console.error(reason);
-});
-</script>
+<!-- //         // 페이지 렌더링 -->
+<!-- //         var renderContext = { -->
+<!-- //             canvasContext: context, -->
+<!-- //             viewport: viewport -->
+<!-- //         }; -->
+<!-- //         page.render(renderContext); -->
+<!-- //     }); -->
+<!-- // }, function(reason) { -->
+<!-- //     console.error(reason); -->
+<!-- // }); -->
+<!-- </script> -->
 
 </body>
 </html>
