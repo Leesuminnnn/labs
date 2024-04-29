@@ -600,26 +600,10 @@
 				<tr>
 					<td rowspan="2"  class="light" style="text-align: left;" height="80px">
 						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_department" name="hos_department" value="" >
-						<div style="display: flex; justify-content: center; width: 100%;">
-							<select id="hos_department" name="hos_department">
-								<option style="font-size: 16px;" value="선택하세요" disabled selected>선택하세요</option>
-								<option value="바나나">바나나</option>
-								<option value="사과">사과</option>
-								<option value="파인애플">파인애플</option>
-							</select>
-						</div>
 					</td>
 				
 					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
 						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_ward" name="hos_ward" value="" >
-						<div style="display: flex; justify-content: center; width: 100%;">
-							<select id="hos_ward" name="hos_ward">
-								<option style="font-size: 16px;" value="선택하세요" disabled selected>선택하세요</option>
-								<option value="일반병실">일반병실</option>
-								<option value="2인실">일반병실</option>
-								<option value="4인실">일반병실</option>
-							</select>
-						</div>
 					</td>
 					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
 						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_room" name="hos_peo" value="" >

@@ -29,6 +29,7 @@ import com.nnn.app.service.MemberService;
 import com.nnn.app.service.PointplusService;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.ImageEntity;
+import com.nnn.app.vo.PDFRequest;
 import com.nnn.app.vo.Paging;
 import com.nnn.app.vo.WrittenVo;
 import com.sun.xml.internal.ws.api.pipe.NextAction;
@@ -764,13 +765,11 @@ public class CanvasController {
 		System.out.println(aes128.decrypt(cipherText7));
 		System.out.println("##################################################");
 		
+		
 		canvasService.modify(vo);
-		
-		
 		return "redirect:/c/CounselList.do";
 	}
-	
-	
+
 	
 	@RequestMapping(value="CounselList2.do")
 	public ModelAndView List2(ModelAndView mav, Criteria cri, WrittenVo vo) throws Exception {

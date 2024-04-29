@@ -1673,23 +1673,20 @@ $(document).ready(function() {
 	var cs_data_29 = $('input[name=cs_data_29]').val();
 	
 	
-	
-		
-		
-	
-	
-	
-	
-	
+	//다운로드 버튼 클릭시 캡쳐한 내용 body에서 불러오기
 	$(function(){
 		
 		$(".btn_download").click(function(e){
+<<<<<<< HEAD
+			html2canvas(document.getElementById("capture_area")).then(function(canvas){
+=======
 			html2canvas(document.getElementById("capture_area")).then(function(canvas)
 			
 				{
 				
 				
 				
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 				
 // 					var el = document.createElement("a")
 // 					el.href = canvas.toDataURL("image/png")
@@ -1732,12 +1729,20 @@ $(document).ready(function() {
 					var cs_data_15 = $('input[name=cs_data_15]').val();
 // 					console.log(cs_data_15);
 					
+<<<<<<< HEAD
+						
+						var cs_data_27 = $('input[name=cs_data_27]').val();
+						var cs_data_28 = $('input[name=cs_data_28]').val();
+						var cs_data_29 = $('input[name=cs_data_29]').val();
+					
+=======
 					var cs_data_27 = $('input[name=cs_data_27]').val();
 // 					console.log(cs_data_27);
 					var cs_data_28 = $('input[name=cs_data_28]').val();
 // 					console.log(cs_data_28);
 					var cs_data_29 = $('input[name=cs_data_29]').val();
 // 					console.log(cs_data_29);
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 					
 					$.ajax({
 					    url: "${pageContext.request.contextPath}/saveImage",
