@@ -64,4 +64,16 @@ public class CanvasService {
 		canvasDao.modify(vo);
 	}
 
+<<<<<<< HEAD
+=======
+	public void modify1(WrittenVo vo) {
+		canvasDao.modify1(vo);
+		
+	}
+
+	public void update1(WrittenVo vo) {
+		canvasDao.update1(vo);
+		
+	}
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 }
