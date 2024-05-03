@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+header {
+	background-color: #eaebee;
+	height: 80px;
+}
+
+.page {
+	margin: 0 auto;
+}
+header > h2 {
+	margin-left:20px;
+}
+header nav {
+	width: 600px;
+	height: 100%;
+}
+
+header ul {
+	width: 100%;
+}
+
+header ul > li {
+	font-size: 20px;
+	height: 100%;
+}
+
+.sub-menu {
+	margin-left: 10px;
+	display: none;
+}
+.open {
+	display: block;
+}
+
+.main-menu {
+	margin-bottom: 5px;
+}
+
+.left-nav {
+	width:250px;
+	position: fixed;
+}
+
+section{
+	padding-left: 250px;
+}
+.table{
+	width: 100%;	
+}
+.table tr{
+	text-align: center;
+}
+.table td:first-child {
+	width:20%;
+}
+
+.table td:last-child {
+	width:10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

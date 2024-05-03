@@ -1,0 +1,211 @@
+@charset "UTF-8";
+:root, html {
+	font-size: 10px;
+	--footer--width: 906px;
+}
+td {
+	border:1px solid #cccccc;
+	padding: 15px;
+	text-align: center;
+}
+.main {
+	background-color: #f7f7f7;
+}
+
+.wrapper {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
+.logo {
+	background-color: #1b304a;
+	}
+.info{
+	background-color : #2f425a;
+	color: #fff;
+	height: 145px;
+	padding: 28px;
+    position: absolute;
+    top: 62px;
+    width: 100%;
+}
+.info_area {
+	margin: 0 20%;
+	
+}
+.info_name {
+	font-size: 3rem;
+	margin-bottom: 7px;
+}
+.info_id {
+	font-size: 2rem;
+}
+.info_hs {
+	color: #c7c7c7;
+	margin-bottom: 4px;
+	font-size: 1.6rem;
+}
+.info_date {
+	color: #c7c7c7;
+	font-size: 1.6rem;
+}
+.target_area {
+	position: absolute;
+    width: 100%;
+    top: 288px;
+    font-size: 1.4rem;
+    margin: 0 15%;
+}
+.notice-area {
+	width: 100%;
+}
+.target {
+	background-color: #f7f7f7;
+	margin: 0 20%;
+	padding-bottom: 20px;
+	border-bottom: 2px solid #1b304a;
+}
+.target_box table {
+	border:1px solid #d7d7d7; 
+	width: 100%;
+	background-color: #ffffff;
+	color: #222222;
+	height: 157px;
+	font-size: 
+}
+.target_info {
+	background-color: #efefef;
+    position: absolute;
+    top: 207px;
+    width: 100%;
+    z-index: 99;
+}
+.target_text {
+	height: 60px;
+	margin: 0 20% 0 20%;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.target_text img{
+	width: 20px;
+	margin-right: 5px;
+}
+.target_text span {
+    font-size: 1.6rem;
+}
+.section {
+	padding-top: 267px;
+}
+.content {
+	padding-top: 20px;
+}
+
+.target_box_header {
+	background-color: #1b304a;
+	border: 1px solid #1b304a;
+	color: #fff;
+}
+.target_box_1 {
+	background-color: #f2f2f2;
+}
+.target_box_1 td {
+	width: 25%;
+}
+.target_box_2 {
+	background-color: #fff;
+}
+
+.area {
+	background-color: #fff;
+	text-align: center;
+	border-top: 2px solid #1b304a;
+	margin: 0 20%;
+}
+.area_header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px dotted #c1c1c1;
+	margin-bottom: 20px;
+	color: #003981;
+	font-size: 20px;
+	padding-left: 5px;
+	
+}
+.text-color-blue {
+	color: #092e5c;
+}
+.check_img {
+	width: 60px;
+}
+@font-face {
+	font-family: "yeonsung";
+	src: url("../fonts/ttf/BMYEONSUNG_ttf.ttf");
+}
+
+.text-wrap {
+    font-family: "yeonsung";
+    width: 100%;
+    margin: 10px auto;
+    position: relative;
+    font-size: 2rem;
+    color: #222222;
+}
+.text-wrap img {
+	width: 100%;
+	vertical-align: middle;
+}
+
+.text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	transform : translate( -50%, -50%);
+	text-align: center;
+}
+.text p {
+	margin-bottom: 7px;
+}
+.end_area {
+	margin-top: 15px;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.end {
+	background-color: #f89d00;
+	color: #fff;
+	border: 1px solid #f89d00;
+	border-radius: 5px;
+	cursor: pointer;
+	height: 40px;
+    font-size: 1.6rem;
+    width: 150px;
+}
+.nav > div {
+	font-size: 2.5rem;
+	cursor: pointer;
+}
+.nav {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+
+.footer > div {
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    width: auto;
+    margin: 0 20%;
+}
+.fixed {
+    position: fixed;
+    top: 62px;
+    border-bottom: 1px solid #dddddd;
+}
+
+

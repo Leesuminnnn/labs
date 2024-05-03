@@ -21,6 +21,7 @@
 <style>
 
 
+
 </style>
 </head>
 <body class="normal" style="font-size: 14pt; background:#f7f7f7;">
@@ -157,7 +158,7 @@
 							<c:otherwise>
 								<div class="sb flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}'">보기</div>
 								<div class="sb flex flex-center" style="cursor: pointer; margin-left: 5px;">
-									<a download="${list.cs_idx}" href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}" >
+									<a class="btn_download" download="${list.cs_idx}" href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}" >
 										<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 40px; vertical-align: middle;">
 									</a>
 									</div>

@@ -118,7 +118,7 @@
     box-sizing: inherit;
   }
   span {
-      line-height: 23px;
+      line-height: 24px;
       margin-bottom: 5px;
   }
    .nav__section {
@@ -153,9 +153,17 @@
 .capture-araa > * {
 	width :100%;
 }
+
+.cont_day{
+	padding: 50px;
+}
+
+.area{margin-bottom:30px;}
+
+
 </style>
 </head>
-<body style="min-width: 1280px;">
+<body style="">
 <%@ include file="header.jsp" %>
 
 <form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenModifyAction.do">
@@ -171,23 +179,12 @@
 		</div>
 </div>
 
-<section style="background-repeat: no-repeat;
-    background-position: center 0;
-    background-size: 1246px 1870px;
-    min-width: 1280px;
-    margin-bottom: 100px;
-<%--     background-image: url(${pageContext.request.contextPath}/resources/img/background4.png); --%>
-
-    margin-top: 62px;
-    background-color: #f7f7f7;
-    margin-left: 240px;
-	display: flex;	
-	justify-content: center;
-    ">
+<section style="margin-bottom: 100px;margin-top: 62px;background-color: #f7f7f7;margin-left: 240px; display: flex; flex-wrap: wrap; justify-content: center;padding: 50px 0 80px 0;min-width: 1150px;">
 
 
+<div class="area" style="">
 <div id="capture_area" class="capture_area">
-<div>
+
 
 <input type="hidden" id="imgData" name="imgData">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
@@ -277,14 +274,16 @@
 		<li style="line-height:23px; font-size:16px; margin-bottom: 6px; padding: 0 0 0 16px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
 		<li style="margin-bottom: 6px; font-size:16px; padding: 0 0 0 16px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
-		<li style="margin-bottom: 13px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
+		<li style="margin-bottom: 20px; font-size:16px; padding: 0 0 0 16px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
+</div>
+
 <span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 <ol class="light_info_list">
-	<li class="light_info">
+	<li class="light_info" style="padding-top: 5px;">
 		<i class="light_info_i">1.&nbsp;</i>
 		<font>
-		주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold" style="display: contents;">일차적 연락대상</b>이며 타보호자는 <b style="display: contents;">상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.
+		주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 <br>관련된 사항에 대해 <b class="bold" style="display: contents;">일차적 연락대상</b>이며 타보호자는 <b style="display: contents;">상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.
 		</font>
 	</li>	
 	<li class="light_info">
@@ -303,7 +302,6 @@
 		입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b style="display: contents;">법적 대리인</b>이 됩니다.
 	</li>
 </ol>
-</div>
 <br>
 
 <table class="table_type2">
@@ -388,6 +386,7 @@
 			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px; width:250px;" value="${decryptedCs_data_15 }" />
 		</th>
 		<th colspan="2" style="text-align: right; border-left:hidden;">
+
 			<div class="checkbox-wrapper-13" style="margin-right: 26px; font-weight:400;">
 				<input id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내" <c:if test="${vo.cs_data_16 eq '부보호자 비용안내' }">checked</c:if>>
 				<label for="cs_data_16">비용안내</label>
@@ -397,116 +396,419 @@
 </table>
 
 <div style="text-align: center; margin-bottom: 30px;">
-<div style="margin-bottom: 20px;">
-<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
-border: 1px solid #dadada;" >
-	<tr style="background-color: #fafafa;">
-		<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
-	</tr>
-	<tr style="background-color: #ffffff;">
-		<td style="height: 48px; text-align: left; border-bottom: none; border-right: none;">
-		<div class="checkbox-wrapper-13" style="margin-top:10px;">
-		  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
-		  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
+	<div style="margin-bottom: 20px;">
+		<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; border: 1px solid #dadada;" >
+			<tr style="background-color: #fafafa;">
+				<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
+			</tr>
+			<tr style="background-color: #ffffff;">
+				<td style="height: 48px; text-align: left; border-bottom: none; border-right: none;">
+				<div class="checkbox-wrapper-13" style="margin-top:10px;">
+				  <input style="" id="cs_data_17" type="checkbox" name="cs_data_17" class="normal" value="환자의 신체적 정신적 장애로 의사결정 불가" <c:if test="${vo.cs_data_17 eq '환자의 신체적 정신적 장애로 의사결정 불가'}">checked</c:if>>
+				  <label for="cs_data_17">환자의 신체적 정신적 장애로 의사결정 불가</label>
+				</div>
+				</td>
+				<td style="text-align: center; border-left: none; border-right: none; border-bottom: none;">
+				<div class="checkbox-wrapper-13" style="display:flex; margin-top:10px;">
+				  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
+				  <label for="cs_data_18">환자위임</label>
+				</div>
+				</td>
+				<td style="text-align: right; border-left: none; border-bottom: none;">
+					<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
+						<input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
+						<label for="cs_data_19">응급 상황</label>
+					</div>
+				</td>
+			</tr>
+			
+			<tr style="background-color: #ffffff;">
+				<td style="height: 48px; text-align: left; border-top: none; border-right: none;">
+				<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
+				  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
+				  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
+				</div>
+				</td>
+				<td style=" border-left: none; border-right: none; border-top: none;">
+				<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
+				  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
+				  <label for="cs_data_21">미성년자</label>
+				</div>
+				</td>
+				<td style="text-align: center; border-left: none; border-top: none;">
+				</td>
+			</tr>
+		</table>
+		<div class="cont_day">
+			<p>20&nbsp;<input class="light" name="hos_contract_year" style="width:40px;" type="text" value="" />&nbsp;년
+			 	 &nbsp;<input class="light" name="hos_contract_month" style="width:40px; text-align:right;" type="text" value="" />&nbsp;월
+				 &nbsp;<input class="light" name="hos_contract_day" style="width:40px; text-align:right;" type="text" value="" />&nbsp;일
+			</p>
+			<h3 class="" style="font-size:1.3rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h3> 
 		</div>
-		</td>
-		<td style="text-align: center; border-left: none; border-right: none; border-bottom: none;">
-		<div class="checkbox-wrapper-13" style="display:flex; margin-top:10px;">
-		  <input style="" id="cs_data_18" type="checkbox" name="cs_data_18" class="normal" value="환자위임" <c:if test="${vo.cs_data_18 eq '환자위임' }">checked</c:if>>
-		  <label for="cs_data_18">환자위임</label>
-		</div>
-		</td>
-		<td style="text-align: right; border-left: none; border-bottom: none;">
-			<div class="checkbox-wrapper-13" style="margin-right: 28px; margin-top:10px;">
-				<input style="" id="cs_data_19" type="checkbox" name="cs_data_19" class="normal" value="응급 상황" <c:if test="${vo.cs_data_19 eq '응급 상황' }">checked</c:if>/>
-				<label for="cs_data_19">응급 상황</label>
-			</div>
-		</td>
-	</tr>
-	
-	<tr style="background-color: #ffffff;">
-		<td style="height: 48px; text-align: left; border-top: none; border-right: none;">
-		<div class="checkbox-wrapper-13" style="margin-bottom:10px;">
-		  <input style="" id="cs_data_20" type="checkbox" name="cs_data_20" class="normal" value="내용 설명 시 환자의 심신에 중대한 영향 우려" <c:if test="${vo.cs_data_20 eq '내용 설명 시 환자의 심신에 중대한 영향 우려' }">checked</c:if>>
-		  <label for="cs_data_20">내용 설명 시 환자의 심신에 중대한 영향 우려</label>
-		</div>
-		</td>
-		<td style=" border-left: none; border-right: none; border-top: none;">
-		<div class="checkbox-wrapper-13" style="display:flex; margin-bottom:10px;">
-		  <input style="" id="cs_data_21" type="checkbox" name="cs_data_21" class="normal" value="미성년자">
-		  <label for="cs_data_21">미성년자</label>
-		</div>
-		</td>
-		<td style="text-align: center; border-left: none; border-top: none;">
-		</td>
-	</tr>
-</table>
-</div>
-
-<div style="text-align: center; margin-bottom: 25px;">
-<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
- margin-right: auto; border: 1px solid #dadada;" >
-	<tr style="height: 45px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
-		<td colspan="3" style="text-align: left;">
-		<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
-		  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
-		  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
-		</div>
-		</td>
-	</tr>
-	<tr style="height: 45px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
-		<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
-		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
-		<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
-		<td style="text-align: right; color:#222222;" class="light">
-		<div style="margin-right: 21px; display: flex; justify-content: right;">
-		<div class="checkbox-wrapper-13" style="">
-		  <input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
-		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
-		  <label for="cs_data_24">특실</label>&emsp;&emsp;
-		</div>
-		<div class="checkbox-wrapper-13" style="">
-		  <input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled"<c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
-		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
-		  <label for="cs_data_25">1인실</label>&emsp;&emsp;
-		</div>
-		
-		
-		<div class="checkbox-wrapper-13" style="">
-		  <input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
-		  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
-		  <label for="cs_data_26" style="margin-right:8px;">2인실</label>
-		</div>
-		</div>
-		</td>
-	</tr>
-	<tr style="height: 45px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
-		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
-		 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
-	</tr>
-	<tr style="height: 50px; background-color: #ffffff;">
-		<td colspan="3" style="text-align: left;">
-		<div style="margin-left: 21px;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
-		</td>
-	</tr>
-</table>
-
-</div>
-</div>
-
-<div style="position: relative;">
-	<div class="normal" style="text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px;
-	display: flex; justify-content: flex-end; align-items: center;">
-		신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
-		<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
-		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div	>
 	</div>
 </div>
-<br><br>
 </div>
 </div>
-<br><br><br><br><br><br><br>
+
+<!-- 입원안내 -->
+<div class="area" style="">
+<div id="capture_area2" class="capture_area2">
+	<div class="hos_info1">
+		<h2 class="hos_info_ho" style="text-align: center;">효사랑가족요양병원 입원 안내</h2>
+		<div style="display:flex;">
+			<p style="font-size:1.1rem; font-weight: 700; padding: 0 0 10px 0;">
+				입원일 : 20&nbsp;<input class="light" id="hos_year" name="hos_year" style="width:40px;" type="text" value="" />&nbsp;.
+				&nbsp;<input class="light" id="hos_month" name="hos_month" style="width:40px; text-align:right;" type="text" value="" />&nbsp;.
+				&nbsp;<input class="light" id="hos_day" name="hos_day" style="width:40px; text-align:right;" type="text" value="" />&nbsp;.
+			</p>
+		</div>
+		<div style="text-align: center; margin-bottom: 25px;">
+			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+				<tr>
+					<td class="normal" width="170px" height="50px" style="background:#fafafa;">No.</td>
+					<td class="light" width="313px" style="text-align: left;">
+						<input style= "margin-left: 33px;" type="text" id="hos_number" name="hos_number" value="" />
+					</td>
+					<td class="normal" width="150px" height="50px" rowspan="2" style="background:#fafafa;">특이<br>사항</td>
+					<td class="light" width="413px" style="text-align: left;" rowspan="2">
+						<textarea cols="20" rows="3" style="margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;" id="hos_po" name="hos_po" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="normal" height="50px" style="background:#fafafa;">이름</td>
+					<td class="light" style="text-align: left;">
+						<input style= "margin-left: 33px;" type="text" id="hos_name" name="hos_name" value="" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="hos_info" style="">
+			<table border=1 style="">
+				<tr>
+					<td class="normal" width="195px" height="50px" style="background:#fafafa;">구분</td>
+					<td class="light" width="313px" colspan="3">
+						<div class="checkbox_click"style=" ">
+							<div class="checkbox-wrapper-13">
+								<input style= "" type="checkbox" id="insurance" name="insurance" value="보험" />
+								<label for="insurance">보험</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input style= "margin-left: 3" type="checkbox" id="salary" name="salary" value="급여" />
+								<label for="salary">급여</label>
+							</div>
+							<div class="checkbox-wrapper-13"> 
+								<input style= "" type="checkbox" id="self_insurance" name="self_insurance" value="자보" />
+								<label for="self_insurance">자보</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input style= "" type="checkbox" id="accident" name="accident" value="산재" />
+								<label for="accident">산재</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input style= "" type="checkbox" id="general" name="general" value="일반" />
+								<label for="general">일반</label>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="normal" height="45px" rowspan="2" style="background:#fafafa;">상병명</td>
+					<td onclick="" class="light" style="text-align: left; height:50px; " colspan="3">
+						<input style= "margin-left: 33px; width:300px;" type="text" id="hos_code1" name="hos_code1" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td class="light" style="text-align: left; height:50px;" colspan="3">
+						<input style= "margin-left: 33px; width:300px;" type="text" id="hos_code2" name="hos_code2" value=""/>
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="3" class="normal" width="150px" style="background:#fafafa;">입원실</td>
+					<td class="normal" width="290px" height="50px" style="background:#fafafa;">과</td>
+					<td class="normal" width="290px" height="50px" style="background:#fafafa;">병실</td>
+					<td class="normal" width="290px" height="50px" style="background:#fafafa;">인실</td>
+				</tr>
+				<tr>
+					<td rowspan="2"  class="light" style="text-align: left;" height="80px">
+						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_department" name="hos_department" value="" >
+					</td>
+					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
+						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_ward" name="hos_ward" value="" >
+					</td>
+					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
+						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_room" name="hos_peo" value="" >
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="hos_info2" style="">
+			<table class="info_important" border=1 style="">
+				<tr style="background-color: #fafafa;">
+					<th style="height:50px;">입원 시 필요사항 설명 유무</th>
+					<th style="width:125px;">확인</th>
+				</tr>
+				<tr>
+					<td>1. 진료비 관련한 사항&nbsp; ➡ &nbsp;️<b>매월(4일~10일) 전월 분 정산</b></td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check1" name="check1" class="normal" value="">
+							<label for="check1"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>2. 앰뷸런스 이용안내: 외진, 응급전원(주,야간) 사설이용</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check2" name="check2" class="normal" value="">
+							<label for="check2"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>3. 환자, 직원의 권리와 의무에 대한 안내</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check3" name="check3" class="normal" value="">
+							<label for="check3"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>4. 제증명은 3일 전 신청하며 환자 이외에는 발급 제한안내</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check4" name="check4" class="normal" value="">
+							<label for="check4"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>5. 외출 / 외박 / 면회 / 음주안내 / 퇴원(3일전고지)</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check5" name="check5" class="normal" value="">
+							<label for="check5"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>6. 타병원 진료(지참약, 검사)안내</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check6" name="check6" class="normal" value="">
+							<label for="check6"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>7. 낙상으로 인한 주의사항 안내</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check7" name="check7" class="normal" value="">
+							<label for="check7"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>8. 임종 시 안치에 대한 안내</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check8" name="check8" class="normal" value="">
+							<label for="check8"></label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>9. 응급전원 및 임종 시 정산에 대한 안내</td>
+					<td>
+						<div class="checkbox_check checkbox-wrapper-13">
+							<input type="checkbox" id="check9" name="check9" class="normal" value="">
+							<label for="check9"></label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="hos_info3" style="">
+			<table class="info_important" border=1 style="">
+				<tr>
+					<td style="height:80px; line-height:25px;">
+						<p style="display:flex;">
+							<i class="light_info_i">※</i>
+							<em style="font-style:normal;padding-left:5px; word-spacing: 1px;">
+							본원 입원 <i style="text-decoration:underline; font-style:normal">중 타 의료기관 진료시 요양(의료)급여 의뢰서</i>를 지참 하지 않은 경우 진료비는 전액 본인 부담 <br>적용됩니다.
+							</em>
+						</p>
+						<p style="font-style:normal; font-size:13px; text-align:right; margin-right:15px;">국민건강보험법 시행규칙 (시행일 : 2019.11.1.) 보건복지부령 제 637호</p>
+					</td>
+					<td width="126px">
+						<div  class="checkbox_check2">
+							<input type="checkbox" id="check10" name="check10" class="normal" value="확인">
+							<label for="check10" style="font-weight:400;" >확인</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td style="height:80px; line-height:25px;">
+						<p style="display:flex;">
+							<i class="light_info_i">※</i>
+							<em style="font-style:normal;padding-left:5px;">
+							증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의 징역 또는 2천만원 이하의 벌금에 처할<br>수 있다.
+							</em>
+						</p>
+					</td>
+					<td width="126px">
+						<div  class="checkbox_check2">
+							<input type="checkbox" id="check11" name="check11" class="normal" value="확인">
+							<label for="check11" style="font-weight:400;">확인</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	</div>
+</div>
+
+
+<!-- 본인부담 안내 -->
+<div class="area" style="">
+<div id="capture_area3" class="capture_area3">
+	<div class="hos_info2 light" style="width:966px;">
+		<h2 class="hos_info_ho">본인부담액상한제 안내</h2>
+		<div class="light_info" style="font-size:16px; word-spacing: 1px; color:#222222; padding-top: 10px; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
+			<span class="bold" style="color:#303030; font-size: 15pt; padding-top:6px;">※ 본인부담금 상한제 (적용기간 : 당해연도 1월1일 ~ 12월31일)</span>
+			<p class="">
+				「국민건강보험법시행령 제19조 2항 및 4항 비용의 본인부담」 의거. 장기 및 중증질환자의 고액진료비 지출로 인한 가계의 경제적 부담을 경감하고 건강보험 본연의 보장성을 확보하고 가계안정을 도모하기 위한 제도.
+			</p>
+			<p class="">
+				<b>2020년 1월 1일부터 본인부담상한제 사전급여는 요양병원이아닌, 환자에게 직접지급하는 방식으로 변경됩니다.</b>
+				건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 
+				<b>최고상한액 ( <input class="yesrs" type="text" id="years" name="years" value="" style="width:50px; text-align:right;"> 년 기준
+				<input class="yesrs" type="text" id="payment" name="payment" value="" style="width:50px; text-align:right;"> 만원) 초과금액을 환자에게 직접 지급합니다.</b><br>
+				다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터 3~5개월 후 직접 지급하게 됩니다.
+			</p>
+			<p class="">개인별 본인부담한액 기준보험표 결정(건강보험료정산) 전후로 나누어 <b>개인별 본인부담상한액 초과금액을 건강보험공단에서 환자에게 다음해 7~8월경 직접지급</b></p>
+<!-- 			<p class="" style="padding-bottom: 5px;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p> -->
+		</div>
+		<div class="hos_pay2" style="text-align: center; margin-bottom: 25px;">
+			<table class="info_important2" border=1 style="">
+				<tr>
+					<td colspan="4" style="height:50px;">
+						<p style="text-align: left; margin: 0 0 0 28px; font-size:13pt;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
+					</td>
+				</tr>
+				<tr class="normal"style="background-color: #fafafa; height:50px;">
+					<td style="width:170px;">구분</td>
+					<td>실비 납부</td>
+					<td>기타 추가 납부</td>
+				</tr>
+				<tr style="height:50px;">
+					<td>비용</td>
+					<td>본인부담 발생 금액</td>
+					<td>
+						<div class="checkbox_pay">
+							<div class="checkbox-wrapper-13">
+							  <input type="checkbox" id="medicine" name="medicine" value="비급여 처치재료, 약제">
+							  <label for="medicine">비급여 처치재료, 약제</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input type="checkbox" id="nutrients" name="nutrients" value="영양제">
+								<label for="nutrients">영양제</label>
+							</div>
+							<div class="checkbox-wrapper-13">
+								<input type="checkbox" id="transport" name="transport" value="이송료">
+								<label for="transport">이송료</label>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="light" style="text-align:left; padding: 0 24px 5px 0;">
+			<ol class="light_info_list">
+				<li class="light_info light_info2">
+					<i class="light_info_i">▣</i>
+					<em style="font-style:normal; padding-left:5px;">요양병원의 정액수가는 환자분류군에 따라 본인부담금이 정해집니다.</em>
+				</li>
+				<li class="light_info light_info2">
+					<i class="light_info_i">▣</i>
+					<em style="font-style:normal; padding-left:5px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 행위별수가의 <br>적용으로 본인부담금이 인상될 수 있습니다.</em>
+				</li>
+				<li class="light_info light_info2">
+					<i class="light_info_i">▣</i>
+					<em style="font-style:normal; padding-left:5px;">선택입원군으로 평가된 환자의 경우 <b class="b40">본인부담금이 40%</b> 부과됩니다.</em>
+				</li>
+			</ol>
+		</div>
+		
+		<div style="text-align: center; margin-bottom: 25px;">
+		<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
+		 margin-right: auto; border: 1px solid #dadada;" >
+			<tr style="height: 50px; background-color: #fafafa; border-bottom: 1px solid #dadada;" class="normal">
+				<td colspan="3" style="text-align: left;">
+				<div class="checkbox-wrapper-13" style="" onchange="toggleCheckbox()">
+				  <input style="font-size:14pt; " id="cs_data_22" type="checkbox" name="cs_data_22" class="normal" value="상급병실" <c:if test="${vo.cs_data_22 eq '상급병실'}">checked</c:if>>
+				  <label for="cs_data_22">상급병실(특실, 1인실, 2인실)의 이용 시 병실차액이 발생할 수 있습니다.</label>
+				</div>
+				</td>
+			</tr>
+			<tr style="height: 50px; background-color: #ffffff; border-bottom: 1px solid #dadada;">
+				<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
+				<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
+				<input name="cs_data_23" style="width:190px; text-align: right;" value="${vo.cs_data_23 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>/> 호</td>
+				<td style="text-align: right; color:#222222;" class="light">
+				<div style="margin-right: 21px; display: flex; justify-content: right;">
+				<div class="checkbox-wrapper-13" style="">
+				  <input style="" id="cs_data_24" type="checkbox" name="cs_data_24" class="normal" value="특실" disabled="disabled" <c:if test="${vo.cs_data_24 eq '특실'}">checked</c:if>
+				  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+				  <label for="cs_data_24">특실</label>&emsp;&emsp;
+				</div>
+				<div class="checkbox-wrapper-13" style="">
+				  <input style="" id="cs_data_25" type="checkbox" name="cs_data_25" class="normal" value="1인실" disabled="disabled"<c:if test="${vo.cs_data_25 eq '1인실' }">checked</c:if> 
+				  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+				  <label for="cs_data_25">1인실</label>&emsp;&emsp;
+				</div>
+				
+				
+				<div class="checkbox-wrapper-13" style="">
+				  <input style="" id="cs_data_26" type="checkbox" name="cs_data_26" class="normal" value="2인실" disabled="disabled" <c:if test="${vo.cs_data_26 eq '2인실' }">checked</c:if> 
+				  <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if>>
+				  <label for="cs_data_26" style="margin-right:8px;">2인실</label>
+				</div>
+				</div>
+				</td>
+			</tr>
+			<tr style="height: 50px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
+				<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
+				 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
+			</tr>
+			<tr style="height: 50px; background-color: #ffffff;">
+				<td colspan="3" style="text-align: left;">
+				<div style="margin-left: 21px;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
+				</td>
+			</tr>
+		</table>
+		</div>
+	
+	</div>
+
+	<div style="position: relative;">
+		<div class="normal normal_sign" style="">
+			신청인  (  관계  : <input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />) :
+			<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
+			<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div>
+		</div>
+	</div>
+	<br><br>
+
+</div>
+</div>
 
 
 <!-- 첫번째 서명 -->
@@ -585,12 +887,15 @@ border: 1px solid #dadada;" >
 	</div>
 </div>
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
 <script>
 var name = "${info.name}";
 console.log("세션아이디 ${sessionScope.loginmember}");
@@ -1054,6 +1359,235 @@ function cancle(){
 
 <script>
 
+// // 웹페이지 이미지로 파일 저장
+// $(document).ready(function() {
+// 	var cs_data_01 = $('input[name=cs_data_01]').val();
+// 	var cs_data_02 = $('input[name=cs_data_02]').val();
+// 	var cs_data_03 = $('input[name=cs_data_03]').val();
+// 	var cs_data_04 = $('input[name=cs_data_04]').val();
+// 	var cs_data_05 = $('input[name=cs_data_05]').val();
+// 	var cs_data_06 = $('input[name=cs_data_06]').val();
+// 	var cs_data_07 = $('input[name=cs_data_07]').val();
+// 	var cs_data_08 = $('input[name=cs_data_08]').val();
+// 	var cs_data_09 = $('input[name=cs_data_09]').val();
+// 	var cs_data_10 = $('input[name=cs_data_10]').val();
+	
+// // 	if($('input[name=cs_data_11]').checked){
+// // 		var cs_data_11 = $('input[name=cs_data_11]').val();
+// // 	}else{
+// // 		var cs_data_11 = '';
+// // 	}
+// 	var cs_data_11 = $('input[name=cs_data_11]').is(':checked') ? $('input[name=cs_data_11]').val() : '';
+	
+	
+// 	var cs_data_12 = $('input[name=cs_data_12]').val();
+// 	var cs_data_13 = $('input[name=cs_data_13]').val();
+// 	var cs_data_14 = $('input[name=cs_data_14]').val();
+// 	var cs_data_15 = $('input[name=cs_data_15]').val();
+// // 	if($('input[name=cs_data_16]').checked){
+// // 		var cs_data_16 = $('input[name=cs_data_16]').val();
+// // 	}else{
+// // 		var cs_data_16 = '';
+// // 	}
+	
+// // 	if($('input[name=cs_data_17]').checked){
+// // 		var cs_data_17 = $('input[name=cs_data_17]').val();
+// // 	}else{
+// // 		var cs_data_17 = '';
+// // 	}
+// // 	if($('input[name=cs_data_18]').checked){
+// // 		var cs_data_18 = $('input[name=cs_data_18]').val();
+// // 	}else{
+// // 		var cs_data_18 = '';
+// // 	}
+// // 	if($('input[name=cs_data_19]').checked){
+// // 		var cs_data_19 = $('input[name=cs_data_19]').val();
+// // 	}else{
+// // 		var cs_data_19 = '';
+// // 	}
+// // 	if($('input[name=cs_data_20]').checked){
+// // 		var cs_data_20 = $('input[name=cs_data_20]').val();
+// // 	}else{
+// // 		var cs_data_20 = '';
+// // 	}
+// // 	if($('input[name=cs_data_21]').checked){
+// // 		var cs_data_21 = $('input[name=cs_data_21]').val();
+// // 	}else{
+// // 		var cs_data_21 = '';
+// // 	}
+// // 	if($('input[name=cs_data_22]').checked){
+// // 		var cs_data_22 = $('input[name=cs_data_22]').val();
+// // 	}else{
+// // 		var cs_data_22 = '';
+// // 	}
+// // 	if($('input[name=cs_data_23]').checked){
+// // 		var cs_data_23 = $('input[name=cs_data_23]').val();
+// // 	}else{
+// // 		var cs_data_23 = '';
+// // 	}
+// // 	if($('input[name=cs_data_24]').checked){
+// // 		var cs_data_24 = $('input[name=cs_data_24]').val();
+// // 	}else{
+// // 		var cs_data_24 = '';
+// // 	}
+// // 	if($('input[name=cs_data_25]').checked){
+// // 		var cs_data_25 = $('input[name=cs_data_25]').val();
+// // 	}else{
+// // 		var cs_data_25 = '';
+// // 	}
+// // 	if($('input[name=cs_data_26]').checked){
+// // 		var cs_data_26 = $('input[name=cs_data_26]').val();
+// // 	}else{
+// // 		var cs_data_26 ='';
+// // 	}
+
+// 	var cs_data_16 = $('input[name=cs_data_16]').is(':checked') ? $('input[name=cs_data_16]').val() : '';
+// 	var cs_data_17 = $('input[name=cs_data_17]').is(':checked') ? $('input[name=cs_data_17]').val() : '';
+// 	var cs_data_18 = $('input[name=cs_data_18]').is(':checked') ? $('input[name=cs_data_18]').val() : '';
+// 	var cs_data_19 = $('input[name=cs_data_19]').is(':checked') ? $('input[name=cs_data_19]').val() : '';
+// 	var cs_data_20 = $('input[name=cs_data_20]').is(':checked') ? $('input[name=cs_data_20]').val() : '';
+// 	var cs_data_21 = $('input[name=cs_data_21]').is(':checked') ? $('input[name=cs_data_21]').val() : '';
+// 	var cs_data_22 = $('input[name=cs_data_22]').is(':checked') ? $('input[name=cs_data_22]').val() : '';
+// 	var cs_data_23 = $('input[name=cs_data_23]').is(':checked') ? $('input[name=cs_data_23]').val() : '';
+// 	var cs_data_24 = $('input[name=cs_data_24]').is(':checked') ? $('input[name=cs_data_24]').val() : '';
+// 	var cs_data_25 = $('input[name=cs_data_25]').is(':checked') ? $('input[name=cs_data_25]').val() : '';
+// 	var cs_data_26 = $('input[name=cs_data_26]').is(':checked') ? $('input[name=cs_data_26]').val() : '';
+	
+	
+	
+// 	var cs_data_27 = $('input[name=cs_data_27]').val();
+// 	var cs_data_28 = $('input[name=cs_data_28]').val();
+// 	var cs_data_29 = $('input[name=cs_data_29]').val();
+	
+	
+	
+		
+		
+	
+	
+	
+	
+	
+// 	$(function(){
+		
+// 		$(".btn_download").click(function(e){
+// 			html2canvas(document.getElementById("capture_area")).then(function(canvas)
+			
+// 				{
+				
+				
+					
+				
+// // 					var el = document.createElement("a")
+// // 					el.href = canvas.toDataURL("image/png")
+					
+// 					// 이미지 url
+// // 					var image = canvas.toDataURL("image/png");
+// // 					console.log(image);
+// // 					image = image.replace("data:image/png;base64,", "");
+// // 					console.log(image);
+// 					var cs_idx = ${cs_idx}
+// 					    var cs_data_01 = $('input[name=cs_data_01]').val();
+// 						var cs_data_02 = $('input[name=cs_data_02]').val();
+// 						var cs_data_03 = $('input[name=cs_data_03]').val();
+// 						var cs_data_04 = $('input[name=cs_data_04]').val();
+// 						var cs_data_05 = $('input[name=cs_data_05]').val();
+// 						var cs_data_06 = $('input[name=cs_data_06]').val();
+// 						var cs_data_07 = $('input[name=cs_data_07]').val();
+// 						var cs_data_08 = $('input[name=cs_data_08]').val();
+// 						var cs_data_09 = $('input[name=cs_data_09]').val();
+// 						var cs_data_10 = $('input[name=cs_data_10]').val();
+					
+// 						var cs_data_12 = $('input[name=cs_data_12]').val();
+// 						var cs_data_13 = $('input[name=cs_data_13]').val();
+// 						var cs_data_14 = $('input[name=cs_data_14]').val();
+// 						var cs_data_15 = $('input[name=cs_data_15]').val();
+					
+						
+// 						var cs_data_27 = $('input[name=cs_data_27]').val();
+// 						var cs_data_28 = $('input[name=cs_data_28]').val();
+// 						var cs_data_29 = $('input[name=cs_data_29]').val();
+					    
+					
+// 					//=============================================
+// 					// pdf test
+// 			        var imgData = canvas.toDataURL('image/png');
+// 			        const pdf = new window.jspdf.jsPDF();  // Ensure jsPDF is correctly referenced
+// 					pdf.addImage(imgData, 'PNG', 0, 0);
+					
+// 					const pdfBase64 = pdf.output('datauristring').split(';base64,')[1]; // Extract base64 part from the data URI
+// 					sendPDFToServer(pdfBase64, cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05,
+// 								    cs_data_06, cs_data_07, cs_data_08, cs_data_09, cs_data_10, cs_data_11, cs_data_12,
+// 								    cs_data_13, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19, cs_data_20,
+// 								    cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27,
+// 								    cs_data_28, cs_data_29
+// 					);
+// 		});
+// 	});
+
+
+// 		function sendPDFToServer(pdfBase64, cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05,
+// 			    cs_data_06, cs_data_07, cs_data_08, cs_data_09, cs_data_10, cs_data_11, cs_data_12,
+// 			    cs_data_13, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19, cs_data_20,
+// 			    cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27,
+// 			    cs_data_28, cs_data_29) {
+		    
+		 
+		    
+// 		    $.ajax({
+// 	            url: '${pageContext.request.contextPath}/save',  // Adjust this to your actual server endpoint
+// 	            type: 'POST',
+// 	            contentType: 'application/json',
+// 	            data: JSON.stringify({ 
+// 	            	pdfData: pdfBase64,
+// 	            	cs_data_01: cs_data_01,
+//             		cs_data_02: cs_data_02, 
+// 	            	cs_data_03: cs_data_03,
+//             		cs_data_04: cs_data_04, 
+// 	            	cs_data_05: cs_data_05,
+//             		cs_data_06: cs_data_06, 
+// 	            	cs_data_07: cs_data_07,
+//             		cs_data_08: cs_data_08, 
+// 	            	cs_data_09: cs_data_09,
+//             		cs_data_10: cs_data_10, 
+// 	            	cs_data_11: cs_data_11,
+//             		cs_data_12: cs_data_12, 
+// 	            	cs_data_13: cs_data_13,
+//             		cs_data_14: cs_data_14, 
+// 	            	cs_data_15: cs_data_15,
+//             		cs_data_16: cs_data_16, 
+// 	            	cs_data_17: cs_data_17,
+//             		cs_data_18: cs_data_18, 
+// 	            	cs_data_19: cs_data_19,
+//             		cs_data_20: cs_data_20, 
+// 	            	cs_data_21: cs_data_21,
+//             		cs_data_22: cs_data_22, 
+// 	            	cs_data_23: cs_data_23,
+//             		cs_data_24: cs_data_24, 
+// 	            	cs_data_25: cs_data_25,
+//             		cs_data_26: cs_data_26, 
+// 	            	cs_data_27: cs_data_27,
+//             		cs_data_28: cs_data_28, 
+// 	            	cs_data_29: cs_data_29,
+// 	            	cs_idx: cs_idx
+// 	            }),
+// 	            success: function(response) {
+// 	                console.log('Server received PDF:', response);
+// 	                alert('PDF uploaded successfully!');
+// 	            },
+// 	            error: function(xhr, status, error) {
+// 	            	console.error('Error status:', status);
+// 	                console.error('Error thrown:', error);
+// 	                console.error('Full server response:', xhr.responseText);
+// 	                alert('Error uploading data: ' + xhr.responseText);
+// 	            }
+// 	        });
+// 		}
+// 	});
+// });
+</script>
+
+<script>
 // 웹페이지 이미지로 파일 저장
 $(document).ready(function() {
 	var cs_data_01 = $('input[name=cs_data_01]').val();
@@ -1139,48 +1673,29 @@ $(document).ready(function() {
 	var cs_data_29 = $('input[name=cs_data_29]').val();
 	
 	
-	
-		
-		
-	
-	
-	
-	
-	
+	//다운로드 버튼 클릭시 캡쳐한 내용 body에서 불러오기
 	$(function(){
 		
 		$(".btn_download").click(function(e){
-// 			var width = 1024;	// 800 pixels
-			//var height = 1122.52;	// 600 pixels
-			html2canvas(document.getElementById("capture_area")).then(function(canvas) {
+<<<<<<< HEAD
+			html2canvas(document.getElementById("capture_area")).then(function(canvas){
+=======
+			html2canvas(document.getElementById("capture_area")).then(function(canvas)
+			
+				{
 				
-// 				var doc = new jsPDF();
-// 		        var imgData = canvas.toDataURL('image/png');
-// 		        var imgProps= doc.getImageProperties(imgData);
-// 		        var width = doc.internal.pageSize.getWidth();
-// 		        var height = width * 1.414; // a4 기준 페이지 height
-// 		        var pdfHeight = (imgProps.height * width) / imgProps.width;
-// 		        var heightLeft = pdfHeight - height;
-// 		        var position = 0;
-		        
-// 		        doc.addImage(imgData, 'PNG', 0, position, width, pdfHeight);
-		        
-// 		        while (heightLeft > 0) {
-// 		            position = heightLeft - pdfHeight;
-// 		            doc.addPage();
-// 		            doc.addImage(imgData, 'PNG', 0, position, width, pdfHeight);
-// 		            heightLeft -= height;
-// 		        }
-// 		        doc.save();
+				
+				
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 				
 // 					var el = document.createElement("a")
 // 					el.href = canvas.toDataURL("image/png")
 					
 					// 이미지 url
 					var image = canvas.toDataURL("image/png");
-					console.log(image);
+// 					console.log(image);
 					image = image.replace("data:image/png;base64,", "");
-					console.log(image);
+// 					console.log(image);
 					
 					var cs_idx = ${cs_idx}
 // 					console.log(cs_idx);
@@ -1205,7 +1720,6 @@ $(document).ready(function() {
 // 					console.log(cs_data_09);
 					var cs_data_10 = $('input[name=cs_data_10]').val();
 // 					console.log(cs_data_10);
-
 					var cs_data_12 = $('input[name=cs_data_12]').val();
 // 					console.log(cs_data_12);
 					var cs_data_13 = $('input[name=cs_data_13]').val();
@@ -1214,23 +1728,27 @@ $(document).ready(function() {
 // 					console.log(cs_data_14);
 					var cs_data_15 = $('input[name=cs_data_15]').val();
 // 					console.log(cs_data_15);
-
 					
+<<<<<<< HEAD
+						
+						var cs_data_27 = $('input[name=cs_data_27]').val();
+						var cs_data_28 = $('input[name=cs_data_28]').val();
+						var cs_data_29 = $('input[name=cs_data_29]').val();
+					
+=======
 					var cs_data_27 = $('input[name=cs_data_27]').val();
 // 					console.log(cs_data_27);
 					var cs_data_28 = $('input[name=cs_data_28]').val();
 // 					console.log(cs_data_28);
 					var cs_data_29 = $('input[name=cs_data_29]').val();
 // 					console.log(cs_data_29);
+>>>>>>> branch 'master' of https://github.com/Leesuminnnn/labs.git
 					
 					$.ajax({
 					    url: "${pageContext.request.contextPath}/saveImage",
 // 					    url: "${pageContext.request.contextPath}/saveImagetest",
 					     method: "post",
-// 					     contentType: "application/json", // Ensure you're sending JSON
-					     data: { 
-						    	image: image,
-// 						    	image: pdfBase64,
+					     data: { image: image, 
 					    		cs_idx: cs_idx,
 					    		cs_data_01: cs_data_01,
 					    		cs_data_02: cs_data_02,
@@ -1266,7 +1784,7 @@ $(document).ready(function() {
 					       alert("이미지가 성공적으로 등록되었습니다.");
 					       window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do"
 					     },
-					     error: function(xhr, status, error) {
+					     error: function() {
 					       alert("이미지 등록에 실패했습니다.");
 					       alert(error);
 					     }
@@ -1279,7 +1797,6 @@ $(document).ready(function() {
 		});
 	});
 });
-
 </script>
 </section>
 
@@ -1348,4 +1865,10 @@ $("#btn_save").click(function () {
 	}
 });
 </script>
+
+
+
+
+
+
 </html>

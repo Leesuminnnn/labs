@@ -40,6 +40,7 @@
 		order by cs_idx desc
 	</select>
 	
+	
 	<insert id="insert" parameterType="writtenVo">
 		insert into cs_data (cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,
 		cs_data_09, cs_data_10, cs_data_11, cs_data_12, cs_data_13, cs_data_14, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19,
@@ -62,8 +63,21 @@
 	<update id="update">
 	update cs_data set cs_data_30 = 2, cs_data_31 = now() where cs_idx = #{cs_idx}
 	</update>
+	<update id="update1">
+	update cs_data set cs_data_30 = 2, cs_data_31 = now() where cs_idx = #{cs_idx}
+	</update>
 	
 	<update id="modify">
+		update csworktools.cs_data set 
+		cs_data_01 = #{cs_data_01}, cs_data_02 = #{cs_data_02}, cs_data_03 = #{cs_data_03}, cs_data_04 = #{cs_data_04}, 
+		cs_data_05 = #{cs_data_05}, cs_data_06 = #{cs_data_06}, cs_data_07 = #{cs_data_07}, cs_data_08 = #{cs_data_08},
+		cs_data_09 = #{cs_data_09}, cs_data_10 = #{cs_data_10}, cs_data_11 = #{cs_data_11}, cs_data_12 = #{cs_data_12}, cs_data_13 = #{cs_data_13}, 
+		cs_data_14 = #{cs_data_14},	cs_data_15 = #{cs_data_15}, cs_data_16 = #{cs_data_16}, cs_data_17 = #{cs_data_17}, cs_data_18 = #{cs_data_18}, 
+		cs_data_19 = #{cs_data_19}, cs_data_20 = #{cs_data_20}, cs_data_21 = #{cs_data_21}, cs_data_22 = #{cs_data_22}, cs_data_23 = #{cs_data_23}, 
+		cs_data_24 = #{cs_data_24},	cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
+		cs_data_29 = #{cs_data_29}, cs_data_30 = 1 where cs_idx = #{cs_idx}
+	</update>
+	<update id="modify1">
 		update csworktools.cs_data set 
 		cs_data_01 = #{cs_data_01}, cs_data_02 = #{cs_data_02}, cs_data_03 = #{cs_data_03}, cs_data_04 = #{cs_data_04}, 
 		cs_data_05 = #{cs_data_05}, cs_data_06 = #{cs_data_06}, cs_data_07 = #{cs_data_07}, cs_data_08 = #{cs_data_08},

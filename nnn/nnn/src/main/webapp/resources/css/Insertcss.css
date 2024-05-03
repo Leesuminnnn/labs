@@ -1,0 +1,322 @@
+@charset "UTF-8";
+section{
+	margin-bottom: 150px;
+}
+.container{
+	padding-left: 35px;
+    padding-right: 35px;
+    width: 100vw;
+}
+.overlay {
+	display: none;
+	z-index: 3;
+	position: fixed;
+	width: 100%; 
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,1);	/* 화면을 완전히 어둡게 */
+	overflow-x: hidden;
+}
+#QRtext{
+	text-align: center;
+	color: #ffffff;
+	position: absolute;
+	z-index: 12;
+	display: none;
+	top: -160px;
+}
+#QRtext2{
+	text-align: center;
+	color: #ffffff;
+	position: absolute;
+	z-index: 12;
+	display: none;
+	/* top: 680px; */
+	top: calc(100vh - 200%);
+}
+#QR_scan_img{
+	display: none;
+	position: relative;
+	z-index: 11;
+	top: 50%;
+	width: 360px;
+}
+.scan {
+	position: relative;
+	/* 스캔 영역 스타일 */
+}
+.scan video {
+	position: absolute;
+	/* 기기의 중앙에 위치하게 */
+	/* 18vh ==> 너무 하단에 위치함 */
+	top: 0;
+	
+	left: 0;
+	width: 100%;
+	/* height: 100%; */
+	/* object-fit: fill; qr스캔 화면 사이즈 키우기*/    
+	object-fit: fill;
+	object-position: center;
+	pointer-events: none;
+	border: 5px solid #000000;
+	z-index: 10;
+}
+.scan-box{
+	margin-top: 48px;
+	height: 370px;
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	align-items: center;
+}
+.scan-box > span{
+	font-size: 24pt;
+	color: #444444;
+	margin-top: 50px;
+	margin-bottom: 55px;
+}
+.dott{
+	margin-top: 0px;
+	margin-bottom: 28px;
+	border-bottom: 1px dotted #e3e3e3;
+	width: 680px;
+}
+.dott2{
+	margin-top: 28px;
+	margin-bottom: 28px;
+	border-bottom: 1px dotted #e3e3e3;
+	width: 680px;
+}
+.enter{
+	margin-bottom: 28px;
+	
+}
+.data-box{
+	
+}
+.data{
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+}
+.data > div, #qr-input{
+	background-color: #f7f7f7;
+	border: 1px solid #dfdfdf;
+	border-radius: 20px;
+	width: 660px;;
+	height: 110px;
+	font-size: 40pt;
+	color: #444444;
+	margin-bottom: 13px;
+}
+.data > div:last-child{
+	margin-bottom: none;
+}
+.data input[type="text"]{
+	width: 100px;
+	background-color: #f7f7f7;
+	border:none;
+	padding-left: 38px;
+}
+.data div{
+	vertical-align: center;
+}
+input:focus{
+	outline: none;
+}
+.btn-box{
+	display: flex;
+	align-items: center; /* 수직 정렬을 위해 align-items 속성을 사용합니다. */
+	justify-content: center;
+}
+#insert{
+	margin-right: 20px;
+}
+.btn{
+	width: 330px;
+	height: 120px;
+	border-radius: 20px;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 38pt;
+	color: #ffffff;
+}
+.btn1{
+	background-color: #fbb03b;
+}
+.btn2{
+	background-color: #7c7c7c;
+}
+.imglist{
+	margin-left: 50px;
+	margin-right: 50px;
+}
+.imglist-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100vw;
+}
+.imglist-content img{
+	width: 70%;
+}
+
+.imglist-content-text{
+	font-size: 30pt;
+}
+.text{
+	color: #444444;
+	font-size: 38px;
+}
+.text1{
+	color: #222222;
+	margin-top: 23px;
+	font-size: 26pt;
+}
+.text2{
+	color: #f49d16;
+	margin-top: 17px;
+}
+.text3{
+	margin-top: 36px;
+	margin-bottom: 56pt;
+}
+.text4{
+	margin-bottom: 48px;
+}
+.text5{
+	font-size: 25pt;
+	color: #000000;
+	margin-top: 17px;
+}
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	bottom: 0;
+	
+	width: 100vw;
+	height: 100vh;
+
+	display: none;
+
+	background-color: rgba(51, 51, 51, 0.7);
+	/* 애니메이션 효과 */
+	/* transform: translateY(100%); */
+	/* transition: transform 1s ease-in-out; */
+}
+
+.modal.show {
+	display: block;
+	transform: translateY(0);
+	transition: transform 1s ease-in-out;
+	z-index: 3;
+}
+
+.modal_body {
+	display: flex;
+    justify-content: center;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+
+	width: 680px;
+	/* height: 60vh; */
+
+	/* padding: 35px; */
+
+	text-align: center;
+
+	background-color: rgb(255, 255, 255);
+	border-radius: 20px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	/* 애니메이션 효과 */
+	transform: translateY(0);
+	transform: translate(-50%, -50%); 
+}
+
+.textarea{
+	margin-bottom: 57px;
+}
+textarea {
+	width: 600px;
+	height: 360px;
+	background-color: #f6f6f6;
+	border: none;
+	font-size: 30pt;
+}
+.del-icon{
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	margin-top: 0;
+}
+.insert-icon{
+	margin-top: 100px;
+	
+}
+.modal_insert{
+	height: 139px;
+	width: 680px;
+	background-color: #fbb03b;
+	color: #ffffff;
+	font-size: 40pt;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0px 0px 20px 20px;
+}
+
+
+.modal2 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	bottom: 0;
+	
+	width: 100vw;
+	height: 100vh;
+
+	display: none;
+
+	background-color: rgba(51, 51, 51, 0.7);
+	/* 애니메이션 효과 */
+	/* transform: translateY(100%); */
+	/* transition: transform 1s ease-in-out; */
+}
+
+.modal2.show {
+	display: block;
+	transform: translateY(0);
+	transition: transform 1s ease-in-out;
+	z-index: 3;
+}
+
+.modal_body2 {
+	display: flex;
+    justify-content: center;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+
+	width: 680px;
+	/* height: 60vh; */
+
+	/* padding: 35px; */
+
+	text-align: center;
+
+	background-color: rgb(255, 255, 255);
+	border-radius: 20px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	/* 애니메이션 효과 */
+	transform: translateY(0);
+	transform: translate(-50%, -50%); 
+}
