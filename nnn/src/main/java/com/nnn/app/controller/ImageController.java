@@ -278,7 +278,7 @@ public class ImageController {
 		canvasService.update(pdfRequest);
 		
 		
-		System.out.println(imageService+"pdfRequest");
+//		System.out.println(imageService+"pdfRequest");
         return ResponseEntity.ok("PDF received successfully!");
 	}
 

@@ -1,6 +1,9 @@
 package com.nnn.app.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -370,26 +373,36 @@ public class HwtController {
 	    try {
 	        Map<String, Object> map = new HashMap<>();
 	        map.put("cs_idx", cs_idx);
+
 	        ImageEntity img = imageService.getImageData(map);
-	        byte[] pdfData = img.getImageData();
+	        ByteArrayInputStream pdfStream = new ByteArrayInputStream(img.getImageData());
+	        byte[] pdfData = convertPdfToByteArray(pdfStream);
+
 	        response.setContentType(MediaType.APPLICATION_PDF_VALUE);
-	        
-	        // try-with-resources 구문을 사용하여 OutputStream을 자동으로 닫습니다.
+
 	        try (OutputStream outputStream = response.getOutputStream()) {
 	            outputStream.write(pdfData);
 	            outputStream.flush();
 	        } catch (IOException e) {
-	            // IOException 처리
 	            e.printStackTrace();
 	        }
-	        
+
 	        System.out.println("--------------------------------------");
 	        System.out.println("PDF Data Length: " + (pdfData != null ? pdfData.length : "No Data"));
 	        System.out.println("--------------------------------------");
 	    } catch (Exception e) {
-	        // 다른 종류의 예외 처리
 	        e.printStackTrace();
 	    }
+	}
+	
+	public byte[] convertPdfToByteArray(InputStream pdfStream) throws IOException {
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    byte[] buffer = new byte[1024];
+	    int bytesRead;
+	    while ((bytesRead = pdfStream.read(buffer)) != -1) {
+	        baos.write(buffer, 0, bytesRead);
+	    }
+	    return baos.toByteArray();
 	}
 	
 //	@RequestMapping(value = "WrittenViewimage/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)

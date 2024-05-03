@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="getImageData" parameterType="image" resultType="image">
-	select imageData from image where cs_idx = ${cs_idx}
+	select imageData from image where cs_idx = ${cs_idx} limit 1
 	</select>
 	
 	<select id="imglist" parameterType="image" resultType="image">
