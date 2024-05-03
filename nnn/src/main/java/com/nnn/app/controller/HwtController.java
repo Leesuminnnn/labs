@@ -28,6 +28,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nnn.app.service.CanvasService;
 import com.nnn.app.service.HwtService;
 import com.nnn.app.service.ImageService;
 import com.nnn.app.vo.AjaxResponse20;
@@ -50,12 +51,14 @@ public class HwtController {
 	
 	private HwtService hwtService;
 	private ImageService imageService;
+	private CanvasService canvasService;
 	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	public HwtController(HwtService hwtService, ImageService imageService) {
+	public HwtController(HwtService hwtService, ImageService imageService, CanvasService canvasService) {
 		this.hwtService = hwtService;
 		this.imageService = imageService;
+		this.canvasService = canvasService;
 	}
 	@RequestMapping(value="Login")
 	public ModelAndView login(ModelAndView mv, NoticeVo vo) throws Exception {
@@ -1379,8 +1382,8 @@ public class HwtController {
 		System.out.println(cipherText7);
 		System.out.println(aes128.decrypt(cipherText7));
 		System.out.println("##################################################");
-		
-		hwtService.modify(vo);
+
+		canvasService.modify1(vo);
 		
 		
 		return "redirect:/hwt/CounselList";
