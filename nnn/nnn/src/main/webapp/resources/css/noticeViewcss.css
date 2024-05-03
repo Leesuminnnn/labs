@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+section{
+	font-size: 36pt;
+	color: #444444;
+}
+.list{
+	height: 155px;
+	padding-left: 40px;
+	padding-right: 40px;
+	background-color: #f9f9f9;
+}
+.list-title{
+	
+}
+.list-date{
+	font-size: 24pt;
+	color: #666666;
+}
+.content{
+	padding-left: 56px;
+	padding-top: 56px;
+	padding-right: 56px;
+	font-size: 24pt;
+}
+.gray-box{
+	background-color: #f9f9f9;
+}
+.status{
+	height: 88px;
+	border-bottom: 1px solid #dddddd;
+	display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.line{
+	border-bottom: 1px solid #dddddd;
+}
+
+
+
+
+
+
+
+
+

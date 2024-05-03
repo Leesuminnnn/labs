@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "member">
+	<!-- 
+	<insert id="insert" parameterType="memberVo">
+		insert into member (
+		m_id, m_name, m_email) 
+		values 
+		(#{m_id}, #{m_name}, #{m_email}
+		)
+	</insert>
+ -->
+	<select id="detail" resultType="memberVo" parameterType="int">
+		select * from csworktools.member where midx=#{midx}
+	</select>
+	<select id="detail2" resultType="memberVo" parameterType="map">
+		select * from csworktools.member where m_name=#{m_name}
+	</select>
+	
+	
+	
+	<update id="detailAction" parameterType="memberVo">
+		update csworktools.member set  m_name = #{m_name},  
+		m_in = #{m_in}, m_de = #{m_de}, m_no = #{m_no} where midx=#{midx}
+	</update>
+	
+	<select id="login" parameterType="memberVo" resultType="memberVo">
+        select *
+        from csworktools.member
+        where m_id = #{m_id} and m_pw = #{m_pw} and m_delyn = 'N'
+    </select>
+    
+    
+    
+    <select id="mlist" resultType="memberVo">
+    <!-- 관리자 제외하고 회원 정보 불러오기 -->
+    	SELECT * FROM csworktools.member WHERE m_status != '2' order by midx DESC
+    </select>
+    <select id="selectmember" parameterType="int" resultType="int">
+    	select count(*) from csworktools.member where midx = #{midx} and m_delyn = 'N'  
+    </select>
+	<update id="approve" parameterType="int">
+		<!-- 관리자 페이지에서 승인 -->
+		UPDATE csworktools.member SET m_status = '1' WHERE midx = #{midx}
+	</update>
+	
+	<insert id="KakaoInfo" parameterType="memberVo">
+		<!-- 가입 하자마자 승인 -->
+		
+		insert into csworktools.member (
+		m_id, m_name, m_email, m_status, m_point) 
+		values 
+		(#{m_email}, #{m_name}, #{m_email}, 1, 0
+		)
+		 
+		<!-- 가입 후 승인절차 -->
+		<!-- 
+		insert into member (
+		m_id, m_name, m_email, m_status, m_point) 
+		values 
+		(#{m_email}, #{m_name}, #{m_email}, 0, 0
+		)
+		 -->
+		
+	</insert>
+	
+	<select id="getMemberByEmail" parameterType="string" resultType="memberVo">
+    	SELECT * FROM csworktools.member WHERE m_email = #{m_email}
+	</select>
+	<update id="updatePoint" parameterType="map">
+	<!-- 
+	update csworktools.member set m_point = m_point + 2000
+	where midx = #{midx}
+	 -->
+	 update csworktools.customer set m_point = m_point + 2000
+	where midx = #{midx}
+	</update>
+	
+	
+	
+	<!-- 시연용 -->
+	
+	<insert id="KakaoInfo2" parameterType="customerVo">
+		<!-- 가입 하자마자 승인 -->
+		
+		insert into csworktools.customer (
+		m_id, m_name, m_email, m_status, m_point, m_no) 
+		values 
+		(#{m_email}, #{m_name}, #{m_email}, 1, 0, 000000
+		)
+	</insert>
+	<select id="login2" parameterType="customerVo" resultType="customerVo">
+        select *
+        from csworktools.customer
+        where m_id = #{m_id} and m_pw = #{m_pw} and m_delyn = 'N'
+    </select>
+	<select id="getMemberByEmail2" parameterType="string" resultType="customerVo">
+    	SELECT * FROM csworktools.customer WHERE m_email = #{m_email}
+	</select>
+
+	<select id="detail3" resultType="customerVo" parameterType="map">
+		select * from csworktools.customer where m_name=#{m_name}
+	</select>
+	<select id="detail4" resultType="customerVo" parameterType="int">
+		select * from csworktools.customer where midx=#{midx}
+	</select>
+	<select id="mlist2" resultType="customerVo">
+    <!-- 관리자 제외하고 회원 정보 불러오기 -->
+    	SELECT * FROM csworktools.customer WHERE m_status != '2' order by midx DESC
+    </select>
+    <update id="detailAction2" parameterType="customerVo">
+		update csworktools.customer set  m_name = #{m_name},  
+		m_in = #{m_in}, m_de = #{m_de}, m_no = #{m_no} where midx=#{midx}
+	</update>
+
+</mapper>

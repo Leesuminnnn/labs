@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+section{
+	font-size: 30pt;
+}
+.container{
+	display: flex;
+	justify-content: space-between;
+	background-color: #fad15b;	/* 유저 정보 배경 */
+	height:290px;
+	/* width: 100vw; */
+	align-items: center; /* 수직 정렬을 위해 align-items 속성을 사용합니다. */
+}
+.content-text1{
+	text-align: left;
+	font-size: 28pt;
+}
+.content-text5{
+	text-align: center;
+}
+.content-text2{
+	align-items: center;
+	/* font-size: 26pt; */
+	font-size: 30pt;
+}
+.content-text3{
+	/* font-size: 40pt; */
+	font-size: 44pt;
+}
+.content-text4{
+	/* font-size: 50pt; */
+	font-size: 66pt;
+}
+.first-content{
+	text-align: left;
+	margin-left: 80px;
+}
+.second-content{
+	text-align: center;
+	margin-right: 45px;
+}
+.line{
+	border-bottom: 20px solid #eaeaea;
+}
+.list{
+	height: 140px;
+	padding-left: 40px;
+	border-bottom: 1px solid #eaeaea;
+}
+.text{
+	margin-left: 40px;
+	font-size: 36pt;
+	color: #555555;
+}
+.line2{
+	border-bottom: 1px solid #eaeaea;
+}
+
+
+
+
