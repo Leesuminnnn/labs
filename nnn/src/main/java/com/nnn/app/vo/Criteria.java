@@ -2,9 +2,9 @@ package com.nnn.app.vo;
 
 public class Criteria {
 
-	
-	private int page; 
-	private int perPageNum;
+	// 페이징 처리
+//	private int page; 
+//	private int perPageNum;
 	
 	private String keyword1;
 	private String keyword2;
@@ -15,8 +15,8 @@ public class Criteria {
 	
 	public Criteria() {
 
-		this.page = 1;
-		this.perPageNum = 10;
+//		this.page = 1;
+//		this.perPageNum = 10;	// 페이징 처리시 1페이지당 출력되는 게시물 수
 	    this.keyword1 = getKeyword1();
 	    this.keyword2 = getKeyword2();
 	    this.keyword3 = getKeyword3();
@@ -68,47 +68,52 @@ public class Criteria {
 		this.keyword3 = keyword3;
 	}
 	
-	public int getPageStart() {
-		return (this.page - 1)  * perPageNum;
-	}
-	
-	public int getPage() {
-		return page;
-	}
-	
-	public void setPage(int page) {
-		
-		if(page <=0) {
-			this.page =1;
-		}else {
-			this.page=page;
-		}
-	}
-	
-	public int getPerPageNum() {
-		
-		return perPageNum;
-	}
-	
-	public void setPerPageNum(int pageCount) {
-		
-		int cnt = this.perPageNum;
-		
-		if(pageCount != cnt) {
-			this.perPageNum = cnt;
-		}else {
-			this.perPageNum = pageCount;
-		}
-		
-	}
+//	public int getPageStart() {
+//		return (this.page - 1)  * perPageNum;
+//	}
+//	
+//	public int getPage() {
+//		return page;
+//	}
+//	
+//	public void setPage(int page) {
+//		
+//		if(page <=0) {
+//			this.page =1;
+//		}else {
+//			this.page=page;
+//		}
+//	}
+//	
+//	public int getPerPageNum() {
+//		
+//		return perPageNum;
+//	}
+//	
+//	public void setPerPageNum(int pageCount) {
+//		
+//		int cnt = this.perPageNum;
+//		
+//		if(pageCount != cnt) {
+//			this.perPageNum = cnt;
+//		}else {
+//			this.perPageNum = pageCount;
+//		}
+//		
+//	}
+//	
+//	@Override
+//	public String toString() {
+//		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", keyword1=" + keyword1 +", keyword2=" + keyword2 + ", keyword3=" + keyword3 +  
+//				", type1=" + type1 + ", type2=" + type2 + ", type3=" + type3
+//				+ "]";
+//	}
 	
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", keyword1=" + keyword1 +", keyword2=" + keyword2 + ", keyword3=" + keyword3 +  
+		return "Criteria [keyword1=" + keyword1 +", keyword2=" + keyword2 + ", keyword3=" + keyword3 +  
 				", type1=" + type1 + ", type2=" + type2 + ", type3=" + type3
 				+ "]";
 	}
-	
-	
 	
 }

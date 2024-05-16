@@ -157,7 +157,7 @@
 <body style="">
 <%@ include file="header.jsp" %>
 
-<form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenAction.do">
+<form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/hwt/WrittenAction.do" enctype="multipart/form-data">
 
 <div class="nav__section" style=" ">
 		<div class="nav__link" data-menu="userall" data-content="all" onclick="location.href='${pageContext.request.contextPath}/hwt/CounselList.do'">
@@ -171,48 +171,51 @@
 </div>
 
 <section style="
-	margin-bottom: 100px;margin-top: 62px;background-color: #f7f7f7;margin-left: 240px; display: flex; flex-wrap: wrap; justify-content: center;padding: 50px 0 80px 0;min-width: 1150px;
+	margin-bottom: 100px;margin-top: 62px;background-color: #f7f7f7;margin-left: 240px; display: flex; flex-wrap: wrap; justify-content: center;padding: 50px 50px 80px 50px;min-width: 1025px;
 	">
 	
 <div class="area" style="">
 <div id="capture_area" class="capture_area" style="">
 
 <input type="hidden" id="imgData" name="imgData">
-<h1 style="text-align: center; font-size: 30pt; padding: 40px 0 30px 0;">입 원 서 약 서</h1>
+<input type="hidden" id="imgData3" name="imgData3">
+<input type="hidden" id="imgData1" name="imgData1">
+<input type="hidden" id="imgData2" name="imgData2">
+<h1 style="text-align: center; font-size: 28pt; padding: 40px 0 20px 0;">입 원 서 약 서</h1>
 
-<div class="bold" style="font-size: 16pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 966px; padding-bottom:13px;">※ 환자의 인적사항</div>
-<div style="text-align: center; margin-bottom: 20px;">
-<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;" >
+<div class="bold" style="font-size: 15pt; color:#303030; display: flex; align-items: start; margin: 0 auto; width: 100%; padding-bottom:13px;">※ 환자의 인적사항</div>
+<div style="text-align: center; margin-bottom: 10px;">
+<table border=1 style="border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; font-size:18px;" >
 	<tr>
-		<td class="normal" width="170px" height="50px">성명</td>
-		<td class="light" width="313px" onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input style= "margin-left: 20px;" type="text" name="cs_data_01" value="${param1}"></td>
-		<td class="normal" width="170px" height="50px">차트번호</td>
-		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" width="313px" style="text-align: left;">
-		<input style="margin-left: 20px;" name="cs_data_02" type="text" value="${param4}"></td>
+		<td class="normal" width="120px" height="45px">성명</td>
+		<td class="light" onclick="this.querySelector('input').focus();" style="text-align: left;">
+		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_01" value="${param1}"></td>
+		<td class="normal" width="120px" height="45px">차트번호</td>
+		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" style="text-align: left;">
+		<input style="margin-left: 20px; width: 170px;" name="cs_data_02" type="text" value="${param4}"></td>
 	</tr>
 	<tr>
-		<td class="normal" height="50px">입원병실</td>
+		<td class="normal" height="45px">입원병실</td>
 		<td onclick="this.querySelector('input').focus();" class="light" style="text-align: left;">
-		<input style= "margin-left: 20px;" type="text" name="cs_data_03" value="${param5}"></td>
-		<td class="normal" height="50px">성별 </td>
+		<input style= "margin-left: 20px;  width: 170px;" type="text" name="cs_data_03" value="${param5}"></td>
+		<td class="normal" height="45px">성별 </td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
 		<input type="radio" name="cs_data_04" value="남성" style="cursor: pointer;" id="genderM" <c:if test="${param2 eq '남성' }">checked</c:if>><label for="genderM" style="cursor: pointer;">남</label></td>
 		<td onclick="this.querySelector('input').checked = true;" class="light" style="cursor: pointer;">
 		<input type="radio" name="cs_data_04" value="여성" id="genderF"<c:if test="${param2 eq '여성' }">checked</c:if>><label for="genderF" style="cursor: pointer;">여</label></td>
 	</tr>
 	<tr>
-		<td class="normal" height="50px">생년월일</td>
+		<td class="normal" height="45px">생년월일</td>
 		<td class="light" onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input style= "margin-left: 20px;" type="text" name="cs_data_05" value="${param3 }"></td>
-		<td class="normal" height="50px">전화</td>
+		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_05" value="${param3 }"></td>
+		<td class="normal" height="45px">전화</td>
 		<td style="text-align: left;" class="light" colspan="2" onclick="this.querySelector('input').focus();">
-		<input style="margin-left: 20px;" type="text" name="cs_data_06" value="${param6 }"></td>
+		<input style="margin-left: 20px; width: 170px;" type="text" name="cs_data_06" value="${param6 }"></td>
 	</tr>
 </table>
 </div>
-<div class="light" style="font-size:14pt; color:#222222; width:966px; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
-<span style="text-indent:15px;"> 
+<div class="light" style="font-size:14pt; color:#222222; width:100%; display: flex; align-items: start; flex-direction: column; margin: 0 auto;">
+<span style="text-indent:15px; font-size:16px; line-height:25px;"> 
 본인(환자의 주보호자)은 귀 의료기관에서 제시한 제반 규칙을 준수함은 물론, 치료와 퇴원 등 의사 및 간호사(또는 직원)의 정당한 지시에 따르며, 아래의 내용을 읽고 서약 및 동의합니다.
 </span>
 <ol class="light_info_list1">
@@ -237,16 +240,22 @@
 	<li class="light_info1">
 	개인정보 수집 및 활용 동의
 	</li>
-		<li style="line-height:29px;">본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.</li>
-		<li style=" line-height:29px;"> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</li>
-		<li style=" line-height:29px; margin-bottom: 10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
-		<li style="margin-bottom: 10px;"> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
-		<li style="margin-bottom: 10px;"> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
-		<li style="margin-bottom: 20px;"> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
+		<li style="line-height:24px; font-size:16px;">본원은 진료 등을 위해 아래와 같은 최소한의 개인정보를 수집함. 진료를 위한 필요정보는 의료법에 따라 별도의 동의 없이 수집되며, 동의를 하지 않더라도 진료에는 불이익이 없음.</li>
+		<li style=" line-height:24px; font-size:15px; "> (1) 개인정보 수집항목 : (필수항목) 성명, 주소, 전화번호, 주민등록번호, 보험정보</li>
+		<li style=" line-height:24px; font-size:15px; margin-bottom: 10px;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;(선택항목) 이메일, 문자메세지 서비스 수신 동의여부 </li>
+		<li style="margin-bottom: 10px; font-size:15px; "> (2) 개인정보 수집방법 : 진료 목적은 별도로 받지 않으며, 진료목적 외는 서면으로 수집</li>
+		<li style="margin-bottom: 10px; font-size:15px; "> (3) 개인정보의 수집 및 이용목적 : 진단/검진 예약, 조회 및 진료를 위한 본인 확인 절차 등</li>
+		<li style="margin-bottom: 20px; font-size:15px; "> (4) 개인정보의 보유 및 이용기간 : 개인정보의 수집목적 또는 제공받은 목적이 달성될 때 파기</li>
 </ol>
-<span class="bold" style="color:#303030; font-size: 16pt; padding-top:15px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
+</div>
+</div>
+</div>
+
+<div class="area" style="">
+<div id="capture_area2" class="capture_area2" style="padding-top: 100px;">
+<span class="bold" style="color:#303030; font-size: 15pt; padding-top:15px;">※ 환자본인, 주보호자 및 부보호자에 대한 안내</span>
 <ol class="light_info_list1">
-	<li class="light_info1">
+	<li class="light_info1" style="padding-top: 5px;">
 	주보호자는 환자의 입원과 전원, 퇴원 등의 절차상 동의인 이며, 환자 상태의 급격한 변화, 낙상 등의 안전사고, 사망 등 환자입원생활에 관련된 사항에 대해 <b class="bold">일차적 연락대상</b>이며 타보호자는 <b>상담이 제한</b>됩니다. 주보호자 변경 시에는  주보호자변경요청서를 통해서만 가능합니다.</li>
 	<li class="light_info1">
 	주보호자 및 부보호자는 환자의 입원비용과 기타 제반 비용 발생 시 매월 <b>정산의 책임</b>을 지게 되며 
@@ -255,13 +264,12 @@
 		</p>
 	</li>
 	<li class="light_info1">
-	주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, 심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
+	주보호자는 환자의 입원기록 외 사본 발급 및 제증명 발급의 주체가 되며, 수혈동의서, 신체 보호대 동의서, <br>심폐소생술거부동의서, 낙상관련설명안내서, 병원비 등의 규정상 동의절차가 필요한 경우 <b>서명 대상자</b>가 됩니다.
 	</li>
 	<li class="light_info1">
-	입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <br/><b>법적 대리인</b>이 됩니다.
+	입원생활에 관련 법적 분쟁 발생 시 원칙적으로 환자 본인이 의료기관의 소송 상대방이 되며, 불가피할 경우 주보호자가 <b>법적 대리인</b>이 됩니다.
 	</li>
 </ol>
-</div>
 <br>
 
 <table class="table_type1">
@@ -277,15 +285,16 @@
 			주<br>보<br>호<br>자
 		</th>
 		<th class="normal" style="">성 명</th> 
-		<th style="text-align: left;" onclick="this.querySelector('input').focus();">
-			<input class="light" name="cs_data_07" style="margin-left: 33px; width:200px;" value="${param4 }" type="text"/>
+		<th style="text-align: left;" onclick="this.querySelector('input').focus();" >
+			<input class="light" name="cs_data_07" style="margin-left: 25px;" value="${param4 }" type="text"/>
 		</th>
 		<th onclick="this.querySelector('input').focus();" style="" class="normal">
-			(관계 :<input class="light" name="cs_data_08" style="width:175px;" type="text"/>)
+			(관계 :&nbsp;<input class="light" name="cs_data_08" style="width:110px;" type="text"/>&nbsp;)
 		</th>
 		<th style="position: relative;">
-			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg1" src="" alt="">
-				<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1">
+			<img style="position: absolute; z-index: 1; width: 100px; top: -35px; " id="canvasImg1" src="" alt="">
+			<input type="hidden" id="canvasImg1" name="canvasImg1" value="">
+			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1">
 				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
 			</div>
 		</th>
@@ -293,16 +302,16 @@
 	<tr>
 		<th class="normal">주 소</th>
 		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_09" type="text" style="margin-left: 33px; width:460px;"/>
+			<input class="light" name="cs_data_09" type="text" style="margin-left: 25px; width:460px;"/>
 		</th>
 	</tr>
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_10" type="text" value="${param5}" style="margin-left:33px; width:360px;"/>
+			<input class="light" name="cs_data_10" type="text" value="${param5}" style="margin-left:25px; width:250px;"/>
 		</th>
 		<th colspan="2" style="text-align: right;">
-			<div class="checkbox-wrapper-13" style="font-weight:400; display:flex;">
+			<div class="checkbox-wrapper-13" style="font-weight:400; display:flex; width:135px;">
 				<input id="cs_data_11" id="cs_data_11" type="checkbox" name="cs_data_11" class="normal" value="주보호자 비용안내">
 				<label for="cs_data_11" for="cs_data_11">비용안내</label>
 			</div>
@@ -324,32 +333,34 @@
 		</th>
 		<th class="normal">성 명</th> 
 		<th style="text-align: left;" onclick="this.querySelector('input').focus();" >
-			<input class="light" name="cs_data_12" style="margin-left: 33px; width:200px;" type="text"/>
+			<input class="light" name="cs_data_12" style="margin-left: 25px;" type="text"/>
 		</th>
 		<th onclick="this.querySelector('input').focus();" style="" class="normal">
-			(관계 :<input class="light" name="cs_data_13" style="width:175px;" type="text"/>)
+			(관계 :&nbsp;<input class="light" name="cs_data_13" style="width:110px;" type="text"/>&nbsp;)
 		</th>
 		<th style="position: relative;">
-			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" src="" alt="">
+			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" name="canvasImg2" src="" alt="">
+			<input type="hidden" id="canvasImg2" name="canvasImg2" value="">
 			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
+			
 				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
 			</div>
 		</th>
 	</tr>
 	 
 	<tr>
-		<th class="normal">주 소 </th>
+		<th style="height:45px;" class="normal">주 소 </th>
 		<th colspan="4" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_14" style="margin-left: 33px; width:460px;" type="text"/>
+			<input class="light" name="cs_data_14" style="margin-left: 25px; width:460px;" type="text"/>
 		</th>
 	</tr>
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_15" type="text" style="margin-left: 33px; width:360px;"/>
+			<input class="light" name="cs_data_15" type="text" style="margin-left: 25px; width:250px;"/>
 		</th>
 		<th colspan="2" style="text-align: right;">
-			<div class="checkbox-wrapper-13" style="font-weight:400; display:flex;">
+			<div class="checkbox-wrapper-13" style="font-weight:400; display:flex; width:135px;">
 			  <input id="cs_data_16" id="cs_data_16" type="checkbox" name="cs_data_16" class="normal" value="부보호자 비용안내">
 			  <label for="cs_data_16" for="cs_data_16">비용안내</label>
 			</div>
@@ -442,14 +453,14 @@
 
 
 <div style="text-align: center; margin-bottom: 30px;">
-	<div style="margin-bottom: 30px;">
-		<table border=1 style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; 
+	<div style="margin-bottom: 20px;">
+		<table border=1 style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; 
 		border: 1px solid #c7c7c7;" >
 			<tr style="background-color: #fafafa;">
-				<td colspan="3" style="height: 56px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
+				<td colspan="3" style="height: 45px; text-align: left;" class="normal"><div style="margin-left: 25px;">환자가 아닌 보호자의 동의사유</div></td>
 			</tr>
 			<tr style="border-bottom: none; background-color: #ffffff;">
-				<td style="border-right: none; border-bottom: none; height: 56px; text-align: left; width:585px;">
+				<td style="border-right: none; border-bottom: none; height: 45px; text-align: left;">
 				<!-- 
 				<input style="margin-left: 21px; cursor: pointer;" name="cs_data_17" id="cs_data_17" value="환자의 신체적 정신적 장애로 의사결정 불가" type="checkbox"/>
 				<label for="cs_data_17" style="cursor: pointer;"> 환자의 신체적 정신적 장애로 의사결정 불가</label>
@@ -483,7 +494,7 @@
 			</tr>
 			
 			<tr style="background-color: #ffffff; border-top:none;">
-				<td style="border-right: none; border-top:none; height: 56px; text-align: left;">
+				<td style="height:45px; border-right: none; border-top:none; text-align: left;">
 				<!-- 
 				<label for="cs_data_20" style="cursor: pointer;"><input style="margin-left:21px; cursor: pointer;" name="cs_data_20" id="cs_data_20" value="내용 설명 시 환자의 심신에 중대한 영향 우려" type="checkbox"/>
 				 내용 설명 시 환자의 심신에 중대한 영향 우려</label>
@@ -519,32 +530,67 @@
 </div>
 </div>
 
+
 <!-- 입원안내 -->
 <div class="area" style="">
-<div id="capture_area2" class="capture_area2">
+<div id="capture_area3" class="capture_area3">
 	<div class="hos_info1">
 		<h2 class="hos_info_ho" style="text-align: center;">효사랑가족요양병원 입원 안내</h2>
 		<div style="display:flex;">
-			<p style="font-size:1.1rem; font-weight: 700; padding: 0 0 10px 0;">
+			<p style="font-size:1.1rem; font-weight: 700;">
 				입원일 : 20&nbsp;<input class="light" id="hos_year" name="hos_year" style="width:40px;" type="text" value="" />&nbsp;.
 				&nbsp;<input class="light" id="hos_month" name="hos_month" style="width:40px; text-align:right;" type="text" value="" />&nbsp;.
 				&nbsp;<input class="light" id="hos_day" name="hos_day" style="width:40px; text-align:right;" type="text" value="" />&nbsp;.
 			</p>
 		</div>
-		<div style="text-align: center; margin-bottom: 25px;">
-			<table border=1 style="border-collapse: collapse; text-align: center; width: 966px; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
+		<div style="text-align: center; margin-bottom: 10px;">
+			<table border=1 style="border-collapse: collapse; text-align: center; width: 100%; margin-left: auto; margin-right: auto; font-size:18px;  border: 1px solid #dadada;">
 				<tr>
-					<td class="normal" width="170px" height="56px" style="background:#fafafa;">No.</td>
+					<td class="normal" width="170px" height="45px" style="background:#fafafa;">No.</td>
 					<td class="light" width="313px" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" id="hos_number" name="hos_number" value="" />
 					</td>
-					<td class="normal" width="150px" height="56px" rowspan="2" style="background:#fafafa;">특이<br>사항</td>
+					<td class="normal" width="150px" height="45px" rowspan="2" style="background:#fafafa;">특이<br>사항</td>
 					<td  class="light" width="413px" style="text-align: left;" rowspan="2">
-						<textarea cols="20" rows="3" style="margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;" id="hos_po" name="hos_po" ></textarea>
+						<textarea cols="20" rows="3" onkeyup="check_length(this);" onkeydown="check_enter(event);" id="hos_po" class="hos_po" name="hos_po" ></textarea>
+						<script>
+						// textarea 글자 수 제한
+						function check_length(area){
+							var text = area.value;
+							var text_length = text.length;
+							// 최대 글자 수
+							var max_length = 40;
+							
+							if(text_length>max_length){
+								alert(max_length+"자 이상 작성할 수 없습니다.")
+								text = text.substr(0, max_length);
+								area.value = text;
+								area.focus();
+							}
+						}
+						
+						var enterCount = 0;
+						// 엔터키 입력 제한
+						function check_enter(event) {
+				            if (event.keyCode === 13) { // Enter 키 코드
+				                enterCount++;
+				                if (enterCount > 2) {
+				                    event.preventDefault();
+				                    alert("엔터키는 2번 이상 입력할 수 없습니다.");
+				                }
+				            }
+				        }
+						// 엔터키 입력 횟수 초기화
+						document.getElementById('hos_po').addEventListener('input', function() {
+				            var text = this.value;
+				            var enterMatches = text.match(/\n/g); // 엔터 키 입력 매칭
+				            enterCount = enterMatches ? enterMatches.length : 0;
+				        });
+						</script>
 					</td>
 				</tr>
 				<tr>
-					<td class="normal" height="56px" style="background:#fafafa;">이름</td>
+					<td class="normal" height="45px" style="background:#fafafa;">이름</td>
 					<td class="light" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" id="hos_name" name="hos_name" value="" />
 					</td>
@@ -552,9 +598,9 @@
 			</table>
 		</div>
 		<div class="hos_info" style="">
-			<table border=1 style="">
+			<table border=1 style="width:100%;">
 				<tr>
-					<td class="normal" width="195px" height="50px" style="background:#fafafa;">구분</td>
+					<td class="normal" width="195px" height="40px" style="background:#fafafa;">구분</td>
 					<td class="light" width="313px" colspan="3">
 						<div class="checkbox_click"style=" ">
 							<div class="checkbox-wrapper-13">
@@ -581,120 +627,120 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="normal" height="56px" rowspan="2" style="background:#fafafa;">상병명</td>
-					<td class="light" style="text-align: left; height:56px; " colspan="3">
+					<td class="normal" height="45px" rowspan="2" style="background:#fafafa;">상병명</td>
+					<td class="light" style="text-align: left; height:50px; " colspan="3">
 						<input style= "margin-left: 33px; width:300px;" type="text" id="hos_code1" name="hos_code1" value="" />
 					</td>
 				</tr>
 				<tr>
-					<td class="light" style="text-align: left; height:56px;" colspan="3">
+					<td class="light" style="text-align: left; height:45px;" colspan="3">
 						<input style= "margin-left: 33px; width:300px;" type="text" id="hos_code2" name="hos_code2" value=""/>
 					</td>
 				</tr>
 				<tr>
 					<td rowspan="3" class="normal" width="150px" style="background:#fafafa;">입원실</td>
-					<td class="normal" width="290px" height="50px" style="background:#fafafa;">과</td>
-					<td class="normal" width="290px" height="50px" style="background:#fafafa;">병실</td>
-					<td class="normal" width="290px" height="50px" style="background:#fafafa;">인실</td>
+					<td class="normal" width="290px" height="40px" style="background:#fafafa;">과</td>
+					<td class="normal" width="290px" height="40px" style="background:#fafafa;">병실</td>
+					<td class="normal" width="290px" height="40px" style="background:#fafafa;">인실</td>
 				</tr>
 				<tr>
-					<td rowspan="2"  class="light" style="text-align: left;" height="80px">
-						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_department" name="hos_department" value="" >
+					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
+						<input style= "margin-left: 45px; width:127px; text-align:center;" type="text" id="hos_department" name="hos_department" value="" >
 					</td>
 				
 					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
-						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_ward" name="hos_ward" value="" >
+						<input style= "margin-left: 45px; width:127px; text-align:center;" type="text" id="hos_ward" name="hos_ward" value="" >
 					</td>
 					<td rowspan="2"  class="light" style="text-align: left;" height="50px">
-						<input style= "margin-left: 45px; width:180px; text-align:center;" type="text" id="hos_room" name="hos_peo" value="" >
+						<input style= "margin-left: 45px; width:127px; text-align:center;" type="text" id="hos_room" name="hos_room" value="" >
 					</td>
 				</tr>
 			</table>
 		</div>
 		
 		<div class="hos_info2" style="">
-			<table class="info_important" border=1 style="">
+			<table class="info_important" border=1 style="width:100%;">
 				<tr style="background-color: #fafafa;">
-					<th style="height:50px;">입원 시 필요사항 설명 유무</th>
+					<th style="height:45px;">입원 시 필요사항 설명 유무</th>
 					<th style="width:125px;">확인</th>
 				</tr>
 				<tr>
-					<td>1. 진료비 관련한 사항&nbsp; ➡ &nbsp;️<b>매월(4일~10일) 전월 분 정산</b></td>
+					<td style="font-size:16px;">1. 진료비 관련한 사항&nbsp; ➡ &nbsp;️<b>매월(4일~10일) 전월 분 정산</b></td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check1" name="check1" class="normal" value="">
+							<input type="checkbox" id="check1" name="check1" class="normal" value="진료비 관련 사항">
 							<label for="check1"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>2. 앰뷸런스 이용안내: 외진, 응급전원(주,야간) 사설이용</td>
+					<td style="font-size:16px;">2. 앰뷸런스 이용안내: 외진, 응급전원(주,야간) 사설이용</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check2" name="check2" class="normal" value="">
+							<input type="checkbox" id="check2" name="check2" class="normal" value="앰뷸런스 이용안내">
 							<label for="check2"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>3. 환자, 직원의 권리와 의무에 대한 안내</td>
+					<td style="font-size:16px;">3. 환자, 직원의 권리와 의무에 대한 안내</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check3" name="check3" class="normal" value="">
+							<input type="checkbox" id="check3" name="check3" class="normal" value="환자, 직원의 권리 의무">
 							<label for="check3"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>4. 제증명은 3일 전 신청하며 환자 이외에는 발급 제한안내</td>
+					<td style="font-size:16px;">4. 제증명은 3일 전 신청하며 환자 이외에는 발급 제한안내</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check4" name="check4" class="normal" value="">
+							<input type="checkbox" id="check4" name="check4" class="normal" value="제증명 발급 제한안내">
 							<label for="check4"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>5. 외출 / 외박 / 면회 / 음주안내 / 퇴원(3일전고지)</td>
+					<td style="font-size:16px;">5. 외출 / 외박 / 면회 / 음주안내 / 퇴원(3일전고지)</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check5" name="check5" class="normal" value="">
+							<input type="checkbox" id="check5" name="check5" class="normal" value="외출외박">
 							<label for="check5"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>6. 타병원진료(지참약, 검사)안내</td>
+					<td style="font-size:16px;">6. 타병원진료(지참약, 검사)안내</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check6" name="check6" class="normal" value="">
+							<input type="checkbox" id="check6" name="check6" class="normal" value="타병원 진료 안내">
 							<label for="check6"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>7. 낙상으로 인한 주의사항 안내</td>
+					<td style="font-size:16px;">7. 낙상으로 인한 주의사항 안내</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check7" name="check7" class="normal" value="">
+							<input type="checkbox" id="check7" name="check7" class="normal" value="낙상 주의 안내">
 							<label for="check7"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>8. 임종 시 안치에 대한 안내</td>
+					<td style="font-size:16px;">8. 임종 시 안치에 대한 안내</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check8" name="check8" class="normal" value="">
+							<input type="checkbox" id="check8" name="check8" class="normal" value="임종시 안치 안내">
 							<label for="check8"></label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td>9. 응급전원 및 임종 시 정산에 대한 안내</td>
+					<td style="font-size:16px;">9. 응급전원 및 임종 시 정산에 대한 안내</td>
 					<td>
 						<div class="checkbox_check checkbox-wrapper-13">
-							<input type="checkbox" id="check9" name="check9" class="normal" value="">
+							<input type="checkbox" id="check9" name="check9" class="normal" value="정산 안내">
 							<label for="check9"></label>
 						</div>
 					</td>
@@ -702,16 +748,16 @@
 			</table>
 		</div>
 		<div class="hos_info3" style="">
-			<table class="info_important" border=1 style="">
+			<table class="info_important" border=1 style="width:100%;">
 				<tr>
-					<td style="height:80px; line-height:25px;">
-						<p style="display:flex;">
+					<td style="height:70px; line-height:24px;">
+						<p style="display:flex;font-size:16px; margin-top:3px;">
 							<i class="light_info_i">※</i>
-							<em style="font-style:normal;padding-left:5px; word-spacing: 1px;">
+							<em style="font-style:normal;padding-left:5px;">
 							본원 입원 <i style="text-decoration:underline; font-style:normal">중 타 의료기관 진료시 요양(의료)급여 의뢰서</i>를 지참 하지 않은 경우 진료비는 전액 본인 부담 적용됩니다.
 							</em>
 						</p>
-						<p style="font-style:normal; font-size:13px; text-align:right; margin-right:15px;">국민건강보험법 시행규칙 (시행일 : 2019.11.1.) 보건복지부령 제 637호</p>
+						<p style="font-style:normal; font-size:13px; text-align:right; margin-right:10px;">국민건강보험법 시행규칙 (시행일 : 2019.11.1.) 보건복지부령 제 637호</p>
 					</td>
 					<td width="126px">
 						<div  class="checkbox_check2">
@@ -721,11 +767,11 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="height:80px; line-height:25px;">
-						<p style="display:flex;">
+					<td style="height:60px; line-height:24px;">
+						<p style="display:flex;font-size:16px;">
 							<i class="light_info_i">※</i>
 							<em style="font-style:normal;padding-left:5px;">
-							증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의 징역 또는 2천만원 이하의 벌금에 처할<br>수 있다.
+							증 부정수급 확인 시 진료비 전액환수(공단부담금)하고 2년 이하의 징역 또는 2천만원 이하의 벌금에 처할 수 있다.
 							</em>
 						</p>
 					</td>
@@ -745,37 +791,39 @@
 
 <!-- 본인부담 안내 -->
 <div class="area" style="">
-<div id="capture_area3" class="capture_area3">
-	<div class="hos_info2 light" style="width:966px;">
+<div id="capture_area4" class="capture_area4">
+	<div class="hos_info2 light" style="width:100%;">
 		<h2 class="hos_info_ho">본인부담액상한제 안내</h2>
-		<div class="light_info" style="font-size:16px; word-spacing: 2px; color:#222222; padding-top: 10px; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
-			<span class="bold" style="color:#303030; font-size: 16pt; padding-top:6px;">※ 본인부담금 상한제 (적용기간 : 당해연도 1월1일 ~ 12월31일)</span>
-			<p class="" style="font-size:18px; line-height:29px;">
+		<div class="light_info" style="font-size:16px; color:#222222; display: flex; align-items: start; flex-direction: column; margin: 0 auto; text-align: left;">
+			<span class="bold" style="font-size: 15pt; color: #303030; display: flex; align-items: start; margin: 0 auto; width: 100%; padding-bottom: 10px;">
+			※ 본인부담금 상한제 (적용기간 : 당해연도 1월1일 ~ 12월31일)
+			</span>
+			<p class="">
 				「국민건강보험법시행령 제19조 2항 및 4항 비용의 본인부담」 의거. 장기 및 중증질환자의 고액진료비 지출로 인한 가계의 경제적 부담을 경감하고 건강보험 본연의 보장성을 확보하고 가계안정을 도모하기 위한 제도.
 			</p>
-			<p class="" style="font-size:18px; line-height:29px;">
+			<p class="">
 				<b>2020년 1월 1일부터 본인부담상한제 사전급여는 요양병원이아닌, 환자에게 직접지급하는 방식으로 변경됩니다.</b>
 				건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 
-				<b>최고상한액 ( <input class="yesrs" type="text" id="years" name="years" value="" style="width:50px; text-align:right;"> 년 기준
+				<b>최고상한액 ( <input class="yesrs" type="text" id="yesrs_pay" name="yesrs_pay" value="" style="width:50px; text-align:right;"> 년 기준
 				<input class="yesrs" type="text" id="payment" name="payment" value="" style="width:50px; text-align:right;"> 만원) 초과금액을 환자에게 직접 지급합니다.</b><br>
 				다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터 3~5개월 후 직접 지급하게 됩니다.
 			</p>
-			<p class="" style="font-size:18px; line-height:29px;">개인별 본인부담한액 기준보험표 결정(건강보험료정산) 전후로 나누어 <b>개인별 본인부담상한액 초과금액을 건강보험공단에서 환자에게 다음해 7~8월경 직접지급</b></p>
+			<p class="">개인별 본인부담한액 기준보험표 결정(건강보험료정산) 전후로 나누어 <b>개인별 본인부담상한액 초과금액을 건강보험공단에서 환자에게 다음해 7~8월경 직접지급</b></p>
 <!-- 			<p class="" style="padding-bottom: 5px; font-size:18px;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p> -->
 		</div>
 		<div class="hos_pay2" style="text-align: center; margin-bottom: 25px;">
-			<table class="info_important2" border=1 style="">
+			<table class="info_important2" border=1 style="width:100%;">
 				<tr>
-					<td colspan="4" style="height:50px;">
-						<p style="text-align: left; margin: 0 0 0 28px;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
+					<td colspan="4" style="height:45px;">
+						<p style="text-align: left; margin: 0 0 0 28px; font-size:13pt;">※ 본인은 병원측으로부터 상한제도에 대한 설명을 들었으며 <b>아래와 같이 동의합니다</b>.</p>
 					</td>
 				</tr>
-				<tr class="normal"style="background-color: #fafafa; height:50px;">
-					<td style="width:170px;">구분</td>
-					<td>실비 납부</td>
+				<tr class="normal"style="background-color: #fafafa; height:45px;">
+					<td style="width:80px;">구분</td>
+					<td style="width:195px;">실비 납부</td>
 					<td>기타 추가 납부</td>
 				</tr>
-				<tr style="height:50px;">
+				<tr style="height:45px;">
 					<td>비용</td>
 					<td>본인부담 발생 금액</td>
 					<td>
@@ -802,22 +850,22 @@
 			<ol class="light_info_list">
 				<li class="light_info light_info2">
 					<i class="light_info_i">▣</i>
-					<em style="font-style:normal; padding-left:5px; font-size:18px; line-height:29px;">요양병원의 정액수가는 환자분류군에 따라 본인부담금이 정해집니다.</em>
+					<em style="font-style:normal; padding-left:5px;">요양병원의 정액수가는 환자분류군에 따라 본인부담금이 정해집니다.</em>
 				</li>
 				<li class="light_info light_info2">
 					<i class="light_info_i">▣</i>
-					<em style="font-style:normal; padding-left:5px; font-size:18px; line-height:29px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 <br>행위별수가의 적용으로 본인부담금이 인상될 수 있습니다.</em>
+					<em style="font-style:normal; padding-left:5px;">특정기간(폐렴, 패혈증, 감염및격리, 체내출혈발생기간), 특정항목(전문재활 치료, 혈액투석전혈및혈액성분제제등) 등에는 <br>행위별수가의 적용으로 본인부담금이 인상될 수 있습니다.</em>
 				</li>
 				<li class="light_info light_info2">
 					<i class="light_info_i">▣</i>
-					<em style="font-style:normal; padding-left:5px; font-size:18px; line-height:29px;">선택입원군으로 평가된 환자의 경우 <b class="b40">본인부담금이 40%</b> 부과됩니다.</em>
+					<em style="font-style:normal; padding-left:5px;">선택입원군으로 평가된 환자의 경우 <b class="b40">본인부담금이 40%</b> 부과됩니다.</em>
 				</li>
 			</ol>
 		</div>
-<div style="text-align: center; margin-bottom: 30px;">
-<table style="font-size:14pt; border-collapse: collapse; text-align: center; width: 966px; margin-left: auto;
+<div style="text-align: center; margin-bottom: 25px;">
+<table style="font-size:13pt; border-collapse: collapse; text-align: center; width: 100%; margin-left: auto;
  margin-right: auto; border: 1px solid #c7c7c7;" >
-	<tr style="height: 56px; background-color: #fafafa;" class="normal">
+	<tr style="height: 45px; background-color: #fafafa;" class="normal">
 		<td colspan="3" style="text-align: left; border-bottom: 1px solid #c7c7c7;">
 		<!-- 
 		<label for="cs_data_22" style="cursor: pointer;">
@@ -831,12 +879,11 @@
 		 
 		</td>
 	</tr>
-	<tr style="height: 56px; border-bottom: 1px solid #dadada; background-color: #ffffff;">
+	<tr style="height: 45px; border-bottom: 1px solid #dadada; background-color: #ffffff;">
 		<td style="text-align: center; width: 170px; border-right: 1px solid #dadada;">병실</td>
-		<td style="text-align: center; width: 30%;" onclick="this.querySelector('input').focus();">
-		<input name="cs_data_23" style="width:190px; text-align: right;" type="text" disabled="disabled"/> 호</td>
+		<td style="text-align: center; width: 23%;" onclick="this.querySelector('input').focus();">
+		<input name="cs_data_23" style="width:120px; text-align: right;" type="text" disabled="disabled"/> 호</td>
 		<td style="text-align: right; color:#222222;" class="light">
-		
 		<div style="margin-right: 21px; display: flex; justify-content: right;">
 		<!-- 
 		<label for="cs_data_24" style="cursor: pointer;">
@@ -866,13 +913,13 @@
 		
 		</td>
 	</tr>
-	<tr style="height: 56px;  border-bottom: 1px solid #dadada; background-color: #ffffff; color:#222222;">
+	<tr style="height: 45px;  border-bottom: 1px solid #dadada; background-color: #ffffff; color:#222222;">
 		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
 		 colspan="2" class="light">1일당 : <input name="cs_data_27" id="cs_data_24" type="text" disabled="disabled"/></td>
 	</tr>
-	<tr style="height: 56px; background-color: #ffffff;">
+	<tr style="height: 45px; background-color: #ffffff;">
 		<td colspan="3" style="text-align: left;">
-		<div style="margin-left: 21px;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
+		<div style="margin-left: 21px; font-weight: 500;">상급병실 사용에 관련한 차액발생부분 설명을 듣고 동의함.</div>
 		</td>
 	</tr>
 </table>
@@ -881,11 +928,14 @@
 
 
 <div style="position: relative; ">
-	<div class="normal normal_sign" style="">
-		신청인  (  관계  : <input style="width:110px;" name="cs_data_28" type="text"/>) :
-		<input name="cs_data_29" style="width:150px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:500;" id="end">
-		<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -16px; top: -43px; width: 120px;" id="canvasImg" src="" alt="">명 )&emsp;</mark></div>
+	<div class="normal normal_sign" style="width:100%;">
+		신청인  (  관계  : &nbsp;<input style="width:110px; padding-top:3px;" name="cs_data_28" type="text"/>&nbsp;) : &nbsp;
+		<input name="cs_data_29" style="width:150px; padding-top:3px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		<img style="position: absolute; z-index: 1; width: 100px;" id="canvasImg" name="canvasImg" src="" alt="">
+		<input type="hidden" id="canvasImg" name="canvasImg" value="">
+		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:0;" id="end">
+			<mark>&emsp;( 서&emsp;&emsp;명 )&emsp;</mark>
+		</div>
 	</div>
 </div>
 <br><br>
@@ -918,6 +968,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- 두번째 서명 -->
 <div class="modal2 normal">
 	<div class="modal_body2">
@@ -975,7 +1026,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/html2canvas.min.js"></script>
-
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <script>
 var name = "${info.name}";
@@ -992,57 +1043,77 @@ const body = document.querySelector('body');
 const modal1 = document.querySelector('.modal1');
 const btnOpenPopup1 = document.querySelector('#end1');
 
+// 모바일 디바이스에서 터치 이벤트에 반응하여 모달 표시
 btnOpenPopup1.addEventListener('touchstart', () => {
-	
 	modal1.classList.toggle('show');
-
 	if (modal1.classList.contains('show')) {
 		body.style.overflow = 'hidden';
 	}
 });
+// 데스크탑에서 클릭 이벤트 처리
 btnOpenPopup1.addEventListener('click', () => {
-	
 	alert('모바일로 접속해주세요.')
 });
+// 모달 바깥 영역을 클릭시, 모달 닫기
 modal1.addEventListener('click', (event) => {
-	
-	
 	if (event.target === modal1) {
-		// 모달 바깥 영역을 클릭했을 때
-		
-			closePopupAndRedirect1();
-		
+		closePopupAndRedirect1();
 	}
 });
 
+// 서명 완료 및 모달 닫기 함수
 function end1(){
-	
 	closePopup1();
 }
 
+// 모달 닫고 리다이렉트 처리
 function closePopupAndRedirect1() {
 	modal1.classList.toggle('show');
 	if (!modal1.classList.contains('show')) {
 		body.style.overflow = 'auto';
 	}
+	// 캡쳐된 서명 이미지 base64로 인코딩
 	var canvasValue1 = canvas1.toDataURL();
-	console.log(canvasValue1);
+	console.log(canvasValue1);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
+								//	콘솔로그 찍었을때 인코딩 확인 코드
+	document.getElementById('imgData').value = canvasValue1.split(',')[1];
 	const canvasImg1 = document.getElementById('canvasImg1');
 	canvasImg1.src = canvasValue1;
+	console.log(canvasImg1);
 	
 }
-function closePopup1(){
+
+// 단순 모달 닫기 함수
+function closePopup1() {
+// 	modal1.classList.toggle('show');
+// 	if (!modal1.classList.contains('show')) {
+// 		body.style.overflow = 'auto';
+// 	}
+// 	// 캡쳐된 서명 이미지 base64로 인코딩
+// 	var canvasValue1 = canvas1.toDataURL();
+// 	console.log(canvasValue1);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
+// 								//	콘솔로그 찍었을때 인코딩 확인 코드
+// 	const canvasImg1 = document.getElementById('canvasImg1');
+// 	canvasImg1.src = canvasValue1;
+// 	console.log(canvasImg1);
+
 	modal1.classList.toggle('show');
 	if (!modal1.classList.contains('show')) {
 		body.style.overflow = 'auto';
 	}
+	// 캡쳐된 서명 이미지 base64로 인코딩
 	var canvasValue1 = canvas1.toDataURL();
-	console.log(canvasValue1);
+	console.log(canvasValue1);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
+								//	콘솔로그 찍었을때 인코딩 확인 코드
+	document.getElementById('imgData').value = canvasValue1.split(',')[1];
 	const canvasImg1 = document.getElementById('canvasImg1');
 	canvasImg1.src = canvasValue1;
+	console.log(canvasValue1)
+	
 }
 
 </script>
+
 
 <script>
 // 두번째 서명 모달
@@ -1086,9 +1157,10 @@ function closePopupAndRedirect2() {
 		body.style.overflow = 'auto';
 	}
 	var canvasValue2 = canvas2.toDataURL();
-	console.log(canvasValue2);
+	document.getElementById('imgData1').value = canvasValue2.split(',')[1];
 	const canvasImg2 = document.getElementById('canvasImg2');
 	canvasImg2.src = canvasValue2;
+	console.log(canvasValue2)
 	
 }
 function closePopup2(){
@@ -1097,11 +1169,13 @@ function closePopup2(){
 		body.style.overflow = 'auto';
 	}
 	var canvasValue2 = canvas2.toDataURL();
-	console.log(canvasValue2);
+	console.log(canvasValue2);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
+								//	콘솔로그 찍었을때 인코딩 확인 코드
+	document.getElementById('imgData1').value = canvasValue2.split(',')[1];
 	const canvasImg2 = document.getElementById('canvasImg2');
 	canvasImg2.src = canvasValue2;
+	console.log(canvasValue2)
 }
-
 </script>
 
 <script>
@@ -1149,23 +1223,26 @@ function closePopupAndRedirect() {
 	console.log(canvasValue);
 	const canvasImg = document.getElementById('canvasImg');
 	canvasImg.src = canvasValue;
-	
 }
+
 function closePopup(){
 	modal.classList.toggle('show');
 	if (!modal.classList.contains('show')) {
 		body.style.overflow = 'auto';
 	}
 	var canvasValue = canvas.toDataURL();
-	console.log(canvasValue);
+	console.log(canvasValue);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
+								//	콘솔로그 찍었을때 인코딩 확인 코드
+	document.getElementById('imgData2').value = canvasValue.split(',')[1];
 	const canvasImg = document.getElementById('canvasImg');
 	canvasImg.src = canvasValue;
+	console.log(canvasValue)
 }
-
 </script>
+
 <script>
-// 첫번째 서명
-//canvas 엘리먼트를 가져옵니다
+// 첫번째 서명 캔버스 처리
+// canvas 설정과 터치 이벤트 처리하여 서명 기능 제공
 var canvas1 = document.getElementById("canvas1");
 //canvas 엘리먼트의 context를 가져옵니다.
 var ctx1 = canvas1.getContext("2d");
@@ -1198,6 +1275,7 @@ function getTouchPos1(e) {
     }
 }
 
+// 터치 이벤트 핸들러
 function touchStart(e) {
     e.preventDefault();
     drawing1 = true;
@@ -1228,11 +1306,13 @@ function onClear1() {
     canvas1 = document.getElementById('canvas1');
     ctx1.save();
     ctx1.setTransform(1, 0, 0, 1, 0, 0);
+    // 캔버스 클리어
 	ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
 	ctx1.restore();
 }
 function cancle1(){
 //	ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+	// 취소 시 캔버스 클리어 및 모달 숨기기
 	modal1.classList.toggle('show');
 	if (!modal1.classList.contains('show')) {
 		body.style.overflow = 'auto';
@@ -1240,8 +1320,6 @@ function cancle1(){
 //	const canvasImg1 = document.getElementById('canvasImg1');
 //	canvasImg1.src = "";
 }
-
-
 </script>
 
 <script>
@@ -1401,87 +1479,6 @@ function cancle(){
 	const canvasImg = document.getElementById('canvasImg');
 	canvasImg.src = "";
 }
-
-
-</script>
-
-<script>
-
-// 웹페이지 이미지로 파일 저장
-$(document).ready(function() {
-
-	var cs_data_01 = $('input[name=cs_data_01]').val();
-	var cs_data_02 = $('input[name=cs_data_02]').val();
-	var cs_data_03 = $('input[name=cs_data_03]').val();
-	var cs_data_04 = $('input[name=cs_data_04]').val();
-	var cs_data_05 = $('input[name=cs_data_05]').val();
-	var cs_data_06 = $('input[name=cs_data_06]').val();
-	var cs_data_07 = $('input[name=cs_data_07]').val();
-	var cs_data_08 = $('input[name=cs_data_08]').val();
-	var cs_data_09 = $('input[name=cs_data_09]').val();
-	var cs_data_10 = $('input[name=cs_data_10]').val();
-	
-	if($('input[name=cs_data_11]').checked){
-		var cs_data_11 = $('input[name=cs_data_11]').val();
-	}else{
-		var cs_data_11 = '';
-	}
-	
-	var cs_data_12 = $('input[name=cs_data_12]').val();
-	var cs_data_13 = $('input[name=cs_data_13]').val();
-	var cs_data_14 = $('input[name=cs_data_14]').val();
-	var cs_data_15 = $('input[name=cs_data_15]').val();
-	if($('input[name=cs_data_16]').checked){
-		var cs_data_16 = $('input[name=cs_data_16]').val();
-	}else{
-		var cs_data_16 = '';
-	}
-	
-	
-	var cs_data_17 = $('input[name=cs_data_17]').val();
-	var cs_data_18 = $('input[name=cs_data_18]').val();
-	var cs_data_19 = $('input[name=cs_data_19]').val();
-	var cs_data_20 = $('input[name=cs_data_20]').val();
-	var cs_data_21 = $('input[name=cs_data_21]').val();
-	var cs_data_22 = $('input[name=cs_data_22]').val();
-	var cs_data_23 = $('input[name=cs_data_23]').val();
-	var cs_data_24 = $('input[name=cs_data_24]').val();
-	var cs_data_25 = $('input[name=cs_data_25]').val();
-	var cs_data_26 = $('input[name=cs_data_26]').val();
-	var cs_data_27 = $('input[name=cs_data_27]').val();
-	var cs_data_28 = $('input[name=cs_data_28]').val();
-	var cs_data_29 = $('input[name=cs_data_29]').val();
-	
-	
-	$(function(){
-		$(".btn_download").click(function(e){
-			html2canvas(document.getElementById("capture_area")).then(function(canvas)
-				{
-					var el = document.createElement("a")
-					el.href = canvas.toDataURL("image/png")
-					
-					// 이미지 url
-					var image = canvas.toDataURL("image/png");
-					image = image.replace("data:image/png;base64,", "");
-					console.log(image);
-					
-					$.ajax({
-					     url: "${pageContext.request.contextPath}/saveImage",
-					     method: "POST",
-					     data: { image: image },
-					     success: function() {
-					       alert("이미지가 성공적으로 등록되었습니다.");
-					     },
-					     error: function() {
-					       alert("이미지 등록에 실패했습니다.");
-					     }
-					   });
-					
-					el.click()
-				});
-		});
-	});
-});
 </script>
 </section>
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
@@ -1539,13 +1536,71 @@ function toggleCheckbox() {
 		
 	}
 }
-$("#btn_save").click(function () {
-	console.log("클릭");
-	var frm = $("#frm");
-	var confirmation = confirm("임시저장을 하시겠습니까?");
-	if (confirmation) {
-		frm.submit();
-	}
+
+$("#frm").submit(function(event) {
+	event.preventDefault(); 
+	var formData = $(this).serialize();
+	console.log("Submitting form with data: ", formData);
+
+	$.post($(this).attr('action'), formData, function(response) {
+		console.log("Response from server: ", response);
+	});
 });
+
+
+
+
+
+$(document).ready(function() {
+    // 저장 버튼 클릭 시 이벤트 처리
+    $("#btn_save").click(function(event) {
+        event.preventDefault(); // 기본 동작 중단
+        submitForm();
+        
+    });
+// 	 $("#btn_save").click(function () {
+// 		console.log("클릭");
+// 		var frm = $("#frm");
+// 		var confirmation = confirm("임시저장을 하시겠습니까?");
+// 		event.preventDefault();
+// // 		window.location.href="${pageContext.request.contextPath}/hwt/CounselList";
+// 	//	window.location.reload(true) // 페이지로 돌아갔을때 강제 새로고침
+// 		if (confirmation) {
+// 			frm.submit();
+// 		}
+// 	});
+	 
+    function submitForm() {
+        var frm = $("#frm");
+        var confirmation = confirm("임시저장을 하시겠습니까?");
+        if (confirmation) {
+            // form 데이터 직렬화 및 전송
+            var formData = frm.serialize();
+            $.ajax({
+                url: frm.attr('action'),
+                type: frm.attr('method'),
+                data: formData,
+                success: function(response) {
+                	console.log(response);
+                    alert('저장이 완료되었습니다.');
+                    // list 페이지로 이동하며 강제로 새로고침
+//                     window.location.reload(true); // 강제 새로고침
+					if (response === "Y") {
+	                     window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do";
+					}
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error status:', status);
+                    console.error('Error thrown:', error);
+                    console.error('Full server response:', xhr.responseText);
+                    alert('Error uploading data: ' + xhr.responseText);
+                }
+            });
+        }
+    }
+});
+
+
+
 </script>
 </html>

@@ -58,6 +58,7 @@
 		<!-- 전자문서 -->
 		<typeAlias alias="access" type="com.nnn.app.vo.Access"/>
 		<typeAlias alias="pdf" type="com.nnn.app.vo.PDFRequest"/>
+		<typeAlias alias="sign" type="com.nnn.app.vo.SignVo"/>
 		
 		<!-- 재물조사 -->
 		<typeAlias alias="property" type="com.nnn.app.vo.UserinformationVo"/>

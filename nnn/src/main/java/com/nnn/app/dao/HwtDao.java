@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.ImageEntity;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.SignVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WrittenVo;
@@ -26,6 +27,7 @@ public class HwtDao {
 	private SqlSession sqlSession3;
 	@Resource(name="sqlSession4")
 	private SqlSession sqlSession4;
+	public byte[] getSignatureDataByCsIdx;
 	
 	
 	public static final String MAPPER = "hwt";
@@ -247,4 +249,18 @@ public class HwtDao {
 	public ImageEntity getImageData(Map<String, Object> map) {
 		return sqlSession4.selectOne(MAPPER+".getImageData", map);
 	}
+
+	public int insertsign(SignVo svo) {
+		return sqlSession4.insert(MAPPER+".signinsert",svo);
+	}
+
+
+	public int select() {
+		return sqlSession4.selectOne(MAPPER+".select");
+	}
+	
+	public SignVo getSignatureByCsIdx(int cs_idx) {
+        return sqlSession4.selectOne(MAPPER+".getSignatureByCsIdx", cs_idx);
+    }
+	
 }

@@ -92,22 +92,21 @@
 		select 
 		cs_idx, cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,
 		cs_data_09, cs_data_10, cs_data_11, cs_data_12, cs_data_13, cs_data_14, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19,
-		 cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30,
-		  DATE_FORMAT(cs_data_31, '%Y.%m.%d') AS cs_data_31, cs_data_32
-		 from cs_data 
+		cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30,
+		DATE_FORMAT(cs_data_31, '%Y.%m.%d') AS cs_data_31, cs_data_32
+		
+		from cs_data 
 		<!-- 최근 일주일 데이터 -->
 		WHERE YEARWEEK(cs_data_31) = YEARWEEK(NOW()) 
 		
 		order by cs_idx desc
 		
-		limit #{pageStart}, #{perPageNum}
+		<!-- 페이징처리 -->
+<!-- 		limit #{pageStart}, #{perPageNum} -->
 	</select>
 	
 	<select id="cslistsearchCnt" resultType="int">
 		select count(*) from cs_data 
-		
-		
-		
 	</select>
 	
 	
@@ -124,15 +123,25 @@
 		order by cs_idx desc
 	</select>
 	
-	<insert id="insert" parameterType="pdf">
+	<insert id="insert" parameterType="writtenVo">
 		insert into cs_data (cs_data_01, cs_data_02, cs_data_03, cs_data_04, cs_data_05, cs_data_06, cs_data_07, cs_data_08,
 		cs_data_09, cs_data_10, cs_data_11, cs_data_12, cs_data_13, cs_data_14, cs_data_15, cs_data_16, cs_data_17, cs_data_18, cs_data_19,
-		 cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, cs_data_30,
-		 cs_data_32
-		) values(#{cs_data_01}, #{cs_data_02}, #{cs_data_03}, #{cs_data_04}, #{cs_data_05}, #{cs_data_06}, #{cs_data_07}, #{cs_data_08}, 
+		cs_data_20, cs_data_21, cs_data_22, cs_data_23, cs_data_24, cs_data_25, cs_data_26, cs_data_27, cs_data_28, cs_data_29, 
+		cs_data_30, cs_data_32,
+		hos_contract_year, hos_contract_month, hos_contract_day, hos_year, hos_month, hos_day, hos_number, hos_po, hos_name, 
+		insurance, salary, self_insurance, accident, general, hos_code1, hos_code2, hos_department, hos_ward, hos_room,
+		check1, check2, check3, check4, check5, check6, check7, check8, check9, check10, check11, yesrs_pay, payment,
+		medicine, nutrients, transport
+		)
+		values(#{cs_data_01}, #{cs_data_02}, #{cs_data_03}, #{cs_data_04}, #{cs_data_05}, #{cs_data_06}, #{cs_data_07}, #{cs_data_08}, 
 		#{cs_data_09}, #{cs_data_10}, #{cs_data_11}, #{cs_data_12}, #{cs_data_13}, #{cs_data_14}, #{cs_data_15}, #{cs_data_16}, #{cs_data_17}, 
 		#{cs_data_18}, #{cs_data_19}, #{cs_data_20}, #{cs_data_21}, #{cs_data_22}, #{cs_data_23}, #{cs_data_24}, #{cs_data_25}, #{cs_data_26}, 
-		#{cs_data_27}, #{cs_data_28}, #{cs_data_29}, 1, 1)
+		#{cs_data_27}, #{cs_data_28}, #{cs_data_29}, 1, 1, 
+		#{hos_contract_year}, #{hos_contract_month}, #{hos_contract_day}, #{hos_year}, #{hos_month}, #{hos_day}, #{hos_number}, #{hos_po}, #{hos_name},
+		#{insurance}, #{salary}, #{self_insurance}, #{accident}, #{general}, #{hos_code1}, #{hos_code2}, #{hos_department}, #{hos_ward}, #{hos_room},
+		#{check1}, #{check2}, #{check3}, #{check4}, #{check5}, #{check6}, #{check7}, #{check8}, #{check9}, #{check10}, #{check11}, #{yesrs_pay}, #{payment},
+		#{medicine}, #{nutrients}, #{transport}
+		)
 	</insert>
 	
 	<select id="selectone" resultType="writtenVo">
@@ -155,10 +164,36 @@
 		cs_data_14 = #{cs_data_14},	cs_data_15 = #{cs_data_15}, cs_data_16 = #{cs_data_16}, cs_data_17 = #{cs_data_17}, cs_data_18 = #{cs_data_18}, 
 		cs_data_19 = #{cs_data_19}, cs_data_20 = #{cs_data_20}, cs_data_21 = #{cs_data_21}, cs_data_22 = #{cs_data_22}, cs_data_23 = #{cs_data_23}, 
 		cs_data_24 = #{cs_data_24},	cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
-		cs_data_29 = #{cs_data_29}, cs_data_30 = 1 where cs_idx = #{cs_idx}
+		cs_data_29 = #{cs_data_29}, 
+		hos_contract_year =#{hos_contract_year}, hos_contract_month =#{hos_contract_month}, hos_contract_day =#{hos_contract_day}, 
+		hos_year =#{hos_year}, hos_month =#{hos_month}, hos_day =#{hos_day}, hos_number =#{hos_number}, hos_po =#{hos_po}, hos_name =#{hos_name}, 
+		insurance =#{insurance}, salary =#{salary}, self_insurance =#{self_insurance}, accident =#{accident}, general =#{general}, hos_code1 =#{hos_code1}, 
+		hos_code2 =#{hos_code2}, hos_department =#{hos_department}, hos_ward =#{hos_ward}, hos_room =#{hos_room}, check1 =#{check1}, check2 =#{check2}, 
+		check3 =#{check3}, check4 =#{check4}, check5 =#{check5}, check6 =#{check6}, check7 =#{check7}, check8 =#{check8}, check9 =#{check9}, 
+		check10 =#{check10}, check11 =#{check11}, yesrs_pay =#{yesrs_pay}, payment =#{payment}, medicine =#{medicine}, nutrients =#{nutrients}, transport =#{transport}, 
+		cs_data_30 = 1 where cs_idx = #{cs_idx}
 	</update>
 	<select id="getImageData" parameterType="image" resultType="image">
 	select imageData from image where cs_idx = ${cs_idx}
 	</select>
+	
+	<insert id="signinsert" parameterType="sign" >
+		insert into signImage (canvasImg1, canvasImg2, canvasImg, cs_idx) values (#{canvasImg1}, #{canvasImg2}, #{canvasImg}, #{cs_idx})
+	</insert>
+	<select id="select" resultType="int">
+		select cs_idx from cs_data order by cs_idx desc limit 1
+	</select>
+	
+	<select id="getSignatureByCsIdx" parameterType="int" resultType="sign">
+    	select idx, canvasImg1, canvasImg2, canvasImg, cs_idx FROM signImage WHERE cs_idx = #{cs_idx}
+	</select>
+<!-- 	<select id="getSignatureByCsIdx" parameterType="int" resultMap="signResultMap"> -->
+<!-- 	    select canvasImg1 from signImage where cs_idx = #{cs_idx} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getSignatureByCsIdx" parameterType="int" resultType="SignVo"> -->
+<!--     	select * from signImage1 where cs_idx = #{cs_idx} -->
+<!-- 	</select> -->
+	
 	
 </mapper>

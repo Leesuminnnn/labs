@@ -1,5 +1,6 @@
 package com.nnn.app.service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import com.nnn.app.dao.HwtDao;
 import com.nnn.app.vo.Criteria;
 import com.nnn.app.vo.ImageEntity;
 import com.nnn.app.vo.NoticeVo;
+import com.nnn.app.vo.SignVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WrittenVo;
@@ -204,4 +206,44 @@ public class HwtService {
 	public ImageEntity getImageData(Map<String, Object> map) {
 		return hwtDao.getImageData(map);
 	}
+
+	public int insertsign(SignVo svo) {
+		return hwtDao.insertsign(svo);
+	}
+
+	public int select() {
+		return hwtDao.select();
+	}
+
+	public SignVo getSignatureByCsIdx(int cs_idx) {
+        return hwtDao.getSignatureByCsIdx(cs_idx);
+    }
+	
+	public String getEncodedImageById(int cs_idx) {
+       SignVo sign = getSignatureByCsIdx(cs_idx); // 데이터베이스에서 서명 데이터를 가져옵니다.
+        if (sign != null && sign.getCanvasImg1() != null) {  
+        	return Base64.getEncoder().encodeToString(sign.getCanvasImg1());
+        }
+        if (sign != null && sign.getCanvasImg2() != null) {  
+        	return Base64.getEncoder().encodeToString(sign.getCanvasImg2());
+        }
+        if (sign != null && sign.getCanvasImg() != null) {  
+        	return Base64.getEncoder().encodeToString(sign.getCanvasImg());
+        }
+
+//       if (sign != null) {
+//			if (sign.getCanvasImg1() != null) {
+//				return Base64.getEncoder().encodeToString(sign.getCanvasImg1());
+//			}
+//			if (sign.getCanvasImg2() != null) {
+//				return Base64.getEncoder().encodeToString(sign.getCanvasImg2());
+//			}
+//			if (sign.getCanvasImg() != null) {
+//				return Base64.getEncoder().encodeToString(sign.getCanvasImg());
+//			}
+//		}
+        return null; // 이미지 데이터가 없다면 null을 반환
+    }
+	
+	
 }

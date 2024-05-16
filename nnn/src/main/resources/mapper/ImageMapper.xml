@@ -16,11 +16,16 @@
 	</select>
 	
 	<select id="getImageData" parameterType="image" resultType="image">
-	select imageData from image where cs_idx = ${cs_idx}
+	select imageData from image where cs_idx = ${cs_idx} limit 1
 	</select>
 	
 	<select id="imglist" parameterType="image" resultType="image">
-	
 	select convert(imageData USING UTF8) as imageData from image
 	</select>
+	
+<!-- 	<insert id="canvasImg1" parameterType="image" resultType="image"> -->
+<!-- 	insert into image(signData, cs_idx) value(#{imageData}, #{cs_idx}) -->
+<!-- 	</insert> -->
+	
+	
 </mapper>
