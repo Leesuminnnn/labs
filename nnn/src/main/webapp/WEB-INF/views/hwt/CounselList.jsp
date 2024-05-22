@@ -44,20 +44,30 @@
 		<!-- class="col-md-9 ms-sm-auto col-lg-10 px-md-4"  -->
 		<div class="pd"></div>
 		<div class="scroll-container">
-		<form action="
-			<c:choose>
-				<c:when test="${keyword1 == '' and keyword2 == '' and keyword3 == ''}">
-				${pageContext.request.contextPath}/hwt/CounselList
-				</c:when>
-				<c:otherwise>
-				${pageContext.request.contextPath}/hwt/CounselListSearch
-				</c:otherwise>
-			</c:choose>	
+		<form action=" ${pageContext.request.contextPath}/hwt/CounselListSearch
+<%-- %> 			<c:choose> -->
+<%-- 				<c:when test="${keyword1 == '' and keyword2 == '' and keyword3 == ''}"> --%>
+<%-- 				${pageContext.request.contextPath}/hwt/CounselList --%>
+<%--				</c:when> -->
+<!-- 				<c:otherwise> -->
+<%-- 				${pageContext.request.contextPath}/hwt/CounselListSearch --%>
+<%-- 				</c:otherwise> --%>
+<%--			</c:choose>	 --%>
 		">
 		<div class="flex flex-center " style="text-align: center; height: 88px; background-color: #f7f7f7; color:#2f2f2f; padding:13px 20px;;">
-			<div class="dv_tx" style="">환자명</div><input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
-			<div class="dv_tx" style="">보호자명</div><input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
-			<div class="dv_tx" style="">전화번호</div><input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"/>
+			<div class="dv_tx" style="">환자명</div>
+				<input class="ip_tx" type="text" name="keyword1" id="keyword1" onkeyup="keyword1text()"/>
+			<div class="dv_tx" style="">보호자명</div>
+				<input class="ip_tx" type="text" name="keyword2" id="keyword2" onkeyup="keyword2text()"/>
+			<div class="dv_tx" style="">전화번호</div>
+				<input class="ip_tx ip_pn" type="text" name="keyword3" id="keyword3" onkeyup="keyword3text()"class="form-control" oninput="oninputPhone(this)" maxlength="14"/>
+				<script>
+				function oninputPhone(target) {
+					target.value = target.value
+						.replace(/[^0-9]/g, '')
+						.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+				}
+				</script>
 			<input class="ip_sb" style="cursor: pointer;" type="submit" value="검색"/>&nbsp;
 			<a class="ip_sb ip_sb2" style="cursor: pointer; padding-top:10px;" href="${pageContext.request.contextPath}/hwt/Written.do">등록</a>
 		</div>
@@ -115,9 +125,9 @@
 									<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenModify/${list.cs_idx}'">서명</div>
 								</c:when>
 								<c:otherwise>
-									<div class="sb flex flex-center" style="cursor: pointer; margin-right: 5px;" onclick="window.open('${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}')">보기</div>
+									<div class="sb flex flex-center" style="cursor: pointer; margin-right: 5px;" onclick="window.open('${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}/${list.cs_data_01}')">보기</div>
 									<div class="sb flex flex-center" style="cursor: pointer; margin-left: 5px;">
-									<a class="btn_download" download="${list.cs_idx}" href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}" >
+									<a class="btn_download" download="${list.cs_data_01}"  href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}/${list.cs_data_01}" >
 										<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 40px; vertical-align: middle;">
 									</a>
 									</div>
@@ -156,12 +166,12 @@
 								<div class="save flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenModify/${list.cs_idx}'">서명</div>
 							</c:when>
 							<c:otherwise>
-								<div class="sb flex flex-center" style="cursor: pointer;" onclick="location.href='${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}'">보기</div>
+								<div class="sb flex flex-center" style="cursor: pointer;" onclick="window.open('${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}/${list.cs_data_01}')">보기</div>
 								<div class="sb flex flex-center" style="cursor: pointer; margin-left: 5px;">
-									<a class="btn_download" download="${list.cs_idx}" href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}" >
+									<a class="btn_download" download="${list.cs_data_01}" href="${pageContext.request.contextPath}/hwt/WrittenView/${list.cs_idx}/${list.cs_data_01}" >
 										<img src="${pageContext.request.contextPath}/resources/icon/dwonload_icon_w.png" style="width: 40px; vertical-align: middle;">
 									</a>
-									</div>
+								</div>
 							</c:otherwise>
 						</c:choose>
 						</div>

@@ -188,6 +188,9 @@
 
 
 <input type="hidden" id="imgData" name="imgData">
+<input type="hidden" id="imgData3" name="imgData3">
+<input type="hidden" id="imgData1" name="imgData1">
+<input type="hidden" id="imgData2" name="imgData2">
 <input type="hidden" name="cs_idx" value="${cs_idx }">
 <h1 style="text-align: center; font-size: 28pt; padding: 40px 0 20px 0;">입 원 서 약 서</h1>
 
@@ -197,10 +200,10 @@
 	<tr>
 		<td class="normal" width="120px" height="45px">성명</td>
 		<td class="light"  onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_01" value="${decryptedCs_data_01 }" /></td>
+		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_01" id="cs_data_01" value="${decryptedCs_data_01 }" /></td>
 		<td class="normal" width="120px" height="45px">차트번호</td>
 		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" style="text-align: left;">
-		<input style="margin-left: 20px; width: 170px;" name="cs_data_02" type="text" value="${vo.cs_data_02 }" /></td>
+		<input style="margin-left: 20px; width: 170px;" name="cs_data_02" id="cs_data_02" type="text" value="${vo.cs_data_02 }" /></td>
 	</tr>
 	<tr>
 		<td class="normal" height="45px">입원병실</td>
@@ -219,7 +222,15 @@
 		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_05" value="${vo.cs_data_05 }" /></td>
 		<td class="normal" height="45px">전화</td>
 		<td style="text-align: left;" class="light" colspan="2" onclick="this.querySelector('input').focus();">
-		<input style="margin-left: 20px; width: 170px;" type="text" name="cs_data_06" value="${decryptedCs_data_06 }"/></td>
+			<input style="margin-left: 20px; width: 170px;" type="text" name="cs_data_06" class="form-control" oninput="oninputPhone(this)" maxlength="14" value="${decryptedCs_data_06 }"/>
+			<script>
+			function oninputPhone(target) {
+				target.value = target.value
+					.replace(/[^0-9]/g, '')
+					.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+			}
+			</script>
+		</td>
 	</tr>
 </table>
 </div>
@@ -329,22 +340,23 @@
 			(관계 :&nbsp;<input class="light" name="cs_data_08" style="width : 110px;" type="text" value="${vo.cs_data_08 }" />&nbsp;)
 		</th>
 		<th style="position: relative;">
-			<div class="normal" style="width: 143px; display: inline-block; position: relative; background-color:#fafafa; " id="">
-				<mark>
+			<div class="normal" style="width: 143px; display: inline-block; position: relative;" id="end1">
+				<mark class="hos_sign">
 				&emsp;(서&nbsp;&nbsp;
-					<img style="position: absolute; z-index: 0; width: 100px; top: -35px; right: 0px;" id="canvasImg1" name="canvasImg1" src="data:image/png;base64,${imageData}" alt="">
+					<img style="position: absolute; z-index: 0; width: 100px; top: -35px; right: 21px;" id="canvasImg1" name="canvasImg1" src="data:image/png;base64,${imageData}" alt="">
 				&nbsp;&nbsp;명)&emsp;
 				</mark>
  				<script>
-	 				document.addEventListener("DOMContentLoaded", function() {
-	 					var imgElement = document.getElementById('canvasImg1');
-	 						console.log(imgElement);
-	 					if (imgElement) {
-	 						console.log("Image source:", imgElement.src);
-	 					} else {
-	 						console.log("No image element found.");
-	 					}
-	 				});
+				document.addEventListener("DOMContentLoaded", function() {
+				var imgElement = document.getElementById('canvasImg1');
+					console.log(imgElement);
+					if (imgElement && imgElement.src && imgElement.src !== 'data:,') {
+						console.log("Image source:", imgElement.src);
+					} else {
+						console.log("No image element found or image is empty.");
+						imgElement.src = "";  // 데이터가 들어있지 않을때
+						}
+				});
 				</script> 
 			</div>
 		</th>
@@ -357,7 +369,14 @@
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_10" type="text" style="margin-left: 25px; width:250px;" value="${decryptedCs_data_10 }" />
+			<input class="light" name="cs_data_10" type="text" style="margin-left: 25px; width:250px;" class="form-control" oninput="oninputPhone(this)" maxlength="14"  value="${decryptedCs_data_10 }" />
+			<script>
+			function oninputPhone(target) {
+			    target.value = target.value
+			    .replace(/[^0-9]/g, '')
+			    .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+			}
+			</script>
 		</th>
 		<th colspan="2" style="text-align: right; border-left:hidden;">
 			<div class="checkbox-wrapper-13" style="margin-right: 25px; font-weight:400;">
@@ -388,20 +407,21 @@
 			(관계 :&nbsp;<input class="light" name="cs_data_13" style="width:110px;" type="text" value="${vo.cs_data_13 }" />&nbsp;)
 		</th>
 		<th style="position: relative;">
-				<div class="normal" style="width: 143px; display: inline-block; position: relative; background-color:#fafafa;" id="">
-					<mark>&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 1; width: 100px; top: -35px; right: 0px;" id="canvasImg2" name="canvasImg2" src="data:image/png;base64,${imageData1}" alt="">&nbsp;&nbsp;명)&emsp;</mark>
-					<script>
-	 				document.addEventListener("DOMContentLoaded", function() {
-	 					var imgElement = document.getElementById('canvasImg2');
-	 						console.log(imgElement);
-	 					if (imgElement) {
-	 						console.log("Image source:", imgElement.src);
-	 					} else {
-	 						console.log("No image element found.");
-	 					}
-	 				});
+			<div class="normal" style="width: 143px; display: inline-block; position: relative;" id="end2">
+				<mark class="hos_sign">&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 1; width: 100px; top: -35px; right: 21px;" id="canvasImg2" name="canvasImg2" src="data:image/png;base64,${imageData1}" alt="">&nbsp;&nbsp;명)&emsp;</mark>
+				<script>
+				document.addEventListener("DOMContentLoaded", function() {
+			        var imgElement = document.getElementById('canvasImg2');
+			        console.log(imgElement);
+			        if (imgElement && imgElement.src && imgElement.src !== 'data:,') {
+			            console.log("Image source:", imgElement.src);
+			        } else {
+			            console.log("No image element found or image is empty.");
+						imgElement.src = "";  // 데이터가 들어있지 않을때
+					}
+				});
 				</script> 
-				</div>
+			</div>
 		</th>
 	</tr>
 	
@@ -414,7 +434,14 @@
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_15" type="text" style="margin-left: 25px; width:250px;" value="${decryptedCs_data_15 }" />
+			<input class="light" name="cs_data_15" type="text" class="form-control" oninput="oninputPhone(this)" maxlength="14" style="margin-left: 25px; width:250px;" value="${decryptedCs_data_15 }" />
+			<script>
+			function oninputPhone(target) {
+				target.value = target.value
+					.replace(/[^0-9]/g, '')
+					.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+			}
+			</script>
 		</th>
 		<th colspan="2" style="text-align: right; border-left:hidden;">
 
@@ -471,9 +498,9 @@
 			</tr>
 		</table>
 		<div class="cont_day">
-			<p>20&nbsp;<input class="light" name="hos_contract_year" style="width:40px;" type="text" value="${vo.hos_contract_year}" />&nbsp;년
-			 	 &nbsp;<input class="light" name="hos_contract_month" style="width:40px; text-align:right;" type="text" value="${vo.hos_contract_month}" />&nbsp;월
-				 &nbsp;<input class="light" name="hos_contract_day" style="width:40px; text-align:right;" type="text" value="${vo.hos_contract_day}" />&nbsp;일
+			<p>20&nbsp;<input class="light" name="hos_contract_year" style="width:40px;" type="number" value="${vo.hos_contract_year}" />&nbsp;년
+			 	 &nbsp;<input class="light" name="hos_contract_month" style="width:40px; text-align:right;" type="number" value="${vo.hos_contract_month}" />&nbsp;월
+				 &nbsp;<input class="light" name="hos_contract_day" style="width:40px; text-align:right;" type="number" value="${vo.hos_contract_day}" />&nbsp;일
 			</p>
 			<h3 class="" style="font-size:1.3rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h3> 
 		</div>
@@ -489,9 +516,9 @@
 		<h2 class="hos_info_ho" style="text-align: center;">효사랑가족요양병원 입원 안내</h2>
 		<div style="display:flex;">
 			<p style="font-size:1.1rem; font-weight: 700;">
-				입원일 : 20&nbsp;<input class="light" id="hos_year" name="hos_year" style="width:40px;" type="text" value="${vo.hos_year}" />&nbsp;.
-				&nbsp;<input class="light" id="hos_month" name="hos_month" style="width:40px; text-align:right;" type="text" value="${vo.hos_month}" />&nbsp;.
-				&nbsp;<input class="light" id="hos_day" name="hos_day" style="width:40px; text-align:right;" type="text" value="${vo.hos_day}" />&nbsp;.
+				입원일 : 20&nbsp;<input class="light" id="hos_year" name="hos_year" style="width:40px;" type="number" value="${vo.hos_year}" />&nbsp;.
+				&nbsp;<input class="light" id="hos_month" name="hos_month" style="width:40px; text-align:right;" type="number" value="${vo.hos_month}" />&nbsp;.
+				&nbsp;<input class="light" id="hos_day" name="hos_day" style="width:40px; text-align:right;" type="number" value="${vo.hos_day}" />&nbsp;.
 			</p>
 		</div>
 		<div style="text-align: center; margin-bottom: 10px;">
@@ -500,50 +527,92 @@
 					<td class="normal" width="170px" height="45px" style="background:#fafafa;">No.</td>
 					<td class="light" width="313px" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" id="hos_number" name="hos_number" value="${vo.hos_number}" />
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								const cs_data_01 = document.getElementById("cs_data_02");
+								const hos_name = document.getElementById("hos_number");
+								hos_name.value = cs_data_01.value;
+								// 업데이트 hos_number when cs_data_02 체인지 이벤트
+								cs_data_02.addEventListener("input", function() {
+									hos_number.value = cs_data_02.value;
+								});
+							});
+						</script>
 					</td>
 					<td class="normal" width="150px" height="45px" rowspan="2" style="background:#fafafa;">특이<br>사항</td>
 					<td class="light" width="413px" style="text-align: left;" rowspan="2">
-						<textarea cols="20" rows="3" onkeyup="check_length(this);" onkeydown="check_enter(event);"  id="hos_po" class="hos_po" name="hos_po" >${decryptedHos_po}</textarea>
+						<textarea cols="27" rows="3" onkeyup="check_length(this);" onkeydown="check_enter(event);" id="hos_po" class="hos_po" name="hos_po">${decryptedHos_po}</textarea>
 						<script>
 						// textarea 글자 수 제한
-						function check_length(area){
-							var text = area.value;
-							var text_length = text.length;
-							// 최대 글자 수
-							var max_length = 40;
-							
-							if(text_length>max_length){
-								alert(max_length+"자 이상 작성할 수 없습니다.")
-								text = text.substr(0, max_length);
-								area.value = text;
-								area.focus();
-							}
+						function check_length(area) {
+						    var text = area.value;
+						    var lines = text.split('\n');
+						    var max_length = 35;
+						    var max_length_third_line = 13;
+						    var enterCount = lines.length - 1;
+
+						    // Check total length
+						    if (text.length > max_length) {
+						        alert(max_length + "자 이상 작성할 수 없습니다.");
+						        text = text.substr(0, max_length);
+						        area.value = text;
+						        area.focus();
+						    }
+
+						    // Check third line length
+						    if (lines.length > 2 && lines[2].length > max_length_third_line) {
+						        alert("더이상 작성할 수 없습니다.");
+						        lines[2] = lines[2].substr(0, max_length_third_line);
+						        area.value = lines.join('\n');
+						        area.focus();
+						    }
+
+						    // 엔터키 입력 횟수 초기화
+						    var enterMatches = text.match(/\n/g); // 엔터 키 입력 매칭
+						    enterCount = enterMatches ? enterMatches.length : 0;
 						}
-						
-						var enterCount = 0;
+
 						// 엔터키 입력 제한
 						function check_enter(event) {
-				            if (event.keyCode === 13) { // Enter 키 코드
-				                enterCount++;
-				                if (enterCount > 2) {
-				                    event.preventDefault();
-				                    alert("엔터키는 2번 이상 입력할 수 없습니다.");
-				                }
-				            }
-				        }
-						// 엔터키 입력 횟수 초기화
-						document.getElementById('hos_po').addEventListener('input', function() {
-				            var text = this.value;
-				            var enterMatches = text.match(/\n/g); // 엔터 키 입력 매칭
-				            enterCount = enterMatches ? enterMatches.length : 0;
-				        });
+						    var area = event.target;
+						    var text = area.value;
+						    var lines = text.split('\n');
+						    var enterCount = lines.length - 1;
+
+						    if (event.keyCode === 13) { // Enter 키 코드
+						        if (enterCount >= 2) {
+						            event.preventDefault();
+						            alert("엔터키는 2번 이상 입력할 수 없습니다.");
+						        }
+						    }
+						}
+
+						// Attach event listeners
+						document.getElementById('hos_po').addEventListener('input', function () {
+						    check_length(this);
+						});
+						document.getElementById('hos_po').addEventListener('keydown', function (event) {
+						    check_enter(event);
+						});
 						</script>
 					</td>
+
 				</tr>
 				<tr>
 					<td class="normal" height="45px" style="background:#fafafa;">이름</td>
 					<td class="light" style="text-align: left;">
-						<input style= "margin-left: 33px;" type="text" id="hos_name" name="hos_name" value="${decryptedHos_name} " />
+						<input style= "margin-left: 33px;" type="text" id="hos_name" name="hos_name" value="${decryptedHos_name}" />
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								const cs_data_01 = document.getElementById("cs_data_01");
+								const hos_name = document.getElementById("hos_name");
+								hos_name.value = cs_data_01.value;
+								// 업데이트 hos_name when cs_data_01 체인지 이벤트
+								cs_data_01.addEventListener("input", function() {
+									hos_name.value = cs_data_01.value;
+								});
+							});
+						</script>
 					</td>
 				</tr>
 			</table>
@@ -754,7 +823,7 @@
 			<p class="">
 				<b>2020년 1월 1일부터 본인부담상한제 사전급여는 요양병원이아닌, 환자에게 직접지급하는 방식으로 변경됩니다.</b>
 				건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 
-				<b>최고상한액 ( <input class="yesrs" type="text" id="yesrs_pay" name="yesrs_pay" value="${decryptedYesrs_pay}" style="width:50px; text-align:right;"> 년 기준
+				<b>최고상한액 ( <input class="yesrs" type="number" id="yesrs_pay" name="yesrs_pay" value="${decryptedYesrs_pay}" style="width:50px; text-align:right;"> 년 기준
 				<input class="yesrs" type="text" id="payment" name="payment" value="${decryptedPayment}" style="width:50px; text-align:right;"> 만원) 초과금액을 환자에게 직접 지급합니다.</b><br>
 				다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터 3~5개월 후 직접 지급하게 됩니다.
 			</p>
@@ -852,7 +921,48 @@
 			</tr>
 			<tr style="height: 45px; background-color: #ffffff; color:#222222; border-bottom: 1px solid #dadada;">
 				<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
-				 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> /></td>
+				 colspan="2" class="light">1일당 : <input name="cs_data_27" value="${vo.cs_data_27 }" type="text" onkeyup="cmaComma(this);" onchange="cmaComma(this);" <c:if test="${vo.cs_data_22 ne '상급병실'}">disabled="disabled"</c:if> />
+				 </td>
+				<script>
+				function cmaComma(obj) {
+				    var firstNum = obj.value.substring(0,1); // 첫글자 확인 변수
+				    var strNum = /^[\,0-9]*$/; // 숫자와 , 만 가능
+				    var str = "" + obj.value.replace(/,/gi,''); // 콤마 제거  /[^0-9]/gi;
+				    var regx = new RegExp(/(-?\d+)(\d{3})/);  
+				    var bExists = str.indexOf(".",0);  
+				    var strArr = str.split('.');
+				    if (!strNum.test(obj.value)) {
+				        alert("숫자만 입력하십시오.");
+				        obj.value = 1;
+				        obj.focus();
+				        return false;
+				    }
+				    while(regx.test(strArr[0])){
+				        strArr[0] = strArr[0].replace(regx,"$1,$2");
+				    }  
+				    if (bExists > -1)  {
+				        obj.value = strArr[0] + "." + strArr[1];
+				    } else  {
+				        obj.value = strArr[0];
+				    }
+				}
+				 
+				function commaSplit(n) {// 콤마 나누는 부분
+				    var txtNumber = '' + n;
+				    var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
+				    var arrNumber = txtNumber.split('.');
+				    arrNumber[0] += '.';
+				    do {
+				        arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
+				    }
+				    while (rxSplit.test(arrNumber[0]));
+				    if(arrNumber.length > 1) {
+				        return arrNumber.join('');
+				    } else {
+				        return arrNumber[0].split('.')[0];
+				    }
+				}
+				</script>
 			</tr>
 			<tr style="height: 45px; background-color: #ffffff;">
 				<td colspan="3" style="text-align: left;">
@@ -868,19 +978,20 @@
 		<div class="normal normal_sign" style="width:100%;">
 			신청인  (  관계  : &nbsp;<input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />&nbsp;) : &nbsp;
 			<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-			<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="">
-			<mark>&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" name="canvasImg" src="data:image/png;base64,${imageData2}" alt="">명 )&emsp;</mark></div>
+			<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
+			<mark class="hos_sign">&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" name="canvasImg" src="data:image/png;base64,${imageData2}" alt="">명 )&emsp;</mark></div>
 			<script>
-	 				document.addEventListener("DOMContentLoaded", function() {
-	 					var imgElement = document.getElementById('canvasImg');
-	 						console.log(imgElement);
-	 					if (imgElement) {
-	 						console.log("Image source:", imgElement.src);
-	 					} else {
-	 						console.log("No image element found.");
-	 					}
-	 				});
-				</script> 
+			document.addEventListener("DOMContentLoaded", function() {
+			var imgElement = document.getElementById('canvasImg');
+				console.log(imgElement);
+				if (imgElement && imgElement.src && imgElement.src !== 'data:') {
+					console.log("Image source:", imgElement.src);
+				} else {
+					console.log("No image element found or image is empty.");
+					imgElement.src = "";  // 데이터가 들어있지 않을때
+					}
+			});
+			</script> 
 		</div>
 	</div>
 	<br><br>
@@ -983,452 +1094,466 @@ if (!name || name.length ===0) {
 	location.href = "${pageContext.request.contextPath}/hwt/Login";
 }
 
-function Mobile(){
-	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+// function Mobile() {
+//     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+//     return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase()) && !/windows/i.test(userAgent.toLowerCase());
+// }
+function Mobile() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    console.log("User Agent: " + navigator.userAgent);
+
+	// Surface 디바이스 확인 (기본적인 User-Agent로는 확인이 어렵기 때문에 터치 지원 여부로 확인)
+    var isSurface = /surface pro|surface duo|surface neo|surface go|surface book|surface laptop|surface/i.test(userAgent.toLowerCase()) || 
+					(navigator.maxTouchPoints > 0 && /windows nt/i.test(userAgent.toLowerCase()));
+	
+    // 체크 모바일 디바이스
+    var isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+
+    // 윈도우 장치 확인 (윈도우폰 장치가 아닐시 제외, Surface 장치는 포함)
+    var isWindows = /windows nt/i.test(userAgent.toLowerCase()) && !/phone/i.test(userAgent.toLowerCase()) && !isSurface;
+
+    // Mac 장치 확인
+    var isMac = /macintosh|mac os x/i.test(userAgent.toLowerCase()) && !/iphone|ipad|ipod/i.test(userAgent.toLowerCase());
+
+    console.log("isMobileDevice: " + isMobileDevice);
+    console.log("isSurface: " + isSurface);
+    console.log("isWindows: " + isWindows);
+    console.log("isMac: " + isMac);
+    
+    return {
+        isMobileDevice: isMobileDevice,
+        isSurface: isSurface,
+        isWindows: isWindows,
+        isMac: isMac
+    };
 }
-	
-if (Mobile()){// 모바일일 경우
-	console.log("모바일");
-} else {// 모바일 외
-	console.log("PC");
+
+const deviceInfo = Mobile();
+if (deviceInfo.isMobileDevice && !deviceInfo.isSurface && !deviceInfo.isWindows && !deviceInfo.isMac) {
+    console.log("Mobile");
+    console.log("모바일");
+} else {
+    console.log("PC로 접속되었습니다.");
 }
-// // 첫번째 서명 모달
-// const body = document.querySelector('body');
-// const modal1 = document.querySelector('.modal1');
-// const btnOpenPopup1 = document.querySelector('#end1');
 
-// btnOpenPopup1.addEventListener('click', () => {
-	
-// 	modal1.classList.toggle('show');
 
-// 	if (modal1.classList.contains('show')) {
-// 		body.style.overflow = 'hidden';
-// 	}
-	
-// // 	if (Mobile()){// 모바일일 경우
-// // 		console.log("모바일");
-// // 		modal1.classList.toggle('show');
+//첫번째 서명 모달
+const body = document.querySelector('body');
+const modal1 = document.querySelector('.modal1');
+const btnOpenPopup1 = document.querySelector('#end1');
+const canvasImg1 = document.getElementById('canvasImg1');
+let isSigned1 = canvasImg1.src && canvasImg1.src !== 'data:image/png;base64,';
 
-// // 		if (modal1.classList.contains('show')) {
-// // 			body.style.overflow = 'hidden';
-// // 		}
-// // 	} else {// 모바일 외
-// // 		console.log("PC");
-// // 		alert('모바일로 접속해주세요.');
-// // 	}
-	
-// });
+// 모바일 디바이스에서 터치 이벤트에 반응하여 모달 표시
+btnOpenPopup1.addEventListener('touchstart', () => {
+    if (!isSigned1) {
+        modal1.classList.toggle('show');
+        if (modal1.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+        }
+    } else {
+        alert('이미 서명이 완료되었습니다.');
+    }
+});
+
+// 모달 바깥 영역을 클릭시, 모달 닫기
 // modal1.addEventListener('click', (event) => {
-	
-// 	if (event.target === modal1) {
-// 		// 모달 바깥 영역을 클릭했을 때
-// 			closePopupAndRedirect1();
-// 	}
+//     if (event.target === modal1) {
+//         closePopupAndRedirect1();
+//     }
 // });
 
-// function end1(){
-	
-// 	closePopup1();
-// }
+function end1() {
+    isSigned1 = true;
+    closePopup1();
+}
 
-// function closePopupAndRedirect1() {
-// 	modal1.classList.toggle('show');
-// 	if (!modal1.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	var canvasValue1 = canvas1.toDataURL();
-// 	console.log(canvasValue1);
-// 	const canvasImg1 = document.getElementById('canvasImg1');
-// 	canvasImg1.src = canvasValue1;
-	
-// }
-// function closePopup1(){
-// 	modal1.classList.toggle('show');
-// 	if (!modal1.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	var canvasValue1 = canvas1.toDataURL();
-// 	console.log(canvasValue1);
-// 	const canvasImg1 = document.getElementById('canvasImg1');
-// 	canvasImg1.src = canvasValue1;
-// 	console.log(canvasImg1);
-// }
+function closePopupAndRedirect1() {
+    modal1.classList.toggle('show');
+    if (!modal1.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned1) {
+        var canvasValue1 = canvas1.toDataURL();
+        console.log(canvasValue1);
+        canvasImg1.src = canvasValue1;
+        document.getElementById('imgData').value = canvasValue1.split(',')[1];
+    }
+}
+
+function closePopup1() {
+    modal1.classList.toggle('show');
+    if (!modal1.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned1) {
+        var canvasValue1 = canvas1.toDataURL();
+        console.log(canvasValue1); // data:image/png;base64,iVBPRw0KGgoAAAANSUhE.....
+        canvasImg1.src = canvasValue1;
+        document.getElementById('imgData').value = canvasValue1.split(',')[1];
+        console.log(canvasImg1);
+    } else {
+        isSigned1 = false;
+    }
+}
 </script>
 
 <script>
-// // 두번째 서명 모달
-// // const body = document.querySelector('body');
-// const modal2 = document.querySelector('.modal2');
-// const btnOpenPopup2 = document.querySelector('#end2');
+//두번째 서명 모달
+const modal2 = document.querySelector('.modal2');
+const btnOpenPopup2 = document.querySelector('#end2');
+const canvasImg2 = document.getElementById('canvasImg2');
+let isSigned2 = canvasImg2.src && canvasImg2.src !== 'data:image/png;base64,';
 
-// btnOpenPopup2.addEventListener('click', () => {
-	
-// 	modal2.classList.toggle('show');
+// 모바일 디바이스에서 터치 이벤트에 반응하여 모달 표시
+btnOpenPopup2.addEventListener('touchstart', () => {
+    if (!isSigned2) {
+        modal2.classList.toggle('show');
+        if (modal2.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+        }
+    } else {
+        alert('이미 서명이 완료되었습니다.');
+    }
+});
 
-// 	if (modal2.classList.contains('show')) {
-// 		body.style.overflow = 'hidden';
-// 	}
-	
-// // 	if (Mobile()){// 모바일일 경우
-// // 		console.log("모바일");
-// // 		modal2.classList.toggle('show');
 
-// // 		if (modal2.classList.contains('show')) {
-// // 			body.style.overflow = 'hidden';
-// // 		}
-// // 	} else {// 모바일 외
-// // 		console.log("PC");
-// // 		alert('모바일로 접속해주세요.');
-// // 	}
-	
-// });
+
+// 모달 바깥 영역을 클릭시, 모달 닫기
 // modal2.addEventListener('click', (event) => {
-	
-	
-// 	if (event.target === modal2) {
-// 		// 모달 바깥 영역을 클릭했을 때
-		
-// 			closePopupAndRedirect2();
-		
-// 	}
+//     if (event.target === modal2) {
+//         closePopupAndRedirect2();
+//     }
 // });
 
-// function end2(){
-	
-// 	closePopup2();
-// }
+function end2() {
+    isSigned2 = true;
+    closePopup2();
+}
 
-// function closePopupAndRedirect2() {
-// 	modal2.classList.toggle('show');
-// 	if (!modal2.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	var canvasValue2 = canvas2.toDataURL();
-// 	console.log(canvasValue2);
-// 	const canvasImg2 = document.getElementById('canvasImg2');
-// 	canvasImg2.src = canvasValue2;
-	
-// }
-// function closePopup2(){
-// 	modal2.classList.toggle('show');
-// 	if (!modal2.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	var canvasValue2 = canvas2.toDataURL();
-// 	console.log(canvasValue2);
-// 	const canvasImg2 = document.getElementById('canvasImg2');
-// 	canvasImg2.src = canvasValue2;
-// }
+function closePopupAndRedirect2() {
+    modal2.classList.toggle('show');
+    if (!modal2.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned2) {
+        var canvasValue2 = canvas2.toDataURL();
+        console.log(canvasValue2);
+        canvasImg2.src = canvasValue2;
+        document.getElementById('imgData1').value = canvasValue2.split(',')[1];
+    }
+}
 
+function closePopup2() {
+    modal2.classList.toggle('show');
+    if (!modal2.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned2) {
+        var canvasValue2 = canvas2.toDataURL();
+        console.log(canvasValue2); // data:image/png;base64,iVBPRw0KGgoAAAANSUhE.....
+        canvasImg2.src = canvasValue2;
+        document.getElementById('imgData1').value = canvasValue2.split(',')[1];
+        console.log(canvasImg2);
+    } else {
+        isSigned2 = false;
+    }
+}
 </script>
 
 <script>
-// // 마지막 서명 모달
-// // const body = document.querySelector('body');
-// const modal = document.querySelector('.modal');
-// const btnOpenPopup = document.querySelector('#end');
+//마지막 서명 모달
+const modal = document.querySelector('.modal');
+const btnOpenPopup = document.querySelector('#end');
+const canvasImg = document.getElementById('canvasImg');
+let isSigned = canvasImg.src && canvasImg.src !== 'data:image/png;base64,';
 
-// btnOpenPopup.addEventListener('click', () => {
-	
-// 	modal.classList.toggle('show');
+// 모바일 디바이스에서 터치 이벤트에 반응하여 모달 표시
+btnOpenPopup.addEventListener('touchstart', () => {
+    if (!isSigned) {
+        modal.classList.toggle('show');
+        if (modal.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+        }
+    } else {
+        alert('이미 서명이 완료되었습니다.');
+    }
+});
 
-// 	if (modal.classList.contains('show')) {
-// 		body.style.overflow = 'hidden';
-// 	}
-	
-// // 	if (Mobile()){// 모바일일 경우
-// // 		console.log("모바일");
-// // 		modal.classList.toggle('show');
+if (deviceInfo.isWindows == true || deviceInfo.isMac == true) {
+	// Handle non-Windows device clicks for mobile-only features
+    const btnOpenPopup1 = document.querySelector('#end1');
+    const btnOpenPopup2 = document.querySelector('#end2');
+    const btnOpenPopup = document.querySelector('#end');
 
-// // 		if (modal.classList.contains('show')) {
-// // 			body.style.overflow = 'hidden';
-// // 		}
-// // 	} else {// 모바일 외
-// // 		console.log("PC");
-// // 		alert('모바일로 접속해주세요.');
-// // 	}
-	
-// });
+    // Ensure buttons exist before adding event listeners
+    if (btnOpenPopup1) {
+        btnOpenPopup1.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('모바일로 접속해주세요.');
+        });
+    }
 
+    if (btnOpenPopup2) {
+        btnOpenPopup2.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('모바일로 접속해주세요.');
+        });
+    }
+
+    if (btnOpenPopup) {
+        btnOpenPopup.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('모바일로 접속해주세요.');
+        });
+    }
+} else {
+    
+}
+// 모달 바깥 영역을 클릭시, 모달 닫기
 // modal.addEventListener('click', (event) => {
-	
-	
-// 	if (event.target === modal) {
-// 		// 모달 바깥 영역을 클릭했을 때
-		
-// 			closePopupAndRedirect();
-		
-// 	}
+//     if (event.target === modal) {
+//         closePopupAndRedirect();
+//     }
 // });
 
-// function end(){
-	
-// 	closePopup();
-// }
+function end() {
+    isSigned = true;
+    closePopup();
+}
 
-// function closePopupAndRedirect() {
-// 	modal.classList.toggle('show');
-// 	if (!modal.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	var canvasValue = canvas.toDataURL();
-// 	console.log(canvasValue);
-// 	const canvasImg = document.getElementById('canvasImg');
-// 	canvasImg.src = canvasValue;
-	
-// }
-// function closePopup(){
-// 	modal.classList.toggle('show');
-// 	if (!modal.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	var canvasValue = canvas.toDataURL();
-// 	console.log(canvasValue);
-// 	const canvasImg = document.getElementById('canvasImg');
-// 	canvasImg.src = canvasValue;
-// }
+function closePopupAndRedirect() {
+    modal.classList.toggle('show');
+    if (!modal.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned) {
+        var canvasValue = canvas.toDataURL();
+        console.log(canvasValue);
+        canvasImg.src = canvasValue;
+        document.getElementById('imgData2').value = canvasValue.split(',')[1];
+    }
+}
 
-</script>
-<script>
-// // 첫번째 서명
-// //canvas 엘리먼트를 가져옵니다
-// var canvas1 = document.getElementById("canvas1");
-// //canvas 엘리먼트의 context를 가져옵니다.
-// var ctx1 = canvas1.getContext("2d");
-
-// //이전 좌표값을 저장할 변수를 초기화합니다.
-// var lastX1;
-// var lastY1;
-// ctx1.lineWidth = 5;
-
-// let drawing1 = false;	// true일 때만 그리기
-// function draw1(curX1, curY1) {
-//     ctx1.beginPath();
-//     ctx1.moveTo(startX1, startY1);
-//     ctx1.lineTo(curX1, curY1);
-//     ctx1.stroke();
-// }
-
-// canvas1.addEventListener("touchmove", touchMove, false);
-// canvas1.addEventListener("touchstart", touchStart, false);
-// canvas1.addEventListener("touchend", touchEnd, false);
-
-// function getTouchPos1(e) {
-// 	const canvasRect1 = canvas1.getBoundingClientRect();
-// 	// getBoundingClientRect() 메소드를 사용하여 캔버스 엘리먼트의 위치 정보를 얻고, 
-// 	// e.touches에서 받은 clientX와 clientY 값을 기준으로 좌표 값을 계산합니다. 그 후, 
-// 	// x와 y 값을 반환합니다.
-//     return {
-//     	x: e.touches[0].clientX - canvasRect1.left,
-//         y: e.touches[0].clientY - canvasRect1.top
-//     }
-// }
-
-// function touchStart(e) {
-//     e.preventDefault();
-//     drawing1 = true;
-//     const { x, y } = getTouchPos1(e);
-//     startX1 = x;
-//     startY1 = y;
-// }
-// function touchMove(e) {
-//     if(!drawing1) return;
-//     const { x, y } = getTouchPos1(e);
-//     draw1(x, y);
-//     startX1 = x;
-//     startY1 = y;
-// }
-// function touchEnd(e) {
-//     if(!drawing1) return;
-//     // 점을 찍을 경우 위해 마지막에 점을 찍는다.
-//     // touchEnd 이벤트의 경우 위치정보가 없어서 startX, startY를 가져와서 점을 찍는다.
-//     ctx1.beginPath();
-    
-//     ctx1.arc(startX1, startY1, ctx1.lineWidth/2, 0, 2*Math.PI);
-//     ctx1.fillStyle = ctx1.strokeStyle;
-//     ctx1.fill();
-//     drawing1 = false;
-// }
-
-// function onClear1() {
-//     canvas1 = document.getElementById('canvas1');
-//     ctx1.save();
-//     ctx1.setTransform(1, 0, 0, 1, 0, 0);
-// 	ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-// 	ctx1.restore();
-// }
-// function cancle1(){
-// 	ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-// 	modal1.classList.toggle('show');
-// 	if (!modal1.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	const canvasImg1 = document.getElementById('canvasImg1');
-// 	canvasImg1.src = "";
-// }
-
-
-
+function closePopup() {
+    modal.classList.toggle('show');
+    if (!modal.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned) {
+        var canvasValue = canvas.toDataURL();
+        console.log(canvasValue); // data:image/png;base64,iVBPRw0KGgoAAAANSUhE.....
+        canvasImg.src = canvasValue;
+        document.getElementById('imgData2').value = canvasValue.split(',')[1];
+        console.log(canvasValue);
+    } else {
+        isSigned = false;
+    }
+}
 </script>
 
 <script>
-// // 두번째 서명
-// //canvas 엘리먼트를 가져옵니다
-// var canvas2 = document.getElementById("canvas2");
-// //canvas 엘리먼트의 context를 가져옵니다.
-// var ctx2 = canvas2.getContext("2d");
+//첫번째 서명 캔버스 처리
+var canvas1 = document.getElementById("canvas1");
+var ctx1 = canvas1.getContext("2d");
+ctx1.lineWidth = 5;
 
-// //이전 좌표값을 저장할 변수를 초기화합니다.
-// var lastX2;
-// var lastY2;
-// ctx2.lineWidth = 5;
+let drawing1 = false; // true일 때만 그리기
+function draw1(curX1, curY1) {
+    ctx1.beginPath();
+    ctx1.moveTo(startX1, startY1);
+    ctx1.lineTo(curX1, curY1);
+    ctx1.stroke();
+}
 
-// let drawing2 = false;	// true일 때만 그리기
-// function draw2(curX2, curY2) {
-//     ctx2.beginPath();
-//     ctx2.moveTo(startX2, startY2);
-//     ctx2.lineTo(curX2, curY2);
-//     ctx2.stroke();
-// }
+canvas1.addEventListener("touchmove", touchMove, false);
+canvas1.addEventListener("touchstart", touchStart, false);
+canvas1.addEventListener("touchend", touchEnd, false);
 
-// canvas2.addEventListener("touchmove", touchMove, false);
-// canvas2.addEventListener("touchstart", touchStart, false);
-// canvas2.addEventListener("touchend", touchEnd, false);
+function getTouchPos1(e) {
+    const canvasRect1 = canvas1.getBoundingClientRect();
+    return {
+        x: e.touches[0].clientX - canvasRect1.left,
+        y: e.touches[0].clientY - canvasRect1.top
+    }
+}
 
-// function getTouchPos2(e) {
-// 	const canvasRect2 = canvas2.getBoundingClientRect();
-// 	// getBoundingClientRect() 메소드를 사용하여 캔버스 엘리먼트의 위치 정보를 얻고, 
-// 	// e.touches에서 받은 clientX와 clientY 값을 기준으로 좌표 값을 계산합니다. 그 후, 
-// 	// x와 y 값을 반환합니다.
-//     return {
-//     	x: e.touches[0].clientX - canvasRect2.left,
-//         y: e.touches[0].clientY - canvasRect2.top
-//     }
-// }
+function touchStart(e) {
+    e.preventDefault();
+    drawing1 = true;
+    const { x, y } = getTouchPos1(e);
+    startX1 = x;
+    startY1 = y;
+}
+function touchMove(e) {
+    if (!drawing1) return;
+    const { x, y } = getTouchPos1(e);
+    draw1(x, y);
+    startX1 = x;
+    startY1 = y;
+}
+function touchEnd(e) {
+    if (!drawing1) return;
+    ctx1.beginPath();
+    ctx1.arc(startX1, startY1, ctx1.lineWidth / 2, 0, 2 * Math.PI);
+    ctx1.fillStyle = ctx1.strokeStyle;
+    ctx1.fill();
+    drawing1 = false;
+    isSigned1 = true; // 서명이 이루어졌음을 설정
+}
 
-// function touchStart(e) {
-//     e.preventDefault();
-//     drawing2 = true;
-//     const { x, y } = getTouchPos2(e);
-//     startX2 = x;
-//     startY2 = y;
-// }
-// function touchMove(e) {
-//     if(!drawing2) return;
-//     const { x, y } = getTouchPos2(e);
-//     draw2(x, y);
-//     startX2 = x;
-//     startY2 = y;
-// }
-// function touchEnd(e) {
-//     if(!drawing2) return;
-//     // 점을 찍을 경우 위해 마지막에 점을 찍는다.
-//     // touchEnd 이벤트의 경우 위치정보가 없어서 startX, startY를 가져와서 점을 찍는다.
-//     ctx2.beginPath();
-    
-//     ctx2.arc(startX2, startY2, ctx2.lineWidth/2, 0, 2*Math.PI);
-//     ctx2.fillStyle = ctx1.strokeStyle;
-//     ctx2.fill();
-//     drawing2 = false;
-// }
-
-// function onClear2() {
-//     canvas2 = document.getElementById('canvas2');
-//     ctx2.save();
-//     ctx2.setTransform(1, 0, 0, 1, 0, 0);
-// 	ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-// 	ctx2.restore();
-// }
-// function cancle2(){
-// 	ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
-// 	modal2.classList.toggle('show');
-// 	if (!modal2.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	const canvasImg2 = document.getElementById('canvasImg2');
-// 	canvasImg2.src = "";
-// }
-
-
+function onClear1() {
+    ctx1.save();
+    ctx1.setTransform(1, 0, 0, 1, 0, 0);
+    ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+    ctx1.restore();
+    isSigned1 = false; // 서명 초기화
+}
+function cancle1() {
+    ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+    modal1.classList.toggle('show');
+    if (!modal1.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    canvasImg1.src = "";
+    isSigned1 = false; // 서명 초기화
+}
 </script>
 
 <script>
-// // 마지막 서명
-// //canvas 엘리먼트를 가져옵니다
-// var canvas = document.getElementById("canvas");
-// //canvas 엘리먼트의 context를 가져옵니다.
-// var ctx = canvas.getContext("2d");
+//두번째 서명 캔버스 처리
+var canvas2 = document.getElementById("canvas2");
+var ctx2 = canvas2.getContext("2d");
+ctx2.lineWidth = 5;
 
-// //이전 좌표값을 저장할 변수를 초기화합니다.
-// var lastX;
-// var lastY;
-// ctx.lineWidth = 5;
+let drawing2 = false; // true일 때만 그리기
+function draw2(curX2, curY2) {
+	ctx2.beginPath();
+	ctx2.moveTo(startX2, startY2);
+	ctx2.lineTo(curX2, curY2);
+	ctx2.stroke();
+}
 
-// let drawing = false;	// true일 때만 그리기
-// function draw(curX, curY) {
-//     ctx.beginPath();
-//     ctx.moveTo(startX, startY);
-//     ctx.lineTo(curX, curY);
-//     ctx.stroke();
-// }
+canvas2.addEventListener("touchmove", touchMove, false);
+canvas2.addEventListener("touchstart", touchStart, false);
+canvas2.addEventListener("touchend", touchEnd, false);
 
-// canvas.addEventListener("touchmove", touchMove, false);
-// canvas.addEventListener("touchstart", touchStart, false);
-// canvas.addEventListener("touchend", touchEnd, false);
+function getTouchPos2(e) {
+	const canvasRect2 = canvas2.getBoundingClientRect();
+	return {
+		x: e.touches[0].clientX - canvasRect2.left,
+		y: e.touches[0].clientY - canvasRect2.top
+	}
+}
 
-// function getTouchPos(e) {
-// 	const canvasRect = canvas.getBoundingClientRect();
-// 	// getBoundingClientRect() 메소드를 사용하여 캔버스 엘리먼트의 위치 정보를 얻고, 
-// 	// e.touches에서 받은 clientX와 clientY 값을 기준으로 좌표 값을 계산합니다. 그 후, 
-// 	// x와 y 값을 반환합니다.
-//     return {
-//     	x: e.touches[0].clientX - canvasRect.left,
-//         y: e.touches[0].clientY - canvasRect.top
-//     }
-// }
+function touchStart(e) {
+	e.preventDefault();
+	drawing2 = true;
+	const { x, y } = getTouchPos2(e);
+	startX2 = x;
+	startY2 = y;
+}
+function touchMove(e) {
+	if (!drawing2) return;
+	const { x, y } = getTouchPos2(e);
+	draw2(x, y);
+	startX2 = x;
+	startY2 = y;
+}
+function touchEnd(e) {
+	if (!drawing2) return;
+	ctx2.beginPath();
+	ctx2.arc(startX2, startY2, ctx2.lineWidth / 2, 0, 2 * Math.PI);
+	ctx2.fillStyle = ctx2.strokeStyle;
+	ctx2.fill();
+	drawing2 = false;
+	isSigned2 = true; // 서명이 이루어졌음을 설정
+}
 
-// function touchStart(e) {
-//     e.preventDefault();
-//     drawing = true;
-//     const { x, y } = getTouchPos(e);
-//     startX = x;
-//     startY = y;
-// }
-// function touchMove(e) {
-//     if(!drawing) return;
-//     const { x, y } = getTouchPos(e);
-//     draw(x, y);
-//     startX = x;
-//     startY = y;
-// }
-// function touchEnd(e) {
-//     if(!drawing) return;
-//     // 점을 찍을 경우 위해 마지막에 점을 찍는다.
-//     // touchEnd 이벤트의 경우 위치정보가 없어서 startX, startY를 가져와서 점을 찍는다.
-//     ctx.beginPath();
-    
-//     ctx.arc(startX, startY, ctx.lineWidth/2, 0, 2*Math.PI);
-//     ctx.fillStyle = ctx.strokeStyle;
-//     ctx.fill();
-//     drawing = false;
-// }
+function onClear2() {
+    ctx2.save();
+    ctx2.setTransform(1, 0, 0, 1, 0, 0);
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+    ctx2.restore();
+    isSigned2 = false; // 서명 초기화
+}
+function cancle2() {
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+    modal2.classList.toggle('show');
+    if (!modal2.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    canvasImg2.src = "";
+    isSigned2 = false; // 서명 초기화
+}
+</script>
 
-// function onClear() {
-//     canvas = document.getElementById('canvas');
-//     ctx.save();
-//     ctx.setTransform(1, 0, 0, 1, 0, 0);
-// 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-// 	ctx.restore();
-// }
-// function cancle(){
-// 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-// 	modal.classList.toggle('show');
-// 	if (!modal.classList.contains('show')) {
-// 		body.style.overflow = 'auto';
-// 	}
-// 	const canvasImg = document.getElementById('canvasImg');
-// 	canvasImg.src = "";
-// }
+<script>
+//마지막 서명 캔버스 처리
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+ctx.lineWidth = 5;
+
+let drawing = false; // true일 때만 그리기
+function draw(curX, curY) {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(curX, curY);
+    ctx.stroke();
+}
+
+canvas.addEventListener("touchmove", touchMove, false);
+canvas.addEventListener("touchstart", touchStart, false);
+canvas.addEventListener("touchend", touchEnd, false);
+
+function getTouchPos(e) {
+    const canvasRect = canvas.getBoundingClientRect();
+    return {
+        x: e.touches[0].clientX - canvasRect.left,
+        y: e.touches[0].clientY - canvasRect.top
+    }
+}
+
+function touchStart(e) {
+    e.preventDefault();
+    drawing = true;
+    const { x, y } = getTouchPos(e);
+    startX = x;
+    startY = y;
+}
+function touchMove(e) {
+    if (!drawing) return;
+    const { x, y } = getTouchPos(e);
+    draw(x, y);
+    startX = x;
+    startY = y;
+}
+function touchEnd(e) {
+    if (!drawing) return;
+    ctx.beginPath();
+    ctx.arc(startX, startY, ctx.lineWidth / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = ctx.strokeStyle;
+    ctx.fill();
+    drawing = false;
+    isSigned = true; // 서명이 이루어졌음을 설정
+}
+
+function onClear() {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+    isSigned = false; // 서명 초기화
+}
+function cancle() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    modal.classList.toggle('show');
+    if (!modal.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    canvasImg.src = "";
+    isSigned = false; // 서명 초기화
+}
 </script>
 
 <script>
@@ -1535,12 +1660,10 @@ $(document).ready(function() {
 	
 	
 	$(document).ready(function() {
-	    // capture_area영역들의 이미지 캡쳐와 압축 해주는 함수
-		function captureAndCompressImages() {
+	    function captureAndCompressImages() {
 	        const elements = ['#capture_area', '#capture_area2', '#capture_area3', '#capture_area4'];
 	        const images = [];
-	        
-			// 각 요소를 재귀적으로 캡쳐하는 함수 (이벤트가 자신을 포함하고 다시 자기 자신을 사용하여 정의될 때)
+
 	        function captureElement(index) {
 	            if (index >= elements.length) {
 	                createPDF(images);
@@ -1548,41 +1671,70 @@ $(document).ready(function() {
 	            }
 
 	            const element = document.querySelector(elements[index]);
+	            const textareas = element.querySelectorAll('textarea');
+				// textarea	div로 숨겨서 가져오기
+	            textareas.forEach((textarea) => {
+	                const div = document.createElement('div');
+	                div.style.width = textarea.offsetWidth + 'px';
+	                div.style.height = textarea.offsetHeight + 'px';
+	                div.style.whiteSpace = 'pre-wrap';
+	                div.style.wordWrap = 'break-word';
+	                div.style.border = textarea.style.border;
+	                div.style.padding = textarea.style.padding;
+	                div.style.fontFamily = textarea.style.fontFamily;
+	                div.style.padding = textarea.style.padding;
+	                div.style.fontSize = textarea.style.fontSize;
+	                div.style.fontSize = '15px';
+	                div.style.lineHeight = textarea.style.lineHeight;
+	                div.style.marginLeft = '33px';
+	                div.style.overflow = 'hidden';
+	                div.innerHTML = textarea.value.replace(/\n/g, '<br>');
+
+	                textarea.style.display = 'none';
+	                textarea.parentNode.insertBefore(div, textarea.nextSibling);
+	            });
+
 	            html2canvas(element).then(function(canvas) {
 	                // 캔버스 Blob으로 변환
-	            	canvas.toBlob(function(blob) {
+	                canvas.toBlob(function(blob) {
 	                    const reader = new FileReader();
 	                    reader.readAsDataURL(blob);
 	                    reader.onloadend = function() {
 	                        images.push(reader.result);
+
+	                        textareas.forEach((textarea) => {
+	                            textarea.style.display = 'block';
+	                            textarea.nextSibling.remove();
+	                        });
+
 	                        captureElement(index + 1);
 	                    };
-	                }, 'image/jpeg', 0.7); // 이미지 70%로 퀄리티 하양 후 압축(용량문제)
+	                }, 'image/jpeg', 0.8); // 이미지 70%로 퀄리티 하양 후 압축(용량문제)
 	            });
 	        }
 
 	        captureElement(0);
 	    }
-		// 위에 변환 시킨 이미지를 PDF로 생성
+		// PDF 변환 코드
 	    function createPDF(images) {
 	        const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
 	        const pdfWidth = pdf.internal.pageSize.getWidth();
 	        const pdfHeight = pdf.internal.pageSize.getHeight();
-	        
-			// 각 영역의 이미지를 PDF 페이지에 추가
+	        const margin = 6;	// 여백
+
 	        images.forEach((imageData, index) => {
 	            const img = new Image();
 	            img.src = imageData;
 	            img.onload = function() {
-	                const imgWidth = pdfWidth;
+	                const imgWidth = pdfWidth - 2 * margin;
 	                const imgHeight = img.height * pdfWidth / img.width;
 
 	                if (index > 0) {
 	                    pdf.addPage();
 	                }
 
-	                pdf.addImage(imageData, 'PNG', 0, 0, imgWidth, imgHeight);
-	                
+	                pdf.addImage(imageData, 'jpeg', 6, 6, imgWidth, imgHeight);
+
 	                if (index === images.length - 1) {
 	                    const pdfData = pdf.output('datauristring').split(';base64,')[1];
 	                    sendPDFToServer(pdfData);
@@ -1590,21 +1742,21 @@ $(document).ready(function() {
 	            };
 	        });
 	    }
-		// 서버로 PDF 전송
+
 	    function sendPDFToServer(pdfData) {
 	        const cs_idx = ${cs_idx};
 	        const formData = {
 	            pdfData: pdfData,
 	            cs_idx: cs_idx
 	        };
-			
-	        $('input').each(function() {
+
+	        $('input, textarea').each(function() {
 	            const name = $(this).attr('name');
 	            if (name) {
 	                formData[name] = $(this).val();
 	            }
 	        });
-			// ajax사용해서 데이터 전송
+
 	        $.ajax({
 	            url: '${pageContext.request.contextPath}/save',
 	            type: 'POST',
@@ -1625,9 +1777,13 @@ $(document).ready(function() {
 	    }
 
 	    $('.btn_download').click(function() {
-	        captureAndCompressImages();
+	    	if (confirm('저장하시면 수정이 불가능합니다. \n저장하시겠습니까? ')) {
+		    	console.log("Capture button clicked");
+		        captureAndCompressImages();
+	    	}
 	    });
 	});
+
 	
 	// 하나의 이미지로 캡쳐하는 소스
 // 	$(document).ready(function() {
@@ -2115,8 +2271,8 @@ $(document).ready(function() {
 	    	 <input style="display: flex; justify-content: center; align-items: center; background-color: #03a9d0; color: #ffffff; 
 	        border-radius: 5px; height: 70px; width: 200px; font-size: 18pt;" id="btn_download" class="btn_download"type="submit" value="등록"/>
 	         -->
-	        <div style="display: flex; justify-content: center; align-items: center; background-color: #1b304a; color: #ffffff; 
-	        border-radius: 5px; height: 50px; width: 150px; font-size: 24px;" id="btn_download" class="btn_download">등록</div>
+			<div style="display: flex; justify-content: center; align-items: center; background-color: #1b304a; color: #ffffff; 
+			border-radius: 5px; height: 50px; width: 150px; font-size: 24px;" id="btn_download" class="btn_download">등록</div>
 	    </div>
 		<!-- 등록버튼	    
 		<div style="display: flex; justify-content: flex-end;">
@@ -2158,13 +2314,74 @@ function toggleCheckbox() {
 		$("#cs_data_26").prop("checked", false);
 	}
 }
-$("#btn_save").click(function () {
-	console.log("클릭");
-	var frm = $("#frm");
-	var confirmation = confirm("서명 정보는 저장이 되지 않습니다. \n임시저장을 하시겠습니까?");
-	if (confirmation) {
-		frm.submit();
-	}
+
+$("#frm").submit(function(event) {
+	event.preventDefault(); 
+	var formData = $(this).serialize();
+	console.log("Submitting form with data: ", formData);
+
+	$.post($(this).attr('action'), formData, function(response) {
+	console.log("Response from server: ", response);
+	});
+});
+
+// document.querySelector("#btn_save").addEventListener('click', function () {
+//     console.log("클릭");
+//     var frm = document.querySelector("#frm");
+//     var confirmation = confirm("임시저장을 하시겠습니까?");
+//     if (confirmation) {
+//         frm.action = "${pageContext.request.contextPath}/hwt/WrittenModifyAction";
+//         frm.submit();
+//     }
+// });
+
+$(document).ready(function() {
+    // 저장 버튼 클릭 시 이벤트 처리
+    $("#btn_save").click(function(event) {
+        event.preventDefault(); // 기본 동작 중단
+        submitForm();
+        
+    });
+// 	 $("#btn_save").click(function () {
+// 		console.log("클릭");
+// 		var frm = $("#frm");
+// 		var confirmation = confirm("임시저장을 하시겠습니까?");
+// 		event.preventDefault();
+// // 		window.location.href="${pageContext.request.contextPath}/hwt/CounselList";
+// 	//	window.location.reload(true) // 페이지로 돌아갔을때 강제 새로고침
+// 		if (confirmation) {
+// 			frm.submit();
+// 		}
+// 	});
+	 
+    function submitForm() {
+        var frm = $("#frm");
+        var confirmation = confirm("임시저장을 하시겠습니까?");
+        if (confirmation) {
+            // form 데이터 직렬화 및 전송
+            var formData = frm.serialize();
+            $.ajax({
+                url: frm.attr('action'),
+                type: frm.attr('method'),
+                data: formData,
+                success: function(response) {
+                	console.log(response);
+                    alert('임시저장이 완료되었습니다.');
+                    // list 페이지로 이동하며 강제로 새로고침
+//                     window.location.reload(true); // 강제 새로고침
+					if (response === "Y") {
+	                     window.location.href = "${pageContext.request.contextPath}/hwt/CounselList.do";
+					}
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error status:', status);
+                    console.error('Error thrown:', error);
+                    console.error('Full server response:', xhr.responseText);
+                    alert('Error uploading data: ' + xhr.responseText);
+                }
+            });
+        }
+    }
 });
 </script>
 

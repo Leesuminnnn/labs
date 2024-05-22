@@ -323,41 +323,35 @@ public class HwtController {
 		return response;
 	}
 
-	@RequestMapping(value = "/WrittenView/{cs_idx}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+	@RequestMapping(value = "/WrittenView/{cs_idx}/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
 	@ResponseBody
-	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx, HttpSession session, HttpServletResponse response,
-			ImageEntity image) throws IOException {
-		System.out.println("WrittenView 페이지");
+	public void WrittenView(@PathVariable("cs_idx") Integer cs_idx,
+							@PathVariable(value = "name", required = false) String name,
+	                        HttpSession session,
+	                        HttpServletResponse response,
+	                        ImageEntity image) throws IOException {
+	    System.out.println("WrittenView 페이지");
+	    System.out.println("cs_idx : " + cs_idx);
+	    System.out.println("name : " + name);
 
-		System.out.println("cs_idx : " + cs_idx);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("cs_idx", cs_idx);
+	    ImageEntity img = imageService.getImageData(map);
+	    byte[] imageData = img.getImageData();
+	    byte[] decodedImageData = Base64.getDecoder().decode(imageData);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("cs_idx", cs_idx);
-		ImageEntity img = imageService.getImageData(map);
-		// ImageEntity 객체에서 이미지 데이터를 바이트 배열 형태로 가져옵니다.
-		byte[] imageData = img.getImageData();
-		// 가져온 이미지 데이터를 Base64 디코딩하여 바이트 배열 형태로 변환합니다.
-		byte[] decodedImageData = Base64.getDecoder().decode(imageData);
+	    // Set response content type to PDF
+	    response.setContentType(MediaType.APPLICATION_PDF_VALUE);
 
-		// 이미지 출력
-		// response 객체의 setContentType() 메서드를 호출하여 이미지의 MIME 타입을
-		// MediaType.IMAGE_PNG_VALUE로 설정합니다.
-		response.setContentType(MediaType.APPLICATION_PDF_VALUE);
-		// response 객체의 getOutputStream() 메서드를 호출하여 출력 스트림을 가져옵니다.
-		OutputStream outputStream = response.getOutputStream();
-		// outputStream을 이용하여 이미지를 출력합니다.
-		outputStream.write(decodedImageData);
-		// outputStream 객체를 닫습니다.
-		outputStream.flush();
-		outputStream.close();
-		// 즉, 해당 메서드는 idx 값을 이용해 이미지 데이터를 조회하고, Base64 디코딩하여 이미지를 출력하는 역할을 합니다. 이 메서드를
-		// 호출하면 해당 idx 값을 가진 이미지가 화면에 출력됩니다.
+	    // Set the content disposition to inline to display it in the browser with a filename
+	    String filename = (name != null ? name : "document") + ".pdf";
+	    response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
 
-		// Add an img tag with a back function
-		String backUrl = "<a href='${pageContext.request.contextPath}/hwt/CounselList.do'><img src='${pageContext.request.contextPath}/resources/icon/arrow2.png' alt='P' /></a>";
-
-		// Print the backUrl
-		System.out.println("backUrl: " + backUrl);
+	    // Write the image data to the response output stream
+	    try (OutputStream outputStream = response.getOutputStream()) {
+	        outputStream.write(decodedImageData);
+	        outputStream.flush();
+	    }
 	}
 
 //	@PostMapping(value ="/saveFormData")
@@ -549,7 +543,7 @@ public class HwtController {
 		mav.setViewName("hwt/Written2");
 		return mav;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "WrittenAction", method = RequestMethod.POST)
 	public String writtenAction(ModelAndView mav, @ModelAttribute("vo") WrittenVo vo, HttpSession session, SignVo svo,
@@ -578,8 +572,7 @@ public class HwtController {
 		byte[] text8 = svo.getCanvasImg1();
 		byte[] text9 = svo.getCanvasImg2();
 		byte[] text10 = svo.getCanvasImg();
-		
-		
+
 		String text11 = vo.getHos_po();
 		String text12 = vo.getHos_name();
 		String text13 = vo.getHos_code1();
@@ -620,7 +613,7 @@ public class HwtController {
 		svo.setCanvasImg1(text8);
 		svo.setCanvasImg2(text9);
 		svo.setCanvasImg(text10);
-		
+
 		vo.setHos_po(cipherText8);
 		vo.setHos_name(cipherText9);
 		vo.setHos_code1(cipherText10);
@@ -630,26 +623,32 @@ public class HwtController {
 		vo.setHos_room(cipherText14);
 		vo.setYesrs_pay(cipherText15);
 		vo.setPayment(cipherText16);
-		
-		
-		
+
 		String canvasImg1Base64 = request.getParameter("imgData");
 		String canvasImg2Base64 = request.getParameter("imgData1");
 		String canvasImgBase64 = request.getParameter("imgData2");
-		
+
 		if (canvasImg1Base64 != null && !canvasImg1Base64.isEmpty()) {
-	        byte[] imageBytes1 = Base64.getDecoder().decode(canvasImg1Base64.substring(canvasImg1Base64.indexOf(",") + 1));
-	        svo.setCanvasImg1(imageBytes1);
-	    }
-	    if (canvasImg2Base64 != null && !canvasImg2Base64.isEmpty()) {
-	        byte[] imageBytes2 = Base64.getDecoder().decode(canvasImg2Base64.substring(canvasImg2Base64.indexOf(",") + 1));
-	        svo.setCanvasImg2(imageBytes2);
-	    }
-	    if (canvasImgBase64 != null && !canvasImgBase64.isEmpty()) {
-	        byte[] imageBytes = Base64.getDecoder().decode(canvasImgBase64.substring(canvasImgBase64.indexOf(",") + 1));
-	        svo.setCanvasImg(imageBytes);
-	    }
-		
+			byte[] imageBytes1 = Base64.getDecoder().decode(canvasImg1Base64);
+			svo.setCanvasImg1(imageBytes1);
+		} else {
+			svo.setCanvasImg1(null);
+		}
+
+		if (canvasImg2Base64 != null && !canvasImg2Base64.isEmpty()) {
+			byte[] imageBytes2 = Base64.getDecoder().decode(canvasImg2Base64);
+			svo.setCanvasImg2(imageBytes2);
+		} else {
+			svo.setCanvasImg2(null);
+		}
+
+		if (canvasImgBase64 != null && !canvasImgBase64.isEmpty()) {
+			byte[] imageBytes = Base64.getDecoder().decode(canvasImgBase64);
+			svo.setCanvasImg(imageBytes);
+		} else {
+			svo.setCanvasImg(null);
+		}
+
 //		if (canvasImgBase64 != null && !canvasImgBase64.isEmpty()) {
 //			canvasImgBase64 = canvasImgBase64.substring(canvasImgBase64.indexOf(",") + 1);
 //			byte[] imageBytes = Base64.getDecoder().decode(canvasImgBase64);
@@ -657,9 +656,7 @@ public class HwtController {
 //			svo.setCanvasImg2(imageBytes);
 //			svo.setCanvasImg(imageBytes);
 //		}
-		
-		
-		
+
 //		String canvasImgBase64 = request.getParameter("imgData");
 //		System.out.println("Received base64Image: " + canvasImgBase64);
 //		
@@ -670,9 +667,7 @@ public class HwtController {
 //		} else {
 //			System.out.println("No imadeData");
 //		}
-		
-		
-		
+
 //		String canvasImgBase64 = request.getParameter("imgData");
 //		if (canvasImgBase64 != null && canvasImgBase64.startsWith("data:image")) {
 //			canvasImgBase64 = canvasImgBase64.substring(canvasImgBase64.indexOf(",") + 1);
@@ -719,13 +714,14 @@ public class HwtController {
 //		System.out.println(cipherText10);
 //		System.out.println(aes128.decrypt(cipherText10));
 		System.out.println("##################################################");
-		
+
 		// DB저장
 		hwtService.insert(vo);
 		int dd = hwtService.select();
 		svo.setCs_idx(dd);
 		hwtService.insertsign(svo);
-		
+
+		mav.setViewName("redirect:/hwt/CounselList");
 		return "Y";
 	}
 
@@ -1064,10 +1060,10 @@ public class HwtController {
 		mav.addObject("keyword", "1");
 		mav.setViewName("hwt/CounselList");
 		System.out.println("cslist : " + cslist);
-
+		System.out.println("=========================================" );
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "CounselListSearch")
 	public ModelAndView ListSearch(ModelAndView mav, HttpSession session,
 			@RequestParam(value = "keyword1", defaultValue = "") String keyword1,
@@ -1091,6 +1087,828 @@ public class HwtController {
 			System.out.println(session.getAttribute("idx"));
 			mav.addObject("info", hwtService.info(idx));
 		}
+
+		// 256 오류로 인해 128으로 변경
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+
+		// 검색어 없을때 전체 리스트 출력
+		if (keyword1.isEmpty() && keyword2.isEmpty() && keyword3.isEmpty()) {
+			// 전체 목록 가져오기
+			List<WrittenVo> cslist = hwtService.listsearch2(cri);
+			for (WrittenVo vo1 : cslist) {
+				decryptData(aes128, vo1);
+			}
+			mav.addObject("cslist", cslist);
+			mav.addObject("keyword", "1");
+		} else {
+			// 키워드 입력해서 검색
+			List<WrittenVo> cslist = hwtService.listsearch(cri);
+			List<WrittenVo> matchingList = new ArrayList<>();
+			for (WrittenVo vo2 : cslist) {
+				boolean matches = matchesSearchCriteria(aes128, vo2, keyword1, keyword2, keyword3);
+				if (matches) {
+					decryptData(aes128, vo2);
+					matchingList.add(vo2);
+				}
+			}
+			mav.addObject("matchingList", matchingList);
+		}
+
+		mav.addObject("keyword1", keyword1);
+		mav.addObject("keyword2", keyword2);
+		mav.addObject("keyword3", keyword3);
+		mav.setViewName("hwt/CounselList");
+
+		return mav;
+	}
+
+	private void decryptData(AES128 aes128, WrittenVo vo) {
+		vo.setCs_data_01(aes128.decrypt(vo.getCs_data_01()));
+		vo.setCs_data_06(aes128.decrypt(vo.getCs_data_06()));
+		vo.setCs_data_07(aes128.decrypt(vo.getCs_data_07()));
+		vo.setCs_data_10(aes128.decrypt(vo.getCs_data_10()));
+		vo.setCs_data_12(aes128.decrypt(vo.getCs_data_12()));
+		vo.setCs_data_15(aes128.decrypt(vo.getCs_data_15()));
+		vo.setCs_data_29(aes128.decrypt(vo.getCs_data_29()));
+	}
+
+	private boolean matchesSearchCriteria(AES128 aes128, WrittenVo vo, String keyword1, String keyword2, String keyword3) {
+		String decryptedCs_data_01 = aes128.decrypt(vo.getCs_data_01());
+		String decryptedCs_data_06 = aes128.decrypt(vo.getCs_data_06());
+		String decryptedCs_data_07 = aes128.decrypt(vo.getCs_data_07());
+		String decryptedCs_data_12 = aes128.decrypt(vo.getCs_data_12());
+
+		boolean search1 = decryptedCs_data_01.contains(keyword1);
+		boolean search2 = decryptedCs_data_07.contains(keyword2) || decryptedCs_data_12.contains(keyword2);
+		boolean search3 = decryptedCs_data_06.contains(keyword3);
+
+		return (!keyword1.isEmpty() && search1) || (!keyword2.isEmpty() && search2) || (!keyword3.isEmpty() && search3);
+	}
+	
+	
+//	@RequestMapping(value = "CounselListSearch")
+//	public ModelAndView ListSearch(ModelAndView mav, HttpSession session,
+//			@RequestParam(value = "keyword1", defaultValue = "") String keyword1,
+//			@RequestParam(value = "keyword2", defaultValue = "") String keyword2,
+//			@RequestParam(value = "keyword3", defaultValue = "") String keyword3,
+//			@RequestParam(value = "type1", defaultValue = "") String type1,
+//			@RequestParam(value = "type2", defaultValue = "") String type2,
+//			@RequestParam(value = "type3", defaultValue = "") String type3, Criteria cri, WrittenVo vo)
+//			throws Exception {
+//		System.out.println("cri = " + cri);
+//		System.out.println("####################type1 : " + cri.getType1());
+//		System.out.println("####################keyword1 : " + cri.getKeyword1());
+//		System.out.println("####################type2 : " + cri.getType2());
+//		System.out.println("####################keyword2 : " + cri.getKeyword2());
+//		System.out.println("####################type3 : " + cri.getType3());
+//		System.out.println("####################keyword3 : " + cri.getKeyword3());
+//		session.getAttribute("loginmember");
+//		if (session.getAttribute("loginmember") != null) {
+//			int idx = (int) session.getAttribute("idx");
+//			System.out.println(session.getAttribute("loginmember"));
+//			System.out.println(session.getAttribute("idx"));
+//			mav.addObject("info", hwtService.info(idx));
+//		}
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		// 256 오류로 인해 128으로 변경
+//		String key = "This is Key!!!!!";
+//		AES128 aes128 = new AES128(key);
+//		List<WrittenVo> cslist = hwtService.listsearch(cri);
+//		
+//		// 검색어가 없을 때 전체 검색
+//		List<WrittenVo> cslist1 = hwtService.listsearch2(cri);
+//		for (WrittenVo vo1 : cslist1) {
+//			if (keyword1.isEmpty() && keyword2.isEmpty() && keyword3.isEmpty()) {
+//				// 검색어 X
+//				System.out.println("검색어 X");
+//
+//				String decryptedCs_data_01 = aes128.decrypt(((WrittenVo) vo1).getCs_data_01());
+//				String decryptedCs_data_06 = aes128.decrypt(((WrittenVo) vo1).getCs_data_06());
+//				String decryptedCs_data_07 = aes128.decrypt(((WrittenVo) vo1).getCs_data_07());
+//				String decryptedCs_data_10 = aes128.decrypt(((WrittenVo) vo1).getCs_data_10());
+//				String decryptedCs_data_12 = aes128.decrypt(((WrittenVo) vo1).getCs_data_12());
+//				String decryptedCs_data_15 = aes128.decrypt(((WrittenVo) vo1).getCs_data_15());
+//				String decryptedCs_data_29 = aes128.decrypt(((WrittenVo) vo1).getCs_data_29());
+//
+//				// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//				((WrittenVo) vo1).setCs_data_01(decryptedCs_data_01);
+//				((WrittenVo) vo1).setCs_data_06(decryptedCs_data_06);
+//				((WrittenVo) vo1).setCs_data_07(decryptedCs_data_07);
+//				((WrittenVo) vo1).setCs_data_10(decryptedCs_data_10);
+//				((WrittenVo) vo1).setCs_data_12(decryptedCs_data_12);
+//				((WrittenVo) vo1).setCs_data_15(decryptedCs_data_15);
+//				((WrittenVo) vo1).setCs_data_29(decryptedCs_data_29);
+//
+//				int Cnt = hwtService.Cnt(cri);
+////				Paging pageMaker = new Paging(); 
+////				pageMaker.setCri(cri);
+////				pageMaker.setTotalCount(Cnt);
+////				mav.addObject("pageMaker", pageMaker);
+////				mav.addObject("cslist", cslist1);
+//				System.out.println(cslist1);
+//				mav.addObject("keyword", "1");
+//
+//			}
+//
+//		}
+//		// 검색결과를 담을 list 생성
+//		List<WrittenVo> matchingList = new ArrayList<>();
+//		String keyword1check = keyword1;
+//		String keyword2check = keyword2;
+//		String keyword3check = keyword3;
+//		// 빈 문자열 null으로 설정
+//		if (keyword1.isEmpty()) {
+//			keyword1check = "null";
+//		}
+//		if (keyword2.isEmpty()) {
+//			keyword2check = "null";
+//		}
+//		if (keyword3.isEmpty()) {
+//			keyword3check = "null";
+//		}
+//
+//		System.out.println("keyword1check : " + keyword1check);
+//		System.out.println("keyword2check : " + keyword2check);
+//		System.out.println("keyword3check : " + keyword3check);
+//		// DB데이터 복호화
+//		// 이상한 오류가 뜨는 이유는 암호화된 데이터가 한개라도 없을 경우 오류가 발생한다.(암호화가 되어있는 데이터와 암호화가 되어있지 않은
+//		// 데이터가 공존할 경우)
+//
+//		for (WrittenVo vo2 : cslist) {
+//			// 성명 가져오기
+//			String str1 = vo2.getCs_data_01();
+//			System.out.println("str1 : " + str1);
+//			// 주보호자성명 가져오기
+//			String str2 = vo2.getCs_data_07();
+//			System.out.println("str2 : " + str2);
+//			// 부보호자성명 가져오기
+//			String str4 = vo2.getCs_data_12();
+//			System.out.println("str4 : " + str4);
+//			// 휴대폰번호 가져오기
+//			String str3 = vo2.getCs_data_06();
+//			System.out.println("str3 : " + str3);
+//
+//			// 성명 복호화
+//			String text1 = aes128.decrypt(str1);
+//			System.out.println("text1 : " + text1);
+//			// 주보호자 성명 복호화
+//			String text2 = aes128.decrypt(str2);
+//			System.out.println("text2 : " + text2);
+//			// 부보호자 성명 복호화
+//			String text4 = aes128.decrypt(str4);
+//			System.out.println("text2 : " + text4);
+//			// 휴대폰번호 복호화
+//			String text3 = aes128.decrypt(str3);
+//			System.out.println("text3 : " + text3);
+//
+//			// 키워드가 포함된 문자열 이면 true
+//
+//			boolean search1 = aes128.decrypt(str1).contains(keyword1check);
+//			System.out.println("search1 : " + search1);
+//			System.out.println("");
+//
+//			boolean search2 = aes128.decrypt(str2).contains(keyword2check)
+//					|| aes128.decrypt(str4).contains(keyword2check);
+//			System.out.println("search2 : " + search2);
+//			System.out.println("");
+//
+//			boolean search3 = aes128.decrypt(str3).contains(keyword3check);
+//			System.out.println("search3 : " + search3);
+//			System.out.println("");
+//			if (keyword1.isEmpty()) {// 검색 키워드 성명 X 보호자명 O 휴대폰 번호 O
+//				System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 O");
+//
+//				if (keyword2.isEmpty()) {// 검색 키워드 성명 X 보호자명 O 휴대폰 번호 X
+//					if (search3 == true) {
+//						System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 X");
+//						matchingList.add(vo2);
+//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//						vo2.setCs_data_01(decryptedCs_data_01);
+//						vo2.setCs_data_06(decryptedCs_data_06);
+//						vo2.setCs_data_07(decryptedCs_data_07);
+//						vo2.setCs_data_10(decryptedCs_data_10);
+//						vo2.setCs_data_12(decryptedCs_data_12);
+//						vo2.setCs_data_15(decryptedCs_data_15);
+//						vo2.setCs_data_29(decryptedCs_data_29);
+//						mav.addObject("matchingList", matchingList);
+//					}
+//				} else if (keyword3.isEmpty()) {// 검색 키워드 성명 X 보호자명 O 휴대폰 번호 X
+//
+//					if (search2 == true) {
+//						System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 X");
+//						matchingList.add(vo2);
+//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//						vo2.setCs_data_01(decryptedCs_data_01);
+//						vo2.setCs_data_06(decryptedCs_data_06);
+//						vo2.setCs_data_07(decryptedCs_data_07);
+//						vo2.setCs_data_10(decryptedCs_data_10);
+//						vo2.setCs_data_12(decryptedCs_data_12);
+//						vo2.setCs_data_15(decryptedCs_data_15);
+//						vo2.setCs_data_29(decryptedCs_data_29);
+//						mav.addObject("matchingList", matchingList);
+//					}
+//				}
+//				if (search2 == true && search3 == true) {
+//					System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 O");
+//					matchingList.add(vo2);
+//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//					vo2.setCs_data_01(decryptedCs_data_01);
+//					vo2.setCs_data_06(decryptedCs_data_06);
+//					vo2.setCs_data_07(decryptedCs_data_07);
+//					vo2.setCs_data_10(decryptedCs_data_10);
+//					vo2.setCs_data_12(decryptedCs_data_12);
+//					vo2.setCs_data_15(decryptedCs_data_15);
+//					vo2.setCs_data_29(decryptedCs_data_29);
+//					mav.addObject("matchingList", matchingList);
+//				}
+//
+//			} else if (keyword2.isEmpty()) {// 검색 키워드 성명 O 보호자명 X 휴대폰 번호 O
+//				System.out.println("검색 키워드 성명 O 보호자명 X 휴대폰 번호 O");
+//				// 검색 키워드 성명 O 보호자명 X 휴대폰번호 X
+//				if (keyword3.isEmpty()) {
+//					if (search1 == true) {
+//						System.out.println("검색 키워드 성명 O 보호자명 X 휴대폰번호 X");
+//						matchingList.add(vo2);
+//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//						vo2.setCs_data_01(decryptedCs_data_01);
+//						vo2.setCs_data_06(decryptedCs_data_06);
+//						vo2.setCs_data_07(decryptedCs_data_07);
+//						vo2.setCs_data_10(decryptedCs_data_10);
+//						vo2.setCs_data_12(decryptedCs_data_12);
+//						vo2.setCs_data_15(decryptedCs_data_15);
+//						vo2.setCs_data_29(decryptedCs_data_29);
+//						mav.addObject("matchingList", matchingList);
+//					}
+//
+//				} else if (keyword1.isEmpty()) {// 검색 키워드 성명 X 보호자명 X 휴대폰번호 O
+//					if (search3 == true) {
+//						System.out.println("검색 키워드 성명 X 보호자명 X 휴대폰번호 O");
+//						matchingList.add(vo2);
+//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//						vo2.setCs_data_01(decryptedCs_data_01);
+//						vo2.setCs_data_06(decryptedCs_data_06);
+//						vo2.setCs_data_07(decryptedCs_data_07);
+//						vo2.setCs_data_10(decryptedCs_data_10);
+//						vo2.setCs_data_12(decryptedCs_data_12);
+//						vo2.setCs_data_15(decryptedCs_data_15);
+//						vo2.setCs_data_29(decryptedCs_data_29);
+//						mav.addObject("matchingList", matchingList);
+//					}
+//				}
+//
+//				if (search1 == true && search3 == true) {
+//					System.out.println("검색 키워드 성명 O 보호자명 X 휴대폰 번호 O");
+//					matchingList.add(vo2);
+//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//					vo2.setCs_data_01(decryptedCs_data_01);
+//					vo2.setCs_data_06(decryptedCs_data_06);
+//					vo2.setCs_data_07(decryptedCs_data_07);
+//					vo2.setCs_data_10(decryptedCs_data_10);
+//					vo2.setCs_data_12(decryptedCs_data_12);
+//					vo2.setCs_data_15(decryptedCs_data_15);
+//					vo2.setCs_data_29(decryptedCs_data_29);
+//					mav.addObject("matchingList", matchingList);
+//				}
+//
+//			} else if (keyword3.isEmpty()) {// 검색 키워드 성명 O 보호자명 O 휴대폰번호 X
+//				System.out.println("검색 키워드 성명 O 보호자명 O 휴대폰번호 X");
+//				// 검색 키워드 성명 X 보호자명 O 휴대폰번호 X
+//				if (keyword1.isEmpty()) {
+//					if (search2 == true) {
+//						System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰번호 X");
+//						matchingList.add(vo2);
+//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//						vo2.setCs_data_01(decryptedCs_data_01);
+//						vo2.setCs_data_06(decryptedCs_data_06);
+//						vo2.setCs_data_07(decryptedCs_data_07);
+//						vo2.setCs_data_10(decryptedCs_data_10);
+//						vo2.setCs_data_12(decryptedCs_data_12);
+//						vo2.setCs_data_15(decryptedCs_data_15);
+//						vo2.setCs_data_29(decryptedCs_data_29);
+//						mav.addObject("matchingList", matchingList);
+//					}
+//
+//				} else if (keyword2.isEmpty()) {// 검색키워드 성명O 보호자명 X 휴대폰 번호 X
+//					if (search1 == true) {
+//						System.out.println("검색키워드 성명O 보호자명 X 휴대폰 번호 X");
+//						matchingList.add(vo2);
+//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//						vo2.setCs_data_01(decryptedCs_data_01);
+//						vo2.setCs_data_06(decryptedCs_data_06);
+//						vo2.setCs_data_07(decryptedCs_data_07);
+//						vo2.setCs_data_10(decryptedCs_data_10);
+//						vo2.setCs_data_12(decryptedCs_data_12);
+//						vo2.setCs_data_15(decryptedCs_data_15);
+//						vo2.setCs_data_29(decryptedCs_data_29);
+//						mav.addObject("matchingList", matchingList);
+//					}
+//				}
+//				if (search1 == true && search2 == true) {
+//					System.out.println("검색 키워드 성명 O 보호자명 O 휴대폰번호 X");
+//					matchingList.add(vo2);
+//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//					vo2.setCs_data_01(decryptedCs_data_01);
+//					vo2.setCs_data_06(decryptedCs_data_06);
+//					vo2.setCs_data_07(decryptedCs_data_07);
+//					vo2.setCs_data_10(decryptedCs_data_10);
+//					vo2.setCs_data_12(decryptedCs_data_12);
+//					vo2.setCs_data_15(decryptedCs_data_15);
+//					vo2.setCs_data_29(decryptedCs_data_29);
+//					mav.addObject("matchingList", matchingList);
+//				}
+//			} else if (!keyword1.isEmpty() && !keyword2.isEmpty() && !keyword3.isEmpty()) {
+//				if (search1 == true && search2 == true && search3 == true) {
+//					System.out.println("검색키워드 성명O 보호자명 O 휴대폰 번호 O");
+//					matchingList.add(vo2);
+//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
+//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
+//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
+//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
+//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
+//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
+//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
+//
+//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+//					vo2.setCs_data_01(decryptedCs_data_01);
+//					vo2.setCs_data_06(decryptedCs_data_06);
+//					vo2.setCs_data_07(decryptedCs_data_07);
+//					vo2.setCs_data_10(decryptedCs_data_10);
+//					vo2.setCs_data_12(decryptedCs_data_12);
+//					vo2.setCs_data_15(decryptedCs_data_15);
+//					vo2.setCs_data_29(decryptedCs_data_29);
+//
+//					mav.addObject("matchingList", matchingList);
+//
+//				}
+//
+//			}
+//
+//		}
+//		mav.addObject("keyword1", keyword1);
+//		mav.addObject("keyword2", keyword2);
+//		mav.addObject("keyword3", keyword3);
+//
+//		mav.setViewName("hwt/CounselList");
+//
+//		return mav;
+//	}
+
+	@ResponseBody
+	@RequestMapping(value = "WrittenModify/{cs_idx}")
+	public ModelAndView writtenModify(ModelAndView mav, HttpSession session, @ModelAttribute("svo") SignVo svo,
+			@PathVariable(name = "cs_idx") Integer cs_idx, HttpServletRequest request) throws Exception {
+		System.out.println("written oath 페이지");
+		System.out.println("cs_idx : " + cs_idx);
+
+		session.getAttribute("loginmember");
+		if (session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+
+		System.out.println("########################");
+		System.out.println(hwtService.selectone(cs_idx));
+		System.out.println("########################");
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+		// 256 오류로 인해서 128으로 변경
+//		AES256Util aes256 = new AES256Util();
+		// DB데이터 복호화
+		// 이상한 오류가 뜨는 이유는 암호화된 데이터가 한개라도 없을 경우 오류가 발생한다.(암호화가 되어있는 데이터와 암호화가 되어있지 않은
+		// 데이터가 공존할 경우)
+
+		String decryptedCs_data_01 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_01());
+		String decryptedCs_data_06 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_06());
+		String decryptedCs_data_07 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_07());
+		String decryptedCs_data_10 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_10());
+		String decryptedCs_data_12 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_12());
+		String decryptedCs_data_15 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_15());
+		String decryptedCs_data_29 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_29());
+		String decryptedHos_po = aes128.decrypt(hwtService.selectone(cs_idx).getHos_po());
+		String decryptedHos_name = aes128.decrypt(hwtService.selectone(cs_idx).getHos_name());
+		String decryptedHos_code1 = aes128.decrypt(hwtService.selectone(cs_idx).getHos_code1());
+		String decryptedHos_code2 = aes128.decrypt(hwtService.selectone(cs_idx).getHos_code2());
+		String decryptedHos_department = aes128.decrypt(hwtService.selectone(cs_idx).getHos_department());
+		String decryptedHos_ward = aes128.decrypt(hwtService.selectone(cs_idx).getHos_ward());
+		String decryptedHos_room = aes128.decrypt(hwtService.selectone(cs_idx).getHos_room());
+		String decryptedYesrs_pay = aes128.decrypt(hwtService.selectone(cs_idx).getYesrs_pay());
+		String decryptedPayment = aes128.decrypt(hwtService.selectone(cs_idx).getPayment());
+
+		byte[] text8 = svo.getCanvasImg1();
+		byte[] text9 = svo.getCanvasImg2();
+		byte[] text10 = svo.getCanvasImg();
+
+		mav.addObject("decryptedCs_data_01", decryptedCs_data_01);
+		mav.addObject("decryptedCs_data_06", decryptedCs_data_06);
+		mav.addObject("decryptedCs_data_07", decryptedCs_data_07);
+		mav.addObject("decryptedCs_data_10", decryptedCs_data_10);
+		mav.addObject("decryptedCs_data_12", decryptedCs_data_12);
+		mav.addObject("decryptedCs_data_15", decryptedCs_data_15);
+		mav.addObject("decryptedCs_data_29", decryptedCs_data_29);
+		mav.addObject("cs_data_04", hwtService.selectone(cs_idx).getCs_data_04());
+		mav.addObject("vo", hwtService.selectone(cs_idx));
+		mav.addObject("cs_idx", cs_idx);
+		mav.addObject("decryptedHos_po", decryptedHos_po);
+		mav.addObject("decryptedHos_name", decryptedHos_name);
+		mav.addObject("decryptedHos_code1", decryptedHos_code1);
+		mav.addObject("decryptedHos_code2", decryptedHos_code2);
+		mav.addObject("decryptedHos_department", decryptedHos_department);
+		mav.addObject("decryptedHos_ward", decryptedHos_ward);
+		mav.addObject("decryptedHos_room", decryptedHos_room);
+		mav.addObject("decryptedYesrs_pay", decryptedYesrs_pay);
+		mav.addObject("decryptedPayment", decryptedPayment);
+
+//		mav.addObject("text8", hwtService.selectone(cs_idx).getCanvasImg1());
+
+		svo.setCanvasImg1(text8);
+		svo.setCanvasImg2(text9);
+		svo.setCanvasImg(text10);
+
+		String canvasImg1Base64 = request.getParameter("imgData");
+		String canvasImg2Base64 = request.getParameter("imgData1");
+		String canvasImgBase64 = request.getParameter("imgData2");
+
+		SignVo sign = hwtService.getSignatureByCsIdx(cs_idx);
+		System.out.println(sign);
+		if (sign != null) {
+	        if (sign.getCanvasImg1() != null) {
+	            String encodedImage1 = Base64.getEncoder().encodeToString(sign.getCanvasImg1());
+	            mav.addObject("imageData", encodedImage1);
+	        }
+	        if (sign.getCanvasImg2() != null) {
+	            String encodedImage2 = Base64.getEncoder().encodeToString(sign.getCanvasImg2());
+	            mav.addObject("imageData1", encodedImage2);
+	        }
+	        if (sign.getCanvasImg() != null) {
+	            String encodedImage3 = Base64.getEncoder().encodeToString(sign.getCanvasImg());
+	            mav.addObject("imageData2", encodedImage3);
+	        }
+	    }
+
+//		String imageData = hwtService.getEncodedImageById(cs_idx);
+//		if (imageData != null) {
+//			mav.addObject("imageData", imageData);
+//	    } else {
+//	    	mav.addObject("imageData", ""); // 이미지 데이터가 없을 경우 빈 문자열 전달
+//	    }
+
+		mav.setViewName("hwt/WrittenModify");
+		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value = "WrittenModifyAction", method = RequestMethod.POST)
+	public String writtenModifyAction(ModelAndView mav, @ModelAttribute("vo") WrittenVo vo, HttpSession session, SignVo svo,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// 암호화
+		// 256 오류로 인해서 128으로 변경
+		// AES256Util aes256 = new AES256Util();
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+		session.getAttribute("loginmember");
+	
+		if (session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+
+		// view에서 받은 데이터를 담아서 넘겨준다.
+		String text1 = vo.getCs_data_01();
+		String text2 = vo.getCs_data_06();
+		String text3 = vo.getCs_data_07();
+		String text4 = vo.getCs_data_10();
+		String text5 = vo.getCs_data_12();
+		String text6 = vo.getCs_data_15();
+		String text7 = vo.getCs_data_29();
+		
+		byte[] text8 = svo.getCanvasImg1();
+		byte[] text9 = svo.getCanvasImg2();
+		byte[] text10 = svo.getCanvasImg();
+		
+		String text11 = vo.getHos_po();
+		String text12 = vo.getHos_name();
+		String text13 = vo.getHos_code1();
+		String text14 = vo.getHos_code2();
+		String text15 = vo.getHos_department();
+		String text16 = vo.getHos_ward();
+		String text17 = vo.getHos_room();
+		String text18 = vo.getYesrs_pay();
+		String text19 = vo.getPayment();
+
+		System.out.println( );
+		System.out.println();
+		System.out.println(vo.getHos_po());
+		System.out.println(vo.getHos_name());
+		System.out.println(vo.getHos_code1());
+		System.out.println(vo.getHos_code2());
+		System.out.println(vo.getHos_department());
+		System.out.println(vo.getHos_ward());
+		System.out.println(vo.getHos_room());
+		System.out.println(vo.getYesrs_pay());
+		System.out.println(vo.getPayment());
+		System.out.println( );
+		
+		// 암호화된 데이터를 변수에 담는다.
+		String cipherText1 = aes128.encrypt(text1);
+		String cipherText2 = aes128.encrypt(text2);
+		String cipherText3 = aes128.encrypt(text3);
+		String cipherText4 = aes128.encrypt(text4);
+		String cipherText5 = aes128.encrypt(text5);
+		String cipherText6 = aes128.encrypt(text6);
+		String cipherText7 = aes128.encrypt(text7);
+		String cipherText8 = aes128.encrypt(text11);
+		String cipherText9 = aes128.encrypt(text12);
+		String cipherText10 = aes128.encrypt(text13);
+		String cipherText11 = aes128.encrypt(text14);
+		String cipherText12 = aes128.encrypt(text15);
+		String cipherText13 = aes128.encrypt(text16);
+		String cipherText14 = aes128.encrypt(text17);
+		String cipherText15 = aes128.encrypt(text18);
+		String cipherText16 = aes128.encrypt(text19);
+
+		// 담은 변수를 DB에 넘겨준다
+		vo.setCs_data_01(cipherText1);
+		vo.setCs_data_06(cipherText2);
+		vo.setCs_data_07(cipherText3);
+		vo.setCs_data_10(cipherText4);
+		vo.setCs_data_12(cipherText5);
+		vo.setCs_data_15(cipherText6);
+		vo.setCs_data_29(cipherText7);
+		
+		svo.setCanvasImg1(text8);
+		svo.setCanvasImg2(text9);
+		svo.setCanvasImg(text10);
+		
+		vo.setHos_po(cipherText8);
+		vo.setHos_name(cipherText9);
+		vo.setHos_code1(cipherText10);
+		vo.setHos_code2(cipherText11);
+		vo.setHos_department(cipherText12);
+		vo.setHos_ward(cipherText13);
+		vo.setHos_room(cipherText14);
+		vo.setYesrs_pay(cipherText15);
+		vo.setPayment(cipherText16);
+		
+		
+		// 기존 SignVo 가져오기
+		SignVo existingSign = hwtService.getSignatureByCsIdx(vo.getCs_idx());
+
+		// 서명이미지가 null이 아니면 새로운 값
+		String canvasImg1Base64 = request.getParameter("imgData");
+		String canvasImg2Base64 = request.getParameter("imgData1");
+		String canvasImgBase64 = request.getParameter("imgData2");
+
+		System.out.println("##################################################");
+		System.out.println(canvasImg1Base64);
+		System.out.println(canvasImg2Base64);
+		System.out.println(canvasImgBase64);
+		System.out.println("##################################################");
+		
+		if (canvasImg1Base64 != null && !canvasImg1Base64.isEmpty()) {
+	        byte[] imageBytes1 = Base64.getDecoder().decode(canvasImg1Base64);
+	        svo.setCanvasImg1(imageBytes1);
+	    } else {
+	        svo.setCanvasImg1(existingSign.getCanvasImg1());
+	    }
+
+	    if (canvasImg2Base64 != null && !canvasImg2Base64.isEmpty()) {
+	        byte[] imageBytes2 = Base64.getDecoder().decode(canvasImg2Base64);
+	        svo.setCanvasImg2(imageBytes2);
+	    } else {
+	        svo.setCanvasImg2(existingSign.getCanvasImg2());
+	    }
+
+	    if (canvasImgBase64 != null && !canvasImgBase64.isEmpty()) {
+	        byte[] imageBytes = Base64.getDecoder().decode(canvasImgBase64);
+	        svo.setCanvasImg(imageBytes);
+	    } else {
+	        svo.setCanvasImg(existingSign.getCanvasImg());
+	    }
+
+		
+		System.out.println("##################################################");
+		System.out.println(text1);
+		System.out.println(cipherText1);
+		System.out.println(aes128.decrypt(cipherText1));
+		System.out.println(text2);
+		System.out.println(cipherText2);
+		System.out.println(aes128.decrypt(cipherText2));
+		System.out.println(text3);
+		System.out.println(cipherText3);
+		System.out.println(aes128.decrypt(cipherText3));
+		System.out.println(text4);
+		System.out.println(cipherText4);
+		System.out.println(aes128.decrypt(cipherText4));
+		System.out.println(text5);
+		System.out.println(cipherText5);
+		System.out.println(aes128.decrypt(cipherText5));
+		System.out.println(text6);
+		System.out.println(cipherText6);
+		System.out.println(aes128.decrypt(cipherText6));
+		System.out.println(text7);
+		System.out.println(cipherText7);
+		System.out.println(aes128.decrypt(cipherText7));
+		System.out.println("##################################################");
+		
+		hwtService.update(vo);
+	    svo.setCs_idx(vo.getCs_idx());
+	    hwtService.updateSign(svo);
+	    canvasService.modify1(vo);
+	    
+	    mav.setViewName("redirect:/hwt/CounselList");
+		return "Y";
+		
+	}
+
+	@RequestMapping(value = "CounselList2")
+	public ModelAndView List2(ModelAndView mav, HttpSession session, Criteria cri, WrittenVo vo) throws Exception {
+		System.out.println("cri = " + cri);
+		System.out.println("####################type1 : " + cri.getType1());
+		System.out.println("####################keyword1 : " + cri.getKeyword1());
+		System.out.println("####################type2 : " + cri.getType2());
+		System.out.println("####################keyword2 : " + cri.getKeyword2());
+		System.out.println("####################type3 : " + cri.getType3());
+		System.out.println("####################keyword3 : " + cri.getKeyword3());
+		session.getAttribute("loginmember");
+		if (session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+
+		// 256 오류로 인해 128으로 변경
+		String key = "This is Key!!!!!";
+		AES128 aes128 = new AES128(key);
+//		AES256Util aes256 = new AES256Util();
+
+		int Cnt = hwtService.Cnt(cri);
+
+		Paging pageMaker = new Paging();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(Cnt);
+		System.out.println(Cnt);
+		System.out.println(pageMaker.getStartPage());
+
+		System.out.println(pageMaker.getEndPage());
+//		String keyword1check = keyword1;
+//		String keyword2check = keyword2;
+//		String keyword3check = keyword3;
+		// 빈 문자열 null으로 설정
+//		if(keyword1.isEmpty()) {
+//			keyword1check = "null";
+//		}
+//		if(keyword2.isEmpty()) {
+//			keyword2check = "null";
+//		}
+//		if(keyword3.isEmpty()) {
+//			keyword3check = "null";
+//		}
+//		
+//		System.out.println("keyword1check : " + keyword1check);
+//		System.out.println("keyword2check : " + keyword2check);
+//		System.out.println("keyword3check : " + keyword3check);
+//		List<Map<String, Object>> cslist = hwtService.listsearch(cri);
+//		List<Map<String, Object>> cslist = hwtService.listsearch2(cri);
+//		List<Map<String,Object>> cslist = hwtService.list2(cri);
+		List<WrittenVo> cslist = hwtService.listsearch2(cri);
+///		List<WrittenVo> matchingList = new ArrayList<>();
+		// DB데이터 복호화
+		// 이상한 오류가 뜨는 이유는 암호화된 데이터가 한개라도 없을 경우 오류가 발생한다.(암호화가 되어있는 데이터와 암호화가 되어있지 않은
+		// 데이터가 공존할 경우)
+		for (WrittenVo vo1 : cslist) {
+			String decryptedCs_data_01 = aes128.decrypt(((WrittenVo) vo1).getCs_data_01());
+			String decryptedCs_data_06 = aes128.decrypt(((WrittenVo) vo1).getCs_data_06());
+			String decryptedCs_data_07 = aes128.decrypt(((WrittenVo) vo1).getCs_data_07());
+			String decryptedCs_data_10 = aes128.decrypt(((WrittenVo) vo1).getCs_data_10());
+			String decryptedCs_data_12 = aes128.decrypt(((WrittenVo) vo1).getCs_data_12());
+			String decryptedCs_data_15 = aes128.decrypt(((WrittenVo) vo1).getCs_data_15());
+			String decryptedCs_data_29 = aes128.decrypt(((WrittenVo) vo1).getCs_data_29());
+
+			// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
+			((WrittenVo) vo1).setCs_data_01(decryptedCs_data_01);
+			((WrittenVo) vo1).setCs_data_06(decryptedCs_data_06);
+			((WrittenVo) vo1).setCs_data_07(decryptedCs_data_07);
+			((WrittenVo) vo1).setCs_data_10(decryptedCs_data_10);
+			((WrittenVo) vo1).setCs_data_12(decryptedCs_data_12);
+			((WrittenVo) vo1).setCs_data_15(decryptedCs_data_15);
+			((WrittenVo) vo1).setCs_data_29(decryptedCs_data_29);
+		}
+
+//		mav.addObject("keyword1", keyword1);
+//		mav.addObject("keyword2", keyword2);
+//		mav.addObject("keyword3", keyword3);		
+		mav.addObject("pageMaker", pageMaker);
+
+		mav.addObject("cslist", cslist);
+		mav.addObject("keyword", "1");
+		mav.setViewName("hwt/CounselList2");
+		System.out.println("cslist : " + cslist);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "CounselListSearch2")
+	public ModelAndView ListSearch2(ModelAndView mav, HttpSession session,
+			@RequestParam(value = "keyword1", defaultValue = "") String keyword1,
+			@RequestParam(value = "keyword2", defaultValue = "") String keyword2,
+			@RequestParam(value = "keyword3", defaultValue = "") String keyword3,
+			@RequestParam(value = "type1", defaultValue = "") String type1,
+			@RequestParam(value = "type2", defaultValue = "") String type2,
+			@RequestParam(value = "type3", defaultValue = "") String type3, Criteria cri, WrittenVo vo)
+			throws Exception {
+		System.out.println("cri = " + cri);
+		System.out.println("####################type1 : " + cri.getType1());
+		System.out.println("####################keyword1 : " + cri.getKeyword1());
+		System.out.println("####################type2 : " + cri.getType2());
+		System.out.println("####################keyword2 : " + cri.getKeyword2());
+		System.out.println("####################type3 : " + cri.getType3());
+		System.out.println("####################keyword3 : " + cri.getKeyword3());
+		session.getAttribute("loginmember");
+		if (session.getAttribute("loginmember") != null) {
+			int idx = (int) session.getAttribute("idx");
+			System.out.println(session.getAttribute("loginmember"));
+			System.out.println(session.getAttribute("idx"));
+			mav.addObject("info", hwtService.info(idx));
+		}
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 256 오류로 인해 128으로 변경
 		String key = "This is Key!!!!!";
@@ -1122,11 +1940,11 @@ public class HwtController {
 				((WrittenVo) vo1).setCs_data_29(decryptedCs_data_29);
 
 				int Cnt = hwtService.Cnt(cri);
-//				Paging pageMaker = new Paging(); 
-//				pageMaker.setCri(cri);
-//				pageMaker.setTotalCount(Cnt);
-//				mav.addObject("pageMaker", pageMaker);
-//				mav.addObject("cslist", cslist1);
+				Paging pageMaker = new Paging();
+				pageMaker.setCri(cri);
+				pageMaker.setTotalCount(Cnt);
+				mav.addObject("pageMaker", pageMaker);
+				mav.addObject("cslist", cslist1);
 				System.out.println(cslist1);
 				mav.addObject("keyword", "1");
 
@@ -1435,649 +2253,10 @@ public class HwtController {
 		mav.addObject("keyword2", keyword2);
 		mav.addObject("keyword3", keyword3);
 
-		mav.setViewName("hwt/CounselList");
-
-		return mav;
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "WrittenModify/{cs_idx}")
-	public ModelAndView writtenModify(ModelAndView mav, HttpSession session, @ModelAttribute("svo") SignVo svo, @PathVariable(name = "cs_idx") Integer cs_idx,HttpServletRequest request) throws Exception {
-		System.out.println("written oath 페이지");
-		System.out.println("cs_idx : " + cs_idx);
-
-		session.getAttribute("loginmember");
-		if (session.getAttribute("loginmember") != null) {
-			int idx = (int) session.getAttribute("idx");
-			System.out.println(session.getAttribute("loginmember"));
-			System.out.println(session.getAttribute("idx"));
-			mav.addObject("info", hwtService.info(idx));
-		}
-
-		System.out.println("########################");
-		System.out.println(hwtService.selectone(cs_idx));
-		System.out.println("########################");
-		String key = "This is Key!!!!!";
-		AES128 aes128 = new AES128(key);
-		// 256 오류로 인해서 128으로 변경
-//		AES256Util aes256 = new AES256Util();
-		// DB데이터 복호화
-		// 이상한 오류가 뜨는 이유는 암호화된 데이터가 한개라도 없을 경우 오류가 발생한다.(암호화가 되어있는 데이터와 암호화가 되어있지 않은
-		// 데이터가 공존할 경우)
-
-		String decryptedCs_data_01 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_01());
-		String decryptedCs_data_06 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_06());
-		String decryptedCs_data_07 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_07());
-		String decryptedCs_data_10 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_10());
-		String decryptedCs_data_12 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_12());
-		String decryptedCs_data_15 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_15());
-		String decryptedCs_data_29 = aes128.decrypt(hwtService.selectone(cs_idx).getCs_data_29());
-		String decryptedHos_po = aes128.decrypt(hwtService.selectone(cs_idx).getHos_po());
-		String decryptedHos_name = aes128.decrypt(hwtService.selectone(cs_idx).getHos_name());
-		String decryptedHos_code1 = aes128.decrypt(hwtService.selectone(cs_idx).getHos_code1());
-		String decryptedHos_code2 = aes128.decrypt(hwtService.selectone(cs_idx).getHos_code2());
-		String decryptedHos_department = aes128.decrypt(hwtService.selectone(cs_idx).getHos_department());
-		String decryptedHos_ward = aes128.decrypt(hwtService.selectone(cs_idx).getHos_ward());
-		String decryptedHos_room = aes128.decrypt(hwtService.selectone(cs_idx).getHos_room());
-		String decryptedYesrs_pay = aes128.decrypt(hwtService.selectone(cs_idx).getYesrs_pay());
-		String decryptedPayment = aes128.decrypt(hwtService.selectone(cs_idx).getPayment());
-
-		byte[] text8 = svo.getCanvasImg1();
-		byte[] text9 = svo.getCanvasImg2();
-		byte[] text10 = svo.getCanvasImg();
-
-		mav.addObject("decryptedCs_data_01", decryptedCs_data_01);
-		mav.addObject("decryptedCs_data_06", decryptedCs_data_06);
-		mav.addObject("decryptedCs_data_07", decryptedCs_data_07);
-		mav.addObject("decryptedCs_data_10", decryptedCs_data_10);
-		mav.addObject("decryptedCs_data_12", decryptedCs_data_12);
-		mav.addObject("decryptedCs_data_15", decryptedCs_data_15);
-		mav.addObject("decryptedCs_data_29", decryptedCs_data_29);
-		mav.addObject("cs_data_04", hwtService.selectone(cs_idx).getCs_data_04());
-		mav.addObject("vo", hwtService.selectone(cs_idx));
-		mav.addObject("cs_idx", cs_idx);
-		mav.addObject("decryptedHos_po", decryptedHos_po);
-		mav.addObject("decryptedHos_name", decryptedHos_name);
-		mav.addObject("decryptedHos_code1", decryptedHos_code1);
-		mav.addObject("decryptedHos_code2", decryptedHos_code2);
-		mav.addObject("decryptedHos_department", decryptedHos_department);
-		mav.addObject("decryptedHos_ward", decryptedHos_ward);
-		mav.addObject("decryptedHos_room", decryptedHos_room);
-		mav.addObject("decryptedYesrs_pay", decryptedYesrs_pay);
-		mav.addObject("decryptedPayment", decryptedPayment);
-
-//		mav.addObject("text8", hwtService.selectone(cs_idx).getCanvasImg1());
-
-		svo.setCanvasImg1(text8);
-		svo.setCanvasImg2(text9);
-		svo.setCanvasImg(text10);
-		
-		String canvasImg1Base64 = request.getParameter("imgData");
-	    String canvasImg2Base64 = request.getParameter("imgData1");
-	    String canvasImgBase64 = request.getParameter("imgData2");
-	    
-	    SignVo sign = hwtService.getSignatureByCsIdx(cs_idx);
-	    System.out.println(sign);
-	    if (sign != null && sign.getCanvasImg1() != null) {
-	    	String encodedImage = Base64.getEncoder().encodeToString(sign.getCanvasImg1());
-	    	mav.addObject("imageData", encodedImage);
-	    	System.out.println("Encoded Image Data: " + encodedImage);
-	    }
-	    if (sign != null && sign.getCanvasImg2() != null) {
-	    	String encodedImage = Base64.getEncoder().encodeToString(sign.getCanvasImg2());
-	    	mav.addObject("imageData1", encodedImage);
-	    	System.out.println("Encoded Image Data: " + encodedImage);
-	    }
-	    if (sign != null && sign.getCanvasImg() != null) {
-	    	String encodedImage = Base64.getEncoder().encodeToString(sign.getCanvasImg());
-	    	mav.addObject("imageData2", encodedImage);
-	    	System.out.println("Encoded Image Data : " + encodedImage);
-	    }
-	    
-//		String imageData = hwtService.getEncodedImageById(cs_idx);
-//		if (imageData != null) {
-//			mav.addObject("imageData", imageData);
-//	    } else {
-//	    	mav.addObject("imageData", ""); // 이미지 데이터가 없을 경우 빈 문자열 전달
-//	    }
-
-		mav.setViewName("hwt/WrittenModify");
-		return mav;
-	}
-
-	@RequestMapping(value = "WrittenModifyAction")
-	public String writtenModifyAction(ModelAndView mav, HttpSession session, WrittenVo vo, SignVo svo)
-			throws Exception {
-		// 암호화
-		// 256 오류로 인해서 128으로 변경
-		// AES256Util aes256 = new AES256Util();
-		String key = "This is Key!!!!!";
-		AES128 aes128 = new AES128(key);
-		session.getAttribute("loginmember");
-		if (session.getAttribute("loginmember") != null) {
-			int idx = (int) session.getAttribute("idx");
-			System.out.println(session.getAttribute("loginmember"));
-			System.out.println(session.getAttribute("idx"));
-			mav.addObject("info", hwtService.info(idx));
-		}
-
-		// view에서 받은 데이터를 담아서 넘겨준다.
-		String text1 = vo.getCs_data_01();
-		String text2 = vo.getCs_data_06();
-		String text3 = vo.getCs_data_07();
-		String text4 = vo.getCs_data_10();
-		String text5 = vo.getCs_data_12();
-		String text6 = vo.getCs_data_15();
-		String text7 = vo.getCs_data_29();
-
-		// 암호화된 데이터를 변수에 담는다.
-		String cipherText1 = aes128.encrypt(text1);
-		String cipherText2 = aes128.encrypt(text2);
-		String cipherText3 = aes128.encrypt(text3);
-		String cipherText4 = aes128.encrypt(text4);
-		String cipherText5 = aes128.encrypt(text5);
-		String cipherText6 = aes128.encrypt(text6);
-		String cipherText7 = aes128.encrypt(text7);
-
-		// 담은 변수를 DB에 넘겨준다
-		vo.setCs_data_01(cipherText1);
-		vo.setCs_data_06(cipherText2);
-		vo.setCs_data_07(cipherText3);
-		vo.setCs_data_10(cipherText4);
-		vo.setCs_data_12(cipherText5);
-		vo.setCs_data_15(cipherText6);
-		vo.setCs_data_29(cipherText7);
-
-		System.out.println("##################################################");
-		System.out.println(text1);
-		System.out.println(cipherText1);
-		System.out.println(aes128.decrypt(cipherText1));
-		System.out.println(text2);
-		System.out.println(cipherText2);
-		System.out.println(aes128.decrypt(cipherText2));
-		System.out.println(text3);
-		System.out.println(cipherText3);
-		System.out.println(aes128.decrypt(cipherText3));
-		System.out.println(text4);
-		System.out.println(cipherText4);
-		System.out.println(aes128.decrypt(cipherText4));
-		System.out.println(text5);
-		System.out.println(cipherText5);
-		System.out.println(aes128.decrypt(cipherText5));
-		System.out.println(text6);
-		System.out.println(cipherText6);
-		System.out.println(aes128.decrypt(cipherText6));
-		System.out.println(text7);
-		System.out.println(cipherText7);
-		System.out.println(aes128.decrypt(cipherText7));
-
-		System.out.println("##################################################");
-
-		canvasService.modify1(vo);
-
-		return "redirect:/hwt/CounselList";
-	}
-
-	@RequestMapping(value = "CounselList2")
-	public ModelAndView List2(ModelAndView mav, HttpSession session, Criteria cri, WrittenVo vo) throws Exception {
-		System.out.println("cri = " + cri);
-		System.out.println("####################type1 : " + cri.getType1());
-		System.out.println("####################keyword1 : " + cri.getKeyword1());
-		System.out.println("####################type2 : " + cri.getType2());
-		System.out.println("####################keyword2 : " + cri.getKeyword2());
-		System.out.println("####################type3 : " + cri.getType3());
-		System.out.println("####################keyword3 : " + cri.getKeyword3());
-		session.getAttribute("loginmember");
-		if (session.getAttribute("loginmember") != null) {
-			int idx = (int) session.getAttribute("idx");
-			System.out.println(session.getAttribute("loginmember"));
-			System.out.println(session.getAttribute("idx"));
-			mav.addObject("info", hwtService.info(idx));
-		}
-
-		// 256 오류로 인해 128으로 변경
-		String key = "This is Key!!!!!";
-		AES128 aes128 = new AES128(key);
-//		AES256Util aes256 = new AES256Util();
-
-		int Cnt = hwtService.Cnt(cri);
-
-		Paging pageMaker = new Paging();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(Cnt);
-		System.out.println(Cnt);
-		System.out.println(pageMaker.getStartPage());
-
-		System.out.println(pageMaker.getEndPage());
-//		String keyword1check = keyword1;
-//		String keyword2check = keyword2;
-//		String keyword3check = keyword3;
-		// 빈 문자열 null으로 설정
-//		if(keyword1.isEmpty()) {
-//			keyword1check = "null";
-//		}
-//		if(keyword2.isEmpty()) {
-//			keyword2check = "null";
-//		}
-//		if(keyword3.isEmpty()) {
-//			keyword3check = "null";
-//		}
-//		
-//		System.out.println("keyword1check : " + keyword1check);
-//		System.out.println("keyword2check : " + keyword2check);
-//		System.out.println("keyword3check : " + keyword3check);
-//		List<Map<String, Object>> cslist = hwtService.listsearch(cri);
-//		List<Map<String, Object>> cslist = hwtService.listsearch2(cri);
-//		List<Map<String,Object>> cslist = hwtService.list2(cri);
-		List<WrittenVo> cslist = hwtService.listsearch2(cri);
-///		List<WrittenVo> matchingList = new ArrayList<>();
-		// DB데이터 복호화
-		// 이상한 오류가 뜨는 이유는 암호화된 데이터가 한개라도 없을 경우 오류가 발생한다.(암호화가 되어있는 데이터와 암호화가 되어있지 않은
-		// 데이터가 공존할 경우)
-		for (WrittenVo vo1 : cslist) {
-			String decryptedCs_data_01 = aes128.decrypt(((WrittenVo) vo1).getCs_data_01());
-			String decryptedCs_data_06 = aes128.decrypt(((WrittenVo) vo1).getCs_data_06());
-			String decryptedCs_data_07 = aes128.decrypt(((WrittenVo) vo1).getCs_data_07());
-			String decryptedCs_data_10 = aes128.decrypt(((WrittenVo) vo1).getCs_data_10());
-			String decryptedCs_data_12 = aes128.decrypt(((WrittenVo) vo1).getCs_data_12());
-			String decryptedCs_data_15 = aes128.decrypt(((WrittenVo) vo1).getCs_data_15());
-			String decryptedCs_data_29 = aes128.decrypt(((WrittenVo) vo1).getCs_data_29());
-
-			// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-			((WrittenVo) vo1).setCs_data_01(decryptedCs_data_01);
-			((WrittenVo) vo1).setCs_data_06(decryptedCs_data_06);
-			((WrittenVo) vo1).setCs_data_07(decryptedCs_data_07);
-			((WrittenVo) vo1).setCs_data_10(decryptedCs_data_10);
-			((WrittenVo) vo1).setCs_data_12(decryptedCs_data_12);
-			((WrittenVo) vo1).setCs_data_15(decryptedCs_data_15);
-			((WrittenVo) vo1).setCs_data_29(decryptedCs_data_29);
-		}
-
-//		mav.addObject("keyword1", keyword1);
-//		mav.addObject("keyword2", keyword2);
-//		mav.addObject("keyword3", keyword3);		
-		mav.addObject("pageMaker", pageMaker);
-
-		mav.addObject("cslist", cslist);
-		mav.addObject("keyword", "1");
 		mav.setViewName("hwt/CounselList2");
-		System.out.println("cslist : " + cslist);
 
 		return mav;
 	}
-//
-//	@RequestMapping(value = "CounselListSearch2")
-//	public ModelAndView ListSearch2(ModelAndView mav, HttpSession session,
-//			@RequestParam(value = "keyword1", defaultValue = "") String keyword1,
-//			@RequestParam(value = "keyword2", defaultValue = "") String keyword2,
-//			@RequestParam(value = "keyword3", defaultValue = "") String keyword3,
-//			@RequestParam(value = "type1", defaultValue = "") String type1,
-//			@RequestParam(value = "type2", defaultValue = "") String type2,
-//			@RequestParam(value = "type3", defaultValue = "") String type3, Criteria cri, WrittenVo vo)
-//			throws Exception {
-//		System.out.println("cri = " + cri);
-//		System.out.println("####################type1 : " + cri.getType1());
-//		System.out.println("####################keyword1 : " + cri.getKeyword1());
-//		System.out.println("####################type2 : " + cri.getType2());
-//		System.out.println("####################keyword2 : " + cri.getKeyword2());
-//		System.out.println("####################type3 : " + cri.getType3());
-//		System.out.println("####################keyword3 : " + cri.getKeyword3());
-//		session.getAttribute("loginmember");
-//		if (session.getAttribute("loginmember") != null) {
-//			int idx = (int) session.getAttribute("idx");
-//			System.out.println(session.getAttribute("loginmember"));
-//			System.out.println(session.getAttribute("idx"));
-//			mav.addObject("info", hwtService.info(idx));
-//		}
-//
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		// 256 오류로 인해 128으로 변경
-//		String key = "This is Key!!!!!";
-//		AES128 aes128 = new AES128(key);
-//		List<WrittenVo> cslist = hwtService.listsearch(cri);
-//
-//		// 검색어가 없을 때 전체 검색
-//		List<WrittenVo> cslist1 = hwtService.listsearch2(cri);
-//		for (WrittenVo vo1 : cslist1) {
-//			if (keyword1.isEmpty() && keyword2.isEmpty() && keyword3.isEmpty()) {
-//				// 검색어 X
-//				System.out.println("검색어 X");
-//
-//				String decryptedCs_data_01 = aes128.decrypt(((WrittenVo) vo1).getCs_data_01());
-//				String decryptedCs_data_06 = aes128.decrypt(((WrittenVo) vo1).getCs_data_06());
-//				String decryptedCs_data_07 = aes128.decrypt(((WrittenVo) vo1).getCs_data_07());
-//				String decryptedCs_data_10 = aes128.decrypt(((WrittenVo) vo1).getCs_data_10());
-//				String decryptedCs_data_12 = aes128.decrypt(((WrittenVo) vo1).getCs_data_12());
-//				String decryptedCs_data_15 = aes128.decrypt(((WrittenVo) vo1).getCs_data_15());
-//				String decryptedCs_data_29 = aes128.decrypt(((WrittenVo) vo1).getCs_data_29());
-//
-//				// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//				((WrittenVo) vo1).setCs_data_01(decryptedCs_data_01);
-//				((WrittenVo) vo1).setCs_data_06(decryptedCs_data_06);
-//				((WrittenVo) vo1).setCs_data_07(decryptedCs_data_07);
-//				((WrittenVo) vo1).setCs_data_10(decryptedCs_data_10);
-//				((WrittenVo) vo1).setCs_data_12(decryptedCs_data_12);
-//				((WrittenVo) vo1).setCs_data_15(decryptedCs_data_15);
-//				((WrittenVo) vo1).setCs_data_29(decryptedCs_data_29);
-//
-//				int Cnt = hwtService.Cnt(cri);
-//				Paging pageMaker = new Paging();
-//				pageMaker.setCri(cri);
-//				pageMaker.setTotalCount(Cnt);
-//				mav.addObject("pageMaker", pageMaker);
-//				mav.addObject("cslist", cslist1);
-//				System.out.println(cslist1);
-//				mav.addObject("keyword", "1");
-//
-//			}
-//
-//		}
-//		// 검색결과를 담을 list 생성
-//		List<WrittenVo> matchingList = new ArrayList<>();
-//		String keyword1check = keyword1;
-//		String keyword2check = keyword2;
-//		String keyword3check = keyword3;
-//		// 빈 문자열 null으로 설정
-//		if (keyword1.isEmpty()) {
-//			keyword1check = "null";
-//		}
-//		if (keyword2.isEmpty()) {
-//			keyword2check = "null";
-//		}
-//		if (keyword3.isEmpty()) {
-//			keyword3check = "null";
-//		}
-//
-//		System.out.println("keyword1check : " + keyword1check);
-//		System.out.println("keyword2check : " + keyword2check);
-//		System.out.println("keyword3check : " + keyword3check);
-//		// DB데이터 복호화
-//		// 이상한 오류가 뜨는 이유는 암호화된 데이터가 한개라도 없을 경우 오류가 발생한다.(암호화가 되어있는 데이터와 암호화가 되어있지 않은
-//		// 데이터가 공존할 경우)
-//
-//		for (WrittenVo vo2 : cslist) {
-//			// 성명 가져오기
-//			String str1 = vo2.getCs_data_01();
-//			System.out.println("str1 : " + str1);
-//			// 주보호자성명 가져오기
-//			String str2 = vo2.getCs_data_07();
-//			System.out.println("str2 : " + str2);
-//			// 휴대폰번호 가져오기
-//			String str3 = vo2.getCs_data_06();
-//			System.out.println("str3 : " + str3);
-//
-//			// 성명 복호화
-//			String text1 = aes128.decrypt(str1);
-//			System.out.println("text1 : " + text1);
-//			// 주보호자 성명 복호화
-//			String text2 = aes128.decrypt(str2);
-//			System.out.println("text2 : " + text2);
-//			// 휴대폰번호 복호화
-//			String text3 = aes128.decrypt(str3);
-//			System.out.println("text3 : " + text3);
-//
-//			// 키워드가 포함된 문자열 이면 true
-//
-//			boolean search1 = aes128.decrypt(str1).contains(keyword1check);
-//			System.out.println("search1 : " + search1);
-//			System.out.println("");
-//
-//			boolean search2 = aes128.decrypt(str2).contains(keyword2check);
-//			System.out.println("search2 : " + search2);
-//			System.out.println("");
-//
-//			boolean search3 = aes128.decrypt(str3).contains(keyword3check);
-//			System.out.println("search3 : " + search3);
-//			System.out.println("");
-//			if (keyword1.isEmpty()) {// 검색 키워드 성명 X 보호자명 O 휴대폰 번호 O
-//				System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 O");
-//
-//				if (keyword2.isEmpty()) {// 검색 키워드 성명 X 보호자명 O 휴대폰 번호 X
-//					if (search3 == true) {
-//						System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 X");
-//						matchingList.add(vo2);
-//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//						vo2.setCs_data_01(decryptedCs_data_01);
-//						vo2.setCs_data_06(decryptedCs_data_06);
-//						vo2.setCs_data_07(decryptedCs_data_07);
-//						vo2.setCs_data_10(decryptedCs_data_10);
-//						vo2.setCs_data_12(decryptedCs_data_12);
-//						vo2.setCs_data_15(decryptedCs_data_15);
-//						vo2.setCs_data_29(decryptedCs_data_29);
-//						mav.addObject("matchingList", matchingList);
-//					}
-//				} else if (keyword3.isEmpty()) {// 검색 키워드 성명 X 보호자명 O 휴대폰 번호 X
-//
-//					if (search2 == true) {
-//						System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 X");
-//						matchingList.add(vo2);
-//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//						vo2.setCs_data_01(decryptedCs_data_01);
-//						vo2.setCs_data_06(decryptedCs_data_06);
-//						vo2.setCs_data_07(decryptedCs_data_07);
-//						vo2.setCs_data_10(decryptedCs_data_10);
-//						vo2.setCs_data_12(decryptedCs_data_12);
-//						vo2.setCs_data_15(decryptedCs_data_15);
-//						vo2.setCs_data_29(decryptedCs_data_29);
-//						mav.addObject("matchingList", matchingList);
-//					}
-//				}
-//				if (search2 == true && search3 == true) {
-//					System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰 번호 O");
-//					matchingList.add(vo2);
-//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//					vo2.setCs_data_01(decryptedCs_data_01);
-//					vo2.setCs_data_06(decryptedCs_data_06);
-//					vo2.setCs_data_07(decryptedCs_data_07);
-//					vo2.setCs_data_10(decryptedCs_data_10);
-//					vo2.setCs_data_12(decryptedCs_data_12);
-//					vo2.setCs_data_15(decryptedCs_data_15);
-//					vo2.setCs_data_29(decryptedCs_data_29);
-//					mav.addObject("matchingList", matchingList);
-//				}
-//
-//			} else if (keyword2.isEmpty()) {// 검색 키워드 성명 O 보호자명 X 휴대폰 번호 O
-//				System.out.println("검색 키워드 성명 O 보호자명 X 휴대폰 번호 O");
-//				// 검색 키워드 성명 O 보호자명 X 휴대폰번호 X
-//				if (keyword3.isEmpty()) {
-//					if (search1 == true) {
-//						System.out.println("검색 키워드 성명 O 보호자명 X 휴대폰번호 X");
-//						matchingList.add(vo2);
-//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//						vo2.setCs_data_01(decryptedCs_data_01);
-//						vo2.setCs_data_06(decryptedCs_data_06);
-//						vo2.setCs_data_07(decryptedCs_data_07);
-//						vo2.setCs_data_10(decryptedCs_data_10);
-//						vo2.setCs_data_12(decryptedCs_data_12);
-//						vo2.setCs_data_15(decryptedCs_data_15);
-//						vo2.setCs_data_29(decryptedCs_data_29);
-//						mav.addObject("matchingList", matchingList);
-//					}
-//
-//				} else if (keyword1.isEmpty()) {// 검색 키워드 성명 X 보호자명 X 휴대폰번호 O
-//					if (search3 == true) {
-//						System.out.println("검색 키워드 성명 X 보호자명 X 휴대폰번호 O");
-//						matchingList.add(vo2);
-//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//						vo2.setCs_data_01(decryptedCs_data_01);
-//						vo2.setCs_data_06(decryptedCs_data_06);
-//						vo2.setCs_data_07(decryptedCs_data_07);
-//						vo2.setCs_data_10(decryptedCs_data_10);
-//						vo2.setCs_data_12(decryptedCs_data_12);
-//						vo2.setCs_data_15(decryptedCs_data_15);
-//						vo2.setCs_data_29(decryptedCs_data_29);
-//						mav.addObject("matchingList", matchingList);
-//					}
-//				}
-//
-//				if (search1 == true && search3 == true) {
-//					System.out.println("검색 키워드 성명 O 보호자명 X 휴대폰 번호 O");
-//					matchingList.add(vo2);
-//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//					vo2.setCs_data_01(decryptedCs_data_01);
-//					vo2.setCs_data_06(decryptedCs_data_06);
-//					vo2.setCs_data_07(decryptedCs_data_07);
-//					vo2.setCs_data_10(decryptedCs_data_10);
-//					vo2.setCs_data_12(decryptedCs_data_12);
-//					vo2.setCs_data_15(decryptedCs_data_15);
-//					vo2.setCs_data_29(decryptedCs_data_29);
-//					mav.addObject("matchingList", matchingList);
-//				}
-//
-//			} else if (keyword3.isEmpty()) {// 검색 키워드 성명 O 보호자명 O 휴대폰번호 X
-//				System.out.println("검색 키워드 성명 O 보호자명 O 휴대폰번호 X");
-//				// 검색 키워드 성명 X 보호자명 O 휴대폰번호 X
-//				if (keyword1.isEmpty()) {
-//					if (search2 == true) {
-//						System.out.println("검색 키워드 성명 X 보호자명 O 휴대폰번호 X");
-//						matchingList.add(vo2);
-//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//						vo2.setCs_data_01(decryptedCs_data_01);
-//						vo2.setCs_data_06(decryptedCs_data_06);
-//						vo2.setCs_data_07(decryptedCs_data_07);
-//						vo2.setCs_data_10(decryptedCs_data_10);
-//						vo2.setCs_data_12(decryptedCs_data_12);
-//						vo2.setCs_data_15(decryptedCs_data_15);
-//						vo2.setCs_data_29(decryptedCs_data_29);
-//						mav.addObject("matchingList", matchingList);
-//					}
-//
-//				} else if (keyword2.isEmpty()) {// 검색키워드 성명O 보호자명 X 휴대폰 번호 X
-//					if (search1 == true) {
-//						System.out.println("검색키워드 성명O 보호자명 X 휴대폰 번호 X");
-//						matchingList.add(vo2);
-//						String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//						String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//						String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//						String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//						String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//						String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//						String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//						// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//						vo2.setCs_data_01(decryptedCs_data_01);
-//						vo2.setCs_data_06(decryptedCs_data_06);
-//						vo2.setCs_data_07(decryptedCs_data_07);
-//						vo2.setCs_data_10(decryptedCs_data_10);
-//						vo2.setCs_data_12(decryptedCs_data_12);
-//						vo2.setCs_data_15(decryptedCs_data_15);
-//						vo2.setCs_data_29(decryptedCs_data_29);
-//						mav.addObject("matchingList", matchingList);
-//					}
-//				}
-//				if (search1 == true && search2 == true) {
-//					System.out.println("검색 키워드 성명 O 보호자명 O 휴대폰번호 X");
-//					matchingList.add(vo2);
-//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//					vo2.setCs_data_01(decryptedCs_data_01);
-//					vo2.setCs_data_06(decryptedCs_data_06);
-//					vo2.setCs_data_07(decryptedCs_data_07);
-//					vo2.setCs_data_10(decryptedCs_data_10);
-//					vo2.setCs_data_12(decryptedCs_data_12);
-//					vo2.setCs_data_15(decryptedCs_data_15);
-//					vo2.setCs_data_29(decryptedCs_data_29);
-//					mav.addObject("matchingList", matchingList);
-//				}
-//			} else if (!keyword1.isEmpty() && !keyword2.isEmpty() && !keyword3.isEmpty()) {
-//				if (search1 == true && search2 == true && search3 == true) {
-//					System.out.println("검색키워드 성명O 보호자명 O 휴대폰 번호 O");
-//					matchingList.add(vo2);
-//					String decryptedCs_data_01 = aes128.decrypt(vo2.getCs_data_01());
-//					String decryptedCs_data_06 = aes128.decrypt(vo2.getCs_data_06());
-//					String decryptedCs_data_07 = aes128.decrypt(vo2.getCs_data_07());
-//					String decryptedCs_data_10 = aes128.decrypt(vo2.getCs_data_10());
-//					String decryptedCs_data_12 = aes128.decrypt(vo2.getCs_data_12());
-//					String decryptedCs_data_15 = aes128.decrypt(vo2.getCs_data_15());
-//					String decryptedCs_data_29 = aes128.decrypt(vo2.getCs_data_29());
-//
-//					// 리스트로 뽑기 위해서 꼭 필요한 코드 없으면 리스트로 출력이 안되고 동일한 데이터가 출력된다.
-//					vo2.setCs_data_01(decryptedCs_data_01);
-//					vo2.setCs_data_06(decryptedCs_data_06);
-//					vo2.setCs_data_07(decryptedCs_data_07);
-//					vo2.setCs_data_10(decryptedCs_data_10);
-//					vo2.setCs_data_12(decryptedCs_data_12);
-//					vo2.setCs_data_15(decryptedCs_data_15);
-//					vo2.setCs_data_29(decryptedCs_data_29);
-//
-//					mav.addObject("matchingList", matchingList);
-//
-//				}
-//
-//			}
-//
-//		}
-//		mav.addObject("keyword1", keyword1);
-//		mav.addObject("keyword2", keyword2);
-//		mav.addObject("keyword3", keyword3);
-//
-//		mav.setViewName("hwt/CounselList2");
-//
-//		return mav;
-//	}
 
 	@RequestMapping(value = "WrittenModify2/{cs_idx}")
 	public ModelAndView writtenModify2(ModelAndView mav, HttpSession session,

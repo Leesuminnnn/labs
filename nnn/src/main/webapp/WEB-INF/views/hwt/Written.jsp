@@ -189,10 +189,10 @@
 	<tr>
 		<td class="normal" width="120px" height="45px">성명</td>
 		<td class="light" onclick="this.querySelector('input').focus();" style="text-align: left;">
-		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_01" value="${param1}"></td>
+		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_01"  id="cs_data_01" value="${param1}"></td>
 		<td class="normal" width="120px" height="45px">차트번호</td>
 		<td onclick="this.querySelector('input').focus();" class="light" colspan="2" style="text-align: left;">
-		<input style="margin-left: 20px; width: 170px;" name="cs_data_02" type="text" value="${param4}"></td>
+		<input style="margin-left: 20px; width: 170px;" name="cs_data_02"  id="cs_data_02" type="text" value="${param4}"></td>
 	</tr>
 	<tr>
 		<td class="normal" height="45px">입원병실</td>
@@ -210,7 +210,15 @@
 		<input style= "margin-left: 20px; width: 170px;" type="text" name="cs_data_05" value="${param3 }"></td>
 		<td class="normal" height="45px">전화</td>
 		<td style="text-align: left;" class="light" colspan="2" onclick="this.querySelector('input').focus();">
-		<input style="margin-left: 20px; width: 170px;" type="text" name="cs_data_06" value="${param6 }"></td>
+			<input style="margin-left: 20px; width: 170px;" type="text" name="cs_data_06" class="form-control" oninput="oninputPhone(this)" maxlength="14" value="${param6 }">
+			<script>
+			function oninputPhone(target) {
+				target.value = target.value
+					.replace(/[^0-9]/g, '')
+					.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+			}
+			</script>
+		</td>
 	</tr>
 </table>
 </div>
@@ -292,10 +300,24 @@
 			(관계 :&nbsp;<input class="light" name="cs_data_08" style="width:110px;" type="text"/>&nbsp;)
 		</th>
 		<th style="position: relative;">
-			<img style="position: absolute; z-index: 1; width: 100px; top: -35px; " id="canvasImg1" src="" alt="">
-			<input type="hidden" id="canvasImg1" name="canvasImg1" value="">
-			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end1">
-				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+			<div class="normal" style="width: 143px; display: inline-block; position: relative;" id="end1">
+				<mark class="hos_sign">
+				&emsp;(서&nbsp;&nbsp;
+					<img style="position: absolute; z-index: 0; width: 100px; top: -35px; right: 21px;" id="canvasImg1" name="canvasImg1" src="data:image/png;base64,${imageData}" alt="">
+				&nbsp;&nbsp;명)&emsp;
+				</mark>
+ 				<script>
+				document.addEventListener("DOMContentLoaded", function() {
+				var imgElement = document.getElementById('canvasImg1');
+					console.log(imgElement);
+					if (imgElement && imgElement.src && imgElement.src !== 'data:,') {
+						console.log("Image source:", imgElement.src);
+					} else {
+						console.log("No image element found or image is empty.");
+						imgElement.style.display = 'none';  // 데이터가 들어있지 않을때
+						}
+				});
+				</script> 
 			</div>
 		</th>
 	</tr>
@@ -308,7 +330,14 @@
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_10" type="text" value="${param5}" style="margin-left:25px; width:250px;"/>
+			<input class="light" name="cs_data_10" type="text" class="form-control" oninput="oninputPhone(this)" maxlength="14" value="${param5}" style="margin-left:25px; width:250px;" />
+			<script>
+			function oninputPhone(target) {
+				target.value = target.value
+					.replace(/[^0-9]/g, '')
+					.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+			}
+			</script>
 		</th>
 		<th colspan="2" style="text-align: right;">
 			<div class="checkbox-wrapper-13" style="font-weight:400; display:flex; width:135px;">
@@ -339,11 +368,20 @@
 			(관계 :&nbsp;<input class="light" name="cs_data_13" style="width:110px;" type="text"/>&nbsp;)
 		</th>
 		<th style="position: relative;">
-			<img style="position: absolute; z-index: 1; width: 100px; top: -20px; right: 0px;" id="canvasImg2" name="canvasImg2" src="" alt="">
-			<input type="hidden" id="canvasImg2" name="canvasImg2" value="">
-			<div class="normal" style="display: inline-block; position: relative; background-color:#fafafa;" id="end2">
-			
-				<mark>&emsp;(서&nbsp;&nbsp;&nbsp;&nbsp;명)&emsp;</mark>
+			<div class="normal" style="width: 143px; display: inline-block; position: relative;" id="end2">
+				<mark class="hos_sign">&emsp;(서&nbsp;&nbsp;<img style="position: absolute; z-index: 1; width: 100px; top: -35px; right: 21px;" id="canvasImg2" name="canvasImg2" src="data:image/png;base64,${imageData1}" alt="">&nbsp;&nbsp;명)&emsp;</mark>
+				<script>
+				document.addEventListener("DOMContentLoaded", function() {
+			        var imgElement = document.getElementById('canvasImg2');
+			        console.log(imgElement);
+			        if (imgElement && imgElement.src && imgElement.src !== 'data:,') {
+			            console.log("Image source:", imgElement.src);
+			        } else {
+			            console.log("No image element found or image is empty.");
+						imgElement.src = "";  // 데이터가 들어있지 않을때
+					}
+				});
+				</script> 
 			</div>
 		</th>
 	</tr>
@@ -357,7 +395,14 @@
 	<tr>
 		<th class="normal">휴대폰 번호</th>
 		<th colspan="2" onclick="this.querySelector('input').focus();" style="text-align: left;">
-			<input class="light" name="cs_data_15" type="text" style="margin-left: 25px; width:250px;"/>
+			<input class="light" name="cs_data_15" type="text" class="form-control" oninput="oninputPhone(this)" maxlength="14" style="margin-left: 25px; width:250px;"/>
+			<script>
+			function oninputPhone(target) {
+				target.value = target.value
+					.replace(/[^0-9]/g, '')
+					.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+			}
+			</script>
 		</th>
 		<th colspan="2" style="text-align: right;">
 			<div class="checkbox-wrapper-13" style="font-weight:400; display:flex; width:135px;">
@@ -519,9 +564,9 @@
 			</tr>
 		</table>
 		<div class="cont_day">
-			<p>20&nbsp;<input class="light" name="hos_contract_year" style="width:40px;" type="text" value="" />&nbsp;년
-			 	 &nbsp;<input class="light" name="hos_contract_month" style="width:40px; text-align:right;" type="text" value="" />&nbsp;월
-				 &nbsp;<input class="light" name="hos_contract_day" style="width:40px; text-align:right;" type="text" value="" />&nbsp;일
+			<p>20&nbsp;<input class="light" name="hos_contract_year" style="width:40px;" type="number" value="" />&nbsp;년
+			 	 &nbsp;<input class="light" name="hos_contract_month" style="width:40px; text-align:right;" type="number" value="" />&nbsp;월
+				 &nbsp;<input class="light" name="hos_contract_day" style="width:40px; text-align:right;" type="number" value="" />&nbsp;일
 			</p>
 			<h2 class="" style="font-size:1.5rem; padding:20px 0 0 0; letter-spacing: 0.2em;">효사랑가족요양병원장 귀하</h2> 
 		</div>
@@ -538,9 +583,9 @@
 		<h2 class="hos_info_ho" style="text-align: center;">효사랑가족요양병원 입원 안내</h2>
 		<div style="display:flex;">
 			<p style="font-size:1.1rem; font-weight: 700;">
-				입원일 : 20&nbsp;<input class="light" id="hos_year" name="hos_year" style="width:40px;" type="text" value="" />&nbsp;.
-				&nbsp;<input class="light" id="hos_month" name="hos_month" style="width:40px; text-align:right;" type="text" value="" />&nbsp;.
-				&nbsp;<input class="light" id="hos_day" name="hos_day" style="width:40px; text-align:right;" type="text" value="" />&nbsp;.
+				입원일 : 20&nbsp;<input class="light" id="hos_year" name="hos_year" style="width:40px;" type="number" value="" />&nbsp;.
+				&nbsp;<input class="light" id="hos_month" name="hos_month" style="width:40px; text-align:right;" type="number" value="" />&nbsp;.
+				&nbsp;<input class="light" id="hos_day" name="hos_day" style="width:40px; text-align:right;" type="number" value="" />&nbsp;.
 			</p>
 		</div>
 		<div style="text-align: center; margin-bottom: 10px;">
@@ -549,43 +594,73 @@
 					<td class="normal" width="170px" height="45px" style="background:#fafafa;">No.</td>
 					<td class="light" width="313px" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" id="hos_number" name="hos_number" value="" />
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								const cs_data_01 = document.getElementById("cs_data_02");
+								const hos_name = document.getElementById("hos_number");
+								hos_name.value = cs_data_01.value;
+								// 업데이트 hos_number when cs_data_02 체인지 이벤트
+								cs_data_02.addEventListener("input", function() {
+									hos_number.value = cs_data_02.value;
+								});
+							});
+						</script>
 					</td>
 					<td class="normal" width="150px" height="45px" rowspan="2" style="background:#fafafa;">특이<br>사항</td>
 					<td  class="light" width="413px" style="text-align: left;" rowspan="2">
-						<textarea cols="20" rows="3" onkeyup="check_length(this);" onkeydown="check_enter(event);" id="hos_po" class="hos_po" name="hos_po" ></textarea>
+						<textarea cols="27" rows="3" onkeyup="check_length(this);" onkeydown="check_enter(event);" id="hos_po" class="hos_po" name="hos_po">${decryptedHos_po}</textarea>
 						<script>
 						// textarea 글자 수 제한
-						function check_length(area){
-							var text = area.value;
-							var text_length = text.length;
-							// 최대 글자 수
-							var max_length = 40;
-							
-							if(text_length>max_length){
-								alert(max_length+"자 이상 작성할 수 없습니다.")
-								text = text.substr(0, max_length);
-								area.value = text;
-								area.focus();
-							}
+						function check_length(area) {
+						    var text = area.value;
+						    var lines = text.split('\n');
+						    var max_length = 35;
+						    var max_length_third_line = 14;
+						    var enterCount = lines.length - 1;
+
+						    // Check total length
+						    if (text.length > max_length) {
+						        alert(max_length + "자 이상 작성할 수 없습니다.");
+						        text = text.substr(0, max_length);
+						        area.value = text;
+						        area.focus();
+						    }
+
+						    // Check third line length
+						    if (lines.length > 2 && lines[2].length > max_length_third_line) {
+						        alert("더이상 작성할 수 없습니다.");
+						        lines[2] = lines[2].substr(0, max_length_third_line);
+						        area.value = lines.join('\n');
+						        area.focus();
+						    }
+
+						    // 엔터키 입력 횟수 초기화
+						    var enterMatches = text.match(/\n/g); // 엔터 키 입력 매칭
+						    enterCount = enterMatches ? enterMatches.length : 0;
 						}
-						
-						var enterCount = 0;
+
 						// 엔터키 입력 제한
 						function check_enter(event) {
-				            if (event.keyCode === 13) { // Enter 키 코드
-				                enterCount++;
-				                if (enterCount > 2) {
-				                    event.preventDefault();
-				                    alert("엔터키는 2번 이상 입력할 수 없습니다.");
-				                }
-				            }
-				        }
-						// 엔터키 입력 횟수 초기화
-						document.getElementById('hos_po').addEventListener('input', function() {
-				            var text = this.value;
-				            var enterMatches = text.match(/\n/g); // 엔터 키 입력 매칭
-				            enterCount = enterMatches ? enterMatches.length : 0;
-				        });
+						    var area = event.target;
+						    var text = area.value;
+						    var lines = text.split('\n');
+						    var enterCount = lines.length - 1;
+
+						    if (event.keyCode === 13) { // Enter 키 코드
+						        if (enterCount >= 2) {
+						            event.preventDefault();
+						            alert("엔터키는 2번 이상 입력할 수 없습니다.");
+						        }
+						    }
+						}
+
+						// Attach event listeners
+						document.getElementById('hos_po').addEventListener('input', function () {
+						    check_length(this);
+						});
+						document.getElementById('hos_po').addEventListener('keydown', function (event) {
+						    check_enter(event);
+						});
 						</script>
 					</td>
 				</tr>
@@ -593,6 +668,17 @@
 					<td class="normal" height="45px" style="background:#fafafa;">이름</td>
 					<td class="light" style="text-align: left;">
 						<input style= "margin-left: 33px;" type="text" id="hos_name" name="hos_name" value="" />
+						<script>
+							document.addEventListener("DOMContentLoaded", function() {
+								const cs_data_01 = document.getElementById("cs_data_01");
+								const hos_name = document.getElementById("hos_name");
+								hos_name.value = cs_data_01.value;
+								// 업데이트 hos_name when cs_data_01 체인지 이벤트
+								cs_data_01.addEventListener("input", function() {
+									hos_name.value = cs_data_01.value;
+								});
+							});
+						</script>
 					</td>
 				</tr>
 			</table>
@@ -804,7 +890,7 @@
 			<p class="">
 				<b>2020년 1월 1일부터 본인부담상한제 사전급여는 요양병원이아닌, 환자에게 직접지급하는 방식으로 변경됩니다.</b>
 				건강보험공단은 모든 요양기관에서 발생한 의료비를 합산하여 본인부담상한액 중 
-				<b>최고상한액 ( <input class="yesrs" type="text" id="yesrs_pay" name="yesrs_pay" value="" style="width:50px; text-align:right;"> 년 기준
+				<b>최고상한액 ( <input class="yesrs" type="number" id="yesrs_pay" name="yesrs_pay" value="" style="width:50px; text-align:right;"> 년 기준
 				<input class="yesrs" type="text" id="payment" name="payment" value="" style="width:50px; text-align:right;"> 만원) 초과금액을 환자에게 직접 지급합니다.</b><br>
 				다만 요양급여비용에 대한 심사 청구가 필요하므로 초과금액은 환자에게 월 단위로 안내하고, 진료월로부터 3~5개월 후 직접 지급하게 됩니다.
 			</p>
@@ -914,8 +1000,50 @@
 		</td>
 	</tr>
 	<tr style="height: 45px;  border-bottom: 1px solid #dadada; background-color: #ffffff; color:#222222;">
-		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td><td class="light" style="text-align: right;"
-		 colspan="2" class="light">1일당 : <input name="cs_data_27" id="cs_data_24" type="text" disabled="disabled"/></td>
+		<td style="text-align: center; border-right: 1px solid #dadada;">비용</td>
+		<td class="light" style="text-align: right;" colspan="2">1일당 : 
+			<input name="cs_data_27" id="cs_data_24" type="text" onkeyup="cmaComma(this);" onchange="cmaComma(this);" disabled="disabled"/>
+			<script>
+			function cmaComma(obj) {
+			    var firstNum = obj.value.substring(0,1); // 첫글자 확인 변수
+			    var strNum = /^[\,0-9]*$/; // 숫자와 , 만 가능
+			    var str = "" + obj.value.replace(/,/gi,''); // 콤마 제거  /[^0-9]/gi;
+			    var regx = new RegExp(/(-?\d+)(\d{3})/);  
+			    var bExists = str.indexOf(".",0);  
+			    var strArr = str.split('.');
+			    if (!strNum.test(obj.value)) {
+			        alert("숫자만 입력하십시오.");
+			        obj.value = 1;
+			        obj.focus();
+			        return false;
+			    }
+			    while(regx.test(strArr[0])){
+			        strArr[0] = strArr[0].replace(regx,"$1,$2");
+			    }  
+			    if (bExists > -1)  {
+			        obj.value = strArr[0] + "." + strArr[1];
+			    } else  {
+			        obj.value = strArr[0];
+			    }
+			}
+			 
+			function commaSplit(n) {// 콤마 나누는 부분
+			    var txtNumber = '' + n;
+			    var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
+			    var arrNumber = txtNumber.split('.');
+			    arrNumber[0] += '.';
+			    do {
+			        arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
+			    }
+			    while (rxSplit.test(arrNumber[0]));
+			    if(arrNumber.length > 1) {
+			        return arrNumber.join('');
+			    } else {
+			        return arrNumber[0].split('.')[0];
+			    }
+			}
+			</script>
+		</td>
 	</tr>
 	<tr style="height: 45px; background-color: #ffffff;">
 		<td colspan="3" style="text-align: left;">
@@ -927,17 +1055,26 @@
 </div>
 
 
-<div style="position: relative; ">
-	<div class="normal normal_sign" style="width:100%;">
-		신청인  (  관계  : &nbsp;<input style="width:110px; padding-top:3px;" name="cs_data_28" type="text"/>&nbsp;) : &nbsp;
-		<input name="cs_data_29" style="width:150px; padding-top:3px;" type="text"/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-		<img style="position: absolute; z-index: 1; width: 100px;" id="canvasImg" name="canvasImg" src="" alt="">
-		<input type="hidden" id="canvasImg" name="canvasImg" value="">
-		<div style="display: inline-block; position: relative; background-color:#fafafa; z-index:0;" id="end">
-			<mark>&emsp;( 서&emsp;&emsp;명 )&emsp;</mark>
+<div style="position: relative;">
+		<div class="normal normal_sign" style="width:100%;">
+			신청인  (  관계  : &nbsp;<input style="width:110px; padding-top:3px;" name="cs_data_28" value="${vo.cs_data_28 }" type="text" />&nbsp;) : &nbsp;
+			<input name="cs_data_29" style="width:150px; padding-top:3px;" value="${decryptedCs_data_29 }" type="text" />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			<div style="display: inline-block; position: relative; marigin-right:30px; background-color:#fafafa; z-index:500;" id="end">
+			<mark class="hos_sign">&emsp;( 서&emsp;&emsp;<img style="position: absolute; z-index: 0; left: -4px; top: -42px; width: 120px;" id="canvasImg" name="canvasImg" src="data:image/png;base64,${imageData2}" alt="">명 )&emsp;</mark></div>
+			<script>
+			document.addEventListener("DOMContentLoaded", function() {
+			var imgElement = document.getElementById('canvasImg');
+				console.log(imgElement);
+				if (imgElement && imgElement.src && imgElement.src !== 'data:') {
+					console.log("Image source:", imgElement.src);
+				} else {
+					console.log("No image element found or image is empty.");
+					imgElement.src = "";  // 데이터가 들어있지 않을때
+					}
+			});
+			</script> 
 		</div>
 	</div>
-</div>
 <br><br>
 </div>
 </div>
@@ -1038,49 +1175,83 @@ if (!name || name.length ===0) {
 	location.href = "${pageContext.request.contextPath}/hwt/Login";
 }
 
+
+function Mobile() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    console.log("User Agent: " + navigator.userAgent);
+    // 체크 모바일 디바이스
+    var isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+    // Surface 디바이스 확인
+    var isSurface = /surface pro|surface duo|surface neo|surface go|surface/i.test(userAgent.toLowerCase());
+    // 윈도우 장치 확인(윈도우폰 장치가 아닐시 제외)
+    var isWindows = /windows nt/i.test(userAgent.toLowerCase()) && !/phone/i.test(userAgent.toLowerCase()) && !isSurface;
+    console.log("isMobileDevice: " + isMobileDevice);
+    console.log("isSurface: " + isSurface);
+    console.log("isWindows: " + isWindows);
+    return {
+        isMobileDevice: isMobileDevice,
+        isSurface: isSurface,
+        isWindows: isWindows
+    };
+}
+
+
+const deviceInfo = Mobile();
+
+if (deviceInfo.isMobileDevice && !deviceInfo.isSurface && !deviceInfo.isWindows) {
+    console.log("Mobile");
+    console.log("모바일");
+} else {
+    console.log("PC로 접속되었습니다.");
+}
+
 // 첫번째 서명 모달
 const body = document.querySelector('body');
 const modal1 = document.querySelector('.modal1');
 const btnOpenPopup1 = document.querySelector('#end1');
+const canvasImg1 = document.getElementById('canvasImg1');
+let isSigned1 = canvasImg1.src && canvasImg1.src !== 'data:image/png;base64,';
 
 // 모바일 디바이스에서 터치 이벤트에 반응하여 모달 표시
 btnOpenPopup1.addEventListener('touchstart', () => {
-	modal1.classList.toggle('show');
-	if (modal1.classList.contains('show')) {
-		body.style.overflow = 'hidden';
+	if (!isSigned1) {
+		modal1.classList.toggle('show');
+		if (modal1.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+	} else {
+		alert('이미 서명이 완료되었습니다.');
 	}
+	
 });
 // 데스크탑에서 클릭 이벤트 처리
-btnOpenPopup1.addEventListener('click', () => {
-	alert('모바일로 접속해주세요.')
-});
+// btnOpenPopup1.addEventListener('click', () => {
+// 	alert('모바일로 접속해주세요.')
+// });
 // 모달 바깥 영역을 클릭시, 모달 닫기
-modal1.addEventListener('click', (event) => {
-	if (event.target === modal1) {
-		closePopupAndRedirect1();
-	}
-});
+// modal1.addEventListener('click', (event) => {
+// 	if (event.target === modal1) {
+// 		closePopupAndRedirect1();
+// 	}
+// });
 
 // 서명 완료 및 모달 닫기 함수
 function end1(){
+	isSigned1 = true;
 	closePopup1();
 }
 
-// 모달 닫고 리다이렉트 처리
 function closePopupAndRedirect1() {
-	modal1.classList.toggle('show');
-	if (!modal1.classList.contains('show')) {
-		body.style.overflow = 'auto';
-	}
-	// 캡쳐된 서명 이미지 base64로 인코딩
-	var canvasValue1 = canvas1.toDataURL();
-	console.log(canvasValue1);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
-								//	콘솔로그 찍었을때 인코딩 확인 코드
-	document.getElementById('imgData').value = canvasValue1.split(',')[1];
-	const canvasImg1 = document.getElementById('canvasImg1');
-	canvasImg1.src = canvasValue1;
-	console.log(canvasImg1);
-	
+    modal1.classList.toggle('show');
+    if (!modal1.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned1) {
+        var canvasValue1 = canvas1.toDataURL();
+        console.log(canvasValue1);
+        canvasImg1.src = canvasValue1;
+        document.getElementById('imgData').value = canvasValue1.split(',')[1];
+    }
 }
 
 // 단순 모달 닫기 함수
@@ -1098,18 +1269,18 @@ function closePopup1() {
 // 	console.log(canvasImg1);
 
 	modal1.classList.toggle('show');
-	if (!modal1.classList.contains('show')) {
-		body.style.overflow = 'auto';
-	}
-	// 캡쳐된 서명 이미지 base64로 인코딩
-	var canvasValue1 = canvas1.toDataURL();
-	console.log(canvasValue1);	// data:image/png;base64,iVBPRw0KGgoAAAANSUhE..... 
-								//	콘솔로그 찍었을때 인코딩 확인 코드
-	document.getElementById('imgData').value = canvasValue1.split(',')[1];
-	const canvasImg1 = document.getElementById('canvasImg1');
-	canvasImg1.src = canvasValue1;
-	console.log(canvasValue1)
-	
+    if (!modal1.classList.contains('show')) {
+        body.style.overflow = 'auto';
+    }
+    if (isSigned1) {
+        var canvasValue1 = canvas1.toDataURL();
+        console.log(canvasValue1); // data:image/png;base64,iVBPRw0KGgoAAAANSUhE.....
+        canvasImg1.src = canvasValue1;
+        document.getElementById('imgData').value = canvasValue1.split(',')[1];
+        console.log(canvasImg1);
+    } else {
+        isSigned1 = false;
+    }
 }
 
 </script>
@@ -1120,34 +1291,33 @@ function closePopup1() {
 // const body = document.querySelector('body');
 const modal2 = document.querySelector('.modal2');
 const btnOpenPopup2 = document.querySelector('#end2');
+const canvasImg2 = document.getElementById('canvasImg2');
+let isSigned2 = canvasImg2.src && canvasImg2.src !== 'data:image/png;base64,';
 
 btnOpenPopup2.addEventListener('touchstart', () => {
-	
-	modal2.classList.toggle('show');
-
-	if (modal2.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
+	if (!isSigned2) {
+        modal2.classList.toggle('show');
+        if (modal2.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+        }
+    } else {
+        alert('이미 서명이 완료되었습니다.');
+    }
 });
 
-btnOpenPopup2.addEventListener('click', () => {
-	
-	alert('모바일로 접속해주세요.')
-});
+// btnOpenPopup2.addEventListener('click', () => {
+// 	alert('모바일로 접속해주세요.')
+// });
 
-modal2.addEventListener('touchstart', (event) => {
-	
-	
-	if (event.target === modal2) {
-		// 모달 바깥 영역을 클릭했을 때
-		
-			closePopupAndRedirect2();
-		
-	}
-});
+// modal2.addEventListener('touchstart', (event) => {
+// 	if (event.target === modal2) {
+// 		// 모달 바깥 영역을 클릭했을 때
+// 		closePopupAndRedirect2();
+// 	}
+// });
 
 function end2(){
-	
+	isSigned2 = true;
 	closePopup2();
 }
 
@@ -1183,34 +1353,61 @@ function closePopup2(){
 // const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
 const btnOpenPopup = document.querySelector('#end');
+const canvasImg = document.getElementById('canvasImg');
+let isSigned = canvasImg.src && canvasImg.src !== 'data:image/png;base64,';
 
 btnOpenPopup.addEventListener('touchstart', () => {
-	
-	modal.classList.toggle('show');
-
-	if (modal.classList.contains('show')) {
-		body.style.overflow = 'hidden';
-	}
+	if (!isSigned) {
+		modal.classList.toggle('show');
+		if (modal.classList.contains('show')) {
+			body.style.overflow = 'hidden';
+		}
+	} else {
+		alert('이미 서명이 완료되었습니다.');
+    }
 });
-btnOpenPopup.addEventListener('click', () => {
-	
-	alert('모바일로 접속해주세요.')
-});
+// btnOpenPopup.addEventListener('click', () => {
+// 	alert('모바일로 접속해주세요.')
+// });
 
+// modal.addEventListener('touchstart', (event) => {
+// 	if (event.target === modal) {
+// 		// 모달 바깥 영역을 클릭했을 때
+// 		closePopupAndRedirect();
+// 	}
+// });
+if (deviceInfo.isWindows) {
+    console.log("Windows Device Detected");
+} else {
+    // Handle non-Windows device clicks for mobile-only features
+    const btnOpenPopup1 = document.querySelector('#end1');
+    const btnOpenPopup2 = document.querySelector('#end2');
+    const btnOpenPopup = document.querySelector('#end');
 
-modal.addEventListener('touchstart', (event) => {
-	
-	
-	if (event.target === modal) {
-		// 모달 바깥 영역을 클릭했을 때
-		
-			closePopupAndRedirect();
-		
-	}
-});
+    // Ensure buttons exist before adding event listeners
+    if (btnOpenPopup1) {
+        btnOpenPopup1.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('모바일로 접속해주세요.');
+        });
+    }
 
+    if (btnOpenPopup2) {
+        btnOpenPopup2.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('모바일로 접속해주세요.');
+        });
+    }
+
+    if (btnOpenPopup) {
+        btnOpenPopup.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('모바일로 접속해주세요.');
+        });
+    }
+}
 function end(){
-	
+	isSigned = true;
 	closePopup();
 }
 
@@ -1480,6 +1677,7 @@ function cancle(){
 	canvasImg.src = "";
 }
 </script>
+
 </section>
 <div style="background-color: #ffffff; position:fixed; bottom:0; width: 100%; z-index: 1;">
 <div style=" border-top: 1px solid #ddd;"></div>
@@ -1547,10 +1745,6 @@ $("#frm").submit(function(event) {
 	});
 });
 
-
-
-
-
 $(document).ready(function() {
     // 저장 버튼 클릭 시 이벤트 처리
     $("#btn_save").click(function(event) {
@@ -1582,7 +1776,7 @@ $(document).ready(function() {
                 data: formData,
                 success: function(response) {
                 	console.log(response);
-                    alert('저장이 완료되었습니다.');
+                    alert('임시저장이 완료되었습니다.');
                     // list 페이지로 이동하며 강제로 새로고침
 //                     window.location.reload(true); // 강제 새로고침
 					if (response === "Y") {
@@ -1599,8 +1793,6 @@ $(document).ready(function() {
         }
     }
 });
-
-
-
 </script>
+
 </html>
