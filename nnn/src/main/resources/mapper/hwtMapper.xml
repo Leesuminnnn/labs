@@ -153,33 +153,41 @@
 	</select>
 	
 	<update id="update">
-	update cs_data set cs_data_30 = 2, cs_data_31 = now() where cs_idx = #{cs_idx}
+		update cs_data set cs_data_30 = 2, cs_data_31 = now() where cs_idx = #{cs_idx}
 	</update>
 	
 	<update id="modify">
 		update cs_data set 
 		cs_data_01 = #{cs_data_01}, cs_data_02 = #{cs_data_02}, cs_data_03 = #{cs_data_03}, cs_data_04 = #{cs_data_04}, 
 		cs_data_05 = #{cs_data_05}, cs_data_06 = #{cs_data_06}, cs_data_07 = #{cs_data_07}, cs_data_08 = #{cs_data_08},
-		cs_data_09 = #{cs_data_09}, cs_data_10 = #{cs_data_10}, cs_data_11 = #{cs_data_11}, cs_data_12 = #{cs_data_12}, cs_data_13 = #{cs_data_13}, 
-		cs_data_14 = #{cs_data_14},	cs_data_15 = #{cs_data_15}, cs_data_16 = #{cs_data_16}, cs_data_17 = #{cs_data_17}, cs_data_18 = #{cs_data_18}, 
-		cs_data_19 = #{cs_data_19}, cs_data_20 = #{cs_data_20}, cs_data_21 = #{cs_data_21}, cs_data_22 = #{cs_data_22}, cs_data_23 = #{cs_data_23}, 
-		cs_data_24 = #{cs_data_24},	cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
-		cs_data_29 = #{cs_data_29}, 
-		hos_contract_year =#{hos_contract_year}, hos_contract_month =#{hos_contract_month}, hos_contract_day =#{hos_contract_day}, 
-		hos_year =#{hos_year}, hos_month =#{hos_month}, hos_day =#{hos_day}, hos_number =#{hos_number}, hos_po =#{hos_po}, hos_name =#{hos_name}, 
-		insurance =#{insurance}, salary =#{salary}, self_insurance =#{self_insurance}, accident =#{accident}, general =#{general}, hos_code1 =#{hos_code1}, 
-		hos_code2 =#{hos_code2}, hos_department =#{hos_department}, hos_ward =#{hos_ward}, hos_room =#{hos_room}, check1 =#{check1}, check2 =#{check2}, 
-		check3 =#{check3}, check4 =#{check4}, check5 =#{check5}, check6 =#{check6}, check7 =#{check7}, check8 =#{check8}, check9 =#{check9}, 
-		check10 =#{check10}, check11 =#{check11}, yesrs_pay =#{yesrs_pay}, payment =#{payment}, medicine =#{medicine}, nutrients =#{nutrients}, transport =#{transport}, 
+		cs_data_09 = #{cs_data_09}, cs_data_10 = #{cs_data_10}, cs_data_11 = #{cs_data_11}, cs_data_12 = #{cs_data_12}, 
+		cs_data_13 = #{cs_data_13}, cs_data_14 = #{cs_data_14}, cs_data_15 = #{cs_data_15}, cs_data_16 = #{cs_data_16}, 
+		cs_data_17 = #{cs_data_17}, cs_data_18 = #{cs_data_18}, cs_data_19 = #{cs_data_19}, cs_data_20 = #{cs_data_20}, 
+		cs_data_21 = #{cs_data_21}, cs_data_22 = #{cs_data_22}, cs_data_23 = #{cs_data_23}, cs_data_24 = #{cs_data_24}, 
+		cs_data_25 = #{cs_data_25}, cs_data_26 = #{cs_data_26}, cs_data_27 = #{cs_data_27}, cs_data_28 = #{cs_data_28}, 
+		cs_data_29 = #{cs_data_29}, hos_contract_year = #{hos_contract_year}, hos_contract_month = #{hos_contract_month}, 
+		hos_contract_day = #{hos_contract_day}, hos_year = #{hos_year}, hos_month = #{hos_month}, hos_day = #{hos_day}, 
+		hos_number = #{hos_number}, hos_po = #{hos_po}, hos_name = #{hos_name}, insurance = #{insurance}, 
+		salary = #{salary}, self_insurance = #{self_insurance}, accident = #{accident}, general = #{general}, 
+		hos_code1 = #{hos_code1}, hos_code2 = #{hos_code2}, hos_department = #{hos_department}, hos_ward = #{hos_ward}, 
+		hos_room = #{hos_room}, check1 = #{check1}, check2 = #{check2}, check3 = #{check3}, check4 = #{check4}, check5 = #{check5}, 
+		check6 = #{check6}, check7 = #{check7}, check8 = #{check8}, check9 = #{check9}, check10 = #{check10}, check11 = #{check11}, 
+		yesrs_pay = #{yesrs_pay}, payment = #{payment}, medicine = #{medicine}, nutrients = #{nutrients}, transport = #{transport}, 
 		cs_data_30 = 1 where cs_idx = #{cs_idx}
 	</update>
 	<select id="getImageData" parameterType="image" resultType="image">
-	select imageData from image where cs_idx = ${cs_idx}
+		select imageData from image where cs_idx = ${cs_idx}
 	</select>
 	
 	<insert id="signinsert" parameterType="sign" >
 		insert into signImage (canvasImg1, canvasImg2, canvasImg, cs_idx) values (#{canvasImg1}, #{canvasImg2}, #{canvasImg}, #{cs_idx})
 	</insert>
+	
+	<update id="signupdate" parameterType="sign" >
+		update signImage set 
+		canvasImg1 = #{canvasImg1}, canvasImg2 = #{canvasImg2}, canvasImg = #{canvasImg} where cs_idx = #{cs_idx}
+	</update>
+	
 	<select id="select" resultType="int">
 		select cs_idx from cs_data order by cs_idx desc limit 1
 	</select>

@@ -71,6 +71,19 @@ input[type=text]:active {
 	border: #000000;
 }
 
+input[type=number], input[type=submit]{
+	border: none;
+	overflow: auto;
+	
+}
+input[type=number]{
+	vertical-align: middle;
+    line-height: 26px;
+}
+
+input[type=number]:active {
+	border: #000000;
+}
 /* 
 input[type=radio]{
 	display:none;
@@ -187,7 +200,8 @@ input[type="radio"]:checked + label span {
 .light_info2{padding-bottom:10px;}
 .light_info_i{font-style:normal;}
 .light_info p{line-height:24px; padding-bottom:13px;}
-.hos_po{margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;overflow:hidden;}
+.hos_po{margin-left: 33px;background-color: #fff;resize: none;color: black;border: none;outline: none;overflow:hidden;resize: none;font-size:14px;height:56px;word-break: break-all;white-space:pre-wrap;}
+.hos_sign{color:#c7c7c7;}
 
 /* 테이블 스타일 */
 .table_type1{border:solid 1px #dadada; width:100%; margin-left:auto; margin-right:auto; margin-bottom:10px; background: #fff;}
@@ -235,6 +249,20 @@ input[type="radio"]:checked + label span {
 
 .normal_sign{text-align: right; position: relative; z-index: 1; color: #222222; width: 966px; height: 42px; margin: 0 auto; padding-right:30px; display: flex; justify-content: flex-end; align-items: center; padding-top:35px;}
 
+#hidden_div {
+            visibility: hidden;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+
+
+
+
 
 input[type=radio], input[type=checkbox] {
 	position: absolute;
@@ -275,11 +303,6 @@ input[type=checkbox]:checked + label:before {
 .input_type input[type=checkbox] + label:before{
 	margin:0;
 }
-
-
-
-
-
 
 
 @media screen and (max-width: 1500px){

@@ -210,6 +210,10 @@ public class HwtService {
 	public int insertsign(SignVo svo) {
 		return hwtDao.insertsign(svo);
 	}
+	
+	public void updateSign(SignVo svo) {
+		hwtDao.updateSign(svo);
+	}
 
 	public int select() {
 		return hwtDao.select();
@@ -230,7 +234,6 @@ public class HwtService {
         if (sign != null && sign.getCanvasImg() != null) {  
         	return Base64.getEncoder().encodeToString(sign.getCanvasImg());
         }
-
 //       if (sign != null) {
 //			if (sign.getCanvasImg1() != null) {
 //				return Base64.getEncoder().encodeToString(sign.getCanvasImg1());

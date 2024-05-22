@@ -2,6 +2,7 @@ package com.nnn.app.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Base64;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import com.nnn.app.vo.SignVo;
 import com.nnn.app.vo.UserPh;
 import com.nnn.app.vo.UsersVo;
 import com.nnn.app.vo.WrittenVo;
+
 
 @Repository
 public class HwtDao {
@@ -253,7 +255,10 @@ public class HwtDao {
 	public int insertsign(SignVo svo) {
 		return sqlSession4.insert(MAPPER+".signinsert",svo);
 	}
-
+	
+	public void updateSign(SignVo svo) {
+		sqlSession4.update(MAPPER+".signupdate",svo);
+	}
 
 	public int select() {
 		return sqlSession4.selectOne(MAPPER+".select");
@@ -261,6 +266,6 @@ public class HwtDao {
 	
 	public SignVo getSignatureByCsIdx(int cs_idx) {
         return sqlSession4.selectOne(MAPPER+".getSignatureByCsIdx", cs_idx);
-    }
+	}
 	
 }
